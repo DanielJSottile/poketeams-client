@@ -295,6 +295,10 @@ label{
   width: 85%;
 }
 
+.name-sprite {
+  margin: auto;
+}
+
 @media (min-width: 700px) { /* Medium Screen */
   .searchbar {
     
