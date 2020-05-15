@@ -85,7 +85,7 @@ function showdownGenerate(input) {
     // the rest of it
 
     if (set.ability){
-      setArr.push(`Abiity: ${set.ability}`);
+      setArr.push(`Ability: ${set.ability}`);
     }
 
     if (set.level < 100){
