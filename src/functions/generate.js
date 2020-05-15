@@ -341,9 +341,4 @@ const team = [
   }
 ];
 
-console.log(showdownGenerate(set));
-console.log('\n');
-console.log(showdownGenerate(team));
-
-
 module.exports = {showdownGenerate};
