@@ -27,11 +27,11 @@ function evIvParser(string, val){
   
   const evIvRE = /(\d{1,3}) (.*)/
 
-  evArr = string.split('/');
+  let evArr = string.split('/');
 
   evArr.forEach(value => {
     
-    trim = value.trim();
+    let trim = value.trim();
     let match = trim.match(evIvRE)
 
     if (match[2] === 'HP') {
