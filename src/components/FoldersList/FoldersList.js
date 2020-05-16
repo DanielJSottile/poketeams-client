@@ -23,7 +23,7 @@ export default class FoldersList extends Component {
     return (
       <form onSubmit={this.handleOnSubmit}>
         <div>
-          <label for="foldername">Folder Name:</label>
+          <label htmlFor="foldername">Folder Name:</label>
           <input placeholder="e.g. Good Teams" type="text" name="foldername" id="foldername" />
         </div>
         <button type="submit">Submit</button>

@@ -18,9 +18,9 @@ export default class SearchBar extends Component {
           onSubmit={this.handleOnSubmit}
         >
           <div>
-            <label for="search">Search:</label>
+            <label htmlFor="search">Search:</label>
             <input placeholder="e.g. Pikachu" value="" type="text" name="search" id="search" />
-            <label for="sort">Sort By:</label>
+            <label htmlFor="sort">Sort By:</label>
             <select name="sort" id="sort">
               <option value="Newest">Newest</option>
               <option value="Oldest">Oldest</option>

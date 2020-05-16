@@ -35,7 +35,7 @@ export default class Navigation extends Component {
     return (
       <div>
         <nav role="navigation">
-          <h1>PokeTeams - Home</h1>
+          <h1>{`${this.props.title}`}</h1>
           <div className="navbar">
             <div className="button_things">
               <Link to='/'>Home</Link>
