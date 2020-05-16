@@ -56,7 +56,7 @@ function evIvParser(string, val){
 
 // Singular function that handles the parsing for teams as well as single sets
 
-function showdownParse(input) {
+export default function showdownParse(input) {
 
   // RegEx's
 
@@ -211,5 +211,3 @@ function showdownParse(input) {
     };
   })
 };
-
-module.exports = {showdownParse};

@@ -56,7 +56,7 @@ function ivGenerator(ob){
 
 // generator function
 
-function showdownGenerate(input) {
+export default function showdownGenerate(input) {
 
   return input.map(set => {
 
@@ -142,5 +142,3 @@ function showdownGenerate(input) {
     
   }).join('\n\n')
 };
-
-module.exports = {showdownGenerate};

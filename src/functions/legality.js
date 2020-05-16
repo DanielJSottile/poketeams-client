@@ -47,7 +47,7 @@ function returnGenderStatus(species){
   }
 };
 
-module.exports = {
+export default {
   isLegalSpecies,
   findSpecies,
   returnType,
