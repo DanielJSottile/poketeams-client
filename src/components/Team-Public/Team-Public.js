@@ -1,12 +1,17 @@
 import React, { Component, Fragment } from 'react';
 import UserContext from '../../contexts/UserContext';
 import showdownGenerate from '../../functions/generate';
-import Set from '../Set/Set';
+import Set from '../Set-Edit/Set-Edit';
 
 
 export default class Team extends Component {
 
   static contextType = UserContext;
+
+  state = {
+    team: [],
+    sets: []
+  }
 
   handleOnClick = () => {
 
@@ -14,8 +19,8 @@ export default class Team extends Component {
 
   renderExpandedTeam(){
 
-    const {sets} = this.context;
-    const {team} = this.context;
+    const sets = this.state.sets;
+    const team = this.state.team;
 
     const SetList = sets.map((set, i) => {
       return <Set key={i} id={set.id}/>
@@ -25,14 +30,10 @@ export default class Team extends Component {
       <section>
         <div className="team">
           <div className="team-header">
-            <form className="team-form"> {/* on submit*/}
               <div className="team-title">
-                <div>
-                  <button>Delete Team X</button> {/* on delete*/}
-                </div>
                 <div className="title-name">
                   <label htmlFor="title-name">Team Name:</label>
-                  <input className="title" placeholder="e.g. Cool Team" value={team.name} type="text" name="team-name" id={`team-name-${team.id}`}/>
+                  <input disabled className="title" placeholder="e.g. Cool Team" value={team.name} type="text" name="team-name" id={`team-name-${team.id}`}/>
                 </div>
                 <p>By {team.user_id}</p>
                 <p>Created on: {team.date_created}</p>
@@ -44,18 +45,16 @@ export default class Team extends Component {
               </div>
               <div className="title-content">
                 <label htmlFor="title-content">Description:</label>
-                <textarea className="title-content desc" placeholder="e.g. description" type="text" name="title-content" id={`title-content-${team.id}`}>{team.desc}</textarea>
+                <textarea className="title-content desc" placeholder="e.g. description" type="text" name="title-content" id={`title-content-${team.id}`} disabled value={team.desc}/>
               </div>
-              <button type="submit">Save Team Details</button>
-            </form>
           <div className="export-team">
           <button>Fold Down</button> {/* onClick*/}
             <div>
               <a href="team.html" target="_blank">Share This Team!</a>
-              <input type="text" readonly value={`[hostname]/share/${team.id}`}/>
+              <input type="text" disabled value={`[hostname]/share/${team.id}`}/>
             </div>
               <label htmlFor="edit-team">Export Team:</label>
-              <textarea readonly type="text" name="export-team" id={`export-team-${team.id}`}>{showdownGenerate(team)}</textarea>
+              <textarea type="text" name="export-team" id={`export-team-${team.id}`} disabled value={showdownGenerate(team)}/>
             </div>
           </div>
         </div>
@@ -66,7 +65,7 @@ export default class Team extends Component {
 
   renderUnexpandedTeam() {
 
-    const {team} = this.context;
+    const team = this.state.team;
 
     return (
       <section>

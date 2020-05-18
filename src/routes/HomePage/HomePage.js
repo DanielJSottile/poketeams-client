@@ -1,9 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import Navigation from '../../components/Naviagation/Navigation';
-import TeamsButtonList from '../../components/TeamsButtonList/TeamsButtonList';
-import TeamList from '../../components/TeamList/TeamList';
+import TeamsButtonListPublic from '../../components/TeamsButtonList-Public/TeamsButtonList-Public';
+import TeamListPublic from '../../components/TeamList-Public/TeamList-Public';
 import Footer from '../../components/Footer/Footer';
-import apiService from '../../services/apiService';
 
 export default class HomePage extends Component {
 
@@ -16,8 +15,8 @@ export default class HomePage extends Component {
           <header role="banner">
             <h1>Results:</h1>
           </header>
-          <TeamsButtonList/>
-          <TeamList/>
+          <TeamsButtonListPublic/>
+          <TeamListPublic/>
           <Footer/>
         </main>
       </Fragment>

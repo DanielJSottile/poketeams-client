@@ -38,12 +38,12 @@ export default class LoginForm extends Component {
       >
         <div role='alert'>{error && <p className='red'>{error}</p>}</div>
         <div>
-          <label htmlFor="username">Username</label>
-          <input placeholder="Username" type="text" name="username" id="username" />
+          <label htmlFor="user_name">Username</label>
+          <input placeholder="Username" autoComplete="username" type="text" name="user_name" id="user_name" />
         </div>
         <div>
           <label htmlFor="password">Password</label>
-          <input type="password" name="password" id="password" />
+          <input type="password" autoComplete="current-password" name="password" id="password" />
         </div>
         <button type="submit">Log In</button>
       </form>

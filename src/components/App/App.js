@@ -9,15 +9,12 @@ import ShareTeamPage from '../../routes/ShareTeamPage/ShareTeamPage';
 import PrivateRoute from '../Utils/PrivateRoute';
 import PublicOnlyRoute from '../Utils/PublicOnlyRoute';
 import UserContext from '../../contexts/UserContext';
-import apiService from '../../services/apiService';
 import './App.css';
 
 
 export default class App extends Component {
   state = {
-    folders: [],
-    teams: [],
-    sets: []
+    canEdit: false
   };
 
   // State Input Update Functions -> these may go in their own components 
@@ -29,9 +26,7 @@ export default class App extends Component {
   render() {
     return (
       <UserContext.Provider value = {{
-        folders: this.state.folders,
-        teams: this.state.teams,
-        sets: this.state.sets
+        
       }}>
         <Fragment>
           <main>
@@ -49,7 +44,7 @@ export default class App extends Component {
                 path = {'/landing'}
                 component = {LandingPage}/>
               <PrivateRoute
-                path={'/build/:user_id'}
+                path={'/build'}
                 component={BuildPage}/>
               <Route
                 component={NotFoundPage}

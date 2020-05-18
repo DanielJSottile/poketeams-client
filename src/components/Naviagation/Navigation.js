@@ -41,7 +41,7 @@ export default class Navigation extends Component {
               <Link to='/'>Home</Link>
               <Link to='/build'>Build!</Link>
             </div>
-            <div class="mobile-button">
+            <div className="mobile-button">
               <Link to='/'>Home</Link>
               <Link to='/build'>Build!</Link>
               {TokenService.hasAuthToken() ? this.renderLogout() : this.renderLogin()}

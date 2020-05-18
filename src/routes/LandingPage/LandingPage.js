@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import Footer from '../../components/Footer/Footer';
 import LoginForm from '../../components/LoginForm/LoginForm';
 
@@ -16,8 +16,7 @@ export class LandingPage extends Component {
 
   render() {
     return (
-      <body>
-        <main>
+      <Fragment>
           <header role="banner">
             <h1>PokeTeams</h1>
             <h2>store. organize. edit. share.</h2>
@@ -28,7 +27,7 @@ export class LandingPage extends Component {
             </header>
             <LoginForm onLoginSuccess={this.handleLoginSucess}/>
           </section>
-          <section class="left">
+          <section className="left">
             <header>
               <h3>Store your teams like never before!</h3>
             </header>
@@ -46,7 +45,7 @@ export class LandingPage extends Component {
             your hearts content!  
             </p>
           </section>
-          <section class="right">
+          <section className="right">
             <header>
                 <h3>Search By Numerous Parameters and Export!</h3>
             </header>
@@ -56,9 +55,9 @@ export class LandingPage extends Component {
               want to use for your own Pokemon Showdown teams!
             </p>
           </section>
-        </main>
+       
       <Footer/>
-    </body>
+      </Fragment>
     );
   };
 };

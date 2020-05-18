@@ -6,8 +6,16 @@ export default class FoldersList extends Component {
 
   static contextType = UserContext;
 
-  handleOnClick = (e) => {
+  state = {
+    folders: [],
+    teams: [],
+    sets: [],
+    clicked: false,
+    currentClickedFolder: ''
+  }
 
+  handleOnClickExpand = () => {
+    this.setState({clicked: !this.state.clicked})
   }
 
   handleOnSubmit = (e) => {
@@ -33,7 +41,7 @@ export default class FoldersList extends Component {
 
   render() {
 
-    const {folders} = this.context;
+    const folders = this.state.folders;
 
     const folderList = folders.map((folder, i) => {
       return <Folder key={i} id={folder.id} folder_name={folder.folder_name}/>
@@ -47,11 +55,11 @@ export default class FoldersList extends Component {
             {folderList.length > 0 ? folderList : <h3>None! Click Below to Make a New Folder!</h3>}
           </div>
           <div>
-            <button onClick={this.handleOnClick}>New Folder +</button>
-            {clicked ? this.renderExpanded() : null}
+            <button onClick={this.handleOnClickExpand}>New Folder +</button>
+            {this.state.clicked ? this.renderExpanded() : null}
           </div>
         <div>
-          <span>Current Folder: {currentClickedFolder}</span>
+          <span>Current Folder: {this.state.currentClickedFolder}</span>
         </div>
       </section>
     </Fragment>

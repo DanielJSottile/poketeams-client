@@ -1,7 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import Navigation from '../../components/Naviagation/Navigation';
-import TeamsButtonList from '../../components/TeamsButtonList/TeamsButtonList';
-import TeamList from '../../components/TeamList/TeamList';
+import TeamsButtonListEdit from '../../components/TeamsButtonList-Edit/TeamsButtonList-Edit';
+import TeamListEdit from '../../components/TeamList-Edit/TeamList-Edit';
+import FolderList from '../../components/FoldersList/FoldersList';
 import Footer from '../../components/Footer/Footer';
 
 export default class BuildPage extends Component {
@@ -12,10 +13,10 @@ export default class BuildPage extends Component {
         title={"PokeTeam - Build!"}/>
         <main>
           <header role="banner">
-            <h1>Results:</h1>
+            <FolderList/>
           </header>
-          <TeamsButtonList/>
-          <TeamList/>
+          <TeamsButtonListEdit/>
+          <TeamListEdit/>
           <Footer/>
         </main>
       </Fragment>

@@ -1,17 +1,28 @@
 import React, { Component, Fragment } from 'react';
 import UserContext from '../../contexts/UserContext';
-import Team from '../Team/Team';
+import TeamPublic from '../Team-Public/Team-Public';
+import apiService from '../../services/apiService';
 
 export default class TeamList extends Component {
 
   static contextType = UserContext;
 
+  state = {
+    error: null,
+    teams: [],
+    sets: []
+  };
+
+  componentDidMount() {
+    
+  }
+
   render() {
 
-    const {teams} = this.context;
+    const teams = this.state.teams;
 
     const TeamList = teams.map((team, i) => {
-      return <Team key={i} id={team.id} name={team.team_name}/>
+      return <TeamPublic key={i} id={team.id} name={team.team_name}/>
     });
 
     return (
