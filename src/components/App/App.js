@@ -13,6 +13,7 @@ import UserContext from '../../contexts/UserContext';
 import apiService from '../../services/apiService';
 import jwtDecode from 'jwt-decode';
 import showdownParse from '../../functions/parse';
+import legality from '../../functions/legality';
 import './App.css';
 
 
@@ -84,7 +85,7 @@ export default class App extends Component {
     newFolderName: {value: '', touched: false},
     //teams-user
     teamAddClicked: false,
-    currentClickedTeam: {value: '', touched: false},
+    currentClickedTeam: {value: '', id: '', touched: false},
     newTeamName: {value: '', touched: false},
     newTeamImport: {value: '', touched: false},
     //sets-teams-user
@@ -131,14 +132,16 @@ export default class App extends Component {
     this.setState({teamAddClicked: !this.state.teamAddClicked})
   };
 
-  handleCurrentTeamClicked = (name) => {
-    this.setState({currentClickedTeam: {value: name, touched: true}})
+  handleCurrentTeamClicked = (name, team_id) => {
+    this.setState({currentClickedTeam: {value: name, id: team_id, touched: true}})
   };
 
   // User Sets-Teams
 
-  handleTeamToggle = () => {
-    this.setState({teamExpandToggle: !this.state.teamExpandToggle})
+  handleTeamToggle = (id) => { // is kinda broken, fix later
+    if(id === this.state.currentClickedTeam.id){
+      this.setState({teamExpandToggle: !this.state.teamExpandToggle})
+    }
   };
 
   handleSetToggle = () => {
@@ -155,28 +158,56 @@ export default class App extends Component {
 
   validateNewFolderName = () => {
     let folder_name = this.state.newFolderName.value;
+    if (!folder_name) {
+      return `Please provide a folder name!`
+    }
   };
 
   // User Teams
 
   validateNewTeamName = () => {
     let team_name = this.state.newTeamName.value;
+    if (!team_name) {
+      return `Please provide a team name!`
+    }
   };
 
-  validateNewTeamImport = () => { // something to do later
+  validateNewTeamImport = () => {
+    let flag;
     let team_import = this.state.newTeamImport.value;
-    if(!showdownParse(team_import)){
-      return `Make sure that it is formatted properly!`
-    }
+    // you do not have to provide a team_import, but if you do...
+    // showdownParse(team_export) gives an array...
 
+    // ** WE SHOULD ALSO ADD A LEGALITY FUNCTION THAT CHECKS IF THERES IS AT LEAST 1 MOVE! ** (if we have time)
+
+    showdownParse(team_import).forEach(set => {
+      if (!legality.isLegalSpecies(set.species)) {
+        flag = `There is an illegal species in your set.  Please fix this to be in the proper format! 
+        (Hint: It could be extra white space at the end because of Showdown's Exporter)`
+      }
+    })
+    return flag;
   };
 
-  validateNewSetImport = () => { // something to do later
-    let set_import = this.state.newSetImport.value;
-    if(!showdownParse(set_import)){
-      return `Make sure that it is formatted properly!`
-    }
+  validateNewSetImport = () => {
+    let flag;
+    let set_import = this.state.newSetImport.value
+    // you do not have to provide a set_import, but if you do...
+    // showdownParse(set_export) gives an array...even just for 1
+    // with that in mind, let's check that it's only length of 1
 
+    if (showdownParse(set_import).length > 1) {
+      flag = `You can only import 1 set here.`
+    }
+    // ** WE SHOULD ALSO ADD A LEGALITY FUNCTION THAT CHECKS IF THERES IS AT LEAST 1 MOVE! ** (if we have time)
+
+    showdownParse(set_import).forEach(set => {
+      if (!legality.isLegalSpecies(set.species)) {
+        flag = `There is an illegal species in your set.  Please fix this to be in the proper format! 
+        (Hint: It could be extra white space at the end because of Showdown's Exporter)`
+      }
+    })
+    return flag;
   };
 
   // Event Handlers/API Calls -> NOT MADE YET!

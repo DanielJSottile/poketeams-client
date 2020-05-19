@@ -19,7 +19,7 @@ export default class FoldersList extends Component {
       <form>
         <div>
           <label htmlFor="foldername">Folder Name:</label>
-          {newFolderName.touched && <p className="error">{validateNewFolderName()}</p>}
+          {<p className="error">{validateNewFolderName()}</p>}
           <input placeholder="e.g. Good Teams" type="text" name="foldername" id="foldername" value={newFolderName.value} onChange={e => setNewFolderName(e.target.value)}/>
         </div>
         <button type="submit"

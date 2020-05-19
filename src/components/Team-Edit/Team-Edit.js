@@ -23,25 +23,31 @@ export default class Team extends Component {
   // set state
 
   setTeamName = team_name => {
-    this.setState({species: {value: team_name, touched: true}});
+    this.setState({team_name: {value: team_name, touched: true}});
   };
 
   setFavTeam = favorite_team => {
-    this.setState({nickname: {value: favorite_team, touched: true}});
+    this.setState({favorite_team: {value: favorite_team, touched: true}});
   };
 
   setDesc = description => {
-    this.setState({gender: {value: description, touched: true}});
+    this.setState({description: {value: description, touched: true}});
   };
 
   // validate
 
   validateTeamName = () => {
     let team_name = this.state.team_name.value;
+    if(!team_name){
+      return `Team MUST have a name!`
+    }
   };
 
   validateDesc = () => {
     let description = this.state.description.value;
+    if (typeof(description) !== 'string') {
+      return `This should never come up, it is superflous`
+    }
   };
 
   // API calls are handled in App.js
@@ -69,9 +75,10 @@ export default class Team extends Component {
           <div className="team-header">
             <form className="team-form">
               <div className="team-title">
-                <button onClick={() => handleTeamToggle()}>Fold Down Team</button>
+                <button onClick={() => handleTeamToggle(team.id)}>Fold Down Team</button>
                 <div className="title-name">
                   <label htmlFor="title-name">Team Name:</label>
+                  {<p className="error">{this.validateTeamName()}</p>}
                   <input className="title" placeholder="e.g. Cool Team" value={this.state.team_name.value} onChange={e => this.setTeamName(e.target.value)} type="text" name="team-name" id={`team-name-${team.id}`}/>
                 </div>
                 <p>By {team.user_name}</p> {/* right now this does not actually exist, so remember to add it for your API call*/}
@@ -84,6 +91,7 @@ export default class Team extends Component {
               </div>
               <div className="title-content">
                 <label htmlFor="title-content">Description:</label>
+                {<p className="error">{this.validateDesc()}</p>}
                 <textarea className="title-content desc" placeholder="e.g. description" type="text" name="title-content" id={`title-content-${team.id}`} value={this.state.description.value} onChange={e => this.setDesc(e.target.value)}/>
               </div>
               <button type="submit"
@@ -124,7 +132,7 @@ export default class Team extends Component {
 
     return (
       <section>
-        <div className="team-closed" onClick={() => handleTeamToggle()}>
+        <div className="team-closed" onClick={() => handleTeamToggle(team.id)}>
           <div>
             <p>By {team.user_name}</p>
             <p>Created on: {new Date(team.date_created).toLocaleString('en-GB', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>

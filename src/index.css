@@ -222,7 +222,7 @@ label{
   transition: 0.3s;
 }
 
-.pokemon-nickname, .pokemon-level, .pokemon-item, .pokemon-ability, .pokemon-nature, .pokemon-happiness, .pokemon-move{
+.pokemon-nickname, .pokemon-level, .pokemon-item, .pokemon-ability, .pokemon-nature, .pokemon-happiness, .pokemon-move, .pokemon-gender{
   color: #444;
   text-emphasis: bold;
   text-align: center;
@@ -239,6 +239,15 @@ label{
 .names, .sprites{
   display: flex;
   flex-direction: column;
+}
+
+img {
+  margin: auto;
+  width: 200px;
+}
+
+.icon {
+  width: 75px;
 }
 
 .closed{

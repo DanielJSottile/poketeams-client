@@ -23,12 +23,12 @@ export default class TeamsButtonList extends Component {
       <form onSubmit={this.handleOnSubmit}>
         <div className="team-name">
           <label htmlFor="foldername">Team Name:</label>
-          {newTeamName.touched && <p className="error">{validateNewTeamName()}</p>}
+          {<p className="error">{validateNewTeamName()}</p>}
           <input placeholder="e.g. My Cool Team" type="text" name="teamname" id="teamname" value={newTeamName.value} onChange={e => setNewTeamName(e.target.value)}/>
         </div>
         <div className="team-import">
           <label htmlFor="team-import">Import Team Set:</label>
-          {newTeamImport.touched && <p className="error">{validateNewTeamImport()}</p>}
+          {newTeamImport.value !== "" && <p className="error">{validateNewTeamImport()}</p>}
           <textarea type="text" placeholder="Optionally Import a proper Pokemon Showdown Team Here And It Will Fill Out Your Whole Team!" name="team-import" id="team-import-1" value={newTeamImport.value} onChange={e => setNewTeamContents(e.target.value)}></textarea>
         </div>
         <button type="submit"
