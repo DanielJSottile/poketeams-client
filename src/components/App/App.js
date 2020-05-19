@@ -31,6 +31,7 @@ export default class App extends Component {
       "id": 1,
       "folder_name": "Infinite Showcase - OU",
       "user_id": 1,
+      "user_name": "test", // you need to join this column
       "date_created": "2020-05-17T17:55:49.995Z",
       "date_modified": null,
       "team_name": "Darkrai's revenge",
@@ -41,6 +42,7 @@ export default class App extends Component {
       "id": 2,
       "folder_name": "Infinite Showcase - OU",
       "user_id": 1,
+      "user_name": "test", // you need to join this column
       "date_created": "2020-05-17T17:55:49.995Z",
       "date_modified": null,
       "team_name": "Darkrai's revenge",
@@ -142,17 +144,17 @@ export default class App extends Component {
   // User Folders
 
   validateNewFolderName = () => {
-    let folder_name = this.state.newFolderName;
+    let folder_name = this.state.newFolderName.value;
   };
 
   // User Teams
 
   validateNewTeamName = () => {
-    let team_name = this.state.newTeamName;
+    let team_name = this.state.newTeamName.value;
   };
 
   validateNewTeamImport = () => { // something to do later
-    let team_import = this.state.newTeamImport;
+    let team_import = this.state.newTeamImport.value;
     if(!showdownParse(team_import)){
       return `Make sure that it is formatted properly!`
     }
@@ -162,17 +164,28 @@ export default class App extends Component {
   // Event Handlers/API Calls -> these may go in their own components
 
   handlePostNewFolder = () => {
-    const folder_name = this.state.newFolderName;
+    const folder_name = this.state.newFolderName.value;
     apiService.postUserFolder(jwtDecode(TokenService.getAuthToken()).id) // postUserFolder not made yet!
     // do the rest!
   }
 
   handlePostNewTeam = () => {
-    const team_name = this.state.newTeamName;
-    const contents = this.state.newTeamImport;
+    const team_name = this.state.newTeamName.value;
+    const contents = this.state.newTeamImport.value;
     const parsed = showdownParse(contents);
-    apiService.postUserTeam(jwtDecode(TokenService.getAuthToken()).id) // postUserFolder not made yet!
+    apiService.postUserTeam(jwtDecode(TokenService.getAuthToken()).id) // postNewTeam not made yet!
     // do the rest!
+  }
+
+  handleUpdateTeam = (teamname, desc, id) => {
+    const team_name = teamname;
+    const description = desc;
+    const team_id = Number(id)
+    apiService.patchUpdateTeam() // patchTeam not made yet
+  }
+
+  handleDeleteTeam = (team_id, user_id) => { // deleteTeam not made yet
+
   }
 
   // RENDER
@@ -217,6 +230,8 @@ export default class App extends Component {
         validateNewTeamImport: this.validateNewTeamImport,
         handleCurrentTeamClicked: this.handleCurrentTeamClicked,
         handleTeamToggle: this.handleTeamToggle,
+        handleUpdateTeam: this.handleUpdateTeam,
+        handleDeleteTeam: this.handleDeleteTeam
         // user set functions
         
       }}>

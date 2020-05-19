@@ -8,17 +8,56 @@ export default class Team extends Component {
 
   static contextType = UserContext;
 
+  /* We actually do need to have State here, 
+  because we are EDITING values from components 
+  that there are more than ONE of. However, the
+  function to update the form and delete are single
+  functions handled in the App.js. */
+
+  state = { 
+    team_name: {value: `${this.props.team.team_name}`, touched: false},
+    favorite_team: {value: false, touched: false},
+    description: {value: `${this.props.team.description}`, touched: false},
+  }
+
+  // set state
+
+  setTeamName = team_name => {
+    this.setState({species: {value: team_name, touched: true}});
+  };
+
+  setFavTeam = favorite_team => {
+    this.setState({nickname: {value: favorite_team, touched: true}});
+  };
+
+  setDesc = description => {
+    this.setState({gender: {value: description, touched: true}});
+  };
+
+  // validate
+
+  validateTeamName = () => {
+    let team_name = this.state.team_name.value;
+  };
+
+  validateDesc = () => {
+    let description = this.state.description.value;
+  };
+
+  // API calls are handled in App.js
+
   renderExpandedTeam() {
 
     const {
       userSets,
       handleTeamToggle,
       handleDeleteTeam,
-      updateTeam,
-      validateEditTeamName
+      handleUpdateTeam,
     } = this.context;
 
     const {team} = this.props;
+
+    const teamSets = userSets.filter(set => set.team_id === team.id)
 
     const SetList = userSets.map((set, i) => {
       return <Set key={i} set={set}/>
@@ -31,25 +70,36 @@ export default class Team extends Component {
             <form className="team-form">
               <div className="team-title">
                 <div>
-                  <button>Delete Team X</button> {/* on delete*/}
+                  <button onClick={(e) => {
+                    e.preventDefault();
+                    handleDeleteTeam(this.props.team.id);
+                  }}>Delete Team!</button>
                 </div>
                 <div className="title-name">
                   <label htmlFor="title-name">Team Name:</label>
-                  <input className="title" placeholder="e.g. Cool Team" value={team.name} type="text" name="team-name" id={`team-name-${team.id}`}/>
+                  <input className="title" placeholder="e.g. Cool Team" value={this.state.team_name.value} onChange={e => this.setTeamName(e.target.value)} type="text" name="team-name" id={`team-name-${team.id}`}/>
                 </div>
-                <p>By {team.user_id}</p>
-                <p>Created on: {team.date_created}</p>
+                <p>By {team.user_name}</p> {/* right now this does not actually exist, so remember to add it for your API call*/}
+                <p>Created on: {new Date(team.date_created).toLocaleString('en-GB', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
                 <div className="title-form">
                   <label htmlFor={`favorite-id-${team.id}`}>Favorite</label>
-                  <input type="checkbox" id={`favorite-id-${team.id}`} name={`favorite-id-${team.id}`} value="true"/>
+                  <input type="checkbox" id={`favorite-id-${team.id}`} name={`favorite-id-${team.id}`} value={this.state.favorite_team.value} onChange={e => this.setFavTeam(e.target.value)}/>
                   <p>Favorites: {team.favorites}</p>
                 </div>
               </div>
               <div className="title-content">
                 <label htmlFor="title-content">Description:</label>
-                <textarea className="title-content desc" placeholder="e.g. description" type="text" name="title-content" id={`title-content-${team.id}`}>{team.desc}</textarea>
+                <textarea className="title-content desc" placeholder="e.g. description" type="text" name="title-content" id={`title-content-${team.id}`} value={this.state.description.value} onChange={e => this.setDesc(e.target.value)}/>
               </div>
-              <button type="submit">Save Team Details</button> {/* on submit */}
+              <button type="submit"
+                disabled={
+                  this.validateTeamName() ||
+                  this.validateDesc()
+                }
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleUpdateTeam(this.state.team_name, this.state.description);
+                }}>Save Team Details</button>
             </form>
           <div className="export-team">
           <button onClick={() => handleTeamToggle()}>Fold Down</button>
@@ -58,7 +108,7 @@ export default class Team extends Component {
               <input disabled type="text" readOnly value={`[hostname]/share/${team.id}`}/>
             </div>
               <label htmlFor="edit-team">Export Team:</label>
-              <textarea disabled readOnly type="text" name="export-team" id={`export-team-${team.id}`} value={showdownGenerate([team])}/>
+              <textarea disabled readOnly type="text" name="export-team" id={`export-team-${team.id}`} value={showdownGenerate(teamSets)}/>
             </div>
           </div>
         </div>

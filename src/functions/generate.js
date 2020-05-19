@@ -6,22 +6,22 @@ and turn it back into a string of text that matches the original format */
 function evGenerator(ob){
   let evArr = [];
 
-  if((ob.hpEv === 0 && ob.atkEv === 0 && ob.defEv === 0 && ob.spaEv === 0 && ob.spdEv === 0 && ob.speEv === 0)){
+  if((ob.hp_ev === 0 && ob.atk_ev === 0 && ob.def_ev === 0 && ob.spa_ev === 0 && ob.spd_ev === 0 && ob.spe_ev === 0)){
     return;
   }
 
-  if (ob.hpEv > 0){
-    evArr.push(`${ob.hpEv} HP`)
-  } if (ob.atkEv > 0){
-    evArr.push(`${ob.atkEv} Atk`)
-  } if (ob.defEv > 0){
-    evArr.push(`${ob.defEv} Def`)
-  } if (ob.spaEv > 0){
-    evArr.push(`${ob.spaEv} SpA`)
-  } if (ob.spdEv > 0){
-    evArr.push(`${ob.spdEv} SpD`)
-  } if (ob.speEv > 0){
-    evArr.push(`${ob.speEv} Spe`)
+  if (ob.hp_ev > 0){
+    evArr.push(`${ob.hp_ev} HP`)
+  } if (ob.atk_ev > 0){
+    evArr.push(`${ob.atk_ev} Atk`)
+  } if (ob.def_ev > 0){
+    evArr.push(`${ob.def_ev} Def`)
+  } if (ob.spa_ev > 0){
+    evArr.push(`${ob.spa_ev} SpA`)
+  } if (ob.spd_ev > 0){
+    evArr.push(`${ob.spd_ev} SpD`)
+  } if (ob.spe_ev > 0){
+    evArr.push(`${ob.spe_ev} Spe`)
   }
 
   return evArr.join(' / ');
@@ -31,22 +31,22 @@ function evGenerator(ob){
 function ivGenerator(ob){
   let ivArr = [];
 
-  if((ob.hpIv === 31 && ob.atkIv === 31 && ob.defIv === 31 && ob.spaIv === 31 && ob.spdIv === 31 && ob.speIv === 31)){
+  if((ob.hp_iv === 31 && ob.atk_iv === 31 && ob.def_iv === 31 && ob.spa_iv === 31 && ob.spd_iv === 31 && ob.spe_iv === 31)){
     return;
   }
 
-  if (ob.hpIv < 31){
-    ivArr.push(`${ob.hpIv} HP`)
-  } if (ob.atkIv < 31){
-    ivArr.push(`${ob.atkIv} Atk`)
-  } if (ob.defIv < 31){
-    ivArr.push(`${ob.defIv} Def`)
-  } if (ob.spaIv < 31){
-    ivArr.push(`${ob.spaIv} SpA`)
-  } if (ob.spdIv < 31){
-    ivArr.push(`${ob.spdIv} SpD`)
-  } if (ob.speIv < 31){
-    ivArr.push(`${ob.speIv} Spe`)
+  if (ob.hp_iv < 31){
+    ivArr.push(`${ob.hp_iv} HP`)
+  } if (ob.atk_iv < 31){
+    ivArr.push(`${ob.atk_iv} Atk`)
+  } if (ob.def_iv < 31){
+    ivArr.push(`${ob.def_iv} Def`)
+  } if (ob.spa_iv < 31){
+    ivArr.push(`${ob.spa_iv} SpA`)
+  } if (ob.spd_iv < 31){
+    ivArr.push(`${ob.spd_iv} SpD`)
+  } if (ob.spe_iv < 31){
+    ivArr.push(`${ob.spe_iv} Spe`)
   }
 
   return ivArr.join(' / ');
@@ -120,22 +120,22 @@ export default function showdownGenerate(input) {
 
     // moves
 
-    if (!set.moveOne){
+    if (!set.move_one){
       setArr.push('- Tackle');
     } else {
-      setArr.push(`- ${set.moveOne}`);
+      setArr.push(`- ${set.move_one}`);
     }
 
-    if (set.moveTwo){
-      setArr.push(`- ${set.moveTwo}`);
+    if (set.move_two){
+      setArr.push(`- ${set.move_two}`);
     }
 
-    if (set.moveThree){
-      setArr.push(`- ${set.moveThree}`);
+    if (set.move_three){
+      setArr.push(`- ${set.move_three}`);
     }
 
-    if (set.moveFour){
-      setArr.push(`- ${set.moveFour}`);
+    if (set.move_four){
+      setArr.push(`- ${set.move_four}`);
     }
 
     return setArr.join('\n');

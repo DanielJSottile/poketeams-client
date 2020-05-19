@@ -7,8 +7,14 @@ export default class Set extends Component {
 
   static contextType = UserContext;
 
+  /* We actually do need to have State here, 
+  because we are EDITING values from components 
+  that there are more than ONE of. However, the
+  function to update the form and delete are single
+  functions handled in the App.js. */
+
   state = {
-    setform: {value: '', touched: false},
+    setform: {value: `${this.props.set}`, touched: false},
     nickname: {value: '', touched: false},
     species: {value: 'Pikachu', touched: false},
     gender: {value: '', touched: false},
@@ -34,10 +40,9 @@ export default class Set extends Component {
     move_two: {value: '', touched: false},
     move_three: {value: '', touched: false},
     move_four: {value: '', touched: false},
-    clicked: false
   }
 
-  // set values
+  // set values probably best kept in here too.
 
   setSetForm = string => {
     
@@ -191,7 +196,7 @@ export default class Set extends Component {
 
   renderExpandedSet() {
 
-    const {set} = this.context;
+    const set = this.props;
 
     return (
       <div className="pokemon">
@@ -272,7 +277,7 @@ export default class Set extends Component {
                 <input className="pokemon-move" placeholder="Tackle" value={this.state.move_one.value} onChange={e => this.setMoveOne(e.target.value)} type="text" name="pokemon-move" id={`pokemon-${set.id}-move-1`} />
                 <input className="pokemon-move" value={this.state.move_two.value} onChange={e => this.setMoveTwo(e.target.value)} type="text" name="pokemon-move" id={`pokemon-${set.id}-move-2`} />
                 <input className="pokemon-move" value={this.state.move_three.value} onChange={e => this.setMoveThree(e.target.value)} type="text" name="pokemon-move" id={`pokemon-${set.id}-move-3`} />
-                <input className="pokemon-move" value={this.state.movefour.value} onChange={e => this.setMoveFour(e.target.value)} type="text" name="pokemon-move" id={`pokemon-${set.id}-move-4`} />
+                <input className="pokemon-move" value={this.state.move_four.value} onChange={e => this.setMoveFour(e.target.value)} type="text" name="pokemon-move" id={`pokemon-${set.id}-move-4`} />
             </div>
             <button type="submit">Submit</button>
           </div>
@@ -285,7 +290,7 @@ export default class Set extends Component {
           </div>
           <div className="export-pokemon">
             <label htmlFor="export-pokemon">Export Pokemon:</label>
-            <textarea readonly type="text" name="export-pokemon" id="export-pokemon-2">{showdownGenerate(set)}</textarea>
+            <textarea readonly type="text" name="export-pokemon" id="export-pokemon-2">{showdownGenerate([set])}</textarea>
           </div>
         </div>
       </div>
