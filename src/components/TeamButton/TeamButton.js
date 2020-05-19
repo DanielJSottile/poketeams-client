@@ -1,20 +1,18 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import UserContext from '../../contexts/UserContext';
 
 export default class TeamButton extends Component {
 
-  handleOnClick = (e) => {
-    e.preventDefault();
-    console.log("hey you clicked me");
-    const {team} = e.target;
-
-    // some kind of APIservice.GetSingleTeam(team.id)
-  };
+  static contextType = UserContext;
 
   render() {
+
+    const {handleCurrentTeamClicked} = this.context;
+
     return (
       <button 
       id={this.props.id} 
-      onClick={this.handleOnClick}>
+      onClick={() => handleCurrentTeamClicked(this.props.team_name)}>
         {this.props.team_name}
       </button>
     );

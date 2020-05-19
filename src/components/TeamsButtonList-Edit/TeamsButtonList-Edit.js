@@ -7,61 +7,53 @@ export default class TeamsButtonList extends Component {
 
   static contextType = UserContext;
 
-  state = {
-    teams: [],
-    sets: [],
-    clicked: false,
-    currentClickedTeam: '',
-  };
-
-  componentDidMount() {
-    // apiService.getTenTeams()
-    //   .then(teams => this.setState({teams: teams}))
-    //   .catch((err) => {
-    //     this.setState({error: err});
-    //   });
-
-    // apiService.getSetsforTenTeams()
-    //   .then(sets => this.setState({sets: sets}))
-    //   .catch((err) => {
-    //     this.setState({error: err});
-    //   });
-  }
-
-  handleOnClickExpand = () => {
-    this.setState({clicked: !this.state.clicked})
-  }
-
-  handleOnSubmit = (e) => {
-    e.preventDefault();
-    console.log("hey you clicked me");
-    const {team_name} = e.target;
-
-    // some kind of APIservice.PostTeam(team_name.value)
-
-  }
-
   renderExpanded() {
+
+    const {
+      newTeamName,
+      newTeamImport,
+      setNewTeamName,
+      setNewTeamContents,
+      handlePostNewTeam,
+      validateNewTeamName,
+      validateNewTeamImport,
+    } = this.context;
+
     return (
       <form onSubmit={this.handleOnSubmit}>
         <div className="team-name">
           <label htmlFor="foldername">Team Name:</label>
-          <input placeholder="e.g. My Cool Team" type="text" name="teamname" id="teamname" />
+          {newTeamName.touched && <p className="error">{validateNewTeamName()}</p>}
+          <input placeholder="e.g. My Cool Team" type="text" name="teamname" id="teamname" value={newTeamName.value} onChange={e => setNewTeamName(e.target.value)}/>
         </div>
         <div className="team-import">
           <label htmlFor="team-import">Import Team Set:</label>
-          <textarea type="text" placeholder="Optionally Import a proper Pokemon Showdown Team Here And It Will Fill Out Your Whole Team!" name="team-import" id="team-import-1"></textarea>
+          {newTeamImport.touched && <p className="error">{validateNewTeamImport()}</p>}
+          <textarea type="text" placeholder="Optionally Import a proper Pokemon Showdown Team Here And It Will Fill Out Your Whole Team!" name="team-import" id="team-import-1" value={newTeamImport.value} onChange={e => setNewTeamContents(e.target.value)}></textarea>
         </div>
-        <button type="submit">Submit</button>
+        <button type="submit"
+        disabled={
+          validateNewTeamName() ||
+          validateNewTeamImport()
+        }
+        onClick={(e) => {
+          e.preventDefault();
+          handlePostNewTeam();
+        }}>Submit</button>
       </form>
     )
   }
 
   render() {
 
-    const teams = this.state.teams;
+    const {
+      userTeams,
+      teamAddClicked,
+      currentClickedTeam,
+      handleTeamAddClickExpand,
+    } = this.context;
 
-    const TeamList = teams.map((team, i) => <TeamButton key={i} id={team.id} folder_name={team.team_name}/>);
+    const TeamList = userTeams.map((team, i) => <TeamButton key={i} id={team.id} team_name={team.team_name}/>);
 
     return (
       <Fragment>
@@ -72,13 +64,13 @@ export default class TeamsButtonList extends Component {
           </div>
           <div>
             <button 
-              onClick={this.handleOnClickExpand}>
+              onClick={() => handleTeamAddClickExpand()}>
               New Team +
             </button>
-            {this.state.clicked ? this.renderExpanded() : null}
+            {teamAddClicked ? this.renderExpanded() : null}
           </div>
         <div>
-          <span>Current Team: {this.state.currentClickedTeam}</span>
+          <span>{`Current Folder: ${currentClickedTeam.value}`}</span>
         </div>
       </section>
     </Fragment>

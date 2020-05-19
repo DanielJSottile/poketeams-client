@@ -8,24 +8,27 @@ export default class Team extends Component {
 
   static contextType = UserContext;
 
-  handleOnClick = () => {
+  renderExpandedTeam() {
 
-  }
+    const {
+      userSets,
+      handleTeamToggle,
+      handleDeleteTeam,
+      updateTeam,
+      validateEditTeamName
+    } = this.context;
 
-  renderExpandedTeam(){
+    const {team} = this.props;
 
-    const {sets} = this.context;
-    const {team} = this.context;
-
-    const SetList = sets.map((set, i) => {
-      return <Set key={i} id={set.id}/>
+    const SetList = userSets.map((set, i) => {
+      return <Set key={i} set={set}/>
     });
 
     return (
       <section>
         <div className="team">
           <div className="team-header">
-            <form className="team-form"> {/* on submit*/}
+            <form className="team-form">
               <div className="team-title">
                 <div>
                   <button>Delete Team X</button> {/* on delete*/}
@@ -46,16 +49,16 @@ export default class Team extends Component {
                 <label htmlFor="title-content">Description:</label>
                 <textarea className="title-content desc" placeholder="e.g. description" type="text" name="title-content" id={`title-content-${team.id}`}>{team.desc}</textarea>
               </div>
-              <button type="submit">Save Team Details</button>
+              <button type="submit">Save Team Details</button> {/* on submit */}
             </form>
           <div className="export-team">
-          <button>Fold Down</button> {/* onClick*/}
+          <button onClick={() => handleTeamToggle()}>Fold Down</button>
             <div>
               <a href="team.html" target="_blank">Share This Team!</a>
-              <input type="text" readonly value={`[hostname]/share/${team.id}`}/>
+              <input disabled type="text" readOnly value={`[hostname]/share/${team.id}`}/>
             </div>
               <label htmlFor="edit-team">Export Team:</label>
-              <textarea readonly type="text" name="export-team" id={`export-team-${team.id}`}>{showdownGenerate(team)}</textarea>
+              <textarea disabled readOnly type="text" name="export-team" id={`export-team-${team.id}`} value={showdownGenerate([team])}/>
             </div>
           </div>
         </div>
@@ -66,7 +69,8 @@ export default class Team extends Component {
 
   renderUnexpandedTeam() {
 
-    const {team} = this.context;
+    const {handleTeamToggle} = this.context;
+    const {team} = this.props;
 
     return (
       <section>
@@ -75,7 +79,7 @@ export default class Team extends Component {
             <p>By {team.user_id}</p>
             <p>Created on: {team.date_created}</p>
           </div>
-          <button><h4>{team.name}</h4></button> {/* onClick*/}
+          <button onClick={() => handleTeamToggle()}><h4>{team.name}></h4></button>
           <div className="title-form">
             
             <label htmlFor={`favorite-id-${team.id}`}>Favorite</label>
@@ -89,9 +93,11 @@ export default class Team extends Component {
   };
 
   render() {
+    const {teamExpandToggle} = this.context;
+
     return (
       <Fragment>
-        {this.handleOnClick() ? this.renderUnexpandedTeam() : this.renderExpandedTeam()} {/* or some value in state */ }
+        {teamExpandToggle ? this.renderUnexpandedTeam() : this.renderExpandedTeam()}
       </Fragment>
     );
   };

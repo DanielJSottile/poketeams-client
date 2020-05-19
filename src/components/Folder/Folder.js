@@ -1,20 +1,18 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import UserContext from '../../contexts/UserContext';
 
 export default class Folder extends Component {
 
-  handleOnClick = (e) => {
-    e.preventDefault();
-    console.log("hey you clicked me");
-    const {folder} = e.target;
-
-    // some kind of APIservice.GetTeams(folder.id)
-  };
+  static contextType = UserContext;
 
   render() {
+
+    const {handleCurrentFolderClicked} = this.context;
+
     return (
       <button 
       id={this.props.id} 
-      onClick={this.handleOnClick}>
+      onClick={() => handleCurrentFolderClicked(this.props.folder_name)}>
         {this.props.folder_name}
       </button>
     );

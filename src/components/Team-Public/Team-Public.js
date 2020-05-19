@@ -10,11 +10,12 @@ export default class Team extends Component {
 
   state = {
     team: [],
-    sets: []
+    sets: [],
+    clicked: false
   }
 
-  handleOnClick = () => {
-
+  handleOnClickExpand = () => {
+    this.setState({clicked: !this.state.clicked})
   }
 
   renderExpandedTeam(){
@@ -33,7 +34,7 @@ export default class Team extends Component {
               <div className="team-title">
                 <div className="title-name">
                   <label htmlFor="title-name">Team Name:</label>
-                  <input disabled className="title" placeholder="e.g. Cool Team" value={team.name} type="text" name="team-name" id={`team-name-${team.id}`}/>
+                  <input disabled className="title" value={team.name} type="text" name="team-name" id={`team-name-${team.id}`}/>
                 </div>
                 <p>By {team.user_id}</p>
                 <p>Created on: {team.date_created}</p>
@@ -45,10 +46,10 @@ export default class Team extends Component {
               </div>
               <div className="title-content">
                 <label htmlFor="title-content">Description:</label>
-                <textarea className="title-content desc" placeholder="e.g. description" type="text" name="title-content" id={`title-content-${team.id}`} disabled value={team.desc}/>
+                <textarea className="title-content desc" type="text" name="title-content" id={`title-content-${team.id}`} disabled value={team.desc}/>
               </div>
           <div className="export-team">
-          <button>Fold Down</button> {/* onClick*/}
+          <button onClick={this.handleOnClickExpand}>Fold Down</button> {/* onClick*/}
             <div>
               <a href="team.html" target="_blank">Share This Team!</a>
               <input type="text" disabled value={`[hostname]/share/${team.id}`}/>
@@ -74,7 +75,7 @@ export default class Team extends Component {
             <p>By {team.user_id}</p>
             <p>Created on: {team.date_created}</p>
           </div>
-          <button><h4>{team.name}</h4></button> {/* onClick*/}
+          <button onClick={this.handleOnClickExpand}><h4>{team.name}</h4></button>
           <div className="title-form">
             
             <label htmlFor={`favorite-id-${team.id}`}>Favorite</label>
@@ -90,7 +91,7 @@ export default class Team extends Component {
   render() {
     return (
       <Fragment>
-        {this.handleOnClick() ? this.renderUnexpandedTeam() : this.renderExpandedTeam()} {/* or some value in state */ }
+        {this.state.clicked ? this.renderUnexpandedTeam() : this.renderExpandedTeam()} {/* or some value in state */ }
       </Fragment>
     );
   };

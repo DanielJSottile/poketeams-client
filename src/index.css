@@ -96,6 +96,9 @@ a:hover, button:hover {
 }
 
 .team {
+  background-color: rgb(212, 41, 41);
+  color: rgb(236, 236, 236);
+  text-shadow: 1px 1px rgb(58, 0, 0);
   border: 1px solid #444;
   border-radius: 10px;
   padding: 5px;
@@ -193,7 +196,8 @@ textarea {
 }
 
 label{
-  color: rgb(114, 114, 114);
+  color: rgb(236, 236, 236);
+  text-shadow: 1px 1px rgb(58, 0, 0);
 }
 
 .title, .pokemon-name{
@@ -209,7 +213,7 @@ label{
 }
 
 .team:hover{
-  background-color: rgb(212, 211, 211);
+  background-color: rgb(255, 75, 75);
   transition: 0.3s;
 }
 

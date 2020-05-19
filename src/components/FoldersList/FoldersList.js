@@ -6,44 +6,44 @@ export default class FoldersList extends Component {
 
   static contextType = UserContext;
 
-  state = {
-    folders: [],
-    teams: [],
-    sets: [],
-    clicked: false,
-    currentClickedFolder: ''
-  }
-
-  handleOnClickExpand = () => {
-    this.setState({clicked: !this.state.clicked})
-  }
-
-  handleOnSubmit = (e) => {
-    e.preventDefault();
-    console.log("hey you clicked me");
-    const {folder_name} = e.target;
-
-    // some kind of APIservice.PostFolder(folder_name.value)
-
-  }
-
   renderExpanded() {
+
+    const {
+      newFolderName,
+      setNewFolderName,
+      handlePostNewFolder,
+      validateNewFolderName
+    } = this.context;
+
     return (
-      <form onSubmit={this.handleOnSubmit}>
+      <form>
         <div>
           <label htmlFor="foldername">Folder Name:</label>
-          <input placeholder="e.g. Good Teams" type="text" name="foldername" id="foldername" />
+          {newFolderName.touched && <p className="error">{validateNewFolderName()}</p>}
+          <input placeholder="e.g. Good Teams" type="text" name="foldername" id="foldername" value={newFolderName.value} onChange={e => setNewFolderName(e.target.value)}/>
         </div>
-        <button type="submit">Submit</button>
+        <button type="submit"
+        disabled={
+          validateNewFolderName()
+        }
+        onClick={(e) => {
+          e.preventDefault();
+          handlePostNewFolder();
+        }}>Submit</button>
       </form>
     )
   }
 
   render() {
 
-    const folders = this.state.folders;
+    const {
+      userFolders, 
+      folderAddClicked, 
+      currentClickedFolder,
+      handleFolderAddClickExpand,
+    } = this.context;
 
-    const folderList = folders.map((folder, i) => {
+    const folderList = userFolders.map((folder, i) => {
       return <Folder key={i} id={folder.id} folder_name={folder.folder_name}/>
     });
 
@@ -55,11 +55,11 @@ export default class FoldersList extends Component {
             {folderList.length > 0 ? folderList : <h3>None! Click Below to Make a New Folder!</h3>}
           </div>
           <div>
-            <button onClick={this.handleOnClickExpand}>New Folder +</button>
-            {this.state.clicked ? this.renderExpanded() : null}
+            <button onClick={() => handleFolderAddClickExpand()}>New Folder +</button>
+            {folderAddClicked ? this.renderExpanded() : null}
           </div>
         <div>
-          <span>Current Folder: {this.state.currentClickedFolder}</span>
+          <span>{`Current Folder: ${currentClickedFolder.value}`}</span>
         </div>
       </section>
     </Fragment>
