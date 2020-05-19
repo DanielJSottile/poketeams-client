@@ -334,9 +334,9 @@ export default class Set extends Component {
                   </div>  
               </div>
               <div className="sprites">
-                <img src={legality.returnIconSprite(this.state.species.value, this.state.shiny.value)} alt={this.state.species.value}/>
+                <img className="sprite-img" src={legality.returnIconSprite(this.state.species.value, this.state.shiny.value)} alt={this.state.species.value}/>
                 {legality.returnTypeIcon(legality.returnType(this.state.species.value)).map((type, i)=> {
-                  return <img src={`${type}`} key={i} alt={`${i + 1}`}/>
+                  return <img className="type-img" src={`${type}`} key={i} alt={`${i + 1}`}/>
                 })}
               </div>
             </div>

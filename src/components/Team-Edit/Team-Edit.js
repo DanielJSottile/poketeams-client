@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import UserContext from '../../contexts/UserContext';
 import showdownGenerate from '../../functions/generate';
-import Set from '../Set-Edit/Set-Edit';
+import SetEdit from '../Set-Edit/Set-Edit';
 
 
 export default class Team extends Component {
@@ -66,7 +66,7 @@ export default class Team extends Component {
     const teamSets = userSets.filter(set => set.team_id === team.id)
 
     const SetList = userSets.map((set, i) => {
-      return <Set key={i} set={set}/>
+      return <SetEdit key={i} set={set}/>
     });
 
     return (
@@ -138,13 +138,7 @@ export default class Team extends Component {
             <p>Created on: {new Date(team.date_created).toLocaleString('en-GB', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
           </div>
           <h4>{team.team_name}</h4>
-          <div className="title-form">
-            
-            <label htmlFor={`favorite-id-${team.id}`}>Favorite</label>
-            <input type="checkbox" id={`favorite-id-${team.id}`} name={`favorite-id-${team.id}`} value="true"/>
-
-            <p>Favorites: {team.favorites}</p>
-        </div>
+          <p>Favorites: {team.likes}</p>
         </div>
       </section>
     );

@@ -1,61 +1,60 @@
 import React, { Component, Fragment } from 'react';
 import UserContext from '../../contexts/UserContext';
 import showdownGenerate from '../../functions/generate';
-import Set from '../Set-Edit/Set-Edit';
+import SetPublic from '../Set-Public/Set-Public';
 
 
 export default class Team extends Component {
 
   static contextType = UserContext;
 
-  state = {
-    team: [],
-    sets: [],
-    clicked: false
-  }
-
-  handleOnClickExpand = () => {
-    this.setState({clicked: !this.state.clicked})
-  }
 
   renderExpandedTeam(){
 
-    const sets = this.state.sets;
-    const team = this.state.team;
+    const {
+      publicSets,
+      handleTeamToggle,
+    } = this.context;
 
-    const SetList = sets.map((set, i) => {
-      return <Set key={i} id={set.id}/>
+    const {team} = this.props;
+
+    const teamSets = publicSets.filter(set => set.team_id === team.id)
+
+    const SetList = publicSets.map((set, i) => {
+      return <SetPublic key={i} set={set}/>
     });
 
     return (
       <section>
         <div className="team">
           <div className="team-header">
+            <form className="team-form">
               <div className="team-title">
+                <button onClick={() => handleTeamToggle(team.id)}>Fold Down Team</button>
                 <div className="title-name">
                   <label htmlFor="title-name">Team Name:</label>
-                  <input disabled className="title" value={team.name} type="text" name="team-name" id={`team-name-${team.id}`}/>
+                  <input disabled readOnly className="title" placeholder="e.g. Cool Team" value={team.team_name} type="text" name="team-name" id={`team-name-${team.id}`}/>
                 </div>
-                <p>By {team.user_id}</p>
-                <p>Created on: {team.date_created}</p>
+                <p>By {team.user_name}</p> {/* right now this does not actually exist, so remember to add it for your API call*/}
+                <p>Created on: {new Date(team.date_created).toLocaleString('en-GB', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
                 <div className="title-form">
                   <label htmlFor={`favorite-id-${team.id}`}>Favorite</label>
-                  <input type="checkbox" id={`favorite-id-${team.id}`} name={`favorite-id-${team.id}`} value="true"/>
-                  <p>Favorites: {team.favorites}</p>
+                  <input type="checkbox" id={`favorite-id-${team.id}`} name={`favorite-id-${team.id}`}/> {/* not sure what to do with this right now...*/}
+                  <p>Likes: {team.likes}</p> {/* right now this does not actually exist, so we have to add it*/}
                 </div>
               </div>
               <div className="title-content">
                 <label htmlFor="title-content">Description:</label>
-                <textarea className="title-content desc" type="text" name="title-content" id={`title-content-${team.id}`} disabled value={team.desc}/>
+                <textarea disabled readOnly className="title-content desc" placeholder="e.g. description" type="text" name="title-content" id={`title-content-${team.id}`} value={team.description}/>
               </div>
+            </form>
           <div className="export-team">
-          <button onClick={this.handleOnClickExpand}>Fold Down</button> {/* onClick*/}
             <div>
               <a href="team.html" target="_blank">Share This Team!</a>
-              <input type="text" disabled value={`[hostname]/share/${team.id}`}/>
+              <input disabled type="text" readOnly value={`[hostname]/share/${team.id}`}/>
             </div>
               <label htmlFor="edit-team">Export Team:</label>
-              <textarea type="text" name="export-team" id={`export-team-${team.id}`} disabled value={showdownGenerate(team)}/>
+              <textarea disabled readOnly type="text" name="export-team" id={`export-team-${team.id}`} value={showdownGenerate(teamSets)}/>
             </div>
           </div>
         </div>
@@ -64,34 +63,32 @@ export default class Team extends Component {
     );
   };
 
+
   renderUnexpandedTeam() {
 
-    const team = this.state.team;
+    const {handleTeamToggle} = this.context;
+    const {team} = this.props;
 
     return (
       <section>
-        <div className="team-closed">
+        <div className="team-closed" onClick={() => handleTeamToggle(team.id)}>
           <div>
-            <p>By {team.user_id}</p>
-            <p>Created on: {team.date_created}</p>
+            <p>By {team.user_name}</p>
+            <p>Created on: {new Date(team.date_created).toLocaleString('en-GB', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
           </div>
-          <button onClick={this.handleOnClickExpand}><h4>{team.name}</h4></button>
-          <div className="title-form">
-            
-            <label htmlFor={`favorite-id-${team.id}`}>Favorite</label>
-            <input type="checkbox" id={`favorite-id-${team.id}`} name={`favorite-id-${team.id}`} value="true"/>
-
-            <p>Favorites: {team.favorites}</p>
-        </div>
+          <h4>{team.team_name}</h4>
+          <p>Favorites: {team.likes}</p>
         </div>
       </section>
     );
   };
 
   render() {
+    const {teamExpandToggle} = this.context;
+
     return (
       <Fragment>
-        {this.state.clicked ? this.renderUnexpandedTeam() : this.renderExpandedTeam()} {/* or some value in state */ }
+        {teamExpandToggle ? this.renderUnexpandedTeam() : this.renderExpandedTeam()}
       </Fragment>
     );
   };

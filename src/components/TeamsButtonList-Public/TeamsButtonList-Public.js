@@ -7,61 +7,24 @@ export default class TeamsButtonList extends Component {
 
   static contextType = UserContext;
 
-  state = {
-    teams: [],
-    sets: [],
-    clicked: false,
-    currentClickedTeam: '',
-  };
+  render() { // ** WILL NEED TO GO BACK AND ADD THE PAGINATION FEATURE **
 
-  componentDidMount() {
-   
-  }
+    const {
+      publicTeams,
+      currentClickedTeam,
+    } = this.context;
 
-  // handleOnClickExpand = () => {
-  //   this.setState({clicked: !this.state.clicked})
-  // }
-
-  // handleOnSubmit = (e) => {
-  //   e.preventDefault();
-  //   console.log("hey you clicked me");
-  //   const {team_name} = e.target;
-
-  //   // some kind of APIservice.PostTeam(team_name.value)
-
-  // }
-
-  // renderExpanded() {
-  //   return (
-  //     <form onSubmit={this.handleOnSubmit}>
-  //       <div className="team-name">
-  //         <label htmlFor="foldername">Team Name:</label>
-  //         <input disabled placeholder="e.g. My Cool Team" type="text" name="teamname" id="teamname" />
-  //       </div>
-  //       <div className="team-import">
-  //         <label htmlFor="team-import">Import Team Set:</label>
-  //         <textarea disabled type="text" placeholder="Optionally Import a proper Pokemon Showdown Team Here And It Will Fill Out Your Whole Team!" name="team-import" id="team-import-1"></textarea>
-  //       </div>
-  //       <button type="submit">Submit</button>
-  //     </form>
-  //   )
-  // }
-
-  render() {
-
-    const teams = this.state.teams;
-
-    const TeamList = teams.map((team, i) => <TeamButton key={i} id={team.id} folder_name={team.team_name}/>);
+    const TeamList = publicTeams.map((team, i) => <TeamButton key={i} id={team.id} team_name={team.team_name}/>);
 
     return (
       <Fragment>
         <section className="folders-list">
           <h3>Teams:</h3>
           <div>
-            {(TeamList.length > 0) ? TeamList : <h3>None! Um...This Is Strange...Can You Please Login And Add A Team For Me?</h3>}
+            {(TeamList.length > 0) ? TeamList : <h3>None! Please Login and Be the First to Add a Team!</h3>}
           </div>
         <div>
-          <span>Current Team: {this.state.currentClickedTeam}</span>
+          <span>{`Current Team: ${currentClickedTeam.value}`}</span>
         </div>
       </section>
     </Fragment>

@@ -20,7 +20,7 @@ import './App.css';
 
 
 export default class App extends Component {
-  state = {
+  state = {  // temporary store until we work with api calls
     userFolders: [{
       "id": 2,
       "folder_name": "Infinite Showcase - OU",
@@ -77,8 +77,55 @@ export default class App extends Component {
       "move_four": "Dark Pulse",
       "team_id": 1
   }],
-    publicTeams: [],
-    publicSets: [],
+    publicTeams: [{
+      "id": 1,
+      "folder_name": "Infinite Showcase - OU",
+      "user_id": 1,
+      "user_name": "test", // you need to join this column to your current api in server
+      "likes": 21, // you need to join this column to your current api in server
+      "date_created": "2020-05-17T17:55:49.995Z",
+      "date_modified": null,
+      "team_name": "Darkrai's revenge",
+      "folder_id": 2,
+      "description": "A team using Mega Darkrai"
+  }],
+    publicSets: [{
+      "id": 2,
+      "folder_name": "Infinite Showcase - OU",
+      "user_id": 1,
+      "user_name": "test", // you need to join this column
+      "date_created": "2020-05-17T17:55:49.995Z",
+      "date_modified": null,
+      "team_name": "Darkrai's revenge",
+      "folder_id": 2,
+      "description": "A team using Mega Darkrai",
+      "nickname": null,
+      "species": "Darkrai",
+      "gender": null,
+      "item": "Darkraite",
+      "ability": "Bad Dreams",
+      "level": 100,
+      "shiny": true,
+      "happiness": 255,
+      "nature": "Timid",
+      "hp_ev": 0,
+      "atk_ev": 0,
+      "def_ev": 0,
+      "spa_ev": 252,
+      "spd_ev": 4,
+      "spe_ev": 252,
+      "hp_iv": 31,
+      "atk_iv": 31,
+      "def_iv": 31,
+      "spa_iv": 31,
+      "spd_iv": 31,
+      "spe_iv": 31,
+      "move_one": "Perdition's Pyre",
+      "move_two": "Dark Void",
+      "move_three": "Nasty Plot",
+      "move_four": "Dark Pulse",
+      "team_id": 1
+  }],
     //folders-user
     folderAddClicked: false,
     currentClickedFolder: {value: '', touched: false},

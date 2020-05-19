@@ -242,8 +242,14 @@ label{
 }
 
 img {
+  padding: 5px;
   margin: auto;
-  width: 200px;
+  align-self: center;
+}
+
+.type-img{
+  
+  width: 100px;
 }
 
 .icon {

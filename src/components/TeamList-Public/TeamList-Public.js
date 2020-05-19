@@ -7,22 +7,12 @@ export default class TeamList extends Component {
 
   static contextType = UserContext;
 
-  state = {
-    error: null,
-    teams: [],
-    sets: []
-  };
-
-  componentDidMount() {
-    
-  }
-
   render() {
 
-    const teams = this.state.teams;
+    const {publicTeams} = this.context;
 
-    const TeamList = teams.map((team, i) => {
-      return <TeamPublic key={i} id={team.id} name={team.team_name}/>
+    const TeamList = publicTeams.map((team, i) => {
+      return <TeamPublic key={i} team={team}/>
     });
 
     return (
