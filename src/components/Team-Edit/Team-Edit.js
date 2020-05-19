@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import { Link } from 'react-router-dom';
 import UserContext from '../../contexts/UserContext';
 import showdownGenerate from '../../functions/generate';
 import SetEdit from '../Set-Edit/Set-Edit';
@@ -106,7 +107,7 @@ export default class Team extends Component {
             </form>
           <div className="export-team">
             <div>
-              <a href="team.html" target="_blank">Share This Team!</a>
+              <Link to={`/share/${team.id}`} target="_blank">Share This Team!</Link>
               <input disabled type="text" readOnly value={`[hostname]/share/${team.id}`}/>
             </div>
               <label htmlFor="edit-team">Export Team:</label>

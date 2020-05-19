@@ -138,7 +138,10 @@ export default class App extends Component {
     //sets-teams-user
     teamExpandToggle: true,
     setExpandToggle: true,
-    newSetImport: {value: '', touched: false}
+    newSetImport: {value: '', touched: false},
+    // search
+    search: {value: '', touched: false},
+    sort: {value: '', touched: false}
   };
 
   componentDidMount() {
@@ -199,6 +202,16 @@ export default class App extends Component {
     this.setState({newSetImport: {value: newSetImport, touched: true}});
   }
 
+  // search 
+
+  setSearch = searchval => {
+    this.setState({search: {value: searchval, touched: true}});
+  }
+
+  setSort = sortval => {
+    this.setState({sort: {value: sortval, touched: true}});
+  }
+
   // Validate State Functions
 
   // User Folders
@@ -256,6 +269,16 @@ export default class App extends Component {
     })
     return flag;
   };
+
+  // search
+
+  validateSearch = () => {
+    let search = this.state.search.value;
+    search = search.toString().trim();
+    if(!legality.isLegalSpecies(search)){
+      return `Must be an 'existing' Pokemon species or form styled via '[species]-[form]'!`
+    }
+  }
 
   // Event Handlers/API Calls -> NOT MADE YET!
 
@@ -330,6 +353,13 @@ export default class App extends Component {
 
   }
 
+  handleSearch = () => {
+    const search = this.state.search.value;
+    const sort = this.state.sort.value;
+    // do the thing
+
+  }
+
   // RENDER
   
   render() {
@@ -357,6 +387,9 @@ export default class App extends Component {
         // set Set state
         setExpandToggle: this.state.setExpandToggle,
         newSetImport: this.state.newSetImport,
+        // set search
+        search: this.state.search,
+        sort: this.state.sort,
         // functions
         // user folder functions
         setNewFolderName: this.setNewFolderName,
@@ -382,6 +415,11 @@ export default class App extends Component {
         setNewSetContents: this.setNewSetContents,
         validateNewSetImport: this.validateNewSetImport,
         handleUpdateSetImport: this.handleUpdateSetImport,
+        // search functions
+        setSearch: this.setSearch,
+        setSort: this.setSort,
+        validateSearch: this.validateSearch,
+        handleSearch: this.handleSearch,
         
       }}>
         <Fragment>
