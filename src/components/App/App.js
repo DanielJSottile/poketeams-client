@@ -31,7 +31,8 @@ export default class App extends Component {
       "id": 1,
       "folder_name": "Infinite Showcase - OU",
       "user_id": 1,
-      "user_name": "test", // you need to join this column
+      "user_name": "test", // you need to join this column to your current api in server
+      "likes": 21, // you need to join this column to your current api in server
       "date_created": "2020-05-17T17:55:49.995Z",
       "date_modified": null,
       "team_name": "Darkrai's revenge",
@@ -87,8 +88,9 @@ export default class App extends Component {
     newTeamName: {value: '', touched: false},
     newTeamImport: {value: '', touched: false},
     //sets-teams-user
-    teamExpandToggle: false,
-    setExpandToggle: false,
+    teamExpandToggle: true,
+    setExpandToggle: true,
+    newSetImport: {value: '', touched: false}
   };
 
   componentDidMount() {
@@ -139,6 +141,14 @@ export default class App extends Component {
     this.setState({teamExpandToggle: !this.state.teamExpandToggle})
   };
 
+  handleSetToggle = () => {
+    this.setState({setExpandToggle: !this.state.setExpandToggle})
+  };
+
+  setNewSetContents = newSetImport => {
+    this.setState({newSetImport: {value: newSetImport, touched: true}});
+  }
+
   // Validate State Functions
 
   // User Folders
@@ -161,7 +171,15 @@ export default class App extends Component {
 
   };
 
-  // Event Handlers/API Calls -> these may go in their own components
+  validateNewSetImport = () => { // something to do later
+    let set_import = this.state.newSetImport.value;
+    if(!showdownParse(set_import)){
+      return `Make sure that it is formatted properly!`
+    }
+
+  };
+
+  // Event Handlers/API Calls -> NOT MADE YET!
 
   handlePostNewFolder = () => {
     const folder_name = this.state.newFolderName.value;
@@ -185,6 +203,52 @@ export default class App extends Component {
   }
 
   handleDeleteTeam = (team_id, user_id) => { // deleteTeam not made yet
+
+  }
+
+  handleUpdateSet= (
+      id,
+      nickname,
+      species,
+      gender,
+      item,
+      ability,
+      level,
+      shiny,
+      happiness,
+      nature,
+      hp_ev,
+      atk_ev,
+      def_ev,
+      spa_ev,
+      spd_ev,
+      spe_ev,
+      hp_iv,
+      atk_iv,
+      def_iv,
+      spa_iv,
+      spd_iv,
+      spe_iv,
+      move_one,
+      move_two,
+      move_three,
+      move_four,
+      team_id
+  ) => {
+    const set_body = {
+
+    }
+    apiService.patchUpdateSet() // patchSet not made yet
+  }
+
+  handleUpdateSetImport = () => {
+    const contents = this.state.newSetImport.value;
+    const parsed = showdownParse(contents);
+    apiService.patchUpdateSet(jwtDecode(TokenService.getAuthToken()).id) // patchSet not made yet
+    // do the rest!
+  }
+
+  handleDeleteSet = (team_id, user_id) => { // deleteSet not made yet
 
   }
 
@@ -213,7 +277,8 @@ export default class App extends Component {
         newTeamImport: this.state.newTeamImport,
         teamExpandToggle: this.state.teamExpandToggle,
         // set Set state
-        setExpandToggle:this.state.setExpandToggle,
+        setExpandToggle: this.state.setExpandToggle,
+        newSetImport: this.state.newSetImport,
         // functions
         // user folder functions
         setNewFolderName: this.setNewFolderName,
@@ -231,8 +296,14 @@ export default class App extends Component {
         handleCurrentTeamClicked: this.handleCurrentTeamClicked,
         handleTeamToggle: this.handleTeamToggle,
         handleUpdateTeam: this.handleUpdateTeam,
-        handleDeleteTeam: this.handleDeleteTeam
+        handleDeleteTeam: this.handleDeleteTeam,
         // user set functions
+        handleSetToggle: this.handleSetToggle,
+        handleDeleteSet: this.handleDeleteSet,
+        handleUpdateSet: this.handleUpdateSet,
+        setNewSetContents: this.setNewSetContents,
+        validateNewSetImport: this.validateNewSetImport,
+        handleUpdateSetImport: this.handleUpdateSetImport,
         
       }}>
         <Fragment>

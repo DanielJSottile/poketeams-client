@@ -70,7 +70,7 @@ export default class TeamsButtonList extends Component {
             {teamAddClicked ? this.renderExpanded() : null}
           </div>
         <div>
-          <span>{`Current Folder: ${currentClickedTeam.value}`}</span>
+          <span>{`Current Team: ${currentClickedTeam.value}`}</span>
         </div>
       </section>
     </Fragment>

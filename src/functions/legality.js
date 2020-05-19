@@ -28,7 +28,7 @@ function findSpecies(species){
 
 function returnType(species){
 
-  let types;
+  let types = ['???'];
 
   if (isLegalSpecies(species)) {
     types = findSpecies(species).types;
@@ -99,6 +99,8 @@ function returnTypeIcon(types) {
       return `https://imgur.com/1aapukI.png`;
       case 'water':
       return `https://imgur.com/7gDH9B8.png`;
+      case '???':
+      return `https://imgur.com/kHG7M8L.png`;
       default:
       return `https://imgur.com/kHG7M8L.png`;
     }

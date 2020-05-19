@@ -69,12 +69,7 @@ export default class Team extends Component {
           <div className="team-header">
             <form className="team-form">
               <div className="team-title">
-                <div>
-                  <button onClick={(e) => {
-                    e.preventDefault();
-                    handleDeleteTeam(this.props.team.id);
-                  }}>Delete Team!</button>
-                </div>
+                <button onClick={() => handleTeamToggle()}>Fold Down Team</button>
                 <div className="title-name">
                   <label htmlFor="title-name">Team Name:</label>
                   <input className="title" placeholder="e.g. Cool Team" value={this.state.team_name.value} onChange={e => this.setTeamName(e.target.value)} type="text" name="team-name" id={`team-name-${team.id}`}/>
@@ -84,7 +79,7 @@ export default class Team extends Component {
                 <div className="title-form">
                   <label htmlFor={`favorite-id-${team.id}`}>Favorite</label>
                   <input type="checkbox" id={`favorite-id-${team.id}`} name={`favorite-id-${team.id}`} value={this.state.favorite_team.value} onChange={e => this.setFavTeam(e.target.value)}/>
-                  <p>Favorites: {team.favorites}</p>
+                  <p>Likes: {team.likes}</p> {/* right now this does not actually exist, so we have to add it*/}
                 </div>
               </div>
               <div className="title-content">
@@ -102,7 +97,6 @@ export default class Team extends Component {
                 }}>Save Team Details</button>
             </form>
           <div className="export-team">
-          <button onClick={() => handleTeamToggle()}>Fold Down</button>
             <div>
               <a href="team.html" target="_blank">Share This Team!</a>
               <input disabled type="text" readOnly value={`[hostname]/share/${team.id}`}/>
@@ -110,6 +104,12 @@ export default class Team extends Component {
               <label htmlFor="edit-team">Export Team:</label>
               <textarea disabled readOnly type="text" name="export-team" id={`export-team-${team.id}`} value={showdownGenerate(teamSets)}/>
             </div>
+          </div>
+          <div>
+            <button onClick={(e) => {
+              e.preventDefault();
+              handleDeleteTeam(this.props.team.id);
+              }}>Delete Team!</button>
           </div>
         </div>
         {SetList}
@@ -124,12 +124,12 @@ export default class Team extends Component {
 
     return (
       <section>
-        <div className="team-closed">
+        <div className="team-closed" onClick={() => handleTeamToggle()}>
           <div>
-            <p>By {team.user_id}</p>
-            <p>Created on: {team.date_created}</p>
+            <p>By {team.user_name}</p>
+            <p>Created on: {new Date(team.date_created).toLocaleString('en-GB', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
           </div>
-          <button onClick={() => handleTeamToggle()}><h4>{team.name}></h4></button>
+          <h4>{team.team_name}</h4>
           <div className="title-form">
             
             <label htmlFor={`favorite-id-${team.id}`}>Favorite</label>
