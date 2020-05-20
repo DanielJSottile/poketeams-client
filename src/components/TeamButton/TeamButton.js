@@ -7,13 +7,12 @@ export default class TeamButton extends Component {
 
   render() {
 
-    const {handleCurrentTeamClicked, handleTeamToggle} = this.context;
+    const {handleCurrentTeamClicked} = this.context;
     return (
       <button 
       id={this.props.id} 
       onClick={() => {
         handleCurrentTeamClicked(this.props.team_name, this.props.id);
-        handleTeamToggle(this.props.id);
       }}>
         {this.props.team_name}
       </button>

@@ -14,121 +14,17 @@ import apiService from '../../services/apiService';
 import jwtDecode from 'jwt-decode';
 import showdownParse from '../../functions/parse';
 import legality from '../../functions/legality';
-import './App.css';
-
-
-
 
 export default class App extends Component {
   state = {  // temporary store until we work with api calls
-    userFolders: [{
-      "id": 2,
-      "folder_name": "Infinite Showcase - OU",
-      "user_id": 1,
-      "date_created": "2020-05-17T17:55:49.995Z",
-      "date_modified": null
-  }],
-    userTeams: [{
-      "id": 1,
-      "folder_name": "Infinite Showcase - OU",
-      "user_id": 1,
-      "user_name": "test", // you need to join this column to your current api in server
-      "likes": 21, // you need to join this column to your current api in server
-      "date_created": "2020-05-17T17:55:49.995Z",
-      "date_modified": null,
-      "team_name": "Darkrai's revenge",
-      "folder_id": 2,
-      "description": "A team using Mega Darkrai"
-  }],
-    userSets: [{
-      "id": 2,
-      "folder_name": "Infinite Showcase - OU",
-      "user_id": 1,
-      "user_name": "test", // you need to join this column
-      "date_created": "2020-05-17T17:55:49.995Z",
-      "date_modified": null,
-      "team_name": "Darkrai's revenge",
-      "folder_id": 2,
-      "description": "A team using Mega Darkrai",
-      "nickname": null,
-      "species": "Darkrai",
-      "gender": null,
-      "item": "Darkraite",
-      "ability": "Bad Dreams",
-      "level": 100,
-      "shiny": true,
-      "happiness": 255,
-      "nature": "Timid",
-      "hp_ev": 0,
-      "atk_ev": 0,
-      "def_ev": 0,
-      "spa_ev": 252,
-      "spd_ev": 4,
-      "spe_ev": 252,
-      "hp_iv": 31,
-      "atk_iv": 31,
-      "def_iv": 31,
-      "spa_iv": 31,
-      "spd_iv": 31,
-      "spe_iv": 31,
-      "move_one": "Perdition's Pyre",
-      "move_two": "Dark Void",
-      "move_three": "Nasty Plot",
-      "move_four": "Dark Pulse",
-      "team_id": 1
-  }],
-    publicTeams: [{
-      "id": 1,
-      "folder_name": "Infinite Showcase - OU",
-      "user_id": 1,
-      "user_name": "test", // you need to join this column to your current api in server
-      "likes": 21, // you need to join this column to your current api in server
-      "date_created": "2020-05-17T17:55:49.995Z",
-      "date_modified": null,
-      "team_name": "Darkrai's revenge",
-      "folder_id": 2,
-      "description": "A team using Mega Darkrai"
-  }],
-    publicSets: [{
-      "id": 2,
-      "folder_name": "Infinite Showcase - OU",
-      "user_id": 1,
-      "user_name": "test", // you need to join this column
-      "date_created": "2020-05-17T17:55:49.995Z",
-      "date_modified": null,
-      "team_name": "Darkrai's revenge",
-      "folder_id": 2,
-      "description": "A team using Mega Darkrai",
-      "nickname": null,
-      "species": "Darkrai",
-      "gender": null,
-      "item": "Darkraite",
-      "ability": "Bad Dreams",
-      "level": 100,
-      "shiny": true,
-      "happiness": 255,
-      "nature": "Timid",
-      "hp_ev": 0,
-      "atk_ev": 0,
-      "def_ev": 0,
-      "spa_ev": 252,
-      "spd_ev": 4,
-      "spe_ev": 252,
-      "hp_iv": 31,
-      "atk_iv": 31,
-      "def_iv": 31,
-      "spa_iv": 31,
-      "spd_iv": 31,
-      "spe_iv": 31,
-      "move_one": "Perdition's Pyre",
-      "move_two": "Dark Void",
-      "move_three": "Nasty Plot",
-      "move_four": "Dark Pulse",
-      "team_id": 1
-  }],
+    userFolders: [],
+    userTeams: [],
+    userSets: [],
+    publicTeams: [],
+    publicSets: [],
     //folders-user
     folderAddClicked: false,
-    currentClickedFolder: {value: '', touched: false},
+    currentClickedFolder: {value: '', id: '', touched: false},
     newFolderName: {value: '', touched: false},
     //teams-user
     teamAddClicked: false,
@@ -136,20 +32,49 @@ export default class App extends Component {
     newTeamName: {value: '', touched: false},
     newTeamImport: {value: '', touched: false},
     //sets-teams-user
-    teamExpandToggle: true,
-    setExpandToggle: true,
     newSetImport: {value: '', touched: false},
     // search
     search: {value: '', touched: false},
-    sort: {value: '', touched: false}
-  };
+    sort: {value: '', touched: false},
+    filter: {value: '', touched: false},
+    filtersort: {value: '', touched: false},
+    page: {value: 1, touched: false}
+  }; 
 
   componentDidMount() {
-    if (TokenService.getAuthToken()){
-      //do an api call to the user folders, teams, sets
-    } else {
-      // do an api call to the public teams and sets
-    }
+
+    if (TokenService.getAuthToken()){ // if user is logged in
+      const user_id = jwtDecode(TokenService.getAuthToken()).user_id
+
+      apiService.getUserFolders(user_id) // Get Public Teams First
+      .then(data => {
+        this.setState({userFolders: data})
+      })
+
+      apiService.getUserTeams(user_id) // Get Public Teams First
+      .then(data => {
+        this.setState({userTeams: data})
+      })
+
+      apiService.getUserSets(user_id) // Get Public Teams First
+      .then(data => {
+        this.setState({userSets: data})
+      })
+    };
+  
+    // Then get the public teams
+
+    apiService.getTenTeamsDefault() // Get Public Teams First
+      .then(data => {
+        this.setState({publicTeams: data})
+      })
+
+        // some way to add likes to the public teams???
+
+    apiService.getSetsforTenTeams() // hopefully get Public Sets of those 10 teams
+      .then(data => {
+        this.setState({publicSets: data})
+      })
   }
 
   // State Input Update Functions 
@@ -164,8 +89,8 @@ export default class App extends Component {
     this.setState({folderAddClicked: !this.state.folderAddClicked})
   };
 
-  handleCurrentFolderClicked = (name) => {
-    this.setState({currentClickedFolder: {value: name, touched: true}})
+  handleCurrentFolderClicked = (name, folder_id) => {
+    this.setState({currentClickedFolder: {value: name, id: folder_id, touched: true}})
   };
 
   // User Teams
@@ -188,16 +113,6 @@ export default class App extends Component {
 
   // User Sets-Teams
 
-  handleTeamToggle = (id) => { // is kinda broken, fix later
-    if(id === this.state.currentClickedTeam.id){
-      this.setState({teamExpandToggle: !this.state.teamExpandToggle})
-    }
-  };
-
-  handleSetToggle = () => {
-    this.setState({setExpandToggle: !this.state.setExpandToggle})
-  };
-
   setNewSetContents = newSetImport => {
     this.setState({newSetImport: {value: newSetImport, touched: true}});
   }
@@ -212,6 +127,14 @@ export default class App extends Component {
     this.setState({sort: {value: sortval, touched: true}});
   }
 
+  setFilter = filter => {
+    this.setState({filter: {value: filter, touched: true}})
+  }
+
+  setFilterSort = filtersort => {
+    this.setState({filtersort: {value: filtersort, touched: true}})
+  }
+  
   // Validate State Functions
 
   // User Folders
@@ -280,7 +203,18 @@ export default class App extends Component {
     }
   }
 
+  validateFilter = () => {
+    let filter = this.state.filter.value;
+    filter = filter.toString().trim();
+    if(!legality.isLegalSpecies(filter)){
+      return `Must be an 'existing' Pokemon species or form styled via '[species]-[form]'!`
+    }
+  }
   // Event Handlers/API Calls -> NOT MADE YET!
+
+  handlePostNewPokemon = () => {
+    
+  }
 
   handlePostNewFolder = () => {
     const folder_name = this.state.newFolderName.value;
@@ -356,8 +290,33 @@ export default class App extends Component {
   handleSearch = () => {
     const search = this.state.search.value;
     const sort = this.state.sort.value;
-    // do the thing
+    const page = this.state.page.value;
+    const query = `?page=${page}&sort=${sort}&species=${search.toLowerCase()}`
+    apiService.getTenTeamsSearch(query)
+      .then(data => {
+        this.setState({publicTeams: data})
+      })
+  }
 
+  handleFilter = () => {
+    const filter = this.state.filter.value;
+    const filtersort = this.state.filtersort.value;
+    // lets do an api call for this, JUST because we fucking can, plus linking data back up is impossible with my current knowledge
+    const query = `?sort=${filtersort}&species=${filter.toLowerCase()}`
+    if (TokenService.getAuthToken()){ // if user is logged in
+      const user_id = jwtDecode(TokenService.getAuthToken()).user_id
+      apiService.getUserFoldersFilter(user_id, query)
+      .then(data => {
+        this.setState({userFolders: data})
+      });
+    apiService.getUserTeamsFilter(user_id, query)
+      .then(data => {
+        this.setState({userTeams: data})
+      });
+    // we did have an api call, but we actually want all the sets for a team,
+    // so we keep the previous ones.  I think that works.  On the plus side, I
+    // now have the capability of searching for single sets by species.
+    }
   }
 
   // RENDER
@@ -390,6 +349,8 @@ export default class App extends Component {
         // set search
         search: this.state.search,
         sort: this.state.sort,
+        filter: this.state.filter,
+        filtersort: this.state.filtersort,
         // functions
         // user folder functions
         setNewFolderName: this.setNewFolderName,
@@ -415,11 +376,16 @@ export default class App extends Component {
         setNewSetContents: this.setNewSetContents,
         validateNewSetImport: this.validateNewSetImport,
         handleUpdateSetImport: this.handleUpdateSetImport,
+        handlePostNewPokemon: this.handlePostNewPokemon,
         // search functions
         setSearch: this.setSearch,
         setSort: this.setSort,
         validateSearch: this.validateSearch,
         handleSearch: this.handleSearch,
+        setFilter: this.setFilter,
+        setFilterSort: this.setFilterSort,
+        validateFilter: this.validateFilter,
+        handleFilter: this.handleFilter
         
       }}>
         <Fragment>

@@ -253,7 +253,7 @@ img {
 }
 
 .icon {
-  width: 75px;
+  transform: scale(.5);
 }
 
 .closed{

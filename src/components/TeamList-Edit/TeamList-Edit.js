@@ -10,15 +10,17 @@ export default class TeamList extends Component {
 
   render() {
 
-    const {userTeams} = this.context;
+    const {userTeams, currentClickedFolder,} = this.context;
 
-    const TeamList = userTeams.map((team, i) => {
+    const TeamList = userTeams
+    .filter(team => team.folder_id === currentClickedFolder.id)
+    .map((team, i) => {
       return <TeamEdit key={i} team={team}/>
     });
 
     return (
       <Fragment>
-        {TeamList.length > 0 ? TeamList : <h3>Cannot Find The Teams!  Things may be broken.</h3>}
+        {TeamList.length > 0 ? TeamList : <h3>There Are No Teams!  Make Teams with Pokemon!</h3>}
       </Fragment>
     );
   };

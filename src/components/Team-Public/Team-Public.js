@@ -9,19 +9,25 @@ export default class Team extends Component {
 
   static contextType = UserContext;
 
+  state = {
+    teamExpandToggle: true,
+  }
+
+  handleTeamToggle = () => {
+    this.setState({teamExpandToggle: !this.state.teamExpandToggle})
+  };
 
   renderExpandedTeam(){
 
     const {
       publicSets,
-      handleTeamToggle,
     } = this.context;
 
     const {team} = this.props;
 
     const teamSets = publicSets.filter(set => set.team_id === team.id)
 
-    const SetList = publicSets.map((set, i) => {
+    const SetList = teamSets.map((set, i) => {
       return <SetPublic key={i} set={set}/>
     });
 
@@ -31,7 +37,7 @@ export default class Team extends Component {
           <div className="team-header">
             <form className="team-form">
               <div className="team-title">
-                <button onClick={() => handleTeamToggle(team.id)}>Fold Down Team</button>
+                <button onClick={() => this.handleTeamToggle()}>Fold Down Team</button>
                 <div className="title-name">
                   <label htmlFor="title-name">Team Name:</label>
                   <input disabled readOnly className="title" placeholder="e.g. Cool Team" value={team.team_name} type="text" name="team-name" id={`team-name-${team.id}`}/>
@@ -67,12 +73,11 @@ export default class Team extends Component {
 
   renderUnexpandedTeam() {
 
-    const {handleTeamToggle} = this.context;
     const {team} = this.props;
 
     return (
       <section>
-        <div className="team-closed" onClick={() => handleTeamToggle(team.id)}>
+        <div className="team-closed" onClick={() => this.handleTeamToggle()}>
           <div>
             <p>By {team.user_name}</p>
             <p>Created on: {new Date(team.date_created).toLocaleString('en-GB', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
@@ -85,11 +90,10 @@ export default class Team extends Component {
   };
 
   render() {
-    const {teamExpandToggle} = this.context;
 
     return (
       <Fragment>
-        {teamExpandToggle ? this.renderUnexpandedTeam() : this.renderExpandedTeam()}
+        {this.state.teamExpandToggle ? this.renderUnexpandedTeam() : this.renderExpandedTeam()}
       </Fragment>
     );
   };

@@ -9,6 +9,8 @@ export default class Team extends Component {
 
   static contextType = UserContext;
 
+  // we have a bug.  we need to change the team_name and description based on the current team.  Will fix later.
+
   /* We actually do need to have State here, 
   because we are EDITING values from components 
   that there are more than ONE of. However, the
@@ -16,9 +18,10 @@ export default class Team extends Component {
   functions handled in the App.js. */
 
   state = { 
-    team_name: {value: `${this.props.team.team_name}`, touched: false},
+    team_name: {value: this.props.team.team_name || '', touched: false},
     favorite_team: {value: false, touched: false},
-    description: {value: `${this.props.team.description}`, touched: false},
+    description: {value: this.props.team.team_description || '', touched: false},
+    teamExpandToggle: true,
   }
 
   // set state
@@ -33,6 +36,13 @@ export default class Team extends Component {
 
   setDesc = description => {
     this.setState({description: {value: description, touched: true}});
+  };
+
+  handleTeamToggle = () => {
+    this.setState(
+      {teamExpandToggle: !this.state.teamExpandToggle,
+      team_name: {value: this.props.team.team_name || '', touched: false},
+      description: {value: this.props.team.description || '', touched: false}})
   };
 
   // validate
@@ -53,11 +63,27 @@ export default class Team extends Component {
 
   // API calls are handled in App.js
 
+  renderSetList(teamSets) {
+
+    const {handlePostNewPokemon} = this.context;
+
+    const SetList = teamSets.map((set, i) => {
+      return <SetEdit key={i} set={set}/>
+    });
+
+    if(SetList.length < 6){
+      SetList.push(<button key={SetList.length} onClick={(e) => {
+        e.preventDefault();
+        handlePostNewPokemon();
+      }}>Add Pokemon! +</button>)
+    }
+    return SetList;
+  }
+
   renderExpandedTeam() {
 
     const {
       userSets,
-      handleTeamToggle,
       handleDeleteTeam,
       handleUpdateTeam,
     } = this.context;
@@ -66,9 +92,7 @@ export default class Team extends Component {
 
     const teamSets = userSets.filter(set => set.team_id === team.id)
 
-    const SetList = userSets.map((set, i) => {
-      return <SetEdit key={i} set={set}/>
-    });
+    const SetList = this.renderSetList(teamSets)
 
     return (
       <section>
@@ -76,7 +100,7 @@ export default class Team extends Component {
           <div className="team-header">
             <form className="team-form">
               <div className="team-title">
-                <button onClick={() => handleTeamToggle(team.id)}>Fold Down Team</button>
+                <button onClick={() => this.handleTeamToggle()}>Fold Down Team</button>
                 <div className="title-name">
                   <label htmlFor="title-name">Team Name:</label>
                   {<p className="error">{this.validateTeamName()}</p>}
@@ -128,12 +152,11 @@ export default class Team extends Component {
 
   renderUnexpandedTeam() {
 
-    const {handleTeamToggle} = this.context;
     const {team} = this.props;
 
     return (
       <section>
-        <div className="team-closed" onClick={() => handleTeamToggle(team.id)}>
+        <div className="team-closed" onClick={() => this.handleTeamToggle()}>
           <div>
             <p>By {team.user_name}</p>
             <p>Created on: {new Date(team.date_created).toLocaleString('en-GB', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
@@ -146,11 +169,10 @@ export default class Team extends Component {
   };
 
   render() {
-    const {teamExpandToggle} = this.context;
 
     return (
       <Fragment>
-        {teamExpandToggle ? this.renderUnexpandedTeam() : this.renderExpandedTeam()}
+        {this.state.teamExpandToggle ? this.renderUnexpandedTeam() : this.renderExpandedTeam()}
       </Fragment>
     );
   };

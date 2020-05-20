@@ -12,7 +12,7 @@ export default class Folder extends Component {
     return (
       <button 
       id={this.props.id} 
-      onClick={() => handleCurrentFolderClicked(this.props.folder_name)}>
+      onClick={() => handleCurrentFolderClicked(this.props.folder_name, this.props.id)}>
         {this.props.folder_name}
       </button>
     );

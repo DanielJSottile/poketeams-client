@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import SearchBar from '../SearchBar/SearchBar';
+import SearchBarBuild from '../SearchBar-Build/SearchBar-Build';
 import TokenService from '../../services/token-service';
 
 export default class Navigation extends Component {
@@ -46,7 +46,7 @@ export default class Navigation extends Component {
               <Link to='/build'>Build!</Link>
               {TokenService.hasAuthToken() ? this.renderLogout() : this.renderLogin()}
             </div>
-            <SearchBar/>
+            <SearchBarBuild/>
             <div className="user_things">
               {TokenService.hasAuthToken() ? this.renderLogout() : this.renderLogin()}
             </div>

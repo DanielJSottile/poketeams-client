@@ -50,10 +50,13 @@ export default class TeamsButtonList extends Component {
       userTeams,
       teamAddClicked,
       currentClickedTeam,
+      currentClickedFolder,
       handleTeamAddClickExpand,
     } = this.context;
 
-    const TeamList = userTeams.map((team, i) => <TeamButton key={i} id={team.id} team_name={team.team_name}/>);
+    const TeamList = userTeams
+    .filter(team => team.folder_id === currentClickedFolder.id)
+    .map((team, i) => <TeamButton key={i} id={team.id} team_name={team.team_name}/>);
 
     return (
       <Fragment>

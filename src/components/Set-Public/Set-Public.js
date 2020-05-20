@@ -7,17 +7,21 @@ export default class Set extends Component {
 
   static contextType = UserContext;
 
+  state = {
+    setExpandToggle: true
+  }
 
+  handleSetToggle = () => {
+    this.setState({setExpandToggle: !this.state.setExpandToggle})
+  };
   
   renderExpandedSet() {
 
     const {set} = this.props;
-    
-    const {handleSetToggle} = this.context;
 
     return (
       <div className="pokemon">
-      <button onClick={() => handleSetToggle()}>Fold Down Set</button>
+      <button onClick={() => this.handleSetToggle()}>Fold Down Set</button>
         <form disabled readOnly> 
           <div className="pokemon-intro">
             <div className="name-sprite">
@@ -111,14 +115,10 @@ export default class Set extends Component {
   renderUnexpandedSet() {
 
     const {set} = this.props;
-    
-    const {
-      handleSetToggle,
-    } = this.context;
 
     return (
       <div className="pokemon">
-        <div className="closed" onClick={() => handleSetToggle()}>
+        <div className="closed" onClick={() => this.handleSetToggle()}>
           <img className="icon" src={legality.returnIconSprite(set.species, set.shiny)} alt={set.species}/>
           <p>{set.species}</p>
           {legality.returnTypeIcon(legality.returnType(set.species)).map((type, i)=> {
@@ -130,10 +130,9 @@ export default class Set extends Component {
   }
 
   render() {
-    const {setExpandToggle} = this.context;
     return (
       <Fragment>
-        {setExpandToggle ? this.renderUnexpandedSet() : this.renderExpandedSet()} {/* or some value in state */ }
+        {this.state.setExpandToggle ? this.renderUnexpandedSet() : this.renderExpandedSet()} {/* or some value in state */ }
       </Fragment>
     );
   };

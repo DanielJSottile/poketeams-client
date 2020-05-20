@@ -40,11 +40,15 @@ export default class Set extends Component {
     move_two: {value: this.props.set.move_two || '', touched: false},
     move_three: {value: this.props.set.move_three || '', touched: false},
     move_four: {value: this.props.set.move_four || '', touched: false},
+    setExpandToggle: true
   }
 
   /* Since we have State here, the setting and validating of these 
   Must be set in here.  Or at least, it's easier to do it that way.*/
 
+  handleSetToggle = () => {
+    this.setState({setExpandToggle: !this.state.setExpandToggle})
+  };
 
   setSpecies = species => {
     this.setState({species: {value: species, touched: true}});
@@ -291,14 +295,13 @@ export default class Set extends Component {
       setNewSetContents,
       validateNewSetImport,
       handleUpdateSetImport,
-      handleSetToggle,
       handleDeleteSet,
       handleUpdateSet,
     } = this.context;
 
     return (
       <div className="pokemon">
-        <button onClick={() => handleSetToggle()}>Fold Down Set</button>
+        <button onClick={() => this.handleSetToggle()}>Fold Down Set</button>
         <form> 
               <div className="pokemon-import">
                 <label htmlFor="pokemon-import">Import Pokemon Set:</label>
@@ -468,14 +471,10 @@ export default class Set extends Component {
   renderUnexpandedSet() {
 
     const {set} = this.props;
-    
-    const {
-      handleSetToggle,
-    } = this.context;
 
     return (
       <div className="pokemon">
-        <div className="closed" onClick={() => handleSetToggle()}>
+        <div className="closed" onClick={() => this.handleSetToggle()}>
           <img className="icon" src={legality.returnIconSprite(set.species, set.shiny)} alt={set.species}/>
           <p>{set.species}</p>
           {legality.returnTypeIcon(legality.returnType(set.species)).map((type, i)=> {
@@ -487,13 +486,10 @@ export default class Set extends Component {
   }
 
   render() {
-    const {setExpandToggle} = this.context;
     return (
       <Fragment>
-        {setExpandToggle ? this.renderUnexpandedSet() : this.renderExpandedSet()} {/* or some value in state */ }
+        {this.state.setExpandToggle ? this.renderUnexpandedSet() : this.renderExpandedSet()} {/* or some value in state */ }
       </Fragment>
     );
   };
 };
-
-
