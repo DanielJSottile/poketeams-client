@@ -218,8 +218,9 @@ export default class App extends Component {
 
   handlePostNewFolder = () => {
     const folder_name = this.state.newFolderName.value;
-    apiService.postUserFolder(jwtDecode(TokenService.getAuthToken()).id) // postUserFolder not made yet!
-    // do the rest!
+    apiService.postUserFolder(jwtDecode(folder_name, TokenService.getAuthToken()).id)
+    .then(res => res.json())
+    .then((folder) => this.setState({userFolders: [...this.state.userFolders, folder]}));
   }
 
   handlePostNewTeam = () => {
@@ -366,11 +367,9 @@ export default class App extends Component {
         validateNewTeamName: this.validateNewTeamName,
         validateNewTeamImport: this.validateNewTeamImport,
         handleCurrentTeamClicked: this.handleCurrentTeamClicked,
-        handleTeamToggle: this.handleTeamToggle,
         handleUpdateTeam: this.handleUpdateTeam,
         handleDeleteTeam: this.handleDeleteTeam,
         // user set functions
-        handleSetToggle: this.handleSetToggle,
         handleDeleteSet: this.handleDeleteSet,
         handleUpdateSet: this.handleUpdateSet,
         setNewSetContents: this.setNewSetContents,

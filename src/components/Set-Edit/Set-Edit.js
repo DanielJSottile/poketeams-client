@@ -450,7 +450,9 @@ export default class Set extends Component {
         
         <div className="export-pokemon">
           <div>
-            <Link to={`/share/${set.team_id}/${set.id}`} target="_blank">Share This Set!</Link>
+          <Link to={{
+            pathname: `/share/${set.team_id}/${set.id}`,
+            state: {singleSet: set}}} target="_blank" >Share This Set!</Link>
             <input type="text" readOnly value={`[hostname]/${set.team_id}/${set.id}`}/>
           </div>
           <div className="export-pokemon">

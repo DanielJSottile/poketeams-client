@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import { Link } from 'react-router-dom';
 import UserContext from '../../contexts/UserContext';
 import showdownGenerate from '../../functions/generate';
 import legality from '../../functions/legality';
@@ -100,8 +101,9 @@ export default class Set extends Component {
         
         <div className="export-pokemon">
           <div>
-            <a href="set.html" target="_blank">Share This Set!</a>
-            <input type="text" disabled readOnly value={`[hostname]/${set.team_id}/${set.id}`}/>
+          <Link to={{
+            pathname: `/share/${set.team_id}/${set.id}`,
+            state: {singleSet: set}}} target="_blank" >Share This Set!</Link>
           </div>
           <div className="export-pokemon">
             <label htmlFor="export-pokemon">Export Pokemon:</label>

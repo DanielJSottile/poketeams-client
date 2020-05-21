@@ -131,7 +131,9 @@ export default class Team extends Component {
             </form>
           <div className="export-team">
             <div>
-              <Link to={`/share/${team.id}`} target="_blank">Share This Team!</Link>
+            <Link to={{
+              pathname: `/share/${team.id}`,
+              state: {singleteam: team, sets: teamSets}}} target="_blank" >Share This Team!</Link>
               <input disabled type="text" readOnly value={`[hostname]/share/${team.id}`}/>
             </div>
               <label htmlFor="edit-team">Export Team:</label>

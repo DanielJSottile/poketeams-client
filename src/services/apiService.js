@@ -254,6 +254,24 @@ const apiService = {
           return Promise.reject(error);
         }
         return data})
+  },
+  postUserFolder(foldername, userid) {
+    return fetch(`${config.API_ENDPOINT}/build/folders/${userid}`, {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+        'authorization': `bearer ${TokenService.getAuthToken()}`,
+      },
+      body: JSON.stringify({
+        folder_name: foldername,
+        user_id: userid
+      }),
+    })
+      .then(res =>
+        (!res.ok)
+          ? res.json().then(e => Promise.reject(e))
+          : res.json()
+      )
   }
 };
 
