@@ -17,6 +17,7 @@ export default class TeamsButtonList extends Component {
       handlePostNewTeam,
       validateNewTeamName,
       validateNewTeamImport,
+      validateCurrentFolderClicked
     } = this.context;
 
     return (
@@ -34,7 +35,8 @@ export default class TeamsButtonList extends Component {
         <button type="submit"
         disabled={
           validateNewTeamName() ||
-          validateNewTeamImport()
+          validateNewTeamImport() ||
+          validateCurrentFolderClicked()
         }
         onClick={(e) => {
           e.preventDefault();

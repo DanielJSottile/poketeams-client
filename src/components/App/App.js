@@ -54,6 +54,7 @@ export default class App extends Component {
       apiService.getUserTeams(user_id) // Get Public Teams First
       .then(data => {
         this.setState({userTeams: data})
+        
       })
 
       apiService.getUserSets(user_id) // Get Public Teams First
@@ -65,16 +66,17 @@ export default class App extends Component {
     // Then get the public teams
 
     apiService.getTenTeamsDefault() // Get Public Teams First
-      .then(data => {
-        this.setState({publicTeams: data})
+      .then(teams => {
+        this.setState({publicTeams: teams})
+        teams.forEach(team => { // now we need to get the sets for those 10 teams and put them in state.
+          apiService.getSetsForOneTeam(team.id)
+            .then(sets => {
+              this.setState({publicSets: [...this.state.publicSets, ...sets]})
+            })
+        })
       })
 
         // some way to add likes to the public teams???
-
-    apiService.getSetsforTenTeams() // hopefully get Public Sets of those 10 teams
-      .then(data => {
-        this.setState({publicSets: data})
-      })
   }
 
   // State Input Update Functions 
@@ -146,6 +148,13 @@ export default class App extends Component {
     }
   };
 
+  validateCurrentFolderClicked = () => {
+    let folder = this.state.currentClickedFolder.id;
+    if (!folder) {
+      return `You'll need to click on a folder in order to add a team!`
+    }
+  };
+
   // User Teams
 
   validateNewTeamName = () => {
@@ -162,13 +171,15 @@ export default class App extends Component {
     // showdownParse(team_export) gives an array...
 
     // ** WE SHOULD ALSO ADD A LEGALITY FUNCTION THAT CHECKS IF THERES IS AT LEAST 1 MOVE! ** (if we have time)
-
+    if(team_import){
     showdownParse(team_import).forEach(set => {
       if (!legality.isLegalSpecies(set.species)) {
         flag = `There is an illegal species in your set.  Please fix this to be in the proper format! 
-        (Hint: It could be extra white space at the end because of Showdown's Exporter)`
+        (Hint: It could be extra white space at the end because of Showdown's Exporter)
+        (Hint: There could be a typo in your species name!)`
       }
     })
+  }
     return flag;
   };
 
@@ -187,7 +198,8 @@ export default class App extends Component {
     showdownParse(set_import).forEach(set => {
       if (!legality.isLegalSpecies(set.species)) {
         flag = `There is an illegal species in your set.  Please fix this to be in the proper format! 
-        (Hint: It could be extra white space at the end because of Showdown's Exporter)`
+        (Hint: It could be extra white space at the end because of Showdown's Exporter)
+        (Hint: There could be a typo in your species name!)`
       }
     })
     return flag;
@@ -212,35 +224,133 @@ export default class App extends Component {
   }
   // Event Handlers/API Calls -> NOT MADE YET!
 
-  handlePostNewPokemon = () => {
-    
-  }
-
   handlePostNewFolder = () => {
     const folder_name = this.state.newFolderName.value;
-    apiService.postUserFolder(jwtDecode(folder_name, TokenService.getAuthToken()).id)
-    .then(res => res.json())
-    .then((folder) => this.setState({userFolders: [...this.state.userFolders, folder]}));
+    apiService.postUserFolder(folder_name, jwtDecode(TokenService.getAuthToken()).user_id)
+      .then((folder) => this.setState({userFolders: [...this.state.userFolders, folder]}));
+  }
+
+  handlePostNewPokemon = ( // will use this function for team post as well
+    team_id,
+    nickname,
+    species = 'Pikachu',
+    gender,
+    item,
+    ability,
+    level = 100,
+    shiny = false,
+    happiness = 255,
+    nature = 'Adamant',
+    hp_ev = 0,
+    atk_ev = 0,
+    def_ev = 0,
+    spa_ev = 0,
+    spd_ev = 0,
+    spe_ev = 0,
+    hp_iv = 31,
+    atk_iv = 31,
+    def_iv = 31,
+    spa_iv = 31,
+    spd_iv = 31,
+    spe_iv = 31,
+    move_one = 'Tackle',
+    move_two,
+    move_three,
+    move_four,
+    ) => {
+
+    const set_body = {
+      team_id,
+      nickname,
+      species,
+      gender,
+      item,
+      ability,
+      level,
+      shiny,
+      happiness,
+      nature,
+      hp_ev,
+      atk_ev,
+      def_ev,
+      spa_ev,
+      spd_ev,
+      spe_ev,
+      hp_iv,
+      atk_iv,
+      def_iv,
+      spa_iv,
+      spd_iv,
+      spe_iv,
+      move_one,
+      move_two,
+      move_three,
+      move_four,
+    }
+
+    apiService.postUserSet(set_body, jwtDecode(TokenService.getAuthToken()).user_id)
+      .then((set) => this.setState({userSets: [...this.state.userSets, set]}));
   }
 
   handlePostNewTeam = () => {
     const team_name = this.state.newTeamName.value;
+    const currentClickedFolder = this.state.currentClickedFolder.id
     const contents = this.state.newTeamImport.value;
-    const parsed = showdownParse(contents);
-    apiService.postUserTeam(jwtDecode(TokenService.getAuthToken()).id) // postNewTeam not made yet!
-    // do the rest!
-  }
+    const body = {team_name, folder_id: currentClickedFolder};
+
+    // first, handle the new team
+
+    apiService.postUserTeam(body, jwtDecode(TokenService.getAuthToken()).user_id)
+      .then((team) => {
+        // first we set the team
+        this.setState({userTeams: [...this.state.userTeams, team]})
+        // then we check if there were contents in the import team set
+        if (contents){
+          const parsed = showdownParse(contents);
+    
+          parsed.forEach(set => {
+
+            this.handlePostNewPokemon( 
+              team.id,
+              set.nickname,
+              set.species,
+              set.gender,
+              set.item,
+              set.ability,
+              set.level,
+              set.shiny,
+              set.happiness,
+              set.nature,
+              set.hp_ev,
+              set.atk_ev,
+              set.def_ev,
+              set.spa_ev,
+              set.spd_ev,
+              set.spe_ev,
+              set.hp_iv,
+              set.atk_iv,
+              set.def_iv,
+              set.spa_iv,
+              set.spd_iv,
+              set.spe_iv,
+              set.move_one,
+              set.move_two,
+              set.move_three,
+              set.move_four,
+              );
+          });
+        };
+      });
+  };
+
+  // PATCH/UPDATE
 
   handleUpdateTeam = (teamname, desc, id) => {
     const team_name = teamname;
     const description = desc;
     const team_id = Number(id)
     apiService.patchUpdateTeam() // patchTeam not made yet
-  }
-
-  handleDeleteTeam = (team_id, user_id) => { // deleteTeam not made yet
-
-  }
+  };
 
   handleUpdateSet= (
       id,
@@ -284,9 +394,17 @@ export default class App extends Component {
     // do the rest!
   }
 
+  // DELETE
+
+  handleDeleteTeam = (team_id, user_id) => { // deleteTeam not made yet
+
+  };
+
   handleDeleteSet = (team_id, user_id) => { // deleteSet not made yet
 
   }
+
+  // SEARCH STUFF
 
   handleSearch = () => {
     const search = this.state.search.value;
@@ -294,8 +412,15 @@ export default class App extends Component {
     const page = this.state.page.value;
     const query = `?page=${page}&sort=${sort}&species=${search.toLowerCase()}`
     apiService.getTenTeamsSearch(query)
-      .then(data => {
-        this.setState({publicTeams: data})
+      .then(teams => {
+        this.setState({publicTeams: teams})
+        this.setState({publicSets: []})// lets clear the publicSets because we are reseeding them! with our search
+        teams.forEach(team => { // now we need to get the sets for those 10 teams and put them in state.
+          apiService.getSetsForOneTeam(team.id)
+            .then(sets => {
+              this.setState({publicSets: [...this.state.publicSets, ...sets]})
+            })
+        })
       })
   }
 
@@ -358,6 +483,7 @@ export default class App extends Component {
         handleFolderAddClickExpand: this.handleFolderAddClickExpand,
         handlePostNewFolder: this.handlePostNewFolder,
         validateNewFolderName: this.validateNewFolderName,
+        validateCurrentFolderClicked: this.validateCurrentFolderClicked,
         handleCurrentFolderClicked: this.handleCurrentFolderClicked,
         // user team functions
         setNewTeamName: this.setNewTeamName,

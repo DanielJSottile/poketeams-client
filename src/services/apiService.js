@@ -83,6 +83,26 @@ const apiService = {
         }
         return data})
   },
+
+  getSetsForOneTeam(team_id){
+    let error;
+    return fetch(`${config.API_ENDPOINT}/all/${team_id}/sets`, {
+      method: 'GET',
+      headers: {}
+      })
+      .then(res => {
+        if (!res.ok) {
+          error = { code: res.status};
+        }
+        return res.json();
+      })
+      .then(data => {
+        if (error) {
+          error.message = data.message;
+          return Promise.reject(error);
+        }
+        return data})
+  },
   
   getSingleTeam(team_id) {
     let error;
@@ -125,6 +145,8 @@ const apiService = {
   },
 
   // USER SIDE
+
+  // GET
 
   getUserFolders(user_id) {
     let error;
@@ -255,6 +277,10 @@ const apiService = {
         }
         return data})
   },
+
+  // POST
+
+
   postUserFolder(foldername, userid) {
     return fetch(`${config.API_ENDPOINT}/build/folders/${userid}`, {
       method: 'POST',
@@ -266,6 +292,39 @@ const apiService = {
         folder_name: foldername,
         user_id: userid
       }),
+    })
+      .then(res =>
+        (!res.ok)
+          ? res.json().then(e => Promise.reject(e))
+          : res.json()
+      )
+  },
+
+  postUserTeam(body, userid) {
+    return fetch(`${config.API_ENDPOINT}/build/teams/${userid}`, {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+        'authorization': `bearer ${TokenService.getAuthToken()}`,
+      },
+      body: JSON.stringify(body),
+    })
+      .then(res =>
+        (!res.ok)
+          ? res.json().then(e => Promise.reject(e))
+          : res.json()
+      )
+  },
+
+
+  postUserSet(body, userid) {
+    return fetch(`${config.API_ENDPOINT}/build/sets/${userid}`, {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+        'authorization': `bearer ${TokenService.getAuthToken()}`,
+      },
+      body: JSON.stringify(body),
     })
       .then(res =>
         (!res.ok)

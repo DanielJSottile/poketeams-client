@@ -74,7 +74,7 @@ export default class Team extends Component {
     if(SetList.length < 6){
       SetList.push(<button key={SetList.length} onClick={(e) => {
         e.preventDefault();
-        handlePostNewPokemon();
+        handlePostNewPokemon(this.props.team.id); // we just need the id of the team.  this func fills out default vals.
       }}>Add Pokemon! +</button>)
     }
     return SetList;
