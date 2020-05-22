@@ -123,7 +123,7 @@ export default class Set extends Component {
         <div className="closed" onClick={() => this.handleSetToggle()}>
           <img className="icon" src={legality.returnIconSprite(set.species, set.shiny)} alt={set.species}/>
           <p>{set.species}</p>
-          <div>
+          <div className="types">
             {legality.returnTypeIcon(legality.returnType(set.species)).map((type, i)=> {
               return <img className="icon" key={i} src={`${type}`} alt={`${i + 1}`}/>
             })}

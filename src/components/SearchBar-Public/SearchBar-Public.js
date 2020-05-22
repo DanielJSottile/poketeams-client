@@ -12,11 +12,11 @@ export default class SearchBar extends Component {
     return (
       <div className="searchbar">
         <form className="search">
-          <div>
+          <div className="search">
             {search.value && <p className="error">{validateSearch()}</p>}
-            <label htmlFor="search">Search:</label>
+            <label htmlFor="search">Search: <i className="fas fa-search"></i></label>
             <input placeholder="e.g. Pikachu" value={search.value} onChange={e => setSearch(e.target.value)} type="text" name="search" id="search" />
-            <label htmlFor="sort">Sort By:</label>
+            <label htmlFor="sort">Sort By:<i className="fas fa-sort"></i> </label>
             <select name="sort" id="sort" value={sort.value} onChange={e => setSort(e.target.value)}>
               <option value="Newest">Newest</option>
               <option value="Oldest">Oldest</option>

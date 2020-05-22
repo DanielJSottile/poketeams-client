@@ -14,9 +14,9 @@ export default class SearchBar extends Component {
         <form className="search">
           <div className="search">
             {filter.value && <p className="error">{validateFilter()}</p>}
-            <label htmlFor="search">Search:</label>
+            <label htmlFor="search">Search: <i className="fas fa-search"></i></label>
             <input placeholder="e.g. Pikachu" value={filter.value} onChange={e => setFilter(e.target.value)} type="text" name="search" id="search" />
-            <label htmlFor="sort">Sort By:</label>
+            <label htmlFor="sort">Sort By: <i className="fas fa-sort"></i></label>
             <select name="sort" id="sort" value={filtersort.value} onChange={e => setFilterSort(e.target.value)}>
               <option value="Newest">Newest</option>
               <option value="Oldest">Oldest</option>

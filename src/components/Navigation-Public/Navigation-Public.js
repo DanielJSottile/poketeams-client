@@ -46,7 +46,9 @@ export default class Navigation extends Component {
               <Link to='/build'><i className="fas fa-hammer"></i>Build!</Link>
               {TokenService.hasAuthToken() ? this.renderLogout() : this.renderLogin()}
             </div>
-            <SearchBar/>
+            <div>
+              <SearchBar/>
+            </div>
             <div className="user_things">
               {TokenService.hasAuthToken() ? this.renderLogout() : this.renderLogin()}
             </div>

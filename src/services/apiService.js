@@ -148,11 +148,35 @@ const apiService = {
 
   // GET
 
+  getSingleFolder(folder_id) {
+    let error;
+    return fetch(`${config.API_ENDPOINT}/build/folder/${folder_id}`, {
+      method: 'GET',
+      headers: {
+        'content-type': 'application/json',
+        'authorization': `bearer ${TokenService.getAuthToken()}`,
+      },
+      })
+      .then(res => {
+        if (!res.ok) {
+          error = { code: res.status};
+        }
+        return res.json();
+      })
+      .then(data => {
+        if (error) {
+          error.message = data.message;
+          return Promise.reject(error);
+        }
+        return data})
+  },
+ 
   getUserFolders(user_id) {
     let error;
     return fetch(`${config.API_ENDPOINT}/build/folders/${user_id}`, {
       method: 'GET',
       headers: {
+        'content-type': 'application/json',
         'authorization': `bearer ${TokenService.getAuthToken()}`,
       },
       })
@@ -175,6 +199,7 @@ const apiService = {
     return fetch(`${config.API_ENDPOINT}/build/teams/${user_id}`, {
       method: 'GET',
       headers: {
+        'content-type': 'application/json',
         'authorization': `bearer ${TokenService.getAuthToken()}`,
       },
       })
@@ -196,6 +221,7 @@ const apiService = {
     return fetch(`${config.API_ENDPOINT}/build/sets/${user_id}`, {
       method: 'GET',
       headers: {
+        'content-type': 'application/json',
         'authorization': `bearer ${TokenService.getAuthToken()}`,
       },
       })
@@ -218,6 +244,7 @@ const apiService = {
     return fetch(`${config.API_ENDPOINT}/build/folders/${user_id}/filter${query}`, {
       method: 'GET',
       headers: {
+        'content-type': 'application/json',
         'authorization': `bearer ${TokenService.getAuthToken()}`,
       },
       })
@@ -240,6 +267,7 @@ const apiService = {
     return fetch(`${config.API_ENDPOINT}/build/teams/${user_id}/filter${query}`, {
       method: 'GET',
       headers: {
+        'content-type': 'application/json',
         'authorization': `bearer ${TokenService.getAuthToken()}`,
       },
       })
@@ -261,6 +289,7 @@ const apiService = {
     return fetch(`${config.API_ENDPOINT}/build/sets/${user_id}/filter${query}`, {
       method: 'GET',
       headers: {
+        'content-type': 'application/json',
         'authorization': `bearer ${TokenService.getAuthToken()}`,
       },
       })
@@ -388,7 +417,76 @@ const apiService = {
       )
   },
 
+  // DELETE
+
+  deleteUserFolder(folder_id) {
+    let error;
+    return fetch(`${config.API_ENDPOINT}/build/folder/${folder_id}`, {
+      method: 'DELETE',
+      headers: {
+        'content-type': 'application/json',
+        'authorization': `bearer ${TokenService.getAuthToken()}`,
+      },
+      })
+      .then(res => {
+        if (!res.ok) {
+          error = { code: res.status};
+        }
+        return res.json();
+      })
+      .then(data => {
+        if (error) {
+          error.message = data.message;
+          return Promise.reject(error);
+        }
+        return data})
+  },
   
+  deleteUserTeam(team_id) {
+    let error;
+    return fetch(`${config.API_ENDPOINT}/build/team/${team_id}`, {
+      method: 'DELETE',
+      headers: {
+        'content-type': 'application/json',
+        'authorization': `bearer ${TokenService.getAuthToken()}`,
+      },
+      })
+      .then(res => {
+        if (!res.ok) {
+          error = { code: res.status};
+        }
+        return res.json();
+      })
+      .then(data => {
+        if (error) {
+          error.message = data.message;
+          return Promise.reject(error);
+        }
+        return data})
+  },
+
+  deleteUserSet(team_id, set_id) {
+    let error;
+    return fetch(`${config.API_ENDPOINT}/build/set/${team_id}/${set_id}`, {
+      method: 'DELETE',
+      headers: {
+        'content-type': 'application/json',
+        'authorization': `bearer ${TokenService.getAuthToken()}`,
+      },
+      })
+      .then(res => {
+        if (!res.ok) {
+          error = { code: res.status};
+        }
+        return res.json();
+      })
+      .then(data => {
+        if (error) {
+          error.message = data.message;
+          return Promise.reject(error);
+        }
+        return data})
+  },
 };
 
 

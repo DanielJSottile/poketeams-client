@@ -2,6 +2,7 @@ import React, { Component, Fragment} from 'react';
 import { Link } from 'react-router-dom';
 import UserContext from '../../contexts/UserContext';
 import showdownGenerate from '../../functions/generate';
+import showdownParse from '../../functions/parse';
 import legality from '../../functions/legality';
 
 export default class Set extends Component {
@@ -45,6 +46,37 @@ export default class Set extends Component {
 
   /* Since we have State here, the setting and validating of these 
   Must be set in here.  Or at least, it's easier to do it that way.*/
+
+  setFields = setImport => {
+    const parse = showdownParse(setImport)[0]
+    this.setState({
+      nickname: {value: parse.nickname || '', touched: false},
+      species: {value: parse.species || 'Pikachu', touched: false},
+      gender: {value: parse.gender || '', touched: false},
+      shiny: {value: parse.shiny || false, touched: false},
+      item: {value: parse.item || '', touched: false},
+      ability: {value: parse.ability || '', touched: false},
+      level: {value: parse.level || 100, touched: false},
+      happiness: {value: parse.happiness || 255, touched: false},
+      nature: {value: parse.nature || '', touched: false},
+      hp_ev: {value: parse.hp_ev || 0, touched: false},
+      atk_ev: {value: parse.atk_ev || 0, touched: false},
+      def_ev: {value: parse.def_ev || 0, touched: false},
+      spa_ev: {value: parse.spa_ev || 0, touched: false},
+      spd_ev: {value: parse.spd_ev || 0, touched: false},
+      spe_ev: {value: parse.spe_ev || 0, touched: false},
+      hp_iv: {value: parse.hp_iv || 31, touched: false},
+      atk_iv: {value: parse.atk_iv || 31, touched: false},
+      def_iv: {value: parse.def_iv || 31, touched: false},
+      spa_iv: {value: parse.spa_iv || 31, touched: false},
+      spd_iv: {value: parse.spd_iv || 31, touched: false},
+      spe_iv: {value: parse.spe_iv || 31 , touched: false},
+      move_one: {value: parse.move_one || 'Tackle', touched: false},
+      move_two: {value: parse.move_two || '', touched: false},
+      move_three: {value: parse.move_three || '', touched: false},
+      move_four: {value: parse.move_four || '', touched: false},
+    })
+  }
 
   handleSetToggle = () => {
     this.setState({setExpandToggle: !this.state.setExpandToggle})
@@ -301,10 +333,10 @@ export default class Set extends Component {
 
     return (
       <div className="pokemon">
-        <button onClick={() => this.handleSetToggle()}>Fold Down Set</button>
+        <button onClick={() => this.handleSetToggle()}>Compress Set <i className="fas fa-compress-arrows-alt"></i></button>
         <form> 
               <div className="pokemon-import">
-                <label htmlFor="pokemon-import">Import Pokemon Set:</label>
+                <label htmlFor="pokemon-import">Import Pokemon Set: <i className="fas fa-upload"></i></label>
                 {newSetImport.value !== "" && <p className="error">{validateNewSetImport()}</p>}
                 <textarea type="text" placeholder="Import a Pokemon Showdown Set Here And It Will Re-populate The Field:" name="pokemon-import" id={`pokemon-import-${set.id}`} value={newSetImport.value} onChange={e => setNewSetContents(e.target.value)}/>
                 <button type="submit"
@@ -313,8 +345,9 @@ export default class Set extends Component {
                   }
                   onClick={(e) => {
                     e.preventDefault();
-                    handleUpdateSetImport(set.id);
-                  }}>Submit</button>
+                    handleUpdateSetImport(Number(set.id));
+                    this.setFields(newSetImport.value);
+                  }}>Submit <i className="fas fa-check-circle"></i></button>
               </div>
             </form>
         <form> 
@@ -444,7 +477,7 @@ export default class Set extends Component {
                     this.state.move_three.value,
                     this.state.move_four.value,
                   );
-                }}>Save Team Details</button>
+                }}>Save Team Details <i className="fas fa-save"></i></button>
           </div>
         </form>
         
@@ -452,19 +485,19 @@ export default class Set extends Component {
           <div>
           <Link to={{
             pathname: `/share/${set.team_id}/${set.id}`,
-            state: {singleSet: set}}} target="_blank" >Share This Set!</Link>
+            state: {singleSet: set}}} target="_blank" >Share This Set! <i className="fas fa-share-square"></i></Link>
             <input type="text" readOnly value={`[hostname]/${set.team_id}/${set.id}`}/>
           </div>
           <div className="export-pokemon">
-            <label htmlFor="export-pokemon">Export Pokemon:</label>
+            <label htmlFor="export-pokemon">Export Pokemon: <i className="fas fa-download"></i></label>
             <textarea readOnly type="text" name="export-pokemon" id="export-pokemon-2" value={showdownGenerate([set])}/>
           </div>
         </div>
         <div>
           <button onClick={(e) => {
             e.preventDefault();
-            handleDeleteSet(this.props.team.id);
-            }}>Delete Set!</button>
+            handleDeleteSet(set.team_id, set.id);
+            }}><i className="fas fa-trash-alt"></i> Delete Set!</button>
         </div>
       </div>
     );

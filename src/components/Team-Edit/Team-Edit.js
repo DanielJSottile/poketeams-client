@@ -100,7 +100,7 @@ export default class Team extends Component {
           <div className="team-header">
             <form className="team-form">
               <div className="team-title">
-                <button onClick={() => this.handleTeamToggle()}>Fold Down Team</button>
+                <button onClick={() => this.handleTeamToggle()}>Compress Team <i className="fas fa-compress-arrows-alt"></i></button>
                 <div className="title-name">
                   <label htmlFor="title-name">Team Name:</label>
                   {<p className="error">{this.validateTeamName()}</p>}
@@ -127,16 +127,16 @@ export default class Team extends Component {
                 onClick={(e) => {
                   e.preventDefault();
                   handleUpdateTeam(this.state.team_name.value, this.state.description.value, team.id);
-                }}>Save Team Details</button>
+                }}>Save Team Details <i className="fas fa-save"></i></button>
             </form>
           <div className="export-team">
             <div>
             <Link to={{
               pathname: `/share/${team.id}`,
-              state: {singleteam: team, sets: teamSets}}} target="_blank" >Share This Team!</Link>
+              state: {singleteam: team, sets: teamSets}}} target="_blank" >Share This Team! <i className="fas fa-share-square"></i></Link>
               <input disabled type="text" readOnly value={`[hostname]/share/${team.id}`}/>
             </div>
-              <label htmlFor="edit-team">Export Team:</label>
+              <label htmlFor="edit-team">Export Team: <i className="fas fa-download"></i></label>
               <textarea disabled readOnly type="text" name="export-team" id={`export-team-${team.id}`} value={showdownGenerate(teamSets)}/>
             </div>
           </div>
@@ -144,7 +144,7 @@ export default class Team extends Component {
             <button onClick={(e) => {
               e.preventDefault();
               handleDeleteTeam(this.props.team.id);
-              }}>Delete Team!</button>
+              }}><i className="fas fa-trash-alt"></i> Delete Team!</button>
           </div>
         </div>
         {SetList}

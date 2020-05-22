@@ -482,7 +482,6 @@ export default class App extends Component {
   handleUpdateSetImport = (id) => {
     const contents = this.state.newSetImport.value;
     const parsed = showdownParse(contents)[0];
-    console.log(parsed);
     const userId = jwtDecode(TokenService.getAuthToken()).user_id
 
     const body = {
@@ -552,15 +551,28 @@ export default class App extends Component {
   // DELETE
 
   handleDeleteFolder = () => {
-    const folder_id = this.state.currentClickedFolder.id;
-  }
-
-  handleDeleteTeam = (team_id, user_id) => { // deleteTeam not made yet
-
+    const folder_id = Number(this.state.currentClickedFolder.id);
+    apiService.deleteUserFolder(folder_id)
+   
+    const newFolders = this.state.userFolders.filter(folder => Number(folder.id) !== Number(folder_id))
+    this.setState({userFolders: newFolders});
+   
   };
 
-  handleDeleteSet = (set_id, user_id) => { // deleteSet not made yet
+  handleDeleteTeam = (team_id) => {
+    apiService.deleteUserTeam(Number(team_id))
+   
+    const newUserTeams = this.state.userTeams.filter(team => Number(team.id) !== Number(team_id))
+    const newPublicTeams = this.state.publicTeams.filter(team => Number(team.id) !== Number(team_id))
+    this.setState({publicTeams: newPublicTeams, userTeams: newUserTeams});
+  };
 
+  handleDeleteSet = (team_id, set_id) => { // deleteSet not made yet
+    apiService.deleteUserSet(Number(team_id), Number(set_id))
+   
+    const newUserSets = this.state.userSets.filter(set => Number(set.id) !== Number(set_id))
+    const newPublicSets = this.state.publicSets.filter(set => Number(set.id) !== Number(set_id))
+    this.setState({publicSets: newPublicSets, userSets: newUserSets});
   }
 
   // SEARCH STUFF
