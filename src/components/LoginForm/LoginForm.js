@@ -45,7 +45,7 @@ export default class LoginForm extends Component {
           <label htmlFor="password">Password</label>
           <input type="password" autoComplete="current-password" name="password" id="password" />
         </div>
-        <button type="submit">Log In</button>
+        <button type="submit">Log In <i className="fas fa-sign-in-alt"></i></button>
       </form>
     );
   };

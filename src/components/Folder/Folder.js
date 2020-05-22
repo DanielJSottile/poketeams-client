@@ -10,10 +10,11 @@ export default class Folder extends Component {
     const {handleCurrentFolderClicked} = this.context;
 
     return (
-      <button 
-      id={this.props.id} 
-      onClick={() => handleCurrentFolderClicked(this.props.folder_name, this.props.id)}>
-        {this.props.folder_name}
+      <button
+        className="btn"
+        id={this.props.id} 
+        onClick={() => handleCurrentFolderClicked(this.props.folder_name, this.props.id)}>
+        <i className="fas fa-folder"></i> {this.props.folder_name}
       </button>
     );
   };

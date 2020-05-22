@@ -13,7 +13,7 @@ export default class HomePage extends Component {
         title={"PokeTeam - Home"}/>
         <main>
           <header role="banner">
-            <h1>Results:</h1>
+            <h2>Results:</h2>
           </header>
           <TeamsButtonListPublic/>
           <TeamListPublic/>

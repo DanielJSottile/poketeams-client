@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import UserContext from '../../contexts/UserContext';
 import TeamEdit from '../Team-Edit/Team-Edit';
-import apiService from '../../services/apiService';
 
 export default class TeamList extends Component {
 
@@ -15,7 +14,7 @@ export default class TeamList extends Component {
     const TeamList = userTeams
     .filter(team => team.folder_id === currentClickedFolder.id)
     .map((team, i) => {
-      return <TeamEdit key={i} team={team}/>
+      return <TeamEdit className="btn" key={i} team={team}/>
     });
 
     return (

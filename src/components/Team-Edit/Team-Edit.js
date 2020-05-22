@@ -163,8 +163,12 @@ export default class Team extends Component {
             <p>By {team.user_name}</p>
             <p>Created on: {new Date(team.date_created).toLocaleString('en-GB', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
           </div>
-          <h4>{team.team_name}</h4>
-          <p>Favorites: {team.likes}</p>
+          <div>
+            <h4>{team.team_name}</h4>
+          </div>
+          <div>
+            <p>Favorites: {team.likes}</p>
+          </div>
         </div>
       </section>
     );

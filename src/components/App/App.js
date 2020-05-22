@@ -30,6 +30,7 @@ export default class App extends Component {
     teamAddClicked: false,
     currentClickedTeam: {value: '', id: '', touched: false},
     newTeamName: {value: '', touched: false},
+    desc: {value: '', touched: false},
     newTeamImport: {value: '', touched: false},
     //sets-teams-user
     newSetImport: {value: '', touched: false},
@@ -101,6 +102,10 @@ export default class App extends Component {
     this.setState({newTeamName: {value: newTeamName, touched: true}});
   };
 
+  setDesc = desc => {
+    this.setState({desc: {value: desc, touched: true}});
+  };
+
   setNewTeamContents = newTeamImport => {
     this.setState({newTeamImport: {value: newTeamImport, touched: true}});
   }
@@ -161,6 +166,13 @@ export default class App extends Component {
     let team_name = this.state.newTeamName.value;
     if (!team_name) {
       return `Please provide a team name!`
+    }
+  };
+
+  validateDesc = () => {
+    let description = this.state.desc.value;
+    if (typeof(description) !== 'string') {
+      return `This should never come up, it is superflous`
     }
   };
 
@@ -294,9 +306,10 @@ export default class App extends Component {
 
   handlePostNewTeam = () => {
     const team_name = this.state.newTeamName.value;
+    const desc = this.state.desc.value;
     const currentClickedFolder = this.state.currentClickedFolder.id
     const contents = this.state.newTeamImport.value;
-    const body = {team_name, folder_id: currentClickedFolder};
+    const body = {team_name, description: desc, folder_id: currentClickedFolder};
 
     // first, handle the new team
 
@@ -467,6 +480,7 @@ export default class App extends Component {
         teamAddClicked: this.state.teamAddClicked,
         currentClickedTeam: this.state.currentClickedTeam,
         newTeamName: this.state.newTeamName,
+        desc: this.state.desc,
         newTeamImport: this.state.newTeamImport,
         teamExpandToggle: this.state.teamExpandToggle,
         // set Set state
@@ -499,6 +513,8 @@ export default class App extends Component {
         handleDeleteSet: this.handleDeleteSet,
         handleUpdateSet: this.handleUpdateSet,
         setNewSetContents: this.setNewSetContents,
+        setDesc: this.setDesc,
+        validateDesc: this.validateDesc,
         validateNewSetImport: this.validateNewSetImport,
         handleUpdateSetImport: this.handleUpdateSetImport,
         handlePostNewPokemon: this.handlePostNewPokemon,

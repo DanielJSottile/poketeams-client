@@ -30,7 +30,7 @@ export default class SearchBar extends Component {
               onClick={(e) => {
                 e.preventDefault();
                 handleSearch();
-              }}>Go!</button>
+              }}>Go <i className="fas fa-exclamation"></i></button>
           </div>
         </form>
       </div>

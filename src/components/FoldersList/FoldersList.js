@@ -23,13 +23,14 @@ export default class FoldersList extends Component {
           <input placeholder="e.g. Good Teams" type="text" name="foldername" id="foldername" value={newFolderName.value} onChange={e => setNewFolderName(e.target.value)}/>
         </div>
         <button type="submit"
+        className="submit"
         disabled={
           validateNewFolderName()
         }
         onClick={(e) => {
           e.preventDefault();
           handlePostNewFolder();
-        }}>Submit</button>
+        }}>Submit <i className="far fa-check-circle"></i></button>
       </form>
     )
   }
@@ -55,7 +56,7 @@ export default class FoldersList extends Component {
             {folderList.length > 0 ? folderList : <h3>None! Click Below to Make a New Folder!</h3>}
           </div>
           <div>
-            <button onClick={() => handleFolderAddClickExpand()}>New Folder +</button>
+            <button onClick={() => handleFolderAddClickExpand()}>New Folder <i className="fas fa-folder-plus"></i></button>
             {folderAddClicked ? this.renderExpanded() : null}
           </div>
         <div>

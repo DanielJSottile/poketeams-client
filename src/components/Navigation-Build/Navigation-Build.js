@@ -14,7 +14,7 @@ export default class Navigation extends Component {
       <Link
         onClick={this.handleLogoutClick}
         to='/'>
-        Logout
+        Logout <i className="fas fa-sign-out-alt"></i>
         </Link>
       </div>
     );
@@ -25,7 +25,7 @@ export default class Navigation extends Component {
       <div className='navigation-logged-out'>
       <Link
         to='/landing'>
-        Log In
+        Log In <i className="fas fa-sign-in-alt"></i>
       </Link>
       </div>
     );
@@ -38,15 +38,17 @@ export default class Navigation extends Component {
           <h1>{`${this.props.title}`}</h1>
           <div className="navbar">
             <div className="button_things">
-              <Link to='/'>Home</Link>
-              <Link to='/build'>Build!</Link>
+              <Link to='/'><i className="fas fa-home"></i> Home</Link>
+              <Link to='/build'><i className="fas fa-hammer"></i> Build!</Link>
             </div>
             <div className="mobile-button">
-              <Link to='/'>Home</Link>
-              <Link to='/build'>Build!</Link>
+              <Link to='/'><i className="fas fa-home"></i> Home</Link>
+              <Link to='/build'><i className="fas fa-hammer"></i> Build!</Link>
               {TokenService.hasAuthToken() ? this.renderLogout() : this.renderLogin()}
             </div>
-            <SearchBarBuild/>
+            <div>
+              <SearchBarBuild/>
+            </div>
             <div className="user_things">
               {TokenService.hasAuthToken() ? this.renderLogout() : this.renderLogin()}
             </div>

@@ -12,7 +12,7 @@ export default class SearchBar extends Component {
     return (
       <div className="searchbar">
         <form className="search">
-          <div>
+          <div className="search">
             {filter.value && <p className="error">{validateFilter()}</p>}
             <label htmlFor="search">Search:</label>
             <input placeholder="e.g. Pikachu" value={filter.value} onChange={e => setFilter(e.target.value)} type="text" name="search" id="search" />
@@ -29,7 +29,7 @@ export default class SearchBar extends Component {
               onClick={(e) => {
                 e.preventDefault();
                 handleFilter();
-              }}>Go!</button>
+              }}>Go <i className="fas fa-exclamation"></i></button>
           </div>
         </form>
       </div>

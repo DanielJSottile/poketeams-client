@@ -9,12 +9,13 @@ export default class TeamButton extends Component {
 
     const {handleCurrentTeamClicked} = this.context;
     return (
-      <button 
-      id={this.props.id} 
-      onClick={() => {
-        handleCurrentTeamClicked(this.props.team_name, this.props.id);
-      }}>
-        {this.props.team_name}
+      <button
+        className="btn"
+        id={this.props.id} 
+        onClick={() => {
+          handleCurrentTeamClicked(this.props.team_name, this.props.id);
+        }}>
+        <i className="fas fa-layer-group"></i> {this.props.team_name}
       </button>
     );
   };
