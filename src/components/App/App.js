@@ -567,7 +567,7 @@ export default class App extends Component {
     this.setState({publicTeams: newPublicTeams, userTeams: newUserTeams});
   };
 
-  handleDeleteSet = (team_id, set_id) => { // deleteSet not made yet
+  handleDeleteSet = (team_id, set_id) => { 
     apiService.deleteUserSet(Number(team_id), Number(set_id))
    
     const newUserSets = this.state.userSets.filter(set => Number(set.id) !== Number(set_id))
