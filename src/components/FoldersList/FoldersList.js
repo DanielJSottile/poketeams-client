@@ -6,6 +6,14 @@ export default class FoldersList extends Component {
 
   static contextType = UserContext;
 
+  state = {
+    editClicked: false
+  }
+
+  handleEditExpand() {
+    this.setState({editClicked: !this.state.editClicked})
+  }
+
   renderExpanded() {
 
     const {
@@ -35,12 +43,42 @@ export default class FoldersList extends Component {
     )
   }
 
+  renderEditExpand() {
+
+    const {
+      newFolderName,
+      setNewFolderName,
+      handleEditFolder,
+      validateNewFolderName
+    } = this.context;
+
+    return (
+      <form>
+        <div>
+          <label htmlFor="foldername">Edit Folder Name:</label>
+          {<p className="error">{validateNewFolderName()}</p>}
+          <input placeholder="e.g. Good Teams" type="text" name="foldername" id="foldername" value={newFolderName.value} onChange={e => setNewFolderName(e.target.value)}/>
+        </div>
+        <button type="submit"
+        className="submit"
+        disabled={
+          validateNewFolderName()
+        }
+        onClick={(e) => {
+          e.preventDefault();
+          handleEditFolder();
+        }}>Submit <i className="far fa-check-circle"></i></button>
+      </form>
+    )
+  }
+
   render() {
 
     const {
       userFolders, 
       folderAddClicked, 
       currentClickedFolder,
+      handleDeleteFolder,
       handleFolderAddClickExpand,
     } = this.context;
 
@@ -61,6 +99,14 @@ export default class FoldersList extends Component {
           </div>
         <div>
           <span>{`Current Folder: ${currentClickedFolder.value}`}</span>
+          {currentClickedFolder.value ? 
+            <div>
+              <button onClick={() => this.handleEditExpand()}><i className="fas fa-edit"></i> Edit</button>
+              <button onClick={() => handleDeleteFolder()}>Delete <i className="fas fa-trash-alt"></i></button>
+            </div> : null}
+        </div>
+        <div>
+            {this.state.editClicked ? this.renderEditExpand() : null}
         </div>
       </section>
     </Fragment>

@@ -126,7 +126,7 @@ export default class Team extends Component {
                 }
                 onClick={(e) => {
                   e.preventDefault();
-                  handleUpdateTeam(this.state.team_name, this.state.description);
+                  handleUpdateTeam(this.state.team_name.value, this.state.description.value, team.id);
                 }}>Save Team Details</button>
             </form>
           <div className="export-team">

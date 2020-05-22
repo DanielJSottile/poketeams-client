@@ -358,11 +358,32 @@ export default class App extends Component {
 
   // PATCH/UPDATE
 
+  handleEditFolder = () => {
+    const folder_name = this.state.newFolderName.value;
+    const id = this.state.currentClickedFolder.id;
+    const userId = jwtDecode(TokenService.getAuthToken()).user_id
+    apiService.patchUserFolder(folder_name, id, userId)
+    
+    const folder = {folder_name: folder_name};
+    
+    this.setState({
+      userFolders: this.state.userFolders.map(fldr => {
+        return (fldr.id !== id) ? fldr : {...fldr, ...folder}})
+    });
+   
+  };
+
   handleUpdateTeam = (teamname, desc, id) => {
-    const team_name = teamname;
-    const description = desc;
-    const team_id = Number(id)
-    apiService.patchUpdateTeam() // patchTeam not made yet
+    const body = {id: id, team_name: teamname, description: desc}
+    const userId = jwtDecode(TokenService.getAuthToken()).user_id
+    apiService.patchUserTeam(body, userId)
+
+    const team = {team_name: teamname, description: desc}
+
+    this.setState({
+      userTeams: this.state.userTeams.map(tm => {
+        return (tm.id !== id) ? tm : {...tm, ...team} })
+    });
   };
 
   handleUpdateSet= (
@@ -391,23 +412,114 @@ export default class App extends Component {
       move_one,
       move_two,
       move_three,
-      move_four,
-      team_id
+      move_four
   ) => {
-    const set_body = {
-
+    const body = {
+      id,
+      nickname,
+      species,
+      gender,
+      item,
+      ability,
+      level,
+      shiny,
+      happiness,
+      nature,
+      hp_ev,
+      atk_ev,
+      def_ev,
+      spa_ev,
+      spd_ev,
+      spe_ev,
+      hp_iv,
+      atk_iv,
+      def_iv,
+      spa_iv,
+      spd_iv,
+      spe_iv,
+      move_one,
+      move_two,
+      move_three,
+      move_four,
     }
-    apiService.patchUpdateSet() // patchSet not made yet
+    const userId = jwtDecode(TokenService.getAuthToken()).user_id
+    apiService.patchUserSet(body, userId)
+
+    const set = {
+      nickname,
+      species,
+      gender,
+      item,
+      ability,
+      level,
+      shiny,
+      happiness,
+      nature,
+      hp_ev,
+      atk_ev,
+      def_ev,
+      spa_ev,
+      spd_ev,
+      spe_ev,
+      hp_iv,
+      atk_iv,
+      def_iv,
+      spa_iv,
+      spd_iv,
+      spe_iv,
+      move_one,
+      move_two,
+      move_three,
+      move_four,
+    }
+    this.setState({
+      userSets: this.state.userSets.map(s => {
+        return (s.id !== id) ? s : {...s, ...set} })
+    });
   }
 
-  handleUpdateSetImport = () => {
+  handleUpdateSetImport = (id) => {
     const contents = this.state.newSetImport.value;
     const parsed = showdownParse(contents);
-    apiService.patchUpdateSet(jwtDecode(TokenService.getAuthToken()).id) // patchSet not made yet
+    const userId = jwtDecode(TokenService.getAuthToken()).user_id
+
+    const body = {
+      id: id,
+      nickname: parsed.nickname,
+      species: parsed.species,
+      gender: parsed.gender,
+      item: parsed.item,
+      ability: parsed.ability,
+      level: parsed.level,
+      shiny: parsed.shiny,
+      happiness: parsed.happiness,
+      nature: parsed.nature,
+      hp_ev: parsed.hp_ev,
+      atk_ev: parsed.atk_ev,
+      def_ev: parsed.def_ev,
+      spa_ev: parsed.spa_ev,
+      spd_ev: parsed.spd_ev,
+      spe_ev: parsed.spe_ev,
+      hp_iv: parsed.hp_iv,
+      atk_iv: parsed.atk_iv,
+      def_iv: parsed.def_iv,
+      spa_iv: parsed.spa_iv,
+      spd_iv: parsed.spd_iv,
+      spe_iv: parsed.spe_iv,
+      move_one: parsed.move_one,
+      move_two: parsed.move_two,
+      move_three: parsed.move_three,
+      move_four: parsed.move_four,
+    }
+    apiService.patchUserSet(body, userId)
     // do the rest!
   }
 
   // DELETE
+
+  handleDeleteFolder = () => {
+    const folder_id = this.state.currentClickedFolder.id;
+  }
 
   handleDeleteTeam = (team_id, user_id) => { // deleteTeam not made yet
 
@@ -499,6 +611,8 @@ export default class App extends Component {
         validateNewFolderName: this.validateNewFolderName,
         validateCurrentFolderClicked: this.validateCurrentFolderClicked,
         handleCurrentFolderClicked: this.handleCurrentFolderClicked,
+        handleEditFolder: this.handleEditFolder,
+        handleDeleteFolder: this.handleDeleteFolder,
         // user team functions
         setNewTeamName: this.setNewTeamName,
         setNewTeamContents: this.setNewTeamContents,

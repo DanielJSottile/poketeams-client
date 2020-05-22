@@ -331,8 +331,68 @@ const apiService = {
           ? res.json().then(e => Promise.reject(e))
           : res.json()
       )
-  }
+  },
+
+  // PATCH
+
+  patchUserFolder(foldername, iden, userid) {
+    return fetch(`${config.API_ENDPOINT}/build/folders/${userid}`, {
+      method: 'PATCH',
+      headers: {
+        'content-type': 'application/json',
+        'authorization': `bearer ${TokenService.getAuthToken()}`,
+      },
+      body: JSON.stringify({
+        id: iden,
+        folder_name: foldername,
+        user_id: userid
+      }),
+    })
+      .then(res =>
+        (!res.ok)
+          ? res.json().then(e => Promise.reject(e))
+          : res.json()
+      )
+  },
+
+  patchUserTeam(body, userid) {
+    return fetch(`${config.API_ENDPOINT}/build/teams/${userid}`, {
+      method: 'PATCH',
+      headers: {
+        'content-type': 'application/json',
+        'authorization': `bearer ${TokenService.getAuthToken()}`,
+      },
+      body: JSON.stringify(body),
+    })
+      .then(res =>
+        (!res.ok)
+          ? res.json().then(e => Promise.reject(e))
+          : res.json()
+      )
+  },
+
+
+  patchUserSet(body, userid) {
+    return fetch(`${config.API_ENDPOINT}/build/sets/${userid}`, {
+      method: 'PATCH',
+      headers: {
+        'content-type': 'application/json',
+        'authorization': `bearer ${TokenService.getAuthToken()}`,
+      },
+      body: JSON.stringify(body),
+    })
+      .then(res =>
+        (!res.ok)
+          ? res.json().then(e => Promise.reject(e))
+          : res.json()
+      )
+  },
+
+  
 };
+
+
+
 
 
 
