@@ -80,6 +80,10 @@ export default class App extends Component {
         // some way to add likes to the public teams???
   }
 
+  componentDidUpdate(prevState){ // compare some thing in state, and if its changed, then do something like refetch the data.
+
+  }
+
   // State Input Update Functions 
 
   // User Folders

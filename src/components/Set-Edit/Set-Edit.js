@@ -494,8 +494,7 @@ export default class Set extends Component {
           </div>
         </div>
         <div>
-          <button onClick={(e) => {
-            e.preventDefault();
+          <button onClick={() => {
             handleDeleteSet(set.team_id, set.id);
             }}><i className="fas fa-trash-alt"></i> Delete Set!</button>
         </div>
