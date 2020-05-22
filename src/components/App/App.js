@@ -387,61 +387,62 @@ export default class App extends Component {
   };
 
   handleUpdateSet= (
-      id,
-      nickname,
-      species,
-      gender,
-      item,
-      ability,
-      level,
-      shiny,
-      happiness,
-      nature,
-      hp_ev,
-      atk_ev,
-      def_ev,
-      spa_ev,
-      spd_ev,
-      spe_ev,
-      hp_iv,
-      atk_iv,
-      def_iv,
-      spa_iv,
-      spd_iv,
-      spe_iv,
-      move_one,
-      move_two,
-      move_three,
-      move_four
+    id,
+    nickname,
+    species,
+    gender,
+    shiny,
+    item,
+    ability,
+    level,
+    happiness,
+    nature,
+    hp_ev,
+    atk_ev,
+    def_ev,
+    spa_ev,
+    spd_ev,
+    spe_ev,
+    hp_iv,
+    atk_iv,
+    def_iv,
+    spa_iv,
+    spd_iv,
+    spe_iv,
+    move_one,
+    move_two,
+    move_three,
+    move_four,
   ) => {
     const body = {
-      id,
-      nickname,
-      species,
-      gender,
-      item,
-      ability,
-      level,
-      shiny,
-      happiness,
-      nature,
-      hp_ev,
-      atk_ev,
-      def_ev,
-      spa_ev,
-      spd_ev,
-      spe_ev,
-      hp_iv,
-      atk_iv,
-      def_iv,
-      spa_iv,
-      spd_iv,
-      spe_iv,
-      move_one,
-      move_two,
-      move_three,
-      move_four,
+      id: id,
+      nickname: nickname,
+      species: species,
+      gender: gender,
+      item: item,
+      ability: ability,
+      level: Number(level),
+      shiny: shiny,
+      happiness: Number(happiness),
+      nature: nature,
+      hp_ev: Number(hp_ev),
+      atk_ev: Number(atk_ev),
+      def_ev: Number(def_ev),
+      spa_ev: Number(spa_ev),
+      spd_ev: Number(spd_ev),
+      spe_ev: Number(spe_ev),
+      hp_iv: Number(hp_iv),
+      atk_iv: Number(atk_iv),
+      def_iv: Number(def_iv),
+      spa_iv: Number(spa_iv),
+      spd_iv: Number(spd_iv),
+      spe_iv: Number(spe_iv),
+      move_one: move_one,
+      move_two: move_two,
+      move_three: move_three,
+      move_four: move_four,
     }
+
     const userId = jwtDecode(TokenService.getAuthToken()).user_id
     apiService.patchUserSet(body, userId)
 
@@ -480,7 +481,8 @@ export default class App extends Component {
 
   handleUpdateSetImport = (id) => {
     const contents = this.state.newSetImport.value;
-    const parsed = showdownParse(contents);
+    const parsed = showdownParse(contents)[0];
+    console.log(parsed);
     const userId = jwtDecode(TokenService.getAuthToken()).user_id
 
     const body = {
@@ -490,29 +492,61 @@ export default class App extends Component {
       gender: parsed.gender,
       item: parsed.item,
       ability: parsed.ability,
-      level: parsed.level,
+      level: Number(parsed.level),
       shiny: parsed.shiny,
-      happiness: parsed.happiness,
+      happiness: Number(parsed.happiness),
       nature: parsed.nature,
-      hp_ev: parsed.hp_ev,
-      atk_ev: parsed.atk_ev,
-      def_ev: parsed.def_ev,
-      spa_ev: parsed.spa_ev,
-      spd_ev: parsed.spd_ev,
-      spe_ev: parsed.spe_ev,
-      hp_iv: parsed.hp_iv,
-      atk_iv: parsed.atk_iv,
-      def_iv: parsed.def_iv,
-      spa_iv: parsed.spa_iv,
-      spd_iv: parsed.spd_iv,
-      spe_iv: parsed.spe_iv,
+      hp_ev: Number(parsed.hp_ev),
+      atk_ev: Number(parsed.atk_ev),
+      def_ev: Number(parsed.def_ev),
+      spa_ev: Number(parsed.spa_ev),
+      spd_ev: Number(parsed.spd_ev),
+      spe_ev: Number(parsed.spe_ev),
+      hp_iv: Number(parsed.hp_iv),
+      atk_iv: Number(parsed.atk_iv),
+      def_iv: Number(parsed.def_iv),
+      spa_iv: Number(parsed.spa_iv),
+      spd_iv: Number(parsed.spd_iv),
+      spe_iv: Number(parsed.spe_iv),
       move_one: parsed.move_one,
       move_two: parsed.move_two,
       move_three: parsed.move_three,
       move_four: parsed.move_four,
     }
     apiService.patchUserSet(body, userId)
-    // do the rest!
+
+    const set = {
+      nickname: parsed.nickname,
+      species: parsed.species,
+      gender: parsed.gender,
+      item: parsed.item,
+      ability: parsed.ability,
+      level: Number(parsed.level),
+      shiny: parsed.shiny,
+      happiness: Number(parsed.happiness),
+      nature: parsed.nature,
+      hp_ev: Number(parsed.hp_ev),
+      atk_ev: Number(parsed.atk_ev),
+      def_ev: Number(parsed.def_ev),
+      spa_ev: Number(parsed.spa_ev),
+      spd_ev: Number(parsed.spd_ev),
+      spe_ev: Number(parsed.spe_ev),
+      hp_iv: Number(parsed.hp_iv),
+      atk_iv: Number(parsed.atk_iv),
+      def_iv: Number(parsed.def_iv),
+      spa_iv: Number(parsed.spa_iv),
+      spd_iv: Number(parsed.spd_iv),
+      spe_iv: Number(parsed.spe_iv),
+      move_one: parsed.move_one,
+      move_two: parsed.move_two,
+      move_three: parsed.move_three,
+      move_four: parsed.move_four,
+    };
+
+    this.setState({
+      userSets: this.state.userSets.map(s => {
+        return (s.id !== id) ? s : {...s, ...set} })
+    });
   }
 
   // DELETE
@@ -525,7 +559,7 @@ export default class App extends Component {
 
   };
 
-  handleDeleteSet = (team_id, user_id) => { // deleteSet not made yet
+  handleDeleteSet = (set_id, user_id) => { // deleteSet not made yet
 
   }
 
@@ -539,7 +573,7 @@ export default class App extends Component {
     apiService.getTenTeamsSearch(query)
       .then(teams => {
         this.setState({publicTeams: teams})
-        this.setState({publicSets: []})// lets clear the publicSets because we are reseeding them! with our search
+        this.setState({publicSets: []}) // lets clear the publicSets because we are reseeding them! with our search
         teams.forEach(team => { // now we need to get the sets for those 10 teams and put them in state.
           apiService.getSetsForOneTeam(team.id)
             .then(sets => {

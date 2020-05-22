@@ -313,7 +313,7 @@ export default class Set extends Component {
                   }
                   onClick={(e) => {
                     e.preventDefault();
-                    handleUpdateSetImport();
+                    handleUpdateSetImport(set.id);
                   }}>Submit</button>
               </div>
             </form>
@@ -417,34 +417,32 @@ export default class Set extends Component {
                 onClick={(e) => {
                   e.preventDefault();
                   handleUpdateSet(
-                    this.state.nickname,
-                    this.state.species,
-                    this.state.gender,
-                    this.state.shiny,
-                    this.state.item,
-                    this.state.ability,
-                    this.state.level,
-                    this.state.happiness,
-                    this.state.nature,
-                    this.state.hp_ev,
-                    this.state.atk_ev,
-                    this.state.def_ev,
-                    this.state.spa_ev,
-                    this.state.spd_ev,
-                    this.state.spe_ev,
-                    this.state.hp_iv,
-                    this.state.atk_iv,
-                    this.state.def_iv,
-                    this.state.spa_iv,
-                    this.state.spd_iv,
-                    this.state.spe_iv,
-                    this.state.move_one,
-                    this.state.move_two,
-                    this.state.move_three,
-                    this.state.move_four,
                     set.id,
-                    set.team_id,
-                    set.user_id,
+                    this.state.nickname.value,
+                    this.state.species.value,
+                    this.state.gender.value,
+                    this.state.shiny.value,
+                    this.state.item.value,
+                    this.state.ability.value,
+                    this.state.level.value,
+                    this.state.happiness.value,
+                    this.state.nature.value,
+                    this.state.hp_ev.value,
+                    this.state.atk_ev.value,
+                    this.state.def_ev.value,
+                    this.state.spa_ev.value,
+                    this.state.spd_ev.value,
+                    this.state.spe_ev.value,
+                    this.state.hp_iv.value,
+                    this.state.atk_iv.value,
+                    this.state.def_iv.value,
+                    this.state.spa_iv.value,
+                    this.state.spd_iv.value,
+                    this.state.spe_iv.value,
+                    this.state.move_one.value,
+                    this.state.move_two.value,
+                    this.state.move_three.value,
+                    this.state.move_four.value,
                   );
                 }}>Save Team Details</button>
           </div>

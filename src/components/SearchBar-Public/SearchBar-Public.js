@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import UserContext from '../../contexts/UserContext';
-import legality from '../../functions/legality';
 
 export default class SearchBar extends Component {
 

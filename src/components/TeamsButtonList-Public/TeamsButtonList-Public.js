@@ -1,7 +1,6 @@
 import React, { Component , Fragment} from 'react';
 import UserContext from '../../contexts/UserContext';
 import TeamButton from '../TeamButton/TeamButton';
-import apiService from '../../services/apiService';
 
 export default class TeamsButtonList extends Component {
 
