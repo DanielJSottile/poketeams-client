@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
 import TokenService from '../../services/token-service';
+import UserContext from '../../contexts/UserContext';
 import AuthApiService from '../../services/auth-api-service';
 
 export default class LoginForm extends Component {
+
+  static contextType = UserContext;
+
   static defaultProps = {
     onLoginSucess: () => {}
   };
@@ -22,6 +26,7 @@ export default class LoginForm extends Component {
       user_name.value = ''
       password.value = ''
       TokenService.saveAuthToken(res.authToken)
+      this.context.getUserState()
       this.props.onLoginSuccess()
     })
     .catch(res => {

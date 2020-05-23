@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import UserContext from '../../contexts/UserContext';
 import showdownGenerate from '../../functions/generate';
@@ -8,6 +8,7 @@ import SetEdit from '../Set-Edit/Set-Edit';
 export default class Team extends Component {
 
   static contextType = UserContext;
+ 
 
   // we have a bug.  we need to change the team_name and description based on the current team.  Will fix later.
 
@@ -22,6 +23,7 @@ export default class Team extends Component {
     favorite_team: {value: false, touched: false},
     description: {value: this.props.team.team_description || '', touched: false},
     teamExpandToggle: true,
+    deleteClicked: false,
   }
 
   // set state
@@ -44,6 +46,11 @@ export default class Team extends Component {
       team_name: {value: this.props.team.team_name || '', touched: false},
       description: {value: this.props.team.description || '', touched: false}})
   };
+
+  handleDeleteExpand() {
+    this.setState({deleteClicked: !this.state.deleteClicked});
+  }
+
 
   // validate
 
@@ -80,11 +87,27 @@ export default class Team extends Component {
     return SetList;
   }
 
+  renderDeleteExpand() {
+    const {
+      handleDeleteTeam,
+    } = this.context;
+
+    return (
+      <div>
+        <p>Are You Sure You'd Like to Delete this Folder?</p> 
+        <button onClick={() => {
+          handleDeleteTeam(this.props.team.id);
+          this.handleDeleteExpand();
+        }}>Yes <i className="fas fa-thumbs-up"></i></button>
+        <button onClick={() => this.handleDeleteExpand()}>No <i className="fas fa-thumbs-down"></i></button>
+      </div> 
+    )
+  };
+
   renderExpandedTeam() {
 
     const {
       userSets,
-      handleDeleteTeam,
       handleUpdateTeam,
     } = this.context;
 
@@ -143,8 +166,9 @@ export default class Team extends Component {
           <div>
             <button onClick={(e) => {
               e.preventDefault();
-              handleDeleteTeam(this.props.team.id);
+              this.handleDeleteExpand()
               }}><i className="fas fa-trash-alt"></i> Delete Team!</button>
+              {this.state.deleteClicked ? this.renderDeleteExpand() : null}
           </div>
         </div>
         {SetList}
@@ -176,10 +200,12 @@ export default class Team extends Component {
 
   render() {
 
+    const {team} = this.props;
+
     return (
-      <Fragment>
+      <div className={`${team.team_name}-${team.id}`}>
         {this.state.teamExpandToggle ? this.renderUnexpandedTeam() : this.renderExpandedTeam()}
-      </Fragment>
+      </div>
     );
   };
 };

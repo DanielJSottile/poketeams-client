@@ -34,6 +34,7 @@ export class LandingPage extends Component {
             <p>[placeholder for upload ui]</p>
             <p>PokeTeams goes above and beyond the average pastebin in order for you to save
             and organize your teams from Pokemon Showdown into a secure database.  Never lose a team again!
+            Say goodbye to Pastebin's forever!
             </p>
           </section>
           <section>

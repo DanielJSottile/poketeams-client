@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import SearchBar from '../SearchBar-Public/SearchBar-Public';
+import UserContext from '../../contexts/UserContext';
 import TokenService from '../../services/token-service';
 
 export default class Navigation extends Component {
+
+  static contextType = UserContext;
+
   handleLogoutClick = () => {
     TokenService.clearAuthToken();
+    this.context.clearUserState();
   };
 
   renderLogout() {
@@ -39,7 +44,7 @@ export default class Navigation extends Component {
           <div className="navbar">
             <div className="button_things">
               <Link to='/'><i className="fas fa-home"></i>Home</Link>
-              <Link to='/build'><i class="fas fa-hammer"></i>Build!</Link>
+              <Link to='/build'><i className="fas fa-hammer"></i>Build!</Link>
             </div>
             <div className="mobile-button">
               <Link to='/'><i className="fas fa-home"></i>Home</Link>

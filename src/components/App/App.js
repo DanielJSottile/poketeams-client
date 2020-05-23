@@ -39,7 +39,7 @@ export default class App extends Component {
     sort: {value: '', touched: false},
     filter: {value: '', touched: false},
     filtersort: {value: '', touched: false},
-    page: {value: 1, touched: false}
+    page: {value: 1}
   }; 
 
   componentDidMount() {
@@ -50,40 +50,52 @@ export default class App extends Component {
       apiService.getUserFolders(user_id) // Get Public Teams First
       .then(data => {
         this.setState({userFolders: data})
-      })
+      });
 
       apiService.getUserTeams(user_id) // Get Public Teams First
       .then(data => {
         this.setState({userTeams: data})
         
-      })
+      });
 
       apiService.getUserSets(user_id) // Get Public Teams First
       .then(data => {
         this.setState({userSets: data})
-      })
+      });
     };
   
     // Then get the public teams
 
-    apiService.getTenTeamsDefault() // Get Public Teams First
+    // apiService.getTenTeamsDefault() // Get Public Teams First
+    //   .then(teams => {
+    //     this.setState({publicTeams: teams})
+    //     teams.forEach(team => { // now we need to get the sets for those 10 teams and put them in state.
+    //       apiService.getSetsForOneTeam(team.id)
+    //         .then(sets => {
+    //           this.setState({publicSets: [...this.state.publicSets, ...sets]})
+    //         });
+    //     });
+    //   });
+
+    const search = this.state.search.value || 'all';
+    const sort = this.state.sort.value || 'newest';
+    const page = this.state.page.value;
+    const query = `?page=${page}&sort=${sort}&species=${search.toLowerCase()}`
+    apiService.getTenTeamsSearch(query)
       .then(teams => {
         this.setState({publicTeams: teams})
+        this.setState({publicSets: []}) // lets clear the publicSets because we are reseeding them! with our search
         teams.forEach(team => { // now we need to get the sets for those 10 teams and put them in state.
           apiService.getSetsForOneTeam(team.id)
             .then(sets => {
               this.setState({publicSets: [...this.state.publicSets, ...sets]})
-            })
-        })
-      })
+            });
+        });
+      });
+    // some way to add likes to the public teams???
+  };
 
-        // some way to add likes to the public teams???
-  }
-
-  componentDidUpdate(prevState){ // compare some thing in state, and if its changed, then do something like refetch the data.
-
-  }
-
+  
   // State Input Update Functions 
 
   // User Folders
@@ -144,6 +156,75 @@ export default class App extends Component {
 
   setFilterSort = filtersort => {
     this.setState({filtersort: {value: filtersort, touched: true}})
+  }
+
+  handlePageUp = () => {
+    this.setState({page: {value: (this.state.page.value + 1)}})
+    const search = this.state.search.value || 'all';
+    const sort = this.state.sort.value || 'newest';
+    const page = this.state.page.value + 1;
+    const query = `?page=${page}&sort=${sort}&species=${search.toLowerCase()}`
+    apiService.getTenTeamsSearch(query)
+      .then(teams => {
+        this.setState({publicTeams: teams})
+        this.setState({publicSets: []}) // lets clear the publicSets because we are reseeding them! with our search
+        teams.forEach(team => { // now we need to get the sets for those 10 teams and put them in state.
+          apiService.getSetsForOneTeam(team.id)
+            .then(sets => {
+              this.setState({publicSets: [...this.state.publicSets, ...sets]})
+            });
+        });
+      });
+  }
+
+  handlePageDown = () => {
+    if(this.state.page.value > 1){
+      this.setState({page: {value: this.state.page.value - 1}})
+    
+    const search = this.state.search.value || 'all';
+    const sort = this.state.sort.value || 'newest';
+    const page = this.state.page.value - 1;
+    const query = `?page=${page}&sort=${sort}&species=${search.toLowerCase()}`
+    apiService.getTenTeamsSearch(query)
+      .then(teams => {
+        this.setState({publicTeams: teams})
+        this.setState({publicSets: []}) // lets clear the publicSets because we are reseeding them! with our search
+        teams.forEach(team => { // now we need to get the sets for those 10 teams and put them in state.
+          apiService.getSetsForOneTeam(team.id)
+            .then(sets => {
+              this.setState({publicSets: [...this.state.publicSets, ...sets]})
+            });
+        });
+      });
+    }
+  }
+
+  // login to fix folders/teams bug (componentDidUpdate in the future perhaps, but not working atm)
+
+  clearUserState = () => {
+    this.setState({userFolders: [], userTeams: [], userSets: []})
+  }
+
+  getUserState = () => {
+    if (TokenService.getAuthToken()){ // if user is logged in
+      const user_id = jwtDecode(TokenService.getAuthToken()).user_id
+
+      apiService.getUserFolders(user_id) // Get Public Teams First
+      .then(data => {
+        this.setState({userFolders: data})
+      });
+
+      apiService.getUserTeams(user_id) // Get Public Teams First
+      .then(data => {
+        this.setState({userTeams: data})
+        
+      });
+
+      apiService.getUserSets(user_id) // Get Public Teams First
+      .then(data => {
+        this.setState({userSets: data})
+      });
+    };
   }
   
   // Validate State Functions
@@ -238,12 +319,14 @@ export default class App extends Component {
       return `Must be an 'existing' Pokemon species or form styled via '[species]-[form]'!`
     }
   }
+
+  
   // Event Handlers/API Calls -> NOT MADE YET!
 
   handlePostNewFolder = () => {
     const folder_name = this.state.newFolderName.value;
     apiService.postUserFolder(folder_name, jwtDecode(TokenService.getAuthToken()).user_id)
-      .then((folder) => this.setState({userFolders: [...this.state.userFolders, folder]}));
+      .then((folder) => this.setState({userFolders: [...this.state.userFolders, folder], folderAddClicked: false}));
   }
 
   handlePostNewPokemon = ( // will use this function for team post as well
@@ -357,6 +440,13 @@ export default class App extends Component {
               );
           });
         };
+      });
+      // then we close the expanded view
+      this.setState({
+        teamAddClicked: !this.state.teamAddClicked,
+        newTeamName: {value: '', touched: false},
+        desc: {value: '', touched: false},
+        newTeamImport: {value: '', touched: false}
       });
   };
 
@@ -559,7 +649,7 @@ export default class App extends Component {
     apiService.deleteUserFolder(folder_id)
    
     const newFolders = this.state.userFolders.filter(folder => Number(folder.id) !== Number(folder_id))
-    this.setState({userFolders: newFolders});
+    this.setState({userFolders: newFolders, currentClickedFolder: {value: '', id: '', touched: false}});
    
   };
 
@@ -568,7 +658,7 @@ export default class App extends Component {
    
     const newUserTeams = this.state.userTeams.filter(team => Number(team.id) !== Number(team_id))
     const newPublicTeams = this.state.publicTeams.filter(team => Number(team.id) !== Number(team_id))
-    this.setState({publicTeams: newPublicTeams, userTeams: newUserTeams});
+    this.setState({publicTeams: newPublicTeams, userTeams: newUserTeams, currentClickedTeam: {value: '', id: '', touched: false}});
   };
 
   handleDeleteSet = (team_id, set_id) => { 
@@ -594,10 +684,10 @@ export default class App extends Component {
           apiService.getSetsForOneTeam(team.id)
             .then(sets => {
               this.setState({publicSets: [...this.state.publicSets, ...sets]})
-            })
-        })
-      })
-  }
+            });
+        });
+      });
+  };
 
   handleFilter = () => {
     const filter = this.state.filter.value;
@@ -653,6 +743,7 @@ export default class App extends Component {
         sort: this.state.sort,
         filter: this.state.filter,
         filtersort: this.state.filtersort,
+        page: this.state.page,
         // functions
         // user folder functions
         setNewFolderName: this.setNewFolderName,
@@ -682,6 +773,8 @@ export default class App extends Component {
         validateNewSetImport: this.validateNewSetImport,
         handleUpdateSetImport: this.handleUpdateSetImport,
         handlePostNewPokemon: this.handlePostNewPokemon,
+        clearUserState: this.clearUserState,
+        getUserState: this.getUserState,
         // search functions
         setSearch: this.setSearch,
         setSort: this.setSort,
@@ -690,7 +783,9 @@ export default class App extends Component {
         setFilter: this.setFilter,
         setFilterSort: this.setFilterSort,
         validateFilter: this.validateFilter,
-        handleFilter: this.handleFilter
+        handleFilter: this.handleFilter,
+        handlePageUp: this.handlePageUp,
+        handlePageDown: this.handlePageDown
         
       }}>
         <Fragment>

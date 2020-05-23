@@ -10,6 +10,9 @@ export default class TeamsButtonList extends Component {
 
     const {
       publicTeams,
+      page,
+      handlePageDown,
+      handlePageUp,
       currentClickedTeam,
     } = this.context;
 
@@ -18,15 +21,37 @@ export default class TeamsButtonList extends Component {
     return (
       <Fragment>
         <section className="folders-list">
-          <h3>Teams:</h3>
+          <div>
+          {page.value > 1 ? 
+            <div className='pagebutton'>
+              <button onClick={() => {
+                handlePageDown();
+              }}>{`Go to Previous 10 Teams`}
+              </button>
+              <button onClick={() => {
+                handlePageUp();
+              }}>{`Go to Next 10 Teams`}
+              </button>
+            </div> 
+            : 
+            <div className='pagebutton'>
+            <button onClick={() => {
+              handlePageUp();
+            }}>{`Go to Next 10 Teams`}
+            </button>
+          </div>}
+          <span>{`Current Teams: ${page.value * 10 - 9} - ${page.value * 10}`}</span>
+            <h3>Teams:</h3>
+            
+          </div>
           <div>
             {(TeamList.length > 0) ? TeamList : <h3>None! Please Login and Be the First to Add a Team!</h3>}
           </div>
-        <div>
-          <span>{`Current Team: ${currentClickedTeam.value}`}</span>
-        </div>
-      </section>
-    </Fragment>
+          <div>
+            <span>{`Current Team: ${currentClickedTeam.value}`}</span>
+          </div>
+        </section>
+      </Fragment>
     );
   };
 };

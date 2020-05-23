@@ -157,7 +157,7 @@ export default function showdownParse(input) {
   
       } else if (line.startsWith('Shiny:')){
   
-        shiny = line.split(': ')[1];
+        shiny = true;
   
       } else if (line.startsWith('Happiness:')){
   

@@ -8,6 +8,7 @@ export default class TeamButton extends Component {
   render() {
 
     const {handleCurrentTeamClicked} = this.context;
+    
     return (
       <button
         className="btn"

@@ -7,11 +7,16 @@ export default class FoldersList extends Component {
   static contextType = UserContext;
 
   state = {
-    editClicked: false
+    editClicked: false,
+    deleteClicked: false
   }
 
   handleEditExpand() {
     this.setState({editClicked: !this.state.editClicked})
+  }
+
+  handleDeleteExpand() {
+    this.setState({deleteClicked: !this.state.deleteClicked})
   }
 
   renderExpanded() {
@@ -49,7 +54,9 @@ export default class FoldersList extends Component {
       newFolderName,
       setNewFolderName,
       handleEditFolder,
-      validateNewFolderName
+      validateNewFolderName,
+      handleCurrentFolderClicked,
+      currentClickedFolder
     } = this.context;
 
     return (
@@ -67,9 +74,30 @@ export default class FoldersList extends Component {
         onClick={(e) => {
           e.preventDefault();
           handleEditFolder();
+          this.handleEditExpand();
+          handleCurrentFolderClicked(newFolderName.value, currentClickedFolder.id)
         }}>Submit <i className="far fa-check-circle"></i></button>
       </form>
     )
+  }
+
+  renderDeleteExpand () {
+
+    const {
+      handleDeleteFolder,
+    } = this.context;
+
+    return (
+      <div>
+        <p>Are You Sure You'd Like to Delete this Folder?</p> 
+        <button onClick={() => {
+          handleDeleteFolder();
+          this.handleDeleteExpand();
+        }}>Yes <i className="fas fa-thumbs-up"></i></button>
+        <button onClick={() => this.handleDeleteExpand()}>No <i className="fas fa-thumbs-down"></i></button>
+      </div> 
+    )
+
   }
 
   render() {
@@ -78,7 +106,6 @@ export default class FoldersList extends Component {
       userFolders, 
       folderAddClicked, 
       currentClickedFolder,
-      handleDeleteFolder,
       handleFolderAddClickExpand,
     } = this.context;
 
@@ -102,11 +129,12 @@ export default class FoldersList extends Component {
           {currentClickedFolder.value ? 
             <div>
               <button onClick={() => this.handleEditExpand()}><i className="fas fa-edit"></i> Edit</button>
-              <button onClick={() => handleDeleteFolder()}>Delete <i className="fas fa-trash-alt"></i></button>
+              <button onClick={() => this.handleDeleteExpand()}>Delete <i className="fas fa-trash-alt"></i></button>
             </div> : null}
         </div>
         <div>
             {this.state.editClicked ? this.renderEditExpand() : null}
+            {this.state.deleteClicked ? this.renderDeleteExpand() : null}
         </div>
       </section>
     </Fragment>
