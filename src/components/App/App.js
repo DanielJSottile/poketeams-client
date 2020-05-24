@@ -226,7 +226,22 @@ export default class App extends Component {
       });
     };
   }
-  
+
+  addPublicSets = (sets) => {
+
+    sets.forEach(set => {
+      console.log(set);
+      let flag = false;
+      for (let i = 0; i < this.state.publicSets.length ; i++) {
+        if (Number(this.state.publicSets[i].id) === Number(set.id)){
+          flag = true
+        }
+      } 
+      if (!flag) {
+        this.setState({publicSets: [...this.state.publicSets, set]})
+      }
+  })
+}
   // Validate State Functions
 
   // User Folders
@@ -638,7 +653,8 @@ export default class App extends Component {
 
     this.setState({
       userSets: this.state.userSets.map(s => {
-        return (s.id !== id) ? s : {...s, ...set} })
+        return (s.id !== id) ? s : {...s, ...set}}),
+      newSetImport: {value: '', touched: false}
     });
   }
 
@@ -671,9 +687,10 @@ export default class App extends Component {
 
   // SEARCH STUFF
 
-  handleSearch = () => {
-    const search = this.state.search.value;
-    const sort = this.state.sort.value;
+  handleSearch = (e) => {
+    e.preventDefault()
+    const search = this.state.search.value || 'all';
+    const sort = this.state.sort.value || 'newest';
     const page = this.state.page.value;
     const query = `?page=${page}&sort=${sort}&species=${search.toLowerCase()}`
     apiService.getTenTeamsSearch(query)
@@ -690,8 +707,8 @@ export default class App extends Component {
   };
 
   handleFilter = () => {
-    const filter = this.state.filter.value;
-    const filtersort = this.state.filtersort.value;
+    const filter = this.state.filter.value || 'all';
+    const filtersort = this.state.filtersort.value || 'newest';
     // lets do an api call for this, JUST because we fucking can, plus linking data back up is impossible with my current knowledge
     const query = `?sort=${filtersort}&species=${filter.toLowerCase()}`
     if (TokenService.getAuthToken()){ // if user is logged in
@@ -785,7 +802,9 @@ export default class App extends Component {
         validateFilter: this.validateFilter,
         handleFilter: this.handleFilter,
         handlePageUp: this.handlePageUp,
-        handlePageDown: this.handlePageDown
+        handlePageDown: this.handlePageDown,
+        // share functions
+        addPublicSets: this.addPublicSets
         
       }}>
         <Fragment>

@@ -18,7 +18,7 @@ export class LandingPage extends Component {
     return (
       <Fragment>
           <header role="banner">
-            <h1>PokeTeams</h1>
+            <h1>PokéTeams</h1>
             <h2>store. organize. edit. share.</h2>
           </header>
           <section>

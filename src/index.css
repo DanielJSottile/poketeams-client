@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato&family=Montserrat+Alternates:wght@900&display=swap');
 @import url('//db.onlinewebfonts.com/c/f4d1593471d222ddebd973210265762a?family=Pokemon');
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+
 * {
   box-sizing: border-box;
 }
@@ -11,6 +13,7 @@ body {
   color: rgb(68, 68, 68);
   text-align: center;
   line-height: 1.5;
+  margin: 0;
 }
 
 nav,
@@ -18,7 +21,7 @@ footer {
   padding: 1% 0;
   font-size: 12px;
   color: white;
-  text-shadow: 1px 1px black;
+  text-shadow: 1px 1px #444;
   background-color: rgb(150, 27, 27);
 }
 
@@ -30,31 +33,39 @@ nav {
 }
 
 header {
-  padding: 45px 15px;
+  padding: 5px 5px;
 }
 
 h1 {
   font-family: 'Pokemon';
-  color: rgb(255, 255, 238);
+  color: rgb(255, 230, 0);
   letter-spacing: 5px;
   font-size: 45px;
   text-shadow: 1px 5px black;
+  margin-top: 1px;
+  margin-bottom: 15px;
+
 }
 
 h2 {
   font-family: 'Montserrat Alternates', sans-serif;
 }
 
+h3 {
+  font-family: 'Anton', sans-serif;
+  letter-spacing: 3px;
+}
+
 section {
-  padding: 30px 15px;
-  color: rgb(0, 0, 0);
+  padding: 2px 2px;
+  color: #444;
   border-radius: 4px;
   text-shadow: 1px 1px rgb(255, 255, 255);
   background-color: rgb(255, 255, 238);
 }
 
 section:nth-child(even) {
-  color: rgb(236, 236, 236);
+  color: rgb(255, 255, 238);
   text-shadow: 1px 1px rgb(58, 0, 0);
   background-color: rgb(212, 41, 41);
 }
@@ -69,20 +80,32 @@ p + p {
 }
 
 input, select {
+  font-family: 'Lato', sans-serif;
+  background-color: white;
   margin-left: 10px;
   margin-right: 10px;
 }
 
 .btn, button {
-
   font-weight: bolder;
   background-color: white;
   font-size: 16px;
   color: #444;
+  border: 1px solid rgb(255, 230, 0);
   border-radius: 4px;
   padding: 3px;
   margin: 3px;
-  text-decoration: none;
+}
+
+.user-welcome {
+  padding: 5px;
+  margin-right: 15px;
+  text-align: right;
+}
+
+.user-welcome:hover {
+  color: rgb(255, 230, 0);
+  transition: 0.5s;
 }
 
 a, .submit {
@@ -96,12 +119,6 @@ a, .submit {
   margin: 3px;
   text-decoration: none;
 }
-
-.types{
-  display: flex;
-  flex-direction: row;
-}
-
 
 .submit{
   color: green;
@@ -147,12 +164,12 @@ a:hover, button:hover {
 
 .team {
   background-color: rgb(212, 41, 41);
-  color: rgb(236, 236, 236);
+  color: rgb(255, 255, 238);
   text-shadow: 1px 1px rgb(58, 0, 0);
   border: 1px solid #444;
   border-radius: 10px;
-  padding: 5px;
-  margin: 10px;
+  padding: 2px;
+  margin: 5px;
 }
 
 .team-closed {
@@ -160,7 +177,7 @@ a:hover, button:hover {
   display: flex;
   width: 100%;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
   align-content: center;
   align-self: center;
   border: 1px solid #444;
@@ -169,14 +186,10 @@ a:hover, button:hover {
   
 }
 
-.closed{
-  font-size: 16px;
-}
-
 .pokemon {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-evenly;
   border: 1px solid #444;
   border-radius: 10px;
   padding: 5px;
@@ -184,7 +197,7 @@ a:hover, button:hover {
 }
 
 .details, .stats, .export-pokemon, .export-team{
-  background-color: rgb(216, 216, 216);
+  background-color: rgb(255, 255, 238);
   border: 1px solid #444;
   border-radius: 10px;
   padding: 5px;
@@ -196,7 +209,7 @@ a:hover, button:hover {
 }
 
 .pokemon-intro{
-  background-color: rgb(216, 216, 216);
+  background-color: rgb(255, 255, 238);
   border: 1px solid #444;
   border-radius: 10px;
   padding: 5px;
@@ -230,12 +243,12 @@ a:hover, button:hover {
   text-align: center;
   border: none;
   border-radius: 20px;
-  background: rgb(228, 228, 228);
+  background: rgb(255, 255, 238);
 }
 
 textarea {
   text-align: left;
-  border: none;
+  border: 1px solid rgb(255, 230, 0);
   resize: none;
   border-radius: 10px;
   width: 100%;
@@ -247,7 +260,7 @@ textarea {
 }
 
 label{
-  color: rgb(236, 236, 236);
+  color: rgb(207, 207, 207);
   text-shadow: 1px 1px rgb(58, 0, 0);
 }
 
@@ -256,11 +269,11 @@ label{
   text-emphasis: bold;
   text-align: center;
   font-size: 22px;
-  border: none;
+  border: 1px solid rgb(255, 230, 0);
   width: 100%;
   margin: auto;
   border-radius: 20px;
-  background: rgb(228, 228, 228);
+  background: white;
 }
 
 .team:hover{
@@ -268,8 +281,16 @@ label{
   transition: 0.3s;
 }
 
+.s-input {
+  font-family: 'Lato', sans-serif;
+  border: none;
+  border-radius: 4px;
+}
+
 .pokemon:hover{
-  background-color: rgb(238, 238, 238);
+  color: #444;
+  text-shadow: none;
+  background-color: rgb(255, 255, 238);
   transition: 0.3s;
 }
 
@@ -282,9 +303,9 @@ label{
   font-size: 16px;
   padding: 5px;
   margin: 5px;
-  border: none;
+  border: 1px solid rgb(255, 230, 0);
   border-radius: 20px;
-  background: rgb(228, 228, 228);
+  background: white;
 }
 
 .names, .sprites{
@@ -301,6 +322,7 @@ img {
 }
 
 .icon {
+  margin: 1px;
   transform: scale(.5);
 }
 
@@ -309,12 +331,16 @@ img {
 }
 
 .closed{
+  font-size: 16px;
   display: flex;
   flex-direction: row;
-  text-align: center;
-  justify-content: space-between;
-  align-self: center;
+  justify-content: space-around;
   align-content: center;
+  align-self: center;
+}
+
+.inside {
+  align-self: center;
 }
 
 .stats{

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import SearchBarBuild from '../SearchBar-Build/SearchBar-Build';
 import UserContext from '../../contexts/UserContext';
 import TokenService from '../../services/token-service';
+import jwtDecode from 'jwt-decode';
 
 export default class Navigation extends Component {
 
@@ -36,11 +37,30 @@ export default class Navigation extends Component {
     );
   };
 
+  renderUserWelcome() {
+    let user = '';
+
+    if (TokenService.getAuthToken()){
+      user = jwtDecode(TokenService.getAuthToken()).sub
+      return (
+        <h2>{`Welcome, ${user}!`}</h2>
+      )
+    } else {
+      return (
+        <h2>{`Click the Login Button to Log In!`}</h2>
+      )
+    }
+  }
+
   render() {
+
     return (
       <div>
         <nav role="navigation">
-          <h1>{`${this.props.title}`}</h1>
+          <div className="user-welcome">
+            {this.renderUserWelcome()}
+          </div>
+          <h1>{<img src="https://cdn.bulbagarden.net/upload/0/09/Dream_Park_Ball_Sprite.png" alt="parkball"/>}{`${this.props.title}`}</h1>
           <div className="navbar">
             <div className="button_things">
               <Link to='/'><i className="fas fa-home"></i> Home</Link>

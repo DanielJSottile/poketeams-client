@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import UserContext from '../../contexts/UserContext';
 import showdownGenerate from '../../functions/generate';
@@ -129,13 +129,13 @@ export default class Team extends Component {
                   {<p className="error">{this.validateTeamName()}</p>}
                   <input className="title" placeholder="e.g. Cool Team" value={this.state.team_name.value} onChange={e => this.setTeamName(e.target.value)} type="text" name="team-name" id={`team-name-${team.id}`}/>
                 </div>
-                <p>By {team.user_name}</p> {/* right now this does not actually exist, so remember to add it for your API call*/}
+                <p>By {team.user_name}</p>
                 <p>Created on: {new Date(team.date_created).toLocaleString('en-GB', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
-                <div className="title-form">
+                {/*<div className="title-form">
                   <label htmlFor={`favorite-id-${team.id}`}>Favorite</label>
-                  <input type="checkbox" id={`favorite-id-${team.id}`} name={`favorite-id-${team.id}`} value={this.state.favorite_team.value} onChange={e => this.setFavTeam(e.target.value)}/>
-                  <p>Likes: {team.likes}</p> {/* right now this does not actually exist, so we have to add it*/}
-                </div>
+                  <input type="checkbox" id={`favorite-id-${team.id}`} name={`favorite-id-${team.id}`}/> 
+                  <p>Likes: {team.likes}</p> 
+                </div>*/} {/* Part of a future feature */}
               </div>
               <div className="title-content">
                 <label htmlFor="title-content">Description:</label>
@@ -184,14 +184,11 @@ export default class Team extends Component {
       <section>
         <div className="team-closed" onClick={() => this.handleTeamToggle()}>
           <div>
+            <h3>{team.team_name}</h3>
+          </div>
+          <div>
             <p>By {team.user_name}</p>
             <p>Created on: {new Date(team.date_created).toLocaleString('en-GB', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
-          </div>
-          <div>
-            <h4>{team.team_name}</h4>
-          </div>
-          <div>
-            <p>Favorites: {team.likes}</p>
           </div>
         </div>
       </section>
@@ -200,12 +197,10 @@ export default class Team extends Component {
 
   render() {
 
-    const {team} = this.props;
-
     return (
-      <div className={`${team.team_name}-${team.id}`}>
+      <Fragment>
         {this.state.teamExpandToggle ? this.renderUnexpandedTeam() : this.renderExpandedTeam()}
-      </div>
+      </Fragment>
     );
   };
 };

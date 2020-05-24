@@ -26,18 +26,18 @@ export default class TeamsButtonList extends Component {
             <div className='pagebutton'>
               <button onClick={() => {
                 handlePageDown();
-              }}>{`Go to Previous 10 Teams`}
+              }}>{`Go to Previous 10 Teams`} <i className="fas fa-arrow-circle-left"></i>
               </button>
               <button onClick={() => {
                 handlePageUp();
-              }}>{`Go to Next 10 Teams`}
+              }}><i className="fas fa-arrow-circle-right"></i> {`Go to Next 10 Teams`} 
               </button>
             </div> 
             : 
             <div className='pagebutton'>
             <button onClick={() => {
               handlePageUp();
-            }}>{`Go to Next 10 Teams`}
+            }}><i className="fas fa-arrow-circle-right"></i> {`Go to Next 10 Teams`} 
             </button>
           </div>}
           <span>{`Current Teams: ${page.value * 10 - 9} - ${page.value * 10}`}</span>
@@ -45,7 +45,7 @@ export default class TeamsButtonList extends Component {
             
           </div>
           <div>
-            {(TeamList.length > 0) ? TeamList : <h3>None! Please Login and Be the First to Add a Team!</h3>}
+            {(TeamList.length > 0) ? TeamList : <h3>None! Please Log In and Add More Teams!</h3>}
           </div>
           <div>
             <span>{`Current Team: ${currentClickedTeam.value}`}</span>

@@ -11,7 +11,7 @@ export default class BuildPage extends Component {
     return (
       <Fragment>
         <NavigationBuild
-        title={"PokéTeam - Build!"}/>
+        title={"PokéTeams - Build!"}/>
         <main>
           <header role="banner">
             <FolderList/>

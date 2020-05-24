@@ -37,22 +37,22 @@ export default class Team extends Component {
           <div className="team-header">
             <form className="team-form">
               <div className="team-title">
-                <button onClick={() => this.handleTeamToggle()}>Fold Down Team</button>
+                <button onClick={() => this.handleTeamToggle()}>Compress Team <i className="fas fa-compress-arrows-alt"></i></button>
                 <div className="title-name">
                   <label htmlFor="title-name">Team Name:</label>
                   <input disabled readOnly className="title" placeholder="e.g. Cool Team" value={team.team_name} type="text" name="team-name" id={`team-name-${team.id}`}/>
                 </div>
-                <p>By {team.user_name}</p> {/* right now this does not actually exist, so remember to add it for your API call*/}
+                <p>By {team.user_name}</p>
                 <p>Created on: {new Date(team.date_created).toLocaleString('en-GB', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
-                <div className="title-form">
+                {/*<div className="title-form">
                   <label htmlFor={`favorite-id-${team.id}`}>Favorite</label>
-                  <input type="checkbox" id={`favorite-id-${team.id}`} name={`favorite-id-${team.id}`}/> {/* not sure what to do with this right now...*/}
-                  <p>Likes: {team.likes}</p> {/* right now this does not actually exist, so we have to add it*/}
-                </div>
+                  <input type="checkbox" id={`favorite-id-${team.id}`} name={`favorite-id-${team.id}`}/> 
+                  <p>Likes: {team.likes}</p> 
+                </div>*/} {/* Part of a future feature */}
               </div>
               <div className="title-content">
                 <label htmlFor="title-content">Description:</label>
-                <textarea disabled readOnly className="title-content desc" placeholder="e.g. description" type="text" name="title-content" id={`title-content-${team.id}`} value={team.description}/>
+                <textarea disabled readOnly className="title-content desc" placeholder="e.g. description" type="text" name="title-content" id={`title-content-${team.id}`} value={team.description || ''}/>
               </div>
             </form>
           <div className="export-team">
@@ -81,14 +81,11 @@ export default class Team extends Component {
       <section>
         <div className="team-closed" onClick={() => this.handleTeamToggle()}>
           <div>
+            <h3>{team.team_name}</h3>
+          </div>
+          <div>
             <p>By {team.user_name}</p>
             <p>Created on: {new Date(team.date_created).toLocaleString('en-GB', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
-          </div>
-          <div>
-            <h4>{team.team_name}</h4>
-          </div>
-          <div>
-            <p>Favorites: {team.likes}</p>
           </div>
         </div>
       </section>

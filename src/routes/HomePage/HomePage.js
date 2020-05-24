@@ -10,7 +10,7 @@ export default class HomePage extends Component {
     return (
       <Fragment>
         <NavigationPublic
-        title={"PokéTeam - Home"}/>
+        title={"PokéTeams - Home"}/>
         <main>
           <header role="banner">
             <h2>Results:</h2>

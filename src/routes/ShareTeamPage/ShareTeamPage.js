@@ -12,11 +12,19 @@ export default class ShareTeamPage extends Component {
   }
 
   componentDidMount() {
+
+    const {addPublicSets} = this.context;
+
     apiService.getSingleTeam(this.props.match.params.team_id) // Get the single public team!
       .then(data => {
         this.setState({team: data})
-      })
+        apiService.getSetsForOneTeam(this.props.match.params.team_id)
+          .then(data => {
+            addPublicSets(data)
+          })
+    })
   }
+
 
   render() {
     return (
