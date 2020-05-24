@@ -205,6 +205,10 @@ export default class App extends Component {
     this.setState({userFolders: [], userTeams: [], userSets: []})
   }
 
+  clearPublicSets = () => {
+    this.setState({publicSets: []})
+  }
+
   getUserState = () => {
     if (TokenService.getAuthToken()){ // if user is logged in
       const user_id = jwtDecode(TokenService.getAuthToken()).user_id
@@ -228,20 +232,9 @@ export default class App extends Component {
   }
 
   addPublicSets = (sets) => {
+    // was going to use this but im so goddamn frustrated about these bugs that I just dont have time.
+  }
 
-    sets.forEach(set => {
-      console.log(set);
-      let flag = false;
-      for (let i = 0; i < this.state.publicSets.length ; i++) {
-        if (Number(this.state.publicSets[i].id) === Number(set.id)){
-          flag = true
-        }
-      } 
-      if (!flag) {
-        this.setState({publicSets: [...this.state.publicSets, set]})
-      }
-  })
-}
   // Validate State Functions
 
   // User Folders
@@ -804,7 +797,8 @@ export default class App extends Component {
         handlePageUp: this.handlePageUp,
         handlePageDown: this.handlePageDown,
         // share functions
-        addPublicSets: this.addPublicSets
+        addPublicSets: this.addPublicSets,
+        clearPublicSets: this.clearPublicSets
         
       }}>
         <Fragment>

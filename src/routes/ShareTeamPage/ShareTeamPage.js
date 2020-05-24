@@ -15,6 +15,7 @@ export default class ShareTeamPage extends Component {
 
     const {addPublicSets} = this.context;
 
+
     apiService.getSingleTeam(this.props.match.params.team_id) // Get the single public team!
       .then(data => {
         this.setState({team: data})
@@ -27,6 +28,9 @@ export default class ShareTeamPage extends Component {
 
 
   render() {
+
+    
+
     return (
       
       <div>
