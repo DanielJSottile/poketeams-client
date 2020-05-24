@@ -94,7 +94,7 @@ export default class Team extends Component {
 
     return (
       <div>
-        <p>Are You Sure You'd Like to Delete this Folder?</p> 
+        <p>Are You Sure You'd Like to Delete this Team?</p> 
         <button onClick={() => {
           handleDeleteTeam(this.props.team.id);
           this.handleDeleteExpand();

@@ -75,7 +75,12 @@ export default class Set extends Component {
       move_two: {value: parse.move_two || '', touched: false},
       move_three: {value: parse.move_three || '', touched: false},
       move_four: {value: parse.move_four || '', touched: false},
+      deleteClicked: false
     })
+  }
+
+  handleDeleteExpand() {
+    this.setState({deleteClicked: !this.state.deleteClicked});
   }
 
   handleSetToggle = () => {
@@ -327,7 +332,6 @@ export default class Set extends Component {
       setNewSetContents,
       validateNewSetImport,
       handleUpdateSetImport,
-      handleDeleteSet,
       handleUpdateSet,
     } = this.context;
 
@@ -495,8 +499,9 @@ export default class Set extends Component {
         </div>
         <div>
           <button onClick={() => {
-            handleDeleteSet(set.team_id, set.id);
+            this.handleDeleteExpand()
             }}><i className="fas fa-trash-alt"></i> Delete Set!</button>
+            {this.state.deleteClicked ? this.renderDeleteExpand() : null}
         </div>
       </div>
     );
@@ -529,6 +534,23 @@ export default class Set extends Component {
     </Fragment>
     );
   }
+
+  renderDeleteExpand() {
+    const {
+      handleDeleteSet,
+    } = this.context;
+
+    return (
+      <div>
+        <p>Are You Sure You'd Like to Delete this Set?</p> 
+        <button onClick={() => {
+          handleDeleteSet(this.props.set.team_id, this.props.set.id);
+          this.handleDeleteExpand();
+        }}>Yes <i className="fas fa-thumbs-up"></i></button>
+        <button onClick={() => this.handleDeleteExpand()}>No <i className="fas fa-thumbs-down"></i></button>
+      </div> 
+    )
+  };
 
   render() {
     return (
