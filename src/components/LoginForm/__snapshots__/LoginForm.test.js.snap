@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<LoginForm/> renders without crashing 1`] = `
+<form
+  className="signup-form"
+  onSubmit={[Function]}
+>
+  <div
+    role="alert"
+  />
+  <div>
+    <label
+      htmlFor="user_name"
+    >
+      Username
+    </label>
+    <input
+      autoComplete="username"
+      id="user_name"
+      name="user_name"
+      placeholder="Username"
+      type="text"
+    />
+  </div>
+  <div>
+    <label
+      htmlFor="password"
+    >
+      Password
+    </label>
+    <input
+      autoComplete="current-password"
+      id="password"
+      name="password"
+      type="password"
+    />
+  </div>
+  <button
+    type="submit"
+  >
+    Log In 
+    <i
+      className="fas fa-sign-in-alt"
+    />
+  </button>
+</form>
+`;

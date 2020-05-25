@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<TeamButton/> renders without crashing 1`] = `
+<button
+  className="btn"
+  onClick={[Function]}
+>
+  <i
+    className="fas fa-layer-group"
+  />
+   
+</button>
+`;

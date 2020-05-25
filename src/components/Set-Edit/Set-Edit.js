@@ -112,11 +112,11 @@ export default class Set extends Component {
   };
 
   setLevel = level => {
-    this.setState({level: {value: level, touched: true}});
+    this.setState({level: {value: Number(level), touched: true}});
   };
 
   setHappiness = happiness => {
-    this.setState({happiness: {value: happiness, touched: true}});
+    this.setState({happiness: {value: Number(happiness), touched: true}});
   };
 
   setNature = nature => {
@@ -124,51 +124,51 @@ export default class Set extends Component {
   };
 
   setHpEv = hpev => {
-    this.setState({hp_ev: {value: hpev, touched: true}});
+    this.setState({hp_ev: {value: Number(hpev), touched: true}});
   };
 
   setAtkEv = atkev => {
-    this.setState({atk_ev: {value: atkev, touched: true}});
+    this.setState({atk_ev: {value: Number(atkev), touched: true}});
   };
 
   setDefEv = defev => {
-    this.setState({def_ev: {value: defev, touched: true}}); 
+    this.setState({def_ev: {value: Number(defev), touched: true}}); 
   };
 
   setSpAEv = spaev => {
-    this.setState({spa_ev: {value: spaev, touched: true}});
+    this.setState({spa_ev: {value: Number(spaev), touched: true}});
   };
 
   setSpDEv = spdev => {
-    this.setState({spd_ev: {value: spdev, touched: true}});  
+    this.setState({spd_ev: {value: Number(spdev), touched: true}});  
   };
 
   setSpeEv = speev => {
-    this.setState({spe_ev: {value: speev, touched: true}});
+    this.setState({spe_ev: {value: Number(speev), touched: true}});
   };
 
   setHpIv = hpiv => {
-    this.setState({hp_iv: {value: hpiv, touched: true}});
+    this.setState({hp_iv: {value: Number(hpiv), touched: true}});
   };
 
   setAtkIv = atkiv => {
-    this.setState({atk_iv: {value: atkiv, touched: true}});
+    this.setState({atk_iv: {value: Number(atkiv), touched: true}});
   };
 
   setDefIv = defiv => {
-    this.setState({def_iv: {value: defiv, touched: true}}); 
+    this.setState({def_iv: {value: Number(defiv), touched: true}}); 
   };
 
   setSpAIv = spaiv => {
-    this.setState({spa_iv: {value: spaiv, touched: true}}); 
+    this.setState({spa_iv: {value: Number(spaiv), touched: true}}); 
   };
 
   setSpDIv = spdiv => {
-    this.setState({spd_iv: {value: spdiv, touched: true}}); 
+    this.setState({spd_iv: {value: Number(spdiv), touched: true}}); 
   };
 
   setSpeIv = speiv => {
-    this.setState({spe_iv: {value: speiv, touched: true}});
+    this.setState({spe_iv: {value: Number(speiv), touched: true}});
   };
 
   setMoveOne = moveone => {
@@ -405,32 +405,32 @@ export default class Set extends Component {
               <div className="evs">
               {<p className="error">{this.validateEvs()}</p>}
                 <label htmlFor="pokemon-ev-hp">HP EV:</label>
-                <input className="pokemon-ev" placeholder="0" value={this.state.hp_ev.value} onChange={e => this.setHpEv(e.target.value)} type="number" name="pokemon-ev-hp" min="0" max="252" id={`pokemon-ev-hp-${set.id}`} />
+                <input className="pokemon-ev" placeholder="0" value={Number(this.state.hp_ev.value)} onChange={e => this.setHpEv(e.target.value)} type="number" name="pokemon-ev-hp" min="0" max="252" id={`pokemon-ev-hp-${set.id}`} />
                 <label htmlFor="pokemon-ev-atk">Atk EV:</label>
-                <input className="pokemon-ev" placeholder="0" value={this.state.atk_ev.value} onChange={e => this.setAtkEv(e.target.value)} type="number" name="pokemon-ev-atk" min="0" max="252" id={`pokemon-ev-atk-${set.id}`} />
+                <input className="pokemon-ev" placeholder="0" value={Number(this.state.atk_ev.value)} onChange={e => this.setAtkEv(e.target.value)} type="number" name="pokemon-ev-atk" min="0" max="252" id={`pokemon-ev-atk-${set.id}`} />
                 <label htmlFor="pokemon-ev-def">Def EV:</label>
-                <input className="pokemon-ev" placeholder="0" value={this.state.def_ev.value} onChange={e => this.setDefEv(e.target.value)} type="number" name="pokemon-ev-def" min="0" max="252" id={`pokemon-ev-def-${set.id}`} />
+                <input className="pokemon-ev" placeholder="0" value={Number(this.state.def_ev.value)} onChange={e => this.setDefEv(e.target.value)} type="number" name="pokemon-ev-def" min="0" max="252" id={`pokemon-ev-def-${set.id}`} />
                 <label htmlFor="pokemon-ev-spa">SpA EV:</label>
-                <input className="pokemon-ev" placeholder="0" value={this.state.spa_ev.value} onChange={e => this.setSpAEv(e.target.value)} type="number" name="pokemon-ev-spa" min="0" max="252" id={`pokemon-ev-spa-${set.id}`} />
+                <input className="pokemon-ev" placeholder="0" value={Number(this.state.spa_ev.value)} onChange={e => this.setSpAEv(e.target.value)} type="number" name="pokemon-ev-spa" min="0" max="252" id={`pokemon-ev-spa-${set.id}`} />
                 <label htmlFor="pokemon-ev-spd">SpD EV:</label>
-                <input className="pokemon-ev" placeholder="0" value={this.state.spd_ev.value} onChange={e => this.setSpDEv(e.target.value)} type="number" name="pokemon-ev-spd" min="0" max="252" id={`pokemon-ev-spd-${set.id}`} />
+                <input className="pokemon-ev" placeholder="0" value={Number(this.state.spd_ev.value)} onChange={e => this.setSpDEv(e.target.value)} type="number" name="pokemon-ev-spd" min="0" max="252" id={`pokemon-ev-spd-${set.id}`} />
                 <label htmlFor="pokemon-ev-spe">SpE EV:</label>
-                <input className="pokemon-ev" placeholder="0" value={this.state.spe_ev.value} onChange={e => this.setSpeEv(e.target.value)} type="number" name="pokemon-ev-spe" min="0" max="252" id={`pokemon-ev-spe-${set.id}`} />
+                <input className="pokemon-ev" placeholder="0" value={Number(this.state.spe_ev.value)} onChange={e => this.setSpeEv(e.target.value)} type="number" name="pokemon-ev-spe" min="0" max="252" id={`pokemon-ev-spe-${set.id}`} />
               </div>
               <div className="ivs">
               {<p className="error">{this.validateIvs()}</p>}
                 <label htmlFor="pokemon-iv-hp">HP IV:</label>
-                <input className="pokemon-iv" placeholder="31" value={this.state.hp_iv.value} onChange={e => this.setHpIv(e.target.value)} type="number" name="pokemon-iv-hp" min="0" max="31" id={`pokemon-iv-hp-${set.id}`} />
+                <input className="pokemon-iv" placeholder="31" value={Number(this.state.hp_iv.value)} onChange={e => this.setHpIv(e.target.value)} type="number" name="pokemon-iv-hp" min="0" max="31" id={`pokemon-iv-hp-${set.id}`} />
                 <label htmlFor="pokemon-iv-atk">Atk IV:</label>
-                <input className="pokemon-iv" placeholder="31" value={this.state.atk_iv.value} onChange={e => this.setAtkIv(e.target.value)} type="number" name="pokemon-iv-atk" min="0" max="31" id={`pokemon-iv-atk-${set.id}`} />
+                <input className="pokemon-iv" placeholder="31" value={Number(this.state.atk_iv.value)} onChange={e => this.setAtkIv(e.target.value)} type="number" name="pokemon-iv-atk" min="0" max="31" id={`pokemon-iv-atk-${set.id}`} />
                 <label htmlFor="pokemon-iv-def">Def IV:</label>
-                <input className="pokemon-iv" placeholder="31" value={this.state.def_iv.value} onChange={e => this.setDefIv(e.target.value)} type="number" name="pokemon-iv-def" min="0" max="31" id={`pokemon-iv-def-${set.id}`} />
+                <input className="pokemon-iv" placeholder="31" value={Number(this.state.def_iv.value)} onChange={e => this.setDefIv(e.target.value)} type="number" name="pokemon-iv-def" min="0" max="31" id={`pokemon-iv-def-${set.id}`} />
                 <label htmlFor="pokemon-iv-spa">SpA IV:</label>
-                <input className="pokemon-iv" placeholder="31" value={this.state.spa_iv.value} onChange={e => this.setSpAIv(e.target.value)} type="number" name="pokemon-iv-spa" min="0" max="31" id={`pokemon-iv-spa-${set.id}`} />
+                <input className="pokemon-iv" placeholder="31" value={Number(this.state.spa_iv.value)} onChange={e => this.setSpAIv(e.target.value)} type="number" name="pokemon-iv-spa" min="0" max="31" id={`pokemon-iv-spa-${set.id}`} />
                 <label htmlFor="pokemon-iv-spd">SpD IV:</label>
-                <input className="pokemon-iv" placeholder="31" value={this.state.spd_iv.value} onChange={e => this.setSpDIv(e.target.value)} type="number" name="pokemon-iv-spd" min="0" max="31" id={`pokemon-iv-spd-${set.id}`} />
+                <input className="pokemon-iv" placeholder="31" value={Number(this.state.spd_iv.value)} onChange={e => this.setSpDIv(e.target.value)} type="number" name="pokemon-iv-spd" min="0" max="31" id={`pokemon-iv-spd-${set.id}`} />
                 <label htmlFor="pokemon-iv-spe">SpE IV:</label>
-                <input className="pokemon-iv" placeholder="31" value={this.state.spe_iv.value} onChange={e => this.setSpeIv(e.target.value)} type="number" name="pokemon-iv-spe" min="0" max="31" id={`pokemon-iv-spe-${set.id}`} />
+                <input className="pokemon-iv" placeholder="31" value={Number(this.state.spe_iv.value)} onChange={e => this.setSpeIv(e.target.value)} type="number" name="pokemon-iv-spe" min="0" max="31" id={`pokemon-iv-spe-${set.id}`} />
               </div>
             </div>
             <div className="moves">
@@ -481,7 +481,7 @@ export default class Set extends Component {
                     this.state.move_three.value,
                     this.state.move_four.value,
                   );
-                }}>Save Team Details <i className="fas fa-save"></i></button>
+                }}>Save Set Details <i className="fas fa-save"></i></button>
           </div>
         </form>
         
@@ -553,6 +553,7 @@ export default class Set extends Component {
   };
 
   render() {
+
     return (
       <Fragment>
         {this.state.setExpandToggle ? this.renderUnexpandedSet() : this.renderExpandedSet()}

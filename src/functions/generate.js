@@ -4,6 +4,7 @@ and turn it back into a string of text that matches the original format */
 // helper functions
 
 function evGenerator(ob){
+  // this is getting back things wrong because of our xss and it's extremely frustrating.... but so far it only seems to affect ivs.
   let evArr = [];
 
   if((ob.hp_ev === 0 && ob.atk_ev === 0 && ob.def_ev === 0 && ob.spa_ev === 0 && ob.spd_ev === 0 && ob.spe_ev === 0)){

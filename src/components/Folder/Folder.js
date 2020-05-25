@@ -5,7 +5,7 @@ export default class Folder extends Component {
 
   static contextType = UserContext;
 
-  render() {
+  render() { 
 
     const {handleCurrentFolderClicked} = this.context;
 

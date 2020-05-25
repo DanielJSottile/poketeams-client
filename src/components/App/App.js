@@ -1,11 +1,12 @@
 import React, { Component, Fragment } from 'react';
-import {Route, Switch} from 'react-router-dom';
+import {Route, Switch, BrowserRouter} from 'react-router-dom';
 import BuildPage from '../../routes/BuildPage/BuildPage';
 import HomePage from '../../routes/HomePage/HomePage';
 import LandingPage from '../../routes/LandingPage/LandingPage';
 import NotFoundPage from '../../routes/NotFoundPage/NotFoundPage';
 import ShareSetPage from '../../routes/ShareSetPage/ShareSetPage';
 import ShareTeamPage from '../../routes/ShareTeamPage/ShareTeamPage';
+import ErrorPage from '../ErrorPage/ErrorPage';
 import PrivateRoute from '../Utils/PrivateRoute';
 import PublicOnlyRoute from '../Utils/PublicOnlyRoute';
 import TokenService from '../../services/token-service';
@@ -803,6 +804,8 @@ export default class App extends Component {
       }}>
         <Fragment>
           <main>
+          <BrowserRouter>
+          <ErrorPage>
             <Switch>
               <Route
                 exact path = {'/'}
@@ -823,6 +826,8 @@ export default class App extends Component {
                 component={NotFoundPage}
               />
             </Switch>
+            </ErrorPage>
+          </BrowserRouter>
           </main>
         </Fragment>
       </UserContext.Provider>
