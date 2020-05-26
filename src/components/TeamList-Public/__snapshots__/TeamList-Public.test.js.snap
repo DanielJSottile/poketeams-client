@@ -1,9 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`<TeamListPublic/> renders without crashing 1`] = `
-<TeamList>
-  <h3>
-    There Are No Teams!  Make Teams with Pokemon!
-  </h3>
-</TeamList>
-`;
