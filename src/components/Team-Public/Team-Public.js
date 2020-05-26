@@ -59,8 +59,8 @@ export default class Team extends Component {
             <div>
             <Link to={{
               pathname: `/share/${team.id}`,
-              state: {singleteam: team, sets: teamSets}}} target="_blank" >Share This Team!</Link>
-              <input disabled type="text" readOnly value={`[hostname]/share/${team.id}`}/>
+              state: {singleteam: team, sets: teamSets}}} target="_blank" >Share This Team! <i className="fas fa-share-square"></i></Link>
+              <input disabled type="text" readOnly value={`poketeams.now.sh/share/${team.id}`}/>
             </div>
               <label htmlFor="edit-team">Export Team:</label>
               <textarea disabled readOnly type="text" name="export-team" id={`export-team-${team.id}`} value={showdownGenerate(teamSets)}/>

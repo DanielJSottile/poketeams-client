@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato&family=Montserrat+Alternates:wght@900&display=swap');
-@import url('//db.onlinewebfonts.com/c/f4d1593471d222ddebd973210265762a?family=Pokemon');
 @import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sedgwick+Ave+Display&display=swap');
 
 * {
   box-sizing: border-box;
@@ -37,10 +37,10 @@ header {
 }
 
 h1 {
-  font-family: 'Pokemon';
+  font-family: 'Sedgwick Ave Display', cursive;
   color: rgb(255, 230, 0);
   letter-spacing: 5px;
-  font-size: 45px;
+  font-size: 55px;
   text-shadow: 1px 5px black;
   margin-top: 1px;
   margin-bottom: 15px;
@@ -80,6 +80,8 @@ p + p {
 }
 
 input, select {
+  border: 1px solid rgb(255, 230, 0);
+  border-radius: 10px;
   font-family: 'Lato', sans-serif;
   background-color: white;
   margin-left: 10px;
@@ -248,6 +250,7 @@ a:hover, button:hover {
 }
 
 textarea {
+  font-family: monospace;
   text-align: left;
   border: 1px solid rgb(255, 230, 0);
   resize: none;
@@ -374,7 +377,9 @@ img {
 }
 
 .pokemon-ev, .pokemon-iv{
-  width: 40px;
+  border: 1px solid rgb(255, 230, 0);
+  border-radius: 10px;
+  width: 60px;
 }
 
 .moves{

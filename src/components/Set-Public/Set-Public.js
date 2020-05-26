@@ -103,7 +103,8 @@ export default class Set extends Component {
           <div>
           <Link to={{
             pathname: `/share/${set.team_id}/${set.id}`,
-            state: {singleSet: set}}} target="_blank" >Share This Set!</Link>
+            state: {singleSet: set}}} target="_blank" >Share This Set! <i className="fas fa-share-square"></i></Link>
+            <input type="text" readOnly value={`poketeams.now.sh/${set.team_id}/${set.id}`}/>
           </div>
           <div className="export-pokemon">
             <label htmlFor="export-pokemon">Export Pokemon:</label>
