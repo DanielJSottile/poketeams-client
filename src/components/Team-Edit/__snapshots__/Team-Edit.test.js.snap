@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<TeamEdit/> renders without crashing 1`] = `
+<Team
+  team={
+    Object {
+      "date_created": "Thu May 21 2020 14:11:23 GMT-0400 (Eastern Daylight Time)",
+      "date_modified": "",
+      "description": "Test",
+      "folder_id": 1,
+      "folder_name": "test",
+      "id": 1,
+      "team_name": "Test",
+      "user_id": 1,
+      "user_name": "test",
+    }
+  }
+>
+  <section>
+    <div
+      className="team-closed"
+      onClick={[Function]}
+    >
+      <div>
+        <h3>
+          Test
+        </h3>
+      </div>
+      <div>
+        <p>
+          By 
+          test
+        </p>
+        <p>
+          Created on: 
+          Thursday, May 21, 2020
+        </p>
+      </div>
+    </div>
+  </section>
+</Team>
+`;

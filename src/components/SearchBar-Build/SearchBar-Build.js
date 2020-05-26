@@ -24,8 +24,7 @@ export default class SearchBar extends Component {
               <option value="rev alphabetical">Z - A</option>
               <option value="most likes">Most Likes</option>
             </select>
-            <button type="submit" 
-              disabled={validateFilter()} 
+            <button type="submit"
               onClick={(e) => {
                 e.preventDefault();
                 handleFilter();

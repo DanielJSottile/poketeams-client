@@ -1,34 +1,33 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<FoldersList/> renders without crashing 1`] = `
-<FoldersList>
+exports[`<TeamsButtonListEdit/> renders without crashing 1`] = `
+<TeamsButtonList>
   <section
     className="folders-list"
   >
     <h3>
-      Folders:
+      Teams:
     </h3>
     <div>
       <h3>
-        None! Click Below to Make a New Folder!
+        None! Click the Button Below to Get Started!
       </h3>
     </div>
     <div>
       <button
         onClick={[Function]}
       >
-        New Folder 
+        New Team 
         <i
-          className="fas fa-folder-plus"
+          className="far fa-plus-square"
         />
       </button>
     </div>
     <div>
       <span>
-        Current Folder: undefined
+        Current Team: undefined
       </span>
     </div>
-    <div />
   </section>
-</FoldersList>
+</TeamsButtonList>
 `;
