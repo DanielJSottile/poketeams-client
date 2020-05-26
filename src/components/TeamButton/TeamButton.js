@@ -10,12 +10,14 @@ export default class TeamButton extends Component {
 
     const {handleCurrentTeamClicked} = this.context;
     
-    return (
-      <a
+    // For now, the Link doesnt go to the anchor because the hash looks disgusting.
+    return ( 
+      <a 
         href={`#${this.props.team_name}`}
         className="btn"
         id={this.props.id} 
-        onClick={() => {
+        onClick={(e) => {
+          e.preventDefault() 
           handleCurrentTeamClicked(this.props.team_name, this.props.id);
         }}>
         <i className="fas fa-layer-group"></i> {this.props.team_name}
