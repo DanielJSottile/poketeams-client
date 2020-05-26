@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<TeamsButtonListPublic/> renders without crashing 1`] = `
+<TeamsButtonList>
+  <section
+    className="folders-list"
+  >
+    <div>
+      <div
+        className="pagebutton"
+      >
+        <button
+          onClick={[Function]}
+        >
+          <i
+            className="fas fa-arrow-circle-right"
+          />
+           
+          Go to Next 10 Teams
+        </button>
+      </div>
+      <span>
+        Current Teams: NaN - NaN
+      </span>
+      <h3>
+        Teams:
+      </h3>
+    </div>
+    <div>
+      <h3>
+        None! Please Log In and Add More Teams!
+      </h3>
+    </div>
+    <div>
+      <span>
+        Current Team: undefined
+      </span>
+    </div>
+  </section>
+</TeamsButtonList>
+`;
