@@ -16,7 +16,9 @@ exports[`<TeamPublic/> renders without crashing 1`] = `
     }
   }
 >
-  <section>
+  <section
+    id="undefined"
+  >
     <div
       className="team-closed"
       onClick={[Function]}

@@ -23,7 +23,7 @@ export default class Team extends Component {
       publicSets,
     } = this.context;
 
-    const {team} = this.props;
+    const {team, id} = this.props;
 
     const teamSets = publicSets.filter(set => set.team_id === team.id)
 
@@ -32,7 +32,7 @@ export default class Team extends Component {
     });
 
     return (
-      <section>
+      <section id={`${id}`}>
         <div className="team">
           <div className="team-header">
             <form className="team-form">
@@ -75,10 +75,10 @@ export default class Team extends Component {
 
   renderUnexpandedTeam() {
 
-    const {team} = this.props;
+    const {team, id} = this.props;
 
     return (
-      <section>
+      <section id={`${id}`}>
         <div className="team-closed" onClick={() => this.handleTeamToggle()}>
           <div>
             <h3>{team.team_name}</h3>

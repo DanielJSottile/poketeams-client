@@ -2,14 +2,15 @@
 
 exports[`<TeamButton/> renders without crashing 1`] = `
 <TeamButton>
-  <button
+  <a
     className="btn"
+    href="#undefined"
     onClick={[Function]}
   >
     <i
       className="fas fa-layer-group"
     />
      
-  </button>
+  </a>
 </TeamButton>
 `;

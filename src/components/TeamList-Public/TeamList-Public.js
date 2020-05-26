@@ -12,7 +12,7 @@ export default class TeamList extends Component {
     const {publicTeams} = this.context;
 
     const TeamList = publicTeams.map((team, i) => {
-      return <TeamPublic key={i} team={team}/>
+      return <TeamPublic key={i} id={`${team.team_name}`} team={team}/>
     });
 
     return (

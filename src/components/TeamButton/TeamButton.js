@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Link} from 'react-router-dom';
 import UserContext from '../../contexts/UserContext';
 
 export default class TeamButton extends Component {
@@ -10,14 +11,15 @@ export default class TeamButton extends Component {
     const {handleCurrentTeamClicked} = this.context;
     
     return (
-      <button
+      <a
+        href={`#${this.props.team_name}`}
         className="btn"
         id={this.props.id} 
         onClick={() => {
           handleCurrentTeamClicked(this.props.team_name, this.props.id);
         }}>
         <i className="fas fa-layer-group"></i> {this.props.team_name}
-      </button>
+      </a>
     );
   };
 };
