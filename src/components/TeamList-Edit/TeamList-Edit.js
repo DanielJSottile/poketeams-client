@@ -14,7 +14,7 @@ export default class TeamList extends Component {
     const TeamList = userTeams
     .filter(team => team.folder_id === currentClickedFolder.id)
     .map((team, i) => {
-      return <TeamEdit className="btn" key={i} team={team}/>
+      return <TeamEdit className="btn" id={`${team.team_name}`} key={i} team={team}/>
     });
 
     return (

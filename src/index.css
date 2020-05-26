@@ -109,6 +109,7 @@ input, select {
 }
 
 a, .submit {
+  white-space: nowrap;
   text-shadow: none;
   font-weight: bolder;
   background-color: white;
