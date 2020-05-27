@@ -233,7 +233,9 @@ export default class App extends Component {
   }
 
   addPublicSets = (sets) => {
-    // was going to use this but im so goddamn frustrated about these bugs that I just dont have time.
+   
+    const s = [...new Set(sets, this.state.publicSets)]
+    this.setState({publicSets: s})
   }
 
   // Validate State Functions

@@ -124,25 +124,7 @@ const apiService = {
         return data})
   },
 
-  getSingleSet(team_id, set_id) {
-    let error;
-    return fetch(`${config.API_ENDPOINT}/all/${team_id}/${set_id}`, {
-      method: 'GET',
-      headers: {}
-      })
-      .then(res => {
-        if (!res.ok) {
-          error = { code: res.status};
-        }
-        return res.json();
-      })
-      .then(data => {
-        if (error) {
-          error.message = data.message;
-          return Promise.reject(error);
-        }
-        return data})
-  },
+  // Get Single Set not used, so I got rid of it
 
   // USER SIDE
 

@@ -88,7 +88,7 @@ describe('<TeamsButtonListPublic/>', () => {
         
       }}>
         <TeamsButtonList/>
-      </UserContext.Provider>);;
+      </UserContext.Provider>);
     expect(toJson(wrapper)).toMatchSnapshot();
   });
 });

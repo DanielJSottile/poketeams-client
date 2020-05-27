@@ -2,6 +2,10 @@ const POKEMON = require('./pokemon');
 
 const ALL= /^(.*)\W(.*)$/; 
 const TYPENULL = /^(.*):\W(.*)$/;
+const MIME = /^(.*).\W(.*)$/;
+const FARGALAR = /^(.*)'(.*)$/;
+const MIMEJR = /^(.*)\W(.*).$/;
+const MIMEGALAR = /^(.*). (.*)$/;
 
 const exceptions = [
   'charizard-mega-y',
@@ -21,6 +25,7 @@ const exceptions = [
   'tapu lele',
   'tapu fini',
   'tapu koko',
+  'nidoran-m'
 ]
   
 const infinite = [
@@ -119,7 +124,23 @@ function returnGenderStatus(species){
   }
 };
 
-function returnIconSprite(species, shiny){
+// These two functions in tandem return valid icon sprites based off of Pokemon Showdown's sprite index.
+// The function below makes things a bit cleaner.
+
+function cleanSpecies(species, shiny, REGEX) {
+  let match = species.match(REGEX);
+  species = '';
+  const cleanMatch = match.slice(1);
+  cleanMatch.forEach(part => {
+    species = species + `${part}`;})
+  if(!shiny){
+    return `https://play.pokemonshowdown.com/sprites/ani/${species.toLowerCase()}.gif`;
+  } else {
+    return `https://play.pokemonshowdown.com/sprites/ani-shiny/${species.toLowerCase()}.gif`;
+  }
+}
+
+function returnIconSprite(species, shiny){  
 
   if (isLegalSpecies(species) && findSpecies(species).num > 0) {
     if (infinite.includes(species.toLowerCase())){
@@ -127,26 +148,18 @@ function returnIconSprite(species, shiny){
     }
 
     if (exceptions.includes(species.toLowerCase())) {
-      let dashMatch = species.match(ALL);
-      let partOne = dashMatch[1];
-      let partTwo = dashMatch[2];
-      species = `${partOne}${partTwo}`;
-      if(!shiny){
-        return `https://play.pokemonshowdown.com/sprites/ani/${species.toLowerCase()}.gif`;
-      } else {
-        return `https://play.pokemonshowdown.com/sprites/ani-shiny/${species.toLowerCase()}.gif`;
-      }
+      return cleanSpecies(species, shiny, ALL)
     } else if (species.toLowerCase() === 'type: null') { // special case for typenull
-      let dashMatch = species.match(TYPENULL);
-      let partOne = dashMatch[1];
-      let partTwo = dashMatch[2];
-      species = `${partOne}${partTwo}`;
-      if(!shiny){
-        return `https://play.pokemonshowdown.com/sprites/ani/${species.toLowerCase()}.gif`;
-      } else {
-        return `https://play.pokemonshowdown.com/sprites/ani-shiny/${species.toLowerCase()}.gif`;
-      }
-    } 
+      return cleanSpecies(species, shiny, TYPENULL)
+    } else if (species.toLowerCase() === 'mr. mime' || species.toLowerCase() === 'mr. rime') { // special case for mr. mime and rime
+      return cleanSpecies(species, shiny, MIME)
+    } else if (species.toLowerCase() === 'farfetch\'d-galar') { // special case for farfetch'd galar
+      return cleanSpecies(species, shiny, FARGALAR)
+    } else if (species.toLowerCase() === 'mime jr.') { // special case for mime jr.
+      return cleanSpecies(species, shiny, MIMEJR)
+    } else if (species.toLowerCase() === 'mr. mime-galar') { // special case for mr. mime galar
+      return cleanSpecies(species, shiny, MIMEGALAR)
+  }
 
     if(!shiny){
       return `https://play.pokemonshowdown.com/sprites/ani/${species.toLowerCase()}.gif`;

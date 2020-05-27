@@ -11603,7 +11603,7 @@ const POKEMON = [
 	},
 {
 		num: 669,
-		species: "Flabe\u0301be\u0301",
+		species: "Flabebe",
 		baseForm: "Red",
 		types: ["Fairy"],
 		genderLock: "F",
