@@ -94,11 +94,6 @@ input, select {
   border-radius: 30px;
 }
 
-.horizontal {
-  display: flex;
-  flex-direction: row;
-}
-
 .btn, button {
   font-weight: bolder;
   background-color: white;

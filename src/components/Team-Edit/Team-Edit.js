@@ -113,7 +113,7 @@ export default class Team extends Component {
 
     const us = [...new Set(userSets.map(set => set.id))];
     
-    const newUS = us.map(id => userSets.find(set => set.id === id))
+    const newUS = us.map(id => userSets.find(set => set.id === id));
 
     const {team, id} = this.props;
 
