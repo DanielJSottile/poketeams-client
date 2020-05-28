@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import {Link} from 'react-router-dom';
 import UserContext from '../../contexts/UserContext';
 
 export default class TeamButton extends Component {
