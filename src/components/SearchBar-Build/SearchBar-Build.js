@@ -22,7 +22,6 @@ export default class SearchBar extends Component {
               <option value="oldest">Oldest</option>
               <option value="alphabetical">A - Z</option>
               <option value="rev alphabetical">Z - A</option>
-              <option value="most likes">Most Likes</option>
             </select>
             <button type="submit"
               onClick={(e) => {
