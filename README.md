@@ -4,8 +4,6 @@ Link: https://poketeams.now.sh
 
 ## API Documentation
 
-Base url: https://shrouded-fjord-53478.herokuapp.com/
-
 - '/api/all/search[params]' : This gets 10 public teams with optional search parameters.
 - '/api/all/:team_id' : This gets 1 team by its ID.
 - '/api/all/:team_id/sets' : This gets all the sets for a team by its ID.
@@ -24,6 +22,22 @@ Base url: https://shrouded-fjord-53478.herokuapp.com/
 - /api/build/sets/:user_id/filter/ : Allows the user to get their sets when applied to the search filter.
 
 ## Screenshots
+
+### Organizing with Folders, Teams, Sets
+
+![Organize page](https://imgur.com/9wYBaMQ.png "Organize")
+
+### Editing a Set
+
+![Editing Sets](https://imgur.com/HR1yjKA.png "Editing Sets")
+
+### Example of a Search and Results
+
+![Search Bar and Results]https://imgur.com/JwMxPdp.png "search bar and results")
+
+### Example of Exporting and the Share URL
+
+![Exporting](https://imgur.com/JWIgCyL.png "exporting")
 
 ## Summary
 
