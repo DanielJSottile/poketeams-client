@@ -64,19 +64,6 @@ export default class App extends Component {
         this.setState({userSets: data})
       });
     };
-  
-    // Then get the public teams
-
-    // apiService.getTenTeamsDefault() // Get Public Teams First
-    //   .then(teams => {
-    //     this.setState({publicTeams: teams})
-    //     teams.forEach(team => { // now we need to get the sets for those 10 teams and put them in state.
-    //       apiService.getSetsForOneTeam(team.id)
-    //         .then(sets => {
-    //           this.setState({publicSets: [...this.state.publicSets, ...sets]})
-    //         });
-    //     });
-    //   });
 
     const search = this.state.search.value || 'all';
     const sort = this.state.sort.value || 'newest';
@@ -93,7 +80,6 @@ export default class App extends Component {
             });
         });
       });
-    // some way to add likes to the public teams???
   };
 
   
@@ -200,7 +186,7 @@ export default class App extends Component {
     }
   }
 
-  // login to fix folders/teams bug (componentDidUpdate in the future perhaps, but not working atm)
+  // these two functions help clear when logins are made so that the user doesn't see other user data.
 
   clearUserState = () => {
     this.setState({userFolders: [], userTeams: [], userSets: []})
@@ -277,8 +263,6 @@ export default class App extends Component {
     let team_import = this.state.newTeamImport.value;
     // you do not have to provide a team_import, but if you do...
     // showdownParse(team_export) gives an array...
-
-    // ** WE SHOULD ALSO ADD A LEGALITY FUNCTION THAT CHECKS IF THERES IS AT LEAST 1 MOVE! ** (if we have time)
     if(team_import){
     showdownParse(team_import).forEach(set => {
       if (!legality.isLegalSpecies(set.species)) {
@@ -301,8 +285,6 @@ export default class App extends Component {
     if (showdownParse(set_import).length > 1) {
       flag = `You can only import 1 set here.`
     }
-    // ** WE SHOULD ALSO ADD A LEGALITY FUNCTION THAT CHECKS IF THERES IS AT LEAST 1 MOVE! ** (if we have time)
-
     showdownParse(set_import).forEach(set => {
       if (!legality.isLegalSpecies(set.species)) {
         flag = `There is an illegal species in your set.  Please fix this to be in the proper format! 
@@ -332,7 +314,7 @@ export default class App extends Component {
   }
 
   
-  // Event Handlers/API Calls -> NOT MADE YET!
+  // Event Handlers/API Calls
 
   handlePostNewFolder = () => {
     const folder_name = this.state.newFolderName.value;
@@ -413,8 +395,8 @@ export default class App extends Component {
 
     apiService.postUserTeam(body, jwtDecode(TokenService.getAuthToken()).user_id)
       .then((team) => {
-        // first we set the team
-        this.setState({userTeams: [...this.state.userTeams, team]})
+        // first we set the team, and due to a bug, we also need to add a few more fields to get it to temporarily show correctly.
+        this.setState({userTeams: [...this.state.userTeams, {...team, folder_name: this.state.currentClickedFolder.value, user_id: jwtDecode(TokenService.getAuthToken()).user_id, user_name: jwtDecode(TokenService.getAuthToken()).sub}]})
         // then we check if there were contents in the import team set
         if (contents){
           const parsed = showdownParse(contents);
