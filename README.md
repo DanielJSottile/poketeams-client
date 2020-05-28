@@ -33,7 +33,7 @@ Link: https://poketeams.now.sh
 
 ### Example of a Search and Results
 
-![Search Bar and Results]https://imgur.com/JwMxPdp.png "search bar and results")
+![Search Bar and Results](https://imgur.com/JwMxPdp.png "search bar and results")
 
 ### Example of Exporting and the Share URL
 
