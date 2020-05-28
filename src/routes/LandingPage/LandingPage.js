@@ -31,7 +31,7 @@ export class LandingPage extends Component {
             <header>
               <h3>Store your teams like never before!</h3>
             </header>
-            <p>[placeholder for upload ui]</p>
+            <img className="landingimg" src="https://imgur.com/9wYBaMQ.png" alt="organize page"/>
             <p>PokeTeams goes above and beyond the average pastebin in order for you to save
             and organize your teams from Pokemon Showdown into a secure database.  Never lose a team again!
             Say goodbye to Pastebin's forever!
@@ -41,7 +41,7 @@ export class LandingPage extends Component {
             <header>
               <h3>Organize, Edit, and Share Your Teams!</h3>
             </header>
-            <p>[placeholder for homescreen ui]</p>
+            <img className="landingimg" src="https://imgur.com/HR1yjKA.png" alt="edit set"/>
             <p>Once you've uploaded your teams, organize, edit, and share them to
             your hearts content!  
             </p>
@@ -50,11 +50,12 @@ export class LandingPage extends Component {
             <header>
                 <h3>Search By Numerous Parameters and Export!</h3>
             </header>
-            <p>[placeholder for search and export option ui]</p>
+            <img className="landingimg" src="https://imgur.com/JwMxPdp.png" alt="search"/>
             <p>PokeTeams lets you search the database by specific Pokemon species, alphabetical order,
               popularity, and newly created, Favorite ones you like, and export ones you
               want to use for your own Pokemon Showdown teams!
             </p>
+            <img className="landingimg" src="https://imgur.com/JWIgCyL.png" alt="export"/>
           </section>
        
       <Footer/>
