@@ -1,68 +1,79 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# PokéTeams
 
-## Available Scripts
+Link: https://poketeams.now.sh
 
-In the project directory, you can run:
+## API Documentation
 
-### `npm start`
+Base url: https://shrouded-fjord-53478.herokuapp.com/
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- '/api/all/search[params]' : This gets 10 public teams with optional search parameters.
+- '/api/all/:team_id' : This gets 1 team by its ID.
+- '/api/all/:team_id/sets' : This gets all the sets for a team by its ID.
+- 'api/all/set/:set_id : This gets 1 set by its ID.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+(API calls below require User Authentication)
 
-### `npm test`
+- /api/build/folder/:folder_id : Allows the user to get and delete a set by its ID.
+- /api/build/folders/:user_id : Allows to get all User Folders, as well as post/patch them.
+- /api/build/folders/:user_id/filter/ : Allows the user to get their folders when applied to the search filter.
+- /api/build/teams/:user_id : Allows the user to get all User Teams, as well as post/patch them.
+- /api/build/team/:team_id : Allows the user to get and delete a team by its ID.
+- /api/build/teams/:user_id/filter/ : Allows the user to get their teams when applied to the search filter.
+- /api/build/sets/:user_id : Allows the user to get all User Sets, as well as post/patch them.
+- /api/build/set/:team_id/:set_id : Allows the user to get and delete a set by its team ID and its own ID.
+- /api/build/sets/:user_id/filter/ : Allows the user to get their sets when applied to the search filter.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Screenshots
 
-### `npm run build`
+## Summary
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### What does this app do?
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+This app is designed as a permanent solution to an extremely niche problem: safely storing Pokemon Showdown teams in a permanent way for tens of thousands of users.  Before, players needed to export batches of text to a pastebin and save/share the URL in order to access it in the future.  Now, users can import text and have an interactive and shareable team that is easier to find, share, and edit in a permanent database.  Not only that, but new players can look for teams with Pokemon they want specically on that team!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Features
 
-### `npm run eject`
+- Allows the public to look through 10 current teams based on search parameters!
+- Allows the public to look through the next or previous 10 teams!
+- Allows the public to search the public database based on Species and Sorting options!
+- Allows users to create Folders to store Teams!
+- Allows users to create a brand new team from scratch, with an optional team import from Pokemon Showdown (This populates the sets of the team automatically)!
+- Allows users to add Pokemon to a team (This creates a default Pokemon)!
+- Allows users to edit this Pokemon either by parameters or by importing a set from Pokemon Showdown (this will populate the fields of the set automatically)!
+- Allows users to edit and delete these as desired!
+- Allows users to search through their own sets by Species and sort parameters!
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### List of Future Additions to this app!
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+In the future...
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- More refined data extraction from a database!  Things will run faster!
+- Ability to Import the contents of an entire Folder, which will automatically create teams and sets in those teams!
+- Ability to Import EVERYTHING!  Users will simply be able to backup their teams from Pokemon Showdown and then paste it into one box.  This will populate all their teams, and the user can do this at any given time.
+- Ability to like teams and add them to a Favorites Folder for the user!  The most liked teams can be searchable via the search parameters!
+- A refined Team and Set view more akin to Pokemon Showdown, more compactified and better visualization for Stats for better teambuilding!
+- More customization!  An open forum that allows users to request custom Pokemon for use in the app!
+- And MORE!
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
+## List of Tech Used!
+- JavaScript
+- React
+- Node.js
+- CSS
+- HTML5
+- Jest
+- Enzyme
+- Mocha
+- Chai
+- Supertest
+- XSS
+- Winston
+- NYC
+- PostgresQL
+- Knex
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+...As well as additional resources from:
+- Pokemon Showdown Sprite Repository: 'http://play.pokemonshowdown.com/sprites/'
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+...And a shoutout to the hardworking people at Smogon, Game Freak, and the Pokemon Company!
