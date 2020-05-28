@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 //import { render } from '@testing-library/react';
 import SearchBar from './SearchBar-Build';
 import { shallow, mount, render } from 'enzyme';
