@@ -233,9 +233,9 @@ export default class App extends Component {
   }
 
   addPublicSets = (sets) => {
-   
-    const s = [...new Set(sets, this.state.publicSets)]
-    this.setState({publicSets: s})
+    // we no longer have to make this a Set object because we do that check in 
+    // the Team-Public.js.  Should also add that wizardry to the Team-Edit version.
+    this.setState({publicSets: [...this.state.publicSets, ...sets]})
   }
 
   // Validate State Functions

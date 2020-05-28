@@ -111,9 +111,13 @@ export default class Team extends Component {
       handleUpdateTeam,
     } = this.context;
 
+    const us = [...new Set(userSets.map(set => set.id))];
+    
+    const newUS = us.map(id => userSets.find(set => set.id === id))
+
     const {team, id} = this.props;
 
-    const teamSets = userSets.filter(set => set.team_id === team.id)
+    const teamSets = newUS.filter(set => set.team_id === team.id)
 
     const SetList = this.renderSetList(teamSets)
 

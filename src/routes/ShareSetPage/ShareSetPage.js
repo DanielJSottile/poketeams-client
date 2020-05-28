@@ -12,16 +12,13 @@ export default class ShareSetPage extends Component {
   }
 
   componentDidMount() {
-    apiService.getSingleSet(this.props.match.params.team_id, this.props.match.params.set_id) // Get the single public set!
+    apiService.getSingleSet(this.props.match.params.set_id) // Get the single public set!
       .then(data => {
-        this.setState({set: data})
+        this.setState({set: [data]})
       })
   }
 
   render() {
-
-    // const {publicSets} = this.context;
-    // const set = publicSets.filter(set => Number(set.id) === Number(this.props.match.params.set_id))
 
     return (
       <div>

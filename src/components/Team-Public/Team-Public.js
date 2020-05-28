@@ -23,9 +23,18 @@ export default class Team extends Component {
       publicSets,
     } = this.context;
 
+    /* we have to use fucking stupid wizardry in order to make the 
+    publicSets have UNIQUE sets.  Basically making a SET of all 
+    unique ids, and then finding those ids and making a new list.
+    I hate JS objects so much.
+    */
+    const ps = [...new Set(publicSets.map(set => set.id))];
+    
+    const newPS = ps.map(id => publicSets.find(set => set.id === id))
+
     const {team, id} = this.props;
 
-    const teamSets = publicSets.filter(set => set.team_id === team.id)
+    const teamSets = newPS.filter(set => set.team_id === team.id)
 
     const SetList = teamSets.map((set, i) => {
       return <SetPublic key={i} set={set}/>
