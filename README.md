@@ -2,6 +2,13 @@
 
 Link: https://poketeams.now.sh
 
+Test Login Users: 
+
+UserName: test
+Password: password
+
+Please only create teams in a new test folder by copying from the export of another team; PLEASE DO NOT DELETE ANY OF MY TEAMS!
+
 ## API Documentation
 
 - '/api/all/search[params]' : This gets 10 public teams with optional search parameters.
