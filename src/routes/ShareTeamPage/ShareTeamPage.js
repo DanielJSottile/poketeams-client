@@ -15,7 +15,9 @@ const ShareTeamPage = (props) => {
   specified in the url parameter.*/
 
   useEffect(() => {
-    apiService.getSingleTeam(props.match.params.team_id)
+    console.log('shareTeamPage is breaking')
+    const id = props.match.params.team_id
+    apiService.getSingleTeam(id)
       .then(data => {
         setState(oldVals => ({...oldVals, team: [data]}))
     })
@@ -25,7 +27,7 @@ const ShareTeamPage = (props) => {
     The dependencies make sure it only updates 1 time.  */
 
       .then(() => {
-     apiService.getSetsForOneTeam(props.match.params.team_id)
+     apiService.getSetsForOneTeam(id)
       .then(data => {
         addPublicSets(data)
       })

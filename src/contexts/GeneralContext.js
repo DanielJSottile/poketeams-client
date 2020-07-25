@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import apiService from '../services/apiService';
 import TokenService from '../services/token-service';
 import jwtDecode from 'jwt-decode';
@@ -7,81 +7,79 @@ import legality from '../functions/legality';
 
 const GeneralContext = React.createContext({
   userFolders: [],
-    userTeams: [],
-    userSets: [],
-    publicTeams: [],
-    publicSets: [],
-    //folders-user
-    folderAddClicked: false,
-    currentClickedFolder: {value: '', id: '', touched: false},
-    newFolderName: {value: '', touched: false},
-    //teams-user
-    teamAddClicked: false,
-    currentClickedTeam: {value: '', id: '', touched: false},
-    newTeamName: {value: '', touched: false},
-    desc: {value: '', touched: false},
-    newTeamImport: {value: '', touched: false},
-    //sets-teams-user
-    newSetImport: {value: '', touched: false},
-    // search
-    search: {value: '', touched: false},
-    sort: {value: '', touched: false},
-    filter: {value: '', touched: false},
-    filtersort: {value: '', touched: false},
-    page: {value: 1},
+  userTeams: [],
+  userSets: [],
+  publicTeams: [],
+  publicSets: [],
+  //folders-user
+  folderAddClicked: false,
+  currentClickedFolder: {value: '', id: '', touched: false},
+  newFolderName: {value: '', touched: false},
+  //teams-user
+  teamAddClicked: false,
+  currentClickedTeam: {value: '', id: '', touched: false},
+  newTeamName: {value: '', touched: false},
+  desc: {value: '', touched: false},
+  newTeamImport: {value: '', touched: false},
+  //sets-teams-user
+  newSetImport: {value: '', touched: false},
+  // search
+  search: {value: '', touched: false},
+  sort: {value: '', touched: false},
+  filter: {value: '', touched: false},
+  filtersort: {value: '', touched: false},
+  page: {value: 1},
 
-
-    setNewFolderName: () => {},
-        handleFolderAddClickExpand: () => {},
-        handlePostNewFolder: () => {},
-        validateNewFolderName: () => {},
-        validateCurrentFolderClicked: () => {},
-        handleCurrentFolderClicked: () => {},
-        handleEditFolder: () => {},
-        handleDeleteFolder: () => {},
-        // user team functions
-        setNewTeamName: () => {},
-        setNewTeamContents: () => {},
-        handleTeamAddClickExpand: () => {},
-        handlePostNewTeam: () => {},
-        validateNewTeamName: () => {},
-        validateNewTeamImport: () => {},
-        handleCurrentTeamClicked: () => {},
-        handleUpdateTeam: () => {},
-        handleDeleteTeam: () => {},
-        // user set functions
-        handleDeleteSet: () => {},
-        handleUpdateSet: () => {},
-        setNewSetContents: () => {},
-        setDesc: () => {},
-        validateDesc: () => {},
-        validateNewSetImport: () => {},
-        handleUpdateSetImport: () => {},
-        handlePostNewPokemon: () => {},
-        clearUserState: () => {},
-        getUserState: () => {},
-        // search functions
-        setSearch: () => {},
-        setSort: () => {},
-        validateSearch: () => {},
-        handleSearch: () => {},
-        setFilter: () => {},
-        setFilterSort: () => {},
-        validateFilter: () => {},
-        handleFilter: () => {},
-        handlePageUp: () => {},
-        handlePageDown: () => {},
-        // share functions
-        addPublicSets: () => {},
-        clearPublicSets: () => {},
+  setNewFolderName: () => {},
+  handleFolderAddClickExpand: () => {},
+  handlePostNewFolder: () => {},
+  validateNewFolderName: () => {},
+  validateCurrentFolderClicked: () => {},
+  handleCurrentFolderClicked: () => {},
+  handleEditFolder: () => {},
+  handleDeleteFolder: () => {},
+  // user team functions
+  setNewTeamName: () => {},
+  setNewTeamContents: () => {},
+  handleTeamAddClickExpand: () => {},
+  handlePostNewTeam: () => {},
+  validateNewTeamName: () => {},
+  validateNewTeamImport: () => {},
+  handleCurrentTeamClicked: () => {},
+  handleUpdateTeam: () => {},
+  handleDeleteTeam: () => {},
+  // user set functions
+  handleDeleteSet: () => {},
+  handleUpdateSet: () => {},
+  setNewSetContents: () => {},
+  setDesc: () => {},
+  validateDesc: () => {},
+  validateNewSetImport: () => {},
+  handleUpdateSetImport: () => {},
+  handlePostNewPokemon: () => {},
+  clearUserState: () => {},
+  getUserState: () => {},
+  // search functions
+  setSearch: () => {},
+  setSort: () => {},
+  validateSearch: () => {},
+  handleSearch: () => {},
+  setFilter: () => {},
+  setFilterSort: () => {},
+  validateFilter: () => {},
+  handleFilter: () => {},
+  handlePageUp: () => {},
+  handlePageDown: () => {},
+  // share functions
+  addPublicSets: () => {},
+  clearPublicSets: () => {},
 });
 
 export default GeneralContext;
 
-export class GeneralProvider extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
+export function GeneralProvider(props) {
+  const [state, setState] = useState(
+    {
       userFolders: [],
       userTeams: [],
       userSets: [],
@@ -106,144 +104,151 @@ export class GeneralProvider extends Component {
       filtersort: {value: '', touched: false},
       page: {value: 1}
     }
-  }
+  );
 
-  componentDidMount() {
-
+  useEffect(() => {
     if (TokenService.getAuthToken()){ // if user is logged in
       const user_id = jwtDecode(TokenService.getAuthToken()).user_id
 
       apiService.getUserFolders(user_id) // Get Public Teams First
       .then(data => {
-        this.setState({userFolders: data})
+        setState(oldVals => ({...oldVals, userFolders: data}));
       });
 
       apiService.getUserTeams(user_id) // Get Public Teams First
       .then(data => {
-        this.setState({userTeams: data})
-        
+        setState(oldVals => ({...oldVals, userTeams: data}));
       });
 
       apiService.getUserSets(user_id) // Get Public Teams First
       .then(data => {
-        this.setState({userSets: data})
+        setState(oldVals => ({...oldVals, userSets: data}));
       });
     };
 
-    const search = this.state.search.value || 'all';
-    const sort = this.state.sort.value || 'newest';
-    const page = this.state.page.value;
+    const search = state.search.value || 'all';
+    const sort = state.sort.value || 'newest';
+    const page = state.page.value;
     const query = `?page=${page}&sort=${sort}&species=${search.toLowerCase()}`
     apiService.getTenTeamsSearch(query)
       .then(teams => {
-        this.setState({publicTeams: teams})
-        this.setState({publicSets: []}) // lets clear the publicSets because we are reseeding them! with our search
+        setState(oldVals => ({...oldVals, publicTeams: teams}));
+        setState(oldVals => ({...oldVals, publicSets: []})); // lets clear the publicSets because we are reseeding them! with our search
+        let newSets = []; // before we were setting the public sets in setState...this was causing a bug.
         teams.forEach(team => { // now we need to get the sets for those 10 teams and put them in state.
           apiService.getSetsForOneTeam(team.id)
             .then(sets => {
-              this.setState({publicSets: [...this.state.publicSets, ...sets]})
+              newSets = [...newSets, ...sets]
+              setState(oldVals => ({...oldVals, publicSets: newSets}));
             });
         });
       });
-  };
+    }, 
+  [
+    state.page.value,
+    state.search.value,
+    state.sort.value,
+  ]
+  );
 
   // State Input Update Functions 
 
   // User Folders
 
-  setNewFolderName = newFolderName => {
-    this.setState({newFolderName: {value: newFolderName, touched: true}});
+  const setNewFolderName = newFolderName => {
+    setState(oldVals => ({...oldVals, newFolderName: {value: newFolderName, touched: true}}));
   };
 
-  handleFolderAddClickExpand = () => {
-    this.setState({folderAddClicked: !this.state.folderAddClicked})
+  const handleFolderAddClickExpand = () => {
+    setState(oldVals => ({...oldVals, folderAddClicked: !state.folderAddClicked}));
   };
 
-  handleCurrentFolderClicked = (name, folder_id) => {
-    this.setState({currentClickedFolder: {value: name, id: folder_id, touched: true}})
+  const handleCurrentFolderClicked = (name, folder_id) => {
+    setState(oldVals => ({...oldVals, currentClickedFolder: {value: name, id: folder_id, touched: true}}));
   };
 
   // User Teams
 
-  setNewTeamName = newTeamName => {
-    this.setState({newTeamName: {value: newTeamName, touched: true}});
+  const setNewTeamName = newTeamName => {
+    setState(oldVals => ({...oldVals, newTeamName: {value: newTeamName, touched: true}}));
   };
 
-  setDesc = desc => {
-    this.setState({desc: {value: desc, touched: true}});
+  const setDesc = desc => {
+    setState(oldVals => ({...oldVals, desc: {value: desc, touched: true}}));
   };
 
-  setNewTeamContents = newTeamImport => {
-    this.setState({newTeamImport: {value: newTeamImport, touched: true}});
+  const setNewTeamContents = newTeamImport => {
+    setState(oldVals => ({...oldVals, newTeamImport: {value: newTeamImport, touched: true}}));
   }
 
-  handleTeamAddClickExpand = () => {
-    this.setState({teamAddClicked: !this.state.teamAddClicked})
+  const handleTeamAddClickExpand = () => {
+    setState(oldVals => ({...oldVals, teamAddClicked: !state.teamAddClicked}));
   };
 
-  handleCurrentTeamClicked = (name, team_id) => {
-    this.setState({currentClickedTeam: {value: name, id: team_id, touched: true}})
+  const handleCurrentTeamClicked = (name, team_id) => {
+    setState(oldVals => ({...oldVals, currentClickedTeam: {value: name, id: team_id, touched: true}}));
   };
 
   // User Sets-Teams
 
-  setNewSetContents = newSetImport => {
-    this.setState({newSetImport: {value: newSetImport, touched: true}});
+  const setNewSetContents = newSetImport => {
+    setState(oldVals => ({...oldVals, newSetImport: {value: newSetImport, touched: true}}));
   }
 
   // search 
 
-  setSearch = searchval => {
-    this.setState({search: {value: searchval, touched: true}});
+  const setSearch = searchval => {
+    setState(oldVals => ({...oldVals, search: {value: searchval, touched: true}}));
   }
 
-  setSort = sortval => {
-    this.setState({sort: {value: sortval, touched: true}});
+  const setSort = sortval => {
+    setState(oldVals => ({...oldVals, sort: {value: sortval, touched: true}}));
   }
 
-  setFilter = filter => {
-    this.setState({filter: {value: filter, touched: true}})
+  const setFilter = filter => {
+    setState(oldVals => ({...oldVals, filter: {value: filter, touched: true}}));
   }
 
-  setFilterSort = filtersort => {
-    this.setState({filtersort: {value: filtersort, touched: true}})
+  const setFilterSort = filtersort => {
+    setState(oldVals => ({...oldVals, filtersort: {value: filtersort, touched: true}}));
   }
 
-  handlePageUp = () => {
-    this.setState({page: {value: (this.state.page.value + 1)}})
-    const search = this.state.search.value || 'all';
-    const sort = this.state.sort.value || 'newest';
-    const page = this.state.page.value + 1;
+  const handlePageUp = () => {
+    setState(oldVals => ({...oldVals, page: {value: (state.page.value + 1)}}));
+
+    const search = state.search.value || 'all';
+    const sort = state.sort.value || 'newest';
+    const page = state.page.value + 1;
     const query = `?page=${page}&sort=${sort}&species=${search.toLowerCase()}`
     apiService.getTenTeamsSearch(query)
       .then(teams => {
-        this.setState({publicTeams: teams})
-        this.setState({publicSets: []}) // lets clear the publicSets because we are reseeding them! with our search
+        setState(oldVals => ({...oldVals, publicTeams: teams}));
+        setState(oldVals => ({...oldVals, publicSets: []})); // lets clear the publicSets because we are reseeding them! with our search
         teams.forEach(team => { // now we need to get the sets for those 10 teams and put them in state.
           apiService.getSetsForOneTeam(team.id)
             .then(sets => {
-              this.setState({publicSets: [...this.state.publicSets, ...sets]})
+              setState(oldVals => ({...oldVals, publicSets: [...state.publicSets, ...sets]}));
             });
         });
       });
   }
 
-  handlePageDown = () => {
-    if(this.state.page.value > 1){
-      this.setState({page: {value: this.state.page.value - 1}})
+  const handlePageDown = () => {
+    if(state.page.value > 1){
+      setState(oldVals => ({...oldVals, page: {value: (state.page.value - 1)}}));
     
-    const search = this.state.search.value || 'all';
-    const sort = this.state.sort.value || 'newest';
-    const page = this.state.page.value - 1;
+    const search = state.search.value || 'all';
+    const sort = state.sort.value || 'newest';
+    const page = state.page.value - 1;
     const query = `?page=${page}&sort=${sort}&species=${search.toLowerCase()}`
     apiService.getTenTeamsSearch(query)
       .then(teams => {
-        this.setState({publicTeams: teams})
-        this.setState({publicSets: []}) // lets clear the publicSets because we are reseeding them! with our search
+        setState(oldVals => ({...oldVals, publicTeams: teams}));
+        setState(oldVals => ({...oldVals, publicSets: []})); // lets clear the publicSets because we are reseeding them! with our search
         teams.forEach(team => { // now we need to get the sets for those 10 teams and put them in state.
           apiService.getSetsForOneTeam(team.id)
             .then(sets => {
-              this.setState({publicSets: [...this.state.publicSets, ...sets]})
+              setState(oldVals => ({...oldVals, publicSets: [...state.publicSets, ...sets]}));
             });
         });
       });
@@ -252,55 +257,54 @@ export class GeneralProvider extends Component {
 
   // these two functions help clear when logins are made so that the user doesn't see other user data.
 
-  clearUserState = () => {
-    this.setState({userFolders: [], userTeams: [], userSets: []})
+  const clearUserState = () => {
+    setState(oldVals => ({...oldVals, userFolders: [], userTeams: [], userSets: []}));
   }
 
-  clearPublicSets = () => {
-    this.setState({publicSets: []})
+  const clearPublicSets = () => {
+    setState(oldVals => ({...oldVals, publicSets: []}));
   }
 
-  getUserState = () => {
+  const getUserState = () => {
     if (TokenService.getAuthToken()){ // if user is logged in
       const user_id = jwtDecode(TokenService.getAuthToken()).user_id
 
       apiService.getUserFolders(user_id) // Get Public Teams First
       .then(data => {
-        this.setState({userFolders: data})
+        setState(oldVals => ({...oldVals, userFolders: data}));
       });
 
       apiService.getUserTeams(user_id) // Get Public Teams First
       .then(data => {
-        this.setState({userTeams: data})
-        
+        setState(oldVals => ({...oldVals, userTeams: data}));
       });
 
       apiService.getUserSets(user_id) // Get Public Teams First
       .then(data => {
-        this.setState({userSets: data})
+        setState(oldVals => ({...oldVals, userSets: data}));
       });
     };
   }
 
-  addPublicSets = (sets) => {
+  const addPublicSets = (sets) => {
     // we no longer have to make this a Set object because we do that check in 
     // the Team-Public.js.  Should also add that wizardry to the Team-Edit version.
-    this.setState({publicSets: [...this.state.publicSets, ...sets]})
+    setState(oldVals => ({...oldVals, publicSets: [...state.publicSets, ...sets]}));
   }
 
   // Validate State Functions
 
   // User Folders
 
-  validateNewFolderName = () => {
-    let folder_name = this.state.newFolderName.value;
+  const validateNewFolderName = () => {
+    let folder_name = state.newFolderName.value;
     if (!folder_name) {
       return `Please provide a folder name!`
     }
   };
 
-  validateCurrentFolderClicked = () => {
-    let folder = this.state.currentClickedFolder.id;
+  const validateCurrentFolderClicked = () => {
+    let folder = state.currentClickedFolder.id;
     if (!folder) {
       return `You'll need to click on a folder in order to add a team!`
     }
@@ -308,23 +312,23 @@ export class GeneralProvider extends Component {
 
   // User Teams
 
-  validateNewTeamName = () => {
-    let team_name = this.state.newTeamName.value;
+  const validateNewTeamName = () => {
+    let team_name = state.newTeamName.value;
     if (!team_name) {
       return `Please provide a team name!`
     }
   };
 
-  validateDesc = () => {
-    let description = this.state.desc.value;
+  const validateDesc = () => {
+    let description = state.desc.value;
     if (typeof(description) !== 'string') {
       return `This should never come up, it is superflous`
     }
   };
 
-  validateNewTeamImport = () => {
+  const validateNewTeamImport = () => {
     let flag;
-    let team_import = this.state.newTeamImport.value;
+    let team_import = state.newTeamImport.value;
     // you do not have to provide a team_import, but if you do...
     // showdownParse(team_export) gives an array...
     if(team_import){
@@ -339,9 +343,9 @@ export class GeneralProvider extends Component {
     return flag;
   };
 
-  validateNewSetImport = () => {
+  const validateNewSetImport = () => {
     let flag;
-    let set_import = this.state.newSetImport.value
+    let set_import = state.newSetImport.value
     // you do not have to provide a set_import, but if you do...
     // showdownParse(set_export) gives an array...even just for 1
     // with that in mind, let's check that it's only length of 1
@@ -361,16 +365,16 @@ export class GeneralProvider extends Component {
 
   // search
 
-  validateSearch = () => {
-    let search = this.state.search.value;
+  const validateSearch = () => {
+    let search = state.search.value;
     search = search.toString().trim();
     if(!legality.isLegalSpecies(search)){
       return `Must be an 'existing' Pokemon species or form styled via '[species]-[form]'!`
     }
   }
 
-  validateFilter = () => {
-    let filter = this.state.filter.value;
+  const validateFilter = () => {
+    let filter = state.filter.value;
     filter = filter.toString().trim();
     if(!legality.isLegalSpecies(filter)){
       return `Must be an 'existing' Pokemon species or form styled via '[species]-[form]'!`
@@ -380,13 +384,13 @@ export class GeneralProvider extends Component {
   
   // Event Handlers/API Calls
 
-  handlePostNewFolder = () => {
-    const folder_name = this.state.newFolderName.value;
+  const handlePostNewFolder = () => {
+    const folder_name = state.newFolderName.value;
     apiService.postUserFolder(folder_name, jwtDecode(TokenService.getAuthToken()).user_id)
-      .then((folder) => this.setState({userFolders: [...this.state.userFolders, folder], folderAddClicked: false}));
+      .then((folder) => setState(oldVals => ({...oldVals, userFolders: [...state.userFolders, folder], folderAddClicked: false})));
   }
 
-  handlePostNewPokemon = ( // will use this function for team post as well
+  const handlePostNewPokemon = ( // will use this function for team post as well
     team_id,
     nickname,
     species = 'Pikachu',
@@ -445,14 +449,14 @@ export class GeneralProvider extends Component {
     }
 
     apiService.postUserSet(set_body, jwtDecode(TokenService.getAuthToken()).user_id)
-      .then((set) => this.setState({userSets: [...this.state.userSets, set]}));
+      .then((set) => setState(oldVals => ({...oldVals, userSets: [...state.userSets, set]})));
   }
 
-  handlePostNewTeam = () => {
-    const team_name = this.state.newTeamName.value;
-    const desc = this.state.desc.value;
-    const currentClickedFolder = this.state.currentClickedFolder.id
-    const contents = this.state.newTeamImport.value;
+  const handlePostNewTeam = () => {
+    const team_name = state.newTeamName.value;
+    const desc = state.desc.value;
+    const currentClickedFolder = state.currentClickedFolder.id
+    const contents = state.newTeamImport.value;
     const body = {team_name, description: desc, folder_id: currentClickedFolder};
 
     // first, handle the new team
@@ -460,14 +464,14 @@ export class GeneralProvider extends Component {
     apiService.postUserTeam(body, jwtDecode(TokenService.getAuthToken()).user_id)
       .then((team) => {
         // first we set the team, and due to a bug, we also need to add a few more fields to get it to temporarily show correctly.
-        this.setState({userTeams: [...this.state.userTeams, {...team, folder_name: this.state.currentClickedFolder.value, user_id: jwtDecode(TokenService.getAuthToken()).user_id, user_name: jwtDecode(TokenService.getAuthToken()).sub}]})
+        setState(oldVals => ({...oldVals, userTeams: [...state.userTeams, {...team, folder_name: state.currentClickedFolder.value, user_id: jwtDecode(TokenService.getAuthToken()).user_id, user_name: jwtDecode(TokenService.getAuthToken()).sub}]}))
         // then we check if there were contents in the import team set
         if (contents){
           const parsed = showdownParse(contents);
     
           parsed.forEach(set => {
 
-            this.handlePostNewPokemon( 
+            handlePostNewPokemon( 
               team.id,
               set.nickname,
               set.species,
@@ -499,45 +503,48 @@ export class GeneralProvider extends Component {
         };
       });
       // then we close the expanded view
-      this.setState({
-        teamAddClicked: !this.state.teamAddClicked,
+      setState(oldVals => ({
+        ...oldVals,
+        teamAddClicked: !state.teamAddClicked,
         newTeamName: {value: '', touched: false},
         desc: {value: '', touched: false},
         newTeamImport: {value: '', touched: false}
-      });
+      }));
   };
 
   // PATCH/UPDATE
 
-  handleEditFolder = () => {
-    const folder_name = this.state.newFolderName.value;
-    const id = this.state.currentClickedFolder.id;
+  const handleEditFolder = () => {
+    const folder_name = state.newFolderName.value;
+    const id = state.currentClickedFolder.id;
     const userId = jwtDecode(TokenService.getAuthToken()).user_id
     apiService.patchUserFolder(folder_name, id, userId)
     
     const folder = {folder_name: folder_name};
     
-    this.setState({
-      userFolders: this.state.userFolders.map(fldr => {
+    setState(oldVals => ({
+      ...oldVals,
+      userFolders: state.userFolders.map(fldr => {
         return (fldr.id !== id) ? fldr : {...fldr, ...folder}})
-    });
+    }));
    
   };
 
-  handleUpdateTeam = (teamname, desc, id) => {
+  const handleUpdateTeam = (teamname, desc, id) => {
     const body = {id: id, team_name: teamname, description: desc}
     const userId = jwtDecode(TokenService.getAuthToken()).user_id
     apiService.patchUserTeam(body, userId)
 
     const team = {team_name: teamname, description: desc}
 
-    this.setState({
-      userTeams: this.state.userTeams.map(tm => {
+    setState(oldVals => ({
+      ...oldVals,
+      userTeams: state.userTeams.map(tm => {
         return (tm.id !== id) ? tm : {...tm, ...team} })
-    });
+    }));
   };
 
-  handleUpdateSet= (
+  const handleUpdateSet= (
     id,
     nickname,
     species,
@@ -624,14 +631,15 @@ export class GeneralProvider extends Component {
       move_three,
       move_four,
     }
-    this.setState({
-      userSets: this.state.userSets.map(s => {
+    setState(oldVals => ({
+      ...oldVals,
+      userSets: state.userSets.map(s => {
         return (s.id !== id) ? s : {...s, ...set} })
-    });
+    }));
   }
 
-  handleUpdateSetImport = (id) => {
-    const contents = this.state.newSetImport.value;
+  const handleUpdateSetImport = (id) => {
+    const contents = state.newSetImport.value;
     const parsed = showdownParse(contents)[0];
     const userId = jwtDecode(TokenService.getAuthToken()).user_id
 
@@ -693,75 +701,76 @@ export class GeneralProvider extends Component {
       move_four: parsed.move_four,
     };
 
-    this.setState({
-      userSets: this.state.userSets.map(s => {
+    setState(oldVals => ({
+      ...oldVals,
+      userSets: state.userSets.map(s => {
         return (s.id !== id) ? s : {...s, ...set}}),
       newSetImport: {value: '', touched: false}
-    });
+    }));
   }
 
   // DELETE
 
-  handleDeleteFolder = () => {
-    const folder_id = Number(this.state.currentClickedFolder.id);
+  const handleDeleteFolder = () => {
+    const folder_id = Number(state.currentClickedFolder.id);
     apiService.deleteUserFolder(folder_id)
    
-    const newFolders = this.state.userFolders.filter(folder => Number(folder.id) !== Number(folder_id))
-    this.setState({userFolders: newFolders, currentClickedFolder: {value: '', id: '', touched: false}});
+    const newFolders = state.userFolders.filter(folder => Number(folder.id) !== Number(folder_id))
+    setState(oldVals => ({...oldVals, userFolders: newFolders, currentClickedFolder: {value: '', id: '', touched: false}}));
    
   };
 
-  handleDeleteTeam = (team_id) => {
+  const handleDeleteTeam = (team_id) => {
     apiService.deleteUserTeam(Number(team_id))
    
-    const newUserTeams = this.state.userTeams.filter(team => Number(team.id) !== Number(team_id))
-    const newPublicTeams = this.state.publicTeams.filter(team => Number(team.id) !== Number(team_id))
-    this.setState({publicTeams: newPublicTeams, userTeams: newUserTeams, currentClickedTeam: {value: '', id: '', touched: false}});
+    const newUserTeams = state.userTeams.filter(team => Number(team.id) !== Number(team_id))
+    const newPublicTeams = state.publicTeams.filter(team => Number(team.id) !== Number(team_id))
+    setState(oldVals => ({...oldVals, publicTeams: newPublicTeams, userTeams: newUserTeams, currentClickedTeam: {value: '', id: '', touched: false}}));
   };
 
-  handleDeleteSet = (team_id, set_id) => { 
+  const handleDeleteSet = (team_id, set_id) => { 
     apiService.deleteUserSet(Number(team_id), Number(set_id))
    
-    const newUserSets = this.state.userSets.filter(set => Number(set.id) !== Number(set_id))
-    const newPublicSets = this.state.publicSets.filter(set => Number(set.id) !== Number(set_id))
-    this.setState({publicSets: newPublicSets, userSets: newUserSets});
+    const newUserSets = state.userSets.filter(set => Number(set.id) !== Number(set_id))
+    const newPublicSets = state.publicSets.filter(set => Number(set.id) !== Number(set_id))
+    setState(oldVals => ({...oldVals, publicSets: newPublicSets, userSets: newUserSets}));
   }
 
   // SEARCH STUFF
 
-  handleSearch = (e) => {
+  const handleSearch = (e) => {
     e.preventDefault()
-    const search = this.state.search.value || 'all';
-    const sort = this.state.sort.value || 'newest';
-    const page = this.state.page.value;
+    const search = state.search.value || 'all';
+    const sort = state.sort.value || 'newest';
+    const page = state.page.value;
     const query = `?page=${page}&sort=${sort}&species=${search.toLowerCase()}`
     apiService.getTenTeamsSearch(query)
       .then(teams => {
-        this.setState({publicTeams: teams})
-        this.setState({publicSets: []}) // lets clear the publicSets because we are reseeding them! with our search
+        setState(oldVals => ({...oldVals, publicTeams: teams}))
+        setState(oldVals => ({...oldVals, publicSets: []})) // lets clear the publicSets because we are reseeding them! with our search
         teams.forEach(team => { // now we need to get the sets for those 10 teams and put them in state.
           apiService.getSetsForOneTeam(team.id)
             .then(sets => {
-              this.setState({publicSets: [...this.state.publicSets, ...sets]})
+              setState(oldVals => ({...oldVals, publicSets: [...state.publicSets, ...sets]}))
             });
         });
       });
   };
 
-  handleFilter = () => {
-    const filter = this.state.filter.value || 'all';
-    const filtersort = this.state.filtersort.value || 'newest';
+  const handleFilter = () => {
+    const filter = state.filter.value || 'all';
+    const filtersort = state.filtersort.value || 'newest';
     // lets do an api call for this, JUST because we fucking can, plus linking data back up is impossible with my current knowledge
     const query = `?sort=${filtersort}&species=${filter.toLowerCase()}`
     if (TokenService.getAuthToken()){ // if user is logged in
       const user_id = jwtDecode(TokenService.getAuthToken()).user_id
       apiService.getUserFoldersFilter(user_id, query)
       .then(data => {
-        this.setState({userFolders: data})
+        setState(oldVals => ({...oldVals, userFolders: data}))
       });
     apiService.getUserTeamsFilter(user_id, query)
       .then(data => {
-        this.setState({userTeams: data})
+        setState(oldVals => ({...oldVals, userTeams: data}))
       });
     // we did have an api call, but we actually want all the sets for a team,
     // so we keep the previous ones.  I think that works.  On the plus side, I
@@ -769,89 +778,88 @@ export class GeneralProvider extends Component {
     }
   }
 
-  render() {
     const value = {
       // main database
         // userdata
-        userFolders: this.state.userFolders,
-        userTeams: this.state.userTeams,
-        userSets: this.state.userSets,
+        userFolders: state.userFolders,
+        userTeams: state.userTeams,
+        userSets: state.userSets,
         //public data
-        publicTeams: this.state.publicTeams,
-        publicSets: this.state.publicSets,
+        publicTeams: state.publicTeams,
+        publicSets: state.publicSets,
         //set states
         // folder set state
-        folderAddClicked: this.state.folderAddClicked,
-        currentClickedFolder: this.state.currentClickedFolder,
-        newFolderName: this.state.newFolderName,
+        folderAddClicked: state.folderAddClicked,
+        currentClickedFolder: state.currentClickedFolder,
+        newFolderName: state.newFolderName,
         // team set state
-        teamAddClicked: this.state.teamAddClicked,
-        currentClickedTeam: this.state.currentClickedTeam,
-        newTeamName: this.state.newTeamName,
-        desc: this.state.desc,
-        newTeamImport: this.state.newTeamImport,
-        teamExpandToggle: this.state.teamExpandToggle,
+        teamAddClicked: state.teamAddClicked,
+        currentClickedTeam: state.currentClickedTeam,
+        newTeamName: state.newTeamName,
+        desc: state.desc,
+        newTeamImport: state.newTeamImport,
+        teamExpandToggle: state.teamExpandToggle,
         // set Set state
-        setExpandToggle: this.state.setExpandToggle,
-        newSetImport: this.state.newSetImport,
+        setExpandToggle: state.setExpandToggle,
+        newSetImport: state.newSetImport,
         // set search
-        search: this.state.search,
-        sort: this.state.sort,
-        filter: this.state.filter,
-        filtersort: this.state.filtersort,
-        page: this.state.page,
+        search: state.search,
+        sort: state.sort,
+        filter: state.filter,
+        filtersort: state.filtersort,
+        page: state.page,
         // functions
         // user folder functions
-        setNewFolderName: this.setNewFolderName,
-        handleFolderAddClickExpand: this.handleFolderAddClickExpand,
-        handlePostNewFolder: this.handlePostNewFolder,
-        validateNewFolderName: this.validateNewFolderName,
-        validateCurrentFolderClicked: this.validateCurrentFolderClicked,
-        handleCurrentFolderClicked: this.handleCurrentFolderClicked,
-        handleEditFolder: this.handleEditFolder,
-        handleDeleteFolder: this.handleDeleteFolder,
+        setNewFolderName: setNewFolderName,
+        handleFolderAddClickExpand: handleFolderAddClickExpand,
+        handlePostNewFolder: handlePostNewFolder,
+        validateNewFolderName: validateNewFolderName,
+        validateCurrentFolderClicked: validateCurrentFolderClicked,
+        handleCurrentFolderClicked: handleCurrentFolderClicked,
+        handleEditFolder: handleEditFolder,
+        handleDeleteFolder: handleDeleteFolder,
         // user team functions
-        setNewTeamName: this.setNewTeamName,
-        setNewTeamContents: this.setNewTeamContents,
-        handleTeamAddClickExpand: this.handleTeamAddClickExpand,
-        handlePostNewTeam: this.handlePostNewTeam,
-        validateNewTeamName: this.validateNewTeamName,
-        validateNewTeamImport: this.validateNewTeamImport,
-        handleCurrentTeamClicked: this.handleCurrentTeamClicked,
-        handleUpdateTeam: this.handleUpdateTeam,
-        handleDeleteTeam: this.handleDeleteTeam,
+        setNewTeamName: setNewTeamName,
+        setNewTeamContents: setNewTeamContents,
+        handleTeamAddClickExpand: handleTeamAddClickExpand,
+        handlePostNewTeam: handlePostNewTeam,
+        validateNewTeamName: validateNewTeamName,
+        validateNewTeamImport: validateNewTeamImport,
+        handleCurrentTeamClicked: handleCurrentTeamClicked,
+        handleUpdateTeam: handleUpdateTeam,
+        handleDeleteTeam: handleDeleteTeam,
         // user set functions
-        handleDeleteSet: this.handleDeleteSet,
-        handleUpdateSet: this.handleUpdateSet,
-        setNewSetContents: this.setNewSetContents,
-        setDesc: this.setDesc,
-        validateDesc: this.validateDesc,
-        validateNewSetImport: this.validateNewSetImport,
-        handleUpdateSetImport: this.handleUpdateSetImport,
-        handlePostNewPokemon: this.handlePostNewPokemon,
-        clearUserState: this.clearUserState,
-        getUserState: this.getUserState,
+        handleDeleteSet: handleDeleteSet,
+        handleUpdateSet: handleUpdateSet,
+        setNewSetContents: setNewSetContents,
+        setDesc: setDesc,
+        validateDesc: validateDesc,
+        validateNewSetImport: validateNewSetImport,
+        handleUpdateSetImport: handleUpdateSetImport,
+        handlePostNewPokemon: handlePostNewPokemon,
+        clearUserState: clearUserState,
+        getUserState: getUserState,
         // search functions
-        setSearch: this.setSearch,
-        setSort: this.setSort,
-        validateSearch: this.validateSearch,
-        handleSearch: this.handleSearch,
-        setFilter: this.setFilter,
-        setFilterSort: this.setFilterSort,
-        validateFilter: this.validateFilter,
-        handleFilter: this.handleFilter,
-        handlePageUp: this.handlePageUp,
-        handlePageDown: this.handlePageDown,
+        setSearch: setSearch,
+        setSort: setSort,
+        validateSearch: validateSearch,
+        handleSearch: handleSearch,
+        setFilter: setFilter,
+        setFilterSort: setFilterSort,
+        validateFilter: validateFilter,
+        handleFilter: handleFilter,
+        handlePageUp: handlePageUp,
+        handlePageDown: handlePageDown,
         // share functions
-        addPublicSets: this.addPublicSets,
-        clearPublicSets: this.clearPublicSets
-        
+        addPublicSets: addPublicSets,
+        clearPublicSets: clearPublicSets 
     }
 
     return (
       <GeneralContext.Provider value={value}>
-        {this.props.children}
+        {props.children}
       </GeneralContext.Provider>
     )
   }
-}
+
+
