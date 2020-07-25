@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import TokenService from '../../services/token-service';
 import UserContext from '../../contexts/UserContext';
 import AuthApiService from '../../services/auth-api-service';
@@ -51,6 +52,8 @@ export default class LoginForm extends Component {
           <input type="password" autoComplete="current-password" name="password" id="password" />
         </div>
         <button type="submit">Log In <i className="fas fa-sign-in-alt"></i></button>
+        <p>Not A Member? </p>
+        <Link to='/register'>Register Here:</Link>
       </form>
     );
   };

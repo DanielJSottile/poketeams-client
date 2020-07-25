@@ -15,6 +15,7 @@ import apiService from '../../services/apiService';
 import jwtDecode from 'jwt-decode';
 import showdownParse from '../../functions/parse';
 import legality from '../../functions/legality';
+import RegistrationForm from '../RegistrationForm/RegistrationForm';
 
 export default class App extends Component {
   state = {  // temporary store until we work with api calls
@@ -803,6 +804,9 @@ export default class App extends Component {
               <PublicOnlyRoute
                 path = {'/landing'}
                 component = {LandingPage}/>
+              <PublicOnlyRoute
+                path = {'/register'}
+                component = {RegistrationForm}/>
               <PrivateRoute
                 path={'/build'}
                 component={BuildPage}/>
