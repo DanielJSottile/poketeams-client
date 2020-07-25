@@ -1,12 +1,12 @@
 import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
-import UserContext from '../../contexts/UserContext';
+import GeneralContext from '../../contexts/GeneralContext';
 import showdownGenerate from '../../functions/generate';
 import legality from '../../functions/legality';
 
 export default class Set extends Component {
 
-  static contextType = UserContext;
+  static contextType = GeneralContext;
 
   state = {
     setExpandToggle: true

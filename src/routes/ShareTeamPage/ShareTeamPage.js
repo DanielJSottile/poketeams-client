@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import UserContext from '../../contexts/UserContext';
+import GeneralContext from '../../contexts/GeneralContext';
 import apiService from '../../services/apiService';
 import TeamPublic from '../../components/Team-Public/Team-Public';
 
 export default class ShareTeamPage extends Component {
 
-  static contextType = UserContext;
+  static contextType = GeneralContext;
 
   state = {
     team: []

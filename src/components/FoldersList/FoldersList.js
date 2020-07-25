@@ -1,10 +1,10 @@
 import React, { Component , Fragment} from 'react';
-import UserContext from '../../contexts/UserContext';
+import GeneralContext from '../../contexts/GeneralContext';
 import Folder from '../Folder/Folder';
 
 export default class FoldersList extends Component {
 
-  static contextType = UserContext;
+  static contextType = GeneralContext;
 
   state = {
     editClicked: false,

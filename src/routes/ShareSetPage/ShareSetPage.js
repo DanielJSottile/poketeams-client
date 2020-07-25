@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import UserContext from '../../contexts/UserContext';
+import GeneralContext from '../../contexts/GeneralContext';
 import apiService from '../../services/apiService';
 import SetPublic from '../../components/Set-Public/Set-Public';
 
 export default class ShareSetPage extends Component {
 
-  static contextType = UserContext;  
+  static contextType = GeneralContext;  
 
   state = {
     set: []

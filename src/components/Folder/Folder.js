@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import UserContext from '../../contexts/UserContext';
+import GeneralContext from '../../contexts/GeneralContext';
 
 export default class Folder extends Component {
 
-  static contextType = UserContext;
+  static contextType = GeneralContext;
 
   render() { 
 

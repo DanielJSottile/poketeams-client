@@ -1,13 +1,13 @@
 import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
-import UserContext from '../../contexts/UserContext';
+import GeneralContext from '../../contexts/GeneralContext';
 import showdownGenerate from '../../functions/generate';
 import SetEdit from '../Set-Edit/Set-Edit';
 
 
 export default class Team extends Component {
 
-  static contextType = UserContext;
+  static contextType = GeneralContext;
  
 
   // we have a bug.  we need to change the team_name and description based on the current team.  Will fix later.

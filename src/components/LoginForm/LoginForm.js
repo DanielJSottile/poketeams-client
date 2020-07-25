@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import TokenService from '../../services/token-service';
-import UserContext from '../../contexts/UserContext';
+import GeneralContext from '../../contexts/GeneralContext';
 import AuthApiService from '../../services/auth-api-service';
 
 export default class LoginForm extends Component {
 
-  static contextType = UserContext;
+  static contextType = GeneralContext;
 
   static defaultProps = {
     onLoginSucess: () => {}

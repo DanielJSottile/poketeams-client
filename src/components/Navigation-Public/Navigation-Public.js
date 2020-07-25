@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import SearchBar from '../SearchBar-Public/SearchBar-Public';
-import UserContext from '../../contexts/UserContext';
+import GeneralContext from '../../contexts/GeneralContext';
 import jwtDecode from 'jwt-decode';
 import TokenService from '../../services/token-service';
 
 export default class Navigation extends Component {
 
-  static contextType = UserContext;
+  static contextType = GeneralContext;
 
   handleLogoutClick = () => {
     TokenService.clearAuthToken();

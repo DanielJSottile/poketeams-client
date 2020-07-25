@@ -1,13 +1,13 @@
 import React, { Component, Fragment } from 'react';
 import {Link} from 'react-router-dom';
-import UserContext from '../../contexts/UserContext';
+import GeneralContext from '../../contexts/GeneralContext';
 import showdownGenerate from '../../functions/generate';
 import SetPublic from '../Set-Public/Set-Public';
 
 
 export default class Team extends Component {
 
-  static contextType = UserContext;
+  static contextType = GeneralContext;
 
   state = {
     teamExpandToggle: true,

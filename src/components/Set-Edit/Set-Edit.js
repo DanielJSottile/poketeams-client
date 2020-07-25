@@ -1,13 +1,13 @@
 import React, { Component, Fragment} from 'react';
 import { Link } from 'react-router-dom';
-import UserContext from '../../contexts/UserContext';
+import GeneralContext from '../../contexts/GeneralContext';
 import showdownGenerate from '../../functions/generate';
 import showdownParse from '../../functions/parse';
 import legality from '../../functions/legality';
 
 export default class Set extends Component {
 
-  static contextType = UserContext;
+  static contextType = GeneralContext;
 
   /* We actually do need to have State here, 
   because we are EDITING values from components 

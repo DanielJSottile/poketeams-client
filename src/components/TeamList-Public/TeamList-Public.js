@@ -1,11 +1,11 @@
 import React, { Component, Fragment } from 'react';
-import UserContext from '../../contexts/UserContext';
+import GeneralContext from '../../contexts/GeneralContext';
 import TeamPublic from '../Team-Public/Team-Public';
 
 
 export default class TeamList extends Component {
 
-  static contextType = UserContext;
+  static contextType = GeneralContext;
 
   render() {
 
