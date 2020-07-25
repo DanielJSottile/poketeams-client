@@ -1,190 +1,198 @@
-import React, { Component, Fragment} from 'react';
+import React, { Fragment, useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import GeneralContext from '../../contexts/GeneralContext';
 import showdownGenerate from '../../functions/generate';
 import showdownParse from '../../functions/parse';
 import legality from '../../functions/legality';
 
-export default class Set extends Component {
+const Set = (props) => {
 
-  static contextType = GeneralContext;
+  const GenCon = useContext(GeneralContext);
 
   /* We actually do need to have State here, 
   because we are EDITING values from components 
   that there are more than ONE of. However, the
   function to update the form and delete are single
-  functions handled in the App.js. */
+  functions handled in the General Context. */
 
-  state = {
-    nickname: {value: this.props.set.nickname || '', touched: false},
-    species: {value: this.props.set.species || 'Pikachu', touched: false},
-    gender: {value: this.props.set.gender || '', touched: false},
-    shiny: {value: this.props.set.shiny || false, touched: false},
-    item: {value: this.props.set.item || '', touched: false},
-    ability: {value: this.props.set.ability || '', touched: false},
-    level: {value: this.props.set.level || 100, touched: false},
-    happiness: {value: this.props.set.happiness || 255, touched: false},
-    nature: {value: this.props.set.nature || '', touched: false},
-    hp_ev: {value: this.props.set.hp_ev || 0, touched: false},
-    atk_ev: {value: this.props.set.atk_ev || 0, touched: false},
-    def_ev: {value: this.props.set.def_ev || 0, touched: false},
-    spa_ev: {value: this.props.set.spa_ev || 0, touched: false},
-    spd_ev: {value: this.props.set.spd_ev || 0, touched: false},
-    spe_ev: {value: this.props.set.spe_ev || 0, touched: false},
-    hp_iv: {value: this.props.set.hp_iv || 31, touched: false},
-    atk_iv: {value: this.props.set.atk_iv || 31, touched: false},
-    def_iv: {value: this.props.set.def_iv || 31, touched: false},
-    spa_iv: {value: this.props.set.spa_iv || 31, touched: false},
-    spd_iv: {value: this.props.set.spd_iv || 31, touched: false},
-    spe_iv: {value: this.props.set.spe_iv || 31 , touched: false},
-    move_one: {value: this.props.set.move_one || 'Tackle', touched: false},
-    move_two: {value: this.props.set.move_two || '', touched: false},
-    move_three: {value: this.props.set.move_three || '', touched: false},
-    move_four: {value: this.props.set.move_four || '', touched: false},
-    setExpandToggle: true
-  }
+  /* TODO: find a way to make a context that handles
+  all of this instead of putting in the component. */
+
+  const [state, setState] = useState(
+    {
+      nickname: {value: props.set.nickname || '', touched: false},
+      species: {value: props.set.species || 'Pikachu', touched: false},
+      gender: {value: props.set.gender || '', touched: false},
+      shiny: {value: props.set.shiny || false, touched: false},
+      item: {value: props.set.item || '', touched: false},
+      ability: {value: props.set.ability || '', touched: false},
+      level: {value: props.set.level || 100, touched: false},
+      happiness: {value: props.set.happiness || 255, touched: false},
+      nature: {value: props.set.nature || '', touched: false},
+      hp_ev: {value: props.set.hp_ev || 0, touched: false},
+      atk_ev: {value: props.set.atk_ev || 0, touched: false},
+      def_ev: {value: props.set.def_ev || 0, touched: false},
+      spa_ev: {value: props.set.spa_ev || 0, touched: false},
+      spd_ev: {value: props.set.spd_ev || 0, touched: false},
+      spe_ev: {value: props.set.spe_ev || 0, touched: false},
+      hp_iv: {value: props.set.hp_iv || 31, touched: false},
+      atk_iv: {value: props.set.atk_iv || 31, touched: false},
+      def_iv: {value: props.set.def_iv || 31, touched: false},
+      spa_iv: {value: props.set.spa_iv || 31, touched: false},
+      spd_iv: {value: props.set.spd_iv || 31, touched: false},
+      spe_iv: {value: props.set.spe_iv || 31 , touched: false},
+      move_one: {value: props.set.move_one || 'Tackle', touched: false},
+      move_two: {value: props.set.move_two || '', touched: false},
+      move_three: {value: props.set.move_three || '', touched: false},
+      move_four: {value: props.set.move_four || '', touched: false},
+      setExpandToggle: true
+    }
+  );
 
   /* Since we have State here, the setting and validating of these 
   Must be set in here.  Or at least, it's easier to do it that way.*/
 
-  setFields = setImport => {
+  const setFields = setImport => {
     const parse = showdownParse(setImport)[0]
-    this.setState({
-      nickname: {value: parse.nickname || '', touched: false},
-      species: {value: parse.species || 'Pikachu', touched: false},
-      gender: {value: parse.gender || '', touched: false},
-      shiny: {value: parse.shiny || false, touched: false},
-      item: {value: parse.item || '', touched: false},
-      ability: {value: parse.ability || '', touched: false},
-      level: {value: parse.level || 100, touched: false},
-      happiness: {value: parse.happiness || 255, touched: false},
-      nature: {value: parse.nature || '', touched: false},
-      hp_ev: {value: parse.hp_ev || 0, touched: false},
-      atk_ev: {value: parse.atk_ev || 0, touched: false},
-      def_ev: {value: parse.def_ev || 0, touched: false},
-      spa_ev: {value: parse.spa_ev || 0, touched: false},
-      spd_ev: {value: parse.spd_ev || 0, touched: false},
-      spe_ev: {value: parse.spe_ev || 0, touched: false},
-      hp_iv: {value: parse.hp_iv || 31, touched: false},
-      atk_iv: {value: parse.atk_iv || 31, touched: false},
-      def_iv: {value: parse.def_iv || 31, touched: false},
-      spa_iv: {value: parse.spa_iv || 31, touched: false},
-      spd_iv: {value: parse.spd_iv || 31, touched: false},
-      spe_iv: {value: parse.spe_iv || 31 , touched: false},
-      move_one: {value: parse.move_one || 'Tackle', touched: false},
-      move_two: {value: parse.move_two || '', touched: false},
-      move_three: {value: parse.move_three || '', touched: false},
-      move_four: {value: parse.move_four || '', touched: false},
-      deleteClicked: false
-    })
+    setState(oldVals => (
+      {
+        ...oldVals,
+        nickname: {value: parse.nickname || '', touched: false},
+        species: {value: parse.species || 'Pikachu', touched: false},
+        gender: {value: parse.gender || '', touched: false},
+        shiny: {value: parse.shiny || false, touched: false},
+        item: {value: parse.item || '', touched: false},
+        ability: {value: parse.ability || '', touched: false},
+        level: {value: parse.level || 100, touched: false},
+        happiness: {value: parse.happiness || 255, touched: false},
+        nature: {value: parse.nature || '', touched: false},
+        hp_ev: {value: parse.hp_ev || 0, touched: false},
+        atk_ev: {value: parse.atk_ev || 0, touched: false},
+        def_ev: {value: parse.def_ev || 0, touched: false},
+        spa_ev: {value: parse.spa_ev || 0, touched: false},
+        spd_ev: {value: parse.spd_ev || 0, touched: false},
+        spe_ev: {value: parse.spe_ev || 0, touched: false},
+        hp_iv: {value: parse.hp_iv || 31, touched: false},
+        atk_iv: {value: parse.atk_iv || 31, touched: false},
+        def_iv: {value: parse.def_iv || 31, touched: false},
+        spa_iv: {value: parse.spa_iv || 31, touched: false},
+        spd_iv: {value: parse.spd_iv || 31, touched: false},
+        spe_iv: {value: parse.spe_iv || 31 , touched: false},
+        move_one: {value: parse.move_one || 'Tackle', touched: false},
+        move_two: {value: parse.move_two || '', touched: false},
+        move_three: {value: parse.move_three || '', touched: false},
+        move_four: {value: parse.move_four || '', touched: false},
+        deleteClicked: false
+      }
+    ));
   }
 
-  handleDeleteExpand() {
-    this.setState({deleteClicked: !this.state.deleteClicked});
+  const handleDeleteExpand = () => {
+    setState(oldVals => ({...oldVals, deleteClicked: !state.deleteClicked}));
   }
 
-  handleSetToggle = () => {
-    this.setState({setExpandToggle: !this.state.setExpandToggle})
+  const handleSetToggle = () => {
+    setState(oldVals => ({...oldVals, setExpandToggle: !state.setExpandToggle}));
   };
 
-  setSpecies = species => {
-    this.setState({species: {value: species, touched: true}});
+  const setSpecies = species => {
+    setState(oldVals => ({...oldVals, species: {value: species, touched: true}}));
   };
 
-  setNickname = nickname => {
-    this.setState({nickname: {value: nickname, touched: true}});
+  const setNickname = nickname => {
+    setState(oldVals => ({...oldVals, nickname: {value: nickname, touched: true}}));
   };
 
-  setGender = gender => {
-    this.setState({gender: {value: gender, touched: true}});
+  const setGender = gender => {
+    setState(oldVals => ({...oldVals, gender: {value: gender, touched: true}}));
   };
 
-  setShiny = () => {
-    this.setState({shiny: {value: !this.state.shiny.value}});
+  const setShiny = () => {
+    setState(oldVals => ({...oldVals, shiny: {value: !state.shiny.value}}));
   };
 
-  setItem = item => {
-    this.setState({item: {value: item, touched: true}});
+  const setItem = item => {
+    setState(oldVals => ({...oldVals, item: {value: item, touched: true}}));
   };
 
-  setAbility = ability => {
-    this.setState({ability: {value: ability, touched: true}});
+  const setAbility = ability => {
+    setState(oldVals => ({...oldVals, ability: {value: ability, touched: true}}));
   };
 
-  setLevel = level => {
-    this.setState({level: {value: Number(level), touched: true}});
+  const setLevel = level => {
+    setState(oldVals => ({...oldVals, level: {value: Number(level), touched: true}}));
   };
 
-  setHappiness = happiness => {
-    this.setState({happiness: {value: Number(happiness), touched: true}});
+  const setHappiness = happiness => {
+    setState(oldVals => ({...oldVals, happiness: {value: Number(happiness), touched: true}}));
   };
 
-  setNature = nature => {
-    this.setState({nature: {value: nature, touched: true}});
+  const setNature = nature => {
+    setState(oldVals => ({...oldVals, nature: {value: nature, touched: true}}));
   };
 
-  setHpEv = hpev => {
-    this.setState({hp_ev: {value: Number(hpev), touched: true}});
+  const setHpEv = hpev => {
+    setState(oldVals => ({...oldVals, hp_ev: {value: Number(hpev), touched: true}}));
   };
 
-  setAtkEv = atkev => {
-    this.setState({atk_ev: {value: Number(atkev), touched: true}});
+  const setAtkEv = atkev => {
+    setState(oldVals => ({...oldVals, atk_ev: {value: Number(atkev), touched: true}}));
   };
 
-  setDefEv = defev => {
-    this.setState({def_ev: {value: Number(defev), touched: true}}); 
+  const setDefEv = defev => {
+    setState(oldVals => ({...oldVals, def_ev: {value: Number(defev), touched: true}}));
   };
 
-  setSpAEv = spaev => {
-    this.setState({spa_ev: {value: Number(spaev), touched: true}});
+  const setSpAEv = spaev => {
+    setState(oldVals => ({...oldVals, spa_ev: {value: Number(spaev), touched: true}}));
   };
 
-  setSpDEv = spdev => {
-    this.setState({spd_ev: {value: Number(spdev), touched: true}});  
+  const setSpDEv = spdev => {
+    setState(oldVals => ({...oldVals, spd_ev: {value: Number(spdev), touched: true}}));
   };
 
-  setSpeEv = speev => {
-    this.setState({spe_ev: {value: Number(speev), touched: true}});
+  const setSpeEv = speev => {
+    setState(oldVals => ({...oldVals, spe_ev: {value: Number(speev), touched: true}}));
   };
 
-  setHpIv = hpiv => {
-    this.setState({hp_iv: {value: Number(hpiv), touched: true}});
+  const setHpIv = hpiv => {
+    setState(oldVals => ({...oldVals, hp_iv: {value: Number(hpiv), touched: true}}));
   };
 
-  setAtkIv = atkiv => {
-    this.setState({atk_iv: {value: Number(atkiv), touched: true}});
+  const setAtkIv = atkiv => {
+    setState(oldVals => ({...oldVals, atk_iv: {value: Number(atkiv), touched: true}}));
   };
 
-  setDefIv = defiv => {
-    this.setState({def_iv: {value: Number(defiv), touched: true}}); 
+  const setDefIv = defiv => {
+    setState(oldVals => ({...oldVals, def_iv: {value: Number(defiv), touched: true}}));
   };
 
-  setSpAIv = spaiv => {
-    this.setState({spa_iv: {value: Number(spaiv), touched: true}}); 
+  const setSpAIv = spaiv => {
+    setState(oldVals => ({...oldVals, spa_iv: {value: Number(spaiv), touched: true}}));
   };
 
-  setSpDIv = spdiv => {
-    this.setState({spd_iv: {value: Number(spdiv), touched: true}}); 
+  const setSpDIv = spdiv => {
+    setState(oldVals => ({...oldVals, spd_iv: {value: Number(spdiv), touched: true}}));
   };
 
-  setSpeIv = speiv => {
-    this.setState({spe_iv: {value: Number(speiv), touched: true}});
+  const setSpeIv = speiv => {
+    setState(oldVals => ({...oldVals, spe_iv: {value: Number(speiv), touched: true}}));
   };
 
-  setMoveOne = moveone => {
-    this.setState({move_one: {value: moveone, touched: true}});
+  const setMoveOne = moveone => {
+    setState(oldVals => ({...oldVals, move_one: {value: moveone, touched: true}}));
   };
 
-  setMoveTwo = movetwo => {
-    this.setState({move_two: {value: movetwo, touched: true}});
+  const setMoveTwo = movetwo => {
+    setState(oldVals => ({...oldVals, move_two: {value: movetwo, touched: true}}));
   };
 
-  setMoveThree = movethree => {
-    this.setState({move_three: {value: movethree, touched: true}});
+  const setMoveThree = movethree => {
+    setState(oldVals => ({...oldVals, move_three: {value: movethree, touched: true}}));
   };
 
-  setMoveFour = movefour => {
-    this.setState({move_four: {value: movefour, touched: true}});
+  const setMoveFour = movefour => {
+    setState(oldVals => ({...oldVals, move_four: {value: movefour, touched: true}}));
   };
 
   // Validate Inputs
@@ -193,81 +201,81 @@ export default class Set extends Component {
   should still check that things are the correct value type (eventually
   may convert the entire site to Typescript to fix this?)*/
 
-  validateNickname = () => { // Will some day check against Legal Nintendo filter!
-    let nickname = this.state.nickname.value;
+  const validateNickname = () => { // Will some day check against Legal Nintendo filter!
+    let nickname = state.nickname.value;
     if (typeof(nickname) !== 'string') {
       return `This is just superflous it should never come up.`
     };
   };
 
-  validateItem = () => { // Will some day check against list of Items!
-    let item = this.state.item.value;
+  const validateItem = () => { // Will some day check against list of Items!
+    let item = state.item.value;
     if (typeof(item) !== 'string') {
       return `This is just superflous it should never come up.`
     };
   };
 
-  validateAbility = () => { // Will some day check against list of Abilities!
-    let ability = this.state.ability.value;
+  const validateAbility = () => { // Will some day check against list of Abilities!
+    let ability = state.ability.value;
     if (typeof(ability) !== 'string') {
       return `This is just superflous it should never come up.`
     };
   };
 
-  validateNature = () => { // Will some day check against list of Natures!
-    let nature = this.state.nature.value;
+  const validateNature = () => { // Will some day check against list of Natures!
+    let nature = state.nature.value;
     if (typeof(nature) !== 'string') {
       return `This is just superflous it should never come up.`
     };
   };
 
-  validateShiny = () => { // Normally this would be put against a legal Shiny list, but my custom game eliminates this.
-    let shiny = this.state.shiny.value;
+  const validateShiny = () => { // Normally this would be put against a legal Shiny list, but my custom game eliminates this.
+    let shiny = state.shiny.value;
     if (typeof(shiny) !== 'boolean') {
       return `This is just superflous it should never come up.`
     };
   };
 
-  validateSpecies = () => {
-    let species = this.state.species.value;
+  const validateSpecies = () => {
+    let species = state.species.value;
     species = species.toString().trim();
     if(!legality.isLegalSpecies(species)){
       return `Must be an 'existing' Pokemon species or form styled via '[species]-[form]'!`
     };
   };
 
-  validateGender = () => { // does this work?
-    let gender = this.state.gender.value;
+  const validateGender = () => { // does this work?
+    let gender = state.gender.value;
     gender = gender.toString().trim();
-    if(legality.returnGenderStatus(this.state.species.value)){
-      if (gender !== legality.returnGenderStatus(this.state.species.value)){
-        return `This species is locked to a gender of '${legality.returnGenderStatus(this.state.species.value)}'.`
+    if(legality.returnGenderStatus(state.species.value)){
+      if (gender !== legality.returnGenderStatus(state.species.value)){
+        return `This species is locked to a gender of '${legality.returnGenderStatus(state.species.value)}'.`
       };
     };
   };
 
-  validateLevel = () => { // in the future, Custom Game might be integrated.  Not sure what the max level is there.
-    let level = Number(this.state.level.value);
+  const validateLevel = () => { // in the future, Custom Game might be integrated.  Not sure what the max level is there.
+    let level = Number(state.level.value);
     if (level > 100 || level < 1) {
       return `Level must be between 1 and 100`
     };
   };
 
-  validateHappiness = () => {
-    let happiness = Number(this.state.happiness.value);
+  const validateHappiness = () => {
+    let happiness = Number(state.happiness.value);
     if (happiness > 255 || happiness < 0) {
       return `Hapiness must be between 0 and 255`
     };
   };
 
-  validateEvs = () => {
+  const validateEvs = () => {
     let flag;
-    let hp_ev = Number(this.state.hp_ev.value);
-    let atk_ev = Number(this.state.atk_ev.value);
-    let def_ev = Number(this.state.def_ev.value);
-    let spa_ev = Number(this.state.spa_ev.value);
-    let spd_ev = Number(this.state.spd_ev.value);
-    let spe_ev = Number(this.state.spe_ev.value);
+    let hp_ev = Number(state.hp_ev.value);
+    let atk_ev = Number(state.atk_ev.value);
+    let def_ev = Number(state.def_ev.value);
+    let spa_ev = Number(state.spa_ev.value);
+    let spd_ev = Number(state.spd_ev.value);
+    let spe_ev = Number(state.spe_ev.value);
 
     let evArr = [hp_ev, atk_ev, def_ev, spa_ev, spd_ev, spe_ev];
 
@@ -282,14 +290,14 @@ export default class Set extends Component {
     return flag;
   }
 
-  validateIvs = () => {
+  const validateIvs = () => {
     let flag;
-    let hp_iv = Number(this.state.hp_iv.value);
-    let atk_iv = Number(this.state.atk_iv.value);
-    let def_iv = Number(this.state.def_iv.value);
-    let spa_iv = Number(this.state.spa_iv.value);
-    let spd_iv = Number(this.state.spd_iv.value);
-    let spe_iv = Number(this.state.spe_iv.value);
+    let hp_iv = Number(state.hp_iv.value);
+    let atk_iv = Number(state.atk_iv.value);
+    let def_iv = Number(state.def_iv.value);
+    let spa_iv = Number(state.spa_iv.value);
+    let spd_iv = Number(state.spd_iv.value);
+    let spe_iv = Number(state.spe_iv.value);
 
     let evArr = [hp_iv, atk_iv, def_iv, spa_iv, spd_iv, spe_iv];
 
@@ -301,11 +309,11 @@ export default class Set extends Component {
     return flag;
   };
 
-  validateMoves = () => { // Every Pokemon has at least 1 move.  Only one we actually need to check for
-    let move_one = this.state.move_one.value;
-    let move_two = this.state.move_two.value;
-    let move_three = this.state.move_three.value;
-    let move_four = this.state.move_four.value;
+  const validateMoves = () => { // Every Pokemon has at least 1 move.  Only one we actually need to check for
+    let move_one = state.move_one.value;
+    let move_two = state.move_two.value;
+    let move_three = state.move_three.value;
+    let move_four = state.move_four.value;
 
     if (!move_one) {
       return `Pokemon must have at least ONE move; make sure it is in the top input box.`
@@ -323,9 +331,9 @@ export default class Set extends Component {
   // Renders
 
 
-  renderExpandedSet() {
+  const renderExpandedSet = () => {
 
-    const {set} = this.props;
+    const {set} = props;
     
     const {
       newSetImport,
@@ -333,11 +341,11 @@ export default class Set extends Component {
       validateNewSetImport,
       handleUpdateSetImport,
       handleUpdateSet,
-    } = this.context;
+    } = GenCon;
 
     return (
       <div className="pokemon">
-        <button onClick={() => this.handleSetToggle()}>Compress Set <i className="fas fa-compress-arrows-alt"></i></button>
+        <button onClick={() => handleSetToggle()}>Compress Set <i className="fas fa-compress-arrows-alt"></i></button>
         <form> 
               <div className="pokemon-import">
                 <label htmlFor="pokemon-import">Import Pokemon Set: <i className="fas fa-upload"></i></label>
@@ -350,7 +358,7 @@ export default class Set extends Component {
                   onClick={(e) => {
                     e.preventDefault();
                     handleUpdateSetImport(Number(set.id));
-                    this.setFields(newSetImport.value);
+                    setFields(newSetImport.value);
                   }}>Submit <i className="fas fa-check-circle"></i></button>
               </div>
             </form>
@@ -359,24 +367,24 @@ export default class Set extends Component {
             <div className="name-sprite">
               <div className="names">
                 <label htmlFor="pokemon-name">Species:</label>
-                {this.state.species.touched && <p className="error">{this.validateSpecies()}</p>}
-                <input className="pokemon-name" placeholder="e.g. Pikachu" value={this.state.species.value} onChange={e => this.setSpecies(e.target.value)} type="text" name="pokemon-name" id={`pokemon-name-${set.id}`} />
+                {state.species.touched && <p className="error">{validateSpecies()}</p>}
+                <input className="pokemon-name" placeholder="e.g. Pikachu" value={ state.species.value} onChange={e => setSpecies(e.target.value)} type="text" name="pokemon-name" id={`pokemon-name-${set.id}`} />
                 <label htmlFor="pokemon-nickname">Nickname: (optional)</label>
-                {<p className="error">{this.validateNickname()}</p>}
-                <input className="pokemon-nickname" placeholder={this.state.species.value} value={this.state.nickname.value} onChange={e => this.setNickname(e.target.value)} type="text" name="pokemon-nickname" id={`pokemon-nickname-${set.id}`} />
+                {<p className="error">{validateNickname()}</p>}
+                <input className="pokemon-nickname" placeholder={state.species.value} value={state.nickname.value} onChange={e => setNickname(e.target.value)} type="text" name="pokemon-nickname" id={`pokemon-nickname-${set.id}`} />
                 <label htmlFor="pokemon-gender">Gender: </label>
-                {<p className="error">{this.validateGender()}</p>}
-                <input className="pokemon-gender" placeholder="F, M, or N" value={this.state.gender.value} onChange={e => this.setGender(e.target.value)} type="text" name="pokemon-gender" id={`pokemon-gender-${set.id}`} />
+                {<p className="error">{validateGender()}</p>}
+                <input className="pokemon-gender" placeholder="F, M, or N" value={state.gender.value} onChange={e => setGender(e.target.value)} type="text" name="pokemon-gender" id={`pokemon-gender-${set.id}`} />
                   <div>
                     <label htmlFor="shiny">Shiny:</label>
-                    {<p className="error">{this.validateShiny()}</p>}
-                    <input type="checkbox" id="shiny-2" name="shiny" checked={this.state.shiny.value} value={this.state.shiny.value} onChange={e => this.setShiny(e.target.value)}/>
+                    {<p className="error">{validateShiny()}</p>}
+                    <input type="checkbox" id="shiny-2" name="shiny" checked={state.shiny.value} value={state.shiny.value} onChange={e => setShiny(e.target.value)}/>
                   </div>  
               </div>
               <div className="sprites">
-                <img className="sprite-img" src={legality.returnIconSprite(this.state.species.value, this.state.shiny.value)} alt={this.state.species.value}/>
+                <img className="sprite-img" src={legality.returnIconSprite(state.species.value, state.shiny.value)} alt={state.species.value}/>
                 <div className="type-icons">
-                  {legality.returnTypeIcon(legality.returnType(this.state.species.value)).map((type, i)=> {
+                  {legality.returnTypeIcon(legality.returnType(state.species.value)).map((type, i)=> {
                     return <img className="type-img" src={`${type}`} key={i} alt={`${i + 1}`}/>
                   })}
                 </div>
@@ -386,100 +394,100 @@ export default class Set extends Component {
           <div className="details">
             <div className="first-details">
               <label htmlFor="pokemon-level">Level: </label>
-              {this.state.species.touched && <p className="error">{this.validateLevel()}</p>}
-              <input className="pokemon-level" placeholder="100" value={this.state.level.value} onChange={e => this.setLevel(e.target.value)} type="text" name="pokemon-level" id={`pokemon-level-${set.id}`} />
+              {state.species.touched && <p className="error">{validateLevel()}</p>}
+              <input className="pokemon-level" placeholder="100" value={state.level.value} onChange={e => setLevel(e.target.value)} type="text" name="pokemon-level" id={`pokemon-level-${set.id}`} />
               <label htmlFor="pokemon-item">Item: (optional)</label>
-              {<p className="error">{this.validateItem()}</p>}
-              <input className="pokemon-item" placeholder="e.g. Leftovers" value={this.state.item.value} onChange={e => this.setItem(e.target.value)} type="text" name="pokemon-item" id={`pokemon-item-${set.id}`} />
+              {<p className="error">{validateItem()}</p>}
+              <input className="pokemon-item" placeholder="e.g. Leftovers" value={state.item.value} onChange={e => setItem(e.target.value)} type="text" name="pokemon-item" id={`pokemon-item-${set.id}`} />
               <label htmlFor="pokemon-ability">Ability: (optional)</label>
-              {<p className="error">{this.validateAbility()}</p>}
-              <input className="pokemon-ability" placeholder="e.g. Static" value={this.state.ability.value} onChange={e => this.setAbility(e.target.value)} type="text" name="pokemon-ability" id={`pokemon-ability-${set.id}`} />
+              {<p className="error">{validateAbility()}</p>}
+              <input className="pokemon-ability" placeholder="e.g. Static" value={state.ability.value} onChange={e => setAbility(e.target.value)} type="text" name="pokemon-ability" id={`pokemon-ability-${set.id}`} />
               <label htmlFor="pokemon-nature">Nature: (optional)</label>
-              {<p className="error">{this.validateNature()}</p>}
-              <input className="pokemon-nature" placeholder="e.g. Adamant" value={this.state.nature.value} onChange={e => this.setNature(e.target.value)} type="text" name="pokemon-nature" id={`pokemon-nature-${set.id}`} />
+              {<p className="error">{validateNature()}</p>}
+              <input className="pokemon-nature" placeholder="e.g. Adamant" value={state.nature.value} onChange={e => setNature(e.target.value)} type="text" name="pokemon-nature" id={`pokemon-nature-${set.id}`} />
               <label htmlFor="pokemon-happiness">Happiness:</label>
-              {this.state.happiness.touched && <p className="error">{this.validateHappiness()}</p>}
-              <input className="pokemon-happiness" placeholder="255" value={this.state.happiness.value} onChange={e => this.setHappiness(e.target.value)} type="number" name="pokemon-happiness" min="0" max="255" id={`pokemon-happiness-${set.id}`} />
+              {state.happiness.touched && <p className="error">{validateHappiness()}</p>}
+              <input className="pokemon-happiness" placeholder="255" value={state.happiness.value} onChange={e => setHappiness(e.target.value)} type="number" name="pokemon-happiness" min="0" max="255" id={`pokemon-happiness-${set.id}`} />
             </div>
             <div className="stats">
               <div className="evs">
-              {<p className="error">{this.validateEvs()}</p>}
+              {<p className="error">{validateEvs()}</p>}
                 <label htmlFor="pokemon-ev-hp">HP EV:</label>
-                <input className="pokemon-ev" placeholder="0" value={Number(this.state.hp_ev.value)} onChange={e => this.setHpEv(e.target.value)} type="number" name="pokemon-ev-hp" min="0" max="252" id={`pokemon-ev-hp-${set.id}`} />
+                <input className="pokemon-ev" placeholder="0" value={Number(state.hp_ev.value)} onChange={e => setHpEv(e.target.value)} type="number" name="pokemon-ev-hp" min="0" max="252" id={`pokemon-ev-hp-${set.id}`} />
                 <label htmlFor="pokemon-ev-atk">Atk EV:</label>
-                <input className="pokemon-ev" placeholder="0" value={Number(this.state.atk_ev.value)} onChange={e => this.setAtkEv(e.target.value)} type="number" name="pokemon-ev-atk" min="0" max="252" id={`pokemon-ev-atk-${set.id}`} />
+                <input className="pokemon-ev" placeholder="0" value={Number(state.atk_ev.value)} onChange={e => setAtkEv(e.target.value)} type="number" name="pokemon-ev-atk" min="0" max="252" id={`pokemon-ev-atk-${set.id}`} />
                 <label htmlFor="pokemon-ev-def">Def EV:</label>
-                <input className="pokemon-ev" placeholder="0" value={Number(this.state.def_ev.value)} onChange={e => this.setDefEv(e.target.value)} type="number" name="pokemon-ev-def" min="0" max="252" id={`pokemon-ev-def-${set.id}`} />
+                <input className="pokemon-ev" placeholder="0" value={Number(state.def_ev.value)} onChange={e => setDefEv(e.target.value)} type="number" name="pokemon-ev-def" min="0" max="252" id={`pokemon-ev-def-${set.id}`} />
                 <label htmlFor="pokemon-ev-spa">SpA EV:</label>
-                <input className="pokemon-ev" placeholder="0" value={Number(this.state.spa_ev.value)} onChange={e => this.setSpAEv(e.target.value)} type="number" name="pokemon-ev-spa" min="0" max="252" id={`pokemon-ev-spa-${set.id}`} />
+                <input className="pokemon-ev" placeholder="0" value={Number(state.spa_ev.value)} onChange={e => setSpAEv(e.target.value)} type="number" name="pokemon-ev-spa" min="0" max="252" id={`pokemon-ev-spa-${set.id}`} />
                 <label htmlFor="pokemon-ev-spd">SpD EV:</label>
-                <input className="pokemon-ev" placeholder="0" value={Number(this.state.spd_ev.value)} onChange={e => this.setSpDEv(e.target.value)} type="number" name="pokemon-ev-spd" min="0" max="252" id={`pokemon-ev-spd-${set.id}`} />
+                <input className="pokemon-ev" placeholder="0" value={Number(state.spd_ev.value)} onChange={e => setSpDEv(e.target.value)} type="number" name="pokemon-ev-spd" min="0" max="252" id={`pokemon-ev-spd-${set.id}`} />
                 <label htmlFor="pokemon-ev-spe">SpE EV:</label>
-                <input className="pokemon-ev" placeholder="0" value={Number(this.state.spe_ev.value)} onChange={e => this.setSpeEv(e.target.value)} type="number" name="pokemon-ev-spe" min="0" max="252" id={`pokemon-ev-spe-${set.id}`} />
+                <input className="pokemon-ev" placeholder="0" value={Number(state.spe_ev.value)} onChange={e => setSpeEv(e.target.value)} type="number" name="pokemon-ev-spe" min="0" max="252" id={`pokemon-ev-spe-${set.id}`} />
               </div>
               <div className="ivs">
-              {<p className="error">{this.validateIvs()}</p>}
+              {<p className="error">{validateIvs()}</p>}
                 <label htmlFor="pokemon-iv-hp">HP IV:</label>
-                <input className="pokemon-iv" placeholder="31" value={Number(this.state.hp_iv.value)} onChange={e => this.setHpIv(e.target.value)} type="number" name="pokemon-iv-hp" min="0" max="31" id={`pokemon-iv-hp-${set.id}`} />
+                <input className="pokemon-iv" placeholder="31" value={Number(state.hp_iv.value)} onChange={e => setHpIv(e.target.value)} type="number" name="pokemon-iv-hp" min="0" max="31" id={`pokemon-iv-hp-${set.id}`} />
                 <label htmlFor="pokemon-iv-atk">Atk IV:</label>
-                <input className="pokemon-iv" placeholder="31" value={Number(this.state.atk_iv.value)} onChange={e => this.setAtkIv(e.target.value)} type="number" name="pokemon-iv-atk" min="0" max="31" id={`pokemon-iv-atk-${set.id}`} />
+                <input className="pokemon-iv" placeholder="31" value={Number(state.atk_iv.value)} onChange={e => setAtkIv(e.target.value)} type="number" name="pokemon-iv-atk" min="0" max="31" id={`pokemon-iv-atk-${set.id}`} />
                 <label htmlFor="pokemon-iv-def">Def IV:</label>
-                <input className="pokemon-iv" placeholder="31" value={Number(this.state.def_iv.value)} onChange={e => this.setDefIv(e.target.value)} type="number" name="pokemon-iv-def" min="0" max="31" id={`pokemon-iv-def-${set.id}`} />
+                <input className="pokemon-iv" placeholder="31" value={Number(state.def_iv.value)} onChange={e => setDefIv(e.target.value)} type="number" name="pokemon-iv-def" min="0" max="31" id={`pokemon-iv-def-${set.id}`} />
                 <label htmlFor="pokemon-iv-spa">SpA IV:</label>
-                <input className="pokemon-iv" placeholder="31" value={Number(this.state.spa_iv.value)} onChange={e => this.setSpAIv(e.target.value)} type="number" name="pokemon-iv-spa" min="0" max="31" id={`pokemon-iv-spa-${set.id}`} />
+                <input className="pokemon-iv" placeholder="31" value={Number(state.spa_iv.value)} onChange={e => setSpAIv(e.target.value)} type="number" name="pokemon-iv-spa" min="0" max="31" id={`pokemon-iv-spa-${set.id}`} />
                 <label htmlFor="pokemon-iv-spd">SpD IV:</label>
-                <input className="pokemon-iv" placeholder="31" value={Number(this.state.spd_iv.value)} onChange={e => this.setSpDIv(e.target.value)} type="number" name="pokemon-iv-spd" min="0" max="31" id={`pokemon-iv-spd-${set.id}`} />
+                <input className="pokemon-iv" placeholder="31" value={Number(state.spd_iv.value)} onChange={e => setSpDIv(e.target.value)} type="number" name="pokemon-iv-spd" min="0" max="31" id={`pokemon-iv-spd-${set.id}`} />
                 <label htmlFor="pokemon-iv-spe">SpE IV:</label>
-                <input className="pokemon-iv" placeholder="31" value={Number(this.state.spe_iv.value)} onChange={e => this.setSpeIv(e.target.value)} type="number" name="pokemon-iv-spe" min="0" max="31" id={`pokemon-iv-spe-${set.id}`} />
+                <input className="pokemon-iv" placeholder="31" value={Number(state.spe_iv.value)} onChange={e => setSpeIv(e.target.value)} type="number" name="pokemon-iv-spe" min="0" max="31" id={`pokemon-iv-spe-${set.id}`} />
               </div>
             </div>
             <div className="moves">
               <label htmlFor="pokemon-moves">Moves:</label>
-              {<p className="error">{this.validateMoves()}</p>}
-                <input className="pokemon-move" placeholder="Tackle" value={this.state.move_one.value} onChange={e => this.setMoveOne(e.target.value)} type="text" name="pokemon-move" id={`pokemon-${set.id}-move-1`} />
-                <input className="pokemon-move" value={this.state.move_two.value} onChange={e => this.setMoveTwo(e.target.value)} type="text" name="pokemon-move" id={`pokemon-${set.id}-move-2`} />
-                <input className="pokemon-move" value={this.state.move_three.value} onChange={e => this.setMoveThree(e.target.value)} type="text" name="pokemon-move" id={`pokemon-${set.id}-move-3`} />
-                <input className="pokemon-move" value={this.state.move_four.value} onChange={e => this.setMoveFour(e.target.value)} type="text" name="pokemon-move" id={`pokemon-${set.id}-move-4`} />
+              {<p className="error">{validateMoves()}</p>}
+                <input className="pokemon-move" placeholder="Tackle" value={state.move_one.value} onChange={e => setMoveOne(e.target.value)} type="text" name="pokemon-move" id={`pokemon-${set.id}-move-1`} />
+                <input className="pokemon-move" value={state.move_two.value} onChange={e => setMoveTwo(e.target.value)} type="text" name="pokemon-move" id={`pokemon-${set.id}-move-2`} />
+                <input className="pokemon-move" value={state.move_three.value} onChange={e => setMoveThree(e.target.value)} type="text" name="pokemon-move" id={`pokemon-${set.id}-move-3`} />
+                <input className="pokemon-move" value={state.move_four.value} onChange={e => setMoveFour(e.target.value)} type="text" name="pokemon-move" id={`pokemon-${set.id}-move-4`} />
             </div>
             <button type="submit"
                 disabled={
-                  this.validateSpecies() ||
-                  this.validateGender() ||
-                  this.validateLevel() ||
-                  this.validateHappiness() ||
-                  this.validateEvs() ||
-                  this.validateIvs() ||
-                  this.validateMoves()
+                  validateSpecies() ||
+                  validateGender() ||
+                  validateLevel() ||
+                  validateHappiness() ||
+                  validateEvs() ||
+                  validateIvs() ||
+                  validateMoves()
                 }
                 onClick={(e) => {
                   e.preventDefault();
                   handleUpdateSet(
                     set.id,
-                    this.state.nickname.value,
-                    this.state.species.value,
-                    this.state.gender.value,
-                    this.state.shiny.value,
-                    this.state.item.value,
-                    this.state.ability.value,
-                    this.state.level.value,
-                    this.state.happiness.value,
-                    this.state.nature.value,
-                    this.state.hp_ev.value,
-                    this.state.atk_ev.value,
-                    this.state.def_ev.value,
-                    this.state.spa_ev.value,
-                    this.state.spd_ev.value,
-                    this.state.spe_ev.value,
-                    this.state.hp_iv.value,
-                    this.state.atk_iv.value,
-                    this.state.def_iv.value,
-                    this.state.spa_iv.value,
-                    this.state.spd_iv.value,
-                    this.state.spe_iv.value,
-                    this.state.move_one.value,
-                    this.state.move_two.value,
-                    this.state.move_three.value,
-                    this.state.move_four.value,
+                    state.nickname.value,
+                    state.species.value,
+                    state.gender.value,
+                    state.shiny.value,
+                    state.item.value,
+                    state.ability.value,
+                    state.level.value,
+                    state.happiness.value,
+                    state.nature.value,
+                    state.hp_ev.value,
+                    state.atk_ev.value,
+                    state.def_ev.value,
+                    state.spa_ev.value,
+                    state.spd_ev.value,
+                    state.spe_ev.value,
+                    state.hp_iv.value,
+                    state.atk_iv.value,
+                    state.def_iv.value,
+                    state.spa_iv.value,
+                    state.spd_iv.value,
+                    state.spe_iv.value,
+                    state.move_one.value,
+                    state.move_two.value,
+                    state.move_three.value,
+                    state.move_four.value,
                   );
                 }}>Save Set Details <i className="fas fa-save"></i></button>
           </div>
@@ -499,18 +507,18 @@ export default class Set extends Component {
         </div>
         <div>
           <button onClick={() => {
-            this.handleDeleteExpand()
+            handleDeleteExpand()
             }}><i className="fas fa-trash-alt"></i> Delete Set!</button>
-            {this.state.deleteClicked ? this.renderDeleteExpand() : null}
+            {state.deleteClicked ? renderDeleteExpand() : null}
         </div>
       </div>
     );
   };
   
 
-  renderUnexpandedSet() {
+  const renderUnexpandedSet = () => {
 
-    const {set} = this.props;
+    const {set} = props;
 
     const types = legality.returnTypeIcon(legality.returnType(set.species)).map((type, i)=> {
       return <img className="icon" key={i} src={`${type}`} alt={`${i + 1}`}/>
@@ -519,7 +527,7 @@ export default class Set extends Component {
     return (
       <Fragment>
       <div className="pokemon">
-        <div className="closed" onClick={() => this.handleSetToggle()}>
+        <div className="closed" onClick={() => handleSetToggle()}>
           <div className="inside">
             <img className="icon" src={legality.returnIconSprite(set.species, set.shiny)} alt={set.species}/>
           </div>
@@ -535,29 +543,28 @@ export default class Set extends Component {
     );
   }
 
-  renderDeleteExpand() {
+  const renderDeleteExpand = () => {
     const {
       handleDeleteSet,
-    } = this.context;
+    } = GenCon;
 
     return (
       <div>
         <p>Are You Sure You'd Like to Delete this Set?</p> 
         <button onClick={() => {
-          handleDeleteSet(this.props.set.team_id, this.props.set.id);
-          this.handleDeleteExpand();
+          handleDeleteSet(props.set.team_id, props.set.id);
+          handleDeleteExpand();
         }}>Yes <i className="fas fa-thumbs-up"></i></button>
-        <button onClick={() => this.handleDeleteExpand()}>No <i className="fas fa-thumbs-down"></i></button>
+        <button onClick={() => handleDeleteExpand()}>No <i className="fas fa-thumbs-down"></i></button>
       </div> 
     )
   };
 
-  render() {
-
-    return (
-      <Fragment>
-        {this.state.setExpandToggle ? this.renderUnexpandedSet() : this.renderExpandedSet()}
-      </Fragment>
-    );
-  };
+  return (
+    <Fragment>
+      {state.setExpandToggle ? renderUnexpandedSet() : renderExpandedSet()}
+    </Fragment>
+  );
 };
+
+export default Set;
