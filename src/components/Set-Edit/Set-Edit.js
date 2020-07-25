@@ -5,7 +5,7 @@ import showdownGenerate from '../../functions/generate';
 import showdownParse from '../../functions/parse';
 import legality from '../../functions/legality';
 
-const Set = (props) => {
+const SetEdit = (props) => {
 
   const GenCon = useContext(GeneralContext);
 
@@ -567,4 +567,4 @@ const Set = (props) => {
   );
 };
 
-export default Set;
+export default SetEdit;
