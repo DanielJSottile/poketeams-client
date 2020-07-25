@@ -1,14 +1,12 @@
-import React, { Component } from 'react';
+import React, { useContext } from 'react';
 import GeneralContext from '../../contexts/GeneralContext';
 
-export default class SearchBar extends Component {
+const SearchBarBuild = (props) => {
 
-  static contextType = GeneralContext;
+  const GenCon = useContext(GeneralContext);
 
-  
-  render() {
+  const {handleFilter, validateFilter, filter, filtersort, setFilter, setFilterSort} = GenCon;
 
-    const {handleFilter, validateFilter, filter, filtersort, setFilter, setFilterSort} = this.context;
     return (
       <div className="searchbar">
         <form className="search">
@@ -32,7 +30,8 @@ export default class SearchBar extends Component {
         </form>
       </div>
     )
-  }
 }
+
+export default SearchBarBuild;
 
 
