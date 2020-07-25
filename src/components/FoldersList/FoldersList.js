@@ -1,32 +1,34 @@
-import React, { Component , Fragment} from 'react';
+import React, { Fragment, useContext, useState } from 'react';
 import GeneralContext from '../../contexts/GeneralContext';
 import Folder from '../Folder/Folder';
 
-export default class FoldersList extends Component {
+const FoldersList = (props) => {
 
-  static contextType = GeneralContext;
+  const GenCon = useContext(GeneralContext);
 
-  state = {
+  const [state, setState] = useState(
+    {
     editClicked: false,
     deleteClicked: false
   }
+  );
 
-  handleEditExpand() {
-    this.setState({editClicked: !this.state.editClicked})
+  const handleEditExpand = () => {
+    setState(oldVals => ({...oldVals, editClicked: !state.editClicked}));
   }
 
-  handleDeleteExpand() {
-    this.setState({deleteClicked: !this.state.deleteClicked})
+  const handleDeleteExpand = () => {
+    setState(oldVals => ({...oldVals, deleteClicked: !state.deleteClicked}));
   }
 
-  renderExpanded() {
+  const renderExpanded = () => {
 
     const {
       newFolderName,
       setNewFolderName,
       handlePostNewFolder,
       validateNewFolderName
-    } = this.context;
+    } = GenCon;
 
     return (
       <form>
@@ -48,7 +50,7 @@ export default class FoldersList extends Component {
     )
   }
 
-  renderEditExpand() {
+  const renderEditExpand = () => {
 
     const {
       newFolderName,
@@ -57,7 +59,7 @@ export default class FoldersList extends Component {
       validateNewFolderName,
       handleCurrentFolderClicked,
       currentClickedFolder
-    } = this.context;
+    } = GenCon;
 
     return (
       <form>
@@ -74,70 +76,68 @@ export default class FoldersList extends Component {
         onClick={(e) => {
           e.preventDefault();
           handleEditFolder();
-          this.handleEditExpand();
+          handleEditExpand();
           handleCurrentFolderClicked(newFolderName.value, currentClickedFolder.id)
         }}>Submit <i className="far fa-check-circle"></i></button>
       </form>
     )
   }
 
-  renderDeleteExpand () {
+  const renderDeleteExpand = () => {
 
     const {
       handleDeleteFolder,
-    } = this.context;
+    } = GenCon;
 
     return (
       <div>
         <p>Are You Sure You'd Like to Delete this Folder?</p> 
         <button onClick={() => {
           handleDeleteFolder();
-          this.handleDeleteExpand();
+          handleDeleteExpand();
         }}>Yes <i className="fas fa-thumbs-up"></i></button>
-        <button onClick={() => this.handleDeleteExpand()}>No <i className="fas fa-thumbs-down"></i></button>
+        <button onClick={() => handleDeleteExpand()}>No <i className="fas fa-thumbs-down"></i></button>
       </div> 
     )
-
   }
 
-  render() {
+  const {
+    userFolders, 
+    folderAddClicked, 
+    currentClickedFolder,
+    handleFolderAddClickExpand,
+  } = GenCon;
 
-    const {
-      userFolders, 
-      folderAddClicked, 
-      currentClickedFolder,
-      handleFolderAddClickExpand,
-    } = this.context;
+  const folderList = userFolders.map((folder, i) => {
+    return <Folder key={i} id={folder.id} folder_name={folder.folder_name}/>
+  });
 
-    const folderList = userFolders.map((folder, i) => {
-      return <Folder key={i} id={folder.id} folder_name={folder.folder_name}/>
-    });
-
-    return (
-      <Fragment>
-        <section className="folders-list">
-          <h3>Folders:</h3>
-          <div>
-            {folderList.length > 0 ? folderList : <h3>None! Click Below to Make a New Folder!</h3>}
-          </div>
-          <div>
-            <button onClick={() => handleFolderAddClickExpand()}>New Folder <i className="fas fa-folder-plus"></i></button>
-            {folderAddClicked ? this.renderExpanded() : null}
-          </div>
+  return (
+    <Fragment>
+      <section className="folders-list">
+        <h3>Folders:</h3>
         <div>
-          <span>{`Current Folder: ${currentClickedFolder.value}`}</span>
-          {currentClickedFolder.value ? 
-            <div>
-              <button onClick={() => this.handleEditExpand()}><i className="fas fa-edit"></i> Edit</button>
-              <button onClick={() => this.handleDeleteExpand()}>Delete <i className="fas fa-trash-alt"></i></button>
-            </div> : null}
+          {folderList.length > 0 ? folderList : <h3>None! Click Below to Make a New Folder!</h3>}
         </div>
         <div>
-            {this.state.editClicked ? this.renderEditExpand() : null}
-            {this.state.deleteClicked ? this.renderDeleteExpand() : null}
+          <button onClick={() => handleFolderAddClickExpand()}>New Folder <i className="fas fa-folder-plus"></i></button>
+          {folderAddClicked ? renderExpanded() : null}
         </div>
-      </section>
-    </Fragment>
-    );
-  };
-};
+      <div>
+        <span>{`Current Folder: ${currentClickedFolder.value}`}</span>
+        {currentClickedFolder.value ? 
+          <div>
+            <button onClick={() => handleEditExpand()}><i className="fas fa-edit"></i> Edit</button>
+            <button onClick={() => handleDeleteExpand()}>Delete <i className="fas fa-trash-alt"></i></button>
+          </div> : null}
+      </div>
+      <div>
+          {state.editClicked ? renderEditExpand() : null}
+          {state.deleteClicked ? renderDeleteExpand() : null}
+      </div>
+    </section>
+  </Fragment>
+  );
+}
+
+export default FoldersList;
