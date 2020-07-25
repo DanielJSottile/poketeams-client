@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Fragment } from 'react';
 import {Route, Switch, BrowserRouter} from 'react-router-dom';
 import BuildPage from '../../routes/BuildPage/BuildPage';
 import HomePage from '../../routes/HomePage/HomePage';
@@ -11,9 +11,7 @@ import PrivateRoute from '../Utils/PrivateRoute';
 import PublicOnlyRoute from '../Utils/PublicOnlyRoute';
 import RegistrationForm from '../RegistrationForm/RegistrationForm';
 
-export default class App extends Component {
-  
-  render() {
+const App = () => {
     return (
         <Fragment>
           <main>
@@ -47,8 +45,9 @@ export default class App extends Component {
           </main>
         </Fragment>
     );
-  };
 };
+
+export default App;
 
 
 
