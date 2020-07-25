@@ -1,68 +1,69 @@
-import React, { Component, Fragment } from 'react';
+import React, { Fragment, useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import GeneralContext from '../../contexts/GeneralContext';
 import showdownGenerate from '../../functions/generate';
 import SetEdit from '../Set-Edit/Set-Edit';
 
 
-export default class Team extends Component {
+const TeamEdit = (props) => {
 
-  static contextType = GeneralContext;
+  const GenCon = useContext(GeneralContext);
  
-
-  // we have a bug.  we need to change the team_name and description based on the current team.  Will fix later.
+  // wait I do? where?
+  // ??? we have a bug.  we need to change the team_name and description based on the current team.  Will fix later.
 
   /* We actually do need to have State here, 
   because we are EDITING values from components 
   that there are more than ONE of. However, the
   function to update the form and delete are single
-  functions handled in the App.js. */
+  functions handled in the General Context. */
 
-  state = { 
-    team_name: {value: this.props.team.team_name || '', touched: false},
-    favorite_team: {value: false, touched: false},
-    description: {value: this.props.team.team_description || '', touched: false},
-    teamExpandToggle: true,
-    deleteClicked: false,
-  }
+  const [state, setState] = useState(
+    { 
+      team_name: {value: props.team.team_name || '', touched: false},
+      favorite_team: {value: false, touched: false},
+      description: {value: props.team.team_description || '', touched: false},
+      teamExpandToggle: true,
+      deleteClicked: false,
+    }
+  );
 
   // set state
 
-  setTeamName = team_name => {
-    this.setState({team_name: {value: team_name, touched: true}});
+  const setTeamName = team_name => {
+    setState(oldVals => ({...oldVals, team_name: {value: team_name, touched: true}}))
   };
 
-  setFavTeam = favorite_team => {
-    this.setState({favorite_team: {value: favorite_team, touched: true}});
+  const setFavTeam = favorite_team => {
+    setState(oldVals => ({...oldVals, favorite_team: {value: favorite_team, touched: true}}))
   };
 
-  setDesc = description => {
-    this.setState({description: {value: description, touched: true}});
+  const setDesc = description => {
+    setState(oldVals => ({...oldVals, description: {value: description, touched: true}}))
   };
 
-  handleTeamToggle = () => {
-    this.setState(
-      {teamExpandToggle: !this.state.teamExpandToggle,
-      team_name: {value: this.props.team.team_name || '', touched: false},
-      description: {value: this.props.team.description || '', touched: false}})
+  const handleTeamToggle = () => {
+    setState(oldVals => ({...oldVals, teamExpandToggle: !state.teamExpandToggle,
+      team_name: {value: props.team.team_name || '', touched: false},
+      description: {value: props.team.description || '', touched: false}}))
   };
 
-  handleDeleteExpand() {
-    this.setState({deleteClicked: !this.state.deleteClicked});
+  const handleDeleteExpand = () => {
+    setState(oldVals => ({...oldVals, deleteClicked: !state.deleteClicked}))
   }
 
 
   // validate
 
-  validateTeamName = () => {
-    let team_name = this.state.team_name.value;
+  const validateTeamName = () => {
+    let team_name = state.team_name.value;
     if(!team_name){
       return `Team MUST have a name!`
     }
   };
 
-  validateDesc = () => {
-    let description = this.state.description.value;
+  const validateDesc = () => {
+    let description = state.description.value;
     if (typeof(description) !== 'string') {
       return `This should never come up, it is superflous`
     }
@@ -70,9 +71,9 @@ export default class Team extends Component {
 
   // API calls are handled in App.js
 
-  renderSetList(teamSets) {
+  const renderSetList = (teamSets) => {
 
-    const {handlePostNewPokemon} = this.context;
+    const {handlePostNewPokemon} = GenCon;
 
     const SetList = teamSets.map((set, i) => {
       return <SetEdit key={i} set={set}/>
@@ -81,45 +82,45 @@ export default class Team extends Component {
     if(SetList.length < 6){
       SetList.push(<button key={SetList.length} onClick={(e) => {
         e.preventDefault();
-        handlePostNewPokemon(this.props.team.id); // we just need the id of the team.  this func fills out default vals.
+        handlePostNewPokemon(props.team.id); // we just need the id of the team.  this func fills out default vals.
       }}>Add Pokemon! +</button>)
     }
     return SetList;
   }
 
-  renderDeleteExpand() {
+  const renderDeleteExpand = () => {
     const {
       handleDeleteTeam,
-    } = this.context;
+    } = GenCon;
 
     return (
       <div>
         <p>Are You Sure You'd Like to Delete this Team?</p> 
         <button onClick={() => {
-          handleDeleteTeam(this.props.team.id);
-          this.handleDeleteExpand();
+          handleDeleteTeam(props.team.id);
+          handleDeleteExpand();
         }}>Yes <i className="fas fa-thumbs-up"></i></button>
-        <button onClick={() => this.handleDeleteExpand()}>No <i className="fas fa-thumbs-down"></i></button>
+        <button onClick={() => handleDeleteExpand()}>No <i className="fas fa-thumbs-down"></i></button>
       </div> 
     )
   };
 
-  renderExpandedTeam() {
+  const renderExpandedTeam = () => {
 
     const {
       userSets,
       handleUpdateTeam,
-    } = this.context;
+    } = GenCon;
 
     const us = [...new Set(userSets.map(set => set.id))];
     
     const newUS = us.map(id => userSets.find(set => set.id === id));
 
-    const {team, id} = this.props;
+    const {team, id} = props;
 
     const teamSets = newUS.filter(set => set.team_id === team.id)
 
-    const SetList = this.renderSetList(teamSets)
+    const SetList = renderSetList(teamSets)
 
     return (
       <section id={`${id}`}>
@@ -127,11 +128,11 @@ export default class Team extends Component {
           <div className="team-header">
             <form className="team-form">
               <div className="team-title">
-                <button onClick={() => this.handleTeamToggle()}>Compress Team <i className="fas fa-compress-arrows-alt"></i></button>
+                <button onClick={() => handleTeamToggle()}>Compress Team <i className="fas fa-compress-arrows-alt"></i></button>
                 <div className="title-name">
                   <label htmlFor="title-name">Team Name:</label>
-                  {<p className="error">{this.validateTeamName()}</p>}
-                  <input className="title" placeholder="e.g. Cool Team" value={this.state.team_name.value} onChange={e => this.setTeamName(e.target.value)} type="text" name="team-name" id={`team-name-${team.id}`}/>
+                  {<p className="error">{validateTeamName()}</p>}
+                  <input className="title" placeholder="e.g. Cool Team" value={state.team_name.value} onChange={e => setTeamName(e.target.value)} type="text" name="team-name" id={`team-name-${team.id}`}/>
                 </div>
                 <p>By {team.user_name}</p>
                 <p>Created on: {new Date(team.date_created).toLocaleString('en-GB', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
@@ -143,17 +144,17 @@ export default class Team extends Component {
               </div>
               <div className="title-content">
                 <label htmlFor="title-content">Description:</label>
-                {<p className="error">{this.validateDesc()}</p>}
-                <textarea className="title-content desc" placeholder="e.g. description" type="text" name="title-content" id={`title-content-${team.id}`} value={this.state.description.value} onChange={e => this.setDesc(e.target.value)}/>
+                {<p className="error">{validateDesc()}</p>}
+                <textarea className="title-content desc" placeholder="e.g. description" type="text" name="title-content" id={`title-content-${team.id}`} value={state.description.value} onChange={e => setDesc(e.target.value)}/>
               </div>
               <button type="submit"
                 disabled={
-                  this.validateTeamName() ||
-                  this.validateDesc()
+                  validateTeamName() ||
+                  validateDesc()
                 }
                 onClick={(e) => {
                   e.preventDefault();
-                  handleUpdateTeam(this.state.team_name.value, this.state.description.value, team.id);
+                  handleUpdateTeam(state.team_name.value, state.description.value, team.id);
                 }}>Save Team Details <i className="fas fa-save"></i></button>
             </form>
           <div className="export-team">
@@ -170,9 +171,9 @@ export default class Team extends Component {
           <div>
             <button onClick={(e) => {
               e.preventDefault();
-              this.handleDeleteExpand()
+              handleDeleteExpand()
               }}><i className="fas fa-trash-alt"></i> Delete Team!</button>
-              {this.state.deleteClicked ? this.renderDeleteExpand() : null}
+              {state.deleteClicked ? renderDeleteExpand() : null}
           </div>
         </div>
         {SetList}
@@ -180,13 +181,13 @@ export default class Team extends Component {
     );
   };
 
-  renderUnexpandedTeam() {
+  const renderUnexpandedTeam = () => {
 
-    const {team, id} = this.props;
+    const {team, id} = props;
 
     return (
       <section id={`${id}`}>
-        <div className="team-closed" onClick={() => this.handleTeamToggle()}>
+        <div className="team-closed" onClick={() => handleTeamToggle()}>
           <div>
             <h3>{team.team_name}</h3>
           </div>
@@ -199,12 +200,13 @@ export default class Team extends Component {
     );
   };
 
-  render() {
+  
 
     return (
       <Fragment>
-        {this.state.teamExpandToggle ? this.renderUnexpandedTeam() : this.renderExpandedTeam()}
+        {state.teamExpandToggle ? renderUnexpandedTeam() : renderExpandedTeam()}
       </Fragment>
     );
-  };
 };
+
+export default TeamEdit;
