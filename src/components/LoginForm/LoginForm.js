@@ -8,10 +8,6 @@ const LoginForm = (props) => {
 
   const GenCon = useContext(GeneralContext);
 
-  const defaultProps = {
-    onLoginSucess: () => {}
-  };
-
   const [state, setState] = useState({error: null});
 
   const handleSubmitJwtAuth = ev => {
@@ -28,7 +24,7 @@ const LoginForm = (props) => {
       password.value = ''
       TokenService.saveAuthToken(res.authToken)
       GenCon.getUserState()
-      defaultProps.onLoginSuccess()
+      props.onLoginSuccess()
     })
     .catch(res => {
       setState(oldVals => ({...oldVals, error: res.error}));

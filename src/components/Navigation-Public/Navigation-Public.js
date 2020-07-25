@@ -1,24 +1,23 @@
-import React, { Component } from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import SearchBar from '../SearchBar-Public/SearchBar-Public';
 import GeneralContext from '../../contexts/GeneralContext';
 import jwtDecode from 'jwt-decode';
 import TokenService from '../../services/token-service';
 
-export default class Navigation extends Component {
+const NavigationPublic = (props) => {
+  const GenCon = useContext(GeneralContext);
 
-  static contextType = GeneralContext;
-
-  handleLogoutClick = () => {
+  const handleLogoutClick = () => {
     TokenService.clearAuthToken();
-    this.context.clearUserState();
+    GenCon.clearUserState();
   };
 
-  renderLogout() {
+  const renderLogout = () => {
     return (
       <div className='navigation-logged-in'>
       <Link
-        onClick={this.handleLogoutClick}
+        onClick={handleLogoutClick}
         to='/'>
         Logout <i className="fas fa-sign-out-alt"></i>
         </Link>
@@ -26,7 +25,7 @@ export default class Navigation extends Component {
     );
   };
 
-  renderLogin() {
+  const renderLogin = () => {
     return (
       <div className='navigation-logged-out'>
       <Link
@@ -37,7 +36,7 @@ export default class Navigation extends Component {
     );
   };
 
-  renderUserWelcome() {
+  const renderUserWelcome = () => {
     let user = '';
 
     if (TokenService.getAuthToken()){
@@ -52,15 +51,13 @@ export default class Navigation extends Component {
     }
   }
 
-  render() {
-
     return (
       <div>
         <nav role="navigation">
           <div className="user-welcome">
-          {this.renderUserWelcome()}
+          {renderUserWelcome()}
           </div>
-          <h1>{<img src="https://cdn.bulbagarden.net/upload/0/09/Dream_Park_Ball_Sprite.png" alt="parkball"/>}{`${this.props.title}`}</h1>
+          <h1>{<img src="https://cdn.bulbagarden.net/upload/0/09/Dream_Park_Ball_Sprite.png" alt="parkball"/>}{`${props.title}`}</h1>
           <div className="navbar">
             <div className="button_things">
               <Link to='/'><i className="fas fa-home"></i>Home</Link>
@@ -69,19 +66,20 @@ export default class Navigation extends Component {
             <div className="mobile-button">
               <Link to='/'><i className="fas fa-home"></i>Home</Link>
               <Link to='/build'><i className="fas fa-hammer"></i>Build!</Link>
-              {TokenService.hasAuthToken() ? this.renderLogout() : this.renderLogin()}
+              {TokenService.hasAuthToken() ? renderLogout() : renderLogin()}
             </div>
             <div>
               <SearchBar/>
             </div>
             <div className="user_things">
-              {TokenService.hasAuthToken() ? this.renderLogout() : this.renderLogin()}
+              {TokenService.hasAuthToken() ? renderLogout() : renderLogin()}
             </div>
           </div>
         </nav>
       </div>
     );
-  };
-};
+}
+
+export default NavigationPublic;
 
 

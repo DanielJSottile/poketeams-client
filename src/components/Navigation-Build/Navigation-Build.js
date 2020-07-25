@@ -5,7 +5,7 @@ import GeneralContext from '../../contexts/GeneralContext';
 import TokenService from '../../services/token-service';
 import jwtDecode from 'jwt-decode';
 
-const Navigation = (props) => {
+const NavigationBuild = (props) => {
 
   const GenCon = useContext(GeneralContext);
 
@@ -81,4 +81,4 @@ const Navigation = (props) => {
   );
 }
 
-export default Navigation;
+export default NavigationBuild;
