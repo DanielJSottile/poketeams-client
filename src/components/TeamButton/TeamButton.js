@@ -1,26 +1,25 @@
-import React, { Component } from 'react';
+import React, { useContext } from 'react';
 import GeneralContext from '../../contexts/GeneralContext';
 
-export default class TeamButton extends Component {
+const TeamButton = (props) => {
 
-  static contextType = GeneralContext;
+  const GenCon = useContext(GeneralContext);
 
-  render() {
-
-    const {handleCurrentTeamClicked} = this.context;
+  const {handleCurrentTeamClicked} = GenCon;
     
-    // For now, the Link doesnt go to the anchor because the hash looks disgusting.
-    return ( 
-      <a 
-        href={`#${this.props.team_name}`}
-        className="btn"
-        id={this.props.id} 
-        onClick={(e) => {
-          e.preventDefault() 
-          handleCurrentTeamClicked(this.props.team_name, this.props.id);
-        }}>
-        <i className="fas fa-layer-group"></i> {this.props.team_name}
-      </a>
-    );
-  };
+  // For now, the Link doesnt go to the anchor because the hash looks disgusting.
+  return ( 
+    <a 
+      href={`#${props.team_name}`}
+      className="btn"
+      id={props.id} 
+      onClick={(e) => {
+        e.preventDefault() 
+        handleCurrentTeamClicked(props.team_name, props.id);
+      }}>
+      <i className="fas fa-layer-group"></i> {props.team_name}
+    </a>
+  );
 };
+
+export default TeamButton;
