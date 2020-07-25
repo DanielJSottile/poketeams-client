@@ -1,22 +1,22 @@
-import React, { Component } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import TokenService from '../../services/token-service';
 import GeneralContext from '../../contexts/GeneralContext';
 import AuthApiService from '../../services/auth-api-service';
 
-export default class LoginForm extends Component {
+const LoginForm = (props) => {
 
-  static contextType = GeneralContext;
+  const GenCon = useContext(GeneralContext);
 
-  static defaultProps = {
+  const defaultProps = {
     onLoginSucess: () => {}
   };
 
-  state = {error: null}
+  const [state, setState] = useState({error: null});
 
-  handleSubmitJwtAuth = ev => {
+  const handleSubmitJwtAuth = ev => {
     ev.preventDefault();
-    this.setState({error: null});
+    setState(oldVals => ({...oldVals, error: null}));
     const { user_name, password } = ev.target
 
     AuthApiService.postLogin({
@@ -27,35 +27,32 @@ export default class LoginForm extends Component {
       user_name.value = ''
       password.value = ''
       TokenService.saveAuthToken(res.authToken)
-      this.context.getUserState()
-      this.props.onLoginSuccess()
+      GenCon.getUserState()
+      defaultProps.onLoginSuccess()
     })
     .catch(res => {
-      this.setState({error: res.error})
+      setState(oldVals => ({...oldVals, error: res.error}));
     })
-  }
-
-  render() {
-    const { error } = this.state;
-
-    return (
-      <form className="signup-form"
-      onSubmit={this.handleSubmitJwtAuth}
-      >
-        <div role='alert'>{error && <p className='red'>{error}</p>}</div>
-        <div>
-          <label htmlFor="user_name">Username</label>
-          <input placeholder="Username" autoComplete="username" type="text" name="user_name" id="user_name" />
-        </div>
-        <div>
-          <label htmlFor="password">Password</label>
-          <input type="password" autoComplete="current-password" name="password" id="password" />
-        </div>
-        <button type="submit">Log In <i className="fas fa-sign-in-alt"></i></button>
-        <p>Not A Member? </p>
-        <Link to='/register'>Register Here:</Link>
-      </form>
-    );
   };
-};
 
+  return (
+    <form className="signup-form"
+    onSubmit={handleSubmitJwtAuth}
+    >
+      <div role='alert'>{state.error && <p className='red'>{state.error}</p>}</div>
+      <div>
+        <label htmlFor="user_name">Username</label>
+        <input placeholder="Username" autoComplete="username" type="text" name="user_name" id="user_name" />
+      </div>
+      <div>
+        <label htmlFor="password">Password</label>
+        <input type="password" autoComplete="current-password" name="password" id="password" />
+      </div>
+      <button type="submit">Log In <i className="fas fa-sign-in-alt"></i></button>
+      <p>Not A Member? </p>
+      <Link to='/register'>Register Here:</Link>
+    </form>
+  );
+}
+
+export default LoginForm;
