@@ -34,9 +34,9 @@ const TeamEdit = (props) => {
     setState(oldVals => ({...oldVals, team_name: {value: team_name, touched: true}}))
   };
 
-  const setFavTeam = favorite_team => {
-    setState(oldVals => ({...oldVals, favorite_team: {value: favorite_team, touched: true}}))
-  };
+  // const setFavTeam = favorite_team => {
+  //   setState(oldVals => ({...oldVals, favorite_team: {value: favorite_team, touched: true}}))
+  // };
 
   const setDesc = description => {
     setState(oldVals => ({...oldVals, description: {value: description, touched: true}}))

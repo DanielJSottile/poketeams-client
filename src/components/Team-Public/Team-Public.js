@@ -1,27 +1,26 @@
-import React, { Component, Fragment } from 'react';
+import React, { Fragment, useContext, useState } from 'react';
 import {Link} from 'react-router-dom';
 import GeneralContext from '../../contexts/GeneralContext';
 import showdownGenerate from '../../functions/generate';
 import SetPublic from '../Set-Public/Set-Public';
 
 
-export default class Team extends Component {
+const TeamPublic = (props) => {
 
-  static contextType = GeneralContext;
+  const GenCon = useContext(GeneralContext);
 
-  state = {
-    teamExpandToggle: true,
-  }
+  const [state, setState] = useState({teamExpandToggle: true});
+  
 
-  handleTeamToggle = () => {
-    this.setState({teamExpandToggle: !this.state.teamExpandToggle})
+  const handleTeamToggle = () => {
+    setState(oldVals => ({...oldVals, teamExpandToggle: !state.teamExpandToggle}));
   };
 
-  renderExpandedTeam(){
+  const renderExpandedTeam = () => {
 
     const {
       publicSets,
-    } = this.context;
+    } = GenCon;
 
     /* we have to use fucking stupid wizardry in order to make the 
     publicSets have UNIQUE sets.  Basically making a SET of all 
@@ -32,7 +31,7 @@ export default class Team extends Component {
     
     const newPS = ps.map(id => publicSets.find(set => set.id === id))
 
-    const {team, id} = this.props;
+    const {team, id} = props;
 
     const teamSets = newPS.filter(set => set.team_id === team.id)
 
@@ -46,7 +45,7 @@ export default class Team extends Component {
           <div className="team-header">
             <form className="team-form">
               <div className="team-title">
-                <button onClick={() => this.handleTeamToggle()}>Compress Team <i className="fas fa-compress-arrows-alt"></i></button>
+                <button onClick={() => handleTeamToggle()}>Compress Team <i className="fas fa-compress-arrows-alt"></i></button>
                 <div className="title-name">
                   <label htmlFor="title-name">Team Name:</label>
                   <input disabled readOnly className="title" placeholder="e.g. Cool Team" value={team.team_name} type="text" name="team-name" id={`team-name-${team.id}`}/>
@@ -82,13 +81,13 @@ export default class Team extends Component {
   };
 
 
-  renderUnexpandedTeam() {
+  const renderUnexpandedTeam = () => {
 
-    const {team, id} = this.props;
+    const {team, id} = props;
 
     return (
       <section id={`${id}`}>
-        <div className="team-closed" onClick={() => this.handleTeamToggle()}>
+        <div className="team-closed" onClick={() => handleTeamToggle()}>
           <div>
             <h3>{team.team_name}</h3>
           </div>
@@ -101,12 +100,11 @@ export default class Team extends Component {
     );
   };
 
-  render() {
-
     return (
       <Fragment>
-        {this.state.teamExpandToggle ? this.renderUnexpandedTeam() : this.renderExpandedTeam()}
+        {state.teamExpandToggle ? renderUnexpandedTeam() : renderExpandedTeam()}
       </Fragment>
     );
-  };
 };
+
+export default TeamPublic;
