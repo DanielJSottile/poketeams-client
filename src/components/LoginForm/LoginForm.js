@@ -35,7 +35,7 @@ const LoginForm = (props) => {
     <form className="signup-form"
     onSubmit={handleSubmitJwtAuth}
     >
-      <div role='alert'>{state.error && <p className='red'>{state.error}</p>}</div>
+      <div role='alert'>{state.error && <p className='error-login shake-horizontal'>{state.error}</p>}</div>
       <div>
         <label htmlFor="user_name">Username</label>
         <input placeholder="Username" autoComplete="username" type="text" name="user_name" id="user_name" />
@@ -45,8 +45,6 @@ const LoginForm = (props) => {
         <input type="password" autoComplete="current-password" name="password" id="password" />
       </div>
       <button type="submit">Log In <i className="fas fa-sign-in-alt"></i></button>
-      <p>Not A Member? </p>
-      <Link to='/register'>Register Here:</Link>
     </form>
   );
 }

@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import {Link} from 'react-router-dom';
 import Footer from '../../components/Footer/Footer';
 import LoginForm from '../../components/LoginForm/LoginForm';
 
@@ -13,16 +14,22 @@ const LandingPage = (props) => {
     return (
       <Fragment>
           <header role="banner">
-            <h1>PokéTeams</h1>
-            <h2>store. organize. edit. share.</h2>
+            <div className="landing-title"></div>
+              <h2>store. organize. edit. share.</h2>
           </header>
           <section>
             <header>
-              <h3>Gotta Store 'em All!</h3>
+              <h3 className="hook">Gotta Store 'em All!</h3>
             </header>
-            <LoginForm onLoginSuccess={handleLoginSucess}/>
+            <div className='login-div'>
+              <LoginForm onLoginSuccess={handleLoginSucess}/>
+              <p>Not A Member? </p>
+              <Link className="register-entry" to='/register'>Register Here:</Link>
+              <h2 className="landing-sub-subheader">Or...</h2>
+              <Link className="public-entry" to='/'>Find Teams Here!</Link>
+            </div>
           </section>
-          <section className="left">
+          <section>
             <header>
               <h3>Store your teams like never before!</h3>
             </header>
@@ -41,7 +48,7 @@ const LandingPage = (props) => {
             individual sets!  The possibilities are endless!
             </p>
           </section>
-          <section className="right">
+          <section>
             <header>
                 <h3>Search By Numerous Parameters!</h3>
             </header>

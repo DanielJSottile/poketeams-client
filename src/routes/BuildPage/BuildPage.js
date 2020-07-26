@@ -9,8 +9,7 @@ const BuildPage = (props) => {
 
     return (
       <Fragment>
-        <NavigationBuild
-        title={"PokéTeams - Build!"}/>
+        <NavigationBuild/>
         <main>
           <header role="banner">
             <FolderList/>

@@ -19,7 +19,7 @@ const NavigationBuild = (props) => {
       <div className='navigation-logged-in'>
       <Link
         onClick={handleLogoutClick}
-        to='/'>
+        to='/landing'>
         Logout <i className="fas fa-sign-out-alt"></i>
         </Link>
       </div>
@@ -58,7 +58,7 @@ const NavigationBuild = (props) => {
         <div className="user-welcome">
           {renderUserWelcome()}
         </div>
-        <h1>{<img src="https://cdn.bulbagarden.net/upload/0/09/Dream_Park_Ball_Sprite.png" alt="parkball"/>}{`${props.title}`}</h1>
+        <div className="build-title"></div>
         <div className="navbar">
           <div className="button_things">
             <Link to='/'><i className="fas fa-home"></i> Home</Link>

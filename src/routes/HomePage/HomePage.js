@@ -8,8 +8,7 @@ const HomePage = (props) => {
 
     return (
       <Fragment>
-        <NavigationPublic
-        title={"PokéTeams - Home"}/>
+        <NavigationPublic/>
         <main>
           <header role="banner">
             <h2>Results:</h2>

@@ -1,6 +1,8 @@
 import React, { Fragment, useContext } from 'react';
 import GeneralContext from '../../contexts/GeneralContext';
 import TeamButton from '../TeamButton/TeamButton';
+import PokeballLoader from '../Loaders/PokeballLoader/PokeballLoader';
+import LoadingWhite from '../Loaders/LoadingWhite/LoadingWhite';
 
 const TeamsButtonListPublic = (props) => {
 
@@ -43,7 +45,12 @@ const TeamsButtonListPublic = (props) => {
             
           </div>
           <div>
-            {(TeamList.length > 0) ? TeamList : <h3>None! Please Log In and Add More Teams!</h3>}
+            {(TeamList.length > 0) ? TeamList : 
+              <div className="pokeball-div">
+                <PokeballLoader/>
+                <LoadingWhite/>
+                <h3 className="hint">(Hint: There May Be No Teams)</h3>
+              </div>}
           </div>
           <div>
             <span>{`Current Team: ${currentClickedTeam.value}`}</span>
