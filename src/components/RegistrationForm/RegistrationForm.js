@@ -10,7 +10,8 @@ const RegistrationForm = (props) => {
     ev.preventDefault()
     const {user_name, password } = ev.target
 
-    this.setState({ error: null })
+    setState({error: null});
+
      AuthApiService.postUser({
        user_name: user_name.value,
        password: password.value,
