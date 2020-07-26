@@ -37,7 +37,7 @@ const RegistrationPage = (props) => {
           <p className="terms-of-service">By creating an account, you agree to the *Terms of Service. 
           For more information about PokéTeam's privacy practices, see the PokéTeams *Privacy Statement.</p>
 
-          <p className="notice">*Not Yet Implemented.  Sorry!</p>
+          <p className="notice">*Not Yet Implemented.  Sorry!  Just know we're working on keeping your data secure!</p>
         </section>
         <Footer/>
       </Fragment>

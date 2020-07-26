@@ -15,6 +15,7 @@ div.registration-form-container label {
 }
 
 div.registration-form-container input {
+  font-size: 18px;
   border: 2px solid rgb(212, 41, 41);
 }
 
@@ -52,7 +53,7 @@ div.registration-form-container button:hover, .go-back:hover {
   margin: 10px;
   text-align: center;
   text-align: center;
-  color: red;
+  color: rgb(212, 41, 41);
   font-weight: bold;
   font-size: 14px;
 }
