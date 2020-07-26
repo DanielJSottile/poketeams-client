@@ -9,7 +9,7 @@ import ShareTeamPage from '../../routes/ShareTeamPage/ShareTeamPage';
 import ErrorPage from '../ErrorPage/ErrorPage';
 import PrivateRoute from '../Utils/PrivateRoute';
 import PublicOnlyRoute from '../Utils/PublicOnlyRoute';
-import RegistrationForm from '../RegistrationForm/RegistrationForm';
+import RegistrationPage from '../../routes/RegistrationPage/RegistrationPage'
 
 const App = () => {
     return (
@@ -32,7 +32,7 @@ const App = () => {
                 component = {LandingPage}/>
               <PublicOnlyRoute
                 path = {'/register'}
-                component = {RegistrationForm}/>
+                component = {RegistrationPage}/>
               <PrivateRoute
                 path={'/build'}
                 component={BuildPage}/>
