@@ -861,5 +861,3 @@ export function GeneralProvider(props) {
       </GeneralContext.Provider>
     )
   }
-
-
