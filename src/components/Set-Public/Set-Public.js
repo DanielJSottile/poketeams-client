@@ -1,28 +1,24 @@
-import React, { Component, Fragment } from 'react';
+import React, {  Fragment, useState } from 'react';
 import { Link } from 'react-router-dom';
-import UserContext from '../../contexts/UserContext';
 import showdownGenerate from '../../functions/generate';
 import legality from '../../functions/legality';
 
-export default class Set extends Component {
+const SetPublic = (props) => {
 
-  static contextType = UserContext;
+  const [state, setState] = useState({setExpandToggle: true});
+  
 
-  state = {
-    setExpandToggle: true
-  }
-
-  handleSetToggle = () => {
-    this.setState({setExpandToggle: !this.state.setExpandToggle})
+  const handleSetToggle = () => {
+    setState(oldVals => ({...oldVals, setExpandToggle: !state.setExpandToggle}));
   };
   
-  renderExpandedSet() {
+  const renderExpandedSet = () => {
 
-    const {set} = this.props;
+    const {set} = props;
 
     return (
       <div className="pokemon">
-      <button onClick={() => this.handleSetToggle()}>Compress Set <i className="fas fa-compress-arrows-alt"></i></button>
+      <button onClick={() => handleSetToggle()}>Compress Set <i className="fas fa-compress-arrows-alt"></i></button>
         <form disabled readOnly> 
           <div className="pokemon-intro">
             <div className="name-sprite">
@@ -115,9 +111,9 @@ export default class Set extends Component {
     );
   };
 
-  renderUnexpandedSet() {
+  const renderUnexpandedSet = () => {
 
-    const {set} = this.props;
+    const {set} = props;
 
     const types = legality.returnTypeIcon(legality.returnType(set.species)).map((type, i)=> {
       return <img className="icon" key={i} src={`${type}`} alt={`${i + 1}`}/>
@@ -126,7 +122,7 @@ export default class Set extends Component {
     return (
       <Fragment>
       <div className="pokemon">
-        <div className="closed" onClick={() => this.handleSetToggle()}>
+        <div className="closed" onClick={() => handleSetToggle()}>
           <div className="inside">
             <img className="icon" src={legality.returnIconSprite(set.species, set.shiny)} alt={set.species}/>
           </div>
@@ -142,13 +138,13 @@ export default class Set extends Component {
     );
   }
 
-  render() {
+  
     return (
       <Fragment>
-        {this.state.setExpandToggle ? this.renderUnexpandedSet() : this.renderExpandedSet()} {/* or some value in state */ }
+        {state.setExpandToggle ? renderUnexpandedSet() : renderExpandedSet()} {/* or some value in state */ }
       </Fragment>
     );
-  };
 };
 
+export default SetPublic;
 

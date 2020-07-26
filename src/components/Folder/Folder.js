@@ -1,21 +1,19 @@
-import React, { Component } from 'react';
-import UserContext from '../../contexts/UserContext';
+import React, { useContext } from 'react';
+import GeneralContext from '../../contexts/GeneralContext';
 
-export default class Folder extends Component {
+const Folder = (props) => {
 
-  static contextType = UserContext;
+  const GenCon = useContext(GeneralContext);
+  const {handleCurrentFolderClicked} = GenCon;
 
-  render() { 
+  return (
+    <button
+      className="btn"
+      id={props.id} 
+      onClick={() => handleCurrentFolderClicked(props.folder_name, props.id)}>
+      <i className="fas fa-folder"></i> {props.folder_name}
+    </button>
+  );
+}
 
-    const {handleCurrentFolderClicked} = this.context;
-
-    return (
-      <button
-        className="btn"
-        id={this.props.id} 
-        onClick={() => handleCurrentFolderClicked(this.props.folder_name, this.props.id)}>
-        <i className="fas fa-folder"></i> {this.props.folder_name}
-      </button>
-    );
-  };
-};
+export default Folder;

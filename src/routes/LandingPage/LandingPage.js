@@ -1,20 +1,15 @@
-import React, { Component, Fragment } from 'react';
+import React, { Fragment } from 'react';
 import Footer from '../../components/Footer/Footer';
 import LoginForm from '../../components/LoginForm/LoginForm';
 
-export class LandingPage extends Component {
-  static defaultProps = {
-    location: {},
-    history: {push: () => {}}
-  };
-
-  handleLoginSucess = () => {
-    const { location, history } = this.props;
+const LandingPage = (props) => {
+  
+  const handleLoginSucess = () => {
+    const { location, history } = props;
     const destination = (location.state || {}).from || '/';
     history.push(destination);
   };
 
-  render() {
     return (
       <Fragment>
           <header role="banner">
@@ -25,7 +20,7 @@ export class LandingPage extends Component {
             <header>
               <h3>Gotta Store 'em All!</h3>
             </header>
-            <LoginForm onLoginSuccess={this.handleLoginSucess}/>
+            <LoginForm onLoginSuccess={handleLoginSucess}/>
           </section>
           <section className="left">
             <header>
@@ -65,12 +60,9 @@ export class LandingPage extends Component {
             teams and Pokemon and let the world know about your creations!
             </p>
           </section>
-          
-       
-      <Footer/>
+        <Footer/>
       </Fragment>
     );
-  };
 };
 
 export default LandingPage;

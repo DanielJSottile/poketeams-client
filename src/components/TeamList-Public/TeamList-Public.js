@@ -1,26 +1,25 @@
-import React, { Component, Fragment } from 'react';
-import UserContext from '../../contexts/UserContext';
+import React, { Fragment, useContext } from 'react';
+import GeneralContext from '../../contexts/GeneralContext';
 import TeamPublic from '../Team-Public/Team-Public';
 
 
-export default class TeamList extends Component {
+const TeamListPublic = (props) => {
 
-  static contextType = UserContext;
+  const GenCon = useContext(GeneralContext);
 
-  render() {
+  const {publicTeams} = GenCon;
 
-    const {publicTeams} = this.context;
-
-    const TeamList = publicTeams.map((team, i) => {
+  const TeamList = publicTeams.map((team, i) => {
       return <TeamPublic key={i} id={`${team.team_name}`} team={team}/>
-    });
+  });
 
-    return (
-      <Fragment>
-        {TeamList.length > 0 ? TeamList : <h3>There Are No Teams!  Make Teams with Pokemon!</h3>}
-      </Fragment>
-    );
-  };
+  return (
+    <Fragment>
+      {TeamList.length > 0 ? TeamList : <h3>There Are No Teams!  Make Teams with Pokemon!</h3>}
+    </Fragment>
+  );
 };
+
+export default TeamListPublic;
 
 

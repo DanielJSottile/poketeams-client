@@ -377,11 +377,10 @@ const apiService = {
         user_id: userid
       }),
     })
-      .then(res =>
-        (!res.ok)
-          ? res.json().then(e => Promise.reject(e))
-          : res.json()
-      )
+    .then(res => {
+      if (!res.ok) return res.json().then(e => Promise.reject(e))
+      return res
+    })
   },
 
   patchUserTeam(body, userid) {
@@ -393,11 +392,10 @@ const apiService = {
       },
       body: JSON.stringify(body),
     })
-      .then(res =>
-        (!res.ok)
-          ? res.json().then(e => Promise.reject(e))
-          : res.json()
-      )
+    .then(res => {
+      if (!res.ok) return res.json().then(e => Promise.reject(e))
+      return res
+    })
   },
 
 
@@ -410,11 +408,10 @@ const apiService = {
       },
       body: JSON.stringify(body),
     })
-      .then(res =>
-        (!res.ok)
-          ? res.json().then(e => Promise.reject(e))
-          : res.json()
-      )
+    .then(res => {
+      if (!res.ok) return res.json().then(e => Promise.reject(e))
+      return res
+    })
   },
 
   // DELETE
@@ -482,10 +479,5 @@ const apiService = {
         return data})
   },
 };
-
-
-
-
-
 
 export default apiService;

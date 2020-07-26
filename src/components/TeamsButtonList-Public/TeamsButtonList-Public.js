@@ -1,12 +1,10 @@
-import React, { Component , Fragment} from 'react';
-import UserContext from '../../contexts/UserContext';
+import React, { Fragment, useContext } from 'react';
+import GeneralContext from '../../contexts/GeneralContext';
 import TeamButton from '../TeamButton/TeamButton';
 
-export default class TeamsButtonList extends Component {
+const TeamsButtonListPublic = (props) => {
 
-  static contextType = UserContext;
-
-  render() { // ** WILL NEED TO GO BACK AND ADD THE PAGINATION FEATURE **
+  const GenCon = useContext(GeneralContext);
 
     const {
       publicTeams,
@@ -14,7 +12,7 @@ export default class TeamsButtonList extends Component {
       handlePageDown,
       handlePageUp,
       currentClickedTeam,
-    } = this.context;
+    } = GenCon;
 
     const TeamList = publicTeams.map((team, i) => <TeamButton key={i} id={team.id} team_name={team.team_name}/>);
 
@@ -53,5 +51,6 @@ export default class TeamsButtonList extends Component {
         </section>
       </Fragment>
     );
-  };
 };
+
+export default TeamsButtonListPublic;

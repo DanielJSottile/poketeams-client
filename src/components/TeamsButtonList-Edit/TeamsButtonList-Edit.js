@@ -1,12 +1,12 @@
-import React, { Component , Fragment} from 'react';
-import UserContext from '../../contexts/UserContext';
+import React, { Fragment, useContext} from 'react';
+import GeneralContext from '../../contexts/GeneralContext';
 import TeamButton from '../TeamButton/TeamButton';
 
-export default class TeamsButtonList extends Component {
+const TeamsButtonListEdit = (props) => {
 
-  static contextType = UserContext;
+  const GenCon = useContext(GeneralContext);
 
-  renderExpanded() {
+  const renderExpanded = () => {
 
     const {
       newTeamName,
@@ -20,10 +20,10 @@ export default class TeamsButtonList extends Component {
       validateNewTeamName,
       validateNewTeamImport,
       validateCurrentFolderClicked
-    } = this.context;
+    } = GenCon;
 
     return (
-      <form onSubmit={this.handleOnSubmit}>
+      <form>
         <div className="team-name">
           <label htmlFor="foldername">Team Name:</label>
           {<p className="error">{validateNewTeamName()}</p>}
@@ -55,15 +55,13 @@ export default class TeamsButtonList extends Component {
     )
   }
 
-  render() {
-
     const {
       userTeams,
       teamAddClicked,
       currentClickedTeam,
       currentClickedFolder,
       handleTeamAddClickExpand,
-    } = this.context;
+    } = GenCon;
 
     const TeamList = userTeams
     .filter(team => team.folder_id === currentClickedFolder.id)
@@ -81,7 +79,7 @@ export default class TeamsButtonList extends Component {
               onClick={() => handleTeamAddClickExpand()}>
               New Team <i className="far fa-plus-square"></i>
             </button>
-            {teamAddClicked ? this.renderExpanded() : null}
+            {teamAddClicked ? renderExpanded() : null}
           </div>
         <div>
           <span>{`Current Team: ${currentClickedTeam.value}`}</span>
@@ -89,5 +87,6 @@ export default class TeamsButtonList extends Component {
       </section>
     </Fragment>
     );
-  };
 };
+
+export default TeamsButtonListEdit;

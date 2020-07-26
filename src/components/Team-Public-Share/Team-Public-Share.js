@@ -1,13 +1,10 @@
-import React, { Fragment, useContext, useState } from 'react';
+import React, { Fragment, useState } from 'react';
 import {Link} from 'react-router-dom';
-import GeneralContext from '../../contexts/GeneralContext';
 import showdownGenerate from '../../functions/generate';
 import SetPublic from '../Set-Public/Set-Public';
 
 
-const TeamPublic = (props) => {
-
-  const GenCon = useContext(GeneralContext);
+const TeamPublicShare = (props) => {
 
   const [state, setState] = useState({teamExpandToggle: true});
   
@@ -18,29 +15,14 @@ const TeamPublic = (props) => {
 
   const renderExpandedTeam = () => {
 
-    const {
-      publicSets,
-    } = GenCon;
+    const {team, sets} = props;
 
-    /* we have to use fucking stupid wizardry in order to make the 
-    publicSets have UNIQUE sets.  Basically making a SET of all 
-    unique ids, and then finding those ids and making a new list.
-    I hate JS objects so much.
-    */
-    const ps = [...new Set(publicSets.map(set => set.id))];
-    
-    const newPS = ps.map(id => publicSets.find(set => set.id === id))
-
-    const {team, id} = props;
-
-    const teamSets = newPS.filter(set => set.team_id === team.id)
-
-    const SetList = teamSets.map((set, i) => {
+    const SetList = sets.map((set, i) => {
       return <SetPublic key={i} set={set}/>
     });
 
     return (
-      <section id={`${id}`}>
+      <section id={`${team.id}`}>
         <div className="team">
           <div className="team-header">
             <form className="team-form">
@@ -67,11 +49,11 @@ const TeamPublic = (props) => {
             <div>
             <Link to={{
               pathname: `/share/${team.id}`,
-              state: {singleteam: team, sets: teamSets}}} target="_blank" >Share This Team! <i className="fas fa-share-square"></i></Link>
+              state: {singleteam: team, sets: sets}}} target="_blank" >Share This Team! <i className="fas fa-share-square"></i></Link>
               <input disabled type="text" readOnly value={`poketeams.now.sh/share/${team.id}`}/>
             </div>
               <label htmlFor="edit-team">Export Team:</label>
-              <textarea disabled readOnly type="text" name="export-team" id={`export-team-${team.id}`} value={showdownGenerate(teamSets)}/>
+              <textarea disabled readOnly type="text" name="export-team" id={`export-team-${team.id}`} value={showdownGenerate(sets)}/>
             </div>
           </div>
         </div>
@@ -107,4 +89,4 @@ const TeamPublic = (props) => {
     );
 };
 
-export default TeamPublic;
+export default TeamPublicShare;

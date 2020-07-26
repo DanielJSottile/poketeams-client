@@ -1,14 +1,12 @@
-import React, { Component } from 'react';
-import UserContext from '../../contexts/UserContext';
+import React, { useContext } from 'react';
+import GeneralContext from '../../contexts/GeneralContext';
 
-export default class SearchBar extends Component {
+const SearchBarPublic = (props) => {
 
-  static contextType = UserContext;
+  const GenCon = useContext(GeneralContext);
 
-  
-  render() {
+  const {handleSearch, validateSearch, search, sort, setSearch, setSort} = GenCon;
 
-    const {handleSearch, validateSearch, search, sort, setSearch, setSort} = this.context;
     return (
       <div className="searchbar">
         <form className="search">
@@ -31,7 +29,8 @@ export default class SearchBar extends Component {
         </form>
       </div>
     )
-  }
 }
+
+export default SearchBarPublic;
 
 
