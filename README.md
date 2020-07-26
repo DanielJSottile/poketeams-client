@@ -2,12 +2,7 @@
 
 Link: https://poketeams.now.sh
 
-Test Login Users: 
-
-UserName: test
-Password: password
-
-Please only create teams in a new test folder by copying from the export of another team; PLEASE DO NOT DELETE ANY OF MY TEAMS!
+Prospective Employeers: You can register a user for testing!  Please feel free to steal other users teams for testing purposes!
 
 ## API Documentation
 
@@ -97,4 +92,4 @@ In the future...
 ...As well as additional resources from:
 - Pokemon Showdown Sprite Repository: 'http://play.pokemonshowdown.com/sprites/'
 
-...And a shoutout to the hardworking people at Smogon, Game Freak, and the Pokemon Company!
+...And a shoutout to the hardworking people at Smogon, Pokemon Showdown, Game Freak, and the Pokemon Company!
