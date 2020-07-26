@@ -5,13 +5,17 @@ import SetPublic from '../../components/Set-Public/Set-Public';
 const ShareSetPage = (props) => {
 
   const [state, setState] = useState({set: []});
+
+  /* This effectively works as ComponentDidMount, and the
+  dependency means that it only updates once as long as it
+  changes.  */
   
   useEffect(() => {
     apiService.getSingleSet(props.match.params.set_id) // Get the single public set!
       .then(data => {
         setState(oldVals => ({...oldVals, set: [data]}))
       })
-  })
+  }, [props.match.params.set_id])
 
     return (
       <div>

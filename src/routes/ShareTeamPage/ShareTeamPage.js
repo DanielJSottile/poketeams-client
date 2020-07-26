@@ -1,15 +1,10 @@
-import React, { useContext, useState, useEffect } from 'react';
-import GeneralContext from '../../contexts/GeneralContext';
+import React, { useState, useEffect } from 'react';
 import apiService from '../../services/apiService';
-import TeamPublic from '../../components/Team-Public/Team-Public';
+import TeamPublicShare from '../../components/Team-Public-Share/Team-Public-Share';
 
 const ShareTeamPage = (props) => {
 
-  const GenCon = useContext(GeneralContext);
-
-  const [state, setState] = useState({team: []});
-
-  const {addPublicSets} = GenCon;
+  const [state, setState] = useState({team: [], sets: []});
 
   /* This acts as our ComponentDidMount that gets the team
   specified in the url parameter.*/
@@ -22,22 +17,24 @@ const ShareTeamPage = (props) => {
         setState(oldVals => ({...oldVals, team: [data]}))
     })
 
-    /* We'll need to get the sets now because they may or may not be 
-    in the public teams at the moment (statistically almost 0 chance). 
-    The dependencies make sure it only updates 1 time.  */
+    /* Then we get the sets.  It doesn't matter if its done first
+    or not.  Before, we were passing it into the public sets, but 
+    this was causing a bug.  Instead, we pass these into a new
+    special public team share component that just has the one team
+    and the one set through props.  */
 
       .then(() => {
      apiService.getSetsForOneTeam(id)
       .then(data => {
-        addPublicSets(data)
+        setState(oldVals => ({...oldVals, sets: data}))
       })
     })
-  }, [props.match.params.team_id, addPublicSets]); 
+  }, [props.match.params.team_id]); 
 
     return (
       
       <div>
-       { state.team[0] ? <TeamPublic team={state.team[0]}/> : <h3>This team seems to not exist anymore</h3>}
+       { state.team[0] ? <TeamPublicShare team={state.team[0]} sets={state.sets}/> : <h3>This team seems to not exist anymore</h3>}
       </div>
     );
 };
