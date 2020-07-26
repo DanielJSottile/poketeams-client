@@ -1,0 +1,8 @@
+.loading-black {
+  background-image: url('../../../Images/Vanilla-2.3s-169px-transparent.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 50px;
+  margin: auto;
+  z-index: 100;
+}

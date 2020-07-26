@@ -1,6 +1,8 @@
 import React, { Fragment, useContext } from 'react';
 import GeneralContext from '../../contexts/GeneralContext';
 import TeamPublic from '../Team-Public/Team-Public';
+import PokeballLoader from '../Loaders/PokeballLoader/PokeballLoader';
+import LoadingBlack from '../Loaders/LoadingBlack/LoadingBlack';
 
 
 const TeamListPublic = (props) => {
@@ -15,7 +17,12 @@ const TeamListPublic = (props) => {
 
   return (
     <Fragment>
-      {TeamList.length > 0 ? TeamList : <h3>There Are No Teams!  Make Teams with Pokemon!</h3>}
+      {TeamList.length > 0 ? TeamList : 
+      <div className="pokeball-div">
+        <PokeballLoader/>
+        <LoadingBlack/>
+      <h3 className="hint">(Hint: There May Be No Teams)</h3>
+    </div>}
     </Fragment>
   );
 };

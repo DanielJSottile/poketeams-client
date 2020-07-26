@@ -16,7 +16,7 @@ const TeamListEdit = (props) => {
 
   return (
     <Fragment>
-      {TeamList.length > 0 ? TeamList : <h3>There Are No Teams!  Make Teams with Pokemon!</h3>}
+      {TeamList.length > 0 ? TeamList : <h3>Either No Folder is Selected Or There Are No Teams!  Make Teams with Pokemon!</h3>}
     </Fragment>
   );
 };

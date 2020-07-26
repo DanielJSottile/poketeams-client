@@ -422,6 +422,43 @@ img {
   margin: auto;
 }
 
+.pokeball-div {
+  margin: 10px;
+}
+
+.hint {
+  font-size: 14px;
+  letter-spacing: 6px;
+}
+
+.landing-title {
+  width: 90%;
+  background-image: url('../src/Images/PokeTeams.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 90%;
+  height: 12em;
+  margin: auto;
+}
+
+.home-title {
+  background-image: url('../src/Images/PokeTeams---Home.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 90%;
+  height: 12em;
+  margin: auto;
+}
+
+.build-title {
+  background-image: url('../src/Images/PokeTeams---Build.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 90%;
+  height: 12em;
+  margin: auto;
+}
+
 @media (min-width: 700px) { /* Medium Screen */
   .searchbar, .search {
     justify-content: space-between;
@@ -463,6 +500,11 @@ img {
 
   .export-team, .pokemon-import{
     width: 45%;
+  }
+
+  .landing-title, .home-title, .build-title {
+    background-size: 70%;
+    height: 15em;
   }
 
 }

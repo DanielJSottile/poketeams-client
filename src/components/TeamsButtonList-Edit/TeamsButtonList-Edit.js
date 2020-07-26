@@ -72,17 +72,18 @@ const TeamsButtonListEdit = (props) => {
         <section className="folders-list">
           <h3>Teams:</h3>
           <div>
-            {(TeamList.length > 0) ? TeamList : <h3>None! Click the Button Below to Get Started!</h3>}
+            {currentClickedFolder.value && TeamList.length > 0 ? TeamList : !currentClickedFolder.value ? <h3>Create or Click On a Folder to Get Started!</h3> : <h3>This Folder is Empty!  Make New Teams Below!</h3>}
           </div>
           <div>
-            <button 
+            {currentClickedFolder.value && <button 
               onClick={() => handleTeamAddClickExpand()}>
               New Team <i className="far fa-plus-square"></i>
-            </button>
+            </button>}
+            
             {teamAddClicked ? renderExpanded() : null}
           </div>
         <div>
-          <span>{`Current Team: ${currentClickedTeam.value}`}</span>
+          {currentClickedFolder.value && <span>{`Current Team: ${currentClickedTeam.value}`}</span>}
         </div>
       </section>
     </Fragment>

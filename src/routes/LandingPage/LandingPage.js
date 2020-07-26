@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import {Link} from 'react-router-dom';
 import Footer from '../../components/Footer/Footer';
 import LoginForm from '../../components/LoginForm/LoginForm';
 
@@ -13,7 +14,7 @@ const LandingPage = (props) => {
     return (
       <Fragment>
           <header role="banner">
-            <h1>PokéTeams</h1>
+            <div className="landing-title"></div>
             <h2>store. organize. edit. share.</h2>
           </header>
           <section>
@@ -21,6 +22,8 @@ const LandingPage = (props) => {
               <h3>Gotta Store 'em All!</h3>
             </header>
             <LoginForm onLoginSuccess={handleLoginSucess}/>
+            <h2 className="landing-sub-subheader">Or...</h2>
+            <Link className="get-inspired" to='/'>Find Teams Here!</Link>
           </section>
           <section className="left">
             <header>

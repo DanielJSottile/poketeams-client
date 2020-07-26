@@ -1,6 +1,8 @@
-import React, { useState } from 'react'
-import { Button, Input, Required } from '../Utils/Utils'
-import AuthApiService from '../../services/auth-api-service'
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { Button, Input, Required } from '../Utils/Utils';
+import AuthApiService from '../../services/auth-api-service';
+import './RegistrationForm.css';
 
 const RegistrationForm = (props) => {
 
@@ -8,7 +10,11 @@ const RegistrationForm = (props) => {
 
   const handleSubmit = ev => {
     ev.preventDefault()
-    const {user_name, password } = ev.target
+    const {user_name, password, verifyPassword } = ev.target
+
+    if (password.value !== verifyPassword.value) {
+      return setState({error: 'Your Passwords Do Not Match!'});
+    }
 
     setState({error: null});
 
@@ -32,7 +38,7 @@ const RegistrationForm = (props) => {
       onSubmit={handleSubmit}
     >
       <div role='alert'>
-        {state.error && <p className='red'>{state.error}</p>}
+        {state.error ? <p className='error shake-horizontal'>{state.error}</p> : <p className="register-intro">Please create a unique username, and a password that is 8 characters and contains an uppercase, lowercase, number and a special char.</p>}
       </div>
       <div className='user_name'>
         <label htmlFor='RegistrationForm__user_name'>
@@ -56,9 +62,24 @@ const RegistrationForm = (props) => {
           id='RegistrationForm__password'>
         </Input>
       </div>
-      <Button type='submit'>
-        Register
-      </Button>
+      <div className='verifyPassword'>
+        <label htmlFor='RegistrationForm__verifyPassword'>
+          Verify Password <Required />
+        </label>
+        <Input
+          name='verifyPassword'
+          type='password'
+          required
+          id='RegistrationForm__verifyPassword'>
+        </Input>
+      </div>
+      <div className="go-back-links">
+        <Button type='submit'>
+          Register
+        </Button>
+        <Link className="go-back" to={'/landing'}>Go Back</Link>
+      </div>
+      
     </form>
   )
 }

@@ -1,6 +1,8 @@
 import React, { Fragment, useContext, useState } from 'react';
 import GeneralContext from '../../contexts/GeneralContext';
 import Folder from '../Folder/Folder';
+import PokeballLoader from '../Loaders/PokeballLoader/PokeballLoader';
+import LoadingBlack from '../Loaders/LoadingBlack/LoadingBlack';
 
 const FoldersList = (props) => {
 
@@ -117,7 +119,12 @@ const FoldersList = (props) => {
       <section className="folders-list">
         <h3>Folders:</h3>
         <div>
-          {folderList.length > 0 ? folderList : <h3>None! Click Below to Make a New Folder!</h3>}
+          {folderList.length > 0 ? folderList : 
+          <div className="pokeball-div">
+          <PokeballLoader/>
+          <LoadingBlack/>
+          <h3 className="hint">(Hint: There May Be No Folders! Click Below to Start!)</h3>
+        </div>}
         </div>
         <div>
           <button onClick={() => handleFolderAddClickExpand()}>New Folder <i className="fas fa-folder-plus"></i></button>
