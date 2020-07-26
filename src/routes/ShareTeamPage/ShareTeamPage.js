@@ -10,7 +10,6 @@ const ShareTeamPage = (props) => {
   specified in the url parameter.*/
 
   useEffect(() => {
-    console.log('shareTeamPage is breaking')
     const id = props.match.params.team_id
     apiService.getSingleTeam(id)
       .then(data => {
