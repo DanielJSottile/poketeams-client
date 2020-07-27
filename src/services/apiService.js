@@ -417,7 +417,6 @@ const apiService = {
   // DELETE
 
   deleteUserFolder(folder_id) {
-    let error;
     return fetch(`${config.API_ENDPOINT}/build/folder/${folder_id}`, {
       method: 'DELETE',
       headers: {
@@ -426,57 +425,37 @@ const apiService = {
       },
       })
       .then(res => {
-        if (!res.ok) {
-          error = { code: res.status};
-        }
-        return res.json();
+        if (!res.ok) return res.json().then(e => Promise.reject(e))
+        return res
       })
-      .then(data => {
-        if (error) {
-          error.message = data.message;
-          return Promise.reject(error);
-        }
-        return data})
   },
   
   deleteUserTeam(team_id) {
-    let error;
     return fetch(`${config.API_ENDPOINT}/build/team/${team_id}`, {
       method: 'DELETE',
       headers: {
         'content-type': 'application/json',
         'authorization': `bearer ${TokenService.getAuthToken()}`,
       },
-      })
-      .then(res => {
-        if (!res.ok) {
-          error = { code: res.status};
-        }
-        return res.json();
-      })
-      .then(data => {
-        if (error) {
-          error.message = data.message;
-          return Promise.reject(error);
-        }
-        return data})
+    })
+    .then(res => {
+      if (!res.ok) return res.json().then(e => Promise.reject(e))
+      return res
+    })
   },
 
   deleteUserSet(team_id, set_id) {
-    let error;
     return fetch(`${config.API_ENDPOINT}/build/set/${team_id}/${set_id}`, {
       method: 'DELETE',
       headers: {
         'content-type': 'application/json',
         'authorization': `bearer ${TokenService.getAuthToken()}`,
       },
-      })
-      .then(data => {
-        if (error) {
-          error.message = data.message;
-          return Promise.reject(error);
-        }
-        return data})
+    })
+    .then(res => {
+      if (!res.ok) return res.json().then(e => Promise.reject(e))
+      return res
+    })
   },
 };
 
