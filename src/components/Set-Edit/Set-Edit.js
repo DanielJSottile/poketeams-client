@@ -349,7 +349,7 @@ const SetEdit = (props) => {
         <form> 
               <div className="pokemon-import">
                 <label htmlFor="pokemon-import">Import Pokemon Set: <i className="fas fa-upload"></i></label>
-                {newSetImport.value !== "" && <p className="error">{validateNewSetImport()}</p>}
+                {newSetImport.value !== "" && <p className="error-validate shake-horizontal">{validateNewSetImport()}</p>}
                 <textarea type="text" placeholder="Import a Pokemon Showdown Set Here And It Will Re-populate The Field:" name="pokemon-import" id={`pokemon-import-${set.id}`} value={newSetImport.value} onChange={e => setNewSetContents(e.target.value)}/>
                 <button type="submit"
                   disabled={
@@ -367,17 +367,17 @@ const SetEdit = (props) => {
             <div className="name-sprite">
               <div className="names">
                 <label htmlFor="pokemon-name">Species:</label>
-                {state.species.touched && <p className="error">{validateSpecies()}</p>}
+                {state.species.touched && <p className="error-validate shake-horizontal">{validateSpecies()}</p>}
                 <input className="pokemon-name" placeholder="e.g. Pikachu" value={ state.species.value} onChange={e => setSpecies(e.target.value)} type="text" name="pokemon-name" id={`pokemon-name-${set.id}`} />
                 <label htmlFor="pokemon-nickname">Nickname: (optional)</label>
-                {<p className="error">{validateNickname()}</p>}
+                {<p className="error-validate shake-horizontal">{validateNickname()}</p>}
                 <input className="pokemon-nickname" placeholder={state.species.value} value={state.nickname.value} onChange={e => setNickname(e.target.value)} type="text" name="pokemon-nickname" id={`pokemon-nickname-${set.id}`} />
                 <label htmlFor="pokemon-gender">Gender: </label>
-                {<p className="error">{validateGender()}</p>}
+                {<p className="error-validate shake-horizontal">{validateGender()}</p>}
                 <input className="pokemon-gender" placeholder="F, M, or N" value={state.gender.value} onChange={e => setGender(e.target.value)} type="text" name="pokemon-gender" id={`pokemon-gender-${set.id}`} />
                   <div>
                     <label htmlFor="shiny">Shiny:</label>
-                    {<p className="error">{validateShiny()}</p>}
+                    {<p className="error-validate shake-horizontal">{validateShiny()}</p>}
                     <input type="checkbox" id="shiny-2" name="shiny" checked={state.shiny.value} value={state.shiny.value} onChange={e => setShiny(e.target.value)}/>
                   </div>  
               </div>
@@ -394,24 +394,24 @@ const SetEdit = (props) => {
           <div className="details">
             <div className="first-details">
               <label htmlFor="pokemon-level">Level: </label>
-              {state.species.touched && <p className="error">{validateLevel()}</p>}
+              {state.species.touched && <p className="error-validate shake-horizontal">{validateLevel()}</p>}
               <input className="pokemon-level" placeholder="100" value={state.level.value} onChange={e => setLevel(e.target.value)} type="text" name="pokemon-level" id={`pokemon-level-${set.id}`} />
               <label htmlFor="pokemon-item">Item: (optional)</label>
-              {<p className="error">{validateItem()}</p>}
+              {<p className="error-validate shake-horizontal">{validateItem()}</p>}
               <input className="pokemon-item" placeholder="e.g. Leftovers" value={state.item.value} onChange={e => setItem(e.target.value)} type="text" name="pokemon-item" id={`pokemon-item-${set.id}`} />
               <label htmlFor="pokemon-ability">Ability: (optional)</label>
-              {<p className="error">{validateAbility()}</p>}
+              {<p className="error-validate shake-horizontal">{validateAbility()}</p>}
               <input className="pokemon-ability" placeholder="e.g. Static" value={state.ability.value} onChange={e => setAbility(e.target.value)} type="text" name="pokemon-ability" id={`pokemon-ability-${set.id}`} />
               <label htmlFor="pokemon-nature">Nature: (optional)</label>
-              {<p className="error">{validateNature()}</p>}
+              {<p className="error-validate shake-horizontal">{validateNature()}</p>}
               <input className="pokemon-nature" placeholder="e.g. Adamant" value={state.nature.value} onChange={e => setNature(e.target.value)} type="text" name="pokemon-nature" id={`pokemon-nature-${set.id}`} />
               <label htmlFor="pokemon-happiness">Happiness:</label>
-              {state.happiness.touched && <p className="error">{validateHappiness()}</p>}
+              {state.happiness.touched && <p className="error-validate shake-horizontal">{validateHappiness()}</p>}
               <input className="pokemon-happiness" placeholder="255" value={state.happiness.value} onChange={e => setHappiness(e.target.value)} type="number" name="pokemon-happiness" min="0" max="255" id={`pokemon-happiness-${set.id}`} />
             </div>
             <div className="stats">
               <div className="evs">
-              {<p className="error">{validateEvs()}</p>}
+              {<p className="error-validate shake-horizontal">{validateEvs()}</p>}
                 <label htmlFor="pokemon-ev-hp">HP EV:</label>
                 <input className="pokemon-ev" placeholder="0" value={Number(state.hp_ev.value)} onChange={e => setHpEv(e.target.value)} type="number" name="pokemon-ev-hp" min="0" max="252" id={`pokemon-ev-hp-${set.id}`} />
                 <label htmlFor="pokemon-ev-atk">Atk EV:</label>
@@ -426,7 +426,7 @@ const SetEdit = (props) => {
                 <input className="pokemon-ev" placeholder="0" value={Number(state.spe_ev.value)} onChange={e => setSpeEv(e.target.value)} type="number" name="pokemon-ev-spe" min="0" max="252" id={`pokemon-ev-spe-${set.id}`} />
               </div>
               <div className="ivs">
-              {<p className="error">{validateIvs()}</p>}
+              {<p className="error-validate shake-horizontal">{validateIvs()}</p>}
                 <label htmlFor="pokemon-iv-hp">HP IV:</label>
                 <input className="pokemon-iv" placeholder="31" value={Number(state.hp_iv.value)} onChange={e => setHpIv(e.target.value)} type="number" name="pokemon-iv-hp" min="0" max="31" id={`pokemon-iv-hp-${set.id}`} />
                 <label htmlFor="pokemon-iv-atk">Atk IV:</label>
@@ -443,7 +443,7 @@ const SetEdit = (props) => {
             </div>
             <div className="moves">
               <label htmlFor="pokemon-moves">Moves:</label>
-              {<p className="error">{validateMoves()}</p>}
+              {<p className="error-validate shake-horizontal">{validateMoves()}</p>}
                 <input className="pokemon-move" placeholder="Tackle" value={state.move_one.value} onChange={e => setMoveOne(e.target.value)} type="text" name="pokemon-move" id={`pokemon-${set.id}-move-1`} />
                 <input className="pokemon-move" value={state.move_two.value} onChange={e => setMoveTwo(e.target.value)} type="text" name="pokemon-move" id={`pokemon-${set.id}-move-2`} />
                 <input className="pokemon-move" value={state.move_three.value} onChange={e => setMoveThree(e.target.value)} type="text" name="pokemon-move" id={`pokemon-${set.id}-move-3`} />

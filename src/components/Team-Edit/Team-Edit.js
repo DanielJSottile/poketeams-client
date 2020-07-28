@@ -131,7 +131,7 @@ const TeamEdit = (props) => {
                 <button onClick={() => handleTeamToggle()}>Compress Team <i className="fas fa-compress-arrows-alt"></i></button>
                 <div className="title-name">
                   <label htmlFor="title-name">Team Name:</label>
-                  {<p className="error">{validateTeamName()}</p>}
+                  {<p className="error-validate shake-horizontal">{validateTeamName()}</p>}
                   <input className="title" placeholder="e.g. Cool Team" value={state.team_name.value} onChange={e => setTeamName(e.target.value)} type="text" name="team-name" id={`team-name-${team.id}`}/>
                 </div>
                 <p>By {team.user_name}</p>
@@ -144,7 +144,7 @@ const TeamEdit = (props) => {
               </div>
               <div className="title-content">
                 <label htmlFor="title-content">Description:</label>
-                {<p className="error">{validateDesc()}</p>}
+                {<p className="error-validate shake-horizontal">{validateDesc()}</p>}
                 <textarea className="title-content desc" placeholder="e.g. description" type="text" name="title-content" id={`title-content-${team.id}`} value={state.description.value} onChange={e => setDesc(e.target.value)}/>
               </div>
               <button type="submit"

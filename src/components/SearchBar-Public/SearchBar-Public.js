@@ -11,7 +11,7 @@ const SearchBarPublic = (props) => {
       <div className="searchbar">
         <form className="search">
           <div className="search">
-            {search.value && <p className="error">{validateSearch()}</p>}
+            {search.value && <p className="error-validate shake-horizontal">{validateSearch()}</p>}
             <label htmlFor="search">Search: <i className="fas fa-search"></i></label>
             <input className="s-input" placeholder="e.g. Pikachu" value={search.value} onChange={e => setSearch(e.target.value)} type="text" name="search" id="search" />
             <label htmlFor="sort">Sort By:<i className="fas fa-sort"></i> </label>

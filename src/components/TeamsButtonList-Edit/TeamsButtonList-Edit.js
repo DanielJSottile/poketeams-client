@@ -26,17 +26,17 @@ const TeamsButtonListEdit = (props) => {
       <form>
         <div className="team-name">
           <label htmlFor="foldername">Team Name:</label>
-          {<p className="error">{validateNewTeamName()}</p>}
+          {<p className="error-validate shake-horizontal">{validateNewTeamName()}</p>}
           <input placeholder="e.g. My Cool Team" type="text" name="teamname" id="teamname" value={newTeamName.value} onChange={e => setNewTeamName(e.target.value)}/>
         </div>
         <div className="team-import">
           <label htmlFor="title-content">Description:</label>
-          {<p className="error">{validateDesc()}</p>}
+          {<p className="error-validate shake-horizontal">{validateDesc()}</p>}
           <textarea placeholder="e.g. description" type="text" name="title-content" id="title-content" value={desc.value} onChange={e => setDesc(e.target.value)}/>
         </div>
         <div className="team-import">
           <label htmlFor="team-import">Import Team Set:</label>
-          {newTeamImport.value !== "" && <p className="error">{validateNewTeamImport()}</p>}
+          {newTeamImport.value !== "" && <p className="error-validate shake-horizontal">{validateNewTeamImport()}</p>}
           <textarea type="text" placeholder="Optionally Import a proper Pokemon Showdown Team Here And It Will Fill Out Your Whole Team!" name="team-import" id="team-import-1" value={newTeamImport.value} onChange={e => setNewTeamContents(e.target.value)}></textarea>
         </div>
         <button type="submit"

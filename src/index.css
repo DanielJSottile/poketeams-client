@@ -516,6 +516,15 @@ form.signup-form label {
   font-size: 14px;
 }
 
+.error-validate {
+  text-align: center;
+  text-align: center;
+  color: #6898ff;
+  text-shadow: 1px 1px #444444;
+  font-weight: bold;
+  font-size: 14px;
+}
+
 @media (min-width: 600px) {
   .landingimg {
     width: 550px;

@@ -11,7 +11,7 @@ const SearchBarBuild = (props) => {
       <div className="searchbar">
         <form className="search">
           <div className="search">
-            {filter.value && <p className="error">{validateFilter()}</p>}
+            {filter.value && <p className="error-validate shake-horizontal">{validateFilter()}</p>}
             <label htmlFor="search">Search: <i className="fas fa-search"></i></label>
             <input className="s-input" placeholder="e.g. Pikachu" value={filter.value} onChange={e => setFilter(e.target.value)} type="text" name="search" id="search" />
             <label htmlFor="sort">Sort By: <i className="fas fa-sort"></i></label>
