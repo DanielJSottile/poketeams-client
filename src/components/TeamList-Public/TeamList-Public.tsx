@@ -16,8 +16,6 @@ const TeamListPublic = (props: any) => {
 
   const {publicTeams} = GenCon;
 
-  console.log(publicTeams)
-
   const TeamList = publicTeams.map((team: PokemonTeam, i) => {
       return <TeamPublic key={i} id={`${team.team_name}`} team={team}/>
   });
