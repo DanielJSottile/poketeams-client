@@ -79,7 +79,6 @@ const infinite = [
 // Legality
 
 function isLegalSpecies(species){
-
   let flag = false;
 
   POKEMON.forEach(pokemon => {
