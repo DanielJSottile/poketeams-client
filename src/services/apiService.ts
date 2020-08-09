@@ -364,7 +364,7 @@ const apiService = {
 
   // PATCH
 
-  patchUserFolder(foldername: string, iden: number, userid: number): Promise<any> {
+  patchUserFolder(foldername: string, iden: string, userid: number): Promise<any> {
     return fetch(`${config.API_ENDPOINT}/build/folders/${userid}`, {
       method: 'PATCH',
       headers: {

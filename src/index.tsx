@@ -4,7 +4,7 @@ import './index.css';
 import App from './components/App/App';
 import * as serviceWorker from './serviceWorker';
 import {BrowserRouter} from 'react-router-dom';
-import {GeneralProvider} from './contexts/GeneralContext';
+import {GeneralProvider} from './contexts/GeneralContext'; // THIS IS TEMPORARY
 
 ReactDOM.render(
   <React.StrictMode>
