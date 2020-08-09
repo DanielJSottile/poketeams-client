@@ -5,9 +5,15 @@ import jwtDecode from 'jwt-decode';
 import showdownParse from '../functions/parse';
 import legality from '../functions/legality';
 
+
+/* This is very important.  I believe React needs to have a Props type
+in order to actually pass the props.
+*/
 type Props = {
   children: React.ReactNode
 };
+
+// Typing Interfaces
 
 export interface StringInput {
   value: string;
@@ -29,6 +35,8 @@ export interface MyToken {
   user_id: any;
   // whatever else is in the JWT.
   }
+
+// This provides the types for creating our context
 
 interface CreateProvider {
   userFolders: any[];
@@ -126,6 +134,10 @@ interface CreateProvider {
   clearPublicSets(): any;
 }
 
+/* This provides the types for our State. 
+If this is not done, the arrays will be set to
+never[] and we can't use the context.*/
+
 interface StateProvider {
   userFolders: any[];
   userTeams: any[];
@@ -151,6 +163,9 @@ interface StateProvider {
   filtersort: StringInput;
   page: PageVal,
 }
+
+/* Here we actually set our Context.  We seed it with 
+initial values and empty functions.  */
 
 const GeneralContext = React.createContext<CreateProvider>({
   userFolders: [],
@@ -223,6 +238,11 @@ const GeneralContext = React.createContext<CreateProvider>({
 });
 
 export default GeneralContext;
+
+/* Here we create our Context Provider, where we pass
+in the Props we created earlier.  We also create our
+State here using the hook.  As you can see, our arrays
+are set to 'any' (or whatever I choose later) instead of never!*/
 
 export const GeneralProvider = ({children}: Props) => {
   const [state, setState] = useState<StateProvider>(
