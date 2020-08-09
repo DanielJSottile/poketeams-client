@@ -3,8 +3,8 @@ import apiService from '../../services/apiService';
 import TeamPublicShare from '../../components/Team-Public-Share/Team-Public-Share';
 
 export interface Provider {
-  team?: Array<any>;
-  sets?: object;
+  team?: any;
+  sets?: any;
 }
 
 const ShareTeamPage = (props: any): JSX.Element => {
@@ -18,6 +18,7 @@ const ShareTeamPage = (props: any): JSX.Element => {
     const id = props.match.params.team_id
     apiService.getSingleTeam(id)
       .then(data => {
+        console.log(data)
         setState(oldVals => ({...oldVals, team: [data]}))
     })
 
@@ -35,10 +36,11 @@ const ShareTeamPage = (props: any): JSX.Element => {
     })
   }, [props.match.params.team_id]); 
 
+  console.log(state?.team);
+
     return (
-      
       <div>
-       { state?.team![0] ? <TeamPublicShare team={state?.team[0]} sets={state?.sets}/> : <h3>This team seems to not exist anymore</h3>}
+       { state?.team[0] ? <TeamPublicShare team={state?.team[0]} sets={state?.sets}/> : <h3>This team seems to not exist anymore</h3>}
       </div>
     );
 };

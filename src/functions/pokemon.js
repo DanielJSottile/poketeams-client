@@ -3,7 +3,8 @@ legality reasons. This is not used to create new data, just make the site more u
 It's based off of some code from my custom Pokemon Showdown server but I basically just 
 needed something that held the species and type, I added and took away a few fields
 
-Future: make a hashmap so that legality finding is constant!*/
+Future: make a hashmap so that legality finding is constant?!
+Future: make this typescript based?*/
 
 const POKEMON = [
 {
@@ -9575,19 +9576,6 @@ const POKEMON = [
 		color: "White",
 		prevo: "drilburaumagari",
 		evoLevel: 31,
-		eggGroups: ["Field"],
-	},
-{
-		num: 530,
-		species: "Excadrill",
-		types: ["Ground", "Steel"],
-		baseStats: {hp: 110, atk: 135, def: 60, spa: 50, spd: 65, spe: 88},
-		abilities: {0: "Sand Rush", 1: "Sand Force", H: "Mold Breaker"},
-		heightm: 0.7,
-		weightkg: 40.4,
-		color: "Gray",
-		prevo: "drilbur",
-		
 		eggGroups: ["Field"],
 	},
 {
