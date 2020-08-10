@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import GeneralContext from '../../contexts/GeneralContext';
 import showdownGenerate from '../../functions/generate';
 import SetEdit from '../Set-Edit/Set-Edit';
+import './Team-Edit.css';
 
 export interface StringInput {
   value: string;

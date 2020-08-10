@@ -2,6 +2,7 @@ import * as React from 'react';
 import { useState, useEffect } from 'react';
 import apiService from '../../services/apiService';
 import SetPublic from '../../components/Set-Public/Set-Public';
+import './ShareSetPage.css';
 
 export interface Provider {
   set: object[];

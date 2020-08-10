@@ -26,8 +26,8 @@
   padding: 10px;
 }
 
-.build-title {
-  background-image: url('../../Images/PokeTeams---Build.png');
+.home-title {
+  background-image: url('../../Images/PokeTeams---Home.png');
   background-repeat: no-repeat;
   background-position: center;
   background-size: 90%;
@@ -37,7 +37,7 @@
 
 @media (min-width: 850px) { /* Large Ipad Screen */
 
-  .build-title {
+  .home-title {
     background-size: 70%;
     height: 15em;
   }

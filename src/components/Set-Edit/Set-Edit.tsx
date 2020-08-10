@@ -4,6 +4,7 @@ import GeneralContext from '../../contexts/GeneralContext';
 import showdownGenerate from '../../functions/generate';
 import showdownParse from '../../functions/parse';
 import legality from '../../functions/legality';
+import './Set-Edit.css';
 
 export interface StringInput {
   value: string;

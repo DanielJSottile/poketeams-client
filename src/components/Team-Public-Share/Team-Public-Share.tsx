@@ -2,6 +2,7 @@ import React, { Fragment, useState } from 'react';
 import {Link} from 'react-router-dom';
 import showdownGenerate from '../../functions/generate';
 import SetPublic from '../Set-Public/Set-Public';
+import './Team-Public-Share.css';
 
 
 const TeamPublicShare = (props: any) => {

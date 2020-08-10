@@ -3,6 +3,7 @@ import GeneralContext from '../../contexts/GeneralContext';
 import Folder from '../Folder/Folder';
 import PokeballLoader from '../Loaders/PokeballLoader/PokeballLoader';
 import LoadingBlack from '../Loaders/LoadingBlack/LoadingBlack';
+import './FoldersList.css';
 
 const FoldersList = (props: any) => {
 

@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import GeneralContext from '../../contexts/GeneralContext';
 import showdownGenerate from '../../functions/generate';
 import SetPublic from '../Set-Public/Set-Public';
+import './Team-Public.css';
 
 export interface PokemonSet {
   id: number;

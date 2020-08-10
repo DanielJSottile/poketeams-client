@@ -3,6 +3,7 @@ import GeneralContext from '../../contexts/GeneralContext';
 import TeamButton from '../TeamButton/TeamButton';
 import PokeballLoader from '../Loaders/PokeballLoader/PokeballLoader';
 import LoadingWhite from '../Loaders/LoadingWhite/LoadingWhite';
+import './TeamsButtonList-Public.css';
 
 export interface PokemonTeam {
   team_name: string;

@@ -9,3 +9,29 @@ div.perks li {
   list-style-position: inside;
   list-style-type: square;
 }
+
+.landing-title {
+  width: 90%;
+  background-image: url('../../Images/PokeTeams.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 90%;
+  height: 12em;
+  margin: auto;
+}
+
+.terms-of-service {
+  font-size: 14px;
+}
+
+.notice {
+  font-size: 12px;
+}
+
+@media (min-width: 850px) { /* Large Ipad Screen */
+
+  .landing-title {
+    background-size: 70%;
+    height: 15em;
+  }
+}
