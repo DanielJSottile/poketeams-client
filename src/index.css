@@ -157,3 +157,35 @@ img {
   font-size: 14px;
 }
 
+.login-div {	
+  width: 85%;	
+  margin: auto;	
+  margin-bottom: 30px;	
+  padding: 5px;	
+  border: 4px double rgb(255, 230, 0);	
+  border-radius: 40px;	
+}
+
+@media (min-width: 600px) {	
+
+  .login-div {	
+    width: 65%;	
+  }	
+}
+
+@media (min-width: 700px) { /* Medium Screen */	
+
+  .login-div {	
+    width: 45%;	
+  }	
+
+}	
+
+@media (min-width: 850px) { /* Large Ipad Screen */	
+  
+  .login-div {	
+    width: 35%;	
+  }	
+
+}	
+
