@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import GeneralContext from '../../contexts/GeneralContext';
+import './SearchBar-Build.css';
 
 const SearchBarBuild = (props: any) => {
 

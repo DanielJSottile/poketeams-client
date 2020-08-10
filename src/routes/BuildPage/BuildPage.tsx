@@ -4,6 +4,7 @@ import TeamsButtonListEdit from '../../components/TeamsButtonList-Edit/TeamsButt
 import TeamListEdit from '../../components/TeamList-Edit/TeamList-Edit';
 import FolderList from '../../components/FoldersList/FoldersList';
 import Footer from '../../components/Footer/Footer';
+import './BuildPage.css';
 
 const BuildPage = (props: any): JSX.Element => {
 

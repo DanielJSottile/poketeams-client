@@ -1,0 +1,102 @@
+.team {
+  background-color: rgb(212, 41, 41);
+  color: rgb(255, 255, 238);
+  text-shadow: 1px 1px rgb(58, 0, 0);
+  border: 1px solid #444;
+  border-radius: 10px;
+  padding: 2px;
+  margin: 5px;
+}
+
+.team:hover{
+  background-color: rgb(255, 75, 75);
+  transition: 0.3s;
+}
+
+.team-closed {
+  font-size: 14px;
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-around;
+  align-content: center;
+  align-self: center;
+  border: 1px solid #444;
+  border-radius: 10px;
+  padding: 5px;
+}
+
+.export-team{
+  background-color: rgb(255, 255, 238);
+  border: 1px solid #444;
+  border-radius: 10px;
+  padding: 5px;
+  margin: auto;
+  width: 85%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.team-title {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 85%;
+  margin: auto;
+  align-items: center;
+}
+
+.title-content{
+  display: flex;
+  flex-direction: column;
+  font-style: italic;
+  width: 85%;
+  margin: auto;
+  height: 100px;
+}
+
+.title {
+  color: #444;
+  text-emphasis: bold;
+  text-align: center;
+  font-size: 22px;
+  border: 1px solid rgb(255, 230, 0);
+  width: 100%;
+  margin: auto;
+  border-radius: 20px;
+  background: white;
+}
+
+.title-name {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 65%;
+  margin: auto;
+}
+
+@media (min-width: 700px) { /* Medium Screen */
+ 
+  .team-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .team-form{
+    width: 50%;
+  }
+
+  .export-team {
+    width: 35%;
+  }
+}
+
+@media (min-width: 850px) { /* Large Ipad Screen */
+  
+  .export-team {
+    width: 45%;
+  }
+
+}

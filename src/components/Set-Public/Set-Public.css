@@ -1,0 +1,162 @@
+.pokemon {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  border: 1px solid #444;
+  border-radius: 10px;
+  padding: 5px;
+  margin: 10px;
+}
+
+.pokemon:hover{
+  color: #444;
+  text-shadow: none;
+  background-color: rgb(255, 255, 238);
+  transition: 0.3s;
+}
+
+.pokemon-nickname, .pokemon-level, .pokemon-item, .pokemon-ability, .pokemon-nature, .pokemon-happiness, .pokemon-move, .pokemon-gender{
+  color: #444;
+  text-emphasis: bold;
+  text-align: center;
+  width: 85%;
+  margin: auto;
+  font-size: 16px;
+  padding: 5px;
+  margin: 5px;
+  border: 1px solid rgb(255, 230, 0);
+  border-radius: 20px;
+  background: white;
+}
+
+.details, .stats, .export-pokemon {
+  background-color: rgb(255, 255, 238);
+  border: 1px solid #444;
+  border-radius: 10px;
+  padding: 5px;
+  margin: auto;
+  width: 85%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.pokemon-intro{
+  background-color: rgb(255, 255, 238);
+  border: 1px solid #444;
+  border-radius: 10px;
+  padding: 5px;
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  align-self: center;
+  margin-left: auto;
+  margin-right: auto;
+  width: 85%;
+}
+
+.pokemon-name{
+  color: #444;
+  text-emphasis: bold;
+  text-align: center;
+  font-size: 22px;
+  border: 1px solid rgb(255, 230, 0);
+  width: 100%;
+  margin: auto;
+  border-radius: 20px;
+  background: white;
+}
+
+.names, .sprites{
+  display: flex;
+  flex-direction: column;
+}
+
+.icon {
+  margin: 1px;
+  transform: scale(.5);
+}
+
+.type-img{
+  width: 100px;
+}
+
+.closed{
+  font-size: 16px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-content: center;
+  align-self: center;
+}
+
+.inside {
+  align-self: center;
+}
+
+.stats{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.details{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.first-details{
+  display: flex;
+  flex-direction: column;
+}
+
+.evs{
+  display: flex;
+  text-align: left;
+  flex-direction: column;
+}
+
+.ivs{
+  display: flex;
+  text-align: left;
+  flex-direction: column;
+}
+
+.pokemon-ev, .pokemon-iv{
+  border: 1px solid rgb(255, 230, 0);
+  border-radius: 10px;
+  width: 60px;
+}
+
+.moves{
+  display: flex;
+  flex-direction: column;
+}
+
+.name-sprite {
+  margin: auto;
+}
+
+@media (min-width: 700px) { /* Medium Screen */
+ 
+  .pokemon-intro{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+@media (min-width: 850px) { /* Large Ipad Screen */
+  
+  .details {
+    flex-direction: row;
+  }
+
+  .stats {
+    width: 33%;
+  }
+
+}

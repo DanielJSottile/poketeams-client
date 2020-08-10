@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import GeneralContext from '../../contexts/GeneralContext';
+import './TeamButton.css';
 
 const TeamButton = (props: any) => {
 

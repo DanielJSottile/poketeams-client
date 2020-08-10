@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import TokenService from '../../services/token-service';
 import GeneralContext from '../../contexts/GeneralContext';
 import AuthApiService from '../../services/auth-api-service';
+import './LoginForm.css';
 
 const LoginForm = (props: any) => {
 

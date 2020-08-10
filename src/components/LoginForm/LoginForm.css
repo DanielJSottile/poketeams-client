@@ -1,0 +1,12 @@
+.signup-form {
+  margin: auto;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+form.signup-form label {
+  font-family: 'Anton', sans-serif;
+  letter-spacing: 3px;
+  text-shadow: #444444;
+  color: rgb(255, 255, 238);
+}
