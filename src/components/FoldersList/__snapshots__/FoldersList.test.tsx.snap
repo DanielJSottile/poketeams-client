@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<LoginForm/> snapshot 1`] = `
+<Fragment>
+  <section
+    className="folders-list"
+  >
+    <h3>
+      Folders:
+    </h3>
+    <div>
+      <div
+        className="pokeball-div"
+      >
+        <PokeballLoader />
+        <LoadingBlack />
+        <h3
+          className="hint"
+        >
+          (Hint: There May Be No Folders! Click Below to Start!)
+        </h3>
+      </div>
+    </div>
+    <div>
+      <button
+        onClick={[Function]}
+      >
+        New Folder 
+        <i
+          className="fas fa-folder-plus"
+        />
+      </button>
+    </div>
+    <div>
+      <span>
+        Current Folder: 
+      </span>
+    </div>
+    <div />
+  </section>
+</Fragment>
+`;

@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<TeamsListPublic/> snapshot 1`] = `
+<Fragment>
+  <div
+    className="pokeball-div"
+  >
+    <PokeballLoader />
+    <LoadingBlack />
+    <h3
+      className="hint"
+    >
+      (Hint: There May Be No Teams)
+    </h3>
+  </div>
+</Fragment>
+`;

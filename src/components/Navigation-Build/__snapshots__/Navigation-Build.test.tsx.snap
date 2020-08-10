@@ -1,0 +1,97 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<NavigationBuild/> snapshot 1`] = `
+<div>
+  <nav
+    role="navigation"
+  >
+    <div
+      className="user-welcome"
+    >
+      <h2>
+        Click the Login Button to Log In!
+      </h2>
+    </div>
+    <div
+      className="build-title"
+    />
+    <div
+      className="navbar"
+    >
+      <div
+        className="button_things"
+      >
+        <Link
+          to="/"
+        >
+          <i
+            className="fas fa-home"
+          />
+           Home
+        </Link>
+        <Link
+          to="/build"
+        >
+          <i
+            className="fas fa-hammer"
+          />
+           Build!
+        </Link>
+      </div>
+      <div
+        className="mobile-button"
+      >
+        <Link
+          to="/"
+        >
+          <i
+            className="fas fa-home"
+          />
+           Home
+        </Link>
+        <Link
+          to="/build"
+        >
+          <i
+            className="fas fa-hammer"
+          />
+           Build!
+        </Link>
+        <div
+          className="navigation-logged-out"
+        >
+          <Link
+            to="/landing"
+          >
+            Log In 
+            <i
+              className="fas fa-sign-in-alt"
+            />
+          </Link>
+        </div>
+      </div>
+      <div
+        className="search-cont"
+      >
+        <SearchBarBuild />
+      </div>
+      <div
+        className="user_things"
+      >
+        <div
+          className="navigation-logged-out"
+        >
+          <Link
+            to="/landing"
+          >
+            Log In 
+            <i
+              className="fas fa-sign-in-alt"
+            />
+          </Link>
+        </div>
+      </div>
+    </div>
+  </nav>
+</div>
+`;
