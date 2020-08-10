@@ -76,7 +76,7 @@ const NavigationBuild = (props: any) => {
             <Link to='/build'><i className="fas fa-hammer"></i> Build!</Link>
             {TokenService.hasAuthToken() ? renderLogout() : renderLogin()}
           </div>
-          <div>
+          <div className='search-cont'>
             <SearchBarBuild/>
           </div>
           <div className="user_things">

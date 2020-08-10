@@ -76,6 +76,13 @@
   margin: auto;
 }
 
+.desc{	
+  text-align: center;	
+  border: none;	
+  border-radius: 20px;	
+  background: rgb(255, 255, 238);	
+}
+
 @media (min-width: 700px) { /* Medium Screen */
  
   .team-header {
