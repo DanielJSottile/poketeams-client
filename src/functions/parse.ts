@@ -4,7 +4,7 @@ handled is a bit different from Python, but the code is essentially the same. */
 
 // helper functions
 
-function evIvParser(string, val){
+function evIvParser(string: string, val: string){
   let hpV = 0;
   let atkV = 0;
   let defV = 0;
@@ -34,18 +34,18 @@ function evIvParser(string, val){
     let trim = value.trim();
     let match = trim.match(evIvRE)
 
-    if (match[2] === 'HP') {
-      hpV = Number(match[1]);
-    } else if (match[2] === 'Atk') {
-      atkV = Number(match[1]);
-    } else if (match[2] === 'Def') {
-      defV = Number(match[1]);
-    } else if (match[2] === 'SpA') {
-      spaV = Number(match[1]);
-    } else if (match[2] === 'SpD') {
-      spdV = Number(match[1]);
-    } else if (match[2] === 'Spe') {
-      speV = Number(match[1]);
+    if (match![2] === 'HP') {
+      hpV = Number(match![1]);
+    } else if (match![2] === 'Atk') {
+      atkV = Number(match![1]);
+    } else if (match![2] === 'Def') {
+      defV = Number(match![1]);
+    } else if (match![2] === 'SpA') {
+      spaV = Number(match![1]);
+    } else if (match![2] === 'SpD') {
+      spdV = Number(match![1]);
+    } else if (match![2] === 'Spe') {
+      speV = Number(match![1]);
     }
 
   });
@@ -56,7 +56,7 @@ function evIvParser(string, val){
 
 // Singular function that handles the parsing for teams as well as single sets
 
-export default function showdownParse(input) {
+export default function showdownParse(input: any) {
 
   // RegEx's
 
@@ -73,7 +73,7 @@ export default function showdownParse(input) {
 
   // parsing the individual teams
 
-  return teamsList.map(team => {
+  return teamsList.map((team: any)=> {
     const lineList = team.split('\n');
     const rest = lineList.slice(1, lineList.length);
     const s = lineList[0].trim();
@@ -92,7 +92,7 @@ export default function showdownParse(input) {
     let ability = null;
     let shiny = false;
     let nature = null;
-    let moves = [];
+    let moves: any[] = [];
     
   
   

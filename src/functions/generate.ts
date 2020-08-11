@@ -3,7 +3,22 @@ and turn it back into a string of text that matches the original format */
 
 // helper functions
 
-function evGenerator(ob){
+export interface PokeObject {
+  hp_ev: number,
+  atk_ev: number,
+  def_ev: number,
+  spa_ev: number,
+  spd_ev: number,
+  spe_ev: number,
+  hp_iv: number,
+  atk_iv: number,
+  def_iv: number,
+  spa_iv: number,
+  spd_iv: number,
+  spe_iv: number,
+}
+
+function evGenerator(ob: PokeObject){
   // this is getting back things wrong because of our xss and it's extremely frustrating.... but so far it only seems to affect ivs.
   let evArr = [];
 
@@ -29,7 +44,7 @@ function evGenerator(ob){
 
 }
 
-function ivGenerator(ob){
+function ivGenerator(ob: PokeObject){
   let ivArr = [];
 
   if((ob.hp_iv === 31 && ob.atk_iv === 31 && ob.def_iv === 31 && ob.spa_iv === 31 && ob.spd_iv === 31 && ob.spe_iv === 31)){
@@ -57,9 +72,9 @@ function ivGenerator(ob){
 
 // generator function
 
-export default function showdownGenerate(input) {
+export default function showdownGenerate(input: any) {
 
-  return input.map(set => {
+  return input.map((set: any)=> {
 
     let setArr = [];
     
