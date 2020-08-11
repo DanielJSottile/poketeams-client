@@ -3,7 +3,7 @@ legality reasons. This is not used to create new data, just make the site more u
 It's based off of some code from my custom Pokemon Showdown server but I basically just 
 needed something that held the species and type, I added and took away a few fields*/
 
-let BattlePokedex = {
+let BattlePokedex: object = {
 	mebiusanpast: {
 		num: 0,
 		species: "Mebiusan-Past",
@@ -4557,7 +4557,7 @@ raikouaumagari: {
 		eggGroups: ["Undiscovered"],
 		otherFormes: ["suicuneaumagari"],
 	},
-	sucineaumagari: {
+	suicuneaumagari: {
 		num: 245,
 		species: "Suicune-Aumagari",
 		baseSpecies: "Suicune",
@@ -8238,6 +8238,20 @@ raikouaumagari: {
 		evoType: "useItem",
 		evoItem: "Shiny Stone",
 		eggGroups: ["Flying", "Fairy"],
+		otherFormes: ["togekissmega"],
+	},
+	togekissmega: {
+		num: 468,
+		species: "Togekiss-Mega",
+		baseSpecies: "Togekiss",
+		forme: "Mega",
+		types: ["Fairy", "Flying"],
+		baseStats: {hp: 85, atk: 60, def: 100, spa: 140, spd: 120, spe: 140},
+		abilities: {0: "Queenly Majesty"},
+		heightm: 2.0,
+		weightkg: 29,
+		color: "White",
+		eggGroups: ["Flying", "Fairy"],
 	},
 	yanmega: {
 		num: 469,
@@ -11000,6 +11014,21 @@ raikouaumagari: {
 		color: "Red",
 		evos: ["bisharp"],
 		eggGroups: ["Human-Like"],
+		otherFormes: ["pawniardaumagari"],
+	},
+	pawniardaumagari: {
+		num: 624,
+		species: "Pawniard-Aumagari",
+		baseSpecies: "Pawniard",
+		forme: "Aumagari",
+		types: ["Electric", "Steel"],
+		baseStats: {hp: 45, atk: 40, def: 40, spa: 85, spd: 70, spe: 60},
+		abilities: {0: "Competitive", 1: "Inner Focus", H: "Pressure"},
+		heightm: 1,
+		weightkg: 65,
+		color: "Blue",
+		evos: ["dubsknight"],
+		eggGroups: ["Undiscovered"],
 	},
 	bisharp: {
 		num: 625,
@@ -11011,6 +11040,19 @@ raikouaumagari: {
 		weightkg: 70,
 		color: "Red",
 		prevo: "pawniard",
+		evoLevel: 52,
+		eggGroups: ["Human-Like"],
+	},
+	dubsknight: {
+		num: -6,
+		species: "Dubsknight",
+		types: ["Electric", "Steel"],
+		baseStats: {hp: 65, atk: 60, def: 75, spa: 125, spd: 100, spe: 70},
+		abilities: {0: "Competitive", 1: "Punk Rock", H: "Pressure"},
+		heightm: 2.4,
+		weightkg: 35,
+		color: "Blue",
+		prevo: "pawniardaumagari",
 		evoLevel: 52,
 		eggGroups: ["Human-Like"],
 	},
@@ -16022,6 +16064,6 @@ raikouaumagari: {
 	},
 };
 
-const POKEMON = new Map(Object.entries(BattlePokedex))
+const POKEMON: Map<string, any> = new Map(Object.entries(BattlePokedex))
 
-module.exports = POKEMON;
+export default POKEMON;

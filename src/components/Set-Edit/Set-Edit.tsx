@@ -284,7 +284,7 @@ const SetEdit = (props: any) => {
   };
 
   const validateSpecies = (): any => {
-    let species = state.species.value.toString().trim();;
+    let species = state.species.value.toString(); // will removing trim solve my problems?
     if(!legality.isLegalSpecies(species)){
       return `Must be an 'existing' Pokemon species or form styled via '[species]-[form]'!`
     };
