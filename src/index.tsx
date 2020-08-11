@@ -3,9 +3,10 @@ import * as ReactDOM from 'react-dom';
 import './index.css';
 import App from './components/App/App';
 import * as serviceWorker from './serviceWorker';
-import {BrowserRouter} from 'react-router-dom';
-import {GeneralProvider} from './contexts/GeneralContext'; // THIS IS TEMPORARY
+import { BrowserRouter } from 'react-router-dom';
+import { GeneralProvider } from './contexts/GeneralContext';
 
+const rootNode: HTMLElement | null = document.getElementById('root');
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
@@ -14,7 +15,7 @@ ReactDOM.render(
       </GeneralProvider>
     </BrowserRouter>
   </React.StrictMode>,
-  document.getElementById('root')
+  rootNode
 );
 
 // If you want your app to work offline and load faster, you can change
