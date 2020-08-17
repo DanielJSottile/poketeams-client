@@ -6,12 +6,28 @@ import './Set-Public.css';
 
 const SetPublic = (props: any) => {
 
-  const [state, setState] = useState({setExpandToggle: true});
+  const [state, setState] = useState({setExpandToggle: true, copySuccess: false});
   
 
   const handleSetToggle = () => {
     setState(oldVals => ({...oldVals, setExpandToggle: !state.setExpandToggle}));
   };
+
+  const removeCopySuccess = (): any => {
+    setState(oldVals => ({...oldVals, copySuccess: false}))
+  }
+
+  // copy to clipboard
+
+  const textArea: any = React.useRef(null);
+
+  const copyCodeToClipboard = (): any => {
+    textArea.current.select()
+    document.execCommand('copy') // this seems to not work
+    const text = textArea.current.defaultValue
+    navigator.clipboard.writeText(text) // this seems to work!
+    setState(oldVals => ({...oldVals, copySuccess: true}))
+  }
   
   const renderExpandedSet = () => {
 
@@ -97,7 +113,17 @@ const SetPublic = (props: any) => {
         </form>
         
         <div className="export-pokemon">
+          {
+            state.copySuccess ?
+            <div className='copied'>
+              Copied to Clipboard!!
+            </div> : null
+          }
           <div>
+            <button onClick={() => {
+              copyCodeToClipboard()
+              setTimeout(removeCopySuccess, 3000)
+            }}>Copy Text</button>
           <Link to={{
             pathname: `/share/${set.team_id}/${set.id}`,
             state: {singleSet: set}}} target="_blank" >Share This Set! <i className="fas fa-share-square"></i></Link>
@@ -105,7 +131,7 @@ const SetPublic = (props: any) => {
           </div>
           <div className="export-pokemon">
             <label htmlFor="export-pokemon">Export Pokemon:</label>
-            <textarea disabled readOnly name="export-pokemon" id="export-pokemon-2" value={showdownGenerate([set])}/>
+            <textarea ref={textArea} disabled readOnly name="export-pokemon" id="export-pokemon-2" value={showdownGenerate([set])}/>
           </div>
         </div>
       </div>

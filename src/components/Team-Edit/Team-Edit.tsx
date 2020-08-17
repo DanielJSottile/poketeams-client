@@ -49,10 +49,17 @@ const TeamEdit = (props: any) => {
       description: {value: props.team.team_description || '', touched: false},
       teamExpandToggle: true,
       deleteClicked: false,
+      copySuccess: false,
     }
   );
 
+  
+
   // set state
+
+  const removeCopySuccess = (): any => {
+    setState(oldVals => ({...oldVals, copySuccess: false}))
+  }
 
   const setTeamName = (team_name: string) => {
     setState(oldVals => ({...oldVals, team_name: {value: team_name, touched: true}}))
@@ -74,6 +81,18 @@ const TeamEdit = (props: any) => {
 
   const handleDeleteExpand = () => {
     setState(oldVals => ({...oldVals, deleteClicked: !state.deleteClicked}))
+  }
+
+  // copy to clipboard
+
+  const textArea: any = React.useRef(null);
+
+  const copyCodeToClipboard = (): any => {
+    textArea.current.select()
+    document.execCommand('copy') // this seems to not work
+    const text = textArea.current.defaultValue
+    navigator.clipboard.writeText(text) // this seems to work!
+    setState(oldVals => ({...oldVals, copySuccess: true}))
   }
 
 
@@ -182,14 +201,24 @@ const TeamEdit = (props: any) => {
                 }}>Save Team Details <i className="fas fa-save"></i></button>
             </form>
           <div className="export-team">
+            {
+              state.copySuccess ?
+              <div className='copied'>
+                Copied to Clipboard!!
+              </div> : null
+            }
             <div>
-            <Link to={{
-              pathname: `/share/${team.id}`,
-              state: {singleteam: team, sets: teamSets}}} target="_blank" >Share This Team! <i className="fas fa-share-square"></i></Link>
+              <button onClick={() => {
+                copyCodeToClipboard()
+                setTimeout(removeCopySuccess, 3000)
+              }}>Copy Text</button>
+              <Link to={{
+                pathname: `/share/${team.id}`,
+                state: {singleteam: team, sets: teamSets}}} target="_blank" >Share This Team! <i className="fas fa-share-square"></i></Link>
               <input disabled type="text" readOnly value={`poketeams.now.sh/share/${team.id}`}/>
             </div>
               <label htmlFor="edit-team">Export Team: <i className="fas fa-download"></i></label>
-              <textarea disabled readOnly name="export-team" id={`export-team-${team.id}`} value={showdownGenerate(teamSets)}/>
+              <textarea ref={textArea} disabled readOnly name="export-team" id={`export-team-${team.id}`} value={showdownGenerate(teamSets)}/>
             </div>
           </div>
           <div>

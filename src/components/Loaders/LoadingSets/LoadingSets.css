@@ -1,0 +1,8 @@
+.loading-sets {
+  background-image: url('../../../Images/DoubleRing-1s-200px.svg');
+  background-repeat: no-repeat;
+  background-position: left;
+  height: 50px;
+  margin: auto;
+  z-index: 100;
+}
