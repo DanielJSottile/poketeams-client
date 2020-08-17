@@ -4,6 +4,7 @@ import GeneralContext from '../../contexts/GeneralContext';
 import showdownGenerate from '../../functions/generate';
 import showdownParse from '../../functions/parse';
 import legality from '../../functions/legality';
+import LoadingSets from '../Loaders/LoadingSets/LoadingSets';
 import './Set-Edit.css';
 
 export interface StringInput {
@@ -48,7 +49,8 @@ export interface Provider {
   move_three: StringInput;
   move_four: StringInput;
   setExpandToggle: boolean;
-  deleteClicked: boolean
+  deleteClicked: boolean;
+  copySuccess: boolean;
 }
 
 const SetEdit = (props: any) => {
@@ -93,6 +95,7 @@ const SetEdit = (props: any) => {
       move_four: {value: props.set.move_four || '', touched: false},
       setExpandToggle: true,
       deleteClicked: false,
+      copySuccess: false,
     }
   );
 
@@ -241,6 +244,22 @@ const SetEdit = (props: any) => {
   const setMoveFour = (movefour: string) => {
     setState(oldVals => ({...oldVals, move_four: {value: movefour, touched: true}}));
   };
+
+  const removeCopySuccess = (): any => {
+    setState(oldVals => ({...oldVals, copySuccess: false}))
+  }
+
+  // copy to clipboard
+
+  const textArea: any = React.useRef(null);
+
+  const copyCodeToClipboard = (): any => {
+    textArea.current.select()
+    document.execCommand('copy') // this seems to not work
+    const text = textArea.current.defaultValue
+    navigator.clipboard.writeText(text) // this seems to work!
+    setState(oldVals => ({...oldVals, copySuccess: true}))
+  }
 
   // Validate Inputs
 
@@ -540,7 +559,17 @@ const SetEdit = (props: any) => {
         </form>
         
         <div className="export-pokemon">
+          {
+            state.copySuccess ?
+            <div className='copied'>
+              Copied to Clipboard!!
+            </div> : null
+          }
           <div>
+            <button onClick={() => {
+              copyCodeToClipboard()
+              setTimeout(removeCopySuccess, 3000)
+            }}>Copy Text</button>
           <Link to={{
             pathname: `/share/${set.team_id}/${set.id}`,
             state: {singleSet: set}}} target="_blank" >Share This Set! <i className="fas fa-share-square"></i></Link>
@@ -548,7 +577,7 @@ const SetEdit = (props: any) => {
           </div>
           <div className="export-pokemon">
             <label htmlFor="export-pokemon">Export Pokemon: <i className="fas fa-download"></i></label>
-            <textarea readOnly name="export-pokemon" id="export-pokemon-2" value={showdownGenerate([set])}/>
+            <textarea ref={textArea} readOnly name="export-pokemon" id="export-pokemon-2" value={showdownGenerate([set])}/>
           </div>
         </div>
         <div>
@@ -569,19 +598,20 @@ const SetEdit = (props: any) => {
     const types = legality.returnTypeIcon(legality.returnType(set.species)).map((type: any, i: number)=> {
       return <img className="icon" key={i} src={`${type}`} alt={`${i + 1}`}/>
     })
+    const imgIcon = <img className="icon" src={legality.returnIconSprite(set.species, set.shiny)} alt={set.species}/>
 
     return (
       <Fragment>
       <div className="pokemon">
         <div className="closed" onClick={() => handleSetToggle()}>
           <div className="inside">
-            <img className="icon" src={legality.returnIconSprite(set.species, set.shiny)} alt={set.species}/>
+            {imgIcon.props.src ? imgIcon : <LoadingSets/> /* this isn't quite ready yet*/ }
           </div>
           <div className="inside">
             <span>{set.species}</span>
           </div>
           <div className="inside">
-            {types}
+            {types ? types : <LoadingSets/> /* this isn't quite ready yet*/ }
           </div>
         </div>
     </div>
