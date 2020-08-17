@@ -7,12 +7,28 @@ import './Team-Public-Share.css';
 
 const TeamPublicShare = (props: any) => {
 
-  const [state, setState] = useState({teamExpandToggle: true});
+  const [state, setState] = useState({teamExpandToggle: true, copySuccess: false});
   
 
   const handleTeamToggle = () => {
     setState(oldVals => ({...oldVals, teamExpandToggle: !state.teamExpandToggle}));
   };
+
+  const removeCopySuccess = (): any => {
+    setState(oldVals => ({...oldVals, copySuccess: false}))
+  }
+
+  // copy to clipboard
+
+  const textArea: any = React.useRef(null);
+
+  const copyCodeToClipboard = (): any => {
+    textArea.current.select()
+    document.execCommand('copy') // this seems to not work
+    const text = textArea.current.defaultValue
+    navigator.clipboard.writeText(text) // this seems to work!
+    setState(oldVals => ({...oldVals, copySuccess: true}))
+  }
 
   const renderExpandedTeam = () => {
 
@@ -47,14 +63,24 @@ const TeamPublicShare = (props: any) => {
               </div>
             </form>
           <div className="export-team">
+            {
+              state.copySuccess ?
+              <div className='copied'>
+                Copied to Clipboard!!
+              </div> : null
+            }
             <div>
+            <button onClick={() => {
+              copyCodeToClipboard()
+              setTimeout(removeCopySuccess, 3000)
+            }}>Copy Text</button>
             <Link to={{
               pathname: `/share/${team.id}`,
               state: {singleteam: team, sets: sets}}} target="_blank" >Share This Team! <i className="fas fa-share-square"></i></Link>
               <input disabled type="text" readOnly value={`poketeams.now.sh/share/${team.id}`}/>
             </div>
               <label htmlFor="edit-team">Export Team:</label>
-              <textarea disabled readOnly name="export-team" id={`export-team-${team.id}`} value={showdownGenerate(sets)}/>
+              <textarea ref={textArea} disabled readOnly name="export-team" id={`export-team-${team.id}`} value={showdownGenerate(sets)}/>
             </div>
           </div>
         </div>
