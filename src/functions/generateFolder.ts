@@ -71,7 +71,7 @@ function ivGenerator(ob: PokeObject){
 
 // generator function
 
-export default function showdownGenerate(input: any) {
+export default function folderGenerate(input: any) {
 
   return input.map((set: any)=> {
 

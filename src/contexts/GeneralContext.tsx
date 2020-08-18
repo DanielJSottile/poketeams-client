@@ -48,6 +48,7 @@ interface CreateProvider {
   folderAddClicked: boolean;
   currentClickedFolder: StringIDInput;
   newFolderName: StringInput;
+  newFolderImport: StringInput;
   //teams-user
   teamAddClicked: boolean;
   currentClickedTeam: StringIDInput;
@@ -62,14 +63,17 @@ interface CreateProvider {
   filter: StringInput;
   filtersort: StringInput;
   page: PageVal,
+  // folder functions
   setNewFolderName(string: string): void;
   handleFolderAddClickExpand(): any;
   handlePostNewFolder(): any;
   validateNewFolderName(): any;
   validateCurrentFolderClicked(): any;
   handleCurrentFolderClicked(string: string, id: string): void; // should be number for id?
+  validateNewFolderImport(): any;
   handleEditFolder(): any;
   handleDeleteFolder(): any;
+  setNewFolderContents(contents: string): any;
   // user team functions
   setNewTeamName(name: string): any;
   setNewTeamContents(contents: string): any;
@@ -154,6 +158,7 @@ interface StateProvider {
   newTeamName: StringInput;
   desc: StringInput;
   newTeamImport: StringInput;
+  newFolderImport: StringInput;
   //sets-teams-user
   newSetImport: StringInput;
   // search
@@ -174,6 +179,7 @@ const GeneralContext = React.createContext<CreateProvider>({
   publicTeams: [],
   publicSets: [],
   //folders-user
+  newFolderImport: {value: '', touched: false},
   folderAddClicked: false,
   currentClickedFolder: {value: '', id: '', touched: false},
   newFolderName: {value: '', touched: false},
@@ -200,6 +206,8 @@ const GeneralContext = React.createContext<CreateProvider>({
   handleCurrentFolderClicked: () => {},
   handleEditFolder: () => {},
   handleDeleteFolder: () => {},
+  setNewFolderContents: () => {},
+  validateNewFolderImport: () => {},
   // user team functions
   setNewTeamName: () => {},
   setNewTeamContents: () => {},
@@ -256,6 +264,7 @@ export const GeneralProvider = ({children}: Props) => {
       folderAddClicked: false,
       currentClickedFolder: {value: '', id: '', touched: false},
       newFolderName: {value: '', touched: false},
+      newFolderImport: {value: '', touched: false},
       //teams-user
       teamAddClicked: false,
       currentClickedTeam: {value: '', id: '', touched: false},
@@ -333,6 +342,10 @@ export const GeneralProvider = ({children}: Props) => {
   const handleCurrentFolderClicked = (name: any, folder_id: any) => {
     setState(oldVals => ({...oldVals, currentClickedFolder: {value: name, id: folder_id, touched: true}}));
   };
+
+  const setNewFolderContents = (newFolderImport: any) => {
+    setState(oldVals => ({...oldVals, newFolderImport: {value: newFolderImport, touched: true}}));
+  }
 
   // User Teams
 
@@ -475,6 +488,23 @@ export const GeneralProvider = ({children}: Props) => {
     if (!folder) {
       return `You'll need to click on a folder in order to add a team!`
     }
+  };
+
+  const validateNewFolderImport = () => {
+    let flag;
+    let folder_import = state.newFolderImport.value;
+    // you do not have to provide a team_import, but if you do...
+    // showdownParse(team_export) gives an array...
+    if(folder_import){
+    showdownParse(folder_import).forEach((set: any) => {
+      if (!legality.isLegalSpecies(set.species)) {
+        flag = `There is an illegal species in your set.  Please fix this to be in the proper format! 
+        (Hint: It could be extra white space at the end because of Showdown's Exporter)
+        (Hint: There could be a typo in your species name!)`
+      }
+    })
+  }
+    return flag;
   };
 
   // User Teams
@@ -965,6 +995,7 @@ export const GeneralProvider = ({children}: Props) => {
         newTeamName: state.newTeamName,
         desc: state.desc,
         newTeamImport: state.newTeamImport,
+        newFolderImport: state.newFolderImport,
         // teamExpandToggle: state.teamExpandToggle,
         // set Set state
         // setExpandToggle: state.setExpandToggle,
@@ -985,6 +1016,8 @@ export const GeneralProvider = ({children}: Props) => {
         handleCurrentFolderClicked: handleCurrentFolderClicked,
         handleEditFolder: handleEditFolder,
         handleDeleteFolder: handleDeleteFolder,
+        setNewFolderContents: setNewFolderContents,
+        validateNewFolderImport: validateNewFolderImport,
         // user team functions
         setNewTeamName: setNewTeamName,
         setNewTeamContents: setNewTeamContents,

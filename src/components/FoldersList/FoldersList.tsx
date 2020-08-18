@@ -1,8 +1,10 @@
 import React, { Fragment, useContext, useState } from 'react';
+import { Link } from 'react-router-dom';
 import GeneralContext from '../../contexts/GeneralContext';
 import Folder from '../Folder/Folder';
 import PokeballLoader from '../Loaders/PokeballLoader/PokeballLoader';
 import LoadingBlack from '../Loaders/LoadingBlack/LoadingBlack';
+import generateFolder from '../../functions/generateFolder';
 import './FoldersList.css';
 
 const FoldersList = (props: any) => {
@@ -12,7 +14,8 @@ const FoldersList = (props: any) => {
   const [state, setState] = useState(
     {
     editClicked: false,
-    deleteClicked: false
+    deleteClicked: false,
+    copySuccess: false,
   }
   );
 
@@ -24,10 +27,29 @@ const FoldersList = (props: any) => {
     setState(oldVals => ({...oldVals, deleteClicked: !state.deleteClicked}));
   }
 
+  const removeCopySuccess = (): any => {
+    setState(oldVals => ({...oldVals, copySuccess: false}))
+  }
+
+  // copy to clipboard
+
+  const textArea: any = React.useRef(null);
+
+  const copyCodeToClipboard = (): any => {
+    textArea.current.select()
+    document.execCommand('copy') // this seems to not work
+    const text = textArea.current.defaultValue
+    navigator.clipboard.writeText(text) // this seems to work!
+    setState(oldVals => ({...oldVals, copySuccess: true}))
+  }
+
   const renderExpanded = () => {
 
     const {
       newFolderName,
+      newFolderImport,
+      validateNewFolderImport,
+      setNewFolderContents,
       setNewFolderName,
       handlePostNewFolder,
       validateNewFolderName
@@ -39,6 +61,11 @@ const FoldersList = (props: any) => {
           <label htmlFor="foldername">Folder Name:</label>
           {<p className="error-validate shake-horizontal">{validateNewFolderName}</p>}
           <input placeholder="e.g. Good Teams" type="text" name="foldername" id="foldername" value={newFolderName.value} onChange={e => setNewFolderName(e.target.value)}/>
+          <div className="folder-import">
+          <label htmlFor="folder-import">Import Showdown Folder:</label>
+          {newFolderImport.value !== "" && <p className="error-validate shake-horizontal">{validateNewFolderImport()}</p>}
+          <textarea placeholder="Optionally Import a proper Pokemon Showdown Folder Here And It Will Fill Out The Entire Folder!" name="folder-import" id="team-import-1" value={newFolderImport.value} onChange={e => setNewFolderContents(e.target.value)}></textarea>
+        </div>
         </div>
         <button type="submit"
         className="submit"
@@ -135,6 +162,27 @@ const FoldersList = (props: any) => {
         <span>{`Current Folder: ${currentClickedFolder.value}`}</span>
         {currentClickedFolder.value ? 
           <div>
+            <div className="export-team">
+              {
+                state.copySuccess ?
+                <div className='copied'>
+                  Copied to Clipboard!!
+                </div> : null
+              }
+              <div>
+                <button onClick={() => {
+                  copyCodeToClipboard()
+                  setTimeout(removeCopySuccess, 3000)
+                }}>Copy Text</button>
+                <Link to={{
+                  pathname: `/share/folder/${currentClickedFolder.id}`,
+                  state: {folders: userFolders}}} target="_blank" >Share This Folder! <i className="fas fa-share-square"></i></Link>
+                <input disabled type="text" readOnly value={`poketeams.now.sh/share/folder/${currentClickedFolder.id}`}/>
+              </div>
+                <label htmlFor="edit-team">Export Folder: <i className="fas fa-download"></i></label>
+                <textarea ref={textArea} disabled readOnly name="export-folder" id={`export-folder-${currentClickedFolder.id}`} value={`put the new Generate function in here!, folder content ${currentClickedFolder.value}`}/>
+              </div>
+        
             <button onClick={() => handleEditExpand()}><i className="fas fa-edit"></i> Edit</button>
             <button onClick={() => handleDeleteExpand()}>Delete <i className="fas fa-trash-alt"></i></button>
           </div> : null}

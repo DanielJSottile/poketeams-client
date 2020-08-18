@@ -7,6 +7,7 @@ import LandingPage from '../../routes/LandingPage/LandingPage';
 import NotFoundPage from '../../routes/NotFoundPage/NotFoundPage';
 import ShareSetPage from '../../routes/ShareSetPage/ShareSetPage';
 import ShareTeamPage from '../../routes/ShareTeamPage/ShareTeamPage';
+import ShareFolderPage from '../../routes/ShareFolderPage/ShareFolderPage';
 import ErrorPage from '../ErrorPage/ErrorPage';
 import PrivateRoute from '../Utils/PrivateRoute';
 import PublicOnlyRoute from '../Utils/PublicOnlyRoute';
@@ -28,6 +29,9 @@ const App = () => {
               <Route
                 exact path = {'/share/:team_id/:set_id'}
                 component = {ShareSetPage}/>
+              <Route
+                exact path = {'/share/folder/:folder_id'}
+                component = {ShareFolderPage}/>
               <PublicOnlyRoute
                 path = {'/landing'}
                 component = {LandingPage}/>
