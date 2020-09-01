@@ -3,6 +3,7 @@ import apiService from '../services/apiService';
 import TokenService from '../services/token-service';
 import jwtDecode from 'jwt-decode';
 import showdownParse from '../functions/parse';
+import showdownFolderParse from '../functions/parseFolder';
 import legality from '../functions/legality';
 
 
@@ -581,11 +582,89 @@ export const GeneralProvider = ({children}: Props) => {
   
   // Event Handlers/API Calls
 
-  const handlePostNewFolder = () => {
+  const handlePostNewFolder = (): any => {
     const folder_name = state.newFolderName.value;
+    const contents = state.newFolderImport.value;
+    let folder: any;
+    let team: any;
+
+    // first handle the folder itself
     apiService.postUserFolder(folder_name, jwtDecode<MyToken>(TokenService.getAuthToken() || '').user_id)
-      .then((folder) => setState(oldVals => ({...oldVals, userFolders: [...state.userFolders, folder], folderAddClicked: false})));
-  }
+      .then((f) => {
+        folder = f;
+        setState(oldVals => ({...oldVals, userFolders: [...state.userFolders, folder], folderAddClicked: false}))
+      })
+      .then(() => {
+        // then we check for an import, otherwise we are done.
+      if (contents){
+        const parsed = showdownFolderParse(contents);
+  
+        parsed.forEach((fullteam: object) => {
+
+          console.log(fullteam);
+
+          // extract the teamname and sets from each team
+          const extract = Object.entries(fullteam)[0];
+          const team_name = extract[0];
+          const sets = extract[1];
+          const desc = ''; // set a blank description
+          const folderId = folder.id;
+          const body = {team_name, description: desc, folder_id: folderId};
+          // post a team with the folder attributes and teamname
+          
+          // second, handle the new team for each entry
+
+          apiService.postUserTeam(body, jwtDecode<MyToken>(TokenService.getAuthToken() || '').user_id)
+            .then((t) => {
+              // set the team with the folder
+              team = t;
+              console.log(folder.folder_name);
+              setState(oldVals => ({...oldVals, userTeams: [...state.userTeams, {...team, folder_name: folder.folder_name, user_id: jwtDecode<MyToken>(TokenService.getAuthToken() || '').user_id, user_name: jwtDecode<MyToken>(TokenService.getAuthToken() || '').sub}]}))
+            })
+            .then(() => {
+              sets.forEach((set: any) => {
+                console.log(set);
+                handlePostNewPokemon( 
+                  team.id,
+                  set.nickname,
+                  set.species,
+                  set.gender,
+                  set.item,
+                  set.ability,
+                  set.level,
+                  set.shiny,
+                  set.happiness,
+                  set.nature,
+                  set.hp_ev,
+                  set.atk_ev,
+                  set.def_ev,
+                  set.spa_ev,
+                  set.spd_ev,
+                  set.spe_ev,
+                  set.hp_iv,
+                  set.atk_iv,
+                  set.def_iv,
+                  set.spa_iv,
+                  set.spd_iv,
+                  set.spe_iv,
+                  set.move_one,
+                  set.move_two,
+                  set.move_three,
+                  set.move_four,
+                  );
+            });
+        });  
+      });
+      // then we close the expanded view
+      setState(oldVals => ({
+        ...oldVals,
+        folderAddClicked: !state.folderAddClicked,
+        newFolderName: {value: '', touched: false},
+        newFolderImport: {value: '', touched: false}
+      }));
+    };
+  });   
+};
 
   const handlePostNewPokemon = ( // will use this function for team post as well
     team_id: any,

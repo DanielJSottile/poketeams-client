@@ -92,9 +92,10 @@ export default function showdownFolderParse(input: string) {
   // parsing the individual teams
 
   return folderList.map((team: string)=> {
-    const lineList = team.split('\n');
-    const rest = lineList.slice(3, lineList.length).join();
+    console.log(team)
+    const lineList = team.split('\n\n');
     const idLine = lineList[0].trim();
+    console.log(idLine);
 
     if (FOLDERPARSE.test(idLine)) {
       const folderMatch = idLine.match(FOLDERPARSE);
@@ -103,7 +104,8 @@ export default function showdownFolderParse(input: string) {
       teamname = folderMatch![3].trim(); // use this!
     }
     
-    const teamList = rest.split('\n\n')
+    const teamList = lineList.slice(1)
+    console.log(teamList);
 
     const setList = teamList.map((t: string) => {
 
