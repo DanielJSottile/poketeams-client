@@ -4,7 +4,7 @@ import GeneralContext from '../../contexts/GeneralContext';
 import Folder from '../Folder/Folder';
 import PokeballLoader from '../Loaders/PokeballLoader/PokeballLoader';
 import LoadingBlack from '../Loaders/LoadingBlack/LoadingBlack';
-import generateFolder from '../../functions/generateFolder';
+import showdownFolderGenerate from '../../functions/generateFolder';
 import './FoldersList.css';
 
 const FoldersList = (props: any) => {
@@ -132,7 +132,9 @@ const FoldersList = (props: any) => {
   }
 
   const {
-    userFolders, 
+    userFolders,
+    userTeams,
+    userSets,
     folderAddClicked, 
     currentClickedFolder,
     handleFolderAddClickExpand,
@@ -141,6 +143,16 @@ const FoldersList = (props: any) => {
   const folderList = userFolders.map((folder: any, i) => {
     return <Folder key={i} id={folder.id} folder_name={folder.folder_name}/>
   });
+
+  const folderTeams = userTeams.filter((team) => team.folder_id === currentClickedFolder.id)
+  
+  const input = folderTeams.map((team) => {
+    const teamSets = userSets.filter((set) => set.team_id === team.id)
+    const teamName: any = team.team_name;
+    return {[teamName] : teamSets}
+  })
+
+  // here we make the input for the generator function...
 
   return (
     <Fragment>
@@ -180,7 +192,7 @@ const FoldersList = (props: any) => {
                 <input disabled type="text" readOnly value={`poketeams.now.sh/share/folder/${currentClickedFolder.id}`}/>
               </div>
                 <label htmlFor="edit-team">Export Folder: <i className="fas fa-download"></i></label>
-                <textarea ref={textArea} disabled readOnly name="export-folder" id={`export-folder-${currentClickedFolder.id}`} value={`put the new Generate function in here!, folder content ${currentClickedFolder.value}`}/>
+                <textarea ref={textArea} disabled readOnly name="export-folder" id={`export-folder-${currentClickedFolder.id}`} value={showdownFolderGenerate(currentClickedFolder.value, input)}/>
               </div>
         
             <button onClick={() => handleEditExpand()}><i className="fas fa-edit"></i> Edit</button>

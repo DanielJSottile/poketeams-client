@@ -19,7 +19,6 @@ const ShareTeamPage = (props: any): JSX.Element => {
     const id = props.match.params.team_id
     apiService.getSingleTeam(id)
       .then(data => {
-        console.log(data)
         setState(oldVals => ({...oldVals, team: [data]}))
     })
 
@@ -36,8 +35,6 @@ const ShareTeamPage = (props: any): JSX.Element => {
       })
     })
   }, [props.match.params.team_id]); 
-
-  console.log(state?.team);
 
     return (
       <div>
