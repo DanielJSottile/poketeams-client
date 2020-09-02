@@ -507,7 +507,8 @@ export const GeneralProvider = ({children}: Props) => {
 
       sets.forEach((set: any) => {
         if (!legality.isLegalSpecies(set.species)) {
-          flag = `There is an illegal species in your set.  Please fix this to be in the proper format! 
+          flag = `There is an illegal species in your set.  Please check each line
+          and fix this to be in the proper format! 
           (Hint: It could be extra white space at the end because of Showdown's Exporter)
           (Hint: There could be a typo in your species name!)`
         }
