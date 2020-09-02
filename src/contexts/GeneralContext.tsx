@@ -586,85 +586,142 @@ export const GeneralProvider = ({children}: Props) => {
     const folder_name = state.newFolderName.value;
     const contents = state.newFolderImport.value;
     let folder: any;
-    let team: any;
-
     // first handle the folder itself
     apiService.postUserFolder(folder_name, jwtDecode<MyToken>(TokenService.getAuthToken() || '').user_id)
       .then((f) => {
-        folder = f;
-        setState(oldVals => ({...oldVals, userFolders: [...state.userFolders, folder], folderAddClicked: false}))
+        folder = f; // save this for later
+        setState(oldVals => ({
+          ...oldVals,
+          userFolders: [...state.userFolders, folder],
+        }))
       })
       .then(() => {
-        // then we check for an import, otherwise we are done.
-      if (contents){
-        const parsed = showdownFolderParse(contents);
-  
-        parsed.forEach((fullteam: object) => {
-
-          console.log(fullteam);
-
-          // extract the teamname and sets from each team
-          const extract = Object.entries(fullteam)[0];
-          const team_name = extract[0];
-          const sets = extract[1];
-          const desc = ''; // set a blank description
-          const folderId = folder.id;
-          const body = {team_name, description: desc, folder_id: folderId};
-          // post a team with the folder attributes and teamname
+        if (contents) {
+          const parsed = showdownFolderParse(contents);
           
-          // second, handle the new team for each entry
+          // first plan is to make a Promises Array of the teams and then handle them individually
 
-          apiService.postUserTeam(body, jwtDecode<MyToken>(TokenService.getAuthToken() || '').user_id)
-            .then((t) => {
-              // set the team with the folder
-              team = t;
-              console.log(folder.folder_name);
-              setState(oldVals => ({...oldVals, userTeams: [...state.userTeams, {...team, folder_name: folder.folder_name, user_id: jwtDecode<MyToken>(TokenService.getAuthToken() || '').user_id, user_name: jwtDecode<MyToken>(TokenService.getAuthToken() || '').sub}]}))
+          const teamPromises: Promise<any>[] = parsed.map((fullteam: object): Promise<any> => {
+            
+            // extract the teamname from each team
+            const extract = Object.entries(fullteam)[0];
+            const team_name = extract[0];
+            const desc = ''; // set a blank description
+            const folderId = folder.id;
+            const body = {team_name, description: desc, folder_id: folderId};
+            // post a team with the folder attributes and teamname
+            // second, handle the new team for each entry
+
+            return apiService.postUserTeam(body, jwtDecode<MyToken>(TokenService.getAuthToken() || '').user_id)
+              
             })
-            .then(() => {
-              sets.forEach((set: any) => {
-                console.log(set);
-                handlePostNewPokemon( 
-                  team.id,
-                  set.nickname,
-                  set.species,
-                  set.gender,
-                  set.item,
-                  set.ability,
-                  set.level,
-                  set.shiny,
-                  set.happiness,
-                  set.nature,
-                  set.hp_ev,
-                  set.atk_ev,
-                  set.def_ev,
-                  set.spa_ev,
-                  set.spd_ev,
-                  set.spe_ev,
-                  set.hp_iv,
-                  set.atk_iv,
-                  set.def_iv,
-                  set.spa_iv,
-                  set.spd_iv,
-                  set.spe_iv,
-                  set.move_one,
-                  set.move_two,
-                  set.move_three,
-                  set.move_four,
-                  );
+
+          Promise.all(teamPromises).then((values) => {
+            const newVals = values.map((team) => {
+              return {...team, folder_name: folder.folder_name, user_id: jwtDecode<MyToken>(TokenService.getAuthToken() || '').user_id, user_name: jwtDecode<MyToken>(TokenService.getAuthToken() || '').sub}
             });
-        });  
-      });
-      // then we close the expanded view
-      setState(oldVals => ({
-        ...oldVals,
-        folderAddClicked: !state.folderAddClicked,
-        newFolderName: {value: '', touched: false},
-        newFolderImport: {value: '', touched: false}
+            setState(oldVals => ({
+              ...oldVals,
+              userTeams: [...state.userTeams, ...newVals]
+            }));
+
+            /* we have to continue on this promise chain because 
+            we need the values from the last promise to make the sets and it is
+            asynchronous. */
+
+            // next, we want to go through the original array again, but re-map and 
+            // re-join to have only single sets with appropriate team id's
+
+            let allSets: any = []
+
+            let altered = parsed.map((fullteam: object) => {
+              const createdTeam = newVals.find(team => team.team_name === Object.keys(fullteam)[0]);
+
+              const sets = Object.values(fullteam)[0];
+
+              return sets.map((set: any) => {
+                let def = {
+                  team_id: createdTeam.id,
+                  species: 'Pikachu',
+                  level: 100,
+                  shiny: false,
+                  happiness: 255,
+                  nature: 'Adamant',
+                  hp_ev: 0,
+                  atk_ev: 0,
+                  def_ev: 0,
+                  spa_ev: 0,
+                  spd_ev: 0,
+                  spe_ev: 0,
+                  hp_iv: 31,
+                  atk_iv: 31,
+                  def_iv: 31,
+                  spa_iv: 31,
+                  spd_iv: 31,
+                  spe_iv: 31,
+                  move_one: 'Tackle',
+                }
+
+                let s = {
+                  ...def,
+                  team_id: createdTeam.id,
+                  nickname: set.id,
+                  species: set.species,
+                  gender: set.gender,
+                  item: set.item,
+                  ability: set.ability,
+                  level: set.level,
+                  shiny: set.shiny,
+                  happiness: set.happiness,
+                  nature: set.nature,
+                  hp_ev: set.hp_ev,
+                  atk_ev: set.atk_ev,
+                  def_ev: set.def_ev,
+                  spa_ev: set.spa_ev,
+                  spd_ev: set.spd_ev,
+                  spe_ev: set.spe_ev,
+                  hp_iv: set.hp_iv,
+                  atk_iv: set.atk_iv,
+                  def_iv: set.def_iv,
+                  spa_iv: set.spa_iv,
+                  spd_iv: set.spd_iv,
+                  spe_iv: set.spe_iv,
+                  move_one: set.move_one,
+                  move_two: set.move_two,
+                  move_three: set.move_three,
+                  move_four: set.move_four,
+                }
+                return s
+              })
+            })
+
+            altered.forEach((sets: any) => {
+              allSets = [...allSets, ...sets]
+            })
+
+            const setPromises: Promise<any>[] = allSets.map((set: any): Promise<any> => {
+          
+              return apiService.postUserSet(set, jwtDecode<MyToken>(TokenService.getAuthToken() || '').user_id)
+            })
+
+            Promise.all(setPromises).then((sets) => {
+              setState(oldVals => ({
+                ...oldVals,
+                userSets: [...state.userTeams, ...sets]
+              }));
+            }) 
+          })
+        }
+      })
+      .then(() => {
+        setState(oldVals => ({
+          ...oldVals,
+          folderAddClicked: !state.folderAddClicked,
+          newFolderName: {value: '', touched: false},
+          newFolderImport: {value: '', touched: false}
       }));
-    };
-  });   
-};
+    }) 
+  };
 
   const handlePostNewPokemon = ( // will use this function for team post as well
     team_id: any,
@@ -726,7 +783,7 @@ export const GeneralProvider = ({children}: Props) => {
 
     apiService.postUserSet(set_body, jwtDecode<MyToken>(TokenService.getAuthToken() || '').user_id)
       .then((set) => setState(oldVals => ({...oldVals, userSets: [...state.userSets, set]})));
-  }
+  };
 
   const handlePostNewTeam = () => {
     const team_name = state.newTeamName.value;

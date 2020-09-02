@@ -90,6 +90,8 @@ const infinite = [
   'dubsknight',
   'drilbur-aumagari',
   'excadrill-aumagari',
+  'urshifu-dragon-fist',
+  'urshifu-tiger-claw',
   ]
 
   const LEGALITY = {

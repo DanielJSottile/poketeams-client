@@ -67,7 +67,9 @@ export default function showdownFolderParse(input: string) {
   const NO_NICKNAME_GEN_AND_ITEM_RE: RegExp  = /^(.*) \(([MF])\) @ (.*)$/;
   const NO_NICKNAME_AND_ITEM_RE: RegExp  = /^(.*) @ (.*)$/;
 
+  // eslint-disable-next-line
   let format: string;
+  // eslint-disable-next-line
   let folder: string;
   let teamname: string;
   let item: string | null = null;
@@ -92,20 +94,19 @@ export default function showdownFolderParse(input: string) {
   // parsing the individual teams
 
   return folderList.map((team: string)=> {
-    console.log(team)
     const lineList = team.split('\n\n');
     const idLine = lineList[0].trim();
-    console.log(idLine);
 
     if (FOLDERPARSE.test(idLine)) {
       const folderMatch = idLine.match(FOLDERPARSE);
+      // eslint-disable-next-line
       format = folderMatch![1].trim(); // unused for now
+      // eslint-disable-next-line
       folder = folderMatch![2].trim(); // might be needed for validation, dont need now
       teamname = folderMatch![3].trim(); // use this!
     }
     
     const teamList = lineList.slice(1)
-    console.log(teamList);
 
     const setList = teamList.map((t: string) => {
 

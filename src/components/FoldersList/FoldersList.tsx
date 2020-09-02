@@ -43,7 +43,7 @@ const FoldersList = (props: any) => {
     setState(oldVals => ({...oldVals, copySuccess: true}))
   }
 
-  const renderExpanded = () => {
+  const renderExpanded = (): JSX.Element => {
 
     const {
       newFolderName,
@@ -65,7 +65,7 @@ const FoldersList = (props: any) => {
           <label htmlFor="folder-import">Import Showdown Folder:</label>
           {newFolderImport.value !== "" && <p className="error-validate shake-horizontal">{validateNewFolderImport()}</p>}
           <textarea placeholder="Optionally Import a proper Pokemon Showdown Folder Here And It Will Fill Out The Entire Folder!" name="folder-import" id="team-import-1" value={newFolderImport.value} onChange={e => setNewFolderContents(e.target.value)}></textarea>
-        </div>
+          </div>
         </div>
         <button type="submit"
         className="submit"
@@ -80,7 +80,7 @@ const FoldersList = (props: any) => {
     )
   }
 
-  const renderEditExpand = () => {
+  const renderEditExpand = (): JSX.Element => {
 
     const {
       newFolderName,
@@ -113,7 +113,7 @@ const FoldersList = (props: any) => {
     )
   }
 
-  const renderDeleteExpand = () => {
+  const renderDeleteExpand = (): JSX.Element => {
 
     const {
       handleDeleteFolder,
