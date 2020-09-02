@@ -70,7 +70,7 @@ const FoldersList = (props: any) => {
         <button type="submit"
         className="submit"
         disabled={
-          validateNewFolderName()
+          validateNewFolderName() || validateNewFolderImport()
         }
         onClick={(e) => {
           e.preventDefault();
