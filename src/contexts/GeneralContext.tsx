@@ -723,7 +723,7 @@ export const GeneralProvider = ({children}: Props) => {
     }) 
   };
 
-  const handlePostNewPokemon = ( // will use this function for team post as well
+  const handlePostNewPokemon = (
     team_id: any,
     nickname: any,
     species: any = 'Pikachu',
@@ -802,37 +802,69 @@ export const GeneralProvider = ({children}: Props) => {
         if (contents){
           const parsed = showdownParse(contents);
     
-          parsed.forEach((set: any) => {
+          let setPromises = parsed.map((set: any) => {
 
-            handlePostNewPokemon( 
-              team.id,
-              set.nickname,
-              set.species,
-              set.gender,
-              set.item,
-              set.ability,
-              set.level,
-              set.shiny,
-              set.happiness,
-              set.nature,
-              set.hp_ev,
-              set.atk_ev,
-              set.def_ev,
-              set.spa_ev,
-              set.spd_ev,
-              set.spe_ev,
-              set.hp_iv,
-              set.atk_iv,
-              set.def_iv,
-              set.spa_iv,
-              set.spd_iv,
-              set.spe_iv,
-              set.move_one,
-              set.move_two,
-              set.move_three,
-              set.move_four,
-              );
+            let def = {
+              team_id: team.id,
+              species: 'Pikachu',
+              level: 100,
+              shiny: false,
+              happiness: 255,
+              nature: 'Adamant',
+              hp_ev: 0,
+              atk_ev: 0,
+              def_ev: 0,
+              spa_ev: 0,
+              spd_ev: 0,
+              spe_ev: 0,
+              hp_iv: 31,
+              atk_iv: 31,
+              def_iv: 31,
+              spa_iv: 31,
+              spd_iv: 31,
+              spe_iv: 31,
+              move_one: 'Tackle',
+            }
+
+            let set_body = {
+              ...def,
+              team_id: team.id,
+              nickname: set.id,
+              species: set.species,
+              gender: set.gender,
+              item: set.item,
+              ability: set.ability,
+              level: set.level,
+              shiny: set.shiny,
+              happiness: set.happiness,
+              nature: set.nature,
+              hp_ev: set.hp_ev,
+              atk_ev: set.atk_ev,
+              def_ev: set.def_ev,
+              spa_ev: set.spa_ev,
+              spd_ev: set.spd_ev,
+              spe_ev: set.spe_ev,
+              hp_iv: set.hp_iv,
+              atk_iv: set.atk_iv,
+              def_iv: set.def_iv,
+              spa_iv: set.spa_iv,
+              spd_iv: set.spd_iv,
+              spe_iv: set.spe_iv,
+              move_one: set.move_one,
+              move_two: set.move_two,
+              move_three: set.move_three,
+              move_four: set.move_four,
+            }
+
+            return apiService.postUserSet(set_body, jwtDecode<MyToken>(TokenService.getAuthToken() || '').user_id)
           });
+
+          Promise.all(setPromises).then((sets) => {
+            setState(oldVals => ({
+              ...oldVals,
+              userSets: [...state.userTeams, ...sets]
+            }));
+          }) 
         };
       });
       // then we close the expanded view

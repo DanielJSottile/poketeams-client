@@ -59,7 +59,7 @@ const FoldersList = (props: any) => {
       <form>
         <div>
           <label htmlFor="foldername">Folder Name:</label>
-          {<p className="error-validate shake-horizontal">{validateNewFolderName}</p>}
+          {<p className="error-validate shake-horizontal">{validateNewFolderName()}</p>}
           <input placeholder="e.g. Good Teams" type="text" name="foldername" id="foldername" value={newFolderName.value} onChange={e => setNewFolderName(e.target.value)}/>
           <div className="folder-import">
           <label htmlFor="folder-import">Import Showdown Folder:</label>
