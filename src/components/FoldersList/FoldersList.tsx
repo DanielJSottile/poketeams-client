@@ -188,7 +188,7 @@ const FoldersList = (props: any) => {
                 }}>Copy Text</button>
                 <Link to={{
                   pathname: `/share/folder/${currentClickedFolder.id}`,
-                  state: {folders: userFolders}}} target="_blank" >Share This Folder! <i className="fas fa-share-square"></i></Link>
+                  state: {folders: userFolders, teams: userTeams, sets: userSets, input: input}}} target="_blank" >Share This Folder! <i className="fas fa-share-square"></i></Link>
                 <input disabled type="text" readOnly value={`poketeams.now.sh/share/folder/${currentClickedFolder.id}`}/>
               </div>
                 <label htmlFor="edit-team">Export Folder: <i className="fas fa-download"></i></label>

@@ -676,7 +676,7 @@ export const GeneralProvider = ({children}: Props) => {
                 let s = {
                   ...def,
                   team_id: createdTeam.id,
-                  nickname: set.id,
+                  nickname: set.nickname,
                   species: set.species,
                   gender: set.gender,
                   item: set.item,
@@ -840,7 +840,7 @@ export const GeneralProvider = ({children}: Props) => {
             let set_body = {
               ...def,
               team_id: team.id,
-              nickname: set.id,
+              nickname: set.nickname,
               species: set.species,
               gender: set.gender,
               item: set.item,

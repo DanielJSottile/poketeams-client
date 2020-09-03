@@ -230,6 +230,7 @@ export default function showdownFolderParse(input: string) {
       };
       moves = []; // need to clear the moves array
       return setFinal;
+      
     })
     const final: any = {};
     final[teamname] = setList;
