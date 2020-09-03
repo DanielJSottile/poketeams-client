@@ -177,12 +177,14 @@ export default function showdownParse(input: string) {
   
       } else if (line.startsWith('- ')){
        
-        moves.splice(1, 0, (line.slice(1, line.length)).trim());
+        const moveLine = line.slice(1, line.length).trim();
+        
+        moves.push(moveLine);
 
       }
     }
   
-    return {
+    let setFinal = {
       nickname: nickname,
       species: species,
       gender: gender,
@@ -209,5 +211,7 @@ export default function showdownParse(input: string) {
       move_three: moves[2] ? moves[2] : null,
       move_four: moves[3] ? moves[3] : null
     };
+    moves = []; // reset moves array
+    return setFinal;
   })
 };

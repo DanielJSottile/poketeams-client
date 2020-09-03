@@ -414,7 +414,7 @@ const SetEdit = (props: any) => {
         <form> 
               <div className="pokemon-import">
                 <label htmlFor="pokemon-import">Import Pokemon Set: <i className="fas fa-upload"></i></label>
-                {newSetImport.value !== "" && <p className="error-validate shake-horizontal">{validateNewSetImport}</p>}
+                {newSetImport.value !== "" && <p className="error-validate shake-horizontal">{validateNewSetImport()}</p>}
                 <textarea placeholder="Import a Pokemon Showdown Set Here And It Will Re-populate The Field:" name="pokemon-import" id={`pokemon-import-${set.id}`} value={newSetImport.value} onChange={e => setNewSetContents(e.target.value)}/>
                 <button type="submit"
                   disabled={
