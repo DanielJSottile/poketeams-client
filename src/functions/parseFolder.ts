@@ -79,9 +79,7 @@ export default function showdownFolderParse(input: string) {
   let level: number = 100;
   let happiness: number = 255;
   let ev: string | null = null; 
-  
   let iv: string | null = null; 
-
   let ability: string | null = null;
   let shiny: boolean = false;
   let nature: string | null = null;
@@ -109,6 +107,22 @@ export default function showdownFolderParse(input: string) {
     const teamList = lineList.slice(1)
 
     const setList = teamList.map((t: string) => {
+
+      // We need to clear the values to default, otherwise they will persist.
+
+      item = null;
+      gender = null;
+      species = 'Pikachu';
+      nickname = null;
+      level = 100;
+      happiness  = 255;
+      ev  = null; 
+      iv = null; 
+      ability = null;
+      shiny = false;
+      nature = null;
+      moves = [];
+
 
       const lineList = t.split('\n');
       const rest = lineList.slice(1, lineList.length);
@@ -228,21 +242,7 @@ export default function showdownFolderParse(input: string) {
         move_three: moves[2] ? moves[2] : null,
         move_four: moves[3] ? moves[3] : null
       };
-      // We need to clear the values to default, otherwise they will persist.
-
-      item = null;
-      gender = null;
-      species = 'Pikachu';
-      nickname = null;
-      level = 100;
-      happiness  = 255;
-      ev  = null; 
-      iv = null; 
-      ability = null;
-      shiny = false;
-      nature = null;
-      moves = [];
-
+    
       return setFinal;
       
     })

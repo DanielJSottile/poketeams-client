@@ -4,7 +4,7 @@ handled is a bit different from Python, but the code is essentially the same. */
 
 // helper functions
 
-function evIvParser(string: string, val: string){
+function evIvParser(string: string | null, val: string){
   let hpV = 0;
   let atkV = 0;
   let defV = 0;
@@ -58,6 +58,19 @@ function evIvParser(string: string, val: string){
 
 export default function showdownParse(input: string) {
 
+  let item: string | null = null;
+  let gender: string | null = null;
+  let species: string = 'Pikachu';
+  let nickname: string | null = null;
+  let level: number = 100;
+  let happiness: number = 255;
+  let ev: string | null = null; 
+  let iv: string | null = null; 
+  let ability: string | null = null;
+  let shiny: boolean = false;
+  let nature: string | null = null;
+  let moves: any[] = [];
+
   // RegEx's
 
   const NICKNAME_GEN_AND_ITEM_RE = /^(.*) \((.*)\) \(([MF])\) @ (.*)$/; 
@@ -79,20 +92,18 @@ export default function showdownParse(input: string) {
     const s = lineList[0].trim();
 
   
-    let item = null;
-    let gender = null;
-    let species = 'Pikachu';
-    let nickname = null;
-    let level = 100;
-    let happiness = 255;
-    let ev = null; 
-    
-    let iv = null; 
-   
-    let ability = null;
-    let shiny = false;
-    let nature = null;
-    let moves: any[] = [];
+    item = null;
+    gender = null;
+    species = 'Pikachu';
+    nickname = null;
+    level = 100;
+    happiness = 255;
+    ev = null; 
+    iv = null; 
+    ability = null;
+    shiny = false;
+    nature = null;
+    moves = [];
     
   
   
@@ -211,21 +222,6 @@ export default function showdownParse(input: string) {
       move_three: moves[2] ? moves[2] : null,
       move_four: moves[3] ? moves[3] : null
     };
-
-    // We need to clear the values to default, otherwise they will persist.
-
-    item = null;
-    gender = null;
-    species = 'Pikachu';
-    nickname = null;
-    level = 100;
-    happiness  = 255;
-    ev  = null; 
-    iv = null; 
-    ability = null;
-    shiny = false;
-    nature = null;
-    moves = [];
 
     return setFinal;
   })
