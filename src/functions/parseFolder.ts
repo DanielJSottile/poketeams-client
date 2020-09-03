@@ -228,7 +228,7 @@ export default function showdownFolderParse(input: string) {
         move_three: moves[2] ? moves[2] : null,
         move_four: moves[3] ? moves[3] : null
       };
-      // We need to clear the values, otherwise they will persist.
+      // We need to clear the values to default, otherwise they will persist.
 
       item = null;
       gender = null;

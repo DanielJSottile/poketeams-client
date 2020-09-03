@@ -92,6 +92,15 @@ const infinite = [
   'excadrill-aumagari',
   'urshifu-dragon-fist',
   'urshifu-tiger-claw',
+
+  // not actually Infinites, but not added yet
+  'venusaur-gmax',
+  'blastoise-gmax',
+  'rillaboom-gmax',
+  'cinderace-gmax',
+  'inteleon-gmax',
+  'urshifu',
+  'urshifu-rapid-strike'
   ]
 
   const LEGALITY = {

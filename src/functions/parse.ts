@@ -212,7 +212,7 @@ export default function showdownParse(input: string) {
       move_four: moves[3] ? moves[3] : null
     };
 
-    // We need to clear the values, otherwise they will persist.
+    // We need to clear the values to default, otherwise they will persist.
 
     item = null;
     gender = null;
@@ -226,7 +226,7 @@ export default function showdownParse(input: string) {
     shiny = false;
     nature = null;
     moves = [];
-    
+
     return setFinal;
   })
 };
