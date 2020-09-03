@@ -211,7 +211,22 @@ export default function showdownParse(input: string) {
       move_three: moves[2] ? moves[2] : null,
       move_four: moves[3] ? moves[3] : null
     };
-    moves = []; // reset moves array
+
+    // We need to clear the values, otherwise they will persist.
+
+    item = null;
+    gender = null;
+    species = 'Pikachu';
+    nickname = null;
+    level = 100;
+    happiness  = 255;
+    ev  = null; 
+    iv = null; 
+    ability = null;
+    shiny = false;
+    nature = null;
+    moves = [];
+    
     return setFinal;
   })
 };
