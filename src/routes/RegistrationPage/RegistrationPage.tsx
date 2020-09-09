@@ -1,12 +1,12 @@
-import React, { Fragment } from "react";
-import RegistrationForm from "../../components/RegistrationForm/RegistrationForm";
-import Footer from "../../components/Footer/Footer";
-import "./RegistrationPage.css";
+import React, { Fragment } from 'react';
+import RegistrationForm from '../../components/RegistrationForm/RegistrationForm';
+import Footer from '../../components/Footer/Footer';
+import './RegistrationPage.css';
 
 const RegistrationPage = (props: any): JSX.Element => {
   const handleRegistrationSuccess = (user: any) => {
     const { history } = props;
-    history.push("/landing");
+    history.push('/landing');
   };
   return (
     <Fragment>

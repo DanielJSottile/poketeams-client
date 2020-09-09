@@ -1,11 +1,11 @@
-import React, { Fragment, useContext, useState } from "react";
-import { Link } from "react-router-dom";
-import GeneralContext from "../../contexts/GeneralContext";
-import Folder from "../Folder/Folder";
-import PokeballLoader from "../Loaders/PokeballLoader/PokeballLoader";
-import LoadingBlack from "../Loaders/LoadingBlack/LoadingBlack";
-import showdownFolderGenerate from "../../functions/generateFolder";
-import "./FoldersList.css";
+import React, { Fragment, useContext, useState } from 'react';
+import { Link } from 'react-router-dom';
+import GeneralContext from '../../contexts/GeneralContext';
+import Folder from '../Folder/Folder';
+import PokeballLoader from '../Loaders/PokeballLoader/PokeballLoader';
+import LoadingBlack from '../Loaders/LoadingBlack/LoadingBlack';
+import showdownFolderGenerate from '../../functions/generateFolder';
+import './FoldersList.css';
 
 const FoldersList = (props: any) => {
   const GenCon = useContext(GeneralContext);
@@ -37,7 +37,7 @@ const FoldersList = (props: any) => {
 
   const copyCodeToClipboard = (): any => {
     textArea.current.select();
-    document.execCommand("copy"); // this seems to not work
+    document.execCommand('copy'); // this seems to not work
     const text = textArea.current.defaultValue;
     navigator.clipboard.writeText(text); // this seems to work!
     setState((oldVals) => ({ ...oldVals, copySuccess: true }));
@@ -73,7 +73,7 @@ const FoldersList = (props: any) => {
           />
           <div className="folder-import">
             <label htmlFor="folder-import">Import Showdown Folder:</label>
-            {newFolderImport.value !== "" && (
+            {newFolderImport.value !== '' && (
               <p className="error-validate shake-horizontal">
                 {validateNewFolderImport()}
               </p>

@@ -1,7 +1,7 @@
-import React, { Fragment, useContext } from "react";
-import GeneralContext from "../../contexts/GeneralContext";
-import TeamButton from "../TeamButton/TeamButton";
-import "./TeamsButtonList-Edit.css";
+import React, { Fragment, useContext } from 'react';
+import GeneralContext from '../../contexts/GeneralContext';
+import TeamButton from '../TeamButton/TeamButton';
+import './TeamsButtonList-Edit.css';
 
 export interface PokemonTeam {
   team_name: string;
@@ -58,7 +58,7 @@ const TeamsButtonListEdit = (props: any) => {
         </div>
         <div className="team-import">
           <label htmlFor="team-import">Import Team Set:</label>
-          {newTeamImport.value !== "" && (
+          {newTeamImport.value !== '' && (
             <p className="error-validate shake-horizontal">
               {validateNewTeamImport()}
             </p>

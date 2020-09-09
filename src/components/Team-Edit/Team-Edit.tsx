@@ -1,9 +1,9 @@
-import React, { Fragment, useContext, useState } from "react";
-import { Link } from "react-router-dom";
-import GeneralContext from "../../contexts/GeneralContext";
-import showdownGenerate from "../../functions/generate";
-import SetEdit from "../Set-Edit/Set-Edit";
-import "./Team-Edit.css";
+import React, { Fragment, useContext, useState } from 'react';
+import { Link } from 'react-router-dom';
+import GeneralContext from '../../contexts/GeneralContext';
+import showdownGenerate from '../../functions/generate';
+import SetEdit from '../Set-Edit/Set-Edit';
+import './Team-Edit.css';
 
 export interface StringInput {
   value: string;
@@ -41,9 +41,9 @@ const TeamEdit = (props: any) => {
   functions handled in the General Context. */
 
   const [state, setState] = useState({
-    team_name: { value: props.team.team_name || "", touched: false },
+    team_name: { value: props.team.team_name || '', touched: false },
     favorite_team: { value: false, touched: false },
-    description: { value: props.team.team_description || "", touched: false },
+    description: { value: props.team.team_description || '', touched: false },
     teamExpandToggle: true,
     deleteClicked: false,
     copySuccess: false,
@@ -77,8 +77,8 @@ const TeamEdit = (props: any) => {
     setState((oldVals) => ({
       ...oldVals,
       teamExpandToggle: !state.teamExpandToggle,
-      team_name: { value: props.team.team_name || "", touched: false },
-      description: { value: props.team.description || "", touched: false },
+      team_name: { value: props.team.team_name || '', touched: false },
+      description: { value: props.team.description || '', touched: false },
     }));
   };
 
@@ -95,7 +95,7 @@ const TeamEdit = (props: any) => {
 
   const copyCodeToClipboard = (): any => {
     textArea.current.select();
-    document.execCommand("copy"); // this seems to not work
+    document.execCommand('copy'); // this seems to not work
     const text = textArea.current.defaultValue;
     navigator.clipboard.writeText(text); // this seems to work!
     setState((oldVals) => ({ ...oldVals, copySuccess: true }));
@@ -112,7 +112,7 @@ const TeamEdit = (props: any) => {
 
   const validateDesc = (): any => {
     let description = state.description.value;
-    if (typeof description !== "string") {
+    if (typeof description !== 'string') {
       return `This should never come up, it is superflous`;
     }
   };
@@ -206,19 +206,19 @@ const TeamEdit = (props: any) => {
                 </div>
                 <p>By {team.user_name}</p>
                 <p>
-                  Created on:{" "}
-                  {new Date(team.date_created).toLocaleString("en-GB", {
-                    weekday: "long",
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric",
+                  Created on:{' '}
+                  {new Date(team.date_created).toLocaleString('en-GB', {
+                    weekday: 'long',
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
                   })}
                 </p>
                 {/*<div className="title-form">
                   <label htmlFor={`favorite-id-${team.id}`}>Favorite</label>
                   <input type="checkbox" id={`favorite-id-${team.id}`} name={`favorite-id-${team.id}`}/> 
                   <p>Likes: {team.likes}</p> 
-                </div>*/}{" "}
+                </div>*/}{' '}
                 {/* Part of a future feature */}
               </div>
               <div className="title-content">
@@ -323,12 +323,12 @@ const TeamEdit = (props: any) => {
           <div>
             <p>By {team.user_name}</p>
             <p>
-              Created on:{" "}
-              {new Date(team.date_created).toLocaleString("en-GB", {
-                weekday: "long",
-                year: "numeric",
-                month: "long",
-                day: "numeric",
+              Created on:{' '}
+              {new Date(team.date_created).toLocaleString('en-GB', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
               })}
             </p>
           </div>

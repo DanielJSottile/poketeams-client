@@ -1,9 +1,9 @@
-import React, { Fragment, useContext } from "react";
-import GeneralContext from "../../contexts/GeneralContext";
-import TeamButton from "../TeamButton/TeamButton";
-import PokeballLoader from "../Loaders/PokeballLoader/PokeballLoader";
-import LoadingWhite from "../Loaders/LoadingWhite/LoadingWhite";
-import "./TeamsButtonList-Public.css";
+import React, { Fragment, useContext } from 'react';
+import GeneralContext from '../../contexts/GeneralContext';
+import TeamButton from '../TeamButton/TeamButton';
+import PokeballLoader from '../Loaders/PokeballLoader/PokeballLoader';
+import LoadingWhite from '../Loaders/LoadingWhite/LoadingWhite';
+import './TeamsButtonList-Public.css';
 
 export interface PokemonTeam {
   team_name: string;
@@ -37,7 +37,7 @@ const TeamsButtonListPublic = (props: any) => {
                   handlePageDown();
                 }}
               >
-                {`Go to Previous 10 Teams`}{" "}
+                {`Go to Previous 10 Teams`}{' '}
                 <i className="fas fa-arrow-circle-left"></i>
               </button>
               <button
@@ -45,7 +45,7 @@ const TeamsButtonListPublic = (props: any) => {
                   handlePageUp();
                 }}
               >
-                <i className="fas fa-arrow-circle-right"></i>{" "}
+                <i className="fas fa-arrow-circle-right"></i>{' '}
                 {`Go to Next 10 Teams`}
               </button>
             </div>
@@ -56,7 +56,7 @@ const TeamsButtonListPublic = (props: any) => {
                   handlePageUp();
                 }}
               >
-                <i className="fas fa-arrow-circle-right"></i>{" "}
+                <i className="fas fa-arrow-circle-right"></i>{' '}
                 {`Go to Next 10 Teams`}
               </button>
             </div>

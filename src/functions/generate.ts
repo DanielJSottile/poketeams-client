@@ -51,7 +51,7 @@ function evGenerator(ob: PokeObject) {
     evArr.push(`${ob.spe_ev} Spe`);
   }
 
-  return evArr.join(" / ");
+  return evArr.join(' / ');
 }
 
 function ivGenerator(ob: PokeObject) {
@@ -87,7 +87,7 @@ function ivGenerator(ob: PokeObject) {
     ivArr.push(`${ob.spe_iv} Spe`);
   }
 
-  return ivArr.join(" / ");
+  return ivArr.join(' / ');
 }
 
 // generator function
@@ -165,7 +165,7 @@ export default function showdownGenerate(input: any) {
       // moves
 
       if (!set.move_one) {
-        setArr.push("- Tackle");
+        setArr.push('- Tackle');
       } else {
         setArr.push(`- ${set.move_one}`);
       }
@@ -182,7 +182,7 @@ export default function showdownGenerate(input: any) {
         setArr.push(`- ${set.move_four}`);
       }
 
-      return setArr.join("\n");
+      return setArr.join('\n');
     })
-    .join("\n\n");
+    .join('\n\n');
 }

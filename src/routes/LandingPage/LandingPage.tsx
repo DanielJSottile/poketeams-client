@@ -1,13 +1,13 @@
-import React, { Fragment } from "react";
-import { Link } from "react-router-dom";
-import Footer from "../../components/Footer/Footer";
-import LoginForm from "../../components/LoginForm/LoginForm";
-import "./LandingPage.css";
+import React, { Fragment } from 'react';
+import { Link } from 'react-router-dom';
+import Footer from '../../components/Footer/Footer';
+import LoginForm from '../../components/LoginForm/LoginForm';
+import './LandingPage.css';
 
 const LandingPage = (props: any): JSX.Element => {
   const handleLoginSucess = (): void => {
     const { location, history } = props;
-    const destination = (location.state || {}).from || "/";
+    const destination = (location.state || {}).from || '/';
     history.push(destination);
   };
 

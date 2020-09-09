@@ -1,8 +1,8 @@
-import React, { useContext, useState } from "react";
-import TokenService from "../../services/token-service";
-import GeneralContext from "../../contexts/GeneralContext";
-import AuthApiService from "../../services/auth-api-service";
-import "./LoginForm.css";
+import React, { useContext, useState } from 'react';
+import TokenService from '../../services/token-service';
+import GeneralContext from '../../contexts/GeneralContext';
+import AuthApiService from '../../services/auth-api-service';
+import './LoginForm.css';
 
 const LoginForm = (props: any) => {
   const GenCon = useContext(GeneralContext);
@@ -19,8 +19,8 @@ const LoginForm = (props: any) => {
       password: password.value,
     })
       .then((res: any) => {
-        user_name.value = "";
-        password.value = "";
+        user_name.value = '';
+        password.value = '';
         TokenService.saveAuthToken(res.authToken);
         GenCon.getUserState();
         props.onLoginSuccess();

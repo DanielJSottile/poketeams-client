@@ -1,9 +1,9 @@
-import React, { Fragment, useContext } from "react";
-import GeneralContext from "../../contexts/GeneralContext";
-import TeamPublic from "../Team-Public/Team-Public";
-import PokeballLoader from "../Loaders/PokeballLoader/PokeballLoader";
-import LoadingBlack from "../Loaders/LoadingBlack/LoadingBlack";
-import "./TeamList-Public.css";
+import React, { Fragment, useContext } from 'react';
+import GeneralContext from '../../contexts/GeneralContext';
+import TeamPublic from '../Team-Public/Team-Public';
+import PokeballLoader from '../Loaders/PokeballLoader/PokeballLoader';
+import LoadingBlack from '../Loaders/LoadingBlack/LoadingBlack';
+import './TeamList-Public.css';
 
 export interface PokemonTeam {
   team_name: string;

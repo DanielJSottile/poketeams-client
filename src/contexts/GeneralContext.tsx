@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
-import apiService from "../services/apiService";
-import TokenService from "../services/token-service";
-import jwtDecode from "jwt-decode";
-import showdownParse from "../functions/parse";
-import showdownFolderParse from "../functions/parseFolder";
-import legality from "../functions/legality";
+import React, { useState, useEffect } from 'react';
+import apiService from '../services/apiService';
+import TokenService from '../services/token-service';
+import jwtDecode from 'jwt-decode';
+import showdownParse from '../functions/parse';
+import showdownFolderParse from '../functions/parseFolder';
+import legality from '../functions/legality';
 
 /* This is very important.  I believe React needs to have a Props type
 in order to actually pass the props.
@@ -179,23 +179,23 @@ const GeneralContext = React.createContext<CreateProvider>({
   publicTeams: [],
   publicSets: [],
   //folders-user
-  newFolderImport: { value: "", touched: false },
+  newFolderImport: { value: '', touched: false },
   folderAddClicked: false,
-  currentClickedFolder: { value: "", id: "", touched: false },
-  newFolderName: { value: "", touched: false },
+  currentClickedFolder: { value: '', id: '', touched: false },
+  newFolderName: { value: '', touched: false },
   //teams-user
   teamAddClicked: false,
-  currentClickedTeam: { value: "", id: "", touched: false },
-  newTeamName: { value: "", touched: false },
-  desc: { value: "", touched: false },
-  newTeamImport: { value: "", touched: false },
+  currentClickedTeam: { value: '', id: '', touched: false },
+  newTeamName: { value: '', touched: false },
+  desc: { value: '', touched: false },
+  newTeamImport: { value: '', touched: false },
   //sets-teams-user
-  newSetImport: { value: "", touched: false },
+  newSetImport: { value: '', touched: false },
   // search
-  search: { value: "", touched: false },
-  sort: { value: "", touched: false },
-  filter: { value: "", touched: false },
-  filtersort: { value: "", touched: false },
+  search: { value: '', touched: false },
+  sort: { value: '', touched: false },
+  filter: { value: '', touched: false },
+  filtersort: { value: '', touched: false },
   page: { value: 1 },
 
   setNewFolderName: () => {},
@@ -261,29 +261,29 @@ export const GeneralProvider = ({ children }: Props) => {
     publicSets: [],
     //folders-user
     folderAddClicked: false,
-    currentClickedFolder: { value: "", id: "", touched: false },
-    newFolderName: { value: "", touched: false },
-    newFolderImport: { value: "", touched: false },
+    currentClickedFolder: { value: '', id: '', touched: false },
+    newFolderName: { value: '', touched: false },
+    newFolderImport: { value: '', touched: false },
     //teams-user
     teamAddClicked: false,
-    currentClickedTeam: { value: "", id: "", touched: false },
-    newTeamName: { value: "", touched: false },
-    desc: { value: "", touched: false },
-    newTeamImport: { value: "", touched: false },
+    currentClickedTeam: { value: '', id: '', touched: false },
+    newTeamName: { value: '', touched: false },
+    desc: { value: '', touched: false },
+    newTeamImport: { value: '', touched: false },
     //sets-teams-user
-    newSetImport: { value: "", touched: false },
+    newSetImport: { value: '', touched: false },
     // search
-    search: { value: "", touched: false },
-    sort: { value: "", touched: false },
-    filter: { value: "", touched: false },
-    filtersort: { value: "", touched: false },
+    search: { value: '', touched: false },
+    sort: { value: '', touched: false },
+    filter: { value: '', touched: false },
+    filtersort: { value: '', touched: false },
     page: { value: 1 },
   });
 
   useEffect(() => {
     if (TokenService.getAuthToken()) {
       // if user is logged in
-      const user_id = jwtDecode<MyToken>(TokenService.getAuthToken() || "")
+      const user_id = jwtDecode<MyToken>(TokenService.getAuthToken() || '')
         .user_id;
 
       apiService
@@ -305,8 +305,8 @@ export const GeneralProvider = ({ children }: Props) => {
         });
     }
 
-    const search = state.search.value || "all";
-    const sort = state.sort.value || "newest";
+    const search = state.search.value || 'all';
+    const sort = state.sort.value || 'newest';
     const page = state.page.value;
     const query = `?page=${page}&sort=${sort}&species=${search.toLowerCase()}`;
     apiService.getTenTeamsSearch(query).then((teams) => {
@@ -437,8 +437,8 @@ export const GeneralProvider = ({ children }: Props) => {
       page: { value: state.page.value + 1 },
     }));
 
-    const search = state.search.value || "all";
-    const sort = state.sort.value || "newest";
+    const search = state.search.value || 'all';
+    const sort = state.sort.value || 'newest';
     const page = state.page.value + 1;
     const query = `?page=${page}&sort=${sort}&species=${search.toLowerCase()}`;
     apiService.getTenTeamsSearch(query).then((teams) => {
@@ -463,8 +463,8 @@ export const GeneralProvider = ({ children }: Props) => {
         page: { value: state.page.value - 1 },
       }));
 
-      const search = state.search.value || "all";
-      const sort = state.sort.value || "newest";
+      const search = state.search.value || 'all';
+      const sort = state.sort.value || 'newest';
       const page = state.page.value - 1;
       const query = `?page=${page}&sort=${sort}&species=${search.toLowerCase()}`;
       apiService.getTenTeamsSearch(query).then((teams) => {
@@ -501,7 +501,7 @@ export const GeneralProvider = ({ children }: Props) => {
   const getUserState = () => {
     if (TokenService.getAuthToken()) {
       // if user is logged in
-      const user_id = jwtDecode<MyToken>(TokenService.getAuthToken() || "")
+      const user_id = jwtDecode<MyToken>(TokenService.getAuthToken() || '')
         .user_id;
 
       apiService
@@ -589,7 +589,7 @@ export const GeneralProvider = ({ children }: Props) => {
 
   const validateDesc = (): any => {
     let description = state.desc.value;
-    if (typeof description !== "string") {
+    if (typeof description !== 'string') {
       return `This should never come up, it is superflous`;
     }
   };
@@ -659,7 +659,7 @@ export const GeneralProvider = ({ children }: Props) => {
     apiService
       .postUserFolder(
         folder_name,
-        jwtDecode<MyToken>(TokenService.getAuthToken() || "").user_id
+        jwtDecode<MyToken>(TokenService.getAuthToken() || '').user_id
       )
       .then((f) => {
         folder = f; // save this for later
@@ -679,7 +679,7 @@ export const GeneralProvider = ({ children }: Props) => {
               // extract the teamname from each team
               const extract = Object.entries(fullteam)[0];
               const team_name = extract[0];
-              const desc = ""; // set a blank description
+              const desc = ''; // set a blank description
               const folderId = folder.id;
               const body = {
                 team_name,
@@ -691,7 +691,7 @@ export const GeneralProvider = ({ children }: Props) => {
 
               return apiService.postUserTeam(
                 body,
-                jwtDecode<MyToken>(TokenService.getAuthToken() || "").user_id
+                jwtDecode<MyToken>(TokenService.getAuthToken() || '').user_id
               );
             }
           );
@@ -701,9 +701,9 @@ export const GeneralProvider = ({ children }: Props) => {
               return {
                 ...team,
                 folder_name: folder.folder_name,
-                user_id: jwtDecode<MyToken>(TokenService.getAuthToken() || "")
+                user_id: jwtDecode<MyToken>(TokenService.getAuthToken() || '')
                   .user_id,
-                user_name: jwtDecode<MyToken>(TokenService.getAuthToken() || "")
+                user_name: jwtDecode<MyToken>(TokenService.getAuthToken() || '')
                   .sub,
               };
             });
@@ -731,11 +731,11 @@ export const GeneralProvider = ({ children }: Props) => {
               return sets.map((set: any) => {
                 let def = {
                   team_id: createdTeam.id,
-                  species: "Pikachu",
+                  species: 'Pikachu',
                   level: 100,
                   shiny: false,
                   happiness: 255,
-                  nature: "Adamant",
+                  nature: 'Adamant',
                   hp_ev: 0,
                   atk_ev: 0,
                   def_ev: 0,
@@ -748,7 +748,7 @@ export const GeneralProvider = ({ children }: Props) => {
                   spa_iv: 31,
                   spd_iv: 31,
                   spe_iv: 31,
-                  move_one: "Tackle",
+                  move_one: 'Tackle',
                 };
 
                 let s = {
@@ -792,7 +792,7 @@ export const GeneralProvider = ({ children }: Props) => {
               (set: any): Promise<any> => {
                 return apiService.postUserSet(
                   set,
-                  jwtDecode<MyToken>(TokenService.getAuthToken() || "").user_id
+                  jwtDecode<MyToken>(TokenService.getAuthToken() || '').user_id
                 );
               }
             );
@@ -810,8 +810,8 @@ export const GeneralProvider = ({ children }: Props) => {
         setState((oldVals) => ({
           ...oldVals,
           folderAddClicked: !state.folderAddClicked,
-          newFolderName: { value: "", touched: false },
-          newFolderImport: { value: "", touched: false },
+          newFolderName: { value: '', touched: false },
+          newFolderImport: { value: '', touched: false },
         }));
       });
   };
@@ -819,14 +819,14 @@ export const GeneralProvider = ({ children }: Props) => {
   const handlePostNewPokemon = (
     team_id: any,
     nickname: any,
-    species: any = "Pikachu",
+    species: any = 'Pikachu',
     gender: any,
     item: any,
     ability: any,
     level: any = 100,
     shiny: any = false,
     happiness: any = 255,
-    nature: any = "Adamant",
+    nature: any = 'Adamant',
     hp_ev: any = 0,
     atk_ev: any = 0,
     def_ev: any = 0,
@@ -839,7 +839,7 @@ export const GeneralProvider = ({ children }: Props) => {
     spa_iv: any = 31,
     spd_iv: any = 31,
     spe_iv: any = 31,
-    move_one: any = "Tackle",
+    move_one: any = 'Tackle',
     move_two: any,
     move_three: any,
     move_four: any
@@ -876,7 +876,7 @@ export const GeneralProvider = ({ children }: Props) => {
     apiService
       .postUserSet(
         set_body,
-        jwtDecode<MyToken>(TokenService.getAuthToken() || "").user_id
+        jwtDecode<MyToken>(TokenService.getAuthToken() || '').user_id
       )
       .then((set) =>
         setState((oldVals) => ({
@@ -902,7 +902,7 @@ export const GeneralProvider = ({ children }: Props) => {
     apiService
       .postUserTeam(
         body,
-        jwtDecode<MyToken>(TokenService.getAuthToken() || "").user_id
+        jwtDecode<MyToken>(TokenService.getAuthToken() || '').user_id
       )
       .then((team) => {
         // first we set the team, and due to a bug, we also need to add a few more fields to get it to temporarily show correctly.
@@ -913,9 +913,9 @@ export const GeneralProvider = ({ children }: Props) => {
             {
               ...team,
               folder_name: state.currentClickedFolder.value,
-              user_id: jwtDecode<MyToken>(TokenService.getAuthToken() || "")
+              user_id: jwtDecode<MyToken>(TokenService.getAuthToken() || '')
                 .user_id,
-              user_name: jwtDecode<MyToken>(TokenService.getAuthToken() || "")
+              user_name: jwtDecode<MyToken>(TokenService.getAuthToken() || '')
                 .sub,
             },
           ],
@@ -927,11 +927,11 @@ export const GeneralProvider = ({ children }: Props) => {
           let setPromises = parsed.map((set: any) => {
             let def = {
               team_id: team.id,
-              species: "Pikachu",
+              species: 'Pikachu',
               level: 100,
               shiny: false,
               happiness: 255,
-              nature: "Adamant",
+              nature: 'Adamant',
               hp_ev: 0,
               atk_ev: 0,
               def_ev: 0,
@@ -944,7 +944,7 @@ export const GeneralProvider = ({ children }: Props) => {
               spa_iv: 31,
               spd_iv: 31,
               spe_iv: 31,
-              move_one: "Tackle",
+              move_one: 'Tackle',
             };
 
             let set_body = {
@@ -979,7 +979,7 @@ export const GeneralProvider = ({ children }: Props) => {
 
             return apiService.postUserSet(
               set_body,
-              jwtDecode<MyToken>(TokenService.getAuthToken() || "").user_id
+              jwtDecode<MyToken>(TokenService.getAuthToken() || '').user_id
             );
           });
 
@@ -995,9 +995,9 @@ export const GeneralProvider = ({ children }: Props) => {
     setState((oldVals) => ({
       ...oldVals,
       teamAddClicked: !state.teamAddClicked,
-      newTeamName: { value: "", touched: false },
-      desc: { value: "", touched: false },
-      newTeamImport: { value: "", touched: false },
+      newTeamName: { value: '', touched: false },
+      desc: { value: '', touched: false },
+      newTeamImport: { value: '', touched: false },
     }));
   };
 
@@ -1006,7 +1006,7 @@ export const GeneralProvider = ({ children }: Props) => {
   const handleEditFolder = () => {
     const folder_name = state.newFolderName.value;
     const id = state.currentClickedFolder.id;
-    const userId = jwtDecode<MyToken>(TokenService.getAuthToken() || "")
+    const userId = jwtDecode<MyToken>(TokenService.getAuthToken() || '')
       .user_id;
     apiService.patchUserFolder(folder_name, id, userId);
 
@@ -1022,7 +1022,7 @@ export const GeneralProvider = ({ children }: Props) => {
 
   const handleUpdateTeam = (teamname: any, desc: any, id: any) => {
     const body = { id: id, team_name: teamname, description: desc };
-    const userId = jwtDecode<MyToken>(TokenService.getAuthToken() || "")
+    const userId = jwtDecode<MyToken>(TokenService.getAuthToken() || '')
       .user_id;
     apiService.patchUserTeam(body, userId);
 
@@ -1093,7 +1093,7 @@ export const GeneralProvider = ({ children }: Props) => {
       move_four: move_four,
     };
 
-    const userId = jwtDecode<MyToken>(TokenService.getAuthToken() || "")
+    const userId = jwtDecode<MyToken>(TokenService.getAuthToken() || '')
       .user_id;
     apiService.patchUserSet(body, userId);
 
@@ -1135,7 +1135,7 @@ export const GeneralProvider = ({ children }: Props) => {
   const handleUpdateSetImport = (id: any) => {
     const contents = state.newSetImport.value;
     const parsed = showdownParse(contents)[0];
-    const userId = jwtDecode<MyToken>(TokenService.getAuthToken() || "")
+    const userId = jwtDecode<MyToken>(TokenService.getAuthToken() || '')
       .user_id;
 
     const body = {
@@ -1201,7 +1201,7 @@ export const GeneralProvider = ({ children }: Props) => {
       userSets: state.userSets.map((s) => {
         return s.id !== id ? s : { ...s, ...set };
       }),
-      newSetImport: { value: "", touched: false },
+      newSetImport: { value: '', touched: false },
     }));
   };
 
@@ -1217,7 +1217,7 @@ export const GeneralProvider = ({ children }: Props) => {
     setState((oldVals) => ({
       ...oldVals,
       userFolders: newFolders,
-      currentClickedFolder: { value: "", id: "", touched: false },
+      currentClickedFolder: { value: '', id: '', touched: false },
     }));
   };
 
@@ -1234,7 +1234,7 @@ export const GeneralProvider = ({ children }: Props) => {
       ...oldVals,
       publicTeams: newPublicTeams,
       userTeams: newUserTeams,
-      currentClickedTeam: { value: "", id: "", touched: false },
+      currentClickedTeam: { value: '', id: '', touched: false },
     }));
   };
 
@@ -1258,8 +1258,8 @@ export const GeneralProvider = ({ children }: Props) => {
 
   const handleSearch = (e: any) => {
     e.preventDefault();
-    const search = state.search.value || "all";
-    const sort = state.sort.value || "newest";
+    const search = state.search.value || 'all';
+    const sort = state.sort.value || 'newest';
     const page = state.page.value;
     const query = `?page=${page}&sort=${sort}&species=${search.toLowerCase()}`;
     apiService.getTenTeamsSearch(query).then((teams) => {
@@ -1278,13 +1278,13 @@ export const GeneralProvider = ({ children }: Props) => {
   };
 
   const handleFilter = () => {
-    const filter = state.filter.value || "all";
-    const filtersort = state.filtersort.value || "newest";
+    const filter = state.filter.value || 'all';
+    const filtersort = state.filtersort.value || 'newest';
     // lets do an api call for this, JUST because we fucking can, plus linking data back up is impossible with my current knowledge
     const query = `?sort=${filtersort}&species=${filter.toLowerCase()}`;
     if (TokenService.getAuthToken()) {
       // if user is logged in
-      const user_id = jwtDecode<MyToken>(TokenService.getAuthToken() || "")
+      const user_id = jwtDecode<MyToken>(TokenService.getAuthToken() || '')
         .user_id;
       apiService.getUserFoldersFilter(user_id, query).then((data) => {
         setState((oldVals) => ({ ...oldVals, userFolders: data }));

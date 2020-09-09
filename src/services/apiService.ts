@@ -1,5 +1,5 @@
-import config from "../config";
-import TokenService from "./token-service";
+import config from '../config';
+import TokenService from './token-service';
 
 // PUBLIC SIDE
 
@@ -7,7 +7,7 @@ const apiService = {
   getTenTeamsDefault(): Promise<any> {
     let error: any;
     return fetch(`${config.API_ENDPOINT}/all`, {
-      method: "GET",
+      method: 'GET',
       headers: {},
     })
       .then((res) => {
@@ -28,7 +28,7 @@ const apiService = {
   getTenTeamsSearch(query: string): Promise<any> {
     let error: any;
     return fetch(`${config.API_ENDPOINT}/all/search${query}`, {
-      method: "GET",
+      method: 'GET',
       headers: {},
     })
       .then((res) => {
@@ -49,7 +49,7 @@ const apiService = {
   getSetsforTenTeams(): Promise<any> {
     let error: any;
     return fetch(`${config.API_ENDPOINT}/all/sets`, {
-      method: "GET",
+      method: 'GET',
       headers: {},
     })
       .then((res) => {
@@ -70,7 +70,7 @@ const apiService = {
   getLikesforOneTeam(team_id: number): Promise<any> {
     let error: any;
     return fetch(`${config.API_ENDPOINT}/all/${team_id}/likes`, {
-      method: "GET",
+      method: 'GET',
       headers: {},
     })
       .then((res) => {
@@ -91,7 +91,7 @@ const apiService = {
   getSetsForOneTeam(team_id: number): Promise<any> {
     let error: any;
     return fetch(`${config.API_ENDPOINT}/all/${team_id}/sets`, {
-      method: "GET",
+      method: 'GET',
       headers: {},
     })
       .then((res) => {
@@ -112,7 +112,7 @@ const apiService = {
   getSingleTeam(team_id: number): Promise<any> {
     let error: any;
     return fetch(`${config.API_ENDPOINT}/all/${team_id}`, {
-      method: "GET",
+      method: 'GET',
       headers: {},
     })
       .then((res) => {
@@ -133,7 +133,7 @@ const apiService = {
   getSingleSet(set_id: number): Promise<any> {
     let error: any;
     return fetch(`${config.API_ENDPOINT}/all/set/${set_id}`, {
-      method: "GET",
+      method: 'GET',
       headers: {},
     })
       .then((res) => {
@@ -158,9 +158,9 @@ const apiService = {
   getSingleFolder(folder_id: number): Promise<any> {
     let error: any;
     return fetch(`${config.API_ENDPOINT}/build/folder/${folder_id}`, {
-      method: "GET",
+      method: 'GET',
       headers: {
-        "content-type": "application/json",
+        'content-type': 'application/json',
         authorization: `bearer ${TokenService.getAuthToken()}`,
       },
     })
@@ -182,9 +182,9 @@ const apiService = {
   getUserFolders(user_id: number): Promise<any> {
     let error: any;
     return fetch(`${config.API_ENDPOINT}/build/folders/${user_id}`, {
-      method: "GET",
+      method: 'GET',
       headers: {
-        "content-type": "application/json",
+        'content-type': 'application/json',
         authorization: `bearer ${TokenService.getAuthToken()}`,
       },
     })
@@ -206,9 +206,9 @@ const apiService = {
   getUserTeams(user_id: number): Promise<any> {
     let error: any;
     return fetch(`${config.API_ENDPOINT}/build/teams/${user_id}`, {
-      method: "GET",
+      method: 'GET',
       headers: {
-        "content-type": "application/json",
+        'content-type': 'application/json',
         authorization: `bearer ${TokenService.getAuthToken()}`,
       },
     })
@@ -229,9 +229,9 @@ const apiService = {
   getUserSets(user_id: number): Promise<any> {
     let error: any;
     return fetch(`${config.API_ENDPOINT}/build/sets/${user_id}`, {
-      method: "GET",
+      method: 'GET',
       headers: {
-        "content-type": "application/json",
+        'content-type': 'application/json',
         authorization: `bearer ${TokenService.getAuthToken()}`,
       },
     })
@@ -255,9 +255,9 @@ const apiService = {
     return fetch(
       `${config.API_ENDPOINT}/build/folders/${user_id}/filter${query}`,
       {
-        method: "GET",
+        method: 'GET',
         headers: {
-          "content-type": "application/json",
+          'content-type': 'application/json',
           authorization: `bearer ${TokenService.getAuthToken()}`,
         },
       }
@@ -282,9 +282,9 @@ const apiService = {
     return fetch(
       `${config.API_ENDPOINT}/build/teams/${user_id}/filter${query}`,
       {
-        method: "GET",
+        method: 'GET',
         headers: {
-          "content-type": "application/json",
+          'content-type': 'application/json',
           authorization: `bearer ${TokenService.getAuthToken()}`,
         },
       }
@@ -308,9 +308,9 @@ const apiService = {
     return fetch(
       `${config.API_ENDPOINT}/build/sets/${user_id}/filter${query}`,
       {
-        method: "GET",
+        method: 'GET',
         headers: {
-          "content-type": "application/json",
+          'content-type': 'application/json',
           authorization: `bearer ${TokenService.getAuthToken()}`,
         },
       }
@@ -334,9 +334,9 @@ const apiService = {
 
   postUserFolder(foldername: string, userid: number): Promise<any> {
     return fetch(`${config.API_ENDPOINT}/build/folders/${userid}`, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "content-type": "application/json",
+        'content-type': 'application/json',
         authorization: `bearer ${TokenService.getAuthToken()}`,
       },
       body: JSON.stringify({
@@ -350,9 +350,9 @@ const apiService = {
 
   postUserTeam(body: object, userid: number): Promise<any> {
     return fetch(`${config.API_ENDPOINT}/build/teams/${userid}`, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "content-type": "application/json",
+        'content-type': 'application/json',
         authorization: `bearer ${TokenService.getAuthToken()}`,
       },
       body: JSON.stringify(body),
@@ -363,9 +363,9 @@ const apiService = {
 
   postUserSet(body: object, userid: number): Promise<any> {
     return fetch(`${config.API_ENDPOINT}/build/sets/${userid}`, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "content-type": "application/json",
+        'content-type': 'application/json',
         authorization: `bearer ${TokenService.getAuthToken()}`,
       },
       body: JSON.stringify(body),
@@ -382,9 +382,9 @@ const apiService = {
     userid: number
   ): Promise<any> {
     return fetch(`${config.API_ENDPOINT}/build/folders/${userid}`, {
-      method: "PATCH",
+      method: 'PATCH',
       headers: {
-        "content-type": "application/json",
+        'content-type': 'application/json',
         authorization: `bearer ${TokenService.getAuthToken()}`,
       },
       body: JSON.stringify({
@@ -400,9 +400,9 @@ const apiService = {
 
   patchUserTeam(body: object, userid: number): Promise<any> {
     return fetch(`${config.API_ENDPOINT}/build/teams/${userid}`, {
-      method: "PATCH",
+      method: 'PATCH',
       headers: {
-        "content-type": "application/json",
+        'content-type': 'application/json',
         authorization: `bearer ${TokenService.getAuthToken()}`,
       },
       body: JSON.stringify(body),
@@ -414,9 +414,9 @@ const apiService = {
 
   patchUserSet(body: object, userid: number): Promise<any> {
     return fetch(`${config.API_ENDPOINT}/build/sets/${userid}`, {
-      method: "PATCH",
+      method: 'PATCH',
       headers: {
-        "content-type": "application/json",
+        'content-type': 'application/json',
         authorization: `bearer ${TokenService.getAuthToken()}`,
       },
       body: JSON.stringify(body),
@@ -430,9 +430,9 @@ const apiService = {
 
   deleteUserFolder(folder_id: number): Promise<any> {
     return fetch(`${config.API_ENDPOINT}/build/folder/${folder_id}`, {
-      method: "DELETE",
+      method: 'DELETE',
       headers: {
-        "content-type": "application/json",
+        'content-type': 'application/json',
         authorization: `bearer ${TokenService.getAuthToken()}`,
       },
     }).then((res) => {
@@ -443,9 +443,9 @@ const apiService = {
 
   deleteUserTeam(team_id: number): Promise<any> {
     return fetch(`${config.API_ENDPOINT}/build/team/${team_id}`, {
-      method: "DELETE",
+      method: 'DELETE',
       headers: {
-        "content-type": "application/json",
+        'content-type': 'application/json',
         authorization: `bearer ${TokenService.getAuthToken()}`,
       },
     }).then((res) => {
@@ -456,9 +456,9 @@ const apiService = {
 
   deleteUserSet(team_id: number, set_id: number): Promise<any> {
     return fetch(`${config.API_ENDPOINT}/build/set/${team_id}/${set_id}`, {
-      method: "DELETE",
+      method: 'DELETE',
       headers: {
-        "content-type": "application/json",
+        'content-type': 'application/json',
         authorization: `bearer ${TokenService.getAuthToken()}`,
       },
     }).then((res) => {

@@ -1,5 +1,5 @@
-import React, { Fragment } from "react";
-import "./LoadingSets.css";
+import React, { Fragment } from 'react';
+import './LoadingSets.css';
 
 const LoadingSets = (props: any) => {
   return (

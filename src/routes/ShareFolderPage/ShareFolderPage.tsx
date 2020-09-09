@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
-import apiService from "../../services/apiService";
-import FolderPublicShare from "../../components/Folder-Public-Share/Folder-Public-Share";
-import "./ShareFolderPage.css";
+import React, { useState, useEffect } from 'react';
+import apiService from '../../services/apiService';
+import FolderPublicShare from '../../components/Folder-Public-Share/Folder-Public-Share';
+import './ShareFolderPage.css';
 
 export interface Provider {
   team?: any;

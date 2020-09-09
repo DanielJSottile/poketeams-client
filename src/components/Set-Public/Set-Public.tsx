@@ -1,8 +1,8 @@
-import React, { Fragment, useState } from "react";
-import { Link } from "react-router-dom";
-import showdownGenerate from "../../functions/generate";
-import legality from "../../functions/legality";
-import "./Set-Public.css";
+import React, { Fragment, useState } from 'react';
+import { Link } from 'react-router-dom';
+import showdownGenerate from '../../functions/generate';
+import legality from '../../functions/legality';
+import './Set-Public.css';
 
 const SetPublic = (props: any) => {
   const [state, setState] = useState({
@@ -27,7 +27,7 @@ const SetPublic = (props: any) => {
 
   const copyCodeToClipboard = (): any => {
     textArea.current.select();
-    document.execCommand("copy"); // this seems to not work
+    document.execCommand('copy'); // this seems to not work
     const text = textArea.current.defaultValue;
     navigator.clipboard.writeText(text); // this seems to work!
     setState((oldVals) => ({ ...oldVals, copySuccess: true }));
@@ -42,7 +42,7 @@ const SetPublic = (props: any) => {
           Compress Set <i className="fas fa-compress-arrows-alt"></i>
         </button>
         <form>
-          {" "}
+          {' '}
           {/* CHECK: do we even need disabled and readOnly? The inputs are already disabled*/}
           <div className="pokemon-intro">
             <div className="name-sprite">
@@ -52,7 +52,7 @@ const SetPublic = (props: any) => {
                   className="pokemon-name"
                   disabled
                   readOnly
-                  value={set.species || "Pikachu"}
+                  value={set.species || 'Pikachu'}
                   type="text"
                   name="pokemon-name"
                   id={`pokemon-name-${set.id}`}
@@ -60,10 +60,10 @@ const SetPublic = (props: any) => {
                 <label htmlFor="pokemon-nickname">Nickname: (optional)</label>
                 <input
                   className="pokemon-nickname"
-                  placeholder={set.species || "Pikachu"}
+                  placeholder={set.species || 'Pikachu'}
                   disabled
                   readOnly
-                  value={set.nickname || ""}
+                  value={set.nickname || ''}
                   type="text"
                   name="pokemon-nickname"
                   id={`pokemon-nickname-${set.id}`}
@@ -73,7 +73,7 @@ const SetPublic = (props: any) => {
                   className="pokemon-gender"
                   disabled
                   readOnly
-                  value={set.gender || ""}
+                  value={set.gender || ''}
                   type="text"
                   name="pokemon-gender"
                   id={`pokemon-gender-${set.id}`}
@@ -94,7 +94,7 @@ const SetPublic = (props: any) => {
                 <img
                   className="sprite-img"
                   src={legality.returnIconSprite(set.species, set.shiny)}
-                  alt={set.species || "Pikachu"}
+                  alt={set.species || 'Pikachu'}
                 />
                 {legality
                   .returnTypeIcon(legality.returnType(set.species))
@@ -128,7 +128,7 @@ const SetPublic = (props: any) => {
                 className="pokemon-item"
                 disabled
                 readOnly
-                value={set.item || ""}
+                value={set.item || ''}
                 type="text"
                 name="pokemon-item"
                 id={`pokemon-item-${set.id}`}
@@ -138,7 +138,7 @@ const SetPublic = (props: any) => {
                 className="pokemon-ability"
                 disabled
                 readOnly
-                value={set.ability || ""}
+                value={set.ability || ''}
                 type="text"
                 name="pokemon-ability"
                 id={`pokemon-ability-${set.id}`}
@@ -148,7 +148,7 @@ const SetPublic = (props: any) => {
                 className="pokemon-nature"
                 disabled
                 readOnly
-                value={set.nature || ""}
+                value={set.nature || ''}
                 type="text"
                 name="pokemon-nature"
                 id={`pokemon-nature-${set.id}`}
@@ -322,7 +322,7 @@ const SetPublic = (props: any) => {
                 className="pokemon-move"
                 disabled
                 readOnly
-                value={set.move_one || "Tackle"}
+                value={set.move_one || 'Tackle'}
                 type="text"
                 name="pokemon-move"
                 id={`pokemon-${set.id}-move-1`}
@@ -331,7 +331,7 @@ const SetPublic = (props: any) => {
                 className="pokemon-move"
                 disabled
                 readOnly
-                value={set.move_two || ""}
+                value={set.move_two || ''}
                 type="text"
                 name="pokemon-move"
                 id={`pokemon-${set.id}-move-2`}
@@ -340,7 +340,7 @@ const SetPublic = (props: any) => {
                 className="pokemon-move"
                 disabled
                 readOnly
-                value={set.move_three || ""}
+                value={set.move_three || ''}
                 type="text"
                 name="pokemon-move"
                 id={`pokemon-${set.id}-move-3`}
@@ -349,7 +349,7 @@ const SetPublic = (props: any) => {
                 className="pokemon-move"
                 disabled
                 readOnly
-                value={set.move_four || ""}
+                value={set.move_four || ''}
                 type="text"
                 name="pokemon-move"
                 id={`pokemon-${set.id}-move-4`}

@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
-import apiService from "../../services/apiService";
-import TeamPublicShare from "../../components/Team-Public-Share/Team-Public-Share";
-import "./ShareTeamPage.css";
+import React, { useState, useEffect } from 'react';
+import apiService from '../../services/apiService';
+import TeamPublicShare from '../../components/Team-Public-Share/Team-Public-Share';
+import './ShareTeamPage.css';
 
 export interface Provider {
   team?: any;

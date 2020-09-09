@@ -1,9 +1,9 @@
-import React from "react";
+import React from 'react';
 
 // delete or comment out unused ones!
 
 export function Hyph() {
-  return <span className="Hyph">{" - "}</span>;
+  return <span className="Hyph">{' - '}</span>;
 }
 
 export function Button({
@@ -12,13 +12,13 @@ export function Button({
 }: {
   className?: any;
   children?: any;
-  type: "button" | "submit" | "reset";
+  type: 'button' | 'submit' | 'reset';
 }) {
-  return <button className={["Button", className].join(" ")} {...props} />;
+  return <button className={['Button', className].join(' ')} {...props} />;
 }
 
 export function Textarea({ className, ...props }: { className?: any }) {
-  return <textarea className={["Textarea", className].join(" ")} {...props} />;
+  return <textarea className={['Textarea', className].join(' ')} {...props} />;
 }
 
 // we have to add all the types usable for this custom element
@@ -33,12 +33,12 @@ export function Input({
   required?: boolean;
   id?: string;
 }) {
-  return <input className={["Input", className].join(" ")} {...props} />;
+  return <input className={['Input', className].join(' ')} {...props} />;
 }
 
 export function Required({ className, ...props }: { className?: any }) {
   return (
-    <span className={["Required", className].join(" ")} {...props}>
+    <span className={['Required', className].join(' ')} {...props}>
       &#42;
     </span>
   );
@@ -52,8 +52,8 @@ export function Section({
   className?: any;
   list?: any;
 }) {
-  const classes = ["Section", list && "Section--list", className]
+  const classes = ['Section', list && 'Section--list', className]
     .filter(Boolean)
-    .join(" ");
+    .join(' ');
   return <section className={classes} {...props} />;
 }

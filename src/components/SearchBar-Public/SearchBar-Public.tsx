@@ -1,6 +1,6 @@
-import React, { useContext } from "react";
-import GeneralContext from "../../contexts/GeneralContext";
-import "./SearchBar-Public.css";
+import React, { useContext } from 'react';
+import GeneralContext from '../../contexts/GeneralContext';
+import './SearchBar-Public.css';
 
 const SearchBarPublic = (props: any) => {
   const GenCon = useContext(GeneralContext);
@@ -34,7 +34,7 @@ const SearchBarPublic = (props: any) => {
             id="search"
           />
           <label htmlFor="sort">
-            Sort By:<i className="fas fa-sort"></i>{" "}
+            Sort By:<i className="fas fa-sort"></i>{' '}
           </label>
           <select
             name="sort"

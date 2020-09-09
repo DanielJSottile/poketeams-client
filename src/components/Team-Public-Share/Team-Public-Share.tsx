@@ -1,8 +1,8 @@
-import React, { Fragment, useState } from "react";
-import { Link } from "react-router-dom";
-import showdownGenerate from "../../functions/generate";
-import SetPublic from "../Set-Public/Set-Public";
-import "./Team-Public-Share.css";
+import React, { Fragment, useState } from 'react';
+import { Link } from 'react-router-dom';
+import showdownGenerate from '../../functions/generate';
+import SetPublic from '../Set-Public/Set-Public';
+import './Team-Public-Share.css';
 
 const TeamPublicShare = (props: any) => {
   const [state, setState] = useState({
@@ -27,7 +27,7 @@ const TeamPublicShare = (props: any) => {
 
   const copyCodeToClipboard = (): any => {
     textArea.current.select();
-    document.execCommand("copy"); // this seems to not work
+    document.execCommand('copy'); // this seems to not work
     const text = textArea.current.defaultValue;
     navigator.clipboard.writeText(text); // this seems to work!
     setState((oldVals) => ({ ...oldVals, copySuccess: true }));
@@ -64,19 +64,19 @@ const TeamPublicShare = (props: any) => {
                 </div>
                 <p>By {team.user_name}</p>
                 <p>
-                  Created on:{" "}
-                  {new Date(team.date_created).toLocaleString("en-GB", {
-                    weekday: "long",
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric",
+                  Created on:{' '}
+                  {new Date(team.date_created).toLocaleString('en-GB', {
+                    weekday: 'long',
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
                   })}
                 </p>
                 {/*<div className="title-form">
                   <label htmlFor={`favorite-id-${team.id}`}>Favorite</label>
                   <input type="checkbox" id={`favorite-id-${team.id}`} name={`favorite-id-${team.id}`}/> 
                   <p>Likes: {team.likes}</p> 
-                </div>*/}{" "}
+                </div>*/}{' '}
                 {/* Part of a future feature */}
               </div>
               <div className="title-content">
@@ -88,7 +88,7 @@ const TeamPublicShare = (props: any) => {
                   placeholder="e.g. description"
                   name="title-content"
                   id={`title-content-${team.id}`}
-                  value={team.description || ""}
+                  value={team.description || ''}
                 />
               </div>
             </form>
@@ -150,12 +150,12 @@ const TeamPublicShare = (props: any) => {
           <div>
             <p>By {team.user_name}</p>
             <p>
-              Created on:{" "}
-              {new Date(team.date_created).toLocaleString("en-GB", {
-                weekday: "long",
-                year: "numeric",
-                month: "long",
-                day: "numeric",
+              Created on:{' '}
+              {new Date(team.date_created).toLocaleString('en-GB', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
               })}
             </p>
           </div>

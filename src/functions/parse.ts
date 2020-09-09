@@ -12,7 +12,7 @@ function evIvParser(string: string | null, val: string) {
   let spdV = 0;
   let speV = 0;
 
-  if (val === "iv") {
+  if (val === 'iv') {
     hpV = 31;
     atkV = 31;
     defV = 31;
@@ -27,23 +27,23 @@ function evIvParser(string: string | null, val: string) {
 
   const evIvRE = /(\d{1,3}) (.*)/;
 
-  let evArr = string.split("/");
+  let evArr = string.split('/');
 
   evArr.forEach((value) => {
     let trim = value.trim();
     let match = trim.match(evIvRE);
 
-    if (match![2] === "HP") {
+    if (match![2] === 'HP') {
       hpV = Number(match![1]);
-    } else if (match![2] === "Atk") {
+    } else if (match![2] === 'Atk') {
       atkV = Number(match![1]);
-    } else if (match![2] === "Def") {
+    } else if (match![2] === 'Def') {
       defV = Number(match![1]);
-    } else if (match![2] === "SpA") {
+    } else if (match![2] === 'SpA') {
       spaV = Number(match![1]);
-    } else if (match![2] === "SpD") {
+    } else if (match![2] === 'SpD') {
       spdV = Number(match![1]);
-    } else if (match![2] === "Spe") {
+    } else if (match![2] === 'Spe') {
       speV = Number(match![1]);
     }
   });
@@ -56,7 +56,7 @@ function evIvParser(string: string | null, val: string) {
 export default function showdownParse(input: string) {
   let item: string | null = null;
   let gender: string | null = null;
-  let species: string = "Pikachu";
+  let species: string = 'Pikachu';
   let nickname: string | null = null;
   let level: number = 100;
   let happiness: number = 255;
@@ -78,18 +78,18 @@ export default function showdownParse(input: string) {
 
   // parsing into teams if they exist (if they don't, theres no double line break)
 
-  const teamsList = input.split("\n\n");
+  const teamsList = input.split('\n\n');
 
   // parsing the individual teams
 
   return teamsList.map((team: any) => {
-    const lineList = team.split("\n");
+    const lineList = team.split('\n');
     const rest = lineList.slice(1, lineList.length);
     const s = lineList[0].trim();
 
     item = null;
     gender = null;
-    species = "Pikachu";
+    species = 'Pikachu';
     nickname = null;
     level = 100;
     happiness = 255;
@@ -136,21 +136,21 @@ export default function showdownParse(input: string) {
     for (let i = 0; i < rest.length; i++) {
       const line = rest[i].trim();
 
-      if (line.startsWith("Ability:")) {
-        ability = line.split(": ")[1];
-      } else if (line.startsWith("Level:")) {
-        level = Number(line.split(": ")[1]);
-      } else if (line.startsWith("Shiny:")) {
+      if (line.startsWith('Ability:')) {
+        ability = line.split(': ')[1];
+      } else if (line.startsWith('Level:')) {
+        level = Number(line.split(': ')[1]);
+      } else if (line.startsWith('Shiny:')) {
         shiny = true;
-      } else if (line.startsWith("Happiness:")) {
-        happiness = Number(line.split(": ")[1]);
-      } else if (line.startsWith("EVs:")) {
-        ev = line.split(": ")[1];
-      } else if (line.endsWith("Nature")) {
-        nature = line.split(" ")[0];
-      } else if (line.startsWith("IVs:")) {
-        iv = line.split(": ")[1];
-      } else if (line.startsWith("- ")) {
+      } else if (line.startsWith('Happiness:')) {
+        happiness = Number(line.split(': ')[1]);
+      } else if (line.startsWith('EVs:')) {
+        ev = line.split(': ')[1];
+      } else if (line.endsWith('Nature')) {
+        nature = line.split(' ')[0];
+      } else if (line.startsWith('IVs:')) {
+        iv = line.split(': ')[1];
+      } else if (line.startsWith('- ')) {
         const moveLine = line.slice(1, line.length).trim();
 
         moves.push(moveLine);
@@ -166,19 +166,19 @@ export default function showdownParse(input: string) {
       level: level,
       shiny: shiny,
       happiness: happiness,
-      hp_ev: evIvParser(ev, "ev")[0],
-      atk_ev: evIvParser(ev, "ev")[1],
-      def_ev: evIvParser(ev, "ev")[2],
-      spa_ev: evIvParser(ev, "ev")[3],
-      spd_ev: evIvParser(ev, "ev")[4],
-      spe_ev: evIvParser(ev, "ev")[5],
+      hp_ev: evIvParser(ev, 'ev')[0],
+      atk_ev: evIvParser(ev, 'ev')[1],
+      def_ev: evIvParser(ev, 'ev')[2],
+      spa_ev: evIvParser(ev, 'ev')[3],
+      spd_ev: evIvParser(ev, 'ev')[4],
+      spe_ev: evIvParser(ev, 'ev')[5],
       nature: nature,
-      hp_iv: evIvParser(iv, "iv")[0],
-      atk_iv: evIvParser(iv, "iv")[1],
-      def_iv: evIvParser(iv, "iv")[2],
-      spa_iv: evIvParser(iv, "iv")[3],
-      spd_iv: evIvParser(iv, "iv")[4],
-      spe_iv: evIvParser(iv, "iv")[5],
+      hp_iv: evIvParser(iv, 'iv')[0],
+      atk_iv: evIvParser(iv, 'iv')[1],
+      def_iv: evIvParser(iv, 'iv')[2],
+      spa_iv: evIvParser(iv, 'iv')[3],
+      spd_iv: evIvParser(iv, 'iv')[4],
+      spe_iv: evIvParser(iv, 'iv')[5],
       move_one: moves[0],
       move_two: moves[1] ? moves[1] : null,
       move_three: moves[2] ? moves[2] : null,

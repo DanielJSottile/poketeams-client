@@ -1,12 +1,12 @@
-import config from "../config";
-import TokenService from "./token-service";
+import config from '../config';
+import TokenService from './token-service';
 
 const AuthApiService = {
   postLogin(credentials: any): Promise<any> {
     return fetch(`${config.API_ENDPOINT}/auth/login`, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "content-type": "application/json",
+        'content-type': 'application/json',
       },
       body: JSON.stringify(credentials),
     }).then((res) =>
@@ -15,9 +15,9 @@ const AuthApiService = {
   },
   postUser(user: any): Promise<any> {
     return fetch(`${config.API_ENDPOINT}/users`, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "content-type": "application/json",
+        'content-type': 'application/json',
       },
       body: JSON.stringify(user),
     }).then((res) =>
@@ -26,7 +26,7 @@ const AuthApiService = {
   },
   refreshToken(): Promise<any> {
     return fetch(`${config.API_ENDPOINT}/auth/token`, {
-      method: "PUT",
+      method: 'PUT',
       headers: {
         authorization: `Bearer ${TokenService.getAuthToken()}`,
       },

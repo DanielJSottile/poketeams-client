@@ -1,10 +1,10 @@
-import React, { useContext } from "react";
-import { Link } from "react-router-dom";
-import SearchBar from "../SearchBar-Public/SearchBar-Public";
-import GeneralContext from "../../contexts/GeneralContext";
-import jwtDecode from "jwt-decode";
-import TokenService from "../../services/token-service";
-import "./Navigation-Public.css";
+import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
+import SearchBar from '../SearchBar-Public/SearchBar-Public';
+import GeneralContext from '../../contexts/GeneralContext';
+import jwtDecode from 'jwt-decode';
+import TokenService from '../../services/token-service';
+import './Navigation-Public.css';
 
 interface MyToken {
   sub: any;
@@ -40,10 +40,10 @@ const NavigationPublic = (props: any) => {
   };
 
   const renderUserWelcome = () => {
-    let user = "";
+    let user = '';
 
     if (TokenService.getAuthToken()) {
-      user = jwtDecode<MyToken>(TokenService.getAuthToken() || "").sub;
+      user = jwtDecode<MyToken>(TokenService.getAuthToken() || '').sub;
       return <h2>{`Welcome, ${user}!`}</h2>;
     } else {
       return <h2>{`Click the Login Button to Log In!`}</h2>;

@@ -1,5 +1,5 @@
-import React, { useContext } from "react";
-import GeneralContext from "../../contexts/GeneralContext";
+import React, { useContext } from 'react';
+import GeneralContext from '../../contexts/GeneralContext';
 
 const Folder = (props: any) => {
   const GenCon = useContext(GeneralContext);

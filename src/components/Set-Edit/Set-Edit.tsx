@@ -1,11 +1,11 @@
-import React, { Fragment, useContext, useState } from "react";
-import { Link } from "react-router-dom";
-import GeneralContext from "../../contexts/GeneralContext";
-import showdownGenerate from "../../functions/generate";
-import showdownParse from "../../functions/parse";
-import legality from "../../functions/legality";
-import LoadingSets from "../Loaders/LoadingSets/LoadingSets";
-import "./Set-Edit.css";
+import React, { Fragment, useContext, useState } from 'react';
+import { Link } from 'react-router-dom';
+import GeneralContext from '../../contexts/GeneralContext';
+import showdownGenerate from '../../functions/generate';
+import showdownParse from '../../functions/parse';
+import legality from '../../functions/legality';
+import LoadingSets from '../Loaders/LoadingSets/LoadingSets';
+import './Set-Edit.css';
 
 export interface StringInput {
   value: string;
@@ -66,15 +66,15 @@ const SetEdit = (props: any) => {
   all of this instead of putting in the component. */
 
   const [state, setState] = useState<Provider>({
-    nickname: { value: props.set.nickname || "", touched: false },
-    species: { value: props.set.species || "Pikachu", touched: false },
-    gender: { value: props.set.gender || "", touched: false },
+    nickname: { value: props.set.nickname || '', touched: false },
+    species: { value: props.set.species || 'Pikachu', touched: false },
+    gender: { value: props.set.gender || '', touched: false },
     shiny: { value: props.set.shiny || false, touched: false },
-    item: { value: props.set.item || "", touched: false },
-    ability: { value: props.set.ability || "", touched: false },
+    item: { value: props.set.item || '', touched: false },
+    ability: { value: props.set.ability || '', touched: false },
     level: { value: props.set.level || 100, touched: false },
     happiness: { value: props.set.happiness || 255, touched: false },
-    nature: { value: props.set.nature || "", touched: false },
+    nature: { value: props.set.nature || '', touched: false },
     hp_ev: { value: props.set.hp_ev || 0, touched: false },
     atk_ev: { value: props.set.atk_ev || 0, touched: false },
     def_ev: { value: props.set.def_ev || 0, touched: false },
@@ -87,10 +87,10 @@ const SetEdit = (props: any) => {
     spa_iv: { value: props.set.spa_iv || 31, touched: false },
     spd_iv: { value: props.set.spd_iv || 31, touched: false },
     spe_iv: { value: props.set.spe_iv || 31, touched: false },
-    move_one: { value: props.set.move_one || "Tackle", touched: false },
-    move_two: { value: props.set.move_two || "", touched: false },
-    move_three: { value: props.set.move_three || "", touched: false },
-    move_four: { value: props.set.move_four || "", touched: false },
+    move_one: { value: props.set.move_one || 'Tackle', touched: false },
+    move_two: { value: props.set.move_two || '', touched: false },
+    move_three: { value: props.set.move_three || '', touched: false },
+    move_four: { value: props.set.move_four || '', touched: false },
     setExpandToggle: true,
     deleteClicked: false,
     copySuccess: false,
@@ -103,15 +103,15 @@ const SetEdit = (props: any) => {
     const parse = showdownParse(setImport)[0];
     setState((oldVals) => ({
       ...oldVals,
-      nickname: { value: parse.nickname || "", touched: false },
-      species: { value: parse.species || "Pikachu", touched: false },
-      gender: { value: parse.gender || "", touched: false },
+      nickname: { value: parse.nickname || '', touched: false },
+      species: { value: parse.species || 'Pikachu', touched: false },
+      gender: { value: parse.gender || '', touched: false },
       shiny: { value: parse.shiny || false, touched: false },
-      item: { value: parse.item || "", touched: false },
-      ability: { value: parse.ability || "", touched: false },
+      item: { value: parse.item || '', touched: false },
+      ability: { value: parse.ability || '', touched: false },
       level: { value: parse.level || 100, touched: false },
       happiness: { value: parse.happiness || 255, touched: false },
-      nature: { value: parse.nature || "", touched: false },
+      nature: { value: parse.nature || '', touched: false },
       hp_ev: { value: parse.hp_ev || 0, touched: false },
       atk_ev: { value: parse.atk_ev || 0, touched: false },
       def_ev: { value: parse.def_ev || 0, touched: false },
@@ -124,10 +124,10 @@ const SetEdit = (props: any) => {
       spa_iv: { value: parse.spa_iv || 31, touched: false },
       spd_iv: { value: parse.spd_iv || 31, touched: false },
       spe_iv: { value: parse.spe_iv || 31, touched: false },
-      move_one: { value: parse.move_one || "Tackle", touched: false },
-      move_two: { value: parse.move_two || "", touched: false },
-      move_three: { value: parse.move_three || "", touched: false },
-      move_four: { value: parse.move_four || "", touched: false },
+      move_one: { value: parse.move_one || 'Tackle', touched: false },
+      move_two: { value: parse.move_two || '', touched: false },
+      move_three: { value: parse.move_three || '', touched: false },
+      move_four: { value: parse.move_four || '', touched: false },
       deleteClicked: false,
     }));
   };
@@ -331,7 +331,7 @@ const SetEdit = (props: any) => {
 
   const copyCodeToClipboard = (): any => {
     textArea.current.select();
-    document.execCommand("copy"); // this seems to not work
+    document.execCommand('copy'); // this seems to not work
     const text = textArea.current.defaultValue;
     navigator.clipboard.writeText(text); // this seems to work!
     setState((oldVals) => ({ ...oldVals, copySuccess: true }));
@@ -346,7 +346,7 @@ const SetEdit = (props: any) => {
   const validateNickname = (): any => {
     // Will some day check against Legal Nintendo filter!
     let nickname = state.nickname.value;
-    if (typeof nickname !== "string") {
+    if (typeof nickname !== 'string') {
       return `This is just superflous it should never come up.`;
     }
   };
@@ -354,7 +354,7 @@ const SetEdit = (props: any) => {
   const validateItem = (): any => {
     // Will some day check against list of Items!
     let item = state.item.value;
-    if (typeof item !== "string") {
+    if (typeof item !== 'string') {
       return `This is just superflous it should never come up.`;
     }
   };
@@ -362,7 +362,7 @@ const SetEdit = (props: any) => {
   const validateAbility = (): any => {
     // Will some day check against list of Abilities!
     let ability = state.ability.value;
-    if (typeof ability !== "string") {
+    if (typeof ability !== 'string') {
       return `This is just superflous it should never come up.`;
     }
   };
@@ -370,7 +370,7 @@ const SetEdit = (props: any) => {
   const validateNature = (): any => {
     // Will some day check against list of Natures!
     let nature = state.nature.value;
-    if (typeof nature !== "string") {
+    if (typeof nature !== 'string') {
       return `This is just superflous it should never come up.`;
     }
   };
@@ -378,7 +378,7 @@ const SetEdit = (props: any) => {
   const validateShiny = (): any => {
     // Normally this would be put against a legal Shiny list, but my custom game eliminates this.
     let shiny = state.shiny.value;
-    if (typeof shiny !== "boolean") {
+    if (typeof shiny !== 'boolean') {
       return `This is just superflous it should never come up.`;
     }
   };
@@ -471,10 +471,10 @@ const SetEdit = (props: any) => {
     }
 
     if (
-      typeof move_one !== "string" ||
-      typeof move_two !== "string" ||
-      typeof move_three !== "string" ||
-      typeof move_four !== "string"
+      typeof move_one !== 'string' ||
+      typeof move_two !== 'string' ||
+      typeof move_three !== 'string' ||
+      typeof move_four !== 'string'
     ) {
       return `This is just superflous it should never come up.`;
     }
@@ -503,7 +503,7 @@ const SetEdit = (props: any) => {
             <label htmlFor="pokemon-import">
               Import Pokemon Set: <i className="fas fa-upload"></i>
             </label>
-            {newSetImport.value !== "" && (
+            {newSetImport.value !== '' && (
               <p className="error-validate shake-horizontal">
                 {validateNewSetImport()}
               </p>

@@ -1,5 +1,5 @@
-import React, { Fragment } from "react";
-import "./LoadingWhite.css";
+import React, { Fragment } from 'react';
+import './LoadingWhite.css';
 
 const LoadingWhite = (props: any) => {
   return (

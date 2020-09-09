@@ -1,5 +1,5 @@
-import React, { Fragment } from "react";
-import "./PokeballLoader.css";
+import React, { Fragment } from 'react';
+import './PokeballLoader.css';
 
 const PokeballLoader = (props: any) => {
   return (

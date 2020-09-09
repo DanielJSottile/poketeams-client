@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { Button, Input, Required } from "../Utils/Utils";
-import AuthApiService from "../../services/auth-api-service";
-import "./RegistrationForm.css";
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { Button, Input, Required } from '../Utils/Utils';
+import AuthApiService from '../../services/auth-api-service';
+import './RegistrationForm.css';
 
 export interface Provider {
   error: string | null;
@@ -16,7 +16,7 @@ const RegistrationForm = (props: any) => {
     const { user_name, password, verifyPassword } = ev.target;
 
     if (password.value !== verifyPassword.value) {
-      return setState({ error: "Your Passwords Do Not Match!" });
+      return setState({ error: 'Your Passwords Do Not Match!' });
     }
 
     setState({ error: null });
@@ -26,8 +26,8 @@ const RegistrationForm = (props: any) => {
       password: password.value,
     })
       .then((user) => {
-        user_name.value = "";
-        password.value = "";
+        user_name.value = '';
+        password.value = '';
         props.onRegistrationSuccess();
       })
       .catch((res) => {
@@ -82,7 +82,7 @@ const RegistrationForm = (props: any) => {
       </div>
       <div className="go-back-links">
         <Button type="submit">Register</Button>
-        <Link className="go-back" to={"/landing"}>
+        <Link className="go-back" to={'/landing'}>
           Go Back
         </Link>
       </div>

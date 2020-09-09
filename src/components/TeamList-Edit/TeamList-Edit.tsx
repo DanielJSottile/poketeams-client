@@ -1,7 +1,7 @@
-import React, { Fragment, useContext } from "react";
-import GeneralContext from "../../contexts/GeneralContext";
-import TeamEdit from "../Team-Edit/Team-Edit";
-import "./TeamList-Edit.css";
+import React, { Fragment, useContext } from 'react';
+import GeneralContext from '../../contexts/GeneralContext';
+import TeamEdit from '../Team-Edit/Team-Edit';
+import './TeamList-Edit.css';
 
 export interface PokemonTeam {
   team_name: string;

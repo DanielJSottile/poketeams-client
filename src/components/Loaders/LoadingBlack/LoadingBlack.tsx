@@ -1,5 +1,5 @@
-import React, { Fragment } from "react";
-import "./LoadingBlack.css";
+import React, { Fragment } from 'react';
+import './LoadingBlack.css';
 
 const LoadingBlack = (props: any) => {
   return (
