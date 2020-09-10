@@ -1,7 +1,6 @@
 import React, { Fragment, useContext } from 'react';
 import GeneralContext from '../../contexts/GeneralContext';
-import TeamButton from '../TeamButton/TeamButton';
-import './TeamsButtonList-Edit.css';
+import './AddTeamSection.css';
 
 export interface PokemonTeam {
   team_name: string;
@@ -9,7 +8,7 @@ export interface PokemonTeam {
   folder_id: number;
 }
 
-const TeamsButtonListEdit = (props: any) => {
+const AddTeamSection = (props: any) => {
   const GenCon = useContext(GeneralContext);
 
   const renderExpanded = () => {
@@ -92,51 +91,27 @@ const TeamsButtonListEdit = (props: any) => {
   };
 
   const {
-    userTeams,
     teamAddClicked,
-    currentClickedTeam,
     currentClickedFolder,
     handleTeamAddClickExpand,
   } = GenCon;
 
-  const TeamList = userTeams
-    .filter(
-      (team: PokemonTeam) => team.folder_id === Number(currentClickedFolder.id)
-    )
-    .map((team: PokemonTeam, i: number) => (
-      <TeamButton key={i} id={team.id} team_name={team.team_name} />
-    ));
-
+  
   return (
     <Fragment>
       <section className="folders-list">
         <h3>Teams:</h3>
         <div>
-          {currentClickedFolder.value && TeamList.length > 0 ? (
-            TeamList
-          ) : !currentClickedFolder.value ? (
-            <h3>Create or Click On a Folder to Get Started!</h3>
-          ) : (
-            <h3>This Folder is Empty! Make New Teams Below!</h3>
-          )}
-        </div>
-        <div>
-          {currentClickedFolder.value && (
+          {currentClickedFolder.value ? (
             <button onClick={() => handleTeamAddClickExpand()}>
               New Team <i className="far fa-plus-square"></i>
             </button>
-          )}
-
+          ) : <h4>Click a Folder to add Teams!</h4>}
           {teamAddClicked ? renderExpanded() : null}
-        </div>
-        <div>
-          {currentClickedFolder.value && (
-            <span>{`Current Team: ${currentClickedTeam.value}`}</span>
-          )}
         </div>
       </section>
     </Fragment>
   );
 };
 
-export default TeamsButtonListEdit;
+export default AddTeamSection;

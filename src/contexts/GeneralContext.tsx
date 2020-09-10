@@ -81,7 +81,6 @@ interface CreateProvider {
   handlePostNewTeam(): any;
   validateNewTeamName(): any;
   validateNewTeamImport(): any;
-  handleCurrentTeamClicked(name: string, id: number): any;
   handleUpdateTeam(name: string, desc: string, id: number): any;
   handleDeleteTeam(id: number): any;
   // user set functions
@@ -215,7 +214,6 @@ const GeneralContext = React.createContext<CreateProvider>({
   handlePostNewTeam: () => {},
   validateNewTeamName: () => {},
   validateNewTeamImport: () => {},
-  handleCurrentTeamClicked: () => {},
   handleUpdateTeam: () => {},
   handleDeleteTeam: () => {},
   // user set functions
@@ -382,13 +380,6 @@ export const GeneralProvider = ({ children }: Props) => {
     setState((oldVals) => ({
       ...oldVals,
       teamAddClicked: !state.teamAddClicked,
-    }));
-  };
-
-  const handleCurrentTeamClicked = (name: any, team_id: any) => {
-    setState((oldVals) => ({
-      ...oldVals,
-      currentClickedTeam: { value: name, id: team_id, touched: true },
     }));
   };
 
@@ -1348,7 +1339,6 @@ export const GeneralProvider = ({ children }: Props) => {
     handlePostNewTeam: handlePostNewTeam,
     validateNewTeamName: validateNewTeamName,
     validateNewTeamImport: validateNewTeamImport,
-    handleCurrentTeamClicked: handleCurrentTeamClicked,
     handleUpdateTeam: handleUpdateTeam,
     handleDeleteTeam: handleDeleteTeam,
     // user set functions

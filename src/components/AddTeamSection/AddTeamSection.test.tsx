@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 //import { render } from '@testing-library/react';
-import TeamsButtonListEdit from './TeamsButtonList-Edit';
+import TeamsButtonListEdit from './AddTeamSection';
 import { shallow, mount, render } from 'enzyme';
 import toJson from 'enzyme-to-json';
 
