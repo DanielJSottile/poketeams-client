@@ -1,6 +1,4 @@
 import React, { Fragment, useState } from 'react';
-import { Link } from 'react-router-dom';
-import showdownGenerate from '../../functions/generate';
 import TeamsListPublicShare from '../TeamList-PublicShare/TeamList-PublicShare';
 import './Folder-Public-Share.css';
 

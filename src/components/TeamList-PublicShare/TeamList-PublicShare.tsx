@@ -12,16 +12,16 @@ export interface PokemonTeam {
 
 const TeamListPublicShare = (props: any) => {
   const {teams, sets} = props;
-  let TeamList;
+  let TeamList = [];
 
   if (teams) {
     TeamList = teams?.map((team: PokemonTeam, i: number) => {
-      let teamSets;
-      if (sets) {
-        teamSets = sets?.filter((set: any) => {
-          return set.team_name === team.team_name
-         })
-      }
+      let teamSets = [];
+      
+      teamSets = sets?.filter((set: any) => {
+        return set.team_name === team.team_name
+      })
+      
       return <TeamPublicShare key={i} id={`${team.team_name}`} team={team} sets={teamSets} />;
     });
   }
