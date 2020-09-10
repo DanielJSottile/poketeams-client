@@ -41,7 +41,7 @@ const TeamPublicShare = (props: any) => {
     });
 
     return (
-      <section id={`${team.id}`}>
+      <section className="team-section" id={`${team.id}`}>
         <div className="team">
           <div className="team-header">
             <form className="team-form">
@@ -142,7 +142,7 @@ const TeamPublicShare = (props: any) => {
     const { team, id } = props;
 
     return (
-      <section id={`${id}`}>
+      <section className="team-section" id={`${id}`}>
         <div className="team-closed" onClick={() => handleTeamToggle()}>
           <div>
             <h3>{team.team_name}</h3>

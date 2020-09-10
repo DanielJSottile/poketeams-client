@@ -64,7 +64,7 @@ const TeamPublic = (props: any) => {
     });
 
     return (
-      <section id={`${id}`}>
+      <section className="team-section" id={`${id}`}>
         <div className="team">
           <div className="team-header">
             <form className="team-form">
@@ -165,7 +165,7 @@ const TeamPublic = (props: any) => {
     const { team, id } = props;
 
     return (
-      <section id={`${id}`}>
+      <section className="team-section" id={`${id}`}>
         <div className="team-closed" onClick={() => handleTeamToggle()}>
           <div>
             <h3>{team.team_name}</h3>

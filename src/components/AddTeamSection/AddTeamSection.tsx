@@ -100,7 +100,6 @@ const AddTeamSection = (props: any) => {
   return (
     <Fragment>
       <section className="folders-list">
-        <h3>Teams:</h3>
         <div>
           {currentClickedFolder.value ? (
             <button onClick={() => handleTeamAddClickExpand()}>
@@ -109,6 +108,7 @@ const AddTeamSection = (props: any) => {
           ) : <h4>Click a Folder to add Teams!</h4>}
           {teamAddClicked ? renderExpanded() : null}
         </div>
+        <h3>Teams:</h3>
       </section>
     </Fragment>
   );
