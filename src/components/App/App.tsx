@@ -19,8 +19,16 @@ const App = () => {
       <main>
         <ErrorPage>
           <Switch>
-            <Route exact path={'/'} component={HomePage} />
-            <Route exact path={'/share/:team_id'} component={ShareTeamPage} />
+            <Route 
+              exact 
+              path={'/'} 
+              component={HomePage} 
+            />
+            <Route 
+              exact 
+              path={'/share/:team_id'} 
+              component={ShareTeamPage} 
+            />
             <Route
               exact
               path={'/share/:team_id/:set_id'}
@@ -28,7 +36,7 @@ const App = () => {
             />
             <Route
               exact
-              path={'/share/folder/:folder_id'}
+              path={'/share/user/folder/:folder_id'}
               component={ShareFolderPage}
             />
             <PublicOnlyRoute path={'/landing'} component={LandingPage} />

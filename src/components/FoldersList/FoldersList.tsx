@@ -188,13 +188,13 @@ const FoldersList = (props: any) => {
     (team) => team.folder_id === currentClickedFolder.id
   );
 
+  // here we make the input for the generator function...
+
   const input = folderTeams.map((team) => {
     const teamSets = userSets.filter((set) => set.team_id === team.id);
     const teamName: any = team.team_name;
     return { [teamName]: teamSets };
   });
-
-  // here we make the input for the generator function...
 
   return (
     <Fragment>
@@ -238,7 +238,7 @@ const FoldersList = (props: any) => {
                   </button>
                   <Link
                     to={{
-                      pathname: `/share/folder/${currentClickedFolder.id}`,
+                      pathname: `/share/user/folder/${currentClickedFolder.id}`,
                       state: {
                         folders: userFolders,
                         teams: userTeams,
@@ -254,7 +254,7 @@ const FoldersList = (props: any) => {
                     disabled
                     type="text"
                     readOnly
-                    value={`poketeams.now.sh/share/folder/${currentClickedFolder.id}`}
+                    value={`poketeams.now.sh/share/user/folder/${currentClickedFolder.id}`}
                   />
                 </div>
                 <label htmlFor="edit-team">

@@ -109,6 +109,27 @@ const apiService = {
       });
   },
 
+  getTeamsForOneFolder(folder_id: number): Promise<any> {
+    let error: any;
+    return fetch(`${config.API_ENDPOINT}/all/${folder_id}/teams`, {
+      method: 'GET',
+      headers: {},
+    })
+      .then((res) => {
+        if (!res.ok) {
+          error = { code: res.status };
+        }
+        return res.json();
+      })
+      .then((data) => {
+        if (error) {
+          error.message = data.message;
+          return Promise.reject(error);
+        }
+        return data;
+      });
+  },
+
   getSingleTeam(team_id: number): Promise<any> {
     let error: any;
     return fetch(`${config.API_ENDPOINT}/all/${team_id}`, {
@@ -178,6 +199,28 @@ const apiService = {
         return data;
       });
   },
+
+  getSingleFolderPublic(folder_id: number): Promise<any> {
+    let error: any;
+    return fetch(`${config.API_ENDPOINT}/all/folderpublic/${folder_id}`, {
+      method: 'GET',
+      headers: {},
+    })
+      .then((res) => {
+        if (!res.ok) {
+          error = { code: res.status };
+        }
+        return res.json();
+      })
+      .then((data) => {
+        if (error) {
+          error.message = data.message;
+          return Promise.reject(error);
+        }
+        return data;
+      });
+  },
+
 
   getUserFolders(user_id: number): Promise<any> {
     let error: any;

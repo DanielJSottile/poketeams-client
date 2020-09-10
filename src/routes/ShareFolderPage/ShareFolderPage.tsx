@@ -4,46 +4,58 @@ import FolderPublicShare from '../../components/Folder-Public-Share/Folder-Publi
 import './ShareFolderPage.css';
 
 export interface Provider {
-  team?: any;
+  folder?: any;
+  teams?: any;
   sets?: any;
 }
 
-const ShareTeamPage = (props: any): JSX.Element => {
+const ShareFolderPage = (props: any): JSX.Element => {
   const [state, setState] = useState<Provider>();
 
   /* This acts as our ComponentDidMount that gets the team
   specified in the url parameter.*/
 
   useEffect(() => {
-    const id = props.match.params.team_id;
+    const id = props.match.params.folder_id;
     apiService
-      .getSingleTeam(id)
-      .then((data) => {
-        setState((oldVals) => ({ ...oldVals, team: [data] }));
+      .getSingleFolderPublic(id)
+      .then((data: any) => {
+        setState((oldVals) => ({ ...oldVals, folder: [data] }));
       })
-
-      /* Then we get the sets.  It doesn't matter if its done first
-    or not.  Before, we were passing it into the public sets, but 
-    this was causing a bug.  Instead, we pass these into a new
-    special public team share component that just has the one team
-    and the one set through props.  */
-
       .then(() => {
-        apiService.getSetsForOneTeam(id).then((data) => {
-          setState((oldVals) => ({ ...oldVals, sets: data }));
-        });
-      });
-  }, [props.match.params.team_id]);
+        apiService
+          .getTeamsForOneFolder(id)
+          .then((data: any) => {
+            setState((oldVals) => ({ ...oldVals, teams: data }));
+
+            /* Much like adding teams and folders via import, we have to 
+              go through the teams and add their sets.  This can be done via
+              a Promise Array. */
+
+            const promiseArray = data.map((team: any) => {
+              return apiService.getSetsForOneTeam(team.id);
+          })
+
+            Promise.all(promiseArray)
+              .then((values: any) => {
+                // this comes back as an array of arrays.  we need one array of objects
+                let merged = [].concat.apply([], values)
+                // we could also use values.flat() but this breaks in I.E.
+                setState((oldVals) => ({...oldVals, sets: merged}))
+              })
+          })
+      })   
+  }, [props.match.params.folder_id]);
 
   return (
     <div>
-      {state?.team[0] ? (
-        <FolderPublicShare team={state?.team[0]} sets={state?.sets} />
+      {state?.folder[0] ? (
+        <FolderPublicShare folder={state?.folder[0]} teams={state?.teams} sets={state?.sets} />
       ) : (
-        <h3>This team seems to not exist anymore</h3>
+        <h3>This folder seems to not exist anymore</h3>
       )}
     </div>
   );
 };
 
-export default ShareTeamPage;
+export default ShareFolderPage;
