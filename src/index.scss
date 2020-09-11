@@ -2,15 +2,35 @@
 @import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Sedgwick+Ave+Display&display=swap');
 
+/* FONTS */
+$body-font: 'Lato', sans-serif;
+$h1-font: 'Sedgwick Ave Display', cursive;
+$h2-font: 'Montserrat Alternates', sans-serif;
+$h3-font: 'Anton', sans-serif;
+
+/* COLOR SCHEME */
+$pokeball-background: #00000033;
+$error-blue: #6898ff;
+$super-dark-red: #3a0000;
+$deep-red: #961b1b;
+$pokeball-red: #d42929;
+$light-pokeball-red: #ff4b4b;
+$pure-yellow: #ffe600;
+$med-light-yellow: #ffffaf;
+$light-yellow: #fff597;
+$super-light-cream: #ffffee;
+$light-grey: #cfcfcf;
+$med-dark-grey: #444444;
+
 * {
   box-sizing: border-box;
 }
 
 body {
-  font-family: 'Lato', sans-serif;
+  font-family: $body-font;
   word-spacing: 1px;
   font-size: 20px;
-  color: rgb(68, 68, 68);
+  color: $med-dark-grey;
   text-align: center;
   line-height: 1.5;
   margin: 0;
@@ -21,8 +41,8 @@ footer {
   padding: 1% 0;
   font-size: 12px;
   color: white;
-  text-shadow: 1px 1px #444;
-  background-color: rgb(150, 27, 27);
+  text-shadow: 1px 1px $med-dark-grey;
+  background-color: $deep-red;
 }
 
 nav {
@@ -37,37 +57,37 @@ header {
 }
 
 h1 {
-  font-family: 'Sedgwick Ave Display', cursive;
-  color: rgb(255, 230, 0);
+  font-family: $h1-font;
+  color: $pure-yellow;
   letter-spacing: 5px;
   font-size: 55px;
-  text-shadow: 1px 5px black;
+  text-shadow: 1px 5px $med-dark-grey;
   margin-top: 1px;
   margin-bottom: 15px;
 
 }
 
 h2 {
-  font-family: 'Montserrat Alternates', sans-serif;
+  font-family: $h2-font;
 }
 
 h3 {
-  font-family: 'Anton', sans-serif;
+  font-family: $h3-font;
   letter-spacing: 3px;
 }
 
 section {
   padding: 2px 2px;
-  color: #444;
+  color: $med-dark-grey;
   border-radius: 4px;
-  text-shadow: 1px 1px rgb(255, 255, 255);
-  background-color: rgb(255, 255, 238);
+  text-shadow: 1px 1px white;
+  background-color: $super-light-cream;
 }
 
 section:nth-child(even) {
-  color: rgb(255, 255, 238);
-  text-shadow: 1px 1px rgb(58, 0, 0);
-  background-color: rgb(212, 41, 41);
+  color: $super-light-cream;
+  text-shadow: 1px 1px $super-dark-red;
+  background-color: $pokeball-red;
 }
 
 p {
@@ -80,9 +100,9 @@ p + p {
 }
 
 input, select {
-  border: 1px solid rgb(255, 230, 0);
+  border: 1px solid $pure-yellow;
   border-radius: 10px;
-  font-family: 'Lato', sans-serif;
+  font-family: $body-font;
   background-color: white;
   margin-left: 10px;
   margin-right: 10px;
@@ -92,8 +112,8 @@ input, select {
   font-weight: bolder;
   background-color: white;
   font-size: 16px;
-  color: #444;
-  border: 1px solid rgb(255, 230, 0);
+  color: $med-dark-grey;
+  border: 1px solid $pure-yellow;
   border-radius: 4px;
   padding: 3px;
   margin: 3px;
@@ -105,7 +125,7 @@ a {
   font-weight: bolder;
   background-color: white;
   font-size: 16px;
-  color: #444;
+  color: $med-dark-grey;
   border-radius: 4px;
   padding: 3px;
   margin: 3px;
@@ -113,14 +133,14 @@ a {
 }
 
 a:hover, button:hover {
-  background-color: rgb(255, 245, 151);
+  background-color: $light-yellow;
   transition: 0.3s;
 }
 
 textarea {
   font-family: monospace;
   text-align: left;
-  border: 1px solid rgb(255, 230, 0);
+  border: 1px solid $pure-yellow;
   resize: none;
   border-radius: 10px;
   width: 100%;
@@ -128,8 +148,8 @@ textarea {
 }
 
 label {
-  color: rgb(207, 207, 207);
-  text-shadow: 1px 1px rgb(58, 0, 0);
+  color: $light-grey;
+  text-shadow: 1px 1px $super-dark-red;
 }
 
 img {
@@ -143,7 +163,7 @@ img {
   margin: 10px;
   text-align: center;
   text-align: center;
-  color: rgb(255, 255, 238);
+  color: $super-light-cream;
   font-weight: bold;
   font-size: 14px;
 }
@@ -151,8 +171,8 @@ img {
 .error-validate {
   text-align: center;
   text-align: center;
-  color: #6898ff;
-  text-shadow: 1px 1px #444444;
+  color: $error-blue;
+  text-shadow: 1px 1px $med-dark-grey;
   font-weight: bold;
   font-size: 14px;
 }
@@ -162,7 +182,7 @@ img {
   margin: auto;	
   margin-bottom: 30px;	
   padding: 5px;	
-  border: 4px double rgb(255, 230, 0);	
+  border: 4px double $pure-yellow;	
   border-radius: 40px;	
 }
 

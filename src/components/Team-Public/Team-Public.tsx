@@ -4,7 +4,7 @@ import GeneralContext from '../../contexts/GeneralContext';
 import showdownGenerate from '../../functions/generate';
 import SetPublic from '../Set-Public/Set-Public';
 import legality from '../../functions/legality';
-import './Team-Public.css';
+import './Team-Public.scss';
 
 // Interfaces
 

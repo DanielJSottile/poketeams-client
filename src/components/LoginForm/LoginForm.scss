@@ -1,0 +1,14 @@
+@import '../../index.scss';
+
+.signup-form {
+  margin: auto;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  
+  label {
+    font-family: $h3-font;
+    letter-spacing: 3px;
+    text-shadow: $med-dark-grey;
+    color: $super-light-cream;
+  }
+}

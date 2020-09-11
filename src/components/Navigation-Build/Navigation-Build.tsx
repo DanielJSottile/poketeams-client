@@ -4,7 +4,7 @@ import SearchBarBuild from '../SearchBar-Build/SearchBar-Build';
 import GeneralContext from '../../contexts/GeneralContext';
 import TokenService from '../../services/token-service';
 import jwtDecode from 'jwt-decode';
-import './Navigation-Build.css';
+import './Navigation-Build.scss';
 
 // Interfaces
 

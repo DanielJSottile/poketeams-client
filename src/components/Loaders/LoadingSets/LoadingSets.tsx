@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import './LoadingSets.css';
+import './LoadingSets.scss';
 
 // Component
 

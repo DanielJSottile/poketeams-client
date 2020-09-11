@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import showdownGenerate from '../../functions/generate';
 import legality from '../../functions/legality';
 import SetPublic from '../Set-Public/Set-Public';
-import './Team-Public-Share.css';
+import './Team-Public-Share.scss';
 
 // Component
 

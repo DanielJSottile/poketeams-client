@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import GeneralContext from '../../contexts/GeneralContext';
-import './SearchBar-Public.css';
+import './SearchBar-Public.scss';
 
 // Component
 

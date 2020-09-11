@@ -4,7 +4,7 @@ import AddTeamSection from '../../components/AddTeamSection/AddTeamSection';
 import TeamListEdit from '../../components/TeamList-Edit/TeamList-Edit';
 import FolderList from '../../components/FoldersList/FoldersList';
 import Footer from '../../components/Footer/Footer';
-import './BuildPage.css';
+import './BuildPage.scss';
 
 // Component
 

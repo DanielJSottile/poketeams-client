@@ -1,10 +1,10 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import './index.css';
 import App from './components/App/App';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter } from 'react-router-dom';
 import { GeneralProvider } from './contexts/GeneralContext';
+import './index.scss';
 
 const rootNode: HTMLElement | null = document.getElementById('root');
 ReactDOM.render(

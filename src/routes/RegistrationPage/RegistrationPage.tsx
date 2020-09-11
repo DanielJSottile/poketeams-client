@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import RegistrationForm from '../../components/RegistrationForm/RegistrationForm';
 import Footer from '../../components/Footer/Footer';
-import './RegistrationPage.css';
+import './RegistrationPage.scss';
 
 // Component
 

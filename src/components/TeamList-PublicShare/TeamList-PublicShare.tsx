@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import TeamPublicShare from '../Team-Public-Share/Team-Public-Share';
 import PokeballLoader from '../Loaders/PokeballLoader/PokeballLoader';
 import LoadingBlack from '../Loaders/LoadingBlack/LoadingBlack';
-import './TeamList-PublicShare.css';
+import './TeamList-PublicShare.scss';
 
 // Interfaces
 

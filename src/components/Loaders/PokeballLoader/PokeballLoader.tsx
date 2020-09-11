@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import './PokeballLoader.css';
+import './PokeballLoader.scss';
 
 // Componenet
 

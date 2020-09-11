@@ -2,7 +2,7 @@ import React, { Fragment, useState } from 'react';
 import { Link } from 'react-router-dom';
 import showdownGenerate from '../../functions/generate';
 import legality from '../../functions/legality';
-import './Set-Public.css';
+import './Set-Public.scss';
 
 // Component
 
