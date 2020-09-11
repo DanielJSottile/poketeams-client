@@ -4,12 +4,21 @@ import { Button, Input, Required } from '../Utils/Utils';
 import AuthApiService from '../../services/auth-api-service';
 import './RegistrationForm.css';
 
+// Interfaces
+
 export interface Provider {
   error: string | null;
 }
 
+// Component
+
 const RegistrationForm = (props: any) => {
+
+  // Set State
+
   const [state, setState] = useState<Provider>({ error: null });
+
+  // Set State Input Functions
 
   const handleSubmit = (ev: any) => {
     ev.preventDefault();
@@ -34,6 +43,8 @@ const RegistrationForm = (props: any) => {
         setState((oldVals) => ({ ...oldVals, error: res.error }));
       });
   };
+
+  // Final Render
 
   return (
     <form className="RegistrationForm" onSubmit={handleSubmit}>

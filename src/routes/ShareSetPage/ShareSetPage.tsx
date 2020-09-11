@@ -4,16 +4,21 @@ import apiService from '../../services/apiService';
 import SetPublic from '../../components/Set-Public/Set-Public';
 import './ShareSetPage.css';
 
+// Interfaces
+
 export interface Provider {
   set: object[];
 }
 
-const ShareSetPage = (props: any): JSX.Element => {
-  const [state, setState] = useState<Provider>(); // for useState, we must define the types that can go into it.
+// Component
 
-  /* This effectively works as ComponentDidMount, and the
-  dependency means that it only updates once as long as it
-  changes.  */
+const ShareSetPage = (props: any): JSX.Element => {
+
+  // Set State
+
+  const [state, setState] = useState<Provider>();
+
+  // Component LifeCycle
 
   useEffect(() => {
     apiService
@@ -23,8 +28,9 @@ const ShareSetPage = (props: any): JSX.Element => {
       });
   }, [props.match.params.set_id]);
 
+  // Final Render
+
   return (
-    // we use the ? operator to provide optional chaining after 'state'
     <div>
       {state?.set[0] ? (
         <SetPublic set={state?.set[0]} />

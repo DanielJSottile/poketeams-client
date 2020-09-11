@@ -2,16 +2,26 @@ import React, { Fragment, useContext } from 'react';
 import GeneralContext from '../../contexts/GeneralContext';
 import './AddTeamSection.css';
 
+// Interfaces
+
 export interface PokemonTeam {
   team_name: string;
   id: number;
   folder_id: number;
 }
 
+// Component
+
 const AddTeamSection = (props: any) => {
+
+  // Set Context
+
   const GenCon = useContext(GeneralContext);
 
+  // Render Functions 
+
   const renderExpanded = () => {
+
     const {
       newTeamName,
       newTeamImport,

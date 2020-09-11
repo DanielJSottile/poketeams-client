@@ -6,19 +6,29 @@ import TokenService from '../../services/token-service';
 import jwtDecode from 'jwt-decode';
 import './Navigation-Build.css';
 
+// Interfaces
+
 interface MyToken {
   sub: any;
   user_id: any;
-  // whatever else is in the JWT.
 }
 
+// Component
+
 const NavigationBuild = (props: any) => {
+
+  // Set Context
+
   const GenCon = useContext(GeneralContext);
+
+  // Handle Logout
 
   const handleLogoutClick = () => {
     TokenService.clearAuthToken();
     GenCon.clearUserState();
   };
+
+  // Render Functions
 
   const renderLogout = () => {
     return (
@@ -50,6 +60,8 @@ const NavigationBuild = (props: any) => {
       return <h2>{`Click the Login Button to Log In!`}</h2>;
     }
   };
+
+  // Final Render
 
   return (
     <div>

@@ -4,10 +4,19 @@ import GeneralContext from '../../contexts/GeneralContext';
 import AuthApiService from '../../services/auth-api-service';
 import './LoginForm.css';
 
+// Component
+
 const LoginForm = (props: any) => {
+
+  // Set Context
+
   const GenCon = useContext(GeneralContext);
 
+  // Set State
+
   const [state, setState] = useState({ error: null });
+
+  // JWT Auth Functionality
 
   const handleSubmitJwtAuth = (ev: any) => {
     ev.preventDefault();
@@ -29,6 +38,8 @@ const LoginForm = (props: any) => {
         setState((oldVals) => ({ ...oldVals, error: res.error }));
       });
   };
+
+  // Final Render
 
   return (
     <form className="signup-form" onSubmit={handleSubmitJwtAuth}>

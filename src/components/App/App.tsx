@@ -13,6 +13,8 @@ import PrivateRoute from '../Utils/PrivateRoute';
 import PublicOnlyRoute from '../Utils/PublicOnlyRoute';
 import RegistrationPage from '../../routes/RegistrationPage/RegistrationPage';
 
+// TODO: In the near future, have these components lazy load!
+
 const App = () => {
   return (
     <Fragment>

@@ -1,7 +1,7 @@
 /* This generator function is designed to take a format of the outcome of the parser.js
 and turn it back into a string of text that matches the original format */
 
-// helper functions
+// Interfaces
 
 export interface PokeObject {
   hp_ev: number;
@@ -17,6 +17,8 @@ export interface PokeObject {
   spd_iv: number;
   spe_iv: number;
 }
+
+// Helper Functions
 
 function evGenerator(ob: PokeObject) {
   let evArr = [];
@@ -90,7 +92,7 @@ function ivGenerator(ob: PokeObject) {
   return ivArr.join(' / ');
 }
 
-// generator function
+// Generator Function
 
 export default function showdownGenerate(input: any) {
   return input

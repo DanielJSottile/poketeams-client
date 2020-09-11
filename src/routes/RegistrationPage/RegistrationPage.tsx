@@ -3,11 +3,19 @@ import RegistrationForm from '../../components/RegistrationForm/RegistrationForm
 import Footer from '../../components/Footer/Footer';
 import './RegistrationPage.css';
 
+// Component
+
 const RegistrationPage = (props: any): JSX.Element => {
+
+  // Handle Registration Success
+
   const handleRegistrationSuccess = (user: any) => {
     const { history } = props;
     history.push('/landing');
   };
+
+  // Final Render
+  
   return (
     <Fragment>
       <section>

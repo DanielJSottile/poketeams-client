@@ -3,16 +3,22 @@ import apiService from '../../services/apiService';
 import TeamPublicShare from '../../components/Team-Public-Share/Team-Public-Share';
 import './ShareTeamPage.css';
 
+// Interfaces
+
 export interface Provider {
   team?: any;
   sets?: any;
 }
 
+// Component
+
 const ShareTeamPage = (props: any): JSX.Element => {
+
+  // Set State
+
   const [state, setState] = useState<Provider>();
 
-  /* This acts as our ComponentDidMount that gets the team
-  specified in the url parameter.*/
+  // Component LifeCycle
 
   useEffect(() => {
     const id = props.match.params.team_id;
@@ -34,6 +40,8 @@ const ShareTeamPage = (props: any): JSX.Element => {
         });
       });
   }, [props.match.params.team_id]);
+
+  // Final Render
 
   return (
     <div>

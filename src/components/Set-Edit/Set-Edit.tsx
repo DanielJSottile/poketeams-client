@@ -7,6 +7,8 @@ import legality from '../../functions/legality';
 import LoadingSets from '../Loaders/LoadingSets/LoadingSets';
 import './Set-Edit.css';
 
+// Interfaces
+
 export interface StringInput {
   value: string;
   touched: boolean;
@@ -53,17 +55,21 @@ export interface Provider {
   copySuccess: boolean;
 }
 
+// Component
+
 const SetEdit = (props: any) => {
+
+  // Set Context
+
   const GenCon = useContext(GeneralContext);
+
+  // Set State
 
   /* We actually do need to have State here, 
   because we are EDITING values from components 
   that there are more than ONE of. However, the
   function to update the form and delete are single
   functions handled in the General Context. */
-
-  /* TODO: find a way to make a context that handles
-  all of this instead of putting in the component. */
 
   const [state, setState] = useState<Provider>({
     nickname: { value: props.set.nickname || '', touched: false },
@@ -96,8 +102,7 @@ const SetEdit = (props: any) => {
     copySuccess: false,
   });
 
-  /* Since we have State here, the setting and validating of these 
-  Must be set in here.  Or at least, it's easier to do it that way.*/
+  // Set State Input Functions
 
   const setFields = (setImport: any) => {
     const parse = showdownParse(setImport)[0];
@@ -325,7 +330,7 @@ const SetEdit = (props: any) => {
     setState((oldVals) => ({ ...oldVals, copySuccess: false }));
   };
 
-  // copy to clipboard
+  // Copy To Clipboard Functionality
 
   const textArea: any = React.useRef(null);
 
@@ -337,11 +342,7 @@ const SetEdit = (props: any) => {
     setState((oldVals) => ({ ...oldVals, copySuccess: true }));
   };
 
-  // Validate Inputs
-
-  /* We only need to validate things that are necessary.  However, we
-  should still check that things are the correct value type (eventually
-  may convert the entire site to Typescript to fix this?)*/
+  // Validate Input Functions
 
   const validateNickname = (): any => {
     // Will some day check against Legal Nintendo filter!
@@ -480,7 +481,7 @@ const SetEdit = (props: any) => {
     }
   };
 
-  // Renders
+  // Render Functions
 
   const renderExpandedSet = () => {
     const { set } = props;
@@ -1067,6 +1068,8 @@ const SetEdit = (props: any) => {
       </div>
     );
   };
+
+  // Final Render
 
   return (
     <Fragment>

@@ -1,11 +1,15 @@
 import POKEMON from './pokemon';
 
+// Regular Expressions
+
 const ALL = /^(.*)\W(.*)$/;
 const TYPENULL = /^(.*):\W(.*)$/;
 const MIME = /^(.*).\W(.*)$/;
 const FARGALAR = /^(.*)'(.*)$/;
 const MIMEJR = /^(.*)\W(.*).$/;
 const MIMEGALAR = /^(.*). (.*)$/;
+
+// List of 'Exceptions' to regular Regex rules
 
 const exceptions = [
   'charizard-mega-y',
@@ -28,6 +32,8 @@ const exceptions = [
   'nidoran-m',
   'nidoran-f',
 ];
+
+// List of Custom Pokemon
 
 const infinite = [
   'arcanine-mega',
@@ -93,7 +99,8 @@ const infinite = [
   'urshifu-dragon-fist',
   'urshifu-tiger-claw',
 
-  // not actually Infinites, but not added yet
+  // not actually Custom, but not added into Showdown Yet
+  // TODO: Check if these were added
   'venusaur-gmax',
   'blastoise-gmax',
   'rillaboom-gmax',
@@ -103,10 +110,10 @@ const infinite = [
   'urshifu-rapid-strike',
 ];
 
+// Legality Object With Methods
+
 const LEGALITY = {
   // Legality
-
-  // THIS NEEDS TO BE MORE SOPHISTICATED!  it includes hyphens inside the name, which we don't want.
 
   removeWhiteSpaceHyphen(string: string) {
     return string.replace(/-|\s/g, '').toLowerCase();

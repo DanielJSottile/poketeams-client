@@ -2,7 +2,7 @@
 Python standard things like .partion have been changed to .split, and the way the Regex is
 handled is a bit different from Python, but the code is essentially the same. */
 
-// helper functions
+// Helper Functions
 
 function evIvParser(string: string | null, val: string) {
   let hpV = 0;
@@ -51,7 +51,7 @@ function evIvParser(string: string | null, val: string) {
   return [hpV, atkV, defV, spaV, spdV, speV];
 }
 
-// Singular function that handles the parsing for teams as well as single sets
+// Parsing Function for Teams and Sets Formats
 
 export default function showdownParse(input: string) {
   let item: string | null = null;
@@ -67,7 +67,7 @@ export default function showdownParse(input: string) {
   let nature: string | null = null;
   let moves: any[] = [];
 
-  // RegEx's
+  // Regular Expressions
 
   const NICKNAME_GEN_AND_ITEM_RE = /^(.*) \((.*)\) \(([MF])\) @ (.*)$/;
   const NICKNAME_AND_ITEM_RE = /^(.*) \((.{2,})\) @ (.*)$/;

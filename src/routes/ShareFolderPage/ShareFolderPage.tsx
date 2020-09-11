@@ -3,17 +3,26 @@ import apiService from '../../services/apiService';
 import FolderPublicShare from '../../components/Folder-Public-Share/Folder-Public-Share';
 import './ShareFolderPage.css';
 
+// Interfaces
+
 export interface Provider {
   folder?: any;
   teams?: any;
   sets?: any;
 }
 
+// Component
+
 const ShareFolderPage = (props: any): JSX.Element => {
+
+  // Set State
+
   const [state, setState] = useState<Provider>();
 
   /* This acts as our ComponentDidMount that gets the team
   specified in the url parameter.*/
+
+  // Component LifeCylce
 
   useEffect(() => {
     const id = props.match.params.folder_id;
@@ -47,6 +56,9 @@ const ShareFolderPage = (props: any): JSX.Element => {
       })   
   }, [props.match.params.folder_id]);
 
+
+  // Final Render
+  
   return (
     <div>
       {state?.folder[0] ? (
