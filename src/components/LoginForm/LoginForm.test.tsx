@@ -11,10 +11,11 @@ describe('<LoginForm/>', (): void => {
     const div: HTMLDivElement = document.createElement('div');
     ReactDOM.render(
       <BrowserRouter>
-        <LoginForm/>
-      </BrowserRouter>
-      , div);
-      ReactDOM.unmountComponentAtNode(div);
+        <LoginForm />
+      </BrowserRouter>,
+      div
+    );
+    ReactDOM.unmountComponentAtNode(div);
   });
   it('snapshot', (): void => {
     const wrapper = shallow(<LoginForm />);

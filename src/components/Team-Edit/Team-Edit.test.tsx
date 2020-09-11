@@ -9,17 +9,18 @@ import toJson from 'enzyme-to-json';
 describe('<TeamEdit/>', (): void => {
   it('renders without crashing', (): void => {
     const div: HTMLDivElement = document.createElement('div');
-    const team = {team_name: 'test'}
+    const team = { team_name: 'test' };
     ReactDOM.render(
       <BrowserRouter>
-        <TeamEdit team={team}/>
-      </BrowserRouter>
-      , div);
-      ReactDOM.unmountComponentAtNode(div);
+        <TeamEdit team={team} />
+      </BrowserRouter>,
+      div
+    );
+    ReactDOM.unmountComponentAtNode(div);
   });
   it('snapshot', (): void => {
-    const team = {team_name: 'test'}
-    const wrapper = shallow(<TeamEdit team={team}/>);
+    const team = { team_name: 'test' };
+    const wrapper = shallow(<TeamEdit team={team} />);
     expect(toJson(wrapper)).toMatchSnapshot();
   });
 });

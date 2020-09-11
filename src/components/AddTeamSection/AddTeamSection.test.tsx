@@ -2,22 +2,23 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 //import { render } from '@testing-library/react';
-import TeamsButtonListPublic from './TeamsButtonList-Public';
+import TeamsButtonListEdit from './AddTeamSection';
 import { shallow, mount, render } from 'enzyme';
 import toJson from 'enzyme-to-json';
 
-describe('<TeamsButtonListPublic/>', (): void => {
+describe('<TeamsButtonListEdit/>', (): void => {
   it('renders without crashing', (): void => {
     const div: HTMLDivElement = document.createElement('div');
     ReactDOM.render(
       <BrowserRouter>
-        <TeamsButtonListPublic/>
-      </BrowserRouter>
-      , div);
-      ReactDOM.unmountComponentAtNode(div);
+        <TeamsButtonListEdit />
+      </BrowserRouter>,
+      div
+    );
+    ReactDOM.unmountComponentAtNode(div);
   });
   it('snapshot', (): void => {
-    const wrapper = shallow(<TeamsButtonListPublic/>);
+    const wrapper = shallow(<TeamsButtonListEdit />);
     expect(toJson(wrapper)).toMatchSnapshot();
   });
 });

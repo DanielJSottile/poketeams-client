@@ -13,7 +13,6 @@ interface MyToken {
 }
 
 const NavigationBuild = (props: any) => {
-
   const GenCon = useContext(GeneralContext);
 
   const handleLogoutClick = () => {
@@ -23,11 +22,9 @@ const NavigationBuild = (props: any) => {
 
   const renderLogout = () => {
     return (
-      <div className='navigation-logged-in'>
-      <Link
-        onClick={handleLogoutClick}
-        to='/landing'>
-        Logout <i className="fas fa-sign-out-alt"></i>
+      <div className="navigation-logged-in">
+        <Link onClick={handleLogoutClick} to="/landing">
+          Logout <i className="fas fa-sign-out-alt"></i>
         </Link>
       </div>
     );
@@ -35,11 +32,10 @@ const NavigationBuild = (props: any) => {
 
   const renderLogin = () => {
     return (
-      <div className='navigation-logged-out'>
-      <Link
-        to='/landing'>
-        Log In <i className="fas fa-sign-in-alt"></i>
-      </Link>
+      <div className="navigation-logged-out">
+        <Link to="/landing">
+          Log In <i className="fas fa-sign-in-alt"></i>
+        </Link>
       </div>
     );
   };
@@ -47,37 +43,39 @@ const NavigationBuild = (props: any) => {
   const renderUserWelcome = () => {
     let user: any = '';
 
-    if (TokenService.getAuthToken()){
-      user = jwtDecode<MyToken>(TokenService.getAuthToken() || '').sub
-      return (
-        <h2>{`Welcome, ${user}!`}</h2>
-      )
+    if (TokenService.getAuthToken()) {
+      user = jwtDecode<MyToken>(TokenService.getAuthToken() || '').sub;
+      return <h2>{`Welcome, ${user}!`}</h2>;
     } else {
-      return (
-        <h2>{`Click the Login Button to Log In!`}</h2>
-      )
+      return <h2>{`Click the Login Button to Log In!`}</h2>;
     }
-  }
+  };
 
   return (
     <div>
       <nav role="navigation">
-        <div className="user-welcome">
-          {renderUserWelcome()}
-        </div>
+        <div className="user-welcome">{renderUserWelcome()}</div>
         <div className="build-title"></div>
         <div className="navbar">
           <div className="button_things">
-            <Link to='/'><i className="fas fa-home"></i> Home</Link>
-            <Link to='/build'><i className="fas fa-hammer"></i> Build!</Link>
+            <Link to="/">
+              <i className="fas fa-home"></i> Home
+            </Link>
+            <Link to="/build">
+              <i className="fas fa-hammer"></i> Build!
+            </Link>
           </div>
           <div className="mobile-button">
-            <Link to='/'><i className="fas fa-home"></i> Home</Link>
-            <Link to='/build'><i className="fas fa-hammer"></i> Build!</Link>
+            <Link to="/">
+              <i className="fas fa-home"></i> Home
+            </Link>
+            <Link to="/build">
+              <i className="fas fa-hammer"></i> Build!
+            </Link>
             {TokenService.hasAuthToken() ? renderLogout() : renderLogin()}
           </div>
-          <div className='search-cont'>
-            <SearchBarBuild/>
+          <div className="search-cont">
+            <SearchBarBuild />
           </div>
           <div className="user_things">
             {TokenService.hasAuthToken() ? renderLogout() : renderLogin()}
@@ -86,6 +84,6 @@ const NavigationBuild = (props: any) => {
       </nav>
     </div>
   );
-}
+};
 
 export default NavigationBuild;

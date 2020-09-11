@@ -9,17 +9,18 @@ import toJson from 'enzyme-to-json';
 describe('<SetPublic/>', (): void => {
   it('renders without crashing', (): void => {
     const div: HTMLDivElement = document.createElement('div');
-    const set = {nickname: 'test', species: 'Pikachu'}
+    const set = { nickname: 'test', species: 'Pikachu' };
     ReactDOM.render(
       <BrowserRouter>
-        <SetPublic set={set}/>
-      </BrowserRouter>
-      , div);
-      ReactDOM.unmountComponentAtNode(div);
+        <SetPublic set={set} />
+      </BrowserRouter>,
+      div
+    );
+    ReactDOM.unmountComponentAtNode(div);
   });
   it('snapshot', (): void => {
-    const set = {nickname: 'test', species: 'Pikachu'}
-    const wrapper = shallow(<SetPublic set={set}/>);
+    const set = { nickname: 'test', species: 'Pikachu' };
+    const wrapper = shallow(<SetPublic set={set} />);
     expect(toJson(wrapper)).toMatchSnapshot();
   });
 });

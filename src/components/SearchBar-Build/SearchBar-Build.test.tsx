@@ -11,13 +11,14 @@ describe('<SearchBarBuild/>', (): void => {
     const div: HTMLDivElement = document.createElement('div');
     ReactDOM.render(
       <BrowserRouter>
-        <SearchBarBuild/>
-      </BrowserRouter>
-      , div);
-      ReactDOM.unmountComponentAtNode(div);
+        <SearchBarBuild />
+      </BrowserRouter>,
+      div
+    );
+    ReactDOM.unmountComponentAtNode(div);
   });
   it('snapshot', (): void => {
-    const wrapper = shallow(<SearchBarBuild/>);
+    const wrapper = shallow(<SearchBarBuild />);
     expect(toJson(wrapper)).toMatchSnapshot();
   });
 });

@@ -10,24 +10,37 @@ export interface PokemonTeam {
 }
 
 const TeamListEdit = (props: any) => {
-
   const GenCon = useContext(GeneralContext);
 
-  const {userTeams, currentClickedFolder} = GenCon;
+  const { userTeams, currentClickedFolder } = GenCon;
 
   const TeamList = userTeams
-    .filter((team: PokemonTeam) => team.folder_id === Number(currentClickedFolder.id))
+    .filter(
+      (team: PokemonTeam) => team.folder_id === Number(currentClickedFolder.id)
+    )
     .map((team: PokemonTeam, i) => {
-      return <TeamEdit className="btn" id={`${team.team_name}`} key={i} team={team}/>
+      return (
+        <TeamEdit
+          className="btn"
+          id={`${team.team_name}`}
+          key={i}
+          team={team}
+        />
+      );
     });
 
   return (
     <Fragment>
-      {TeamList.length > 0 ? TeamList : <h3>Either No Folder is Selected Or There Are No Teams!  Make Teams with Pokemon!</h3>}
+      {TeamList.length > 0 ? (
+        TeamList
+      ) : (
+        <h3>
+          Either No Folder is Selected Or There Are No Teams! Make Teams with
+          Pokemon!
+        </h3>
+      )}
     </Fragment>
   );
 };
 
 export default TeamListEdit;
-
-

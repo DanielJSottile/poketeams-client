@@ -11,13 +11,14 @@ describe('<RegistrationForm/>', (): void => {
     const div: HTMLDivElement = document.createElement('div');
     ReactDOM.render(
       <BrowserRouter>
-        <RegistrationForm/>
-      </BrowserRouter>
-      , div);
-      ReactDOM.unmountComponentAtNode(div);
+        <RegistrationForm />
+      </BrowserRouter>,
+      div
+    );
+    ReactDOM.unmountComponentAtNode(div);
   });
   it('snapshot', (): void => {
-    const wrapper = shallow(<RegistrationForm/>);
+    const wrapper = shallow(<RegistrationForm />);
     expect(toJson(wrapper)).toMatchSnapshot();
   });
 });

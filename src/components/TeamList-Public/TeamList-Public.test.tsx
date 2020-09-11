@@ -11,13 +11,14 @@ describe('<TeamsListPublic/>', (): void => {
     const div: HTMLDivElement = document.createElement('div');
     ReactDOM.render(
       <BrowserRouter>
-        <TeamListPublic/>
-      </BrowserRouter>
-      , div);
-      ReactDOM.unmountComponentAtNode(div);
+        <TeamListPublic />
+      </BrowserRouter>,
+      div
+    );
+    ReactDOM.unmountComponentAtNode(div);
   });
   it('snapshot', (): void => {
-    const wrapper = shallow(<TeamListPublic/>);
+    const wrapper = shallow(<TeamListPublic />);
     expect(toJson(wrapper)).toMatchSnapshot();
   });
 });

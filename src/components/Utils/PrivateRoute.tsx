@@ -1,6 +1,6 @@
-import React from 'react'
-import { Route, Redirect } from 'react-router-dom'
-import TokenService from '../../services/token-service'
+import React from 'react';
+import { Route, Redirect } from 'react-router-dom';
+import TokenService from '../../services/token-service';
 
 export interface IProps {
   component: any;
@@ -8,20 +8,22 @@ export interface IProps {
 }
 
 export default function PrivateRoute({ component, ...props }: IProps) {
-  const Component = component
+  const Component = component;
   return (
     <Route
       {...props}
-      render={componentProps => (
-        TokenService.hasAuthToken()
-          ? <Component {...componentProps} />
-          : <Redirect
-              to={{
-                pathname: '/landing',
-                state: { from: componentProps.location }
-              }}
-            />
-      )}
+      render={(componentProps) =>
+        TokenService.hasAuthToken() ? (
+          <Component {...componentProps} />
+        ) : (
+          <Redirect
+            to={{
+              pathname: '/landing',
+              state: { from: componentProps.location },
+            }}
+          />
+        )
+      }
     />
-  )
+  );
 }

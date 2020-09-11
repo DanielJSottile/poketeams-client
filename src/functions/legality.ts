@@ -1,6 +1,6 @@
 import POKEMON from './pokemon';
 
-const ALL= /^(.*)\W(.*)$/; 
+const ALL = /^(.*)\W(.*)$/;
 const TYPENULL = /^(.*):\W(.*)$/;
 const MIME = /^(.*).\W(.*)$/;
 const FARGALAR = /^(.*)'(.*)$/;
@@ -17,8 +17,8 @@ const exceptions = [
   'kommo-o',
   'jangmo-o',
   'hakamo-o',
-  'sirfetch\'d',
-  'farfetch\'d',
+  "sirfetch'd",
+  "farfetch'd",
   'necrozma-dusk-mane',
   'necrozma-dawn-wings',
   'tapu bulu',
@@ -26,9 +26,9 @@ const exceptions = [
   'tapu fini',
   'tapu koko',
   'nidoran-m',
-  'nidoran-f'
-]
-  
+  'nidoran-f',
+];
+
 const infinite = [
   'arcanine-mega',
   'rapidash-mega',
@@ -53,7 +53,7 @@ const infinite = [
   'noivern-mega',
   'golisopod-mega',
   'cinderace-mega',
-  'sirfetch\'d-mega',
+  "sirfetch'd-mega",
   'tyranitar-gmax',
   'regigigas-gmax',
   'jellicent-gmax',
@@ -81,7 +81,7 @@ const infinite = [
   'mantyke-aumagari',
   'raikou-aumagari',
   'entei-aumagari',
-  'suicune-aumgarai',
+  'suicune-aumagari',
   'gible-aumagari',
   'gabite-aumagari',
   'garchomp-aumagari',
@@ -90,148 +90,167 @@ const infinite = [
   'dubsknight',
   'drilbur-aumagari',
   'excadrill-aumagari',
-  ]
+  'urshifu-dragon-fist',
+  'urshifu-tiger-claw',
 
-  const LEGALITY = {
-    // Legality
-  
-  
+  // not actually Infinites, but not added yet
+  'venusaur-gmax',
+  'blastoise-gmax',
+  'rillaboom-gmax',
+  'cinderace-gmax',
+  'inteleon-gmax',
+  'urshifu',
+  'urshifu-rapid-strike',
+];
+
+const LEGALITY = {
+  // Legality
+
   // THIS NEEDS TO BE MORE SOPHISTICATED!  it includes hyphens inside the name, which we don't want.
 
   removeWhiteSpaceHyphen(string: string) {
-    return string.replace(/-|\s/g,"").toLowerCase();
+    return string.replace(/-|\s/g, '').toLowerCase();
   },
-  
+
   isLegalSpecies(species: string) {
     if (POKEMON.has(this.removeWhiteSpaceHyphen(species))) {
-      return (species === POKEMON.get(this.removeWhiteSpaceHyphen(species))?.species)
+      return (
+        species === POKEMON.get(this.removeWhiteSpaceHyphen(species))?.species
+      );
     } else {
       return false;
     }
   },
-  
-  findSpecies(species: string): any{
-    if(this.isLegalSpecies(species)){
-      return POKEMON.get(this.removeWhiteSpaceHyphen(species))
-    } 
+
+  findSpecies(species: string): any {
+    if (this.isLegalSpecies(species)) {
+      return POKEMON.get(this.removeWhiteSpaceHyphen(species));
+    }
   },
-  
-  returnType(species: string){
-  
+
+  returnType(species: string) {
     let types: string[] = ['???'];
-  
+
     if (this.isLegalSpecies(species)) {
       types = this.findSpecies(species)!.types;
     }
     return types;
   },
-  
-  returnGenderStatus(species: string){
+
+  returnGenderStatus(species: string) {
     if (this.isLegalSpecies(species)) {
       let pokemon = this.findSpecies(species);
-      if (Object.keys(pokemon)?.includes('genderLock')){
-        return pokemon?.genderLock
-      } 
+      if (Object.keys(pokemon)?.includes('genderLock')) {
+        return pokemon?.genderLock;
+      }
       return false;
     }
   },
-  
+
   // These two functions in tandem return valid icon sprites based off of Pokemon Showdown's sprite index.
   // The function below makes things a bit cleaner.
-  
+
   cleanSpecies(species: string, shiny: boolean, REGEX: RegExp) {
     let match = species.match(REGEX);
     species = '';
     const cleanMatch = match!.slice(1);
-    cleanMatch.forEach(part => {
-      species = species + `${part}`;})
-    if(!shiny){
+    cleanMatch.forEach((part) => {
+      species = species + `${part}`;
+    });
+    if (!shiny) {
       return `https://play.pokemonshowdown.com/sprites/ani/${species.toLowerCase()}.gif`;
     } else {
       return `https://play.pokemonshowdown.com/sprites/ani-shiny/${species.toLowerCase()}.gif`;
     }
   },
-  
-  returnIconSprite(species: string, shiny: boolean){  
-  
+
+  returnIconSprite(species: string, shiny: boolean) {
     if (this.isLegalSpecies(species) && this.findSpecies(species).num > 0) {
-      if (infinite.includes(species.toLowerCase())){
-        return `https://imgur.com/m0p2ljo.png`
+      if (infinite.includes(species.toLowerCase())) {
+        return `https://imgur.com/m0p2ljo.png`;
       }
-  
+
       if (exceptions.includes(species.toLowerCase())) {
-        return this.cleanSpecies(species, shiny, ALL)
-      } else if (species.toLowerCase() === 'type: null') { // special case for typenull
-        return this.cleanSpecies(species, shiny, TYPENULL)
-      } else if (species.toLowerCase() === 'mr. mime' || species.toLowerCase() === 'mr. rime') { // special case for mr. mime and rime
-        return this.cleanSpecies(species, shiny, MIME)
-      } else if (species.toLowerCase() === 'farfetch\'d-galar') { // special case for farfetch'd galar
-        return this.cleanSpecies(species, shiny, FARGALAR)
-      } else if (species.toLowerCase() === 'mime jr.') { // special case for mime jr.
-        return this.cleanSpecies(species, shiny, MIMEJR)
-      } else if (species.toLowerCase() === 'mr. mime-galar') { // special case for mr. mime galar
-        return this.cleanSpecies(species, shiny, MIMEGALAR)
-    }
-  
-      if(!shiny){
+        return this.cleanSpecies(species, shiny, ALL);
+      } else if (species.toLowerCase() === 'type: null') {
+        // special case for typenull
+        return this.cleanSpecies(species, shiny, TYPENULL);
+      } else if (
+        species.toLowerCase() === 'mr. mime' ||
+        species.toLowerCase() === 'mr. rime'
+      ) {
+        // special case for mr. mime and rime
+        return this.cleanSpecies(species, shiny, MIME);
+      } else if (species.toLowerCase() === "farfetch'd-galar") {
+        // special case for farfetch'd galar
+        return this.cleanSpecies(species, shiny, FARGALAR);
+      } else if (species.toLowerCase() === 'mime jr.') {
+        // special case for mime jr.
+        return this.cleanSpecies(species, shiny, MIMEJR);
+      } else if (species.toLowerCase() === 'mr. mime-galar') {
+        // special case for mr. mime galar
+        return this.cleanSpecies(species, shiny, MIMEGALAR);
+      }
+
+      if (!shiny) {
         return `https://play.pokemonshowdown.com/sprites/ani/${species.toLowerCase()}.gif`;
       } else {
         return `https://play.pokemonshowdown.com/sprites/ani-shiny/${species.toLowerCase()}.gif`;
       }
     } else {
-      return `https://imgur.com/m0p2ljo.png`
+      return `https://imgur.com/m0p2ljo.png`;
     }
   },
-  
+
   returnTypeIcon(types: string[]) {
-    const urls = types.map(type => {
+    const urls = types.map((type) => {
       switch (type.toLowerCase()) {
         case 'bug':
-        return `https://imgur.com/9ex5BV6.png`;
+          return `https://imgur.com/9ex5BV6.png`;
         case 'dark':
-        return `https://imgur.com/uoXwMZF.png`;
+          return `https://imgur.com/uoXwMZF.png`;
         case 'dragon':
-        return `https://imgur.com/Agm9LSg.png`;
+          return `https://imgur.com/Agm9LSg.png`;
         case 'electric':
-        return `https://imgur.com/6rrimLN.png`;
+          return `https://imgur.com/6rrimLN.png`;
         case 'fairy':
-        return `https://imgur.com/DKCsIOv.png`;
+          return `https://imgur.com/DKCsIOv.png`;
         case 'fighting':
-        return `https://imgur.com/0PiaukU.png`;
+          return `https://imgur.com/0PiaukU.png`;
         case 'fire':
-        return `https://imgur.com/AdJd8ua.png`;
+          return `https://imgur.com/AdJd8ua.png`;
         case 'flying':
-        return `https://imgur.com/hmXQFXy.png`;
+          return `https://imgur.com/hmXQFXy.png`;
         case 'ghost':
-        return `https://imgur.com/sOLJoNj.png`;
+          return `https://imgur.com/sOLJoNj.png`;
         case 'grass':
-        return `https://imgur.com/emZGbVr.png`;
+          return `https://imgur.com/emZGbVr.png`;
         case 'ground':
-        return `https://imgur.com/c4gnllj.png`;
+          return `https://imgur.com/c4gnllj.png`;
         case 'ice':
-        return `https://imgur.com/3NLAUft.png`;
+          return `https://imgur.com/3NLAUft.png`;
         case 'infinite':
-        return `https://imgur.com/pINWaZD.png`;
+          return `https://imgur.com/pINWaZD.png`;
         case 'normal':
-        return `https://imgur.com/f4bdXSF.png`;
+          return `https://imgur.com/f4bdXSF.png`;
         case 'poison':
-        return `https://imgur.com/wPavZFT.png`;
+          return `https://imgur.com/wPavZFT.png`;
         case 'psychic':
-        return `https://imgur.com/emftvEC.png`;
+          return `https://imgur.com/emftvEC.png`;
         case 'rock':
-        return `https://imgur.com/iqjgywR.png`;
+          return `https://imgur.com/iqjgywR.png`;
         case 'steel':
-        return `https://imgur.com/1aapukI.png`;
+          return `https://imgur.com/1aapukI.png`;
         case 'water':
-        return `https://imgur.com/7gDH9B8.png`;
+          return `https://imgur.com/7gDH9B8.png`;
         case '???':
-        return `https://imgur.com/kHG7M8L.png`;
+          return `https://imgur.com/kHG7M8L.png`;
         default:
-        return `https://imgur.com/kHG7M8L.png`;
+          return `https://imgur.com/kHG7M8L.png`;
       }
-    })
+    });
     return urls;
   },
-  }
+};
 
 export default LEGALITY;

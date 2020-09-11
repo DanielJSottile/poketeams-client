@@ -11,13 +11,14 @@ describe('<LoginForm/>', (): void => {
     const div: HTMLDivElement = document.createElement('div');
     ReactDOM.render(
       <BrowserRouter>
-        <FoldersList/>
-      </BrowserRouter>
-      , div);
-      ReactDOM.unmountComponentAtNode(div);
+        <FoldersList />
+      </BrowserRouter>,
+      div
+    );
+    ReactDOM.unmountComponentAtNode(div);
   });
   it('snapshot', (): void => {
-    const wrapper = shallow(<FoldersList/>);
+    const wrapper = shallow(<FoldersList />);
     expect(toJson(wrapper)).toMatchSnapshot();
   });
 });

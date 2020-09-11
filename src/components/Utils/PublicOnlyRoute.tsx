@@ -8,15 +8,17 @@ export interface IProps {
 }
 
 export default function PublicOnlyRoute({ component, ...props }: IProps) {
-  const Component = component
+  const Component = component;
   return (
     <Route
       {...props}
-      render={componentProps => (
-        TokenService.hasAuthToken()
-          ? <Redirect to={'/'} />
-          : <Component {...componentProps} />
-      )}
+      render={(componentProps) =>
+        TokenService.hasAuthToken() ? (
+          <Redirect to={'/'} />
+        ) : (
+          <Component {...componentProps} />
+        )
+      }
     />
-  )
+  );
 }
