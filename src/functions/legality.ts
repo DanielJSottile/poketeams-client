@@ -109,9 +109,7 @@ const infinite = [
   'urshifu',
   'urshifu-rapid-strike',
   'zarude',
-  'zarude-dada',
-  'regidrago',
-  'regieleki' // tests for branch
+  'zarude-dada'
 ];
 
 // Legality Object With Methods
