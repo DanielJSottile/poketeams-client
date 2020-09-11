@@ -3,20 +3,32 @@ import { Link } from 'react-router-dom';
 import GeneralContext from '../../contexts/GeneralContext';
 import showdownGenerate from '../../functions/generate';
 import SetPublic from '../Set-Public/Set-Public';
+import legality from '../../functions/legality';
 import './Team-Public.css';
+
+// Interfaces
 
 export interface PokemonSet {
   id: number;
   team_id: number;
 }
 
+// Component
+
 const TeamPublic = (props: any) => {
+
+  // Set Context
+
   const GenCon = useContext(GeneralContext);
+
+  // Set State
 
   const [state, setState] = useState({
     teamExpandToggle: true,
     copySuccess: false,
   });
+
+  // Set State Change Functions
 
   const handleTeamToggle = () => {
     setState((oldVals) => ({
@@ -29,7 +41,7 @@ const TeamPublic = (props: any) => {
     setState((oldVals) => ({ ...oldVals, copySuccess: false }));
   };
 
-  // copy to clipboard
+  // Copy to Clipboard Functionality
 
   const textArea: any = React.useRef(null);
 
@@ -41,24 +53,34 @@ const TeamPublic = (props: any) => {
     setState((oldVals) => ({ ...oldVals, copySuccess: true }));
   };
 
+  /* --------------------- */
+
+  /* Set Up Common Definitions to be 
+  Used in Expanded/Unexpanded views */
+
+  const { team, id } = props;
+
+  const { publicSets } = GenCon;
+
+  /* Because of a strange bug, I'm forced to make sure 
+  teams have only unique ID'd Pokemon 'sets' in them. 
+  This also happens in the other Team Components
+  */
+ 
+  const ps = [...new Set(publicSets.map((set: PokemonSet) => set.id))];
+
+  const newPS = ps.map((id) =>
+    publicSets.find((set: PokemonSet) => set.id === id)
+  );
+
+  const teamSets = newPS.filter((set: any) => set.team_id === team.id); // will need to find out how to fix this in the future.
+
+  /* --------------------- */
+
+  // Render Functions
+
   const renderExpandedTeam = () => {
-    const { publicSets } = GenCon;
-
-    /* we have to use fucking stupid wizardry in order to make the 
-    publicSets have UNIQUE sets.  Basically making a SET of all 
-    unique ids, and then finding those ids and making a new list.
-    I hate JS objects so much.
-    */
-    const ps = [...new Set(publicSets.map((set: PokemonSet) => set.id))];
-
-    const newPS = ps.map((id) =>
-      publicSets.find((set: PokemonSet) => set.id === id)
-    );
-
-    const { team, id } = props;
-
-    const teamSets = newPS.filter((set: any) => set.team_id === team.id); // will need to find out how to fix this in the future.
-
+    
     const SetList = teamSets.map((set, i) => {
       return <SetPublic key={i} set={set} />;
     });
@@ -162,7 +184,17 @@ const TeamPublic = (props: any) => {
   };
 
   const renderUnexpandedTeam = () => {
-    const { team, id } = props;
+
+    let spriteMap = teamSets.map((set, i) => {
+      return (
+        <img
+          key={i}
+          className="tiny-icon"
+          src={legality.returnIconSprite(set.species, set.shiny)}
+          alt={set.species}
+        />
+      )
+    })
 
     return (
       <section className="team-section" id={`${id}`}>
@@ -172,6 +204,7 @@ const TeamPublic = (props: any) => {
           </div>
           <div>
             <p>By {team.user_name}</p>
+            {spriteMap}
             <p>
               Created on:{' '}
               {new Date(team.date_created).toLocaleString('en-GB', {
@@ -186,6 +219,8 @@ const TeamPublic = (props: any) => {
       </section>
     );
   };
+
+  // Final Render
 
   return (
     <Fragment>

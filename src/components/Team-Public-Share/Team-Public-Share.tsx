@@ -1,14 +1,22 @@
 import React, { Fragment, useState } from 'react';
 import { Link } from 'react-router-dom';
 import showdownGenerate from '../../functions/generate';
+import legality from '../../functions/legality';
 import SetPublic from '../Set-Public/Set-Public';
 import './Team-Public-Share.css';
 
+// Component
+
 const TeamPublicShare = (props: any) => {
+
+  // Set State
+
   const [state, setState] = useState({
     teamExpandToggle: true,
     copySuccess: false,
   });
+
+  // Set State Change Functions
 
   const handleTeamToggle = () => {
     setState((oldVals) => ({
@@ -21,7 +29,7 @@ const TeamPublicShare = (props: any) => {
     setState((oldVals) => ({ ...oldVals, copySuccess: false }));
   };
 
-  // copy to clipboard
+  // Copy to Clipboard Functionality
 
   const textArea: any = React.useRef(null);
 
@@ -32,6 +40,8 @@ const TeamPublicShare = (props: any) => {
     navigator.clipboard.writeText(text); // this seems to work!
     setState((oldVals) => ({ ...oldVals, copySuccess: true }));
   };
+
+  // Render Functions
 
   const renderExpandedTeam = () => {
     const { team, sets } = props;
@@ -139,7 +149,22 @@ const TeamPublicShare = (props: any) => {
   };
 
   const renderUnexpandedTeam = () => {
-    const { team, id } = props;
+    const { team, id, sets } = props;
+
+    let spriteMap;
+    if (sets) {
+      spriteMap = sets.map((set: any, i: number) => {
+        return (
+          <img
+            key={i}
+            className="tiny-icon"
+            src={legality.returnIconSprite(set.species, set.shiny)}
+            alt={set.species}
+          />
+        )
+      })
+    }
+    
 
     return (
       <section className="team-section" id={`${id}`}>
@@ -149,6 +174,7 @@ const TeamPublicShare = (props: any) => {
           </div>
           <div>
             <p>By {team.user_name}</p>
+            {spriteMap}
             <p>
               Created on:{' '}
               {new Date(team.date_created).toLocaleString('en-GB', {
@@ -163,6 +189,8 @@ const TeamPublicShare = (props: any) => {
       </section>
     );
   };
+
+  // Final Render
 
   return (
     <Fragment>

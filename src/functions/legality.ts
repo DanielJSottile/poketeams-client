@@ -81,7 +81,7 @@ const infinite = [
   'mantyke-aumagari',
   'raikou-aumagari',
   'entei-aumagari',
-  'suicune-aumgarai',
+  'suicune-aumagari',
   'gible-aumagari',
   'gabite-aumagari',
   'garchomp-aumagari',

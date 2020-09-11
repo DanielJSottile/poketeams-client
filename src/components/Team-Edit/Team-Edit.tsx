@@ -2,8 +2,11 @@ import React, { Fragment, useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import GeneralContext from '../../contexts/GeneralContext';
 import showdownGenerate from '../../functions/generate';
+import legality from '../../functions/legality';
 import SetEdit from '../Set-Edit/Set-Edit';
 import './Team-Edit.css';
+
+// Interfaces
 
 export interface StringInput {
   value: string;
@@ -28,17 +31,15 @@ export interface PokemonSet {
   team_id: number;
 }
 
+// Component
+
 const TeamEdit = (props: any) => {
+
+  // Set Context
+
   const GenCon = useContext(GeneralContext);
 
-  // wait I do? where?
-  // ??? we have a bug.  we need to change the team_name and description based on the current team.  Will fix later.
-
-  /* We actually do need to have State here, 
-  because we are EDITING values from components 
-  that there are more than ONE of. However, the
-  function to update the form and delete are single
-  functions handled in the General Context. */
+  // Set State
 
   const [state, setState] = useState({
     team_name: { value: props.team.team_name || '', touched: false },
@@ -49,7 +50,7 @@ const TeamEdit = (props: any) => {
     copySuccess: false,
   });
 
-  // set state
+  // Set State Change Functions
 
   const removeCopySuccess = (): any => {
     setState((oldVals) => ({ ...oldVals, copySuccess: false }));
@@ -89,7 +90,7 @@ const TeamEdit = (props: any) => {
     }));
   };
 
-  // copy to clipboard
+  // Copy to Clipboard Functionality
 
   const textArea: any = React.useRef(null);
 
@@ -101,7 +102,7 @@ const TeamEdit = (props: any) => {
     setState((oldVals) => ({ ...oldVals, copySuccess: true }));
   };
 
-  // validate
+  // Validate State Inputs
 
   const validateTeamName = (): any => {
     let team_name = state.team_name.value;
@@ -117,7 +118,26 @@ const TeamEdit = (props: any) => {
     }
   };
 
-  // API calls are handled in App.js
+  /* ---------------- */
+
+  /* Set Up Common Definitions to be 
+  Used in Expanded/Unexpanded views */
+
+  const { team, id } = props;
+
+  const { userSets, handleUpdateTeam } = GenCon;
+
+  const ps = [...new Set(userSets.map((set: PokemonSet) => set.id))];
+
+  const newPS = ps.map((id) =>
+    userSets.find((set: PokemonSet) => set.id === id)
+  );
+
+  const teamSets = newPS.filter((set: any) => set.team_id === team.id); 
+
+   /* ---------------- */
+
+   // Render Functions
 
   const renderSetList = (teamSets: any) => {
     const { handlePostNewPokemon } = GenCon;
@@ -164,17 +184,6 @@ const TeamEdit = (props: any) => {
   };
 
   const renderExpandedTeam = () => {
-    const { userSets, handleUpdateTeam } = GenCon;
-
-    const us = [...new Set(userSets.map((set: PokemonSet) => set.id))];
-
-    const newUS = us.map((id) =>
-      userSets.find((set: PokemonSet) => set.id === id)
-    );
-
-    const { team, id } = props;
-
-    const teamSets = newUS.filter((set: any) => set.team_id === team.id); // will need to find out how to fix this in the future.
 
     const SetList = renderSetList(teamSets);
 
@@ -312,7 +321,17 @@ const TeamEdit = (props: any) => {
   };
 
   const renderUnexpandedTeam = () => {
-    const { team, id } = props;
+
+    let spriteMap = teamSets.map((set, i) => {
+      return (
+        <img
+          key={i}
+          className="tiny-icon"
+          src={legality.returnIconSprite(set.species, set.shiny)}
+          alt={set.species}
+        />
+      )
+    })
 
     return (
       <section className="team-section" id={`${id}`}>
@@ -322,6 +341,7 @@ const TeamEdit = (props: any) => {
           </div>
           <div>
             <p>By {team.user_name}</p>
+            {spriteMap}
             <p>
               Created on:{' '}
               {new Date(team.date_created).toLocaleString('en-GB', {
@@ -336,6 +356,8 @@ const TeamEdit = (props: any) => {
       </section>
     );
   };
+
+  // Final Render
 
   return (
     <Fragment>
