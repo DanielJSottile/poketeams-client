@@ -108,6 +108,8 @@ const infinite = [
   'inteleon-gmax',
   'urshifu',
   'urshifu-rapid-strike',
+  'zarude',
+  'zarude-dada'
 ];
 
 // Legality Object With Methods
