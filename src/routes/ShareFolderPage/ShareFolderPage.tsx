@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import * as array from 'lodash';
 import apiService from '../../services/apiService';
 import FolderPublicShare from '../../components/Folder-Public-Share/Folder-Public-Share';
+
+
 import './ShareFolderPage.css';
 
 // Interfaces
@@ -48,8 +51,10 @@ const ShareFolderPage = (props: any): JSX.Element => {
             Promise.all(promiseArray)
               .then((values: any) => {
                 // this comes back as an array of arrays.  we need one array of objects
-                let merged = [].concat.apply([], values)
-                // we could also use values.flat() but this breaks in I.E.
+                // Lodash -> _.flattenDeep recursively flattens an array to its base level
+                let merged = array.flattenDeep(values)
+                /* we could also use values.flat() but this breaks in I.E, and the old version 
+                is 8 years old and looks horrible.*/
                 setState((oldVals) => ({...oldVals, sets: merged}))
               })
           })
