@@ -4,13 +4,22 @@ import PokeballLoader from '../Loaders/PokeballLoader/PokeballLoader';
 import LoadingBlack from '../Loaders/LoadingBlack/LoadingBlack';
 import './TeamList-PublicShare.css';
 
+// Interfaces
+
 export interface PokemonTeam {
   team_name: string;
   id: number;
   folder_id: number;
 }
 
+// Component
+
 const TeamListPublicShare = (props: any) => {
+
+  // Set Common Definitions/Props
+
+  // TODO: This probably needs work
+
   const {teams, sets} = props;
   let TeamList = [];
 
@@ -26,6 +35,7 @@ const TeamListPublicShare = (props: any) => {
     });
   }
   
+  // Final Render
 
   return (
     <Fragment>

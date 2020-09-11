@@ -2,7 +2,12 @@ import React, { useContext } from 'react';
 import GeneralContext from '../../contexts/GeneralContext';
 import './SearchBar-Build.css';
 
+// Component
+
 const SearchBarBuild = (props: any) => {
+
+  // Set Context
+
   const GenCon = useContext(GeneralContext);
 
   const {
@@ -13,6 +18,8 @@ const SearchBarBuild = (props: any) => {
     setFilter,
     setFilterSort,
   } = GenCon;
+
+  // Final Render
 
   return (
     <div className="searchbar">

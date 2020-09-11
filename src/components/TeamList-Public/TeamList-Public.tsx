@@ -5,13 +5,20 @@ import PokeballLoader from '../Loaders/PokeballLoader/PokeballLoader';
 import LoadingBlack from '../Loaders/LoadingBlack/LoadingBlack';
 import './TeamList-Public.css';
 
+// Interfaces
+
 export interface PokemonTeam {
   team_name: string;
   id: number;
   folder_id: number;
 }
 
+// Component
+
 const TeamListPublic = (props: any) => {
+
+  // Set Context
+
   const GenCon = useContext(GeneralContext);
 
   const { publicTeams, page, handlePageDown, handlePageUp } = GenCon;
@@ -19,6 +26,8 @@ const TeamListPublic = (props: any) => {
   const TeamList = publicTeams.map((team: PokemonTeam, i) => {
     return <TeamPublic key={i} id={`${team.team_name}`} team={team} />;
   });
+
+  // Final Render
 
   return (
     <Fragment>

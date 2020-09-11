@@ -3,13 +3,20 @@ import GeneralContext from '../../contexts/GeneralContext';
 import TeamEdit from '../Team-Edit/Team-Edit';
 import './TeamList-Edit.css';
 
+// Interfaces
+
 export interface PokemonTeam {
   team_name: string;
   id: number;
   folder_id: number;
 }
 
+// Component
+
 const TeamListEdit = (props: any) => {
+
+  // Set Context
+
   const GenCon = useContext(GeneralContext);
 
   const { userTeams, currentClickedFolder } = GenCon;
@@ -28,6 +35,8 @@ const TeamListEdit = (props: any) => {
         />
       );
     });
+
+  // Final Render
 
   return (
     <Fragment>

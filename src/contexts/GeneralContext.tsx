@@ -6,14 +6,16 @@ import showdownParse from '../functions/parse';
 import showdownFolderParse from '../functions/parseFolder';
 import legality from '../functions/legality';
 
-/* This is very important.  I believe React needs to have a Props type
-in order to actually pass the props.
-*/
+/* This is very important.  React needs to have a Props type
+in order to actually pass the props. */
+
+// Types
+
 type Props = {
   children: React.ReactNode;
 };
 
-// Typing Interfaces
+// Interfaces
 
 export interface StringInput {
   value: string;
@@ -33,10 +35,9 @@ export interface PageVal {
 export interface MyToken {
   sub: any;
   user_id: any;
-  // whatever else is in the JWT.
 }
 
-// This provides the types for creating our context
+// Context Provider Interface
 
 interface CreateProvider {
   userFolders: any[];
@@ -137,9 +138,7 @@ interface CreateProvider {
   clearPublicSets(): any;
 }
 
-/* This provides the types for our State. 
-If this is not done, the arrays will be set to
-never[] and we can't use the context.*/
+// State Provider Interface
 
 interface StateProvider {
   userFolders: any[];
@@ -168,8 +167,7 @@ interface StateProvider {
   page: PageVal;
 }
 
-/* Here we actually set our Context.  We seed it with 
-initial values and empty functions.  */
+// Create Context
 
 const GeneralContext = React.createContext<CreateProvider>({
   userFolders: [],
@@ -245,10 +243,7 @@ const GeneralContext = React.createContext<CreateProvider>({
 
 export default GeneralContext;
 
-/* Here we create our Context Provider, where we pass
-in the Props we created earlier.  We also create our
-State here using the hook.  As you can see, our arrays
-are set to 'any' (or whatever I choose later) instead of never!*/
+// Create Context General Provider
 
 export const GeneralProvider = ({ children }: Props) => {
   const [state, setState] = useState<StateProvider>({
@@ -277,6 +272,8 @@ export const GeneralProvider = ({ children }: Props) => {
     filtersort: { value: '', touched: false },
     page: { value: 1 },
   });
+
+  // Initial Life Cycle
 
   useEffect(() => {
     if (TokenService.getAuthToken()) {
@@ -1289,6 +1286,8 @@ export const GeneralProvider = ({ children }: Props) => {
     }
   };
 
+  // Set Context Value
+
   const value: any = {
     // main database
     // userdata
@@ -1367,6 +1366,8 @@ export const GeneralProvider = ({ children }: Props) => {
     addPublicSets: addPublicSets,
     clearPublicSets: clearPublicSets,
   };
+
+  // Return General Context Provider
 
   return (
     <GeneralContext.Provider value={value}>{children}</GeneralContext.Provider>

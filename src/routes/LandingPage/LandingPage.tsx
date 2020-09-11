@@ -4,15 +4,21 @@ import Footer from '../../components/Footer/Footer';
 import LoginForm from '../../components/LoginForm/LoginForm';
 import './LandingPage.css';
 
+// Component
+
 const LandingPage = (props: any): JSX.Element => {
+
+  // Handle Login Success
+  
   const handleLoginSucess = (): void => {
     const { location, history } = props;
     const destination = (location.state || {}).from || '/';
     history.push(destination);
   };
 
+  // Final Render
+
   return (
-    // make this JSX into a component!
     <Fragment>
       <header role="banner">
         <div className="landing-title"></div>

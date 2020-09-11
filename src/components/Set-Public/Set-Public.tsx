@@ -4,11 +4,18 @@ import showdownGenerate from '../../functions/generate';
 import legality from '../../functions/legality';
 import './Set-Public.css';
 
+// Component
+
 const SetPublic = (props: any) => {
+
+  // Set State
+
   const [state, setState] = useState({
     setExpandToggle: true,
     copySuccess: false,
   });
+
+  // Set State Input Functions
 
   const handleSetToggle = () => {
     setState((oldVals) => ({
@@ -21,7 +28,7 @@ const SetPublic = (props: any) => {
     setState((oldVals) => ({ ...oldVals, copySuccess: false }));
   };
 
-  // copy to clipboard
+  // Copy to Clipboard Functionality
 
   const textArea: any = React.useRef(null);
 
@@ -32,6 +39,8 @@ const SetPublic = (props: any) => {
     navigator.clipboard.writeText(text); // this seems to work!
     setState((oldVals) => ({ ...oldVals, copySuccess: true }));
   };
+
+  // Render Functions
 
   const renderExpandedSet = () => {
     const { set } = props;
@@ -433,6 +442,8 @@ const SetPublic = (props: any) => {
       </Fragment>
     );
   };
+
+  // Final Render
 
   return (
     <Fragment>

@@ -1,9 +1,16 @@
 import React, { useContext } from 'react';
 import GeneralContext from '../../contexts/GeneralContext';
 
+// Component
+
 const Folder = (props: any) => {
+
+  // Set Context
+
   const GenCon = useContext(GeneralContext);
   const { handleCurrentFolderClicked } = GenCon;
+
+  // Final Render
 
   return (
     <button

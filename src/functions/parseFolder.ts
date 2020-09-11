@@ -1,7 +1,7 @@
 /* This is based off the parse.ts file, but this is for the entire Folder import.  This may be 
 adapted in the future to import entire collections as it parses the same data. */
 
-// helper functions
+// Helper Functions
 
 function evIvParser(string: string | null, val: string) {
   let hpV = 0;
@@ -50,10 +50,11 @@ function evIvParser(string: string | null, val: string) {
   return [hpV, atkV, defV, spaV, spdV, speV];
 }
 
-// Singular function that handles the parsing for teams as well as single sets
+// Parsing Function for Folder Format
 
 export default function showdownFolderParse(input: string) {
-  // RegEx's
+
+  // Regular Expressions
 
   const FOLDERPARSE: RegExp = /^=== \[(.*)\] (.*)\/(.*) ===$/;
   const NICKNAME_GEN_AND_ITEM_RE: RegExp = /^(.*) \((.*)\) \(([MF])\) @ (.*)$/;
@@ -64,8 +65,10 @@ export default function showdownFolderParse(input: string) {
   const NO_NICKNAME_AND_ITEM_RE: RegExp = /^(.*) @ (.*)$/;
 
   // eslint-disable-next-line
+  // TODO: Add this as part of the teams
   let format: string;
   // eslint-disable-next-line
+  // TODO: Check against the folder name
   let folder: string;
   let teamname: string;
   let item: string | null = null;

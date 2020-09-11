@@ -6,8 +6,12 @@ import FolderList from '../../components/FoldersList/FoldersList';
 import Footer from '../../components/Footer/Footer';
 import './BuildPage.css';
 
+// Component
 
 const BuildPage = (props: any): JSX.Element => {
+
+  // Final Render
+  
   return (
     <Fragment>
       <NavigationBuild />

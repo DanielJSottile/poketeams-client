@@ -7,14 +7,23 @@ import LoadingBlack from '../Loaders/LoadingBlack/LoadingBlack';
 import showdownFolderGenerate from '../../functions/generateFolder';
 import './FoldersList.css';
 
+// Component
+
 const FoldersList = (props: any) => {
+
+  // Set Context
+
   const GenCon = useContext(GeneralContext);
+
+  // Set State
 
   const [state, setState] = useState({
     editClicked: false,
     deleteClicked: false,
     copySuccess: false,
   });
+
+  // State State Input Functions
 
   const handleEditExpand = () => {
     setState((oldVals) => ({ ...oldVals, editClicked: !state.editClicked }));
@@ -31,7 +40,7 @@ const FoldersList = (props: any) => {
     setState((oldVals) => ({ ...oldVals, copySuccess: false }));
   };
 
-  // copy to clipboard
+  // Copy To Clipboard Functionality
 
   const textArea: any = React.useRef(null);
 
@@ -42,6 +51,40 @@ const FoldersList = (props: any) => {
     navigator.clipboard.writeText(text); // this seems to work!
     setState((oldVals) => ({ ...oldVals, copySuccess: true }));
   };
+
+  /* --------------------- */
+
+  /* Set Up Common Definitions to be 
+  Used in Different views */
+
+  const {
+    userFolders,
+    userTeams,
+    userSets,
+    folderAddClicked,
+    currentClickedFolder,
+    handleFolderAddClickExpand,
+  } = GenCon;
+
+  const folderList = userFolders.map((folder: any, i) => {
+    return <Folder key={i} id={folder.id} folder_name={folder.folder_name} />;
+  });
+
+  const folderTeams = userTeams.filter(
+    (team) => team.folder_id === currentClickedFolder.id
+  );
+
+  // here we make the input for the generator function...
+
+  const input = folderTeams.map((team) => {
+    const teamSets = userSets.filter((set) => set.team_id === team.id);
+    const teamName: any = team.team_name;
+    return { [teamName]: teamSets };
+  });
+
+  /* --------------------- */
+
+  // Render Functions
 
   const renderExpanded = (): JSX.Element => {
     const {
@@ -171,30 +214,7 @@ const FoldersList = (props: any) => {
     );
   };
 
-  const {
-    userFolders,
-    userTeams,
-    userSets,
-    folderAddClicked,
-    currentClickedFolder,
-    handleFolderAddClickExpand,
-  } = GenCon;
-
-  const folderList = userFolders.map((folder: any, i) => {
-    return <Folder key={i} id={folder.id} folder_name={folder.folder_name} />;
-  });
-
-  const folderTeams = userTeams.filter(
-    (team) => team.folder_id === currentClickedFolder.id
-  );
-
-  // here we make the input for the generator function...
-
-  const input = folderTeams.map((team) => {
-    const teamSets = userSets.filter((set) => set.team_id === team.id);
-    const teamName: any = team.team_name;
-    return { [teamName]: teamSets };
-  });
+  // Final Render
 
   return (
     <Fragment>

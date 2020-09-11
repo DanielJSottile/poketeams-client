@@ -2,7 +2,12 @@ import React, { useContext } from 'react';
 import GeneralContext from '../../contexts/GeneralContext';
 import './SearchBar-Public.css';
 
+// Component
+
 const SearchBarPublic = (props: any) => {
+
+  // Set Context
+
   const GenCon = useContext(GeneralContext);
 
   const {
@@ -13,6 +18,8 @@ const SearchBarPublic = (props: any) => {
     setSearch,
     setSort,
   } = GenCon;
+
+  // Final Render
 
   return (
     <div className="searchbar">
