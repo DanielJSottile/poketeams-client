@@ -1,3 +1,5 @@
+@import '../../index.scss';
+
 .searchbar, .search {
   display: flex;
   flex-direction: column;
@@ -5,8 +7,12 @@
   margin: auto;
 }
 
+.search {
+  margin-top: 5%;
+}
+
 .s-input {
-  font-family: 'Lato', sans-serif;
+  font-family: $body-font;
   border: none;
   border-radius: 4px;
 }
@@ -16,6 +22,10 @@
     justify-content: space-between;
     align-items: center;
     flex-direction: row;
+  }
+
+  .search {
+    margin-top: 12%;
   }
 
   .button_things, .user_things {

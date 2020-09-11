@@ -4,7 +4,7 @@ import SearchBar from '../SearchBar-Public/SearchBar-Public';
 import GeneralContext from '../../contexts/GeneralContext';
 import jwtDecode from 'jwt-decode';
 import TokenService from '../../services/token-service';
-import './Navigation-Public.css';
+import './Navigation-Public.scss';
 
 // Interfaces
 

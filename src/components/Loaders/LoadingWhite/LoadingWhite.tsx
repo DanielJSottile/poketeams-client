@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import './LoadingWhite.css';
+import './LoadingWhite.scss';
 
 // Component
 

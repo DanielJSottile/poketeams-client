@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import NavigationPublic from '../../components/Navigation-Public/Navigation-Public';
 import TeamListPublic from '../../components/TeamList-Public/TeamList-Public';
 import Footer from '../../components/Footer/Footer';
-import './HomePage.css';
+import './HomePage.scss';
 
 // Component
 

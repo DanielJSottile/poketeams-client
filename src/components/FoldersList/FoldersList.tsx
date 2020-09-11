@@ -5,7 +5,7 @@ import Folder from '../Folder/Folder';
 import PokeballLoader from '../Loaders/PokeballLoader/PokeballLoader';
 import LoadingBlack from '../Loaders/LoadingBlack/LoadingBlack';
 import showdownFolderGenerate from '../../functions/generateFolder';
-import './FoldersList.css';
+import './FoldersList.scss';
 
 // Component
 

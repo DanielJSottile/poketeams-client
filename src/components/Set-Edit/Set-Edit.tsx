@@ -5,7 +5,7 @@ import showdownGenerate from '../../functions/generate';
 import showdownParse from '../../functions/parse';
 import legality from '../../functions/legality';
 import LoadingSets from '../Loaders/LoadingSets/LoadingSets';
-import './Set-Edit.css';
+import './Set-Edit.scss';
 
 // Interfaces
 

@@ -4,7 +4,7 @@ import GeneralContext from '../../contexts/GeneralContext';
 import showdownGenerate from '../../functions/generate';
 import legality from '../../functions/legality';
 import SetEdit from '../Set-Edit/Set-Edit';
-import './Team-Edit.css';
+import './Team-Edit.scss';
 
 // Interfaces
 

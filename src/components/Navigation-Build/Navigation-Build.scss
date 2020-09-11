@@ -1,3 +1,5 @@
+@import '../../index.scss';
+
 .user-welcome {
   padding: 5px;
   margin-right: 15px;
@@ -5,7 +7,7 @@
 }
 
 .user-welcome:hover {
-  color: rgb(255, 230, 0);
+  color: $pure-yellow;
   transition: 0.5s;
 }
 

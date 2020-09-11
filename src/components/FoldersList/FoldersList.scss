@@ -1,26 +1,28 @@
+@import '../../index.scss';
+
 .submit {
   display: inline-block;
   text-shadow: none;
   font-weight: bolder;
   background-color: white;
   font-size: 16px;
-  color: #444;
+  color: $med-dark-grey;
   border-radius: 4px;
   padding: 3px;
   margin: 3px;
   text-decoration: none;
 }
 
-.submit{
+.submit {
   color: green;
 }
 
 .submit:disabled {
-  color: red;
+  color: $pokeball-red;
 }
 
 .submit:hover {
-  background-color: rgb(255, 245, 151);
+  background-color: $light-yellow;
   transition: 0.3s;
 }
 

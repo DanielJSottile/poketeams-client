@@ -2,9 +2,7 @@ import React, { useState, useEffect } from 'react';
 import * as array from 'lodash';
 import apiService from '../../services/apiService';
 import FolderPublicShare from '../../components/Folder-Public-Share/Folder-Public-Share';
-
-
-import './ShareFolderPage.css';
+import './ShareFolderPage.scss';
 
 // Interfaces
 

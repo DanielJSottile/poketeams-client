@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Input, Required } from '../Utils/Utils';
 import AuthApiService from '../../services/auth-api-service';
-import './RegistrationForm.css';
+import './RegistrationForm.scss';
 
 // Interfaces
 

@@ -1,15 +1,53 @@
+@import '../../index.scss';
+
+.desc-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.tiny-icon {
+  height: 35px;
+}
+
+.team-section {
+  padding: 2px 2px;
+  color: $med-dark-grey;
+  border-radius: 4px;
+  text-shadow: 1px 1px white;
+  background-color: $super-light-cream;
+}
+
+.team-section:nth-child(even) {
+  color: $super-light-cream;
+  text-shadow: 1px 1px $super-dark-red;
+  background-color: $pokeball-red;
+}
+
+.team-section:hover {
+  cursor: pointer;
+  background-color: $med-light-yellow;
+  transition: 0.3s;
+}
+
+.team-section:nth-child(even):hover {
+  cursor: pointer;
+  background-color: $light-pokeball-red;
+  transition: 0.3s;
+}
+
 .team {
-  background-color: rgb(212, 41, 41);
-  color: rgb(255, 255, 238);
-  text-shadow: 1px 1px rgb(58, 0, 0);
-  border: 1px solid #444;
+  background-color: $pokeball-red;
+  color: $super-light-cream;
+  text-shadow: 1px 1px $super-dark-red;
+  border: 1px solid $med-dark-grey;
   border-radius: 10px;
   padding: 2px;
   margin: 5px;
 }
 
-.team:hover{
-  background-color: rgb(255, 75, 75);
+.team:hover {
+  background-color: $light-pokeball-red;
   transition: 0.3s;
 }
 
@@ -21,21 +59,14 @@
   justify-content: space-around;
   align-content: center;
   align-self: center;
-  border: 1px solid #444;
+  border: 1px solid $med-dark-grey;
   border-radius: 10px;
   padding: 5px;
 }
 
-.desc{	
-  text-align: center;	
-  border: none;	
-  border-radius: 20px;	
-  background: rgb(255, 255, 238);	
-}
-
-.export-team{
-  background-color: rgb(255, 255, 238);
-  border: 1px solid #444;
+.export-team {
+  background-color: $super-light-cream;
+  border: 1px solid $med-dark-grey;
   border-radius: 10px;
   padding: 5px;
   margin: auto;
@@ -54,7 +85,7 @@
   align-items: center;
 }
 
-.title-content{
+.title-content {
   display: flex;
   flex-direction: column;
   font-style: italic;
@@ -64,15 +95,30 @@
 }
 
 .title {
-  color: #444;
+  color: $med-dark-grey;
   text-emphasis: bold;
   text-align: center;
   font-size: 22px;
-  border: 1px solid rgb(255, 230, 0);
+  border: 1px solid $pure-yellow;
   width: 100%;
   margin: auto;
   border-radius: 20px;
   background: white;
+}
+
+.title-name {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 65%;
+  margin: auto;
+}
+
+.desc {	
+  text-align: center;	
+  border: none;	
+  border-radius: 20px;	
+  background: $super-light-cream;	
 }
 
 .copied {
@@ -113,18 +159,18 @@
 }
 
 @media (min-width: 700px) { /* Medium Screen */
-
+ 
   .team-header {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
   }
 
-  .team-form{
+  .team-form {
     width: 50%;
   }
 
-  .export-team{
+  .export-team {
     width: 35%;
   }
 }

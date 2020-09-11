@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import Footer from '../../components/Footer/Footer';
 import LoginForm from '../../components/LoginForm/LoginForm';
-import './LandingPage.css';
+import './LandingPage.scss';
 
 // Component
 
