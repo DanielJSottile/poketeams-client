@@ -109,7 +109,9 @@ const infinite = [
   'urshifu',
   'urshifu-rapid-strike',
   'zarude',
-  'zarude-dada'
+  'zarude-dada',
+  'regieleki',
+  'regidrago',
 ];
 
 // Legality Object With Methods
