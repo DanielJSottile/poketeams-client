@@ -16,7 +16,6 @@ export interface PokemonSet {
 // Component
 
 const TeamPublic = (props: any) => {
-
   // Set Context
 
   const GenCon = useContext(GeneralContext);
@@ -58,6 +57,8 @@ const TeamPublic = (props: any) => {
   /* Set Up Common Definitions to be 
   Used in Expanded/Unexpanded views */
 
+  // This code is also seen in Team-Edit and Team-Public-Share
+
   const { team, id } = props;
 
   const { publicSets } = GenCon;
@@ -66,21 +67,29 @@ const TeamPublic = (props: any) => {
   teams have only unique ID'd Pokemon 'sets' in them. 
   This also happens in the other Team Components
   */
- 
+
+  // We map out the ID's of each Pokemon, and then put them into a Set, and then back into an Array.
+  // Have to go through this craziness because there is no 'object equivalence' in JavaScript!
+
   const ps = [...new Set(publicSets.map((set: PokemonSet) => set.id))];
+
+  // Then we map through the new array we have created.  For each ID, we find the Pokemon in the old Array and replace it.
 
   const newPS = ps.map((id) =>
     publicSets.find((set: PokemonSet) => set.id === id)
   );
 
-  const teamSets = newPS.filter((set: any) => set.team_id === team.id); // will need to find out how to fix this in the future.
+  // Then we find the sets for a particular team in our new list of Pokemon.  No more duplicates!
+
+  // There may be a way to fix this in the future with Lodash.
+
+  const teamSets = newPS.filter((set: any) => set.team_id === team.id);
 
   /* --------------------- */
 
   // Render Functions
 
   const renderExpandedTeam = () => {
-    
     const SetList = teamSets.map((set, i) => {
       return <SetPublic key={i} set={set} />;
     });
@@ -184,7 +193,6 @@ const TeamPublic = (props: any) => {
   };
 
   const renderUnexpandedTeam = () => {
-
     let spriteMap = teamSets.map((set, i) => {
       return (
         <img
@@ -193,8 +201,8 @@ const TeamPublic = (props: any) => {
           src={legality.returnIconSprite(set.species, set.shiny)}
           alt={set.species}
         />
-      )
-    })
+      );
+    });
 
     return (
       <section className="team-section" id={`${id}`}>
