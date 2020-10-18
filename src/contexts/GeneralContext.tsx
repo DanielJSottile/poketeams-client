@@ -974,7 +974,7 @@ export const GeneralProvider = ({ children }: Props) => {
           Promise.all(setPromises).then((sets) => {
             setState((oldVals) => ({
               ...oldVals,
-              userSets: [...state.userTeams, ...sets],
+              userSets: [...state.userSets, ...sets],
             }));
           });
         }
