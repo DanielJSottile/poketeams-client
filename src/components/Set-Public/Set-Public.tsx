@@ -7,7 +7,6 @@ import './Set-Public.scss';
 // Component
 
 const SetPublic = (props: any) => {
-
   // Set State
 
   const [state, setState] = useState({
@@ -56,37 +55,43 @@ const SetPublic = (props: any) => {
           <div className="pokemon-intro">
             <div className="name-sprite">
               <div className="names">
-                <label htmlFor="pokemon-name">Species:</label>
-                <input
-                  className="pokemon-name"
-                  disabled
-                  readOnly
-                  value={set.species || 'Pikachu'}
-                  type="text"
-                  name="pokemon-name"
-                  id={`pokemon-name-${set.id}`}
-                />
-                <label htmlFor="pokemon-nickname">Nickname: (optional)</label>
-                <input
-                  className="pokemon-nickname"
-                  placeholder={set.species || 'Pikachu'}
-                  disabled
-                  readOnly
-                  value={set.nickname || ''}
-                  type="text"
-                  name="pokemon-nickname"
-                  id={`pokemon-nickname-${set.id}`}
-                />
-                <label htmlFor="pokemon-gender">Gender: </label>
-                <input
-                  className="pokemon-gender"
-                  disabled
-                  readOnly
-                  value={set.gender || ''}
-                  type="text"
-                  name="pokemon-gender"
-                  id={`pokemon-gender-${set.id}`}
-                />
+                <div>
+                  <label htmlFor="pokemon-name">Species:</label>
+                  <input
+                    className="pokemon-name"
+                    disabled
+                    readOnly
+                    value={set.species || 'Pikachu'}
+                    type="text"
+                    name="pokemon-name"
+                    id={`pokemon-name-${set.id}`}
+                  />
+                </div>
+                <div>
+                  <label htmlFor="pokemon-nickname">Nickname: (optional)</label>
+                  <input
+                    className="pokemon-nickname"
+                    placeholder={set.species || 'Pikachu'}
+                    disabled
+                    readOnly
+                    value={set.nickname || ''}
+                    type="text"
+                    name="pokemon-nickname"
+                    id={`pokemon-nickname-${set.id}`}
+                  />
+                </div>
+                <div>
+                  <label htmlFor="pokemon-gender">Gender: </label>
+                  <input
+                    className="pokemon-gender"
+                    disabled
+                    readOnly
+                    value={set.gender || ''}
+                    type="text"
+                    name="pokemon-gender"
+                    id={`pokemon-gender-${set.id}`}
+                  />
+                </div>
                 <div>
                   <label htmlFor="shiny">Shiny:</label>
                   <input
