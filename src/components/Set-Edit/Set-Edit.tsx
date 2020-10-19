@@ -58,7 +58,6 @@ export interface Provider {
 // Component
 
 const SetEdit = (props: any) => {
-
   // Set Context
 
   const GenCon = useContext(GeneralContext);
@@ -533,51 +532,57 @@ const SetEdit = (props: any) => {
           <div className="pokemon-intro">
             <div className="name-sprite">
               <div className="names">
-                <label htmlFor="pokemon-name">Species:</label>
-                {state.species.touched && (
-                  <p className="error-validate shake-horizontal">
-                    {validateSpecies()}
-                  </p>
-                )}
-                <input
-                  className="pokemon-name"
-                  placeholder="e.g. Pikachu"
-                  value={state.species.value}
-                  onChange={(e) => setSpecies(e.target.value)}
-                  type="text"
-                  name="pokemon-name"
-                  id={`pokemon-name-${set.id}`}
-                />
-                <label htmlFor="pokemon-nickname">Nickname: (optional)</label>
-                {
-                  <p className="error-validate shake-horizontal">
-                    {validateNickname()}
-                  </p>
-                }
-                <input
-                  className="pokemon-nickname"
-                  placeholder={state.species.value}
-                  value={state.nickname.value}
-                  onChange={(e) => setNickname(e.target.value)}
-                  type="text"
-                  name="pokemon-nickname"
-                  id={`pokemon-nickname-${set.id}`}
-                />
-                <label htmlFor="pokemon-gender">Gender: </label>
-                {
-                  <p className="error-validate shake-horizontal">
-                    {validateGender()}
-                  </p>
-                }
-                <input
-                  className="pokemon-gender"
-                  placeholder="F, M, or N"
-                  value={state.gender.value}
-                  onChange={(e) => setGender(e.target.value)}
-                  type="text"
-                  name="pokemon-gender"
-                  id={`pokemon-gender-${set.id}`}
-                />
+                <div>
+                  <label htmlFor="pokemon-name">Species:</label>
+                  {state.species.touched && (
+                    <p className="error-validate shake-horizontal">
+                      {validateSpecies()}
+                    </p>
+                  )}
+                  <input
+                    className="pokemon-name"
+                    placeholder="e.g. Pikachu"
+                    value={state.species.value}
+                    onChange={(e) => setSpecies(e.target.value)}
+                    type="text"
+                    name="pokemon-name"
+                    id={`pokemon-name-${set.id}`}
+                  />
+                </div>
+                <div>
+                  <label htmlFor="pokemon-nickname">Nickname: (optional)</label>
+                  {
+                    <p className="error-validate shake-horizontal">
+                      {validateNickname()}
+                    </p>
+                  }
+                  <input
+                    className="pokemon-nickname"
+                    placeholder={state.species.value}
+                    value={state.nickname.value}
+                    onChange={(e) => setNickname(e.target.value)}
+                    type="text"
+                    name="pokemon-nickname"
+                    id={`pokemon-nickname-${set.id}`}
+                  />
+                </div>
+                <div>
+                  <label htmlFor="pokemon-gender">Gender: </label>
+                  {
+                    <p className="error-validate shake-horizontal">
+                      {validateGender()}
+                    </p>
+                  }
+                  <input
+                    className="pokemon-gender"
+                    placeholder="F, M, or N"
+                    value={state.gender.value}
+                    onChange={(e) => setGender(e.target.value)}
+                    type="text"
+                    name="pokemon-gender"
+                    id={`pokemon-gender-${set.id}`}
+                  />
+                </div>
                 <div>
                   <label htmlFor="shiny">Shiny:</label>
                   {

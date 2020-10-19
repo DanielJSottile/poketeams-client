@@ -17,7 +17,14 @@
   transition: 0.3s;
 }
 
-.pokemon-nickname, .pokemon-level, .pokemon-item, .pokemon-ability, .pokemon-nature, .pokemon-happiness, .pokemon-move, .pokemon-gender {
+.pokemon-nickname,
+.pokemon-level,
+.pokemon-item,
+.pokemon-ability,
+.pokemon-nature,
+.pokemon-happiness,
+.pokemon-move,
+.pokemon-gender {
   color: $med-dark-grey;
   text-emphasis: bold;
   text-align: center;
@@ -31,7 +38,9 @@
   background: white;
 }
 
-.details, .stats, .export-pokemon {
+.details,
+.stats,
+.export-pokemon {
   background-color: $super-light-cream;
   border: 1px solid $med-dark-grey;
   border-radius: 10px;
@@ -71,17 +80,18 @@
   background: white;
 }
 
-.names, .sprites{
+.names,
+.sprites {
   display: flex;
   flex-direction: column;
 }
 
 .icon {
   margin: 1px;
-  transform: scale(.5);
+  transform: scale(0.5);
 }
 
-.type-img{
+.type-img {
   width: 100px;
 }
 
@@ -127,7 +137,8 @@
   flex-direction: column;
 }
 
-.pokemon-ev, .pokemon-iv {
+.pokemon-ev,
+.pokemon-iv {
   border: 1px solid $pure-yellow;
   border-radius: 10px;
   width: 60px;
@@ -155,7 +166,7 @@
   text-shadow: none;
   color: green;
   -webkit-animation: fade-out 3s ease-out both;
-	animation: fade-out 3s ease-out both;
+  animation: fade-out 3s ease-out both;
 }
 
 /* ----------------------------------------------
@@ -170,7 +181,7 @@
  * animation fade-out
  * ----------------------------------------
  */
- @-webkit-keyframes fade-out {
+@-webkit-keyframes fade-out {
   0% {
     opacity: 1;
   }
@@ -187,30 +198,62 @@
   }
 }
 
-@media (min-width: 700px) { /* Medium Screen */
- 
-  .pokemon-intro{
+@media (min-width: 700px) {
+  /* Medium Screen */
+
+  .name-sprite {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
   }
 
-  .pokemon-import{
+  .pokemon-import {
     width: 35%;
   }
 }
 
-@media (min-width: 850px) { /* Large Ipad Screen */
+@media (min-width: 850px) {
+  /* Large Ipad Screen */
 
-  .details {
+  .details,
+  .sprites {
+    display: flex;
     flex-direction: row;
+  }
+
+  .type-icons {
+    display: flex;
+    flex-direction: column;
+    align-content: space-around;
+    align-self: center;
+  }
+
+  .type-img {
+    margin: 1px;
   }
 
   .stats {
     width: 33%;
   }
 
-  .pokemon-import{
+  .pokemon-import {
     width: 45%;
+  }
+}
+
+@media (min-width: 1200px) {
+  /* Large Ipad Screen */
+
+  .name-sprite {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+  }
+
+  .names,
+  .sprites {
+    display: flex;
+    flex-direction: row;
+    align-self: center;
   }
 }
