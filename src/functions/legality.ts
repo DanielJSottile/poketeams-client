@@ -2,16 +2,17 @@ import POKEMON from './pokemon';
 
 // Regular Expressions
 
-const ALL = /^(.*)\W(.*)$/;
-const TYPENULL = /^(.*):\W(.*)$/;
-const MIME = /^(.*).\W(.*)$/;
-const FARGALAR = /^(.*)'(.*)$/;
-const MIMEJR = /^(.*)\W(.*).$/;
-const MIMEGALAR = /^(.*). (.*)$/;
+const ALL: RegExp = /^(.*)\W(.*)$/;
+const TYPENULL: RegExp = /^(.*):\W(.*)$/;
+const MIME: RegExp = /^(.*).\W(.*)$/;
+const BADBIRB: RegExp = /^(.*)’(.*)$/;
+const FARGALAR: RegExp = /^(.*)'(.*)$/;
+const MIMEJR: RegExp = /^(.*)\W(.*).$/;
+const MIMEGALAR: RegExp = /^(.*). (.*)$/;
 
 // List of 'Exceptions' to regular Regex rules
 
-const exceptions = [
+const exceptions: string[] = [
   'charizard-mega-y',
   'charizard-mega-x',
   'mewtwo-mega-y',
@@ -22,7 +23,9 @@ const exceptions = [
   'jangmo-o',
   'hakamo-o',
   "sirfetch'd",
+  'sirfetch’d',
   "farfetch'd",
+  'farfetch’d',
   'necrozma-dusk-mane',
   'necrozma-dawn-wings',
   'tapu bulu',
@@ -35,7 +38,7 @@ const exceptions = [
 
 // List of Custom Pokemon
 
-const infinite = [
+const infinite: string[] = [
   'arcanine-mega',
   'rapidash-mega',
   'meganium-mega',
@@ -60,6 +63,7 @@ const infinite = [
   'golisopod-mega',
   'cinderace-mega',
   "sirfetch'd-mega",
+  'sirfetch’d-mega',
   'tyranitar-gmax',
   'regigigas-gmax',
   'jellicent-gmax',
@@ -109,7 +113,7 @@ const infinite = [
   'urshifu',
   'urshifu-rapid-strike',
   'zarude',
-  'zarude-dada'
+  'zarude-dada',
 ];
 
 // Legality Object With Methods
@@ -117,11 +121,20 @@ const infinite = [
 const LEGALITY = {
   // Legality
 
-  removeWhiteSpaceHyphen(string: string) {
-    return string.replace(/-|\s/g, '').toLowerCase();
+  removeWhiteSpaceHyphen(string: string): string {
+    return string.replace(/-|:|'|\|.|’|\s/g, '').toLowerCase();
   },
 
-  isLegalSpecies(species: string) {
+  isLegalSpecies(species: string): boolean {
+    if (
+      species.toLowerCase() === 'farfetch’d' ||
+      species.toLowerCase() === 'sirfetch’d' ||
+      species.toLowerCase() === 'farfetch’d-galar' ||
+      species.toLowerCase() === 'sirfetch’d-mega'
+    ) {
+      // very stupid on Showdown to use the different single quote symbol...
+      return true;
+    }
     if (POKEMON.has(this.removeWhiteSpaceHyphen(species))) {
       return (
         species === POKEMON.get(this.removeWhiteSpaceHyphen(species))?.species
@@ -137,7 +150,7 @@ const LEGALITY = {
     }
   },
 
-  returnType(species: string) {
+  returnType(species: string): string[] {
     let types: string[] = ['???'];
 
     if (this.isLegalSpecies(species)) {
@@ -146,7 +159,7 @@ const LEGALITY = {
     return types;
   },
 
-  returnGenderStatus(species: string) {
+  returnGenderStatus(species: string): any {
     if (this.isLegalSpecies(species)) {
       let pokemon = this.findSpecies(species);
       if (Object.keys(pokemon)?.includes('genderLock')) {
@@ -159,7 +172,7 @@ const LEGALITY = {
   // These two functions in tandem return valid icon sprites based off of Pokemon Showdown's sprite index.
   // The function below makes things a bit cleaner.
 
-  cleanSpecies(species: string, shiny: boolean, REGEX: RegExp) {
+  cleanSpecies(species: string, shiny: boolean, REGEX: RegExp): string {
     let match = species.match(REGEX);
     species = '';
     const cleanMatch = match!.slice(1);
@@ -173,7 +186,7 @@ const LEGALITY = {
     }
   },
 
-  returnIconSprite(species: string, shiny: boolean) {
+  returnIconSprite(species: string, shiny: boolean): string {
     if (this.isLegalSpecies(species) && this.findSpecies(species).num > 0) {
       if (infinite.includes(species.toLowerCase())) {
         return `https://imgur.com/m0p2ljo.png`;
@@ -190,6 +203,14 @@ const LEGALITY = {
       ) {
         // special case for mr. mime and rime
         return this.cleanSpecies(species, shiny, MIME);
+      } else if (
+        species.toLowerCase() === 'farfetch’d' ||
+        species.toLowerCase() === 'sirfetch’d' ||
+        species.toLowerCase() === 'farfetch’d-galar' ||
+        species.toLowerCase() === 'sirfetch’d-mega'
+      ) {
+        // special case for the bad symbol on Showdown...
+        return this.cleanSpecies(species, shiny, BADBIRB);
       } else if (species.toLowerCase() === "farfetch'd-galar") {
         // special case for farfetch'd galar
         return this.cleanSpecies(species, shiny, FARGALAR);
@@ -211,7 +232,7 @@ const LEGALITY = {
     }
   },
 
-  returnTypeIcon(types: string[]) {
+  returnTypeIcon(types: string[]): string[] {
     const urls = types.map((type) => {
       switch (type.toLowerCase()) {
         case 'bug':
