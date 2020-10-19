@@ -628,83 +628,93 @@ const SetEdit = (props: any) => {
           </div>
           <div className="details">
             <div className="first-details">
-              <label htmlFor="pokemon-level">Level: </label>
-              {state.species.touched && (
-                <p className="error-validate shake-horizontal">
-                  {validateLevel()}
-                </p>
-              )}
-              <input
-                className="pokemon-level"
-                placeholder="100"
-                value={state.level.value}
-                onChange={(e) => setLevel(Number(e.target.value))}
-                type="text"
-                name="pokemon-level"
-                id={`pokemon-level-${set.id}`}
-              />
-              <label htmlFor="pokemon-item">Item: (optional)</label>
-              {
-                <p className="error-validate shake-horizontal">
-                  {validateItem()}
-                </p>
-              }
-              <input
-                className="pokemon-item"
-                placeholder="e.g. Leftovers"
-                value={state.item.value}
-                onChange={(e) => setItem(e.target.value)}
-                type="text"
-                name="pokemon-item"
-                id={`pokemon-item-${set.id}`}
-              />
-              <label htmlFor="pokemon-ability">Ability: (optional)</label>
-              {
-                <p className="error-validate shake-horizontal">
-                  {validateAbility()}
-                </p>
-              }
-              <input
-                className="pokemon-ability"
-                placeholder="e.g. Static"
-                value={state.ability.value}
-                onChange={(e) => setAbility(e.target.value)}
-                type="text"
-                name="pokemon-ability"
-                id={`pokemon-ability-${set.id}`}
-              />
-              <label htmlFor="pokemon-nature">Nature: (optional)</label>
-              {
-                <p className="error-validate shake-horizontal">
-                  {validateNature()}
-                </p>
-              }
-              <input
-                className="pokemon-nature"
-                placeholder="e.g. Adamant"
-                value={state.nature.value}
-                onChange={(e) => setNature(e.target.value)}
-                type="text"
-                name="pokemon-nature"
-                id={`pokemon-nature-${set.id}`}
-              />
-              <label htmlFor="pokemon-happiness">Happiness:</label>
-              {state.happiness.touched && (
-                <p className="error-validate shake-horizontal">
-                  {validateHappiness()}
-                </p>
-              )}
-              <input
-                className="pokemon-happiness"
-                placeholder="255"
-                value={state.happiness.value}
-                onChange={(e) => setHappiness(Number(e.target.value))}
-                type="number"
-                name="pokemon-happiness"
-                min="0"
-                max="255"
-                id={`pokemon-happiness-${set.id}`}
-              />
+              <div>
+                <label htmlFor="pokemon-level">Level: </label>
+                {state.species.touched && (
+                  <p className="error-validate shake-horizontal">
+                    {validateLevel()}
+                  </p>
+                )}
+                <input
+                  className="pokemon-level"
+                  placeholder="100"
+                  value={state.level.value}
+                  onChange={(e) => setLevel(Number(e.target.value))}
+                  type="text"
+                  name="pokemon-level"
+                  id={`pokemon-level-${set.id}`}
+                />
+              </div>
+              <div>
+                <label htmlFor="pokemon-item">Item: (optional)</label>
+                {
+                  <p className="error-validate shake-horizontal">
+                    {validateItem()}
+                  </p>
+                }
+                <input
+                  className="pokemon-item"
+                  placeholder="e.g. Leftovers"
+                  value={state.item.value}
+                  onChange={(e) => setItem(e.target.value)}
+                  type="text"
+                  name="pokemon-item"
+                  id={`pokemon-item-${set.id}`}
+                />
+              </div>
+              <div>
+                <label htmlFor="pokemon-ability">Ability: (optional)</label>
+                {
+                  <p className="error-validate shake-horizontal">
+                    {validateAbility()}
+                  </p>
+                }
+                <input
+                  className="pokemon-ability"
+                  placeholder="e.g. Static"
+                  value={state.ability.value}
+                  onChange={(e) => setAbility(e.target.value)}
+                  type="text"
+                  name="pokemon-ability"
+                  id={`pokemon-ability-${set.id}`}
+                />
+              </div>
+              <div>
+                <label htmlFor="pokemon-nature">Nature: (optional)</label>
+                {
+                  <p className="error-validate shake-horizontal">
+                    {validateNature()}
+                  </p>
+                }
+                <input
+                  className="pokemon-nature"
+                  placeholder="e.g. Adamant"
+                  value={state.nature.value}
+                  onChange={(e) => setNature(e.target.value)}
+                  type="text"
+                  name="pokemon-nature"
+                  id={`pokemon-nature-${set.id}`}
+                />
+              </div>
+              <div>
+                <label htmlFor="pokemon-happiness">Happiness:</label>
+                {state.happiness.touched && (
+                  <p className="error-validate shake-horizontal">
+                    {validateHappiness()}
+                  </p>
+                )}
+                <input
+                  className="pokemon-happiness"
+                  placeholder="255"
+                  value={state.happiness.value}
+                  onChange={(e) => setHappiness(Number(e.target.value))}
+                  type="number"
+                  name="pokemon-happiness"
+                  min="0"
+                  max="255"
+                  id={`pokemon-happiness-${set.id}`}
+                />
+              </div>
             </div>
             <div className="stats">
               <div className="evs">
@@ -713,78 +723,90 @@ const SetEdit = (props: any) => {
                     {validateEvs()}
                   </p>
                 }
-                <label htmlFor="pokemon-ev-hp">HP EV:</label>
-                <input
-                  className="pokemon-ev"
-                  placeholder="0"
-                  value={Number(state.hp_ev.value)}
-                  onChange={(e) => setHpEv(Number(e.target.value))}
-                  type="number"
-                  name="pokemon-ev-hp"
-                  min="0"
-                  max="252"
-                  id={`pokemon-ev-hp-${set.id}`}
-                />
-                <label htmlFor="pokemon-ev-atk">Atk EV:</label>
-                <input
-                  className="pokemon-ev"
-                  placeholder="0"
-                  value={Number(state.atk_ev.value)}
-                  onChange={(e) => setAtkEv(Number(e.target.value))}
-                  type="number"
-                  name="pokemon-ev-atk"
-                  min="0"
-                  max="252"
-                  id={`pokemon-ev-atk-${set.id}`}
-                />
-                <label htmlFor="pokemon-ev-def">Def EV:</label>
-                <input
-                  className="pokemon-ev"
-                  placeholder="0"
-                  value={Number(state.def_ev.value)}
-                  onChange={(e) => setDefEv(Number(e.target.value))}
-                  type="number"
-                  name="pokemon-ev-def"
-                  min="0"
-                  max="252"
-                  id={`pokemon-ev-def-${set.id}`}
-                />
-                <label htmlFor="pokemon-ev-spa">SpA EV:</label>
-                <input
-                  className="pokemon-ev"
-                  placeholder="0"
-                  value={Number(state.spa_ev.value)}
-                  onChange={(e) => setSpAEv(Number(e.target.value))}
-                  type="number"
-                  name="pokemon-ev-spa"
-                  min="0"
-                  max="252"
-                  id={`pokemon-ev-spa-${set.id}`}
-                />
-                <label htmlFor="pokemon-ev-spd">SpD EV:</label>
-                <input
-                  className="pokemon-ev"
-                  placeholder="0"
-                  value={Number(state.spd_ev.value)}
-                  onChange={(e) => setSpDEv(Number(e.target.value))}
-                  type="number"
-                  name="pokemon-ev-spd"
-                  min="0"
-                  max="252"
-                  id={`pokemon-ev-spd-${set.id}`}
-                />
-                <label htmlFor="pokemon-ev-spe">SpE EV:</label>
-                <input
-                  className="pokemon-ev"
-                  placeholder="0"
-                  value={Number(state.spe_ev.value)}
-                  onChange={(e) => setSpeEv(Number(e.target.value))}
-                  type="number"
-                  name="pokemon-ev-spe"
-                  min="0"
-                  max="252"
-                  id={`pokemon-ev-spe-${set.id}`}
-                />
+                <div className="stat">
+                  <label htmlFor="pokemon-ev-hp">HP EV:</label>
+                  <input
+                    className="pokemon-ev"
+                    placeholder="0"
+                    value={Number(state.hp_ev.value)}
+                    onChange={(e) => setHpEv(Number(e.target.value))}
+                    type="number"
+                    name="pokemon-ev-hp"
+                    min="0"
+                    max="252"
+                    id={`pokemon-ev-hp-${set.id}`}
+                  />
+                </div>
+                <div className="stat">
+                  <label htmlFor="pokemon-ev-atk">Atk EV:</label>
+                  <input
+                    className="pokemon-ev"
+                    placeholder="0"
+                    value={Number(state.atk_ev.value)}
+                    onChange={(e) => setAtkEv(Number(e.target.value))}
+                    type="number"
+                    name="pokemon-ev-atk"
+                    min="0"
+                    max="252"
+                    id={`pokemon-ev-atk-${set.id}`}
+                  />
+                </div>
+                <div className="stat">
+                  <label htmlFor="pokemon-ev-def">Def EV:</label>
+                  <input
+                    className="pokemon-ev"
+                    placeholder="0"
+                    value={Number(state.def_ev.value)}
+                    onChange={(e) => setDefEv(Number(e.target.value))}
+                    type="number"
+                    name="pokemon-ev-def"
+                    min="0"
+                    max="252"
+                    id={`pokemon-ev-def-${set.id}`}
+                  />
+                </div>
+                <div className="stat">
+                  <label htmlFor="pokemon-ev-spa">SpA EV:</label>
+                  <input
+                    className="pokemon-ev"
+                    placeholder="0"
+                    value={Number(state.spa_ev.value)}
+                    onChange={(e) => setSpAEv(Number(e.target.value))}
+                    type="number"
+                    name="pokemon-ev-spa"
+                    min="0"
+                    max="252"
+                    id={`pokemon-ev-spa-${set.id}`}
+                  />
+                </div>
+                <div className="stat">
+                  <label htmlFor="pokemon-ev-spd">SpD EV:</label>
+                  <input
+                    className="pokemon-ev"
+                    placeholder="0"
+                    value={Number(state.spd_ev.value)}
+                    onChange={(e) => setSpDEv(Number(e.target.value))}
+                    type="number"
+                    name="pokemon-ev-spd"
+                    min="0"
+                    max="252"
+                    id={`pokemon-ev-spd-${set.id}`}
+                  />
+                </div>
+                <div className="stat">
+                  <label htmlFor="pokemon-ev-spe">SpE EV:</label>
+                  <input
+                    className="pokemon-ev"
+                    placeholder="0"
+                    value={Number(state.spe_ev.value)}
+                    onChange={(e) => setSpeEv(Number(e.target.value))}
+                    type="number"
+                    name="pokemon-ev-spe"
+                    min="0"
+                    max="252"
+                    id={`pokemon-ev-spe-${set.id}`}
+                  />
+                </div>
               </div>
               <div className="ivs">
                 {
@@ -792,78 +814,90 @@ const SetEdit = (props: any) => {
                     {validateIvs()}
                   </p>
                 }
-                <label htmlFor="pokemon-iv-hp">HP IV:</label>
-                <input
-                  className="pokemon-iv"
-                  placeholder="31"
-                  value={Number(state.hp_iv.value)}
-                  onChange={(e) => setHpIv(Number(e.target.value))}
-                  type="number"
-                  name="pokemon-iv-hp"
-                  min="0"
-                  max="31"
-                  id={`pokemon-iv-hp-${set.id}`}
-                />
-                <label htmlFor="pokemon-iv-atk">Atk IV:</label>
-                <input
-                  className="pokemon-iv"
-                  placeholder="31"
-                  value={Number(state.atk_iv.value)}
-                  onChange={(e) => setAtkIv(Number(e.target.value))}
-                  type="number"
-                  name="pokemon-iv-atk"
-                  min="0"
-                  max="31"
-                  id={`pokemon-iv-atk-${set.id}`}
-                />
-                <label htmlFor="pokemon-iv-def">Def IV:</label>
-                <input
-                  className="pokemon-iv"
-                  placeholder="31"
-                  value={Number(state.def_iv.value)}
-                  onChange={(e) => setDefIv(Number(e.target.value))}
-                  type="number"
-                  name="pokemon-iv-def"
-                  min="0"
-                  max="31"
-                  id={`pokemon-iv-def-${set.id}`}
-                />
-                <label htmlFor="pokemon-iv-spa">SpA IV:</label>
-                <input
-                  className="pokemon-iv"
-                  placeholder="31"
-                  value={Number(state.spa_iv.value)}
-                  onChange={(e) => setSpAIv(Number(e.target.value))}
-                  type="number"
-                  name="pokemon-iv-spa"
-                  min="0"
-                  max="31"
-                  id={`pokemon-iv-spa-${set.id}`}
-                />
-                <label htmlFor="pokemon-iv-spd">SpD IV:</label>
-                <input
-                  className="pokemon-iv"
-                  placeholder="31"
-                  value={Number(state.spd_iv.value)}
-                  onChange={(e) => setSpDIv(Number(e.target.value))}
-                  type="number"
-                  name="pokemon-iv-spd"
-                  min="0"
-                  max="31"
-                  id={`pokemon-iv-spd-${set.id}`}
-                />
-                <label htmlFor="pokemon-iv-spe">SpE IV:</label>
-                <input
-                  className="pokemon-iv"
-                  placeholder="31"
-                  value={Number(state.spe_iv.value)}
-                  onChange={(e) => setSpeIv(Number(e.target.value))}
-                  type="number"
-                  name="pokemon-iv-spe"
-                  min="0"
-                  max="31"
-                  id={`pokemon-iv-spe-${set.id}`}
-                />
+                <div className="stat">
+                  <label htmlFor="pokemon-iv-hp">HP IV:</label>
+                  <input
+                    className="pokemon-iv"
+                    placeholder="31"
+                    value={Number(state.hp_iv.value)}
+                    onChange={(e) => setHpIv(Number(e.target.value))}
+                    type="number"
+                    name="pokemon-iv-hp"
+                    min="0"
+                    max="31"
+                    id={`pokemon-iv-hp-${set.id}`}
+                  />
+                </div>
+                <div className="stat">
+                  <label htmlFor="pokemon-iv-atk">Atk IV:</label>
+                  <input
+                    className="pokemon-iv"
+                    placeholder="31"
+                    value={Number(state.atk_iv.value)}
+                    onChange={(e) => setAtkIv(Number(e.target.value))}
+                    type="number"
+                    name="pokemon-iv-atk"
+                    min="0"
+                    max="31"
+                    id={`pokemon-iv-atk-${set.id}`}
+                  />
+                </div>
+                <div className="stat">
+                  <label htmlFor="pokemon-iv-def">Def IV:</label>
+                  <input
+                    className="pokemon-iv"
+                    placeholder="31"
+                    value={Number(state.def_iv.value)}
+                    onChange={(e) => setDefIv(Number(e.target.value))}
+                    type="number"
+                    name="pokemon-iv-def"
+                    min="0"
+                    max="31"
+                    id={`pokemon-iv-def-${set.id}`}
+                  />
+                </div>
+                <div className="stat">
+                  <label htmlFor="pokemon-iv-spa">SpA IV:</label>
+                  <input
+                    className="pokemon-iv"
+                    placeholder="31"
+                    value={Number(state.spa_iv.value)}
+                    onChange={(e) => setSpAIv(Number(e.target.value))}
+                    type="number"
+                    name="pokemon-iv-spa"
+                    min="0"
+                    max="31"
+                    id={`pokemon-iv-spa-${set.id}`}
+                  />
+                </div>
+                <div className="stat">
+                  <label htmlFor="pokemon-iv-spd">SpD IV:</label>
+                  <input
+                    className="pokemon-iv"
+                    placeholder="31"
+                    value={Number(state.spd_iv.value)}
+                    onChange={(e) => setSpDIv(Number(e.target.value))}
+                    type="number"
+                    name="pokemon-iv-spd"
+                    min="0"
+                    max="31"
+                    id={`pokemon-iv-spd-${set.id}`}
+                  />
+                </div>
+                <div className="stat">
+                  <label htmlFor="pokemon-iv-spe">SpE IV:</label>
+                  <input
+                    className="pokemon-iv"
+                    placeholder="31"
+                    value={Number(state.spe_iv.value)}
+                    onChange={(e) => setSpeIv(Number(e.target.value))}
+                    type="number"
+                    name="pokemon-iv-spe"
+                    min="0"
+                    max="31"
+                    id={`pokemon-iv-spe-${set.id}`}
+                  />
+                </div>
               </div>
             </div>
             <div className="moves">
