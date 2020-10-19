@@ -154,6 +154,11 @@
   margin: auto;
 }
 
+.stat {
+  display: flex;
+  flex-direction: column;
+}
+
 .copied {
   font-size: 16px;
   text-shadow: none;
@@ -198,6 +203,17 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+  }
+
+  .type-icons {
+    display: flex;
+    flex-direction: column;
+    align-content: space-around;
+    align-self: center;
+  }
+
+  .pokemon-import {
+    width: 35%;
   }
 }
 
@@ -244,5 +260,31 @@
     display: flex;
     flex-direction: row;
     align-self: center;
+  }
+
+  .details {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+  }
+
+  .first-details,
+  .evs,
+  .ivs,
+  .moves {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .stats {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .first-details,
+  .stats,
+  .moves {
+    padding: 15px;
   }
 }
