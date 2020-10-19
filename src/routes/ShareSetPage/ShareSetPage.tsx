@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import apiService from '../../services/apiService';
 import SetPublic from '../../components/Set-Public/Set-Public';
 import './ShareSetPage.scss';
@@ -13,7 +14,6 @@ export interface Provider {
 // Component
 
 const ShareSetPage = (props: any): JSX.Element => {
-
   // Set State
 
   const [state, setState] = useState<Provider>();
@@ -32,6 +32,9 @@ const ShareSetPage = (props: any): JSX.Element => {
 
   return (
     <div>
+      <Link className="go-back" to={'/'}>
+        Go To PokéTeams <i className="fas fa-home"></i>
+      </Link>
       {state?.set[0] ? (
         <SetPublic set={state?.set[0]} />
       ) : (
