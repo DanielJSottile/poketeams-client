@@ -110,18 +110,20 @@ const SetPublic = (props: any) => {
                   src={legality.returnIconSprite(set.species, set.shiny)}
                   alt={set.species || 'Pikachu'}
                 />
-                {legality
-                  .returnTypeIcon(legality.returnType(set.species))
-                  .map((type: any, i: number) => {
-                    return (
-                      <img
-                        className="type-img"
-                        src={`${type}`}
-                        key={i}
-                        alt={`${i + 1}`}
-                      />
-                    );
-                  })}
+                <div className="type-icons">
+                  {legality
+                    .returnTypeIcon(legality.returnType(set.species))
+                    .map((type: any, i: number) => {
+                      return (
+                        <img
+                          className="type-img"
+                          src={`${type}`}
+                          key={i}
+                          alt={`${i + 1}`}
+                        />
+                      );
+                    })}
+                </div>
               </div>
             </div>
           </div>
