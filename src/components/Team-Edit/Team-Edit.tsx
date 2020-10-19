@@ -34,7 +34,6 @@ export interface PokemonSet {
 // Component
 
 const TeamEdit = (props: any) => {
-
   // Set Context
 
   const GenCon = useContext(GeneralContext);
@@ -133,11 +132,11 @@ const TeamEdit = (props: any) => {
     userSets.find((set: PokemonSet) => set.id === id)
   );
 
-  const teamSets = newPS.filter((set: any) => set.team_id === team.id); 
+  const teamSets = newPS.filter((set: any) => set.team_id === team.id);
 
-   /* ---------------- */
+  /* ---------------- */
 
-   // Render Functions
+  // Render Functions
 
   const renderSetList = (teamSets: any) => {
     const { handlePostNewPokemon } = GenCon;
@@ -170,8 +169,9 @@ const TeamEdit = (props: any) => {
         <p>Are You Sure You'd Like to Delete this Team?</p>
         <button
           onClick={() => {
-            handleDeleteTeam(props.team.id);
             handleDeleteExpand();
+            handleTeamToggle();
+            handleDeleteTeam(props.team.id);
           }}
         >
           Yes <i className="fas fa-thumbs-up"></i>
@@ -184,7 +184,6 @@ const TeamEdit = (props: any) => {
   };
 
   const renderExpandedTeam = () => {
-
     const SetList = renderSetList(teamSets);
 
     return (
@@ -321,7 +320,6 @@ const TeamEdit = (props: any) => {
   };
 
   const renderUnexpandedTeam = () => {
-
     let spriteMap = teamSets.map((set, i) => {
       return (
         <img
@@ -330,8 +328,8 @@ const TeamEdit = (props: any) => {
           src={legality.returnIconSprite(set.species, set.shiny)}
           alt={set.species}
         />
-      )
-    })
+      );
+    });
 
     return (
       <section className="team-section" id={`${id}`}>
