@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import apiService from '../../services/apiService';
 import TeamPublicShare from '../../components/Team-Public-Share/Team-Public-Share';
 import './ShareTeamPage.scss';
@@ -13,7 +14,6 @@ export interface Provider {
 // Component
 
 const ShareTeamPage = (props: any): JSX.Element => {
-
   // Set State
 
   const [state, setState] = useState<Provider>();
@@ -45,6 +45,9 @@ const ShareTeamPage = (props: any): JSX.Element => {
 
   return (
     <div>
+      <Link className="go-back" to={'/'}>
+        Go To PokéTeams <i className="fas fa-home"></i>
+      </Link>
       {state?.team[0] ? (
         <TeamPublicShare team={state?.team[0]} sets={state?.sets} />
       ) : (
