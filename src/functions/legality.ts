@@ -13,6 +13,16 @@ const MIMEGALAR: RegExp = /^(.*). (.*)$/;
 // List of 'Exceptions' to regular Regex rules
 
 const exceptions: string[] = [
+  'vivillon-icy snow',
+  'vivillon-high plains',
+  'alcremie-ruby-cream',
+  'alcremie-matcha-cream',
+  'alcremie-mint-cream',
+  'alcremie-lemon-cream',
+  'alcremie-salted-cream',
+  'alcremie-ruby-swirl',
+  'alcremie-caramel-swirl',
+  'alcremie-rainbow-swirl',
   'charizard-mega-y',
   'charizard-mega-x',
   'mewtwo-mega-y',
