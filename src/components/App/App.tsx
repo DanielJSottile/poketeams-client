@@ -1,18 +1,12 @@
 import * as React from 'react';
 import { Fragment, lazy, Suspense } from 'react';
 import { Route, Switch } from 'react-router-dom';
-// import BuildPage from '../../routes/BuildPage/BuildPage';
-// import HomePage from '../../routes/HomePage/HomePage';
-// import LandingPage from '../../routes/LandingPage/LandingPage';
-// import NotFoundPage from '../../routes/NotFoundPage/NotFoundPage';
-// import ShareSetPage from '../../routes/ShareSetPage/ShareSetPage';
-// import ShareTeamPage from '../../routes/ShareTeamPage/ShareTeamPage';
-// import ShareFolderPage from '../../routes/ShareFolderPage/ShareFolderPage';
-// import RegistrationPage from '../../routes/RegistrationPage/RegistrationPage';
 import ErrorPage from '../ErrorPage/ErrorPage';
 import PrivateRoute from '../Utils/PrivateRoute';
 import PublicOnlyRoute from '../Utils/PublicOnlyRoute';
 import LazyLoader from '../Loaders/LazyLoader/LazyLoader';
+
+// Code splitting for Routing
 
 const BuildPage = lazy(() => import('../../routes/BuildPage/BuildPage'));
 const HomePage = lazy(() => import('../../routes/HomePage/HomePage'));
@@ -32,8 +26,6 @@ const ShareFolderPage = lazy(
 const RegistrationPage = lazy(
   () => import('../../routes/RegistrationPage/RegistrationPage')
 );
-
-// TODO: In the near future, have these components lazy load!
 
 const App = () => {
   return (
