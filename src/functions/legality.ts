@@ -124,6 +124,19 @@ const infinite: string[] = [
   'urshifu-rapid-strike',
   'zarude',
   'zarude-dada',
+  'slowking-galar',
+  'slowbro-galar',
+  'slowpoke-galar',
+  'articuno-galar',
+  'zapdos-galar',
+  'moltres-galar',
+  'regieleki',
+  'regidrago',
+  'spectrier',
+  'glastrier',
+  'calyrex',
+  'calyrex-ice',
+  'calyrex-shadow',
 ];
 
 // Legality Object With Methods
