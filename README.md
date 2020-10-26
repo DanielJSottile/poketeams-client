@@ -2,7 +2,7 @@
 
 Link: https://poketeams.now.sh
 
-Prospective Employeers: You can register a user for testing!  Please feel free to steal other users teams for testing purposes!
+Prospective Employeers: You can register a user for testing! Please feel free to steal other users teams for testing purposes!
 
 ## API Documentation
 
@@ -27,25 +27,25 @@ Prospective Employeers: You can register a user for testing!  Please feel free t
 
 ### Organizing with Folders, Teams, Sets
 
-![Organize page](https://imgur.com/9wYBaMQ.png "Organize")
+![Organize page](https://imgur.com/9wYBaMQ.png 'Organize')
 
 ### Editing a Set
 
-![Editing Sets](https://imgur.com/HR1yjKA.png "Editing Sets")
+![Editing Sets](https://imgur.com/HR1yjKA.png 'Editing Sets')
 
 ### Example of a Search and Results
 
-![Search Bar and Results](https://imgur.com/JwMxPdp.png "search bar and results")
+![Search Bar and Results](https://imgur.com/JwMxPdp.png 'search bar and results')
 
 ### Example of Exporting and the Share URL
 
-![Exporting](https://imgur.com/JWIgCyL.png "exporting")
+![Exporting](https://imgur.com/JWIgCyL.png 'exporting')
 
 ## Summary
 
 ### What does this app do?
 
-This app is designed as a permanent solution to an extremely niche problem: safely storing Pokemon Showdown teams in a permanent way for tens of thousands of users.  Before, players needed to export batches of text to a pastebin and save/share the URL in order to access it in the future.  Now, users can import text and have an interactive and shareable team that is easier to find, share, and edit in a permanent database.  Not only that, but new players can look for teams with Pokemon they want specically on that team!
+This app is designed as a permanent solution to an extremely niche problem: safely storing Pokemon Showdown teams in a permanent way for tens of thousands of users. Before, players needed to export batches of text to a pastebin and save/share the URL in order to access it in the future. Now, users can import text and have an interactive and shareable team that is easier to find, share, and edit in a permanent database. Not only that, but new players can look for teams with Pokemon they want specically on that team!
 
 ### Features
 
@@ -63,16 +63,16 @@ This app is designed as a permanent solution to an extremely niche problem: safe
 
 In the future...
 
-- More refined data extraction from a database!  Things will run faster!
+- More refined data extraction from a database! Things will run faster!
 - Ability to Import the contents of an entire Folder, which will automatically create teams and sets in those teams!
-- Ability to Import EVERYTHING!  Users will simply be able to backup their teams from Pokemon Showdown and then paste it into one box.  This will populate all their teams, and the user can do this at any given time.
-- Ability to like teams and add them to a Favorites Folder for the user!  The most liked teams can be searchable via the search parameters!
+- Ability to Import EVERYTHING! Users will simply be able to backup their teams from Pokemon Showdown and then paste it into one box. This will populate all their teams, and the user can do this at any given time.
+- Ability to like teams and add them to a Favorites Folder for the user! The most liked teams can be searchable via the search parameters!
 - A refined Team and Set view more akin to Pokemon Showdown, more compactified and better visualization for Stats for better teambuilding!
-- More customization!  An open forum that allows users to request custom Pokemon for use in the app!
+- More customization! An open forum that allows users to request custom Pokemon for use in the app!
 - And MORE!
 
-
 ## List of Tech Used!
+
 - JavaScript
 - React
 - Node.js
@@ -90,6 +90,9 @@ In the future...
 - Knex
 
 ...As well as additional resources from:
+
 - Pokemon Showdown Sprite Repository: 'http://play.pokemonshowdown.com/sprites/'
 
 ...And a shoutout to the hardworking people at Smogon, Pokemon Showdown, Game Freak, and the Pokemon Company!
+
+This repo proudly uses Pre-Commit-CI, created by my brother Anthony Sottile, you can find it here: 'https://pre-commit.ci/'
