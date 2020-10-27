@@ -10,7 +10,6 @@ div.perks {
     list-style-position: inside;
     list-style-type: square;
   }
-
 }
 
 .landing-title {
@@ -31,7 +30,8 @@ div.perks {
   font-size: 12px;
 }
 
-@media (min-width: 850px) { /* Large Ipad Screen */
+@media (min-width: 850px) {
+  /* Large Ipad Screen */
 
   .landing-title {
     background-size: 70%;

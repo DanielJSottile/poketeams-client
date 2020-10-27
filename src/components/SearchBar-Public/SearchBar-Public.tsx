@@ -5,7 +5,6 @@ import './SearchBar-Public.scss';
 // Component
 
 const SearchBarPublic = (props: any) => {
-
   // Set Context
 
   const GenCon = useContext(GeneralContext);

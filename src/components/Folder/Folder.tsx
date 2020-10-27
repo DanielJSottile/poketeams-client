@@ -4,7 +4,6 @@ import GeneralContext from '../../contexts/GeneralContext';
 // Component
 
 const Folder = (props: any) => {
-
   // Set Context
 
   const GenCon = useContext(GeneralContext);

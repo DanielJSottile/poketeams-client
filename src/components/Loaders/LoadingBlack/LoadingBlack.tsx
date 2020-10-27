@@ -4,7 +4,6 @@ import './LoadingBlack.scss';
 // Component
 
 const LoadingBlack = (props: any) => {
-
   // Final Render
 
   return (

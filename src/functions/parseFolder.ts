@@ -53,7 +53,6 @@ function evIvParser(string: string | null, val: string) {
 // Parsing Function for Folder Format
 
 export default function showdownFolderParse(input: string) {
-
   // Regular Expressions
 
   const FOLDERPARSE: RegExp = /^=== \[(.*)\] (.*)\/(.*) ===$/;

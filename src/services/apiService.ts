@@ -221,7 +221,6 @@ const apiService = {
       });
   },
 
-
   getUserFolders(user_id: number): Promise<any> {
     let error: any;
     return fetch(`${config.API_ENDPOINT}/build/folders/${user_id}`, {

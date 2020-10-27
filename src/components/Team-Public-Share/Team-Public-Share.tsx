@@ -8,7 +8,6 @@ import './Team-Public-Share.scss';
 // Component
 
 const TeamPublicShare = (props: any) => {
-
   // Set State
 
   const [state, setState] = useState({
@@ -161,10 +160,9 @@ const TeamPublicShare = (props: any) => {
             src={legality.returnIconSprite(set.species, set.shiny)}
             alt={set.species}
           />
-        )
-      })
+        );
+      });
     }
-    
 
     return (
       <section className="team-section" id={`${id}`}>
