@@ -7,9 +7,8 @@ import './LandingPage.scss';
 // Component
 
 const LandingPage = (props: any): JSX.Element => {
-
   // Handle Login Success
-  
+
   const handleLoginSucess = (): void => {
     const { location, history } = props;
     const destination = (location.state || {}).from || '/';

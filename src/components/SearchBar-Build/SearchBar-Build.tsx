@@ -5,7 +5,6 @@ import './SearchBar-Build.scss';
 // Component
 
 const SearchBarBuild = (props: any) => {
-
   // Set Context
 
   const GenCon = useContext(GeneralContext);

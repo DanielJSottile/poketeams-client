@@ -14,7 +14,6 @@ export interface PokemonTeam {
 // Component
 
 const TeamListEdit = (props: any) => {
-
   // Set Context
 
   const GenCon = useContext(GeneralContext);

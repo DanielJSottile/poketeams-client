@@ -63,7 +63,9 @@ div.registration-form-container {
   border-radius: 10px;
 }
 
-.user_name, .password, .verifyPassword {
+.user_name,
+.password,
+.verifyPassword {
   width: 90%;
   padding: 10px;
   margin: auto;
@@ -168,9 +170,11 @@ div.registration-form-container {
   }
 }
 
-@media (min-width: 600px) { /* Medium Screen */
-  .user_name, .password, .verifyPassword {
+@media (min-width: 600px) {
+  /* Medium Screen */
+  .user_name,
+  .password,
+  .verifyPassword {
     flex-direction: row;
   }
-
 }

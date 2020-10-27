@@ -16,7 +16,6 @@ interface MyToken {
 // Component
 
 const NavigationBuild = (props: any) => {
-
   // Set Context
 
   const GenCon = useContext(GeneralContext);

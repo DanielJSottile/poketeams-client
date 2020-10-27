@@ -6,7 +6,6 @@ import './RegistrationPage.scss';
 // Component
 
 const RegistrationPage = (props: any): JSX.Element => {
-
   // Handle Registration Success
 
   const handleRegistrationSuccess = (user: any) => {
@@ -15,7 +14,7 @@ const RegistrationPage = (props: any): JSX.Element => {
   };
 
   // Final Render
-  
+
   return (
     <Fragment>
       <section>

@@ -13,15 +13,13 @@ export interface PokemonTeam {
 // Component
 
 const AddTeamSection = (props: any) => {
-
   // Set Context
 
   const GenCon = useContext(GeneralContext);
 
-  // Render Functions 
+  // Render Functions
 
   const renderExpanded = () => {
-
     const {
       newTeamName,
       newTeamImport,
@@ -106,7 +104,6 @@ const AddTeamSection = (props: any) => {
     handleTeamAddClickExpand,
   } = GenCon;
 
-  
   return (
     <Fragment>
       <section className="folders-list">
@@ -115,7 +112,9 @@ const AddTeamSection = (props: any) => {
             <button onClick={() => handleTeamAddClickExpand()}>
               New Team <i className="far fa-plus-square"></i>
             </button>
-          ) : <h4>Click a Folder to add Teams!</h4>}
+          ) : (
+            <h4>Click a Folder to add Teams!</h4>
+          )}
           {teamAddClicked ? renderExpanded() : null}
         </div>
         <h3>Teams:</h3>

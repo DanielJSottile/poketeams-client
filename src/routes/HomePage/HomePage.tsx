@@ -7,9 +7,8 @@ import './HomePage.scss';
 // Component
 
 const HomePage = (props: any): JSX.Element => {
-
   // Final Render
-  
+
   return (
     <Fragment>
       <NavigationPublic />

@@ -17,7 +17,8 @@
   justify-content: space-evenly;
 }
 
-.button_things, .user_things {
+.button_things,
+.user_things {
   display: none;
 }
 
@@ -37,7 +38,8 @@
   margin: auto;
 }
 
-@media (min-width: 850px) { /* Large Ipad Screen */
+@media (min-width: 850px) {
+  /* Large Ipad Screen */
 
   .home-title {
     background-size: 70%;

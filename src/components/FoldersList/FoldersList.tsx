@@ -10,7 +10,6 @@ import './FoldersList.scss';
 // Component
 
 const FoldersList = (props: any) => {
-
   // Set Context
 
   const GenCon = useContext(GeneralContext);

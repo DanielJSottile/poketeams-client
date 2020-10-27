@@ -3,7 +3,7 @@
 }
 
 body {
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-size: 20px;
   color: #444;
   text-align: center;
@@ -46,7 +46,8 @@ p + p {
   margin-top: 15px;
 }
 
-a, button {
+a,
+button {
   background-color: white;
   font-size: 16px;
   color: #444;
@@ -56,7 +57,8 @@ a, button {
   text-decoration: none;
 }
 
-a:hover, button:hover {
+a:hover,
+button:hover {
   background-color: rgb(216, 216, 216);
   transition: 0.3s;
 }
@@ -69,14 +71,14 @@ a:hover, button:hover {
   text-align: right;
 }
 
-.navbar{
+.navbar {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  
 }
 
-.searchbar, .search {
+.searchbar,
+.search {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -101,10 +103,9 @@ a:hover, button:hover {
   border: 1px solid #444;
   border-radius: 10px;
   padding: 5px;
-  
 }
 
-.closed{
+.closed {
   font-size: 16px;
 }
 
@@ -118,7 +119,10 @@ a:hover, button:hover {
   margin: 10px;
 }
 
-.details, .stats, .export-pokemon, .export-team{
+.details,
+.stats,
+.export-pokemon,
+.export-team {
   background-color: rgb(216, 216, 216);
   border: 1px solid #444;
   border-radius: 10px;
@@ -130,7 +134,7 @@ a:hover, button:hover {
   align-items: center;
 }
 
-.pokemon-intro{
+.pokemon-intro {
   background-color: rgb(216, 216, 216);
   border: 1px solid #444;
   border-radius: 10px;
@@ -151,7 +155,7 @@ a:hover, button:hover {
   align-items: center;
 }
 
-.title-content{
+.title-content {
   display: flex;
   flex-direction: column;
   font-style: italic;
@@ -160,7 +164,7 @@ a:hover, button:hover {
   height: 100px;
 }
 
-.desc{
+.desc {
   text-align: center;
   border: none;
   border-radius: 20px;
@@ -176,15 +180,16 @@ textarea {
   height: 145px;
 }
 
-.italic{
+.italic {
   font-style: italic;
 }
 
-label{
+label {
   color: rgb(114, 114, 114);
 }
 
-.title, .pokemon-name{
+.title,
+.pokemon-name {
   color: #444;
   text-emphasis: bold;
   text-align: center;
@@ -196,17 +201,23 @@ label{
   background: rgb(228, 228, 228);
 }
 
-.team:hover{
+.team:hover {
   background-color: rgb(212, 211, 211);
   transition: 0.3s;
 }
 
-.pokemon:hover{
+.pokemon:hover {
   background-color: rgb(238, 238, 238);
   transition: 0.3s;
 }
 
-.pokemon-nickname, .pokemon-level, .pokemon-item, .pokemon-ability, .pokemon-nature, .pokemon-happiness, .pokemon-move{
+.pokemon-nickname,
+.pokemon-level,
+.pokemon-item,
+.pokemon-ability,
+.pokemon-nature,
+.pokemon-happiness,
+.pokemon-move {
   color: #444;
   text-emphasis: bold;
   text-align: center;
@@ -220,57 +231,61 @@ label{
   background: rgb(228, 228, 228);
 }
 
-.names, .sprites{
+.names,
+.sprites {
   display: flex;
   flex-direction: column;
 }
 
-.closed{
+.closed {
   display: flex;
   flex-direction: row;
   text-align: center;
   justify-content: space-between;
 }
 
-.stats{
+.stats {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
 }
 
-.details{
+.details {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
 }
 
-.first-details{
+.first-details {
   display: flex;
   flex-direction: column;
 }
 
-.evs{
-  display: flex;
-  text-align: left;
-  flex-direction: column;
-}
-
-.ivs{
+.evs {
   display: flex;
   text-align: left;
   flex-direction: column;
 }
 
-.pokemon-ev, .pokemon-iv{
+.ivs {
+  display: flex;
+  text-align: left;
+  flex-direction: column;
+}
+
+.pokemon-ev,
+.pokemon-iv {
   width: 40px;
 }
 
-.moves{
+.moves {
   display: flex;
   flex-direction: column;
 }
 
-.title-name, .pokemon-import, .team-import{
+.title-name,
+.pokemon-import,
+.team-import {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -278,7 +293,8 @@ label{
   margin: auto;
 }
 
-.button_things, .user_things {
+.button_things,
+.user_things {
   display: none;
 }
 
@@ -299,35 +315,38 @@ label{
   margin: auto;
 }
 
-@media (min-width: 700px) { /* Medium Screen */
+@media (min-width: 700px) {
+  /* Medium Screen */
   .searchbar {
-    
     flex-direction: row;
   }
-  .button_things, .user_things {
+  .button_things,
+  .user_things {
     display: inline;
   }
   .mobile-button {
     display: none;
   }
 
-  .team-header, .pokemon-intro{
+  .team-header,
+  .pokemon-intro {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
   }
 
-  .team-form{
+  .team-form {
     width: 50%;
   }
 
-  .export-team, .pokemon-import{
+  .export-team,
+  .pokemon-import {
     width: 35%;
   }
-
 }
 
-@media (min-width: 850px) { /* Large Ipad Screen */
+@media (min-width: 850px) {
+  /* Large Ipad Screen */
   .details {
     flex-direction: row;
   }
@@ -336,9 +355,8 @@ label{
     width: 33%;
   }
 
-  .export-team, .pokemon-import{
+  .export-team,
+  .pokemon-import {
     width: 45%;
   }
-
 }
-

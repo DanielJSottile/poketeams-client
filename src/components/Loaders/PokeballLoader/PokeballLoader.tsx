@@ -4,9 +4,8 @@ import './PokeballLoader.scss';
 // Componenet
 
 const PokeballLoader = (props: any) => {
-
   // Final Render
-  
+
   return (
     <Fragment>
       <div className="pokeball">
