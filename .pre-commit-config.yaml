@@ -3,4 +3,5 @@ repos:
     rev: v2.1.2
     hooks:
       - id: prettier
-        args: [--single-quote=true]
+        # TODO: might be able to remove redundant args: https://github.com/prettier/pre-commit/issues/22
+        args: [--write, --list-different, --ignore-unknown, --single-quote=true]
