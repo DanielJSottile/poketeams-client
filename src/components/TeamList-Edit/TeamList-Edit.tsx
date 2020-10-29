@@ -1,7 +1,10 @@
-import React, { Fragment, useContext } from 'react';
+import React, { Fragment, useContext, lazy } from 'react';
 import GeneralContext from '../../contexts/GeneralContext';
-import TeamEdit from '../Team-Edit/Team-Edit';
 import './TeamList-Edit.scss';
+
+// Code Splitting
+
+const TeamEdit = lazy(() => import('../Team-Edit/Team-Edit'));
 
 // Interfaces
 

@@ -1,10 +1,13 @@
-import React, { useContext } from 'react';
+import React, { useContext, lazy } from 'react';
 import { Link } from 'react-router-dom';
-import SearchBar from '../SearchBar-Public/SearchBar-Public';
 import GeneralContext from '../../contexts/GeneralContext';
 import jwtDecode from 'jwt-decode';
 import TokenService from '../../services/token-service';
 import './Navigation-Public.scss';
+
+// Code Splitting
+
+const SearchBar = lazy(() => import('../SearchBar-Public/SearchBar-Public'));
 
 // Interfaces
 

@@ -73,7 +73,7 @@ exports[`<NavigationPublic/> snapshot 1`] = `
       <div
         className="search-cont"
       >
-        <SearchBarPublic />
+        <lazy />
       </div>
       <div
         className="user_things"

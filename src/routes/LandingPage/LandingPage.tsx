@@ -1,8 +1,11 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, lazy } from 'react';
 import { Link } from 'react-router-dom';
-import Footer from '../../components/Footer/Footer';
-import LoginForm from '../../components/LoginForm/LoginForm';
 import './LandingPage.scss';
+
+// Code Splitting
+
+const Footer = lazy(() => import('../../components/Footer/Footer'));
+const LoginForm = lazy(() => import('../../components/LoginForm/LoginForm'));
 
 // Component
 

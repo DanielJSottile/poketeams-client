@@ -1,11 +1,18 @@
-import React, { Fragment, useContext, useState } from 'react';
+import React, { Fragment, useContext, useState, lazy } from 'react';
 import { Link } from 'react-router-dom';
 import GeneralContext from '../../contexts/GeneralContext';
-import Folder from '../Folder/Folder';
-import PokeballLoader from '../Loaders/PokeballLoader/PokeballLoader';
-import LoadingBlack from '../Loaders/LoadingBlack/LoadingBlack';
 import showdownFolderGenerate from '../../functions/generateFolder';
 import './FoldersList.scss';
+
+// Code Splitting
+
+const Folder = lazy(() => import('../Folder/Folder'));
+
+const PokeballLoader = lazy(
+  () => import('../Loaders/PokeballLoader/PokeballLoader')
+);
+
+const LoadingBlack = lazy(() => import('../Loaders/LoadingBlack/LoadingBlack'));
 
 // Component
 

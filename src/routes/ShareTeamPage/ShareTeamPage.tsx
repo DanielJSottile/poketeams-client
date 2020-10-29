@@ -1,8 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, lazy } from 'react';
 import { Link } from 'react-router-dom';
 import apiService from '../../services/apiService';
-import TeamPublicShare from '../../components/Team-Public-Share/Team-Public-Share';
 import './ShareTeamPage.scss';
+
+// Code Splitting
+
+const TeamPublicShare = lazy(
+  () => import('../../components/Team-Public-Share/Team-Public-Share')
+);
 
 // Interfaces
 

@@ -1,10 +1,13 @@
-import React, { Fragment, useContext, useState } from 'react';
+import React, { Fragment, useContext, useState, lazy } from 'react';
 import { Link } from 'react-router-dom';
 import GeneralContext from '../../contexts/GeneralContext';
 import showdownGenerate from '../../functions/generate';
-import SetPublic from '../Set-Public/Set-Public';
 import legality from '../../functions/legality';
 import './Team-Public.scss';
+
+// Code Splitting
+
+const SetPublic = lazy(() => import('../Set-Public/Set-Public'));
 
 // Interfaces
 

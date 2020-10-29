@@ -12,8 +12,8 @@ exports[`<LoginForm/> snapshot 1`] = `
       <div
         className="pokeball-div"
       >
-        <PokeballLoader />
-        <LoadingBlack />
+        <lazy />
+        <lazy />
         <h3
           className="hint"
         >
