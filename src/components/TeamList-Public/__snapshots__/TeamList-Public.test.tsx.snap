@@ -28,8 +28,8 @@ exports[`<TeamsListPublic/> snapshot 1`] = `
   <div
     className="pokeball-div"
   >
-    <lazy />
-    <lazy />
+    <PokeballLoader />
+    <LoadingBlack />
     <h3
       className="hint"
     >

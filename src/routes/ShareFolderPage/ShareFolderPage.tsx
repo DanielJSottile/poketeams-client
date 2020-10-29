@@ -1,14 +1,9 @@
-import React, { useState, useEffect, lazy } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import FolderPublicShare from '../../components/Folder-Public-Share/Folder-Public-Share';
 import * as array from 'lodash';
 import apiService from '../../services/apiService';
 import './ShareFolderPage.scss';
-
-// Code Splitting
-
-const FolderPublicShare = lazy(
-  () => import('../../components/Folder-Public-Share/Folder-Public-Share')
-);
 
 // Interfaces
 

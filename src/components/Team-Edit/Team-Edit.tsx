@@ -1,13 +1,10 @@
-import React, { Fragment, useContext, useState, lazy } from 'react';
+import React, { Fragment, useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
+import SetEdit from '../Set-Edit/Set-Edit';
 import GeneralContext from '../../contexts/GeneralContext';
 import showdownGenerate from '../../functions/generate';
 import legality from '../../functions/legality';
 import './Team-Edit.scss';
-
-// Code Splitting
-
-const SetEdit = lazy(() => import('../Set-Edit/Set-Edit'));
 
 // Interfaces
 
