@@ -3,7 +3,7 @@
 exports[`<LoginForm/> snapshot 1`] = `
 <Fragment>
   <div
-    className="loading-black"
+    className="loading-sets"
   />
 </Fragment>
 `;

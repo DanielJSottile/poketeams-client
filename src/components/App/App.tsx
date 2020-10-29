@@ -6,7 +6,7 @@ import PrivateRoute from '../Utils/PrivateRoute';
 import PublicOnlyRoute from '../Utils/PublicOnlyRoute';
 import LazyLoader from '../Loaders/LazyLoader/LazyLoader';
 
-// Code splitting for Routing
+// Code Splitting for Routing
 
 const BuildPage = lazy(() => import('../../routes/BuildPage/BuildPage'));
 const HomePage = lazy(() => import('../../routes/HomePage/HomePage'));

@@ -9,9 +9,10 @@ import toJson from 'enzyme-to-json';
 describe('<TeamsListPublic/>', (): void => {
   it('renders without crashing', (): void => {
     const div: HTMLDivElement = document.createElement('div');
+    const folder = { folder_name: 'folder' };
     ReactDOM.render(
       <BrowserRouter>
-        <TeamListPublicShare />
+        <TeamListPublicShare folder={folder} />
       </BrowserRouter>,
       div
     );

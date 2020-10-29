@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 //import { render } from '@testing-library/react';
@@ -11,7 +11,9 @@ describe('<NavigationBuild/>', (): void => {
     const div: HTMLDivElement = document.createElement('div');
     ReactDOM.render(
       <BrowserRouter>
-        <NavigationBuild />
+        <Suspense fallback={<div>test</div>}>
+          <NavigationBuild />
+        </Suspense>
       </BrowserRouter>,
       div
     );

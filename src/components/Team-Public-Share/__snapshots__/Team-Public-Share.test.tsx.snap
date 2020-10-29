@@ -3,6 +3,7 @@
 exports[`<TeamPublicShare> snapshot 1`] = `
 <Fragment>
   <section
+    className="team-section"
     id="undefined"
   >
     <div
@@ -19,7 +20,8 @@ exports[`<TeamPublicShare> snapshot 1`] = `
           By 
         </p>
         <p>
-          Created on: 
+          Created on:
+           
           Invalid Date
         </p>
       </div>

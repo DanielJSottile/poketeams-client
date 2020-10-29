@@ -1,10 +1,21 @@
-import React, { Fragment } from 'react';
-import NavigationBuild from '../../components/Navigation-Build/Navigation-Build';
-import AddTeamSection from '../../components/AddTeamSection/AddTeamSection';
-import TeamListEdit from '../../components/TeamList-Edit/TeamList-Edit';
-import FolderList from '../../components/FoldersList/FoldersList';
-import Footer from '../../components/Footer/Footer';
+import React, { Fragment, lazy } from 'react';
 import './BuildPage.scss';
+
+// Code Splitting
+
+const NavigationBuild = lazy(
+  () => import('../../components/Navigation-Build/Navigation-Build')
+);
+const AddTeamSection = lazy(
+  () => import('../../components/AddTeamSection/AddTeamSection')
+);
+const TeamListEdit = lazy(
+  () => import('../../components/TeamList-Edit/TeamList-Edit')
+);
+const FolderList = lazy(
+  () => import('../../components/FoldersList/FoldersList')
+);
+const Footer = lazy(() => import('../../components/Footer/Footer'));
 
 // Component
 

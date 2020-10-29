@@ -1,8 +1,15 @@
-import React, { Fragment } from 'react';
-import NavigationPublic from '../../components/Navigation-Public/Navigation-Public';
-import TeamListPublic from '../../components/TeamList-Public/TeamList-Public';
-import Footer from '../../components/Footer/Footer';
+import React, { Fragment, lazy } from 'react';
 import './HomePage.scss';
+
+// Code Splitting
+
+const NavigationPublic = lazy(
+  () => import('../../components/Navigation-Public/Navigation-Public')
+);
+const TeamListPublic = lazy(
+  () => import('../../components/TeamList-Public/TeamList-Public')
+);
+const Footer = lazy(() => import('../../components/Footer/Footer'));
 
 // Component
 

@@ -1,9 +1,12 @@
 import * as React from 'react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, lazy } from 'react';
 import { Link } from 'react-router-dom';
 import apiService from '../../services/apiService';
-import SetPublic from '../../components/Set-Public/Set-Public';
 import './ShareSetPage.scss';
+
+// Code Splitting
+
+const SetPublic = lazy(() => import('../../components/Set-Public/Set-Public'));
 
 // Interfaces
 

@@ -1,11 +1,14 @@
-import React, { Fragment, useContext, useState } from 'react';
+import React, { Fragment, useContext, useState, lazy } from 'react';
 import { Link } from 'react-router-dom';
 import GeneralContext from '../../contexts/GeneralContext';
 import showdownGenerate from '../../functions/generate';
 import showdownParse from '../../functions/parse';
 import legality from '../../functions/legality';
-import LoadingSets from '../Loaders/LoadingSets/LoadingSets';
 import './Set-Edit.scss';
+
+// Code Splitting
+
+const LoadingSets = lazy(() => import('../Loaders/LoadingSets/LoadingSets'));
 
 // Interfaces
 

@@ -3,10 +3,33 @@
 exports[`<TeamsListPublic/> snapshot 1`] = `
 <Fragment>
   <div
+    className="team-pagination"
+  >
+    <div
+      className="pagebutton"
+    >
+      <button
+        onClick={[Function]}
+      >
+        <i
+          className="fas fa-arrow-circle-right"
+        />
+         
+        Go to Next 10 Teams
+      </button>
+    </div>
+    <span>
+      Current Teams: 1 - 10
+    </span>
+    <h3>
+      Teams:
+    </h3>
+  </div>
+  <div
     className="pokeball-div"
   >
-    <PokeballLoader />
-    <LoadingBlack />
+    <lazy />
+    <lazy />
     <h3
       className="hint"
     >

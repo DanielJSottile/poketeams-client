@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 //import { render } from '@testing-library/react';
@@ -12,7 +12,9 @@ describe('<TeamPublicShare>', (): void => {
     const team = { team_name: 'test' };
     ReactDOM.render(
       <BrowserRouter>
-        <FolderPublicShare />
+        <Suspense fallback={<div>test</div>}>
+          <FolderPublicShare />
+        </Suspense>
       </BrowserRouter>,
       div
     );

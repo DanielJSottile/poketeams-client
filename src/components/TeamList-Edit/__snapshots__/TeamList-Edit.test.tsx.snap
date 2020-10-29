@@ -3,7 +3,7 @@
 exports[`<TeamListEdit/> snapshot 1`] = `
 <Fragment>
   <h3>
-    Either No Folder is Selected Or There Are No Teams!  Make Teams with Pokemon!
+    Either No Folder is Selected Or There Are No Teams! Make Teams with Pokemon!
   </h3>
 </Fragment>
 `;
