@@ -4,7 +4,6 @@ import './LoadingSets.scss';
 // Component
 
 const LoadingSets = (props: any) => {
-
   // Final Render
 
   return (

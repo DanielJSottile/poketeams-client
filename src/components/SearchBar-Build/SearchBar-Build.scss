@@ -1,6 +1,7 @@
 @import '../../index.scss';
 
-.searchbar, .search {
+.searchbar,
+.search {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -13,17 +14,20 @@
   border-radius: 4px;
 }
 
-@media (min-width: 700px) { /* Medium Screen */
-  .searchbar, .search {
+@media (min-width: 700px) {
+  /* Medium Screen */
+  .searchbar,
+  .search {
     justify-content: space-between;
     align-items: center;
     flex-direction: row;
   }
 
-  .button_things, .user_things {
+  .button_things,
+  .user_things {
     display: inline;
   }
-  
+
   .mobile-button {
     display: none;
   }

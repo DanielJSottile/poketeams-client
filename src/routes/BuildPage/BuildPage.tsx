@@ -9,9 +9,8 @@ import './BuildPage.scss';
 // Component
 
 const BuildPage = (props: any): JSX.Element => {
-
   // Final Render
-  
+
   return (
     <Fragment>
       <NavigationBuild />

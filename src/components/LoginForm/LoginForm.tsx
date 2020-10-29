@@ -7,7 +7,6 @@ import './LoginForm.scss';
 // Component
 
 const LoginForm = (props: any) => {
-
   // Set Context
 
   const GenCon = useContext(GeneralContext);

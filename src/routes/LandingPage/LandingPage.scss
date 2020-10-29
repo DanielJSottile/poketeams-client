@@ -16,7 +16,8 @@
   margin: auto;
 }
 
-.public-entry, .register-entry {
+.public-entry,
+.register-entry {
   display: block;
   width: 200px;
   text-align: center;
@@ -34,7 +35,7 @@
 }
 
 .hook::before {
-  content: open-quote; 
+  content: open-quote;
 }
 
 .hook::after {
@@ -47,7 +48,8 @@
   }
 }
 
-@media (min-width: 850px) { /* Large Ipad Screen */
+@media (min-width: 850px) {
+  /* Large Ipad Screen */
 
   .landing-title {
     background-size: 70%;

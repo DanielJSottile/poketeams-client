@@ -11,13 +11,14 @@
   transition: 0.5s;
 }
 
-.navbar{
+.navbar {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
 }
 
-.button_things, .user_things {
+.button_things,
+.user_things {
   display: none;
 }
 
@@ -37,7 +38,8 @@
   margin: auto;
 }
 
-@media (min-width: 850px) { /* Large Ipad Screen */
+@media (min-width: 850px) {
+  /* Large Ipad Screen */
 
   .build-title {
     background-size: 70%;

@@ -13,7 +13,6 @@ export interface Provider {
 // Component
 
 const RegistrationForm = (props: any) => {
-
   // Set State
 
   const [state, setState] = useState<Provider>({ error: null });
