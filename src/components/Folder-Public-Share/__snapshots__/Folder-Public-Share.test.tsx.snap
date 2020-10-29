@@ -8,6 +8,6 @@ exports[`<TeamPublicShare> snapshot 1`] = `
     />
      
   </h3>
-  <lazy />
+  <TeamListPublicShare />
 </Fragment>
 `;

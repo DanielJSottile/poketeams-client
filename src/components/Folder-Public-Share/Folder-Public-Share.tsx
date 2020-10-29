@@ -1,11 +1,6 @@
-import React, { Fragment, lazy } from 'react';
+import React, { Fragment } from 'react';
+import TeamsListPublicShare from '../TeamList-PublicShare/TeamList-PublicShare';
 import './Folder-Public-Share.scss';
-
-// Code Splitting
-
-const TeamsListPublicShare = lazy(
-  () => import('../TeamList-PublicShare/TeamList-PublicShare')
-);
 
 const FolderPublicShare = (props: any) => {
   // Final Render

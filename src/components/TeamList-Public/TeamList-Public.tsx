@@ -1,14 +1,9 @@
-import React, { Fragment, useContext, lazy } from 'react';
+import React, { Fragment, useContext } from 'react';
+import TeamPublic from '../Team-Public/Team-Public';
+import PokeballLoader from '../Loaders/PokeballLoader/PokeballLoader';
+import LoadingBlack from '../Loaders/LoadingBlack/LoadingBlack';
 import GeneralContext from '../../contexts/GeneralContext';
 import './TeamList-Public.scss';
-
-// Code Splitting
-
-const TeamPublic = lazy(() => import('../Team-Public/Team-Public'));
-const PokeballLoader = lazy(
-  () => import('../Loaders/PokeballLoader/PokeballLoader')
-);
-const LoadingBlack = lazy(() => import('../Loaders/LoadingBlack/LoadingBlack'));
 
 // Interfaces
 

@@ -1,12 +1,7 @@
-import React, { Fragment, lazy } from 'react';
+import React, { Fragment } from 'react';
+import RegistrationForm from '../../components/RegistrationForm/RegistrationForm';
+import Footer from '../../components/Footer/Footer';
 import './RegistrationPage.scss';
-
-// Code Splitting
-
-const RegistrationForm = lazy(
-  () => import('../../components/RegistrationForm/RegistrationForm')
-);
-const Footer = lazy(() => import('../../components/Footer/Footer'));
 
 // Component
 
