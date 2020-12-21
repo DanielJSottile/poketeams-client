@@ -44,6 +44,7 @@ const exceptions: string[] = [
   'tapu koko',
   'nidoran-m',
   'nidoran-f',
+  'urshifu-rapid-strike',
 ];
 
 // List of Custom Pokemon
@@ -117,26 +118,8 @@ const infinite: string[] = [
   // TODO: Check if these were added
   'venusaur-gmax',
   'blastoise-gmax',
-  'rillaboom-gmax',
   'cinderace-gmax',
-  'inteleon-gmax',
-  'urshifu',
-  'urshifu-rapid-strike',
-  'zarude',
-  'zarude-dada',
-  'slowking-galar',
-  'slowbro-galar',
-  'slowpoke-galar',
-  'articuno-galar',
-  'zapdos-galar',
-  'moltres-galar',
-  'regieleki',
-  'regidrago',
-  'spectrier',
-  'glastrier',
-  'calyrex',
-  'calyrex-ice',
-  'calyrex-shadow',
+  'rillaboom-gmax',
 ];
 
 // Legality Object With Methods
