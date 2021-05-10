@@ -98,11 +98,8 @@ const AddTeamSection = (props: any) => {
     );
   };
 
-  const {
-    teamAddClicked,
-    currentClickedFolder,
-    handleTeamAddClickExpand,
-  } = GenCon;
+  const { teamAddClicked, currentClickedFolder, handleTeamAddClickExpand } =
+    GenCon;
 
   return (
     <Fragment>
