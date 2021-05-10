@@ -9,14 +9,8 @@ const SearchBarPublic = (props: any) => {
 
   const GenCon = useContext(GeneralContext);
 
-  const {
-    handleSearch,
-    validateSearch,
-    search,
-    sort,
-    setSearch,
-    setSort,
-  } = GenCon;
+  const { handleSearch, validateSearch, search, sort, setSearch, setSort } =
+    GenCon;
 
   // Final Render
 

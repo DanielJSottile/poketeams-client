@@ -278,8 +278,9 @@ export const GeneralProvider = ({ children }: Props) => {
   useEffect(() => {
     if (TokenService.getAuthToken()) {
       // if user is logged in
-      const user_id = jwtDecode<MyToken>(TokenService.getAuthToken() || '')
-        .user_id;
+      const user_id = jwtDecode<MyToken>(
+        TokenService.getAuthToken() || ''
+      ).user_id;
 
       apiService
         .getUserFolders(user_id) // Get Public Teams First
@@ -489,8 +490,9 @@ export const GeneralProvider = ({ children }: Props) => {
   const getUserState = () => {
     if (TokenService.getAuthToken()) {
       // if user is logged in
-      const user_id = jwtDecode<MyToken>(TokenService.getAuthToken() || '')
-        .user_id;
+      const user_id = jwtDecode<MyToken>(
+        TokenService.getAuthToken() || ''
+      ).user_id;
 
       apiService
         .getUserFolders(user_id) // Get Public Teams First
@@ -994,8 +996,9 @@ export const GeneralProvider = ({ children }: Props) => {
   const handleEditFolder = () => {
     const folder_name = state.newFolderName.value;
     const id = state.currentClickedFolder.id;
-    const userId = jwtDecode<MyToken>(TokenService.getAuthToken() || '')
-      .user_id;
+    const userId = jwtDecode<MyToken>(
+      TokenService.getAuthToken() || ''
+    ).user_id;
     apiService.patchUserFolder(folder_name, id, userId);
 
     const folder = { folder_name: folder_name };
@@ -1010,8 +1013,9 @@ export const GeneralProvider = ({ children }: Props) => {
 
   const handleUpdateTeam = (teamname: any, desc: any, id: any) => {
     const body = { id: id, team_name: teamname, description: desc };
-    const userId = jwtDecode<MyToken>(TokenService.getAuthToken() || '')
-      .user_id;
+    const userId = jwtDecode<MyToken>(
+      TokenService.getAuthToken() || ''
+    ).user_id;
     apiService.patchUserTeam(body, userId);
 
     const team = { team_name: teamname, description: desc };
@@ -1081,8 +1085,9 @@ export const GeneralProvider = ({ children }: Props) => {
       move_four: move_four,
     };
 
-    const userId = jwtDecode<MyToken>(TokenService.getAuthToken() || '')
-      .user_id;
+    const userId = jwtDecode<MyToken>(
+      TokenService.getAuthToken() || ''
+    ).user_id;
     apiService.patchUserSet(body, userId);
 
     const set = {
@@ -1123,8 +1128,9 @@ export const GeneralProvider = ({ children }: Props) => {
   const handleUpdateSetImport = (id: any) => {
     const contents = state.newSetImport.value;
     const parsed = showdownParse(contents)[0];
-    const userId = jwtDecode<MyToken>(TokenService.getAuthToken() || '')
-      .user_id;
+    const userId = jwtDecode<MyToken>(
+      TokenService.getAuthToken() || ''
+    ).user_id;
 
     const body = {
       id: id,
@@ -1272,8 +1278,9 @@ export const GeneralProvider = ({ children }: Props) => {
     const query = `?sort=${filtersort}&species=${filter.toLowerCase()}`;
     if (TokenService.getAuthToken()) {
       // if user is logged in
-      const user_id = jwtDecode<MyToken>(TokenService.getAuthToken() || '')
-        .user_id;
+      const user_id = jwtDecode<MyToken>(
+        TokenService.getAuthToken() || ''
+      ).user_id;
       apiService.getUserFoldersFilter(user_id, query).then((data) => {
         setState((oldVals) => ({ ...oldVals, userFolders: data }));
       });
