@@ -1,5 +1,6 @@
 import React, { Fragment, useState } from 'react';
 import { Link } from 'react-router-dom';
+import Input from '../Input/Input';
 import showdownGenerate from '../../functions/generate';
 import legality from '../../functions/legality';
 import styles from './Set-Public.module.scss';
@@ -55,54 +56,57 @@ const SetPublic = (props: any) => {
           <div className={styles['pokemon-intro']}>
             <div className={styles['name-sprite']}>
               <div className={styles['names']}>
-                <div>
-                  <label htmlFor="pokemon-name">Species:</label>
-                  <input
-                    className={styles['pokemon-name']}
-                    disabled
-                    readOnly
-                    value={set.species || 'Pikachu'}
-                    type="text"
-                    name="pokemon-name"
-                    id={`pokemon-name-${set.id}`}
-                  />
-                </div>
-                <div>
-                  <label htmlFor="pokemon-nickname">Nickname: (optional)</label>
-                  <input
-                    className={styles['pokemon-nickname']}
-                    placeholder={set.species || 'Pikachu'}
-                    disabled
-                    readOnly
-                    value={set.nickname || ''}
-                    type="text"
-                    name="pokemon-nickname"
-                    id={`pokemon-nickname-${set.id}`}
-                  />
-                </div>
-                <div>
-                  <label htmlFor="pokemon-gender">Gender: </label>
-                  <input
-                    className={styles['pokemon-gender']}
-                    disabled
-                    readOnly
-                    value={set.gender || ''}
-                    type="text"
-                    name="pokemon-gender"
-                    id={`pokemon-gender-${set.id}`}
-                  />
-                </div>
-                <div>
-                  <label htmlFor="shiny">Shiny:</label>
-                  <input
-                    type="checkbox"
-                    id="shiny-2"
-                    name="shiny"
-                    disabled
-                    readOnly
-                    checked={set.shiny || false}
-                  />
-                </div>
+                <Input
+                  inputHasError={false}
+                  formId={'pokemon-name'}
+                  label={'Species: '}
+                  inputClass={styles['pokemon-name']}
+                  disabled
+                  readOnly
+                  value={set.species || 'Pikachu'}
+                  type="text"
+                  name="pokemon-name"
+                  id={`pokemon-name-${set.id}`}
+                />
+
+                <Input
+                  inputHasError={false}
+                  formId={'pokemon-nickname'}
+                  label={'Nickname: (optional)'}
+                  inputClass={styles['pokemon-nickname']}
+                  disabled
+                  readOnly
+                  value={set.nickname || ''}
+                  type="text"
+                  name="pokemon-nickname"
+                  id={`pokemon-nickname-${set.id}`}
+                />
+
+                <Input
+                  inputHasError={false}
+                  formId={'pokemon-gender'}
+                  label={'Gender: '}
+                  inputClass={styles['pokemon-nickname']}
+                  disabled
+                  readOnly
+                  value={set.gender || ''}
+                  type="text"
+                  name="pokemon-gender"
+                  id={`pokemon-gender-${set.id}`}
+                />
+
+                <Input
+                  containerClass={styles['label-as-column']}
+                  inputHasError={false}
+                  formId={'shiny'}
+                  label={'Shiny:'}
+                  type="checkbox"
+                  id="shiny-2"
+                  name="shiny"
+                  disabled
+                  readOnly
+                  checked={set.shiny || false}
+                />
               </div>
               <div className={styles['sprites']}>
                 <img
@@ -129,247 +133,263 @@ const SetPublic = (props: any) => {
           </div>
           <div className={styles['details']}>
             <div className={styles['first-details']}>
-              <div>
-                <label htmlFor="pokemon-level">Level: </label>
-                <input
-                  className={styles['pokemon-level']}
-                  disabled
-                  readOnly
-                  value={set.level || 100}
-                  type="text"
-                  name="pokemon-level"
-                  id={`pokemon-level-${set.id}`}
-                />
-              </div>
-              <div>
-                <label htmlFor="pokemon-item">Item: (optional)</label>
-                <input
-                  className={styles['pokemon-item']}
-                  disabled
-                  readOnly
-                  value={set.item || ''}
-                  type="text"
-                  name="pokemon-item"
-                  id={`pokemon-item-${set.id}`}
-                />
-              </div>
-              <div>
-                <label htmlFor="pokemon-ability">Ability: (optional)</label>
-                <input
-                  className={styles['pokemon-ability']}
-                  disabled
-                  readOnly
-                  value={set.ability || ''}
-                  type="text"
-                  name="pokemon-ability"
-                  id={`pokemon-ability-${set.id}`}
-                />
-              </div>
-              <div>
-                <label htmlFor="pokemon-nature">Nature: (optional)</label>
-                <input
-                  className={styles['pokemon-nature']}
-                  disabled
-                  readOnly
-                  value={set.nature || ''}
-                  type="text"
-                  name="pokemon-nature"
-                  id={`pokemon-nature-${set.id}`}
-                />
-              </div>
-              <div>
-                <label htmlFor="pokemon-happiness">Happiness:</label>
-                <input
-                  className={styles['pokemon-happiness']}
-                  disabled
-                  readOnly
-                  value={set.happiness || 255}
-                  type="number"
-                  name="pokemon-happiness"
-                  min="0"
-                  max="252"
-                  id={`pokemon-happiness-${set.id}`}
-                />
-              </div>
+              <Input
+                inputHasError={false}
+                formId={'pokemon-level'}
+                label={'Level: '}
+                inputClass={styles['pokemon-level']}
+                disabled
+                readOnly
+                value={set.level || 100}
+                type="text"
+                name="pokemon-level"
+                id={`pokemon-level-${set.id}`}
+              />
+
+              <Input
+                inputHasError={false}
+                formId={'pokemon-item'}
+                label={'Item: (optional)'}
+                inputClass={styles['pokemon-item']}
+                disabled
+                readOnly
+                value={set.item || ''}
+                type="text"
+                name="pokemon-item"
+                id={`pokemon-item-${set.id}`}
+              />
+              <Input
+                inputHasError={false}
+                formId={'pokemon-ability'}
+                label={'Ability: (optional)'}
+                inputClass={styles['pokemon-ability']}
+                disabled
+                readOnly
+                value={set.ability || ''}
+                type="text"
+                name="pokemon-ability"
+                id={`pokemon-ability-${set.id}`}
+              />
+              <Input
+                inputHasError={false}
+                formId={'pokemon-nature'}
+                label={'Nature: (optional)'}
+                inputClass={styles['pokemon-nature']}
+                disabled
+                readOnly
+                value={set.nature || ''}
+                type="text"
+                name="pokemon-nature"
+                id={`pokemon-nature-${set.id}`}
+              />
+              <Input
+                inputHasError={false}
+                formId={'pokemon-happiness'}
+                label={'Happiness:'}
+                inputClass={styles['pokemon-happiness']}
+                disabled
+                readOnly
+                value={set.happiness || 255}
+                type="number"
+                name="pokemon-happiness"
+                min="0"
+                max="252"
+                id={`pokemon-happiness-${set.id}`}
+              />
             </div>
             <div className={styles['stats']}>
               <div className={styles['evs']}>
-                <div className={styles['stat']}>
-                  <label htmlFor="pokemon-ev-hp">HP EV:</label>
-                  <input
-                    className={styles['pokemon-ev']}
-                    disabled
-                    readOnly
-                    value={set.hp_ev || 0}
-                    type="number"
-                    name="pokemon-ev-hp"
-                    min="0"
-                    max="252"
-                    id={`pokemon-ev-hp-${set.id}`}
-                  />
-                </div>
-                <div className={styles['stat']}>
-                  <label htmlFor="pokemon-ev-atk">Atk EV:</label>
-                  <input
-                    className={styles['pokemon-ev']}
-                    disabled
-                    readOnly
-                    value={set.atk_ev || 0}
-                    type="number"
-                    name="pokemon-ev-atk"
-                    min="0"
-                    max="252"
-                    id={`pokemon-ev-atk-${set.id}`}
-                  />
-                </div>
-                <div className={styles['stat']}>
-                  <label htmlFor="pokemon-ev-def">Def EV:</label>
-                  <input
-                    className={styles['pokemon-ev']}
-                    disabled
-                    readOnly
-                    value={set.def_ev || 0}
-                    type="number"
-                    name="pokemon-ev-def"
-                    min="0"
-                    max="252"
-                    id={`pokemon-ev-def-${set.id}`}
-                  />
-                </div>
-                <div className={styles['stat']}>
-                  <label htmlFor="pokemon-ev-spa">SpA EV:</label>
-                  <input
-                    className={styles['pokemon-ev']}
-                    disabled
-                    readOnly
-                    value={set.spa_ev || 0}
-                    type="number"
-                    name="pokemon-ev-spa"
-                    min="0"
-                    max="252"
-                    id={`pokemon-ev-spa-${set.id}`}
-                  />
-                </div>
-                <div className={styles['stat']}>
-                  <label htmlFor="pokemon-ev-spd">SpD EV:</label>
-                  <input
-                    className={styles['pokemon-ev']}
-                    disabled
-                    readOnly
-                    value={set.spd_ev || 0}
-                    type="number"
-                    name="pokemon-ev-spd"
-                    min="0"
-                    max="252"
-                    id={`pokemon-ev-spd-${set.id}`}
-                  />
-                </div>
-                <div className={styles['stat']}>
-                  <label htmlFor="pokemon-ev-spe">SpE EV:</label>
-                  <input
-                    className={styles['pokemon-ev']}
-                    disabled
-                    readOnly
-                    value={set.spe_ev || 0}
-                    type="number"
-                    name="pokemon-ev-spe"
-                    min="0"
-                    max="252"
-                    id={`pokemon-ev-spe-${set.id}`}
-                  />
-                </div>
+                <Input
+                  inputHasError={false}
+                  containerClass={styles['stat']}
+                  formId={'pokemon-ev-hp'}
+                  label={'HP EV:'}
+                  inputClass={styles['pokemon-ev']}
+                  disabled
+                  readOnly
+                  value={set.hp_ev || 0}
+                  type="number"
+                  name="pokemon-ev-hp"
+                  min="0"
+                  max="252"
+                  id={`pokemon-ev-hp-${set.id}`}
+                />
+                <Input
+                  inputHasError={false}
+                  containerClass={styles['stat']}
+                  formId={'pokemon-ev-atk'}
+                  label={'Atk EV:'}
+                  inputClass={styles['pokemon-ev']}
+                  disabled
+                  readOnly
+                  value={set.atk_ev || 0}
+                  type="number"
+                  name="pokemon-ev-atk"
+                  min="0"
+                  max="252"
+                  id={`pokemon-ev-atk-${set.id}`}
+                />
+                <Input
+                  inputHasError={false}
+                  containerClass={styles['stat']}
+                  formId={'pokemon-ev-def'}
+                  label={'Def EV:'}
+                  inputClass={styles['pokemon-ev']}
+                  disabled
+                  readOnly
+                  value={set.def_ev || 0}
+                  type="number"
+                  name="pokemon-ev-def"
+                  min="0"
+                  max="252"
+                  id={`pokemon-ev-def-${set.id}`}
+                />
+                <Input
+                  inputHasError={false}
+                  containerClass={styles['stat']}
+                  formId={'pokemon-ev-spa'}
+                  label={'SpA EV:'}
+                  inputClass={styles['pokemon-ev']}
+                  disabled
+                  readOnly
+                  value={set.spa_ev || 0}
+                  type="number"
+                  name="pokemon-ev-spa"
+                  min="0"
+                  max="252"
+                  id={`pokemon-ev-spa-${set.id}`}
+                />
+                <Input
+                  inputHasError={false}
+                  containerClass={styles['stat']}
+                  formId={'pokemon-ev-spd'}
+                  label={'SpD EV:'}
+                  inputClass={styles['pokemon-ev']}
+                  disabled
+                  readOnly
+                  value={set.spd_ev || 0}
+                  type="number"
+                  name="pokemon-ev-spd"
+                  min="0"
+                  max="252"
+                  id={`pokemon-ev-spd-${set.id}`}
+                />
+                <Input
+                  inputHasError={false}
+                  containerClass={styles['stat']}
+                  formId={'pokemon-ev-spe'}
+                  label={'SpE EV:'}
+                  inputClass={styles['pokemon-ev']}
+                  disabled
+                  readOnly
+                  value={set.spe_ev || 0}
+                  type="number"
+                  name="pokemon-ev-spe"
+                  min="0"
+                  max="252"
+                  id={`pokemon-ev-spe-${set.id}`}
+                />
               </div>
               <div className={styles['ivs']}>
-                <div className={styles['stat']}>
-                  <label htmlFor="pokemon-iv-hp">HP IV:</label>
-                  <input
-                    className={styles['pokemon-iv']}
-                    disabled
-                    readOnly
-                    value={set.hp_iv || 31}
-                    type="number"
-                    name="pokemon-iv-hp"
-                    min="0"
-                    max="31"
-                    id={`pokemon-iv-hp-${set.id}`}
-                  />
-                </div>
-                <div className={styles['stat']}>
-                  <label htmlFor="pokemon-iv-atk">Atk IV:</label>
-                  <input
-                    className={styles['pokemon-iv']}
-                    disabled
-                    readOnly
-                    value={set.atk_iv || 31}
-                    type="number"
-                    name="pokemon-iv-atk"
-                    min="0"
-                    max="31"
-                    id={`pokemon-iv-atk-${set.id}`}
-                  />
-                </div>
-                <div className={styles['stat']}>
-                  <label htmlFor="pokemon-iv-def">Def IV:</label>
-                  <input
-                    className={styles['pokemon-iv']}
-                    disabled
-                    readOnly
-                    value={set.def_iv || 31}
-                    type="number"
-                    name="pokemon-iv-def"
-                    min="0"
-                    max="31"
-                    id={`pokemon-iv-def-${set.id}`}
-                  />
-                </div>
-                <div className={styles['stat']}>
-                  <label htmlFor="pokemon-iv-spa">SpA IV:</label>
-                  <input
-                    className={styles['pokemon-iv']}
-                    disabled
-                    readOnly
-                    value={set.spa_iv || 31}
-                    type="number"
-                    name="pokemon-iv-spa"
-                    min="0"
-                    max="31"
-                    id={`pokemon-iv-spa-${set.id}`}
-                  />
-                </div>
-                <div className={styles['stat']}>
-                  <label htmlFor="pokemon-iv-spd">SpD IV:</label>
-                  <input
-                    className={styles['pokemon-iv']}
-                    disabled
-                    readOnly
-                    value={set.spd_iv || 31}
-                    type="number"
-                    name="pokemon-iv-spd"
-                    min="0"
-                    max="31"
-                    id={`pokemon-iv-spd-${set.id}`}
-                  />
-                </div>
-                <div className={styles['stat']}>
-                  <label htmlFor="pokemon-iv-spe">SpE IV:</label>
-                  <input
-                    className={styles['pokemon-iv']}
-                    disabled
-                    readOnly
-                    value={set.spe_iv || 31}
-                    type="number"
-                    name="pokemon-iv-spe"
-                    min="0"
-                    max="31"
-                    id={`pokemon-iv-spe-${set.id}`}
-                  />
-                </div>
+                <Input
+                  inputHasError={false}
+                  containerClass={styles['stat']}
+                  formId={'pokemon-iv-hp'}
+                  label={'HP IV:'}
+                  inputClass={styles['pokemon-iv']}
+                  disabled
+                  readOnly
+                  value={set.hp_iv || 31}
+                  type="number"
+                  name="pokemon-iv-hp"
+                  min="0"
+                  max="31"
+                  id={`pokemon-iv-hp-${set.id}`}
+                />
+                <Input
+                  inputHasError={false}
+                  containerClass={styles['stat']}
+                  formId={'pokemon-iv-atk'}
+                  label={'Atk IV:'}
+                  inputClass={styles['pokemon-iv']}
+                  disabled
+                  readOnly
+                  value={set.atk_iv || 31}
+                  type="number"
+                  name="pokemon-iv-atk"
+                  min="0"
+                  max="31"
+                  id={`pokemon-iv-atk-${set.id}`}
+                />
+                <Input
+                  inputHasError={false}
+                  containerClass={styles['stat']}
+                  formId={'pokemon-iv-def'}
+                  label={'Def IV:'}
+                  inputClass={styles['pokemon-iv']}
+                  disabled
+                  readOnly
+                  value={set.def_iv || 31}
+                  type="number"
+                  name="pokemon-iv-def"
+                  min="0"
+                  max="31"
+                  id={`pokemon-iv-def-${set.id}`}
+                />
+                <Input
+                  inputHasError={false}
+                  containerClass={styles['stat']}
+                  formId={'pokemon-iv-spa'}
+                  label={'SpA IV:'}
+                  inputClass={styles['pokemon-iv']}
+                  disabled
+                  readOnly
+                  value={set.spa_iv || 31}
+                  type="number"
+                  name="pokemon-iv-spa"
+                  min="0"
+                  max="31"
+                  id={`pokemon-iv-spa-${set.id}`}
+                />
+                <Input
+                  inputHasError={false}
+                  containerClass={styles['stat']}
+                  formId={'pokemon-iv-spd'}
+                  label={'SpD IV:'}
+                  inputClass={styles['pokemon-iv']}
+                  disabled
+                  readOnly
+                  value={set.spd_iv || 31}
+                  type="number"
+                  name="pokemon-iv-spd"
+                  min="0"
+                  max="31"
+                  id={`pokemon-iv-spd-${set.id}`}
+                />
+                <Input
+                  inputHasError={false}
+                  containerClass={styles['stat']}
+                  formId={'pokemon-iv-spe'}
+                  label={'SpE IV:'}
+                  inputClass={styles['pokemon-iv']}
+                  disabled
+                  readOnly
+                  value={set.spe_iv || 31}
+                  type="number"
+                  name="pokemon-iv-spe"
+                  min="0"
+                  max="31"
+                  id={`pokemon-iv-spe-${set.id}`}
+                />
               </div>
             </div>
             <div className={styles['moves']}>
-              <label htmlFor="pokemon-moves">Moves:</label>
-              <input
-                className={styles['pokemon-move']}
+              <Input
+                containerClass={styles['label-as-row']}
+                inputHasError={false}
+                formId={'pokemon-moves'}
+                label={'Moves:'}
+                inputClass={styles['pokemon-move']}
                 disabled
                 readOnly
                 value={set.move_one || 'Tackle'}
@@ -377,8 +397,9 @@ const SetPublic = (props: any) => {
                 name="pokemon-move"
                 id={`pokemon-${set.id}-move-1`}
               />
-              <input
-                className={styles['pokemon-move']}
+              <Input
+                inputHasError={false}
+                inputClass={styles['pokemon-move']}
                 disabled
                 readOnly
                 value={set.move_two || ''}
@@ -386,8 +407,9 @@ const SetPublic = (props: any) => {
                 name="pokemon-move"
                 id={`pokemon-${set.id}-move-2`}
               />
-              <input
-                className={styles['pokemon-move']}
+              <Input
+                inputHasError={false}
+                inputClass={styles['pokemon-move']}
                 disabled
                 readOnly
                 value={set.move_three || ''}
@@ -395,8 +417,9 @@ const SetPublic = (props: any) => {
                 name="pokemon-move"
                 id={`pokemon-${set.id}-move-3`}
               />
-              <input
-                className={styles['pokemon-move']}
+              <Input
+                inputHasError={false}
+                inputClass={styles['pokemon-move']}
                 disabled
                 readOnly
                 value={set.move_four || ''}
@@ -430,7 +453,8 @@ const SetPublic = (props: any) => {
             >
               Share This Set! <i className="fas fa-share-square"></i>
             </Link>
-            <input
+            <Input
+              inputHasError={false}
               type="text"
               readOnly
               value={`poketeams.now.sh/${set.team_id}/${set.id}`}

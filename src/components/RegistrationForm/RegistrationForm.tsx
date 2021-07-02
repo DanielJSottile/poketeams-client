@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Button, Input, Required } from '../Utils/Utils';
+import Button from '../Button/Button';
+import Input from '../Input/Input';
 import AuthApiService from '../../services/auth-api-service';
 import styles from './RegistrationForm.module.scss';
 
@@ -58,40 +59,39 @@ const RegistrationForm = (props: any) => {
         )}
       </div>
       <div className={styles['user_name']}>
-        <label htmlFor="RegistrationForm__user_name">
-          User name <Required />
-        </label>
+        <label htmlFor="RegistrationForm__user_name">User name &#42;</label>
         <Input
+          inputHasError={false}
           name="user_name"
           type="text"
           required
           id="RegistrationForm__user_name"
-        ></Input>
+        />
       </div>
       <div className={styles['password']}>
-        <label htmlFor="RegistrationForm__password">
-          Password <Required />
-        </label>
+        <label htmlFor="RegistrationForm__password">Password &#42;</label>
         <Input
+          inputHasError={false}
           name="password"
           type="password"
           required
           id="RegistrationForm__password"
-        ></Input>
+        />
       </div>
       <div className={styles['verifyPassword']}>
         <label htmlFor="RegistrationForm__verifyPassword">
-          Verify Password <Required />
+          Verify Password &#42;
         </label>
         <Input
+          inputHasError={false}
           name="verifyPassword"
           type="password"
           required
           id="RegistrationForm__verifyPassword"
-        ></Input>
+        />
       </div>
       <div className={styles['go-back-links']}>
-        <Button type="submit">Register</Button>
+        <Button type="submit" buttonLabel={'Register'} />
         <Link className={styles['go-back']} to={'/landing'}>
           Go Back
         </Link>

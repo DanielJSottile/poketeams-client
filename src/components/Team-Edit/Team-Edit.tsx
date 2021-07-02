@@ -1,5 +1,6 @@
 import React, { Fragment, useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
+import Input from '../Input/Input';
 import SetEdit from '../Set-Edit/Set-Edit';
 import GeneralContext from '../../contexts/GeneralContext';
 import showdownGenerate from '../../functions/generate';
@@ -202,11 +203,14 @@ const TeamEdit = (props: any) => {
                       {validateTeamName()}
                     </p>
                   }
-                  <input
-                    className={styles['title']}
+                  <Input
+                    inputHasError={false}
+                    inputClass={styles['title']}
                     placeholder="e.g. Cool Team"
                     value={state.team_name.value}
-                    onChange={(e) => setTeamName(e.target.value)}
+                    onChangeCallback={(
+                      e: React.ChangeEvent<HTMLInputElement>
+                    ) => setTeamName(e.target.value)}
                     type="text"
                     name="team-name"
                     id={`team-name-${team.id}`}
@@ -282,7 +286,8 @@ const TeamEdit = (props: any) => {
                 >
                   Share This Team! <i className="fas fa-share-square"></i>
                 </Link>
-                <input
+                <Input
+                  inputHasError={false}
                   disabled
                   type="text"
                   readOnly

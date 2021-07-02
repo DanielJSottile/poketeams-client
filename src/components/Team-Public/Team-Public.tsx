@@ -1,5 +1,6 @@
 import React, { Fragment, useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
+import Input from '../Input/Input';
 import SetPublic from '../Set-Public/Set-Public';
 import GeneralContext from '../../contexts/GeneralContext';
 import showdownGenerate from '../../functions/generate';
@@ -104,15 +105,17 @@ const TeamPublic = (props: any) => {
                   Compress Team <i className="fas fa-compress-arrows-alt"></i>
                 </button>
                 <div className={styles['title-name']}>
-                  <label htmlFor="title-name">Team Name:</label>
-                  <input
+                  <Input
+                    formId={'title-name'}
+                    label={'Team Name:'}
+                    inputHasError={false}
                     disabled
                     readOnly
-                    className={styles['title']}
-                    placeholder="e.g. Cool Team"
+                    inputClass={styles['title']}
+                    placeholder={'e.e. Cool team'}
                     value={team.team_name}
-                    type="text"
-                    name="team-name"
+                    type={'text'}
+                    name={'team-name'}
                     id={`team-name-${team.id}`}
                   />
                 </div>
@@ -168,10 +171,11 @@ const TeamPublic = (props: any) => {
                 >
                   Share This Team! <i className="fas fa-share-square"></i>
                 </Link>
-                <input
+                <Input
+                  inputHasError={false}
                   disabled
-                  type="text"
                   readOnly
+                  type="text"
                   value={`poketeams.now.sh/share/${team.id}`}
                 />
               </div>

@@ -4,27 +4,25 @@ type Props = {
   /** class for input container */
   containerClass?: string;
   /** id for the form the input lives in */
-  formId: string;
+  formId?: string;
   /** determines if there is a label for the input */
-  hasLabel?: boolean;
-  /** class for the label */
   labelClass?: string;
   /** label string*/
   label?: string;
   /** determines if the input has an error or not */
-  inputHasError?: boolean;
+  inputHasError: boolean;
   /** determines if the error is triggered or not */
   isError?: boolean;
   /** function used to validate the input and provide feedback errors*/
   validationCallback?: () => void;
   /** style for the input */
-  inputStyle?: string;
+  inputClass?: string;
   /** value of the input */
   value?: string;
   /** placeholder string */
   placeholder?: string;
   /** function used for onChange for the input */
-  onChangeCallback?: () => void;
+  onChangeCallback?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   /** string of input type */
   type?: string;
   /** string of input name for form*/
@@ -50,13 +48,12 @@ type Props = {
 const Input: React.FC<Props> = ({
   containerClass = '',
   formId = '',
-  hasLabel = false,
   labelClass = '',
   label = '',
   inputHasError = false,
   isError = false,
   validationCallback = () => null,
-  inputStyle = '',
+  inputClass = '',
   value = '',
   placeholder = '',
   onChangeCallback = () => null,
@@ -73,7 +70,7 @@ const Input: React.FC<Props> = ({
 }) => {
   return (
     <div className={containerClass}>
-      {hasLabel && (
+      {!!label && (
         <label className={labelClass} htmlFor={formId}>
           {label}
         </label>
@@ -82,7 +79,7 @@ const Input: React.FC<Props> = ({
         <p className="error-validate shake-horizontal">{validationCallback}</p>
       )}
       <input
-        className={inputStyle}
+        className={inputClass}
         placeholder={placeholder}
         value={value}
         onChange={onChangeCallback}

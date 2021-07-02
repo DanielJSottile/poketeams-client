@@ -11,8 +11,8 @@ type Props = {
   disabled?: boolean;
   /** function used for onChange for the input */
   onClickCallback?: () => void;
-  // /** string of input type */
-  // type?: string;
+  /** string of input type */
+  type?: 'button' | 'submit' | 'reset' | undefined;
   /** label text for button */
   buttonLabel?: React.ReactNode;
 };
@@ -24,7 +24,7 @@ const Button: React.FC<Props> = ({
   onClickCallback = () => null,
   disabled = false,
   buttonLabel = '',
-  ...otherProps
+  type = undefined,
 }) => {
   return (
     <div className={containerClass}>
@@ -33,7 +33,7 @@ const Button: React.FC<Props> = ({
         className={buttonClass}
         disabled={disabled}
         onClick={onClickCallback}
-        {...otherProps}
+        type={type}
       >
         {buttonLabel}
       </button>
