@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import SetPublic from '../../components/Set-Public/Set-Public';
 import apiService from '../../services/apiService';
-import './ShareSetPage.scss';
+import styles from './ShareSetPage.module.scss';
 
 // Interfaces
 
@@ -32,7 +32,7 @@ const ShareSetPage = (props: any): JSX.Element => {
 
   return (
     <div>
-      <Link className="go-back" to={'/'}>
+      <Link className={styles['go-back']} to={'/'}>
         Go To PokéTeams <i className="fas fa-home"></i>
       </Link>
       {state?.set[0] ? (

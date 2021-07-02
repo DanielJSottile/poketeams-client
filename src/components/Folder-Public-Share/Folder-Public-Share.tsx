@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import TeamsListPublicShare from '../TeamList-PublicShare/TeamList-PublicShare';
-import './Folder-Public-Share.scss';
+import './Folder-Public-Share.module.scss';
 
 const FolderPublicShare = (props: any) => {
   // Final Render

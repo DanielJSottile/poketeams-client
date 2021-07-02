@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import TeamPublicShare from '../../components/Team-Public-Share/Team-Public-Share';
 import apiService from '../../services/apiService';
-import './ShareTeamPage.scss';
+import styles from './ShareTeamPage.module.scss';
 
 // Interfaces
 
@@ -45,7 +45,7 @@ const ShareTeamPage = (props: any): JSX.Element => {
 
   return (
     <div>
-      <Link className="go-back" to={'/'}>
+      <Link className={styles['go-back']} to={'/'}>
         Go To PokéTeams <i className="fas fa-home"></i>
       </Link>
       {state?.team[0] ? (

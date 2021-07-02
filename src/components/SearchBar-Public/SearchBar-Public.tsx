@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import GeneralContext from '../../contexts/GeneralContext';
-import './SearchBar-Public.scss';
+import styles from './SearchBar-Public.module.scss';
 
 // Component
 
@@ -15,9 +15,9 @@ const SearchBarPublic = (props: any) => {
   // Final Render
 
   return (
-    <div className="searchbar">
-      <form className="search">
-        <div className="search">
+    <div className={styles['searchbar']}>
+      <form className={styles['search']}>
+        <div className={styles['search']}>
           {search.value && (
             <p className="error-validate shake-horizontal">{validateSearch}</p>
           )}
@@ -25,7 +25,7 @@ const SearchBarPublic = (props: any) => {
             Search: <i className="fas fa-search"></i>
           </label>
           <input
-            className="s-input"
+            className={styles['s-input']}
             placeholder="e.g. Pikachu"
             value={search.value}
             onChange={(e) => setSearch(e.target.value)}

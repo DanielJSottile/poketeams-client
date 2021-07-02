@@ -1,7 +1,7 @@
 import React from 'react';
 import PokeballLoader from '../PokeballLoader/PokeballLoader';
 import LoadingBlack from '../LoadingBlack/LoadingBlack';
-import './LazyLoader.scss';
+import styles from './LazyLoader.module.scss';
 
 // Componenet
 
@@ -9,7 +9,7 @@ const LazyLoader = (props: any) => {
   // Final Render
 
   return (
-    <div className="lazy-loader">
+    <div className={styles['lazy-loader']}>
       <PokeballLoader />
       <LoadingBlack />
     </div>

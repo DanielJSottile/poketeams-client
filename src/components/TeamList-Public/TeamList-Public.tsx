@@ -3,7 +3,7 @@ import TeamPublic from '../Team-Public/Team-Public';
 import PokeballLoader from '../Loaders/PokeballLoader/PokeballLoader';
 import LoadingBlack from '../Loaders/LoadingBlack/LoadingBlack';
 import GeneralContext from '../../contexts/GeneralContext';
-import './TeamList-Public.scss';
+import styles from './TeamList-Public.module.scss';
 
 // Interfaces
 
@@ -30,9 +30,9 @@ const TeamListPublic = (props: any) => {
 
   return (
     <Fragment>
-      <div className="team-pagination">
+      <div className={styles['team-pagination']}>
         {page.value > 1 ? (
-          <div className="pagebutton">
+          <div className={styles['pagebutton']}>
             <button
               onClick={() => {
                 handlePageDown();
@@ -51,7 +51,7 @@ const TeamListPublic = (props: any) => {
             </button>
           </div>
         ) : (
-          <div className="pagebutton">
+          <div className={styles['pagebutton']}>
             <button
               onClick={() => {
                 handlePageUp();
@@ -70,10 +70,10 @@ const TeamListPublic = (props: any) => {
       {TeamList.length > 0 ? (
         TeamList
       ) : (
-        <div className="pokeball-div">
+        <div className={styles['pokeball-div']}>
           <PokeballLoader />
           <LoadingBlack />
-          <h3 className="hint">(Hint: There May Be No Teams)</h3>
+          <h3 className={styles['hint']}>(Hint: There May Be No Teams)</h3>
         </div>
       )}
     </Fragment>

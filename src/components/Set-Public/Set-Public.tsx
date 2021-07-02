@@ -2,7 +2,7 @@ import React, { Fragment, useState } from 'react';
 import { Link } from 'react-router-dom';
 import showdownGenerate from '../../functions/generate';
 import legality from '../../functions/legality';
-import './Set-Public.scss';
+import styles from './Set-Public.module.scss';
 
 // Component
 
@@ -45,20 +45,20 @@ const SetPublic = (props: any) => {
     const { set } = props;
 
     return (
-      <div className="pokemon">
+      <div className={styles['pokemon']}>
         <button onClick={() => handleSetToggle()}>
           Compress Set <i className="fas fa-compress-arrows-alt"></i>
         </button>
         <form>
           {' '}
           {/* CHECK: do we even need disabled and readOnly? The inputs are already disabled*/}
-          <div className="pokemon-intro">
-            <div className="name-sprite">
-              <div className="names">
+          <div className={styles['pokemon-intro']}>
+            <div className={styles['name-sprite']}>
+              <div className={styles['names']}>
                 <div>
                   <label htmlFor="pokemon-name">Species:</label>
                   <input
-                    className="pokemon-name"
+                    className={styles['pokemon-name']}
                     disabled
                     readOnly
                     value={set.species || 'Pikachu'}
@@ -70,7 +70,7 @@ const SetPublic = (props: any) => {
                 <div>
                   <label htmlFor="pokemon-nickname">Nickname: (optional)</label>
                   <input
-                    className="pokemon-nickname"
+                    className={styles['pokemon-nickname']}
                     placeholder={set.species || 'Pikachu'}
                     disabled
                     readOnly
@@ -83,7 +83,7 @@ const SetPublic = (props: any) => {
                 <div>
                   <label htmlFor="pokemon-gender">Gender: </label>
                   <input
-                    className="pokemon-gender"
+                    className={styles['pokemon-gender']}
                     disabled
                     readOnly
                     value={set.gender || ''}
@@ -104,19 +104,19 @@ const SetPublic = (props: any) => {
                   />
                 </div>
               </div>
-              <div className="sprites">
+              <div className={styles['sprites']}>
                 <img
-                  className="sprite-img"
+                  className={styles['sprite-img']}
                   src={legality.returnIconSprite(set.species, set.shiny)}
                   alt={set.species || 'Pikachu'}
                 />
-                <div className="type-icons">
+                <div className={styles['type-icons']}>
                   {legality
                     .returnTypeIcon(legality.returnType(set.species))
                     .map((type: any, i: number) => {
                       return (
                         <img
-                          className="type-img"
+                          className={styles['type-img']}
                           src={`${type}`}
                           key={i}
                           alt={`${i + 1}`}
@@ -127,12 +127,12 @@ const SetPublic = (props: any) => {
               </div>
             </div>
           </div>
-          <div className="details">
-            <div className="first-details">
+          <div className={styles['details']}>
+            <div className={styles['first-details']}>
               <div>
                 <label htmlFor="pokemon-level">Level: </label>
                 <input
-                  className="pokemon-level"
+                  className={styles['pokemon-level']}
                   disabled
                   readOnly
                   value={set.level || 100}
@@ -144,7 +144,7 @@ const SetPublic = (props: any) => {
               <div>
                 <label htmlFor="pokemon-item">Item: (optional)</label>
                 <input
-                  className="pokemon-item"
+                  className={styles['pokemon-item']}
                   disabled
                   readOnly
                   value={set.item || ''}
@@ -156,7 +156,7 @@ const SetPublic = (props: any) => {
               <div>
                 <label htmlFor="pokemon-ability">Ability: (optional)</label>
                 <input
-                  className="pokemon-ability"
+                  className={styles['pokemon-ability']}
                   disabled
                   readOnly
                   value={set.ability || ''}
@@ -168,7 +168,7 @@ const SetPublic = (props: any) => {
               <div>
                 <label htmlFor="pokemon-nature">Nature: (optional)</label>
                 <input
-                  className="pokemon-nature"
+                  className={styles['pokemon-nature']}
                   disabled
                   readOnly
                   value={set.nature || ''}
@@ -180,7 +180,7 @@ const SetPublic = (props: any) => {
               <div>
                 <label htmlFor="pokemon-happiness">Happiness:</label>
                 <input
-                  className="pokemon-happiness"
+                  className={styles['pokemon-happiness']}
                   disabled
                   readOnly
                   value={set.happiness || 255}
@@ -192,12 +192,12 @@ const SetPublic = (props: any) => {
                 />
               </div>
             </div>
-            <div className="stats">
-              <div className="evs">
-                <div className="stat">
+            <div className={styles['stats']}>
+              <div className={styles['evs']}>
+                <div className={styles['stat']}>
                   <label htmlFor="pokemon-ev-hp">HP EV:</label>
                   <input
-                    className="pokemon-ev"
+                    className={styles['pokemon-ev']}
                     disabled
                     readOnly
                     value={set.hp_ev || 0}
@@ -208,10 +208,10 @@ const SetPublic = (props: any) => {
                     id={`pokemon-ev-hp-${set.id}`}
                   />
                 </div>
-                <div className="stat">
+                <div className={styles['stat']}>
                   <label htmlFor="pokemon-ev-atk">Atk EV:</label>
                   <input
-                    className="pokemon-ev"
+                    className={styles['pokemon-ev']}
                     disabled
                     readOnly
                     value={set.atk_ev || 0}
@@ -222,10 +222,10 @@ const SetPublic = (props: any) => {
                     id={`pokemon-ev-atk-${set.id}`}
                   />
                 </div>
-                <div className="stat">
+                <div className={styles['stat']}>
                   <label htmlFor="pokemon-ev-def">Def EV:</label>
                   <input
-                    className="pokemon-ev"
+                    className={styles['pokemon-ev']}
                     disabled
                     readOnly
                     value={set.def_ev || 0}
@@ -236,10 +236,10 @@ const SetPublic = (props: any) => {
                     id={`pokemon-ev-def-${set.id}`}
                   />
                 </div>
-                <div className="stat">
+                <div className={styles['stat']}>
                   <label htmlFor="pokemon-ev-spa">SpA EV:</label>
                   <input
-                    className="pokemon-ev"
+                    className={styles['pokemon-ev']}
                     disabled
                     readOnly
                     value={set.spa_ev || 0}
@@ -250,10 +250,10 @@ const SetPublic = (props: any) => {
                     id={`pokemon-ev-spa-${set.id}`}
                   />
                 </div>
-                <div className="stat">
+                <div className={styles['stat']}>
                   <label htmlFor="pokemon-ev-spd">SpD EV:</label>
                   <input
-                    className="pokemon-ev"
+                    className={styles['pokemon-ev']}
                     disabled
                     readOnly
                     value={set.spd_ev || 0}
@@ -264,10 +264,10 @@ const SetPublic = (props: any) => {
                     id={`pokemon-ev-spd-${set.id}`}
                   />
                 </div>
-                <div className="stat">
+                <div className={styles['stat']}>
                   <label htmlFor="pokemon-ev-spe">SpE EV:</label>
                   <input
-                    className="pokemon-ev"
+                    className={styles['pokemon-ev']}
                     disabled
                     readOnly
                     value={set.spe_ev || 0}
@@ -279,11 +279,11 @@ const SetPublic = (props: any) => {
                   />
                 </div>
               </div>
-              <div className="ivs">
-                <div className="stat">
+              <div className={styles['ivs']}>
+                <div className={styles['stat']}>
                   <label htmlFor="pokemon-iv-hp">HP IV:</label>
                   <input
-                    className="pokemon-iv"
+                    className={styles['pokemon-iv']}
                     disabled
                     readOnly
                     value={set.hp_iv || 31}
@@ -294,10 +294,10 @@ const SetPublic = (props: any) => {
                     id={`pokemon-iv-hp-${set.id}`}
                   />
                 </div>
-                <div className="stat">
+                <div className={styles['stat']}>
                   <label htmlFor="pokemon-iv-atk">Atk IV:</label>
                   <input
-                    className="pokemon-iv"
+                    className={styles['pokemon-iv']}
                     disabled
                     readOnly
                     value={set.atk_iv || 31}
@@ -308,10 +308,10 @@ const SetPublic = (props: any) => {
                     id={`pokemon-iv-atk-${set.id}`}
                   />
                 </div>
-                <div className="stat">
+                <div className={styles['stat']}>
                   <label htmlFor="pokemon-iv-def">Def IV:</label>
                   <input
-                    className="pokemon-iv"
+                    className={styles['pokemon-iv']}
                     disabled
                     readOnly
                     value={set.def_iv || 31}
@@ -322,10 +322,10 @@ const SetPublic = (props: any) => {
                     id={`pokemon-iv-def-${set.id}`}
                   />
                 </div>
-                <div className="stat">
+                <div className={styles['stat']}>
                   <label htmlFor="pokemon-iv-spa">SpA IV:</label>
                   <input
-                    className="pokemon-iv"
+                    className={styles['pokemon-iv']}
                     disabled
                     readOnly
                     value={set.spa_iv || 31}
@@ -336,10 +336,10 @@ const SetPublic = (props: any) => {
                     id={`pokemon-iv-spa-${set.id}`}
                   />
                 </div>
-                <div className="stat">
+                <div className={styles['stat']}>
                   <label htmlFor="pokemon-iv-spd">SpD IV:</label>
                   <input
-                    className="pokemon-iv"
+                    className={styles['pokemon-iv']}
                     disabled
                     readOnly
                     value={set.spd_iv || 31}
@@ -350,10 +350,10 @@ const SetPublic = (props: any) => {
                     id={`pokemon-iv-spd-${set.id}`}
                   />
                 </div>
-                <div className="stat">
+                <div className={styles['stat']}>
                   <label htmlFor="pokemon-iv-spe">SpE IV:</label>
                   <input
-                    className="pokemon-iv"
+                    className={styles['pokemon-iv']}
                     disabled
                     readOnly
                     value={set.spe_iv || 31}
@@ -366,10 +366,10 @@ const SetPublic = (props: any) => {
                 </div>
               </div>
             </div>
-            <div className="moves">
+            <div className={styles['moves']}>
               <label htmlFor="pokemon-moves">Moves:</label>
               <input
-                className="pokemon-move"
+                className={styles['pokemon-move']}
                 disabled
                 readOnly
                 value={set.move_one || 'Tackle'}
@@ -378,7 +378,7 @@ const SetPublic = (props: any) => {
                 id={`pokemon-${set.id}-move-1`}
               />
               <input
-                className="pokemon-move"
+                className={styles['pokemon-move']}
                 disabled
                 readOnly
                 value={set.move_two || ''}
@@ -387,7 +387,7 @@ const SetPublic = (props: any) => {
                 id={`pokemon-${set.id}-move-2`}
               />
               <input
-                className="pokemon-move"
+                className={styles['pokemon-move']}
                 disabled
                 readOnly
                 value={set.move_three || ''}
@@ -396,7 +396,7 @@ const SetPublic = (props: any) => {
                 id={`pokemon-${set.id}-move-3`}
               />
               <input
-                className="pokemon-move"
+                className={styles['pokemon-move']}
                 disabled
                 readOnly
                 value={set.move_four || ''}
@@ -408,9 +408,9 @@ const SetPublic = (props: any) => {
           </div>
         </form>
 
-        <div className="export-pokemon">
+        <div className={styles['export-pokemon']}>
           {state.copySuccess ? (
-            <div className="copied">Copied to Clipboard!!</div>
+            <div className={styles['copied']}>Copied to Clipboard!!</div>
           ) : null}
           <div>
             <button
@@ -436,7 +436,7 @@ const SetPublic = (props: any) => {
               value={`poketeams.now.sh/${set.team_id}/${set.id}`}
             />
           </div>
-          <div className="export-pokemon">
+          <div className={styles['export-pokemon']}>
             <label htmlFor="export-pokemon">Export Pokemon:</label>
             <textarea
               ref={textArea}
@@ -459,25 +459,30 @@ const SetPublic = (props: any) => {
       .returnTypeIcon(legality.returnType(set.species))
       .map((type: any, i: number) => {
         return (
-          <img className="icon" key={i} src={`${type}`} alt={`${i + 1}`} />
+          <img
+            className={styles['icon']}
+            key={i}
+            src={`${type}`}
+            alt={`${i + 1}`}
+          />
         );
       });
 
     return (
       <Fragment>
-        <div className="pokemon">
-          <div className="closed" onClick={() => handleSetToggle()}>
-            <div className="inside">
+        <div className={styles['pokemon']}>
+          <div className={styles['closed']} onClick={() => handleSetToggle()}>
+            <div className={styles['inside']}>
               <img
-                className="icon"
+                className={styles['icon']}
                 src={legality.returnIconSprite(set.species, set.shiny)}
                 alt={set.species}
               />
             </div>
-            <div className="inside">
+            <div className={styles['inside']}>
               <span>{set.species}</span>
             </div>
-            <div className="inside">{types}</div>
+            <div className={styles['inside']}>{types}</div>
           </div>
         </div>
       </Fragment>

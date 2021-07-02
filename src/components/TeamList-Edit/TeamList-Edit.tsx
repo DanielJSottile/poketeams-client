@@ -1,7 +1,7 @@
 import React, { Fragment, useContext } from 'react';
 import TeamEdit from '../Team-Edit/Team-Edit';
 import GeneralContext from '../../contexts/GeneralContext';
-import './TeamList-Edit.scss';
+// import styles from './TeamList-Edit.module.scss';
 
 // Interfaces
 
