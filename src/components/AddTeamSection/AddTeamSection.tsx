@@ -1,6 +1,6 @@
 import React, { Fragment, useContext } from 'react';
 import GeneralContext from '../../contexts/GeneralContext';
-import './AddTeamSection.css';
+import styles from './AddTeamSection.module.scss';
 
 // Interfaces
 
@@ -36,7 +36,7 @@ const AddTeamSection = (props: any) => {
 
     return (
       <form>
-        <div className="team-name">
+        <div className={styles['team-name']}>
           <label htmlFor="foldername">Team Name:</label>
           {
             <p className="error-validate shake-horizontal">
@@ -52,7 +52,7 @@ const AddTeamSection = (props: any) => {
             onChange={(e) => setNewTeamName(e.target.value)}
           />
         </div>
-        <div className="team-import">
+        <div className={styles['team-import']}>
           <label htmlFor="title-content">Description:</label>
           {<p className="error-validate shake-horizontal">{validateDesc()}</p>}
           <textarea
@@ -63,7 +63,7 @@ const AddTeamSection = (props: any) => {
             onChange={(e) => setDesc(e.target.value)}
           />
         </div>
-        <div className="team-import">
+        <div className={styles['team-import']}>
           <label htmlFor="team-import">Import Team Set:</label>
           {newTeamImport.value !== '' && (
             <p className="error-validate shake-horizontal">
@@ -80,7 +80,7 @@ const AddTeamSection = (props: any) => {
         </div>
         <button
           type="submit"
-          className="submit"
+          className={styles['submit']}
           disabled={
             validateNewTeamName() ||
             validateNewTeamImport() ||
@@ -103,7 +103,7 @@ const AddTeamSection = (props: any) => {
 
   return (
     <Fragment>
-      <section className="folders-list">
+      <section className={styles['folders-list']}>
         <div>
           {currentClickedFolder.value ? (
             <button onClick={() => handleTeamAddClickExpand()}>

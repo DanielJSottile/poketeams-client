@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import TokenService from '../../services/token-service';
 import GeneralContext from '../../contexts/GeneralContext';
 import AuthApiService from '../../services/auth-api-service';
-import './LoginForm.scss';
+import styles from './LoginForm.module.scss';
 
 // Component
 
@@ -41,10 +41,12 @@ const LoginForm = (props: any) => {
   // Final Render
 
   return (
-    <form className="signup-form" onSubmit={handleSubmitJwtAuth}>
+    <form className={styles['signup-form']} onSubmit={handleSubmitJwtAuth}>
       <div role="alert">
         {state.error && (
-          <p className="error-login shake-horizontal">{state.error}</p>
+          <p className={styles['error-login shake-horizontal']}>
+            {state.error}
+          </p>
         )}
       </div>
       <div>

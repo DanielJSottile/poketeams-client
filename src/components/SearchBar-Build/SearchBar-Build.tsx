@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import GeneralContext from '../../contexts/GeneralContext';
-import './SearchBar-Build.scss';
+import styles from './SearchBar-Build.module.scss';
 
 // Component
 
@@ -21,9 +21,9 @@ const SearchBarBuild = (props: any) => {
   // Final Render
 
   return (
-    <div className="searchbar">
-      <form className="search">
-        <div className="search">
+    <div className={styles['searchbar']}>
+      <form className={styles['search']}>
+        <div className={styles['search']}>
           {filter.value && (
             <p className="error-validate shake-horizontal">{validateFilter}</p>
           )}
@@ -31,7 +31,7 @@ const SearchBarBuild = (props: any) => {
             Search: <i className="fas fa-search"></i>
           </label>
           <input
-            className="s-input"
+            className={styles['s-input']}
             placeholder="e.g. Pikachu"
             value={filter.value}
             onChange={(e) => setFilter(e.target.value)}

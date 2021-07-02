@@ -4,7 +4,7 @@ import SearchBar from '../SearchBar-Public/SearchBar-Public';
 import GeneralContext from '../../contexts/GeneralContext';
 import jwtDecode from 'jwt-decode';
 import TokenService from '../../services/token-service';
-import './Navigation-Public.scss';
+import styles from './Navigation-Public.module.scss';
 
 // Interfaces
 
@@ -30,7 +30,7 @@ const NavigationPublic = (props: any) => {
 
   const renderLogout = () => {
     return (
-      <div className="navigation-logged-in">
+      <div className={styles['navigation-logged-in']}>
         <Link onClick={handleLogoutClick} to="/landing">
           Logout <i className="fas fa-sign-out-alt"></i>
         </Link>
@@ -40,7 +40,7 @@ const NavigationPublic = (props: any) => {
 
   const renderLogin = () => {
     return (
-      <div className="navigation-logged-out">
+      <div className={styles['navigation-logged-out']}>
         <Link to="/landing">
           Log In <i className="fas fa-sign-in-alt"></i>
         </Link>
@@ -64,18 +64,18 @@ const NavigationPublic = (props: any) => {
   return (
     <div>
       <nav role="navigation">
-        <div className="user-welcome">{renderUserWelcome()}</div>
-        <div className="home-title"></div>
-        <div className="navbar">
-          <div className="button_things">
+        <div className={styles['user-welcome']}>{renderUserWelcome()}</div>
+        <div className={styles['home-title']}></div>
+        <div className={styles['navbar']}>
+          <div className={styles['button_things']}>
             <Link to="/">
               <i className="fas fa-home"></i>Home
             </Link>
             <Link to="/build">
-              <i className="fas fa-hammer"></i>Build!
+              <i className={styles['fas fa-hammer']}></i>Build!
             </Link>
           </div>
-          <div className="mobile-button">
+          <div className={styles['mobile-button']}>
             <Link to="/">
               <i className="fas fa-home"></i>Home
             </Link>
@@ -84,10 +84,10 @@ const NavigationPublic = (props: any) => {
             </Link>
             {TokenService.hasAuthToken() ? renderLogout() : renderLogin()}
           </div>
-          <div className="search-cont">
+          <div className={styles['search-cont']}>
             <SearchBar />
           </div>
-          <div className="user_things">
+          <div className={styles['user_things']}>
             {TokenService.hasAuthToken() ? renderLogout() : renderLogin()}
           </div>
         </div>

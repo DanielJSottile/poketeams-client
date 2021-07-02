@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import RegistrationForm from '../../components/RegistrationForm/RegistrationForm';
 import Footer from '../../components/Footer/Footer';
-import './RegistrationPage.scss';
+import styles from './RegistrationPage.module.scss';
 
 // Component
 
@@ -18,14 +18,14 @@ const RegistrationPage = (props: any): JSX.Element => {
   return (
     <Fragment>
       <section>
-        <div className="landing-title"></div>
+        <div className={styles['landing-title']}></div>
         <h2>Create Your Account!</h2>
-        <div className="registration-form-container">
+        <div className={styles['registration-form-container']}>
           <RegistrationForm onRegistrationSuccess={handleRegistrationSuccess} />
         </div>
       </section>
       <section>
-        <div className="perks">
+        <div className={styles['perks']}>
           <h3>Perks of Signing Up:</h3>
           <ul>
             <li>Save Your Teams Permanently!</li>
@@ -36,13 +36,13 @@ const RegistrationPage = (props: any): JSX.Element => {
         </div>
       </section>
       <section>
-        <p className="terms-of-service">
+        <p className={styles['terms-of-service']}>
           By creating an account, you agree to the *Terms of Service. For more
           information about PokéTeam's privacy practices, see the PokéTeams
           *Privacy Statement.
         </p>
 
-        <p className="notice">
+        <p className={styles['notice']}>
           *Not Yet Implemented. Sorry! Just know we're working on keeping your
           data secure!
         </p>

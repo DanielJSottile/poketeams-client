@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import SetPublic from '../Set-Public/Set-Public';
 import showdownGenerate from '../../functions/generate';
 import legality from '../../functions/legality';
-import './Team-Public-Share.scss';
+import styles from './Team-Public-Share.module.scss';
 
 // Component
 
@@ -50,20 +50,20 @@ const TeamPublicShare = (props: any) => {
     });
 
     return (
-      <section className="team-section" id={`${team.id}`}>
-        <div className="team">
-          <div className="team-header">
-            <form className="team-form">
-              <div className="team-title">
+      <section className={styles['team-section']} id={`${team.id}`}>
+        <div className={styles['team']}>
+          <div className={styles['team-header']}>
+            <form className={styles['team-form']}>
+              <div className={styles['team-title']}>
                 <button onClick={() => handleTeamToggle()}>
                   Compress Team <i className="fas fa-compress-arrows-alt"></i>
                 </button>
-                <div className="title-name">
+                <div className={styles['title-name']}>
                   <label htmlFor="title-name">Team Name:</label>
                   <input
                     disabled
                     readOnly
-                    className="title"
+                    className={styles['title']}
                     placeholder="e.g. Cool Team"
                     value={team.team_name}
                     type="text"
@@ -88,12 +88,12 @@ const TeamPublicShare = (props: any) => {
                 </div>*/}{' '}
                 {/* Part of a future feature */}
               </div>
-              <div className="title-content">
+              <div className={styles['title-content']}>
                 <label htmlFor="title-content">Description:</label>
                 <textarea
                   disabled
                   readOnly
-                  className="title-content desc"
+                  className={`${styles['title-content']} ${styles['desc']}`}
                   placeholder="e.g. description"
                   name="title-content"
                   id={`title-content-${team.id}`}
@@ -101,9 +101,9 @@ const TeamPublicShare = (props: any) => {
                 />
               </div>
             </form>
-            <div className="export-team">
+            <div className={styles['export-team']}>
               {state.copySuccess ? (
-                <div className="copied">Copied to Clipboard!!</div>
+                <div className={styles['copied']}>Copied to Clipboard!!</div>
               ) : null}
               <div>
                 <button
@@ -156,7 +156,7 @@ const TeamPublicShare = (props: any) => {
         return (
           <img
             key={i}
-            className="tiny-icon"
+            className={styles['tiny-icon']}
             src={legality.returnIconSprite(set.species, set.shiny)}
             alt={set.species}
           />
@@ -165,8 +165,11 @@ const TeamPublicShare = (props: any) => {
     }
 
     return (
-      <section className="team-section" id={`${id}`}>
-        <div className="team-closed" onClick={() => handleTeamToggle()}>
+      <section className={styles['team-section']} id={`${id}`}>
+        <div
+          className={styles['team-closed']}
+          onClick={() => handleTeamToggle()}
+        >
           <div>
             <h3>{team.team_name}</h3>
           </div>

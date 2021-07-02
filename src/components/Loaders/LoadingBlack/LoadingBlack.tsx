@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import './LoadingBlack.scss';
+import styles from './LoadingBlack.module.scss';
 
 // Component
 
@@ -8,7 +8,7 @@ const LoadingBlack = (props: any) => {
 
   return (
     <Fragment>
-      <div className="loading-black"></div>
+      <div className={styles['loading-black']}></div>
     </Fragment>
   );
 };

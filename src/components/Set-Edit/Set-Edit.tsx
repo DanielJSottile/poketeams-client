@@ -5,7 +5,7 @@ import GeneralContext from '../../contexts/GeneralContext';
 import showdownGenerate from '../../functions/generate';
 import showdownParse from '../../functions/parse';
 import legality from '../../functions/legality';
-import './Set-Edit.scss';
+import styles from './Set-Edit.module.scss';
 
 // Interfaces
 
@@ -494,12 +494,12 @@ const SetEdit = (props: any) => {
     } = GenCon;
 
     return (
-      <div className="pokemon">
+      <div className={styles['pokemon']}>
         <button onClick={() => handleSetToggle()}>
           Compress Set <i className="fas fa-compress-arrows-alt"></i>
         </button>
         <form>
-          <div className="pokemon-import">
+          <div className={styles['pokemon-import']}>
             <label htmlFor="pokemon-import">
               Import Pokemon Set: <i className="fas fa-upload"></i>
             </label>
@@ -529,9 +529,9 @@ const SetEdit = (props: any) => {
           </div>
         </form>
         <form>
-          <div className="pokemon-intro">
-            <div className="name-sprite">
-              <div className="names">
+          <div className={styles['pokemon-intro']}>
+            <div className={styles['name-sprite']}>
+              <div className={styles['names']}>
                 <div>
                   <label htmlFor="pokemon-name">Species:</label>
                   {state.species.touched && (
@@ -540,7 +540,7 @@ const SetEdit = (props: any) => {
                     </p>
                   )}
                   <input
-                    className="pokemon-name"
+                    className={styles['pokemon-name']}
                     placeholder="e.g. Pikachu"
                     value={state.species.value}
                     onChange={(e) => setSpecies(e.target.value)}
@@ -557,7 +557,7 @@ const SetEdit = (props: any) => {
                     </p>
                   }
                   <input
-                    className="pokemon-nickname"
+                    className={styles['pokemon-nickname']}
                     placeholder={state.species.value}
                     value={state.nickname.value}
                     onChange={(e) => setNickname(e.target.value)}
@@ -574,7 +574,7 @@ const SetEdit = (props: any) => {
                     </p>
                   }
                   <input
-                    className="pokemon-gender"
+                    className={styles['pokemon-gender']}
                     placeholder="F, M, or N"
                     value={state.gender.value}
                     onChange={(e) => setGender(e.target.value)}
@@ -600,22 +600,22 @@ const SetEdit = (props: any) => {
                   />
                 </div>
               </div>
-              <div className="sprites">
+              <div className={styles['sprites']}>
                 <img
-                  className="sprite-img"
+                  className={styles['sprite-img']}
                   src={legality.returnIconSprite(
                     state.species.value,
                     state.shiny.value
                   )}
                   alt={state.species.value}
                 />
-                <div className="type-icons">
+                <div className={styles['type-icons']}>
                   {legality
                     .returnTypeIcon(legality.returnType(state.species.value))
                     .map((type: any, i: number) => {
                       return (
                         <img
-                          className="type-img"
+                          className={styles['type-img']}
                           src={`${type}`}
                           key={i}
                           alt={`${i + 1}`}
@@ -626,8 +626,8 @@ const SetEdit = (props: any) => {
               </div>
             </div>
           </div>
-          <div className="details">
-            <div className="first-details">
+          <div className={styles['details']}>
+            <div className={styles['first-details']}>
               <div>
                 <label htmlFor="pokemon-level">Level: </label>
                 {state.species.touched && (
@@ -636,7 +636,7 @@ const SetEdit = (props: any) => {
                   </p>
                 )}
                 <input
-                  className="pokemon-level"
+                  className={styles['pokemon-level']}
                   placeholder="100"
                   value={state.level.value}
                   onChange={(e) => setLevel(Number(e.target.value))}
@@ -653,7 +653,7 @@ const SetEdit = (props: any) => {
                   </p>
                 }
                 <input
-                  className="pokemon-item"
+                  className={styles['pokemon-item']}
                   placeholder="e.g. Leftovers"
                   value={state.item.value}
                   onChange={(e) => setItem(e.target.value)}
@@ -670,7 +670,7 @@ const SetEdit = (props: any) => {
                   </p>
                 }
                 <input
-                  className="pokemon-ability"
+                  className={styles['pokemon-ability']}
                   placeholder="e.g. Static"
                   value={state.ability.value}
                   onChange={(e) => setAbility(e.target.value)}
@@ -687,7 +687,7 @@ const SetEdit = (props: any) => {
                   </p>
                 }
                 <input
-                  className="pokemon-nature"
+                  className={styles['pokemon-nature']}
                   placeholder="e.g. Adamant"
                   value={state.nature.value}
                   onChange={(e) => setNature(e.target.value)}
@@ -704,7 +704,7 @@ const SetEdit = (props: any) => {
                   </p>
                 )}
                 <input
-                  className="pokemon-happiness"
+                  className={styles['pokemon-happiness']}
                   placeholder="255"
                   value={state.happiness.value}
                   onChange={(e) => setHappiness(Number(e.target.value))}
@@ -716,17 +716,17 @@ const SetEdit = (props: any) => {
                 />
               </div>
             </div>
-            <div className="stats">
-              <div className="evs">
+            <div className={styles['stats']}>
+              <div className={styles['evs']}>
                 {
                   <p className="error-validate shake-horizontal">
                     {validateEvs()}
                   </p>
                 }
-                <div className="stat">
+                <div className={styles['stat']}>
                   <label htmlFor="pokemon-ev-hp">HP EV:</label>
                   <input
-                    className="pokemon-ev"
+                    className={styles['pokemon-ev']}
                     placeholder="0"
                     value={Number(state.hp_ev.value)}
                     onChange={(e) => setHpEv(Number(e.target.value))}
@@ -737,10 +737,10 @@ const SetEdit = (props: any) => {
                     id={`pokemon-ev-hp-${set.id}`}
                   />
                 </div>
-                <div className="stat">
+                <div className={styles['stat']}>
                   <label htmlFor="pokemon-ev-atk">Atk EV:</label>
                   <input
-                    className="pokemon-ev"
+                    className={styles['pokemon-ev']}
                     placeholder="0"
                     value={Number(state.atk_ev.value)}
                     onChange={(e) => setAtkEv(Number(e.target.value))}
@@ -751,10 +751,10 @@ const SetEdit = (props: any) => {
                     id={`pokemon-ev-atk-${set.id}`}
                   />
                 </div>
-                <div className="stat">
+                <div className={styles['stat']}>
                   <label htmlFor="pokemon-ev-def">Def EV:</label>
                   <input
-                    className="pokemon-ev"
+                    className={styles['pokemon-ev']}
                     placeholder="0"
                     value={Number(state.def_ev.value)}
                     onChange={(e) => setDefEv(Number(e.target.value))}
@@ -765,10 +765,10 @@ const SetEdit = (props: any) => {
                     id={`pokemon-ev-def-${set.id}`}
                   />
                 </div>
-                <div className="stat">
+                <div className={styles['stat']}>
                   <label htmlFor="pokemon-ev-spa">SpA EV:</label>
                   <input
-                    className="pokemon-ev"
+                    className={styles['pokemon-ev']}
                     placeholder="0"
                     value={Number(state.spa_ev.value)}
                     onChange={(e) => setSpAEv(Number(e.target.value))}
@@ -779,10 +779,10 @@ const SetEdit = (props: any) => {
                     id={`pokemon-ev-spa-${set.id}`}
                   />
                 </div>
-                <div className="stat">
+                <div className={styles['stat']}>
                   <label htmlFor="pokemon-ev-spd">SpD EV:</label>
                   <input
-                    className="pokemon-ev"
+                    className={styles['pokemon-ev']}
                     placeholder="0"
                     value={Number(state.spd_ev.value)}
                     onChange={(e) => setSpDEv(Number(e.target.value))}
@@ -793,10 +793,10 @@ const SetEdit = (props: any) => {
                     id={`pokemon-ev-spd-${set.id}`}
                   />
                 </div>
-                <div className="stat">
+                <div className={styles['stat']}>
                   <label htmlFor="pokemon-ev-spe">SpE EV:</label>
                   <input
-                    className="pokemon-ev"
+                    className={styles['pokemon-ev']}
                     placeholder="0"
                     value={Number(state.spe_ev.value)}
                     onChange={(e) => setSpeEv(Number(e.target.value))}
@@ -808,16 +808,16 @@ const SetEdit = (props: any) => {
                   />
                 </div>
               </div>
-              <div className="ivs">
+              <div className={styles['ivs']}>
                 {
                   <p className="error-validate shake-horizontal">
                     {validateIvs()}
                   </p>
                 }
-                <div className="stat">
+                <div className={styles['stat']}>
                   <label htmlFor="pokemon-iv-hp">HP IV:</label>
                   <input
-                    className="pokemon-iv"
+                    className={styles['pokemon-iv']}
                     placeholder="31"
                     value={Number(state.hp_iv.value)}
                     onChange={(e) => setHpIv(Number(e.target.value))}
@@ -828,10 +828,10 @@ const SetEdit = (props: any) => {
                     id={`pokemon-iv-hp-${set.id}`}
                   />
                 </div>
-                <div className="stat">
+                <div className={styles['stat']}>
                   <label htmlFor="pokemon-iv-atk">Atk IV:</label>
                   <input
-                    className="pokemon-iv"
+                    className={styles['pokemon-iv']}
                     placeholder="31"
                     value={Number(state.atk_iv.value)}
                     onChange={(e) => setAtkIv(Number(e.target.value))}
@@ -842,10 +842,10 @@ const SetEdit = (props: any) => {
                     id={`pokemon-iv-atk-${set.id}`}
                   />
                 </div>
-                <div className="stat">
+                <div className={styles['stat']}>
                   <label htmlFor="pokemon-iv-def">Def IV:</label>
                   <input
-                    className="pokemon-iv"
+                    className={styles['pokemon-iv']}
                     placeholder="31"
                     value={Number(state.def_iv.value)}
                     onChange={(e) => setDefIv(Number(e.target.value))}
@@ -856,10 +856,10 @@ const SetEdit = (props: any) => {
                     id={`pokemon-iv-def-${set.id}`}
                   />
                 </div>
-                <div className="stat">
+                <div className={styles['stat']}>
                   <label htmlFor="pokemon-iv-spa">SpA IV:</label>
                   <input
-                    className="pokemon-iv"
+                    className={styles['pokemon-iv']}
                     placeholder="31"
                     value={Number(state.spa_iv.value)}
                     onChange={(e) => setSpAIv(Number(e.target.value))}
@@ -870,10 +870,10 @@ const SetEdit = (props: any) => {
                     id={`pokemon-iv-spa-${set.id}`}
                   />
                 </div>
-                <div className="stat">
+                <div className={styles['stat']}>
                   <label htmlFor="pokemon-iv-spd">SpD IV:</label>
                   <input
-                    className="pokemon-iv"
+                    className={styles['pokemon-iv']}
                     placeholder="31"
                     value={Number(state.spd_iv.value)}
                     onChange={(e) => setSpDIv(Number(e.target.value))}
@@ -884,10 +884,10 @@ const SetEdit = (props: any) => {
                     id={`pokemon-iv-spd-${set.id}`}
                   />
                 </div>
-                <div className="stat">
+                <div className={styles['stat']}>
                   <label htmlFor="pokemon-iv-spe">SpE IV:</label>
                   <input
-                    className="pokemon-iv"
+                    className={styles['pokemon-iv']}
                     placeholder="31"
                     value={Number(state.spe_iv.value)}
                     onChange={(e) => setSpeIv(Number(e.target.value))}
@@ -900,7 +900,7 @@ const SetEdit = (props: any) => {
                 </div>
               </div>
             </div>
-            <div className="moves">
+            <div className={styles['moves']}>
               <label htmlFor="pokemon-moves">Moves:</label>
               {
                 <p className="error-validate shake-horizontal">
@@ -908,7 +908,7 @@ const SetEdit = (props: any) => {
                 </p>
               }
               <input
-                className="pokemon-move"
+                className={styles['pokemon-move']}
                 placeholder="Tackle"
                 value={state.move_one.value}
                 onChange={(e) => setMoveOne(e.target.value)}
@@ -917,7 +917,7 @@ const SetEdit = (props: any) => {
                 id={`pokemon-${set.id}-move-1`}
               />
               <input
-                className="pokemon-move"
+                className={styles['pokemon-move']}
                 value={state.move_two.value}
                 onChange={(e) => setMoveTwo(e.target.value)}
                 type="text"
@@ -925,7 +925,7 @@ const SetEdit = (props: any) => {
                 id={`pokemon-${set.id}-move-2`}
               />
               <input
-                className="pokemon-move"
+                className={styles['pokemon-move']}
                 value={state.move_three.value}
                 onChange={(e) => setMoveThree(e.target.value)}
                 type="text"
@@ -933,7 +933,7 @@ const SetEdit = (props: any) => {
                 id={`pokemon-${set.id}-move-3`}
               />
               <input
-                className="pokemon-move"
+                className={styles['pokemon-move']}
                 value={state.move_four.value}
                 onChange={(e) => setMoveFour(e.target.value)}
                 type="text"
@@ -989,9 +989,9 @@ const SetEdit = (props: any) => {
           </div>
         </form>
 
-        <div className="export-pokemon">
+        <div className={styles['export-pokemon']}>
           {state.copySuccess ? (
-            <div className="copied">Copied to Clipboard!!</div>
+            <div className={styles['copied']}>Copied to Clipboard!!</div>
           ) : null}
           <div>
             <button
@@ -1017,7 +1017,7 @@ const SetEdit = (props: any) => {
               value={`poketeams.now.sh/${set.team_id}/${set.id}`}
             />
           </div>
-          <div className="export-pokemon">
+          <div className={styles['export-pokemon']}>
             <label htmlFor="export-pokemon">
               Export Pokemon: <i className="fas fa-download"></i>
             </label>
@@ -1051,12 +1051,17 @@ const SetEdit = (props: any) => {
       .returnTypeIcon(legality.returnType(set.species))
       .map((type: any, i: number) => {
         return (
-          <img className="icon" key={i} src={`${type}`} alt={`${i + 1}`} />
+          <img
+            className={styles['icon']}
+            key={i}
+            src={`${type}`}
+            alt={`${i + 1}`}
+          />
         );
       });
     const imgIcon = (
       <img
-        className="icon"
+        className={styles['icon']}
         src={legality.returnIconSprite(set.species, set.shiny)}
         alt={set.species}
       />
@@ -1064,9 +1069,9 @@ const SetEdit = (props: any) => {
 
     return (
       <Fragment>
-        <div className="pokemon">
-          <div className="closed" onClick={() => handleSetToggle()}>
-            <div className="inside">
+        <div className={styles['pokemon']}>
+          <div className={styles['closed']} onClick={() => handleSetToggle()}>
+            <div className={styles['inside']}>
               {
                 imgIcon.props.src ? (
                   imgIcon
@@ -1075,10 +1080,10 @@ const SetEdit = (props: any) => {
                 ) /* this isn't quite ready yet*/
               }
             </div>
-            <div className="inside">
+            <div className={styles['inside']}>
               <span>{set.species}</span>
             </div>
-            <div className="inside">
+            <div className={styles['inside']}>
               {types ? types : <LoadingSets /> /* this isn't quite ready yet*/}
             </div>
           </div>

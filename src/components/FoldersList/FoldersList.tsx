@@ -5,7 +5,7 @@ import PokeballLoader from '../Loaders/PokeballLoader/PokeballLoader';
 import LoadingBlack from '../Loaders/LoadingBlack/LoadingBlack';
 import GeneralContext from '../../contexts/GeneralContext';
 import showdownFolderGenerate from '../../functions/generateFolder';
-import './FoldersList.scss';
+import styles from './FoldersList.module.scss';
 
 // Component
 
@@ -113,7 +113,7 @@ const FoldersList = (props: any) => {
             value={newFolderName.value}
             onChange={(e) => setNewFolderName(e.target.value)}
           />
-          <div className="folder-import">
+          <div className={styles['folder-import']}>
             <label htmlFor="folder-import">Import Showdown Folder:</label>
             {newFolderImport.value !== '' && (
               <p className="error-validate shake-horizontal">
@@ -131,7 +131,7 @@ const FoldersList = (props: any) => {
         </div>
         <button
           type="submit"
-          className="submit"
+          className={styles['submit']}
           disabled={validateNewFolderName() || validateNewFolderImport()}
           onClick={(e) => {
             e.preventDefault();
@@ -174,7 +174,7 @@ const FoldersList = (props: any) => {
         </div>
         <button
           type="submit"
-          className="submit"
+          className={styles['submit']}
           disabled={validateNewFolderName()}
           onClick={(e) => {
             e.preventDefault();
@@ -217,16 +217,16 @@ const FoldersList = (props: any) => {
 
   return (
     <Fragment>
-      <section className="folders-list">
+      <section className={styles['folders-list']}>
         <h3>Folders:</h3>
         <div>
           {folderList.length > 0 ? (
             folderList
           ) : (
-            <div className="pokeball-div">
+            <div className={styles['pokeball-div']}>
               <PokeballLoader />
               <LoadingBlack />
-              <h3 className="hint">
+              <h3 className={styles['hint']}>
                 (Hint: There May Be No Folders! Click Below to Start!)
               </h3>
             </div>
@@ -242,9 +242,9 @@ const FoldersList = (props: any) => {
           <span>{`Current Folder: ${currentClickedFolder.value}`}</span>
           {currentClickedFolder.value ? (
             <div>
-              <div className="export-team">
+              <div className={styles['export-team']}>
                 {state.copySuccess ? (
-                  <div className="copied">Copied to Clipboard!!</div>
+                  <div className={styles['copied']}>Copied to Clipboard!!</div>
                 ) : null}
                 <div>
                   <button

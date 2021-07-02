@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import './PokeballLoader.scss';
+import styles from './PokeballLoader.module.scss';
 
 // Componenet
 
@@ -8,7 +8,7 @@ const PokeballLoader = (props: any) => {
 
   return (
     <Fragment>
-      <div className="pokeball">
+      <div className={styles['pokeball']}>
         <span></span>
       </div>
     </Fragment>
