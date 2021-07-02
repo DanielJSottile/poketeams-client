@@ -4,7 +4,7 @@ import SetEdit from '../Set-Edit/Set-Edit';
 import GeneralContext from '../../contexts/GeneralContext';
 import showdownGenerate from '../../functions/generate';
 import legality from '../../functions/legality';
-import './Team-Edit.scss';
+import styles from './Team-Edit.module.scss';
 
 // Interfaces
 
@@ -187,15 +187,15 @@ const TeamEdit = (props: any) => {
     const SetList = renderSetList(teamSets);
 
     return (
-      <section className="team-section" id={`${id}`}>
-        <div className="team">
-          <div className="team-header">
-            <form className="team-form">
-              <div className="team-title">
+      <section className={styles['team-section']} id={`${id}`}>
+        <div className={styles['team']}>
+          <div className={styles['team-header']}>
+            <form className={styles['team-form']}>
+              <div className={styles['team-title']}>
                 <button onClick={() => handleTeamToggle()}>
                   Compress Team <i className="fas fa-compress-arrows-alt"></i>
                 </button>
-                <div className="title-name">
+                <div className={styles['title-name']}>
                   <label htmlFor="title-name">Team Name:</label>
                   {
                     <p className="error-validate shake-horizontal">
@@ -203,7 +203,7 @@ const TeamEdit = (props: any) => {
                     </p>
                   }
                   <input
-                    className="title"
+                    className={styles['title']}
                     placeholder="e.g. Cool Team"
                     value={state.team_name.value}
                     onChange={(e) => setTeamName(e.target.value)}
@@ -229,7 +229,7 @@ const TeamEdit = (props: any) => {
                 </div>*/}{' '}
                 {/* Part of a future feature */}
               </div>
-              <div className="title-content">
+              <div className={styles['title-content']}>
                 <label htmlFor="title-content">Description:</label>
                 {
                   <p className="error-validate shake-horizontal">
@@ -237,7 +237,7 @@ const TeamEdit = (props: any) => {
                   </p>
                 }
                 <textarea
-                  className="title-content desc"
+                  className={styles['title-content desc']}
                   placeholder="e.g. description"
                   name="title-content"
                   id={`title-content-${team.id}`}
@@ -260,9 +260,9 @@ const TeamEdit = (props: any) => {
                 Save Team Details <i className="fas fa-save"></i>
               </button>
             </form>
-            <div className="export-team">
+            <div className={styles['export-team']}>
               {state.copySuccess ? (
-                <div className="copied">Copied to Clipboard!!</div>
+                <div className={styles['copied']}>Copied to Clipboard!!</div>
               ) : null}
               <div>
                 <button
@@ -324,7 +324,7 @@ const TeamEdit = (props: any) => {
       return (
         <img
           key={i}
-          className="tiny-icon"
+          className={styles['tiny-icon']}
           src={legality.returnIconSprite(set.species, set.shiny)}
           alt={set.species}
         />
@@ -332,8 +332,11 @@ const TeamEdit = (props: any) => {
     });
 
     return (
-      <section className="team-section" id={`${id}`}>
-        <div className="team-closed" onClick={() => handleTeamToggle()}>
+      <section className={styles['team-section']} id={`${id}`}>
+        <div
+          className={styles['team-closed']}
+          onClick={() => handleTeamToggle()}
+        >
           <div>
             <h3>{team.team_name}</h3>
           </div>

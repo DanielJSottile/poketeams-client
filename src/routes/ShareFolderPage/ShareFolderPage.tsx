@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import FolderPublicShare from '../../components/Folder-Public-Share/Folder-Public-Share';
 import * as array from 'lodash';
 import apiService from '../../services/apiService';
-import './ShareFolderPage.scss';
+import styles from './ShareFolderPage.module.scss';
 
 // Interfaces
 
@@ -60,7 +60,7 @@ const ShareFolderPage = (props: any): JSX.Element => {
 
   return (
     <div>
-      <Link className="go-back" to={'/'}>
+      <Link className={styles['go-back']} to={'/'}>
         Go To PokéTeams <i className="fas fa-home"></i>
       </Link>
       {state?.folder[0] ? (

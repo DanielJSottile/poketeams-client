@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import TeamPublicShare from '../Team-Public-Share/Team-Public-Share';
 import PokeballLoader from '../Loaders/PokeballLoader/PokeballLoader';
 import LoadingBlack from '../Loaders/LoadingBlack/LoadingBlack';
-import './TeamList-PublicShare.scss';
+import styles from './TeamList-PublicShare.module.scss';
 
 // Interfaces
 
@@ -48,10 +48,10 @@ const TeamListPublicShare = (props: any) => {
       {TeamList ? (
         TeamList
       ) : (
-        <div className="pokeball-div">
+        <div className={styles['pokeball-div']}>
           <PokeballLoader />
           <LoadingBlack />
-          <h3 className="hint">(Hint: There May Be No Teams)</h3>
+          <h3 className={styles['hint']}>(Hint: There May Be No Teams)</h3>
         </div>
       )}
     </Fragment>

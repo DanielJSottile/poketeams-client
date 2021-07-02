@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import './LoadingWhite.scss';
+import styles from './LoadingWhite.module.scss';
 
 // Component
 
@@ -8,7 +8,7 @@ const LoadingWhite = (props: any) => {
 
   return (
     <Fragment>
-      <div className="loading-white"></div>
+      <div className={styles['loading-white']}></div>
     </Fragment>
   );
 };

@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import './LoadingSets.scss';
+import styles from './LoadingSets.module.scss';
 
 // Component
 
@@ -8,7 +8,7 @@ const LoadingSets = (props: any) => {
 
   return (
     <Fragment>
-      <div className="loading-sets"></div>
+      <div className={styles['loading-sets']}></div>
     </Fragment>
   );
 };
