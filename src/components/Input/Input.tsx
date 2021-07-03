@@ -18,7 +18,7 @@ type Props = {
   /** style for the input */
   inputClass?: string;
   /** value of the input */
-  value?: string;
+  value?: string | number;
   /** placeholder string */
   placeholder?: string;
   /** function used for onChange for the input */
