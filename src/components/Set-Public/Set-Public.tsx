@@ -59,7 +59,7 @@ const SetPublic = (props: any) => {
               <div className={styles['names']}>
                 <Input
                   inputHasError={false}
-                  formId={'pokemon-name'}
+                  htmlFor={'pokemon-name'}
                   label={'Species: '}
                   inputClass={styles['pokemon-name']}
                   disabled
@@ -72,7 +72,7 @@ const SetPublic = (props: any) => {
 
                 <Input
                   inputHasError={false}
-                  formId={'pokemon-nickname'}
+                  htmlFor={'pokemon-nickname'}
                   label={'Nickname: (optional)'}
                   inputClass={styles['pokemon-nickname']}
                   disabled
@@ -85,7 +85,7 @@ const SetPublic = (props: any) => {
 
                 <Input
                   inputHasError={false}
-                  formId={'pokemon-gender'}
+                  htmlFor={'pokemon-gender'}
                   label={'Gender: '}
                   inputClass={styles['pokemon-nickname']}
                   disabled
@@ -99,7 +99,7 @@ const SetPublic = (props: any) => {
                 <Input
                   containerClass={styles['label-as-column']}
                   inputHasError={false}
-                  formId={'shiny'}
+                  htmlFor={'shiny'}
                   label={'Shiny:'}
                   type="checkbox"
                   id="shiny-2"
@@ -136,7 +136,7 @@ const SetPublic = (props: any) => {
             <div className={styles['first-details']}>
               <Input
                 inputHasError={false}
-                formId={'pokemon-level'}
+                htmlFor={'pokemon-level'}
                 label={'Level: '}
                 inputClass={styles['pokemon-level']}
                 disabled
@@ -149,7 +149,7 @@ const SetPublic = (props: any) => {
 
               <Input
                 inputHasError={false}
-                formId={'pokemon-item'}
+                htmlFor={'pokemon-item'}
                 label={'Item: (optional)'}
                 inputClass={styles['pokemon-item']}
                 disabled
@@ -161,7 +161,7 @@ const SetPublic = (props: any) => {
               />
               <Input
                 inputHasError={false}
-                formId={'pokemon-ability'}
+                htmlFor={'pokemon-ability'}
                 label={'Ability: (optional)'}
                 inputClass={styles['pokemon-ability']}
                 disabled
@@ -173,7 +173,7 @@ const SetPublic = (props: any) => {
               />
               <Input
                 inputHasError={false}
-                formId={'pokemon-nature'}
+                htmlFor={'pokemon-nature'}
                 label={'Nature: (optional)'}
                 inputClass={styles['pokemon-nature']}
                 disabled
@@ -185,7 +185,7 @@ const SetPublic = (props: any) => {
               />
               <Input
                 inputHasError={false}
-                formId={'pokemon-happiness'}
+                htmlFor={'pokemon-happiness'}
                 label={'Happiness:'}
                 inputClass={styles['pokemon-happiness']}
                 disabled
@@ -203,7 +203,7 @@ const SetPublic = (props: any) => {
                 <Input
                   inputHasError={false}
                   containerClass={styles['stat']}
-                  formId={'pokemon-ev-hp'}
+                  htmlFor={'pokemon-ev-hp'}
                   label={'HP EV:'}
                   inputClass={styles['pokemon-ev']}
                   disabled
@@ -218,7 +218,7 @@ const SetPublic = (props: any) => {
                 <Input
                   inputHasError={false}
                   containerClass={styles['stat']}
-                  formId={'pokemon-ev-atk'}
+                  htmlFor={'pokemon-ev-atk'}
                   label={'Atk EV:'}
                   inputClass={styles['pokemon-ev']}
                   disabled
@@ -233,7 +233,7 @@ const SetPublic = (props: any) => {
                 <Input
                   inputHasError={false}
                   containerClass={styles['stat']}
-                  formId={'pokemon-ev-def'}
+                  htmlFor={'pokemon-ev-def'}
                   label={'Def EV:'}
                   inputClass={styles['pokemon-ev']}
                   disabled
@@ -248,7 +248,7 @@ const SetPublic = (props: any) => {
                 <Input
                   inputHasError={false}
                   containerClass={styles['stat']}
-                  formId={'pokemon-ev-spa'}
+                  htmlFor={'pokemon-ev-spa'}
                   label={'SpA EV:'}
                   inputClass={styles['pokemon-ev']}
                   disabled
@@ -263,7 +263,7 @@ const SetPublic = (props: any) => {
                 <Input
                   inputHasError={false}
                   containerClass={styles['stat']}
-                  formId={'pokemon-ev-spd'}
+                  htmlFor={'pokemon-ev-spd'}
                   label={'SpD EV:'}
                   inputClass={styles['pokemon-ev']}
                   disabled
@@ -278,7 +278,7 @@ const SetPublic = (props: any) => {
                 <Input
                   inputHasError={false}
                   containerClass={styles['stat']}
-                  formId={'pokemon-ev-spe'}
+                  htmlFor={'pokemon-ev-spe'}
                   label={'SpE EV:'}
                   inputClass={styles['pokemon-ev']}
                   disabled
@@ -295,7 +295,7 @@ const SetPublic = (props: any) => {
                 <Input
                   inputHasError={false}
                   containerClass={styles['stat']}
-                  formId={'pokemon-iv-hp'}
+                  htmlFor={'pokemon-iv-hp'}
                   label={'HP IV:'}
                   inputClass={styles['pokemon-iv']}
                   disabled
@@ -310,7 +310,7 @@ const SetPublic = (props: any) => {
                 <Input
                   inputHasError={false}
                   containerClass={styles['stat']}
-                  formId={'pokemon-iv-atk'}
+                  htmlFor={'pokemon-iv-atk'}
                   label={'Atk IV:'}
                   inputClass={styles['pokemon-iv']}
                   disabled
@@ -325,7 +325,7 @@ const SetPublic = (props: any) => {
                 <Input
                   inputHasError={false}
                   containerClass={styles['stat']}
-                  formId={'pokemon-iv-def'}
+                  htmlFor={'pokemon-iv-def'}
                   label={'Def IV:'}
                   inputClass={styles['pokemon-iv']}
                   disabled
@@ -340,7 +340,7 @@ const SetPublic = (props: any) => {
                 <Input
                   inputHasError={false}
                   containerClass={styles['stat']}
-                  formId={'pokemon-iv-spa'}
+                  htmlFor={'pokemon-iv-spa'}
                   label={'SpA IV:'}
                   inputClass={styles['pokemon-iv']}
                   disabled
@@ -355,7 +355,7 @@ const SetPublic = (props: any) => {
                 <Input
                   inputHasError={false}
                   containerClass={styles['stat']}
-                  formId={'pokemon-iv-spd'}
+                  htmlFor={'pokemon-iv-spd'}
                   label={'SpD IV:'}
                   inputClass={styles['pokemon-iv']}
                   disabled
@@ -370,7 +370,7 @@ const SetPublic = (props: any) => {
                 <Input
                   inputHasError={false}
                   containerClass={styles['stat']}
-                  formId={'pokemon-iv-spe'}
+                  htmlFor={'pokemon-iv-spe'}
                   label={'SpE IV:'}
                   inputClass={styles['pokemon-iv']}
                   disabled
@@ -388,7 +388,7 @@ const SetPublic = (props: any) => {
               <Input
                 containerClass={styles['label-as-row']}
                 inputHasError={false}
-                formId={'pokemon-moves'}
+                htmlFor={'pokemon-moves'}
                 label={'Moves:'}
                 inputClass={styles['pokemon-move']}
                 disabled

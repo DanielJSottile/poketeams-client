@@ -106,6 +106,8 @@
 }
 
 .inside {
+  display: flex;
+  flex-direction: row;
   align-self: center;
 }
 

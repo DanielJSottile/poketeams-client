@@ -1,77 +1,81 @@
 import React, { useContext, useState } from 'react';
 import Input from '../Input/Input';
+import Button from '../Button/Button';
 import TokenService from '../../services/token-service';
 import GeneralContext from '../../contexts/GeneralContext';
 import AuthApiService from '../../services/auth-api-service';
 import styles from './LoginForm.module.scss';
 
-// Component
+type Props = {
+  /** onLoginSuccess Function */
+  onLoginSuccess: () => void;
+};
 
-const LoginForm = (props: any) => {
-  // Set Context
-
-  const GenCon = useContext(GeneralContext);
-
-  // Set State
-
-  const [state, setState] = useState({ error: null });
+const LoginForm: React.FC<Props> = ({ onLoginSuccess }) => {
+  const { getUserState } = useContext(GeneralContext);
+  const [error, setError] = useState(null);
+  const [userName, setUsername] = useState('');
+  const [password, setPassword] = useState('');
 
   // JWT Auth Functionality
 
   const handleSubmitJwtAuth = (ev: any) => {
     ev.preventDefault();
-    setState((oldVals) => ({ ...oldVals, error: null }));
-    const { user_name, password } = ev.target;
+    setError(null);
 
     AuthApiService.postLogin({
-      user_name: user_name.value,
-      password: password.value,
+      user_name: userName,
+      password: password,
     })
       .then((res: any) => {
-        user_name.value = '';
-        password.value = '';
+        setUsername('');
+        setPassword('');
         TokenService.saveAuthToken(res.authToken);
-        GenCon.getUserState();
-        props.onLoginSuccess();
+        getUserState();
+        onLoginSuccess();
       })
       .catch((res) => {
-        setState((oldVals) => ({ ...oldVals, error: res.error }));
+        setError(res.error);
       });
   };
-
-  // Final Render
 
   return (
     <form className={styles['signup-form']} onSubmit={handleSubmitJwtAuth}>
       <div role="alert">
-        {state.error && (
-          <p className={styles['error-login shake-horizontal']}>
-            {state.error}
-          </p>
+        {error && (
+          <p className={styles['error-login shake-horizontal']}>{error}</p>
         )}
       </div>
       <Input
         inputHasError={false}
-        formId="user_name"
+        htmlFor="user_name"
         label="Username"
         placeholder="Username"
         autoComplete="username"
         type="text"
         name="user_name"
         id="user_name"
+        onChangeCallback={(e) => {
+          setUsername(e.target.value);
+        }}
+        value={userName}
       />
       <Input
         inputHasError={false}
-        formId="password"
+        htmlFor="password"
         label="Password"
         type="password"
         autoComplete="current-password"
         name="password"
         id="password"
+        onChangeCallback={(e) => {
+          setPassword(e.target.value);
+        }}
+        value={password}
       />
-      <button type="submit">
+      <Button type="submit">
         Log In <i className="fas fa-sign-in-alt"></i>
-      </button>
+      </Button>
     </form>
   );
 };

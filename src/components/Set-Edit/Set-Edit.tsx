@@ -537,7 +537,7 @@ const SetEdit = (props: any) => {
                 <Input
                   inputHasError
                   isError={state.species.touched}
-                  formId={'pokemon-name'}
+                  htmlFor={'pokemon-name'}
                   label={'Species: '}
                   inputClass={styles['pokemon-name']}
                   validationCallback={validateSpecies()}
@@ -551,7 +551,7 @@ const SetEdit = (props: any) => {
                 <Input
                   inputHasError
                   isError={state.species.touched}
-                  formId={'pokemon-nickname'}
+                  htmlFor={'pokemon-nickname'}
                   label={'Nickname: (optional)'}
                   inputClass={styles['pokemon-name']}
                   validationCallback={validateNickname()}
@@ -564,7 +564,7 @@ const SetEdit = (props: any) => {
                 />
                 <Input
                   inputHasError
-                  formId={'pokemon-gender'}
+                  htmlFor={'pokemon-gender'}
                   label={'Gender: '}
                   inputClass={styles['pokemon-gender']}
                   validationCallback={validateGender()}
@@ -578,7 +578,7 @@ const SetEdit = (props: any) => {
                 <Input
                   inputHasError
                   isError={state.species.touched}
-                  formId={'shiny'}
+                  htmlFor={'shiny'}
                   label={'Shiny:'}
                   validationCallback={validateShiny()}
                   onChangeCallback={(e) => setShiny()}
@@ -620,7 +620,7 @@ const SetEdit = (props: any) => {
               <Input
                 inputHasError
                 isError={state.species.touched}
-                formId={'pokemon-level'}
+                htmlFor={'pokemon-level'}
                 label={'Level: '}
                 inputClass={styles['pokemon-level']}
                 validationCallback={validateLevel()}
@@ -633,7 +633,7 @@ const SetEdit = (props: any) => {
               />
               <Input
                 inputHasError
-                formId={'pokemon-item'}
+                htmlFor={'pokemon-item'}
                 label={'Item: (optional)'}
                 inputClass={styles['pokemon-item']}
                 validationCallback={validateItem()}
@@ -646,7 +646,7 @@ const SetEdit = (props: any) => {
               />
               <Input
                 inputHasError
-                formId={'pokemon-ability'}
+                htmlFor={'pokemon-ability'}
                 label={'Ability: (optional)'}
                 inputClass={styles['pokemon-ability']}
                 validationCallback={validateAbility()}
@@ -659,7 +659,7 @@ const SetEdit = (props: any) => {
               />
               <Input
                 inputHasError
-                formId={'pokemon-nature'}
+                htmlFor={'pokemon-nature'}
                 label={'Nature: (optional)'}
                 inputClass={styles['pokemon-nature']}
                 validationCallback={validateNature()}
@@ -673,7 +673,7 @@ const SetEdit = (props: any) => {
               <Input
                 inputHasError
                 isError={state.happiness.touched}
-                formId={'pokemon-happiness'}
+                htmlFor={'pokemon-happiness'}
                 label={'Happiness:'}
                 inputClass={styles['pokemon-happiness']}
                 validationCallback={validateHappiness()}
@@ -697,7 +697,7 @@ const SetEdit = (props: any) => {
                 <Input
                   containerClass={styles['stat']}
                   inputHasError={false}
-                  formId={'pokemon-ev-hp'}
+                  htmlFor={'pokemon-ev-hp'}
                   label={'HP EV:'}
                   inputClass={styles['pokemon-ev']}
                   onChangeCallback={(e) => setHpEv(Number(e.target.value))}
@@ -712,7 +712,7 @@ const SetEdit = (props: any) => {
                 <Input
                   containerClass={styles['stat']}
                   inputHasError={false}
-                  formId={'pokemon-ev-atk'}
+                  htmlFor={'pokemon-ev-atk'}
                   label={'Atk EV:'}
                   inputClass={styles['pokemon-ev']}
                   onChangeCallback={(e) => setAtkEv(Number(e.target.value))}
@@ -727,7 +727,7 @@ const SetEdit = (props: any) => {
                 <Input
                   containerClass={styles['stat']}
                   inputHasError={false}
-                  formId={'pokemon-ev-def'}
+                  htmlFor={'pokemon-ev-def'}
                   label={'Def EV:'}
                   inputClass={styles['pokemon-ev']}
                   onChangeCallback={(e) => setDefEv(Number(e.target.value))}
@@ -742,7 +742,7 @@ const SetEdit = (props: any) => {
                 <Input
                   containerClass={styles['stat']}
                   inputHasError={false}
-                  formId={'pokemon-ev-spa'}
+                  htmlFor={'pokemon-ev-spa'}
                   label={'SpA EV:'}
                   inputClass={styles['pokemon-ev']}
                   onChangeCallback={(e) => setSpAEv(Number(e.target.value))}
@@ -757,7 +757,7 @@ const SetEdit = (props: any) => {
                 <Input
                   containerClass={styles['stat']}
                   inputHasError={false}
-                  formId={'pokemon-ev-spd'}
+                  htmlFor={'pokemon-ev-spd'}
                   label={'SpD EV:'}
                   inputClass={styles['pokemon-ev']}
                   onChangeCallback={(e) => setSpDEv(Number(e.target.value))}
@@ -772,7 +772,7 @@ const SetEdit = (props: any) => {
                 <Input
                   containerClass={styles['stat']}
                   inputHasError={false}
-                  formId={'pokemon-ev-spe'}
+                  htmlFor={'pokemon-ev-spe'}
                   label={'SpE EV:'}
                   inputClass={styles['pokemon-ev']}
                   onChangeCallback={(e) => setSpeEv(Number(e.target.value))}
@@ -794,7 +794,7 @@ const SetEdit = (props: any) => {
                 <Input
                   containerClass={styles['stat']}
                   inputHasError={false}
-                  formId={'pokemon-iv-hp'}
+                  htmlFor={'pokemon-iv-hp'}
                   label={'HP IV:'}
                   inputClass={styles['pokemon-iv']}
                   onChangeCallback={(e) => setHpIv(Number(e.target.value))}
@@ -809,7 +809,7 @@ const SetEdit = (props: any) => {
                 <Input
                   containerClass={styles['stat']}
                   inputHasError={false}
-                  formId={'pokemon-iv-atk'}
+                  htmlFor={'pokemon-iv-atk'}
                   label={'Atk IV:'}
                   inputClass={styles['pokemon-iv']}
                   onChangeCallback={(e) => setAtkIv(Number(e.target.value))}
@@ -824,7 +824,7 @@ const SetEdit = (props: any) => {
                 <Input
                   containerClass={styles['stat']}
                   inputHasError={false}
-                  formId={'pokemon-iv-def'}
+                  htmlFor={'pokemon-iv-def'}
                   label={'Def IV:'}
                   inputClass={styles['pokemon-iv']}
                   onChangeCallback={(e) => setDefIv(Number(e.target.value))}
@@ -839,7 +839,7 @@ const SetEdit = (props: any) => {
                 <Input
                   containerClass={styles['stat']}
                   inputHasError={false}
-                  formId={'pokemon-iv-spa'}
+                  htmlFor={'pokemon-iv-spa'}
                   label={'SpA IV:'}
                   inputClass={styles['pokemon-iv']}
                   onChangeCallback={(e) => setSpAIv(Number(e.target.value))}
@@ -854,7 +854,7 @@ const SetEdit = (props: any) => {
                 <Input
                   containerClass={styles['stat']}
                   inputHasError={false}
-                  formId={'pokemon-iv-spd'}
+                  htmlFor={'pokemon-iv-spd'}
                   label={'SpD IV:'}
                   inputClass={styles['pokemon-iv']}
                   onChangeCallback={(e) => setSpDIv(Number(e.target.value))}
@@ -869,7 +869,7 @@ const SetEdit = (props: any) => {
                 <Input
                   containerClass={styles['stat']}
                   inputHasError={false}
-                  formId={'pokemon-iv-spe'}
+                  htmlFor={'pokemon-iv-spe'}
                   label={'Spe IV:'}
                   inputClass={styles['pokemon-iv']}
                   onChangeCallback={(e) => setSpeIv(Number(e.target.value))}
@@ -887,7 +887,7 @@ const SetEdit = (props: any) => {
               <Input
                 containerClass={styles['label-as-row']}
                 inputHasError={false}
-                formId={'pokemon-moves'}
+                htmlFor={'pokemon-moves'}
                 label={'Moves:'}
                 inputClass={styles['pokemon-move']}
                 placeholder="Tackle"

@@ -91,7 +91,7 @@ const RegistrationForm = (props: any) => {
         />
       </div>
       <div className={styles['go-back-links']}>
-        <Button type="submit" buttonLabel={'Register'} />
+        <Button type="submit">Register</Button>
         <Link className={styles['go-back']} to={'/landing'}>
           Go Back
         </Link>

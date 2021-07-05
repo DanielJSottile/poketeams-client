@@ -10,11 +10,11 @@ type Props = {
   /** boolean for whether the input is disabled */
   disabled?: boolean;
   /** function used for onChange for the input */
-  onClickCallback?: () => void;
+  onClickCallback?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   /** string of input type */
   type?: 'button' | 'submit' | 'reset' | undefined;
-  /** label text for button */
-  buttonLabel?: React.ReactNode;
+  /** button children */
+  children?: React.ReactNode | JSX.Element;
 };
 
 const Button: React.FC<Props> = ({
@@ -23,8 +23,8 @@ const Button: React.FC<Props> = ({
   buttonClass = '',
   onClickCallback = () => null,
   disabled = false,
-  buttonLabel = '',
-  type = undefined,
+  type,
+  children,
 }) => {
   return (
     <div className={containerClass}>
@@ -35,7 +35,7 @@ const Button: React.FC<Props> = ({
         onClick={onClickCallback}
         type={type}
       >
-        {buttonLabel}
+        {children}
       </button>
     </div>
   );

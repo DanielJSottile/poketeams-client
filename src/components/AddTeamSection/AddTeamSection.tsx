@@ -1,6 +1,7 @@
 import React, { Fragment, useContext } from 'react';
 import GeneralContext from '../../contexts/GeneralContext';
 import Input from '../Input/Input';
+import Button from '../Button/Button';
 import styles from './AddTeamSection.module.scss';
 
 // Interfaces
@@ -40,7 +41,7 @@ const AddTeamSection = (props: any) => {
         <Input
           inputHasError
           containerClass={styles['team-name']}
-          formId="foldername"
+          htmlFor="foldername"
           label="Team Name:"
           validationCallback={validateNewTeamName()}
           placeholder="e.g. My Cool Team"
@@ -76,22 +77,22 @@ const AddTeamSection = (props: any) => {
             onChange={(e) => setNewTeamContents(e.target.value)}
           ></textarea>
         </div>
-        <button
+        <Button
           type="submit"
-          className={styles['submit']}
+          buttonClass={styles['submit']}
           disabled={
             validateNewTeamName() ||
             validateNewTeamImport() ||
             validateDesc() ||
             validateCurrentFolderClicked()
           }
-          onClick={(e) => {
+          onClickCallback={(e) => {
             e.preventDefault();
             handlePostNewTeam();
           }}
         >
           Submit <i className="far fa-check-circle"></i>
-        </button>
+        </Button>
       </form>
     );
   };
@@ -104,9 +105,9 @@ const AddTeamSection = (props: any) => {
       <section className={styles['folders-list']}>
         <div>
           {currentClickedFolder.value ? (
-            <button onClick={() => handleTeamAddClickExpand()}>
+            <Button onClickCallback={() => handleTeamAddClickExpand()}>
               New Team <i className="far fa-plus-square"></i>
-            </button>
+            </Button>
           ) : (
             <h4>Click a Folder to add Teams!</h4>
           )}

@@ -4,6 +4,12 @@
   height: 35px;
 }
 
+.sprites-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
 .team-section {
   padding: 2px 2px;
   color: $med-dark-grey;

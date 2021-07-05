@@ -107,7 +107,7 @@ const TeamPublic = (props: any) => {
                 </button>
                 <div className={styles['title-name']}>
                   <Input
-                    formId={'title-name'}
+                    htmlFor={'title-name'}
                     label={'Team Name:'}
                     inputHasError={false}
                     disabled
@@ -220,7 +220,7 @@ const TeamPublic = (props: any) => {
           </div>
           <div>
             <p>By {team.user_name}</p>
-            {spriteMap}
+            <div className={styles['sprites-row']}>{spriteMap}</div>
             <p>
               Created on:{' '}
               {new Date(team.date_created).toLocaleString('en-GB', {

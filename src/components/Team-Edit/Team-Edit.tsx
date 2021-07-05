@@ -348,7 +348,7 @@ const TeamEdit = (props: any) => {
           </div>
           <div>
             <p>By {team.user_name}</p>
-            {spriteMap}
+            <div className={styles['sprites-row']}>{spriteMap}</div>
             <p>
               Created on:{' '}
               {new Date(team.date_created).toLocaleString('en-GB', {

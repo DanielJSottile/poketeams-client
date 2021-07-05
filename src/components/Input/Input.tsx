@@ -4,7 +4,7 @@ type Props = {
   /** class for input container */
   containerClass?: string;
   /** id for the form the input lives in */
-  formId?: string;
+  htmlFor?: string;
   /** determines if there is a label for the input */
   labelClass?: string;
   /** label string*/
@@ -49,7 +49,7 @@ type Props = {
 
 const Input: React.FC<Props> = ({
   containerClass = '',
-  formId = '',
+  htmlFor = '',
   labelClass = '',
   label = '',
   labelIcon,
@@ -74,7 +74,7 @@ const Input: React.FC<Props> = ({
   return (
     <div className={containerClass}>
       {!!label && (
-        <label className={labelClass} htmlFor={formId}>
+        <label className={labelClass} htmlFor={htmlFor}>
           {label}
           {labelIcon}
         </label>

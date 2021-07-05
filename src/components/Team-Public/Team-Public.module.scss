@@ -6,6 +6,12 @@
   justify-content: space-around;
 }
 
+.sprites-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
 .tiny-icon {
   height: 35px;
 }
