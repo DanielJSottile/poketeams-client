@@ -115,7 +115,7 @@ const TeamPublic = (props: any) => {
                     disabled
                     readOnly
                     inputClass={styles['title']}
-                    placeholder={'e.e. Cool team'}
+                    placeholder={'e.g. Cool team'}
                     value={team.team_name}
                     type={'text'}
                     name={'team-name'}
