@@ -1,6 +1,7 @@
 import React, { Fragment, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Input from '../Input/Input';
+import Image from '../Image/Image';
 import SetPublic from '../Set-Public/Set-Public';
 import showdownGenerate from '../../functions/generate';
 import legality from '../../functions/legality';
@@ -157,9 +158,9 @@ const TeamPublicShare = (props: any) => {
     if (sets) {
       spriteMap = sets.map((set: any, i: number) => {
         return (
-          <img
+          <Image
             key={i}
-            className={styles['tiny-icon']}
+            imageClass={styles['tiny-icon']}
             src={legality.returnIconSprite(set.species, set.shiny)}
             alt={set.species}
           />

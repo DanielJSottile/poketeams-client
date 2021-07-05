@@ -1,6 +1,7 @@
 import React, { Fragment, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Input from '../Input/Input';
+import Image from '../Image/Image';
 import showdownGenerate from '../../functions/generate';
 import legality from '../../functions/legality';
 import styles from './Set-Public.module.scss';
@@ -109,8 +110,8 @@ const SetPublic = (props: any) => {
                 />
               </div>
               <div className={styles['sprites']}>
-                <img
-                  className={styles['sprite-img']}
+                <Image
+                  imageClass={styles['sprite-img']}
                   src={legality.returnIconSprite(set.species, set.shiny)}
                   alt={set.species || 'Pikachu'}
                 />
@@ -119,8 +120,8 @@ const SetPublic = (props: any) => {
                     .returnTypeIcon(legality.returnType(set.species))
                     .map((type: any, i: number) => {
                       return (
-                        <img
-                          className={styles['type-img']}
+                        <Image
+                          imageClass={styles['type-img']}
                           src={`${type}`}
                           key={i}
                           alt={`${i + 1}`}
@@ -483,8 +484,8 @@ const SetPublic = (props: any) => {
       .returnTypeIcon(legality.returnType(set.species))
       .map((type: any, i: number) => {
         return (
-          <img
-            className={styles['icon']}
+          <Image
+            imageClass={styles['icon']}
             key={i}
             src={`${type}`}
             alt={`${i + 1}`}
@@ -497,8 +498,8 @@ const SetPublic = (props: any) => {
         <div className={styles['pokemon']}>
           <div className={styles['closed']} onClick={() => handleSetToggle()}>
             <div className={styles['inside']}>
-              <img
-                className={styles['icon']}
+              <Image
+                imageClass={styles['icon']}
                 src={legality.returnIconSprite(set.species, set.shiny)}
                 alt={set.species}
               />

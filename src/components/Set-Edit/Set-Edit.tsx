@@ -1,6 +1,7 @@
 import React, { Fragment, useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Input from '../Input/Input';
+import Image from '../Image/Image';
 import LoadingSets from '../Loaders/LoadingSets/LoadingSets';
 import GeneralContext from '../../contexts/GeneralContext';
 import showdownGenerate from '../../functions/generate';
@@ -589,8 +590,8 @@ const SetEdit = (props: any) => {
                 />
               </div>
               <div className={styles['sprites']}>
-                <img
-                  className={styles['sprite-img']}
+                <Image
+                  imageClass={styles['sprite-img']}
                   src={legality.returnIconSprite(
                     state.species.value,
                     state.shiny.value
@@ -602,8 +603,8 @@ const SetEdit = (props: any) => {
                     .returnTypeIcon(legality.returnType(state.species.value))
                     .map((type: any, i: number) => {
                       return (
-                        <img
-                          className={styles['type-img']}
+                        <Image
+                          imageClass={styles['type-img']}
                           src={`${type}`}
                           key={i}
                           alt={`${i + 1}`}
@@ -1035,8 +1036,8 @@ const SetEdit = (props: any) => {
       .returnTypeIcon(legality.returnType(set.species))
       .map((type: any, i: number) => {
         return (
-          <img
-            className={styles['icon']}
+          <Image
+            imageClass={styles['icon']}
             key={i}
             src={`${type}`}
             alt={`${i + 1}`}
@@ -1044,8 +1045,8 @@ const SetEdit = (props: any) => {
         );
       });
     const imgIcon = (
-      <img
-        className={styles['icon']}
+      <Image
+        imageClass={styles['icon']}
         src={legality.returnIconSprite(set.species, set.shiny)}
         alt={set.species}
       />

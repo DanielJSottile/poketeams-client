@@ -1,6 +1,7 @@
 import React, { Fragment, useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Input from '../Input/Input';
+import Image from '../Image/Image';
 import SetPublic from '../Set-Public/Set-Public';
 import GeneralContext from '../../contexts/GeneralContext';
 import showdownGenerate from '../../functions/generate';
@@ -199,9 +200,9 @@ const TeamPublic = (props: any) => {
   const renderUnexpandedTeam = () => {
     let spriteMap = teamSets.map((set, i) => {
       return (
-        <img
+        <Image
           key={i}
-          className={styles['tiny-icon']}
+          imageClass={styles['tiny-icon']}
           src={legality.returnIconSprite(set.species, set.shiny)}
           alt={set.species}
         />
