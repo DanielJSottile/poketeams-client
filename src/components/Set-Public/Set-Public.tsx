@@ -89,7 +89,7 @@ const SetPublic = (props: any) => {
                   inputHasError={false}
                   htmlFor={'pokemon-gender'}
                   label={'Gender: '}
-                  inputClass={styles['pokemon-nickname']}
+                  inputClass={styles['pokemon-gender']}
                   disabled
                   readOnly
                   value={set.gender || ''}

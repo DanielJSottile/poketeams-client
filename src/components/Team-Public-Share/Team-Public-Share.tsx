@@ -70,7 +70,7 @@ const TeamPublicShare = (props: any) => {
                     disabled
                     readOnly
                     inputClass={styles['title']}
-                    placeholder={'e.e. Cool team'}
+                    placeholder={'e.g. Cool team'}
                     value={team.team_name}
                     type={'text'}
                     name={'team-name'}
@@ -134,7 +134,7 @@ const TeamPublicShare = (props: any) => {
                   inputHasError={false}
                   disabled
                   readOnly
-                  value={team.team_name}
+                  value={`poketeams.now.sh/share/${team.id}`}
                 />
               </div>
               <label htmlFor="edit-team">Export Team:</label>
