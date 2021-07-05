@@ -1,5 +1,9 @@
 import React, { Fragment, useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
+import Input from '../Input/Input';
+import TextArea from '../TextArea/TextArea';
+import Image from '../Image/Image';
+import Button from '../Button/Button';
 import SetPublic from '../Set-Public/Set-Public';
 import GeneralContext from '../../contexts/GeneralContext';
 import showdownGenerate from '../../functions/generate';
@@ -100,19 +104,21 @@ const TeamPublic = (props: any) => {
           <div className={styles['team-header']}>
             <form className={styles['team-form']}>
               <div className={styles['team-title']}>
-                <button onClick={() => handleTeamToggle()}>
+                <Button onClickCallback={() => handleTeamToggle()}>
                   Compress Team <i className="fas fa-compress-arrows-alt"></i>
-                </button>
+                </Button>
                 <div className={styles['title-name']}>
-                  <label htmlFor="title-name">Team Name:</label>
-                  <input
+                  <Input
+                    htmlFor={'title-name'}
+                    label={'Team Name:'}
+                    inputHasError={false}
                     disabled
                     readOnly
-                    className={styles['title']}
-                    placeholder="e.g. Cool Team"
+                    inputClass={styles['title']}
+                    placeholder={'e.e. Cool team'}
                     value={team.team_name}
-                    type="text"
-                    name="team-name"
+                    type={'text'}
+                    name={'team-name'}
                     id={`team-name-${team.id}`}
                   />
                 </div>
@@ -133,32 +139,33 @@ const TeamPublic = (props: any) => {
                 </div>*/}{' '}
                 {/* Part of a future feature */}
               </div>
-              <div className={styles['title-content']}>
-                <label htmlFor="title-content">Description:</label>
-                <textarea
-                  disabled
-                  readOnly
-                  className={styles['title-content desc']}
-                  placeholder="e.g. description"
-                  name="title-content"
-                  id={`title-content-${team.id}`}
-                  value={team.description || ''}
-                />
-              </div>
+              <TextArea
+                textAreaHasError={false}
+                containerClass={styles['title-content']}
+                htmlFor="title-content"
+                label={'Description:'}
+                disabled
+                readOnly
+                textAreaClass={styles['title-content desc']}
+                placeholder="e.g. description"
+                name="title-content"
+                id={`title-content-${team.id}`}
+                value={team.description || ''}
+              />
             </form>
             <div className={styles['export-team']}>
               {state.copySuccess ? (
                 <div className={styles['copied']}>Copied to Clipboard!!</div>
               ) : null}
               <div>
-                <button
-                  onClick={() => {
+                <Button
+                  onClickCallback={() => {
                     copyCodeToClipboard();
                     setTimeout(removeCopySuccess, 3000);
                   }}
                 >
                   Copy Text
-                </button>
+                </Button>
                 <Link
                   to={{
                     pathname: `/share/${team.id}`,
@@ -168,15 +175,17 @@ const TeamPublic = (props: any) => {
                 >
                   Share This Team! <i className="fas fa-share-square"></i>
                 </Link>
-                <input
+                <Input
+                  inputHasError={false}
                   disabled
-                  type="text"
                   readOnly
+                  type="text"
                   value={`poketeams.now.sh/share/${team.id}`}
                 />
               </div>
               <label htmlFor="edit-team">Export Team:</label>
-              <textarea
+              <TextArea
+                textAreaHasError={false}
                 ref={textArea}
                 disabled
                 readOnly
@@ -195,9 +204,9 @@ const TeamPublic = (props: any) => {
   const renderUnexpandedTeam = () => {
     let spriteMap = teamSets.map((set, i) => {
       return (
-        <img
+        <Image
           key={i}
-          className={styles['tiny-icon']}
+          imageClass={styles['tiny-icon']}
           src={legality.returnIconSprite(set.species, set.shiny)}
           alt={set.species}
         />
@@ -215,7 +224,7 @@ const TeamPublic = (props: any) => {
           </div>
           <div>
             <p>By {team.user_name}</p>
-            {spriteMap}
+            <div className={styles['sprites-row']}>{spriteMap}</div>
             <p>
               Created on:{' '}
               {new Date(team.date_created).toLocaleString('en-GB', {

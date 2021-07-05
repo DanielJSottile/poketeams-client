@@ -106,6 +106,8 @@
 }
 
 .inside {
+  display: flex;
+  flex-direction: row;
   align-self: center;
 }
 
@@ -165,6 +167,17 @@
   color: green;
   -webkit-animation: fade-out 3s ease-out both;
   animation: fade-out 3s ease-out both;
+}
+
+.label-as-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.label-as-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 /* ----------------------------------------------
