@@ -2,6 +2,7 @@ import React, { Fragment, useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Folder from '../Folder/Folder';
 import Input from '../Input/Input';
+import TextArea from '../TextArea/TextArea';
 import Button from '../Button/Button';
 import PokeballLoader from '../Loaders/PokeballLoader/PokeballLoader';
 import LoadingBlack from '../Loaders/LoadingBlack/LoadingBlack';
@@ -113,21 +114,19 @@ const FoldersList = (props: any) => {
             value={newFolderName.value}
             onChangeCallback={(e) => setNewFolderName(e.target.value)}
           />
-          <div className={styles['folder-import']}>
-            <label htmlFor="folder-import">Import Showdown Folder:</label>
-            {newFolderImport.value !== '' && (
-              <p className="error-validate shake-horizontal">
-                {validateNewFolderImport()}
-              </p>
-            )}
-            <textarea
-              placeholder="Optionally Import a proper Pokemon Showdown Folder Here And It Will Fill Out The Entire Folder!"
-              name="folder-import"
-              id="team-import-1"
-              value={newFolderImport.value}
-              onChange={(e) => setNewFolderContents(e.target.value)}
-            ></textarea>
-          </div>
+          <TextArea
+            containerClass={styles['folder-import']}
+            textAreaHasError
+            isError={!!newFolderImport.value}
+            validationCallback={validateNewFolderImport()}
+            htmlFor="folder-import"
+            label="Import Showdown Folder:"
+            placeholder="Optionally Import a proper Pokemon Showdown Folder Here And It Will Fill Out The Entire Folder!"
+            name="folder-import"
+            id="team-import-1"
+            value={newFolderImport.value}
+            onChangeCallback={(e) => setNewFolderContents(e.target.value)}
+          />
         </div>
         <Button
           type="submit"
@@ -215,7 +214,7 @@ const FoldersList = (props: any) => {
     <Fragment>
       <section className={styles['folders-list']}>
         <h3>Folders:</h3>
-        <div>
+        <div className={styles['folders']}>
           {folderList.length > 0 ? (
             folderList
           ) : (
@@ -276,7 +275,8 @@ const FoldersList = (props: any) => {
                 <label htmlFor="edit-team">
                   Export Folder: <i className="fas fa-download"></i>
                 </label>
-                <textarea
+                <TextArea
+                  textAreaHasError={false}
                   ref={textArea}
                   disabled
                   readOnly

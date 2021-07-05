@@ -1,6 +1,7 @@
 import React, { Fragment, useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Input from '../Input/Input';
+import TextArea from '../TextArea/TextArea';
 import Image from '../Image/Image';
 import Button from '../Button/Button';
 import SetEdit from '../Set-Edit/Set-Edit';
@@ -235,22 +236,19 @@ const TeamEdit = (props: any) => {
                 </div>*/}{' '}
                 {/* Part of a future feature */}
               </div>
-              <div className={styles['title-content']}>
-                <label htmlFor="title-content">Description:</label>
-                {
-                  <p className="error-validate shake-horizontal">
-                    {validateDesc()}
-                  </p>
-                }
-                <textarea
-                  className={styles['title-content desc']}
-                  placeholder="e.g. description"
-                  name="title-content"
-                  id={`title-content-${team.id}`}
-                  value={state.description.value}
-                  onChange={(e) => setDesc(e.target.value)}
-                />
-              </div>
+              <TextArea
+                textAreaHasError
+                containerClass={styles['title-content']}
+                htmlFor="title-content"
+                label="Description:"
+                validationCallback={validateDesc()}
+                textAreaClass={styles['title-content desc']}
+                placeholder="e.g. description"
+                name="title-content"
+                id={`title-content-${team.id}`}
+                value={state.description.value}
+                onChangeCallback={(e) => setDesc(e.target.value)}
+              />
               <Button
                 type="submit"
                 disabled={validateTeamName() || validateDesc()}
@@ -299,7 +297,8 @@ const TeamEdit = (props: any) => {
               <label htmlFor="edit-team">
                 Export Team: <i className="fas fa-download"></i>
               </label>
-              <textarea
+              <TextArea
+                textAreaHasError={false}
                 ref={textArea}
                 disabled
                 readOnly

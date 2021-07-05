@@ -1,6 +1,7 @@
 import React, { Fragment, useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Input from '../Input/Input';
+import TextArea from '../TextArea/TextArea';
 import Image from '../Image/Image';
 import Button from '../Button/Button';
 import LoadingSets from '../Loaders/LoadingSets/LoadingSets';
@@ -511,12 +512,13 @@ const SetEdit = (props: any) => {
                 {validateNewSetImport()}
               </p>
             )}
-            <textarea
+            <TextArea
+              textAreaHasError={false}
               placeholder="Import a Pokemon Showdown Set Here And It Will Re-populate The Field:"
               name="pokemon-import"
               id={`pokemon-import-${set.id}`}
               value={newSetImport.value}
-              onChange={(e) => setNewSetContents(e.target.value)}
+              onChangeCallback={(e) => setNewSetContents(e.target.value)}
             />
             <Button
               type="submit"
@@ -1003,18 +1005,18 @@ const SetEdit = (props: any) => {
               value={`poketeams.now.sh/${set.team_id}/${set.id}`}
             />
           </div>
-          <div className={styles['export-pokemon']}>
-            <label htmlFor="export-pokemon">
-              Export Pokemon: <i className="fas fa-download"></i>
-            </label>
-            <textarea
-              ref={textArea}
-              readOnly
-              name="export-pokemon"
-              id="export-pokemon-2"
-              value={showdownGenerate([set])}
-            />
-          </div>
+          <TextArea
+            containerClass={styles['export-pokemon']}
+            textAreaHasError
+            htmlFor="export-pokemon"
+            label="Export Pokemon: "
+            labelIcon={<i className="fas fa-download"></i>}
+            ref={textArea}
+            readOnly
+            name="export-pokemon"
+            id="export-pokemon-2"
+            value={showdownGenerate([set])}
+          />
         </div>
         <div>
           <Button

@@ -1,6 +1,7 @@
 import React, { Fragment, useContext } from 'react';
 import GeneralContext from '../../contexts/GeneralContext';
 import Input from '../Input/Input';
+import TextArea from '../TextArea/TextArea';
 import Button from '../Button/Button';
 import styles from './AddTeamSection.module.scss';
 
@@ -51,32 +52,31 @@ const AddTeamSection = (props: any) => {
           value={newTeamName.value}
           onChangeCallback={(e) => setNewTeamName(e.target.value)}
         />
-        <div className={styles['team-import']}>
-          <label htmlFor="title-content">Description:</label>
-          {<p className="error-validate shake-horizontal">{validateDesc()}</p>}
-          <textarea
-            placeholder="e.g. description"
-            name="title-content"
-            id="title-content"
-            value={desc.value}
-            onChange={(e) => setDesc(e.target.value)}
-          />
-        </div>
-        <div className={styles['team-import']}>
-          <label htmlFor="team-import">Import Team Set:</label>
-          {newTeamImport.value !== '' && (
-            <p className="error-validate shake-horizontal">
-              {validateNewTeamImport()}
-            </p>
-          )}
-          <textarea
-            placeholder="Optionally Import a proper Pokemon Showdown Team Here And It Will Fill Out Your Whole Team!"
-            name="team-import"
-            id="team-import-1"
-            value={newTeamImport.value}
-            onChange={(e) => setNewTeamContents(e.target.value)}
-          ></textarea>
-        </div>
+        <TextArea
+          containerClass={styles['team-import']}
+          textAreaHasError
+          htmlFor="title-content"
+          label={'Description:'}
+          validationCallback={validateDesc()}
+          placeholder="e.g. description"
+          name="title-content"
+          id="title-content"
+          value={desc.value}
+          onChangeCallback={(e) => setDesc(e.target.value)}
+        />
+        <TextArea
+          containerClass={styles['team-import']}
+          textAreaHasError
+          isError={!!newTeamImport.value}
+          htmlFor="team-import"
+          label={'Description:'}
+          validationCallback={validateNewTeamImport()}
+          placeholder="Optionally Import a proper Pokemon Showdown Team Here And It Will Fill Out Your Whole Team!"
+          name="team-import"
+          id="team-import-1"
+          value={newTeamImport.value}
+          onChangeCallback={(e) => setNewTeamContents(e.target.value)}
+        />
         <Button
           type="submit"
           buttonClass={styles['submit']}

@@ -1,6 +1,7 @@
 import React, { Fragment, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Input from '../Input/Input';
+import TextArea from '../TextArea/TextArea';
 import Image from '../Image/Image';
 import Button from '../Button/Button';
 import showdownGenerate from '../../functions/generate';
@@ -462,17 +463,18 @@ const SetPublic = (props: any) => {
               value={`poketeams.now.sh/${set.team_id}/${set.id}`}
             />
           </div>
-          <div className={styles['export-pokemon']}>
-            <label htmlFor="export-pokemon">Export Pokemon:</label>
-            <textarea
-              ref={textArea}
-              disabled
-              readOnly
-              name="export-pokemon"
-              id="export-pokemon-2"
-              value={showdownGenerate([set])}
-            />
-          </div>
+          <TextArea
+            containerClass={styles['export-pokemon']}
+            textAreaHasError={false}
+            htmlFor="export-pokemon"
+            label={'Export Pokemon:'}
+            ref={textArea}
+            disabled
+            readOnly
+            name="export-pokemon"
+            id="export-pokemon-2"
+            value={showdownGenerate([set])}
+          />
         </div>
       </div>
     );

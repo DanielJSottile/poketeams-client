@@ -1,8 +1,6 @@
 import React from 'react';
 
 type Props = {
-  /** class for input container */
-  containerClass?: string;
   /** class for the label */
   buttonClass?: string;
   /** string of input id */
@@ -18,7 +16,6 @@ type Props = {
 };
 
 const Button: React.FC<Props> = ({
-  containerClass = '',
   id = '',
   buttonClass = '',
   onClickCallback = () => null,
@@ -27,17 +24,15 @@ const Button: React.FC<Props> = ({
   children,
 }) => {
   return (
-    <div className={containerClass}>
-      <button
-        id={id}
-        className={buttonClass}
-        disabled={disabled}
-        onClick={onClickCallback}
-        type={type}
-      >
-        {children}
-      </button>
-    </div>
+    <button
+      id={id}
+      className={buttonClass}
+      disabled={disabled}
+      onClick={onClickCallback}
+      type={type}
+    >
+      {children}
+    </button>
   );
 };
 

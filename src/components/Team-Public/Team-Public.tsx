@@ -1,6 +1,7 @@
 import React, { Fragment, useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Input from '../Input/Input';
+import TextArea from '../TextArea/TextArea';
 import Image from '../Image/Image';
 import Button from '../Button/Button';
 import SetPublic from '../Set-Public/Set-Public';
@@ -138,18 +139,19 @@ const TeamPublic = (props: any) => {
                 </div>*/}{' '}
                 {/* Part of a future feature */}
               </div>
-              <div className={styles['title-content']}>
-                <label htmlFor="title-content">Description:</label>
-                <textarea
-                  disabled
-                  readOnly
-                  className={styles['title-content desc']}
-                  placeholder="e.g. description"
-                  name="title-content"
-                  id={`title-content-${team.id}`}
-                  value={team.description || ''}
-                />
-              </div>
+              <TextArea
+                textAreaHasError={false}
+                containerClass={styles['title-content']}
+                htmlFor="title-content"
+                label={'Description:'}
+                disabled
+                readOnly
+                textAreaClass={styles['title-content desc']}
+                placeholder="e.g. description"
+                name="title-content"
+                id={`title-content-${team.id}`}
+                value={team.description || ''}
+              />
             </form>
             <div className={styles['export-team']}>
               {state.copySuccess ? (
@@ -182,7 +184,8 @@ const TeamPublic = (props: any) => {
                 />
               </div>
               <label htmlFor="edit-team">Export Team:</label>
-              <textarea
+              <TextArea
+                textAreaHasError={false}
                 ref={textArea}
                 disabled
                 readOnly
