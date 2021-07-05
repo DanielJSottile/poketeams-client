@@ -9,6 +9,8 @@ type Props = {
   labelClass?: string;
   /** label string*/
   label?: string;
+  /** optional icon to be appended to the label */
+  labelIcon?: JSX.Element;
   /** determines if the input has an error or not */
   inputHasError: boolean;
   /** determines if the error is triggered or not */
@@ -50,6 +52,7 @@ const Input: React.FC<Props> = ({
   formId = '',
   labelClass = '',
   label = '',
+  labelIcon,
   inputHasError = false,
   isError = false,
   validationCallback = () => null,
@@ -73,6 +76,7 @@ const Input: React.FC<Props> = ({
       {!!label && (
         <label className={labelClass} htmlFor={formId}>
           {label}
+          {labelIcon}
         </label>
       )}
       {isError && inputHasError && (

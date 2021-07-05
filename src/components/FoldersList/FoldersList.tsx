@@ -1,6 +1,7 @@
 import React, { Fragment, useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Folder from '../Folder/Folder';
+import Input from '../Input/Input';
 import PokeballLoader from '../Loaders/PokeballLoader/PokeballLoader';
 import LoadingBlack from '../Loaders/LoadingBlack/LoadingBlack';
 import GeneralContext from '../../contexts/GeneralContext';
@@ -99,19 +100,17 @@ const FoldersList = (props: any) => {
     return (
       <form>
         <div>
-          <label htmlFor="foldername">Folder Name:</label>
-          {
-            <p className="error-validate shake-horizontal">
-              {validateNewFolderName()}
-            </p>
-          }
-          <input
+          <Input
+            inputHasError
+            formId="foldername"
+            label="Folder Name:"
+            validationCallback={validateNewFolderName()}
             placeholder="e.g. Good Teams"
             type="text"
             name="foldername"
             id="foldername"
             value={newFolderName.value}
-            onChange={(e) => setNewFolderName(e.target.value)}
+            onChangeCallback={(e) => setNewFolderName(e.target.value)}
           />
           <div className={styles['folder-import']}>
             <label htmlFor="folder-import">Import Showdown Folder:</label>
@@ -156,22 +155,18 @@ const FoldersList = (props: any) => {
 
     return (
       <form>
-        <div>
-          <label htmlFor="foldername">Edit Folder Name:</label>
-          {
-            <p className="error-validate shake-horizontal">
-              {validateNewFolderName}
-            </p>
-          }
-          <input
-            placeholder="e.g. Good Teams"
-            type="text"
-            name="foldername"
-            id="foldername"
-            value={newFolderName.value}
-            onChange={(e) => setNewFolderName(e.target.value)}
-          />
-        </div>
+        <Input
+          inputHasError
+          formId="foldername"
+          label="Edit Folder Name:"
+          validationCallback={validateNewFolderName()}
+          placeholder="e.g. Good Teams"
+          type="text"
+          name="foldername"
+          id="foldername"
+          value={newFolderName.value}
+          onChangeCallback={(e) => setNewFolderName(e.target.value)}
+        />
         <button
           type="submit"
           className={styles['submit']}
@@ -269,7 +264,8 @@ const FoldersList = (props: any) => {
                   >
                     Share This Folder! <i className="fas fa-share-square"></i>
                   </Link>
-                  <input
+                  <Input
+                    inputHasError={false}
                     disabled
                     type="text"
                     readOnly

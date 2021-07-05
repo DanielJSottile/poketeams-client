@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import GeneralContext from '../../contexts/GeneralContext';
+import Input from '../Input/Input';
 import styles from './SearchBar-Public.module.scss';
 
 // Component
@@ -18,17 +19,16 @@ const SearchBarPublic = (props: any) => {
     <div className={styles['searchbar']}>
       <form className={styles['search']}>
         <div className={styles['search']}>
-          {search.value && (
-            <p className="error-validate shake-horizontal">{validateSearch}</p>
-          )}
-          <label htmlFor="search">
-            Search: <i className="fas fa-search"></i>
-          </label>
-          <input
-            className={styles['s-input']}
+          <Input
+            inputHasError
+            isError={!!search.value}
+            validationCallback={validateSearch}
+            inputClass={styles['s-input']}
+            label={'Search: '}
+            labelIcon={<i className="fas fa-search"></i>}
             placeholder="e.g. Pikachu"
             value={search.value}
-            onChange={(e) => setSearch(e.target.value)}
+            onChangeCallback={(e) => setSearch(e.target.value)}
             type="text"
             name="search"
             id="search"

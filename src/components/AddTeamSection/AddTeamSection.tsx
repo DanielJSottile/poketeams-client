@@ -1,5 +1,6 @@
 import React, { Fragment, useContext } from 'react';
 import GeneralContext from '../../contexts/GeneralContext';
+import Input from '../Input/Input';
 import styles from './AddTeamSection.module.scss';
 
 // Interfaces
@@ -36,22 +37,19 @@ const AddTeamSection = (props: any) => {
 
     return (
       <form>
-        <div className={styles['team-name']}>
-          <label htmlFor="foldername">Team Name:</label>
-          {
-            <p className="error-validate shake-horizontal">
-              {validateNewTeamName()}
-            </p>
-          }
-          <input
-            placeholder="e.g. My Cool Team"
-            type="text"
-            name="teamname"
-            id="teamname"
-            value={newTeamName.value}
-            onChange={(e) => setNewTeamName(e.target.value)}
-          />
-        </div>
+        <Input
+          inputHasError
+          containerClass={styles['team-name']}
+          formId="foldername"
+          label="Team Name:"
+          validationCallback={validateNewTeamName()}
+          placeholder="e.g. My Cool Team"
+          type="text"
+          name="teamname"
+          id="teamname"
+          value={newTeamName.value}
+          onChangeCallback={(e) => setNewTeamName(e.target.value)}
+        />
         <div className={styles['team-import']}>
           <label htmlFor="title-content">Description:</label>
           {<p className="error-validate shake-horizontal">{validateDesc()}</p>}

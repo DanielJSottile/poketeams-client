@@ -1,4 +1,5 @@
 import React, { useContext, useState } from 'react';
+import Input from '../Input/Input';
 import TokenService from '../../services/token-service';
 import GeneralContext from '../../contexts/GeneralContext';
 import AuthApiService from '../../services/auth-api-service';
@@ -49,25 +50,25 @@ const LoginForm = (props: any) => {
           </p>
         )}
       </div>
-      <div>
-        <label htmlFor="user_name">Username</label>
-        <input
-          placeholder="Username"
-          autoComplete="username"
-          type="text"
-          name="user_name"
-          id="user_name"
-        />
-      </div>
-      <div>
-        <label htmlFor="password">Password</label>
-        <input
-          type="password"
-          autoComplete="current-password"
-          name="password"
-          id="password"
-        />
-      </div>
+      <Input
+        inputHasError={false}
+        formId="user_name"
+        label="Username"
+        placeholder="Username"
+        autoComplete="username"
+        type="text"
+        name="user_name"
+        id="user_name"
+      />
+      <Input
+        inputHasError={false}
+        formId="password"
+        label="Password"
+        type="password"
+        autoComplete="current-password"
+        name="password"
+        id="password"
+      />
       <button type="submit">
         Log In <i className="fas fa-sign-in-alt"></i>
       </button>
