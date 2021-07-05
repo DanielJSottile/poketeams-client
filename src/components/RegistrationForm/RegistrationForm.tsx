@@ -58,38 +58,36 @@ const RegistrationForm = (props: any) => {
           </p>
         )}
       </div>
-      <div className={styles['user_name']}>
-        <label htmlFor="RegistrationForm__user_name">User name &#42;</label>
-        <Input
-          inputHasError={false}
-          name="user_name"
-          type="text"
-          required
-          id="RegistrationForm__user_name"
-        />
-      </div>
-      <div className={styles['password']}>
-        <label htmlFor="RegistrationForm__password">Password &#42;</label>
-        <Input
-          inputHasError={false}
-          name="password"
-          type="password"
-          required
-          id="RegistrationForm__password"
-        />
-      </div>
-      <div className={styles['verifyPassword']}>
-        <label htmlFor="RegistrationForm__verifyPassword">
-          Verify Password &#42;
-        </label>
-        <Input
-          inputHasError={false}
-          name="verifyPassword"
-          type="password"
-          required
-          id="RegistrationForm__verifyPassword"
-        />
-      </div>
+      <Input
+        containerClass={styles['user_name']}
+        inputHasError={false}
+        htmlFor="RegistrationForm__user_name"
+        label="User name &#42;"
+        name="user_name"
+        type="text"
+        required
+        id="RegistrationForm__user_name"
+      />
+      <Input
+        containerClass={styles['password']}
+        inputHasError={false}
+        htmlFor="RegistrationForm__password"
+        label="Password &#42;"
+        name="password"
+        type="password"
+        required
+        id="RegistrationForm__password"
+      />
+      <Input
+        containerClass={styles['verifyPassword']}
+        inputHasError={false}
+        htmlFor="RegistrationForm__verifyPassword"
+        label="Verify Password &#42;"
+        name="verifyPassword"
+        type="password"
+        required
+        id="RegistrationForm__verifyPassword"
+      />
       <div className={styles['go-back-links']}>
         <Button type="submit">Register</Button>
         <Link className={styles['go-back']} to={'/landing'}>
