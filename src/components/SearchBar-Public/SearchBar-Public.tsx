@@ -1,7 +1,5 @@
 import React, { useContext } from 'react';
 import GeneralContext from '../../contexts/GeneralContext';
-import Input from '../Input/Input';
-import Button from '../Button/Button';
 import styles from './SearchBar-Public.module.scss';
 
 // Component
@@ -20,16 +18,17 @@ const SearchBarPublic = (props: any) => {
     <div className={styles['searchbar']}>
       <form className={styles['search']}>
         <div className={styles['search']}>
-          <Input
-            inputHasError
-            isError={!!search.value}
-            validationCallback={validateSearch}
-            inputClass={styles['s-input']}
-            label={'Search: '}
-            labelIcon={<i className="fas fa-search"></i>}
+          {search.value && (
+            <p className="error-validate shake-horizontal">{validateSearch}</p>
+          )}
+          <label htmlFor="search">
+            Search: <i className="fas fa-search"></i>
+          </label>
+          <input
+            className={styles['s-input']}
             placeholder="e.g. Pikachu"
             value={search.value}
-            onChangeCallback={(e) => setSearch(e.target.value)}
+            onChange={(e) => setSearch(e.target.value)}
             type="text"
             name="search"
             id="search"
@@ -48,16 +47,14 @@ const SearchBarPublic = (props: any) => {
             <option value="alphabetical">A - Z</option>
             <option value="rev alphabetical">Z - A</option>
           </select>
-          <Button
+          <button
             type="submit"
-            onClickCallback={(
-              e: React.MouseEvent<HTMLButtonElement, MouseEvent>
-            ) => {
+            onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
               handleSearch(e);
             }}
           >
             Go <i className="fas fa-exclamation"></i>
-          </Button>
+          </button>
         </div>
       </form>
     </div>

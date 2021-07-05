@@ -1,9 +1,5 @@
 import React, { Fragment, useState } from 'react';
 import { Link } from 'react-router-dom';
-import Input from '../Input/Input';
-import TextArea from '../TextArea/TextArea';
-import Image from '../Image/Image';
-import Button from '../Button/Button';
 import SetPublic from '../Set-Public/Set-Public';
 import showdownGenerate from '../../functions/generate';
 import legality from '../../functions/legality';
@@ -59,21 +55,19 @@ const TeamPublicShare = (props: any) => {
           <div className={styles['team-header']}>
             <form className={styles['team-form']}>
               <div className={styles['team-title']}>
-                <Button onClickCallback={() => handleTeamToggle()}>
+                <button onClick={() => handleTeamToggle()}>
                   Compress Team <i className="fas fa-compress-arrows-alt"></i>
-                </Button>
+                </button>
                 <div className={styles['title-name']}>
-                  <Input
-                    htmlFor={'title-name'}
-                    label={'Team Name:'}
-                    inputHasError={false}
+                  <label htmlFor="title-name">Team Name:</label>
+                  <input
                     disabled
                     readOnly
-                    inputClass={styles['title']}
-                    placeholder={'e.e. Cool team'}
+                    className={styles['title']}
+                    placeholder="e.g. Cool Team"
                     value={team.team_name}
-                    type={'text'}
-                    name={'team-name'}
+                    type="text"
+                    name="team-name"
                     id={`team-name-${team.id}`}
                   />
                 </div>
@@ -94,33 +88,32 @@ const TeamPublicShare = (props: any) => {
                 </div>*/}{' '}
                 {/* Part of a future feature */}
               </div>
-              <TextArea
-                textAreaHasError={false}
-                containerClass={styles['title-content']}
-                htmlFor="title-content"
-                label={'Description:'}
-                disabled
-                readOnly
-                textAreaClass={`${styles['title-content']} ${styles['desc']}`}
-                placeholder="e.g. description"
-                name="title-content"
-                id={`title-content-${team.id}`}
-                value={team.description || ''}
-              />
+              <div className={styles['title-content']}>
+                <label htmlFor="title-content">Description:</label>
+                <textarea
+                  disabled
+                  readOnly
+                  className={`${styles['title-content']} ${styles['desc']}`}
+                  placeholder="e.g. description"
+                  name="title-content"
+                  id={`title-content-${team.id}`}
+                  value={team.description || ''}
+                />
+              </div>
             </form>
             <div className={styles['export-team']}>
               {state.copySuccess ? (
                 <div className={styles['copied']}>Copied to Clipboard!!</div>
               ) : null}
               <div>
-                <Button
-                  onClickCallback={() => {
+                <button
+                  onClick={() => {
                     copyCodeToClipboard();
                     setTimeout(removeCopySuccess, 3000);
                   }}
                 >
                   Copy Text
-                </Button>
+                </button>
                 <Link
                   to={{
                     pathname: `/share/${team.id}`,
@@ -130,16 +123,15 @@ const TeamPublicShare = (props: any) => {
                 >
                   Share This Team! <i className="fas fa-share-square"></i>
                 </Link>
-                <Input
-                  inputHasError={false}
+                <input
                   disabled
+                  type="text"
                   readOnly
-                  value={team.team_name}
+                  value={`poketeams.now.sh/share/${team.id}`}
                 />
               </div>
               <label htmlFor="edit-team">Export Team:</label>
-              <TextArea
-                textAreaHasError={false}
+              <textarea
                 ref={textArea}
                 disabled
                 readOnly
@@ -162,9 +154,9 @@ const TeamPublicShare = (props: any) => {
     if (sets) {
       spriteMap = sets.map((set: any, i: number) => {
         return (
-          <Image
+          <img
             key={i}
-            imageClass={styles['tiny-icon']}
+            className={styles['tiny-icon']}
             src={legality.returnIconSprite(set.species, set.shiny)}
             alt={set.species}
           />
@@ -183,7 +175,7 @@ const TeamPublicShare = (props: any) => {
           </div>
           <div>
             <p>By {team.user_name}</p>
-            <div className={styles['sprites-row']}>{spriteMap}</div>
+            {spriteMap}
             <p>
               Created on:{' '}
               {new Date(team.date_created).toLocaleString('en-GB', {

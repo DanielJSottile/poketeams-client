@@ -1,9 +1,6 @@
 import React, { Fragment, useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Folder from '../Folder/Folder';
-import Input from '../Input/Input';
-import TextArea from '../TextArea/TextArea';
-import Button from '../Button/Button';
 import PokeballLoader from '../Loaders/PokeballLoader/PokeballLoader';
 import LoadingBlack from '../Loaders/LoadingBlack/LoadingBlack';
 import GeneralContext from '../../contexts/GeneralContext';
@@ -102,43 +99,47 @@ const FoldersList = (props: any) => {
     return (
       <form>
         <div>
-          <Input
-            inputHasError
-            htmlFor="foldername"
-            label="Folder Name:"
-            validationCallback={validateNewFolderName()}
+          <label htmlFor="foldername">Folder Name:</label>
+          {
+            <p className="error-validate shake-horizontal">
+              {validateNewFolderName()}
+            </p>
+          }
+          <input
             placeholder="e.g. Good Teams"
             type="text"
             name="foldername"
             id="foldername"
             value={newFolderName.value}
-            onChangeCallback={(e) => setNewFolderName(e.target.value)}
+            onChange={(e) => setNewFolderName(e.target.value)}
           />
-          <TextArea
-            containerClass={styles['folder-import']}
-            textAreaHasError
-            isError={!!newFolderImport.value}
-            validationCallback={validateNewFolderImport()}
-            htmlFor="folder-import"
-            label="Import Showdown Folder:"
-            placeholder="Optionally Import a proper Pokemon Showdown Folder Here And It Will Fill Out The Entire Folder!"
-            name="folder-import"
-            id="team-import-1"
-            value={newFolderImport.value}
-            onChangeCallback={(e) => setNewFolderContents(e.target.value)}
-          />
+          <div className={styles['folder-import']}>
+            <label htmlFor="folder-import">Import Showdown Folder:</label>
+            {newFolderImport.value !== '' && (
+              <p className="error-validate shake-horizontal">
+                {validateNewFolderImport()}
+              </p>
+            )}
+            <textarea
+              placeholder="Optionally Import a proper Pokemon Showdown Folder Here And It Will Fill Out The Entire Folder!"
+              name="folder-import"
+              id="team-import-1"
+              value={newFolderImport.value}
+              onChange={(e) => setNewFolderContents(e.target.value)}
+            ></textarea>
+          </div>
         </div>
-        <Button
+        <button
           type="submit"
-          buttonClass={styles['submit']}
+          className={styles['submit']}
           disabled={validateNewFolderName() || validateNewFolderImport()}
-          onClickCallback={(e) => {
+          onClick={(e) => {
             e.preventDefault();
             handlePostNewFolder();
           }}
         >
           Submit <i className="far fa-check-circle"></i>
-        </Button>
+        </button>
       </form>
     );
   };
@@ -155,23 +156,27 @@ const FoldersList = (props: any) => {
 
     return (
       <form>
-        <Input
-          inputHasError
-          htmlFor="foldername"
-          label="Edit Folder Name:"
-          validationCallback={validateNewFolderName()}
-          placeholder="e.g. Good Teams"
-          type="text"
-          name="foldername"
-          id="foldername"
-          value={newFolderName.value}
-          onChangeCallback={(e) => setNewFolderName(e.target.value)}
-        />
-        <Button
+        <div>
+          <label htmlFor="foldername">Edit Folder Name:</label>
+          {
+            <p className="error-validate shake-horizontal">
+              {validateNewFolderName}
+            </p>
+          }
+          <input
+            placeholder="e.g. Good Teams"
+            type="text"
+            name="foldername"
+            id="foldername"
+            value={newFolderName.value}
+            onChange={(e) => setNewFolderName(e.target.value)}
+          />
+        </div>
+        <button
           type="submit"
-          buttonClass={styles['submit']}
+          className={styles['submit']}
           disabled={validateNewFolderName()}
-          onClickCallback={(e) => {
+          onClick={(e) => {
             e.preventDefault();
             handleEditFolder();
             handleEditExpand();
@@ -182,7 +187,7 @@ const FoldersList = (props: any) => {
           }}
         >
           Submit <i className="far fa-check-circle"></i>
-        </Button>
+        </button>
       </form>
     );
   };
@@ -193,17 +198,17 @@ const FoldersList = (props: any) => {
     return (
       <div>
         <p>Are You Sure You'd Like to Delete this Folder?</p>
-        <Button
-          onClickCallback={() => {
+        <button
+          onClick={() => {
             handleDeleteFolder();
             handleDeleteExpand();
           }}
         >
           Yes <i className="fas fa-thumbs-up"></i>
-        </Button>
-        <Button onClickCallback={() => handleDeleteExpand()}>
+        </button>
+        <button onClick={() => handleDeleteExpand()}>
           No <i className="fas fa-thumbs-down"></i>
-        </Button>
+        </button>
       </div>
     );
   };
@@ -214,7 +219,7 @@ const FoldersList = (props: any) => {
     <Fragment>
       <section className={styles['folders-list']}>
         <h3>Folders:</h3>
-        <div className={styles['folders']}>
+        <div>
           {folderList.length > 0 ? (
             folderList
           ) : (
@@ -228,9 +233,9 @@ const FoldersList = (props: any) => {
           )}
         </div>
         <div>
-          <Button onClickCallback={() => handleFolderAddClickExpand()}>
+          <button onClick={() => handleFolderAddClickExpand()}>
             New Folder <i className="fas fa-folder-plus"></i>
-          </Button>
+          </button>
           {folderAddClicked ? renderExpanded() : null}
         </div>
         <div>
@@ -242,14 +247,14 @@ const FoldersList = (props: any) => {
                   <div className={styles['copied']}>Copied to Clipboard!!</div>
                 ) : null}
                 <div>
-                  <Button
-                    onClickCallback={() => {
+                  <button
+                    onClick={() => {
                       copyCodeToClipboard();
                       setTimeout(removeCopySuccess, 3000);
                     }}
                   >
                     Copy Text
-                  </Button>
+                  </button>
                   <Link
                     to={{
                       pathname: `/share/user/folder/${currentClickedFolder.id}`,
@@ -264,8 +269,7 @@ const FoldersList = (props: any) => {
                   >
                     Share This Folder! <i className="fas fa-share-square"></i>
                   </Link>
-                  <Input
-                    inputHasError={false}
+                  <input
                     disabled
                     type="text"
                     readOnly
@@ -275,8 +279,7 @@ const FoldersList = (props: any) => {
                 <label htmlFor="edit-team">
                   Export Folder: <i className="fas fa-download"></i>
                 </label>
-                <TextArea
-                  textAreaHasError={false}
+                <textarea
                   ref={textArea}
                   disabled
                   readOnly
@@ -288,12 +291,13 @@ const FoldersList = (props: any) => {
                   )}
                 />
               </div>
-              <Button onClickCallback={() => handleEditExpand()}>
+
+              <button onClick={() => handleEditExpand()}>
                 <i className="fas fa-edit"></i> Edit
-              </Button>
-              <Button onClickCallback={() => handleDeleteExpand()}>
+              </button>
+              <button onClick={() => handleDeleteExpand()}>
                 Delete <i className="fas fa-trash-alt"></i>
-              </Button>
+              </button>
             </div>
           ) : null}
         </div>

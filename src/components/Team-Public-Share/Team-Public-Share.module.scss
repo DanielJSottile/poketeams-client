@@ -8,12 +8,6 @@
   background-color: $super-light-cream;
 }
 
-.sprites-row {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-}
-
 .team-section:nth-child(even) {
   color: $super-light-cream;
   text-shadow: 1px 1px $super-dark-red;

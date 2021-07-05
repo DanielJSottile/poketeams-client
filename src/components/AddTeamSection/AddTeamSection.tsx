@@ -1,8 +1,5 @@
 import React, { Fragment, useContext } from 'react';
 import GeneralContext from '../../contexts/GeneralContext';
-import Input from '../Input/Input';
-import TextArea from '../TextArea/TextArea';
-import Button from '../Button/Button';
 import styles from './AddTeamSection.module.scss';
 
 // Interfaces
@@ -39,60 +36,64 @@ const AddTeamSection = (props: any) => {
 
     return (
       <form>
-        <Input
-          inputHasError
-          containerClass={styles['team-name']}
-          htmlFor="foldername"
-          label="Team Name:"
-          validationCallback={validateNewTeamName()}
-          placeholder="e.g. My Cool Team"
-          type="text"
-          name="teamname"
-          id="teamname"
-          value={newTeamName.value}
-          onChangeCallback={(e) => setNewTeamName(e.target.value)}
-        />
-        <TextArea
-          containerClass={styles['team-import']}
-          textAreaHasError
-          htmlFor="title-content"
-          label={'Description:'}
-          validationCallback={validateDesc()}
-          placeholder="e.g. description"
-          name="title-content"
-          id="title-content"
-          value={desc.value}
-          onChangeCallback={(e) => setDesc(e.target.value)}
-        />
-        <TextArea
-          containerClass={styles['team-import']}
-          textAreaHasError
-          isError={!!newTeamImport.value}
-          htmlFor="team-import"
-          label={'Description:'}
-          validationCallback={validateNewTeamImport()}
-          placeholder="Optionally Import a proper Pokemon Showdown Team Here And It Will Fill Out Your Whole Team!"
-          name="team-import"
-          id="team-import-1"
-          value={newTeamImport.value}
-          onChangeCallback={(e) => setNewTeamContents(e.target.value)}
-        />
-        <Button
+        <div className={styles['team-name']}>
+          <label htmlFor="foldername">Team Name:</label>
+          {
+            <p className="error-validate shake-horizontal">
+              {validateNewTeamName()}
+            </p>
+          }
+          <input
+            placeholder="e.g. My Cool Team"
+            type="text"
+            name="teamname"
+            id="teamname"
+            value={newTeamName.value}
+            onChange={(e) => setNewTeamName(e.target.value)}
+          />
+        </div>
+        <div className={styles['team-import']}>
+          <label htmlFor="title-content">Description:</label>
+          {<p className="error-validate shake-horizontal">{validateDesc()}</p>}
+          <textarea
+            placeholder="e.g. description"
+            name="title-content"
+            id="title-content"
+            value={desc.value}
+            onChange={(e) => setDesc(e.target.value)}
+          />
+        </div>
+        <div className={styles['team-import']}>
+          <label htmlFor="team-import">Import Team Set:</label>
+          {newTeamImport.value !== '' && (
+            <p className="error-validate shake-horizontal">
+              {validateNewTeamImport()}
+            </p>
+          )}
+          <textarea
+            placeholder="Optionally Import a proper Pokemon Showdown Team Here And It Will Fill Out Your Whole Team!"
+            name="team-import"
+            id="team-import-1"
+            value={newTeamImport.value}
+            onChange={(e) => setNewTeamContents(e.target.value)}
+          ></textarea>
+        </div>
+        <button
           type="submit"
-          buttonClass={styles['submit']}
+          className={styles['submit']}
           disabled={
             validateNewTeamName() ||
             validateNewTeamImport() ||
             validateDesc() ||
             validateCurrentFolderClicked()
           }
-          onClickCallback={(e) => {
+          onClick={(e) => {
             e.preventDefault();
             handlePostNewTeam();
           }}
         >
           Submit <i className="far fa-check-circle"></i>
-        </Button>
+        </button>
       </form>
     );
   };
@@ -105,9 +106,9 @@ const AddTeamSection = (props: any) => {
       <section className={styles['folders-list']}>
         <div>
           {currentClickedFolder.value ? (
-            <Button onClickCallback={() => handleTeamAddClickExpand()}>
+            <button onClick={() => handleTeamAddClickExpand()}>
               New Team <i className="far fa-plus-square"></i>
-            </Button>
+            </button>
           ) : (
             <h4>Click a Folder to add Teams!</h4>
           )}

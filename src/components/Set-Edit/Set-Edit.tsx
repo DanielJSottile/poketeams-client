@@ -1,9 +1,5 @@
 import React, { Fragment, useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
-import Input from '../Input/Input';
-import TextArea from '../TextArea/TextArea';
-import Image from '../Image/Image';
-import Button from '../Button/Button';
 import LoadingSets from '../Loaders/LoadingSets/LoadingSets';
 import GeneralContext from '../../contexts/GeneralContext';
 import showdownGenerate from '../../functions/generate';
@@ -499,9 +495,9 @@ const SetEdit = (props: any) => {
 
     return (
       <div className={styles['pokemon']}>
-        <Button onClickCallback={() => handleSetToggle()}>
+        <button onClick={() => handleSetToggle()}>
           Compress Set <i className="fas fa-compress-arrows-alt"></i>
-        </Button>
+        </button>
         <form>
           <div className={styles['pokemon-import']}>
             <label htmlFor="pokemon-import">
@@ -512,89 +508,101 @@ const SetEdit = (props: any) => {
                 {validateNewSetImport()}
               </p>
             )}
-            <TextArea
-              textAreaHasError={false}
+            <textarea
               placeholder="Import a Pokemon Showdown Set Here And It Will Re-populate The Field:"
               name="pokemon-import"
               id={`pokemon-import-${set.id}`}
               value={newSetImport.value}
-              onChangeCallback={(e) => setNewSetContents(e.target.value)}
+              onChange={(e) => setNewSetContents(e.target.value)}
             />
-            <Button
+            <button
               type="submit"
               disabled={validateNewSetImport()}
-              onClickCallback={(e) => {
+              onClick={(e) => {
                 e.preventDefault();
                 handleUpdateSetImport(Number(set.id));
                 setFields(newSetImport.value);
               }}
             >
               Submit <i className="fas fa-check-circle"></i>
-            </Button>
+            </button>
           </div>
         </form>
         <form>
           <div className={styles['pokemon-intro']}>
             <div className={styles['name-sprite']}>
               <div className={styles['names']}>
-                <Input
-                  inputHasError
-                  isError={state.species.touched}
-                  htmlFor={'pokemon-name'}
-                  label={'Species: '}
-                  inputClass={styles['pokemon-name']}
-                  validationCallback={validateSpecies()}
-                  onChangeCallback={(e) => setSpecies(e.target.value)}
-                  placeholder="e.g. Pikachu"
-                  value={state.species.value}
-                  type="text"
-                  name="pokemon-name"
-                  id={`pokemon-name-${set.id}`}
-                />
-                <Input
-                  inputHasError
-                  isError={state.species.touched}
-                  htmlFor={'pokemon-nickname'}
-                  label={'Nickname: (optional)'}
-                  inputClass={styles['pokemon-name']}
-                  validationCallback={validateNickname()}
-                  onChangeCallback={(e) => setNickname(e.target.value)}
-                  placeholder={state.species.value}
-                  value={state.nickname.value}
-                  type="text"
-                  name="pokemon-nickname"
-                  id={`pokemon-nickname-${set.id}`}
-                />
-                <Input
-                  inputHasError
-                  htmlFor={'pokemon-gender'}
-                  label={'Gender: '}
-                  inputClass={styles['pokemon-gender']}
-                  validationCallback={validateGender()}
-                  onChangeCallback={(e) => setGender(e.target.value)}
-                  placeholder="F, M, or N"
-                  value={state.gender.value}
-                  type="text"
-                  name="pokemon-gender"
-                  id={`pokemon-gender-${set.id}`}
-                />
-                <Input
-                  inputHasError
-                  isError={state.species.touched}
-                  htmlFor={'shiny'}
-                  label={'Shiny:'}
-                  validationCallback={validateShiny()}
-                  onChangeCallback={(e) => setShiny()}
-                  type="checkbox"
-                  id="shiny-2"
-                  name="shiny"
-                  checked={state.shiny.value}
-                  value={state.shiny.value.toString()}
-                />
+                <div>
+                  <label htmlFor="pokemon-name">Species:</label>
+                  {state.species.touched && (
+                    <p className="error-validate shake-horizontal">
+                      {validateSpecies()}
+                    </p>
+                  )}
+                  <input
+                    className={styles['pokemon-name']}
+                    placeholder="e.g. Pikachu"
+                    value={state.species.value}
+                    onChange={(e) => setSpecies(e.target.value)}
+                    type="text"
+                    name="pokemon-name"
+                    id={`pokemon-name-${set.id}`}
+                  />
+                </div>
+                <div>
+                  <label htmlFor="pokemon-nickname">Nickname: (optional)</label>
+                  {
+                    <p className="error-validate shake-horizontal">
+                      {validateNickname()}
+                    </p>
+                  }
+                  <input
+                    className={styles['pokemon-nickname']}
+                    placeholder={state.species.value}
+                    value={state.nickname.value}
+                    onChange={(e) => setNickname(e.target.value)}
+                    type="text"
+                    name="pokemon-nickname"
+                    id={`pokemon-nickname-${set.id}`}
+                  />
+                </div>
+                <div>
+                  <label htmlFor="pokemon-gender">Gender: </label>
+                  {
+                    <p className="error-validate shake-horizontal">
+                      {validateGender()}
+                    </p>
+                  }
+                  <input
+                    className={styles['pokemon-gender']}
+                    placeholder="F, M, or N"
+                    value={state.gender.value}
+                    onChange={(e) => setGender(e.target.value)}
+                    type="text"
+                    name="pokemon-gender"
+                    id={`pokemon-gender-${set.id}`}
+                  />
+                </div>
+                <div>
+                  <label htmlFor="shiny">Shiny:</label>
+                  {
+                    <p className="error-validate shake-horizontal">
+                      {validateShiny()}
+                    </p>
+                  }
+                  <input
+                    type="checkbox"
+                    id="shiny-2"
+                    name="shiny"
+                    checked={state.shiny.value}
+                    value={state.shiny.value.toString()}
+                    onChange={(e) => setShiny()}
+                  />
+                </div>
               </div>
               <div className={styles['sprites']}>
-                <Image
-                  imageClass={styles['sprite-img']}
+                <img
+                  className={styles['sprite-img']}
                   src={legality.returnIconSprite(
                     state.species.value,
                     state.shiny.value
@@ -606,8 +614,8 @@ const SetEdit = (props: any) => {
                     .returnTypeIcon(legality.returnType(state.species.value))
                     .map((type: any, i: number) => {
                       return (
-                        <Image
-                          imageClass={styles['type-img']}
+                        <img
+                          className={styles['type-img']}
                           src={`${type}`}
                           key={i}
                           alt={`${i + 1}`}
@@ -620,75 +628,93 @@ const SetEdit = (props: any) => {
           </div>
           <div className={styles['details']}>
             <div className={styles['first-details']}>
-              <Input
-                inputHasError
-                isError={state.species.touched}
-                htmlFor={'pokemon-level'}
-                label={'Level: '}
-                inputClass={styles['pokemon-level']}
-                validationCallback={validateLevel()}
-                onChangeCallback={(e) => setLevel(Number(e.target.value))}
-                placeholder="100"
-                value={state.level.value}
-                type="text"
-                name="pokemon-level"
-                id={`pokemon-level-${set.id}`}
-              />
-              <Input
-                inputHasError
-                htmlFor={'pokemon-item'}
-                label={'Item: (optional)'}
-                inputClass={styles['pokemon-item']}
-                validationCallback={validateItem()}
-                onChangeCallback={(e) => setItem(e.target.value)}
-                placeholder="e.g. Leftovers"
-                value={state.item.value}
-                type="text"
-                name="pokemon-item"
-                id={`pokemon-item-${set.id}`}
-              />
-              <Input
-                inputHasError
-                htmlFor={'pokemon-ability'}
-                label={'Ability: (optional)'}
-                inputClass={styles['pokemon-ability']}
-                validationCallback={validateAbility()}
-                onChangeCallback={(e) => setAbility(e.target.value)}
-                placeholder="e.g. Static"
-                value={state.ability.value}
-                type="text"
-                name="pokemon-ability"
-                id={`pokemon-ability-${set.id}`}
-              />
-              <Input
-                inputHasError
-                htmlFor={'pokemon-nature'}
-                label={'Nature: (optional)'}
-                inputClass={styles['pokemon-nature']}
-                validationCallback={validateNature()}
-                onChangeCallback={(e) => setNature(e.target.value)}
-                placeholder="e.g. Adamant"
-                value={state.nature.value}
-                type="text"
-                name="pokemon-nature"
-                id={`pokemon-nature-${set.id}`}
-              />
-              <Input
-                inputHasError
-                isError={state.happiness.touched}
-                htmlFor={'pokemon-happiness'}
-                label={'Happiness:'}
-                inputClass={styles['pokemon-happiness']}
-                validationCallback={validateHappiness()}
-                onChangeCallback={(e) => setHappiness(Number(e.target.value))}
-                placeholder="255"
-                value={state.happiness.value}
-                type="number"
-                name="pokemon-happiness"
-                min="0"
-                max="255"
-                id={`pokemon-happiness-${set.id}`}
-              />
+              <div>
+                <label htmlFor="pokemon-level">Level: </label>
+                {state.species.touched && (
+                  <p className="error-validate shake-horizontal">
+                    {validateLevel()}
+                  </p>
+                )}
+                <input
+                  className={styles['pokemon-level']}
+                  placeholder="100"
+                  value={state.level.value}
+                  onChange={(e) => setLevel(Number(e.target.value))}
+                  type="text"
+                  name="pokemon-level"
+                  id={`pokemon-level-${set.id}`}
+                />
+              </div>
+              <div>
+                <label htmlFor="pokemon-item">Item: (optional)</label>
+                {
+                  <p className="error-validate shake-horizontal">
+                    {validateItem()}
+                  </p>
+                }
+                <input
+                  className={styles['pokemon-item']}
+                  placeholder="e.g. Leftovers"
+                  value={state.item.value}
+                  onChange={(e) => setItem(e.target.value)}
+                  type="text"
+                  name="pokemon-item"
+                  id={`pokemon-item-${set.id}`}
+                />
+              </div>
+              <div>
+                <label htmlFor="pokemon-ability">Ability: (optional)</label>
+                {
+                  <p className="error-validate shake-horizontal">
+                    {validateAbility()}
+                  </p>
+                }
+                <input
+                  className={styles['pokemon-ability']}
+                  placeholder="e.g. Static"
+                  value={state.ability.value}
+                  onChange={(e) => setAbility(e.target.value)}
+                  type="text"
+                  name="pokemon-ability"
+                  id={`pokemon-ability-${set.id}`}
+                />
+              </div>
+              <div>
+                <label htmlFor="pokemon-nature">Nature: (optional)</label>
+                {
+                  <p className="error-validate shake-horizontal">
+                    {validateNature()}
+                  </p>
+                }
+                <input
+                  className={styles['pokemon-nature']}
+                  placeholder="e.g. Adamant"
+                  value={state.nature.value}
+                  onChange={(e) => setNature(e.target.value)}
+                  type="text"
+                  name="pokemon-nature"
+                  id={`pokemon-nature-${set.id}`}
+                />
+              </div>
+              <div>
+                <label htmlFor="pokemon-happiness">Happiness:</label>
+                {state.happiness.touched && (
+                  <p className="error-validate shake-horizontal">
+                    {validateHappiness()}
+                  </p>
+                )}
+                <input
+                  className={styles['pokemon-happiness']}
+                  placeholder="255"
+                  value={state.happiness.value}
+                  onChange={(e) => setHappiness(Number(e.target.value))}
+                  type="number"
+                  name="pokemon-happiness"
+                  min="0"
+                  max="255"
+                  id={`pokemon-happiness-${set.id}`}
+                />
+              </div>
             </div>
             <div className={styles['stats']}>
               <div className={styles['evs']}>
@@ -697,96 +723,90 @@ const SetEdit = (props: any) => {
                     {validateEvs()}
                   </p>
                 }
-                <Input
-                  containerClass={styles['stat']}
-                  inputHasError={false}
-                  htmlFor={'pokemon-ev-hp'}
-                  label={'HP EV:'}
-                  inputClass={styles['pokemon-ev']}
-                  onChangeCallback={(e) => setHpEv(Number(e.target.value))}
-                  placeholder="0"
-                  value={Number(state.hp_ev.value)}
-                  type="number"
-                  name="pokemon-ev-hp"
-                  min="0"
-                  max="252"
-                  id={`pokemon-ev-hp-${set.id}`}
-                />
-                <Input
-                  containerClass={styles['stat']}
-                  inputHasError={false}
-                  htmlFor={'pokemon-ev-atk'}
-                  label={'Atk EV:'}
-                  inputClass={styles['pokemon-ev']}
-                  onChangeCallback={(e) => setAtkEv(Number(e.target.value))}
-                  placeholder="0"
-                  value={Number(state.atk_ev.value)}
-                  type="number"
-                  name="pokemon-ev-atk"
-                  min="0"
-                  max="252"
-                  id={`pokemon-ev-atk-${set.id}`}
-                />
-                <Input
-                  containerClass={styles['stat']}
-                  inputHasError={false}
-                  htmlFor={'pokemon-ev-def'}
-                  label={'Def EV:'}
-                  inputClass={styles['pokemon-ev']}
-                  onChangeCallback={(e) => setDefEv(Number(e.target.value))}
-                  placeholder="0"
-                  value={Number(state.def_ev.value)}
-                  type="number"
-                  name="pokemon-ev-def"
-                  min="0"
-                  max="252"
-                  id={`pokemon-ev-def-${set.id}`}
-                />
-                <Input
-                  containerClass={styles['stat']}
-                  inputHasError={false}
-                  htmlFor={'pokemon-ev-spa'}
-                  label={'SpA EV:'}
-                  inputClass={styles['pokemon-ev']}
-                  onChangeCallback={(e) => setSpAEv(Number(e.target.value))}
-                  placeholder="0"
-                  value={Number(state.spa_ev.value)}
-                  type="number"
-                  name="pokemon-ev-spa"
-                  min="0"
-                  max="252"
-                  id={`pokemon-ev-spa-${set.id}`}
-                />
-                <Input
-                  containerClass={styles['stat']}
-                  inputHasError={false}
-                  htmlFor={'pokemon-ev-spd'}
-                  label={'SpD EV:'}
-                  inputClass={styles['pokemon-ev']}
-                  onChangeCallback={(e) => setSpDEv(Number(e.target.value))}
-                  placeholder="0"
-                  value={Number(state.spd_ev.value)}
-                  type="number"
-                  name="pokemon-ev-spd"
-                  min="0"
-                  max="252"
-                  id={`pokemon-ev-spd-${set.id}`}
-                />
-                <Input
-                  containerClass={styles['stat']}
-                  inputHasError={false}
-                  htmlFor={'pokemon-ev-spe'}
-                  label={'SpE EV:'}
-                  inputClass={styles['pokemon-ev']}
-                  onChangeCallback={(e) => setSpeEv(Number(e.target.value))}
-                  placeholder="0"
-                  value={Number(state.spe_ev.value)}
-                  type="number"
-                  name="pokemon-ev-spe"
-                  min="0"
-                  max="252"
-                  id={`pokemon-ev-spe-${set.id}`}
-                />
+                <div className={styles['stat']}>
+                  <label htmlFor="pokemon-ev-hp">HP EV:</label>
+                  <input
+                    className={styles['pokemon-ev']}
+                    placeholder="0"
+                    value={Number(state.hp_ev.value)}
+                    onChange={(e) => setHpEv(Number(e.target.value))}
+                    type="number"
+                    name="pokemon-ev-hp"
+                    min="0"
+                    max="252"
+                    id={`pokemon-ev-hp-${set.id}`}
+                  />
+                </div>
+                <div className={styles['stat']}>
+                  <label htmlFor="pokemon-ev-atk">Atk EV:</label>
+                  <input
+                    className={styles['pokemon-ev']}
+                    placeholder="0"
+                    value={Number(state.atk_ev.value)}
+                    onChange={(e) => setAtkEv(Number(e.target.value))}
+                    type="number"
+                    name="pokemon-ev-atk"
+                    min="0"
+                    max="252"
+                    id={`pokemon-ev-atk-${set.id}`}
+                  />
+                </div>
+                <div className={styles['stat']}>
+                  <label htmlFor="pokemon-ev-def">Def EV:</label>
+                  <input
+                    className={styles['pokemon-ev']}
+                    placeholder="0"
+                    value={Number(state.def_ev.value)}
+                    onChange={(e) => setDefEv(Number(e.target.value))}
+                    type="number"
+                    name="pokemon-ev-def"
+                    min="0"
+                    max="252"
+                    id={`pokemon-ev-def-${set.id}`}
+                  />
+                </div>
+                <div className={styles['stat']}>
+                  <label htmlFor="pokemon-ev-spa">SpA EV:</label>
+                  <input
+                    className={styles['pokemon-ev']}
+                    placeholder="0"
+                    value={Number(state.spa_ev.value)}
+                    onChange={(e) => setSpAEv(Number(e.target.value))}
+                    type="number"
+                    name="pokemon-ev-spa"
+                    min="0"
+                    max="252"
+                    id={`pokemon-ev-spa-${set.id}`}
+                  />
+                </div>
+                <div className={styles['stat']}>
+                  <label htmlFor="pokemon-ev-spd">SpD EV:</label>
+                  <input
+                    className={styles['pokemon-ev']}
+                    placeholder="0"
+                    value={Number(state.spd_ev.value)}
+                    onChange={(e) => setSpDEv(Number(e.target.value))}
+                    type="number"
+                    name="pokemon-ev-spd"
+                    min="0"
+                    max="252"
+                    id={`pokemon-ev-spd-${set.id}`}
+                  />
+                </div>
+                <div className={styles['stat']}>
+                  <label htmlFor="pokemon-ev-spe">SpE EV:</label>
+                  <input
+                    className={styles['pokemon-ev']}
+                    placeholder="0"
+                    value={Number(state.spe_ev.value)}
+                    onChange={(e) => setSpeEv(Number(e.target.value))}
+                    type="number"
+                    name="pokemon-ev-spe"
+                    min="0"
+                    max="252"
+                    id={`pokemon-ev-spe-${set.id}`}
+                  />
+                </div>
               </div>
               <div className={styles['ivs']}>
                 {
@@ -794,141 +814,134 @@ const SetEdit = (props: any) => {
                     {validateIvs()}
                   </p>
                 }
-                <Input
-                  containerClass={styles['stat']}
-                  inputHasError={false}
-                  htmlFor={'pokemon-iv-hp'}
-                  label={'HP IV:'}
-                  inputClass={styles['pokemon-iv']}
-                  onChangeCallback={(e) => setHpIv(Number(e.target.value))}
-                  placeholder="31"
-                  value={Number(state.hp_iv.value)}
-                  type="number"
-                  name="pokemon-iv-hp"
-                  min="0"
-                  max="31"
-                  id={`pokemon-iv-hp-${set.id}`}
-                />
-                <Input
-                  containerClass={styles['stat']}
-                  inputHasError={false}
-                  htmlFor={'pokemon-iv-atk'}
-                  label={'Atk IV:'}
-                  inputClass={styles['pokemon-iv']}
-                  onChangeCallback={(e) => setAtkIv(Number(e.target.value))}
-                  placeholder="31"
-                  value={Number(state.atk_iv.value)}
-                  type="number"
-                  name="pokemon-iv-atk"
-                  min="0"
-                  max="31"
-                  id={`pokemon-iv-atk-${set.id}`}
-                />
-                <Input
-                  containerClass={styles['stat']}
-                  inputHasError={false}
-                  htmlFor={'pokemon-iv-def'}
-                  label={'Def IV:'}
-                  inputClass={styles['pokemon-iv']}
-                  onChangeCallback={(e) => setDefIv(Number(e.target.value))}
-                  placeholder="31"
-                  value={Number(state.def_iv.value)}
-                  type="number"
-                  name="pokemon-iv-def"
-                  min="0"
-                  max="31"
-                  id={`pokemon-iv-def-${set.id}`}
-                />
-                <Input
-                  containerClass={styles['stat']}
-                  inputHasError={false}
-                  htmlFor={'pokemon-iv-spa'}
-                  label={'SpA IV:'}
-                  inputClass={styles['pokemon-iv']}
-                  onChangeCallback={(e) => setSpAIv(Number(e.target.value))}
-                  placeholder="31"
-                  value={Number(state.spa_iv.value)}
-                  type="number"
-                  name="pokemon-iv-spa"
-                  min="0"
-                  max="31"
-                  id={`pokemon-iv-spa-${set.id}`}
-                />
-                <Input
-                  containerClass={styles['stat']}
-                  inputHasError={false}
-                  htmlFor={'pokemon-iv-spd'}
-                  label={'SpD IV:'}
-                  inputClass={styles['pokemon-iv']}
-                  onChangeCallback={(e) => setSpDIv(Number(e.target.value))}
-                  placeholder="31"
-                  value={Number(state.spd_iv.value)}
-                  type="number"
-                  name="pokemon-iv-spd"
-                  min="0"
-                  max="31"
-                  id={`pokemon-iv-spd-${set.id}`}
-                />
-                <Input
-                  containerClass={styles['stat']}
-                  inputHasError={false}
-                  htmlFor={'pokemon-iv-spe'}
-                  label={'Spe IV:'}
-                  inputClass={styles['pokemon-iv']}
-                  onChangeCallback={(e) => setSpeIv(Number(e.target.value))}
-                  placeholder="31"
-                  value={Number(state.spe_iv.value)}
-                  type="number"
-                  name="pokemon-iv-spe"
-                  min="0"
-                  max="31"
-                  id={`pokemon-iv-spe-${set.id}`}
-                />
+                <div className={styles['stat']}>
+                  <label htmlFor="pokemon-iv-hp">HP IV:</label>
+                  <input
+                    className={styles['pokemon-iv']}
+                    placeholder="31"
+                    value={Number(state.hp_iv.value)}
+                    onChange={(e) => setHpIv(Number(e.target.value))}
+                    type="number"
+                    name="pokemon-iv-hp"
+                    min="0"
+                    max="31"
+                    id={`pokemon-iv-hp-${set.id}`}
+                  />
+                </div>
+                <div className={styles['stat']}>
+                  <label htmlFor="pokemon-iv-atk">Atk IV:</label>
+                  <input
+                    className={styles['pokemon-iv']}
+                    placeholder="31"
+                    value={Number(state.atk_iv.value)}
+                    onChange={(e) => setAtkIv(Number(e.target.value))}
+                    type="number"
+                    name="pokemon-iv-atk"
+                    min="0"
+                    max="31"
+                    id={`pokemon-iv-atk-${set.id}`}
+                  />
+                </div>
+                <div className={styles['stat']}>
+                  <label htmlFor="pokemon-iv-def">Def IV:</label>
+                  <input
+                    className={styles['pokemon-iv']}
+                    placeholder="31"
+                    value={Number(state.def_iv.value)}
+                    onChange={(e) => setDefIv(Number(e.target.value))}
+                    type="number"
+                    name="pokemon-iv-def"
+                    min="0"
+                    max="31"
+                    id={`pokemon-iv-def-${set.id}`}
+                  />
+                </div>
+                <div className={styles['stat']}>
+                  <label htmlFor="pokemon-iv-spa">SpA IV:</label>
+                  <input
+                    className={styles['pokemon-iv']}
+                    placeholder="31"
+                    value={Number(state.spa_iv.value)}
+                    onChange={(e) => setSpAIv(Number(e.target.value))}
+                    type="number"
+                    name="pokemon-iv-spa"
+                    min="0"
+                    max="31"
+                    id={`pokemon-iv-spa-${set.id}`}
+                  />
+                </div>
+                <div className={styles['stat']}>
+                  <label htmlFor="pokemon-iv-spd">SpD IV:</label>
+                  <input
+                    className={styles['pokemon-iv']}
+                    placeholder="31"
+                    value={Number(state.spd_iv.value)}
+                    onChange={(e) => setSpDIv(Number(e.target.value))}
+                    type="number"
+                    name="pokemon-iv-spd"
+                    min="0"
+                    max="31"
+                    id={`pokemon-iv-spd-${set.id}`}
+                  />
+                </div>
+                <div className={styles['stat']}>
+                  <label htmlFor="pokemon-iv-spe">SpE IV:</label>
+                  <input
+                    className={styles['pokemon-iv']}
+                    placeholder="31"
+                    value={Number(state.spe_iv.value)}
+                    onChange={(e) => setSpeIv(Number(e.target.value))}
+                    type="number"
+                    name="pokemon-iv-spe"
+                    min="0"
+                    max="31"
+                    id={`pokemon-iv-spe-${set.id}`}
+                  />
+                </div>
               </div>
             </div>
             <div className={styles['moves']}>
-              <Input
-                containerClass={styles['label-as-row']}
-                inputHasError={false}
-                htmlFor={'pokemon-moves'}
-                label={'Moves:'}
-                inputClass={styles['pokemon-move']}
+              <label htmlFor="pokemon-moves">Moves:</label>
+              {
+                <p className="error-validate shake-horizontal">
+                  {validateMoves()}
+                </p>
+              }
+              <input
+                className={styles['pokemon-move']}
                 placeholder="Tackle"
                 value={state.move_one.value}
-                onChangeCallback={(e) => setMoveOne(e.target.value)}
+                onChange={(e) => setMoveOne(e.target.value)}
                 type="text"
                 name="pokemon-move"
                 id={`pokemon-${set.id}-move-1`}
               />
-              <Input
-                inputHasError={false}
-                inputClass={styles['pokemon-move']}
+              <input
+                className={styles['pokemon-move']}
                 value={state.move_two.value}
-                onChangeCallback={(e) => setMoveTwo(e.target.value)}
+                onChange={(e) => setMoveTwo(e.target.value)}
                 type="text"
                 name="pokemon-move"
                 id={`pokemon-${set.id}-move-2`}
               />
-              <Input
-                inputHasError={false}
-                inputClass={styles['pokemon-move']}
+              <input
+                className={styles['pokemon-move']}
                 value={state.move_three.value}
-                onChangeCallback={(e) => setMoveThree(e.target.value)}
+                onChange={(e) => setMoveThree(e.target.value)}
                 type="text"
                 name="pokemon-move"
                 id={`pokemon-${set.id}-move-3`}
               />
-              <Input
-                inputHasError={false}
-                inputClass={styles['pokemon-move']}
+              <input
+                className={styles['pokemon-move']}
                 value={state.move_four.value}
-                onChangeCallback={(e) => setMoveFour(e.target.value)}
+                onChange={(e) => setMoveFour(e.target.value)}
                 type="text"
                 name="pokemon-move"
                 id={`pokemon-${set.id}-move-4`}
               />
             </div>
-            <Button
+            <button
               type="submit"
               disabled={
                 validateSpecies() ||
@@ -939,7 +952,7 @@ const SetEdit = (props: any) => {
                 validateIvs() ||
                 validateMoves()
               }
-              onClickCallback={(e) => {
+              onClick={(e) => {
                 e.preventDefault();
                 handleUpdateSet(
                   set.id,
@@ -972,7 +985,7 @@ const SetEdit = (props: any) => {
               }}
             >
               Save Set Details <i className="fas fa-save"></i>
-            </Button>
+            </button>
           </div>
         </form>
 
@@ -981,14 +994,14 @@ const SetEdit = (props: any) => {
             <div className={styles['copied']}>Copied to Clipboard!!</div>
           ) : null}
           <div>
-            <Button
-              onClickCallback={() => {
+            <button
+              onClick={() => {
                 copyCodeToClipboard();
                 setTimeout(removeCopySuccess, 3000);
               }}
             >
               Copy Text
-            </Button>
+            </button>
             <Link
               to={{
                 pathname: `/share/${set.team_id}/${set.id}`,
@@ -998,34 +1011,33 @@ const SetEdit = (props: any) => {
             >
               Share This Set! <i className="fas fa-share-square"></i>
             </Link>
-            <Input
-              inputHasError={false}
+            <input
               type="text"
               readOnly
               value={`poketeams.now.sh/${set.team_id}/${set.id}`}
             />
           </div>
-          <TextArea
-            containerClass={styles['export-pokemon']}
-            textAreaHasError
-            htmlFor="export-pokemon"
-            label="Export Pokemon: "
-            labelIcon={<i className="fas fa-download"></i>}
-            ref={textArea}
-            readOnly
-            name="export-pokemon"
-            id="export-pokemon-2"
-            value={showdownGenerate([set])}
-          />
+          <div className={styles['export-pokemon']}>
+            <label htmlFor="export-pokemon">
+              Export Pokemon: <i className="fas fa-download"></i>
+            </label>
+            <textarea
+              ref={textArea}
+              readOnly
+              name="export-pokemon"
+              id="export-pokemon-2"
+              value={showdownGenerate([set])}
+            />
+          </div>
         </div>
         <div>
-          <Button
-            onClickCallback={() => {
+          <button
+            onClick={() => {
               handleDeleteExpand();
             }}
           >
             <i className="fas fa-trash-alt"></i> Delete Set!
-          </Button>
+          </button>
           {state.deleteClicked ? renderDeleteExpand() : null}
         </div>
       </div>
@@ -1039,8 +1051,8 @@ const SetEdit = (props: any) => {
       .returnTypeIcon(legality.returnType(set.species))
       .map((type: any, i: number) => {
         return (
-          <Image
-            imageClass={styles['icon']}
+          <img
+            className={styles['icon']}
             key={i}
             src={`${type}`}
             alt={`${i + 1}`}
@@ -1048,8 +1060,8 @@ const SetEdit = (props: any) => {
         );
       });
     const imgIcon = (
-      <Image
-        imageClass={styles['icon']}
+      <img
+        className={styles['icon']}
         src={legality.returnIconSprite(set.species, set.shiny)}
         alt={set.species}
       />
@@ -1086,17 +1098,17 @@ const SetEdit = (props: any) => {
     return (
       <div>
         <p>Are You Sure You'd Like to Delete this Set?</p>
-        <Button
-          onClickCallback={() => {
+        <button
+          onClick={() => {
             handleDeleteSet(props.set.team_id, props.set.id);
             handleDeleteExpand();
           }}
         >
           Yes <i className="fas fa-thumbs-up"></i>
-        </Button>
-        <Button onClickCallback={() => handleDeleteExpand()}>
+        </button>
+        <button onClick={() => handleDeleteExpand()}>
           No <i className="fas fa-thumbs-down"></i>
-        </Button>
+        </button>
       </div>
     );
   };

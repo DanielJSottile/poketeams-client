@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import Button from '../Button/Button';
 import GeneralContext from '../../contexts/GeneralContext';
 
 // Component
@@ -13,15 +12,13 @@ const Folder = (props: any) => {
   // Final Render
 
   return (
-    <Button
-      buttonClass="btn"
+    <button
+      className="btn"
       id={props.id}
-      onClickCallback={() =>
-        handleCurrentFolderClicked(props.folder_name, props.id)
-      }
+      onClick={() => handleCurrentFolderClicked(props.folder_name, props.id)}
     >
       <i className="fas fa-folder"></i> {props.folder_name}
-    </Button>
+    </button>
   );
 };
 

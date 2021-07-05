@@ -1,9 +1,5 @@
 import React, { Fragment, useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
-import Input from '../Input/Input';
-import TextArea from '../TextArea/TextArea';
-import Image from '../Image/Image';
-import Button from '../Button/Button';
 import SetEdit from '../Set-Edit/Set-Edit';
 import GeneralContext from '../../contexts/GeneralContext';
 import showdownGenerate from '../../functions/generate';
@@ -151,15 +147,15 @@ const TeamEdit = (props: any) => {
 
     if (SetList.length < 6) {
       SetList.push(
-        <Button
+        <button
           key={SetList.length}
-          onClickCallback={(e) => {
+          onClick={(e) => {
             e.preventDefault();
             handlePostNewPokemon(props.team.id); // we just need the id of the team.  this func fills out default vals.
           }}
         >
           Add Pokemon! +
-        </Button>
+        </button>
       );
     }
     return SetList;
@@ -171,18 +167,18 @@ const TeamEdit = (props: any) => {
     return (
       <div>
         <p>Are You Sure You'd Like to Delete this Team?</p>
-        <Button
-          onClickCallback={() => {
+        <button
+          onClick={() => {
             handleDeleteExpand();
             handleTeamToggle();
             handleDeleteTeam(props.team.id);
           }}
         >
           Yes <i className="fas fa-thumbs-up"></i>
-        </Button>
-        <Button onClickCallback={() => handleDeleteExpand()}>
+        </button>
+        <button onClick={() => handleDeleteExpand()}>
           No <i className="fas fa-thumbs-down"></i>
-        </Button>
+        </button>
       </div>
     );
   };
@@ -196,9 +192,9 @@ const TeamEdit = (props: any) => {
           <div className={styles['team-header']}>
             <form className={styles['team-form']}>
               <div className={styles['team-title']}>
-                <Button onClickCallback={() => handleTeamToggle()}>
+                <button onClick={() => handleTeamToggle()}>
                   Compress Team <i className="fas fa-compress-arrows-alt"></i>
-                </Button>
+                </button>
                 <div className={styles['title-name']}>
                   <label htmlFor="title-name">Team Name:</label>
                   {
@@ -206,14 +202,11 @@ const TeamEdit = (props: any) => {
                       {validateTeamName()}
                     </p>
                   }
-                  <Input
-                    inputHasError={false}
-                    inputClass={styles['title']}
+                  <input
+                    className={styles['title']}
                     placeholder="e.g. Cool Team"
                     value={state.team_name.value}
-                    onChangeCallback={(
-                      e: React.ChangeEvent<HTMLInputElement>
-                    ) => setTeamName(e.target.value)}
+                    onChange={(e) => setTeamName(e.target.value)}
                     type="text"
                     name="team-name"
                     id={`team-name-${team.id}`}
@@ -236,23 +229,26 @@ const TeamEdit = (props: any) => {
                 </div>*/}{' '}
                 {/* Part of a future feature */}
               </div>
-              <TextArea
-                textAreaHasError
-                containerClass={styles['title-content']}
-                htmlFor="title-content"
-                label="Description:"
-                validationCallback={validateDesc()}
-                textAreaClass={styles['title-content desc']}
-                placeholder="e.g. description"
-                name="title-content"
-                id={`title-content-${team.id}`}
-                value={state.description.value}
-                onChangeCallback={(e) => setDesc(e.target.value)}
-              />
-              <Button
+              <div className={styles['title-content']}>
+                <label htmlFor="title-content">Description:</label>
+                {
+                  <p className="error-validate shake-horizontal">
+                    {validateDesc()}
+                  </p>
+                }
+                <textarea
+                  className={styles['title-content desc']}
+                  placeholder="e.g. description"
+                  name="title-content"
+                  id={`title-content-${team.id}`}
+                  value={state.description.value}
+                  onChange={(e) => setDesc(e.target.value)}
+                />
+              </div>
+              <button
                 type="submit"
                 disabled={validateTeamName() || validateDesc()}
-                onClickCallback={(e) => {
+                onClick={(e) => {
                   e.preventDefault();
                   handleUpdateTeam(
                     state.team_name.value,
@@ -262,21 +258,21 @@ const TeamEdit = (props: any) => {
                 }}
               >
                 Save Team Details <i className="fas fa-save"></i>
-              </Button>
+              </button>
             </form>
             <div className={styles['export-team']}>
               {state.copySuccess ? (
                 <div className={styles['copied']}>Copied to Clipboard!!</div>
               ) : null}
               <div>
-                <Button
-                  onClickCallback={() => {
+                <button
+                  onClick={() => {
                     copyCodeToClipboard();
                     setTimeout(removeCopySuccess, 3000);
                   }}
                 >
                   Copy Text
-                </Button>
+                </button>
                 <Link
                   to={{
                     pathname: `/share/${team.id}`,
@@ -286,8 +282,7 @@ const TeamEdit = (props: any) => {
                 >
                   Share This Team! <i className="fas fa-share-square"></i>
                 </Link>
-                <Input
-                  inputHasError={false}
+                <input
                   disabled
                   type="text"
                   readOnly
@@ -297,8 +292,7 @@ const TeamEdit = (props: any) => {
               <label htmlFor="edit-team">
                 Export Team: <i className="fas fa-download"></i>
               </label>
-              <TextArea
-                textAreaHasError={false}
+              <textarea
                 ref={textArea}
                 disabled
                 readOnly
@@ -309,14 +303,14 @@ const TeamEdit = (props: any) => {
             </div>
           </div>
           <div>
-            <Button
-              onClickCallback={(e) => {
+            <button
+              onClick={(e) => {
                 e.preventDefault();
                 handleDeleteExpand();
               }}
             >
               <i className="fas fa-trash-alt"></i> Delete Team!
-            </Button>
+            </button>
             {state.deleteClicked ? renderDeleteExpand() : null}
           </div>
         </div>
@@ -328,9 +322,9 @@ const TeamEdit = (props: any) => {
   const renderUnexpandedTeam = () => {
     let spriteMap = teamSets.map((set, i) => {
       return (
-        <Image
+        <img
           key={i}
-          imageClass={styles['tiny-icon']}
+          className={styles['tiny-icon']}
           src={legality.returnIconSprite(set.species, set.shiny)}
           alt={set.species}
         />
@@ -348,7 +342,7 @@ const TeamEdit = (props: any) => {
           </div>
           <div>
             <p>By {team.user_name}</p>
-            <div className={styles['sprites-row']}>{spriteMap}</div>
+            {spriteMap}
             <p>
               Created on:{' '}
               {new Date(team.date_created).toLocaleString('en-GB', {

@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Image from '../../components/Image/Image';
 import styles from './NotFoundPage.module.scss';
 
 // Component
@@ -11,7 +10,7 @@ const NotFoundPage = (props: any): JSX.Element => {
   return (
     <div className={styles['not-found-background']}>
       <h1 className={styles['ohno']}>Oh No! 404 Not Found!</h1>
-      <Image
+      <img
         src={require('../../Images/dizzy-pikachu-shuffle.png')}
         alt="dizzy-pikachu-shuffle"
       />

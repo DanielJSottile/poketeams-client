@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
-import Image from '../../components/Image/Image';
 import Footer from '../../components/Footer/Footer';
 import LoginForm from '../../components/LoginForm/LoginForm';
 import styles from './LandingPage.module.scss';
@@ -44,8 +43,8 @@ const LandingPage = (props: any): JSX.Element => {
         <header>
           <h3>Store your teams like never before!</h3>
         </header>
-        <Image
-          imageClass={styles['landingimg']}
+        <img
+          className={styles['landingimg']}
           src="https://imgur.com/9wYBaMQ.png"
           alt="organize page"
         />
@@ -60,8 +59,8 @@ const LandingPage = (props: any): JSX.Element => {
         <header>
           <h3>Upload, Edit, and Maintain your teams!</h3>
         </header>
-        <Image
-          imageClass={styles['landingimg']}
+        <img
+          className={styles['landingimg']}
           src="https://imgur.com/HR1yjKA.png"
           alt="edit set"
         />
@@ -74,8 +73,8 @@ const LandingPage = (props: any): JSX.Element => {
         <header>
           <h3>Search By Numerous Parameters!</h3>
         </header>
-        <Image
-          imageClass={styles['landingimg']}
+        <img
+          className={styles['landingimg']}
           src="https://imgur.com/JwMxPdp.png"
           alt="search"
         />
@@ -89,8 +88,8 @@ const LandingPage = (props: any): JSX.Element => {
         <header>
           <h3>Share Your Teams and Pokemon!</h3>
         </header>
-        <Image
-          imageClass={styles['landingimg']}
+        <img
+          className={styles['landingimg']}
           src="https://imgur.com/JWIgCyL.png"
           alt="export"
         />

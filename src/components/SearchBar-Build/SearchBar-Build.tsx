@@ -1,7 +1,5 @@
 import React, { useContext } from 'react';
 import GeneralContext from '../../contexts/GeneralContext';
-import Input from '../Input/Input';
-import Button from '../Button/Button';
 import styles from './SearchBar-Build.module.scss';
 
 // Component
@@ -26,16 +24,17 @@ const SearchBarBuild = (props: any) => {
     <div className={styles['searchbar']}>
       <form className={styles['search']}>
         <div className={styles['search']}>
-          <Input
-            inputHasError
-            isError={!!filter.value}
-            validationCallback={validateFilter}
-            inputClass={styles['s-input']}
-            label={'Search: '}
-            labelIcon={<i className="fas fa-search"></i>}
+          {filter.value && (
+            <p className="error-validate shake-horizontal">{validateFilter}</p>
+          )}
+          <label htmlFor="search">
+            Search: <i className="fas fa-search"></i>
+          </label>
+          <input
+            className={styles['s-input']}
             placeholder="e.g. Pikachu"
             value={filter.value}
-            onChangeCallback={(e) => setFilter(e.target.value)}
+            onChange={(e) => setFilter(e.target.value)}
             type="text"
             name="search"
             id="search"
@@ -54,15 +53,15 @@ const SearchBarBuild = (props: any) => {
             <option value="alphabetical">A - Z</option>
             <option value="rev alphabetical">Z - A</option>
           </select>
-          <Button
+          <button
             type="submit"
-            onClickCallback={(e) => {
+            onClick={(e) => {
               e.preventDefault();
               handleFilter();
             }}
           >
             Go <i className="fas fa-exclamation"></i>
-          </Button>
+          </button>
         </div>
       </form>
     </div>
