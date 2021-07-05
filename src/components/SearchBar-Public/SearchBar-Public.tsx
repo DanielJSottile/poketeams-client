@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import GeneralContext from '../../contexts/GeneralContext';
 import Input from '../Input/Input';
+import Button from '../Button/Button';
 import styles from './SearchBar-Public.module.scss';
 
 // Component
@@ -47,14 +48,16 @@ const SearchBarPublic = (props: any) => {
             <option value="alphabetical">A - Z</option>
             <option value="rev alphabetical">Z - A</option>
           </select>
-          <button
+          <Button
             type="submit"
-            onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+            onClickCallback={(
+              e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+            ) => {
               handleSearch(e);
             }}
           >
             Go <i className="fas fa-exclamation"></i>
-          </button>
+          </Button>
         </div>
       </form>
     </div>

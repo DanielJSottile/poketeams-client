@@ -2,6 +2,7 @@ import React, { Fragment, useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Input from '../Input/Input';
 import Image from '../Image/Image';
+import Button from '../Button/Button';
 import LoadingSets from '../Loaders/LoadingSets/LoadingSets';
 import GeneralContext from '../../contexts/GeneralContext';
 import showdownGenerate from '../../functions/generate';
@@ -497,9 +498,9 @@ const SetEdit = (props: any) => {
 
     return (
       <div className={styles['pokemon']}>
-        <button onClick={() => handleSetToggle()}>
+        <Button onClickCallback={() => handleSetToggle()}>
           Compress Set <i className="fas fa-compress-arrows-alt"></i>
-        </button>
+        </Button>
         <form>
           <div className={styles['pokemon-import']}>
             <label htmlFor="pokemon-import">
@@ -517,17 +518,17 @@ const SetEdit = (props: any) => {
               value={newSetImport.value}
               onChange={(e) => setNewSetContents(e.target.value)}
             />
-            <button
+            <Button
               type="submit"
               disabled={validateNewSetImport()}
-              onClick={(e) => {
+              onClickCallback={(e) => {
                 e.preventDefault();
                 handleUpdateSetImport(Number(set.id));
                 setFields(newSetImport.value);
               }}
             >
               Submit <i className="fas fa-check-circle"></i>
-            </button>
+            </Button>
           </div>
         </form>
         <form>
@@ -925,7 +926,7 @@ const SetEdit = (props: any) => {
                 id={`pokemon-${set.id}-move-4`}
               />
             </div>
-            <button
+            <Button
               type="submit"
               disabled={
                 validateSpecies() ||
@@ -936,7 +937,7 @@ const SetEdit = (props: any) => {
                 validateIvs() ||
                 validateMoves()
               }
-              onClick={(e) => {
+              onClickCallback={(e) => {
                 e.preventDefault();
                 handleUpdateSet(
                   set.id,
@@ -969,7 +970,7 @@ const SetEdit = (props: any) => {
               }}
             >
               Save Set Details <i className="fas fa-save"></i>
-            </button>
+            </Button>
           </div>
         </form>
 
@@ -978,14 +979,14 @@ const SetEdit = (props: any) => {
             <div className={styles['copied']}>Copied to Clipboard!!</div>
           ) : null}
           <div>
-            <button
-              onClick={() => {
+            <Button
+              onClickCallback={() => {
                 copyCodeToClipboard();
                 setTimeout(removeCopySuccess, 3000);
               }}
             >
               Copy Text
-            </button>
+            </Button>
             <Link
               to={{
                 pathname: `/share/${set.team_id}/${set.id}`,
@@ -1016,13 +1017,13 @@ const SetEdit = (props: any) => {
           </div>
         </div>
         <div>
-          <button
-            onClick={() => {
+          <Button
+            onClickCallback={() => {
               handleDeleteExpand();
             }}
           >
             <i className="fas fa-trash-alt"></i> Delete Set!
-          </button>
+          </Button>
           {state.deleteClicked ? renderDeleteExpand() : null}
         </div>
       </div>
@@ -1083,17 +1084,17 @@ const SetEdit = (props: any) => {
     return (
       <div>
         <p>Are You Sure You'd Like to Delete this Set?</p>
-        <button
-          onClick={() => {
+        <Button
+          onClickCallback={() => {
             handleDeleteSet(props.set.team_id, props.set.id);
             handleDeleteExpand();
           }}
         >
           Yes <i className="fas fa-thumbs-up"></i>
-        </button>
-        <button onClick={() => handleDeleteExpand()}>
+        </Button>
+        <Button onClickCallback={() => handleDeleteExpand()}>
           No <i className="fas fa-thumbs-down"></i>
-        </button>
+        </Button>
       </div>
     );
   };

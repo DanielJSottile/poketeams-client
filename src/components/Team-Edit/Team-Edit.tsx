@@ -2,6 +2,7 @@ import React, { Fragment, useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Input from '../Input/Input';
 import Image from '../Image/Image';
+import Button from '../Button/Button';
 import SetEdit from '../Set-Edit/Set-Edit';
 import GeneralContext from '../../contexts/GeneralContext';
 import showdownGenerate from '../../functions/generate';
@@ -149,15 +150,15 @@ const TeamEdit = (props: any) => {
 
     if (SetList.length < 6) {
       SetList.push(
-        <button
+        <Button
           key={SetList.length}
-          onClick={(e) => {
+          onClickCallback={(e) => {
             e.preventDefault();
             handlePostNewPokemon(props.team.id); // we just need the id of the team.  this func fills out default vals.
           }}
         >
           Add Pokemon! +
-        </button>
+        </Button>
       );
     }
     return SetList;
@@ -169,18 +170,18 @@ const TeamEdit = (props: any) => {
     return (
       <div>
         <p>Are You Sure You'd Like to Delete this Team?</p>
-        <button
-          onClick={() => {
+        <Button
+          onClickCallback={() => {
             handleDeleteExpand();
             handleTeamToggle();
             handleDeleteTeam(props.team.id);
           }}
         >
           Yes <i className="fas fa-thumbs-up"></i>
-        </button>
-        <button onClick={() => handleDeleteExpand()}>
+        </Button>
+        <Button onClickCallback={() => handleDeleteExpand()}>
           No <i className="fas fa-thumbs-down"></i>
-        </button>
+        </Button>
       </div>
     );
   };
@@ -194,9 +195,9 @@ const TeamEdit = (props: any) => {
           <div className={styles['team-header']}>
             <form className={styles['team-form']}>
               <div className={styles['team-title']}>
-                <button onClick={() => handleTeamToggle()}>
+                <Button onClickCallback={() => handleTeamToggle()}>
                   Compress Team <i className="fas fa-compress-arrows-alt"></i>
-                </button>
+                </Button>
                 <div className={styles['title-name']}>
                   <label htmlFor="title-name">Team Name:</label>
                   {
@@ -250,10 +251,10 @@ const TeamEdit = (props: any) => {
                   onChange={(e) => setDesc(e.target.value)}
                 />
               </div>
-              <button
+              <Button
                 type="submit"
                 disabled={validateTeamName() || validateDesc()}
-                onClick={(e) => {
+                onClickCallback={(e) => {
                   e.preventDefault();
                   handleUpdateTeam(
                     state.team_name.value,
@@ -263,21 +264,21 @@ const TeamEdit = (props: any) => {
                 }}
               >
                 Save Team Details <i className="fas fa-save"></i>
-              </button>
+              </Button>
             </form>
             <div className={styles['export-team']}>
               {state.copySuccess ? (
                 <div className={styles['copied']}>Copied to Clipboard!!</div>
               ) : null}
               <div>
-                <button
-                  onClick={() => {
+                <Button
+                  onClickCallback={() => {
                     copyCodeToClipboard();
                     setTimeout(removeCopySuccess, 3000);
                   }}
                 >
                   Copy Text
-                </button>
+                </Button>
                 <Link
                   to={{
                     pathname: `/share/${team.id}`,
@@ -309,14 +310,14 @@ const TeamEdit = (props: any) => {
             </div>
           </div>
           <div>
-            <button
-              onClick={(e) => {
+            <Button
+              onClickCallback={(e) => {
                 e.preventDefault();
                 handleDeleteExpand();
               }}
             >
               <i className="fas fa-trash-alt"></i> Delete Team!
-            </button>
+            </Button>
             {state.deleteClicked ? renderDeleteExpand() : null}
           </div>
         </div>

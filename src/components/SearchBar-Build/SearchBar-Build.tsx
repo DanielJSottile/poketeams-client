@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import GeneralContext from '../../contexts/GeneralContext';
 import Input from '../Input/Input';
+import Button from '../Button/Button';
 import styles from './SearchBar-Build.module.scss';
 
 // Component
@@ -53,15 +54,15 @@ const SearchBarBuild = (props: any) => {
             <option value="alphabetical">A - Z</option>
             <option value="rev alphabetical">Z - A</option>
           </select>
-          <button
+          <Button
             type="submit"
-            onClick={(e) => {
+            onClickCallback={(e) => {
               e.preventDefault();
               handleFilter();
             }}
           >
             Go <i className="fas fa-exclamation"></i>
-          </button>
+          </Button>
         </div>
       </form>
     </div>

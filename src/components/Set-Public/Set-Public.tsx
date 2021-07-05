@@ -2,6 +2,7 @@ import React, { Fragment, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Input from '../Input/Input';
 import Image from '../Image/Image';
+import Button from '../Button/Button';
 import showdownGenerate from '../../functions/generate';
 import legality from '../../functions/legality';
 import styles from './Set-Public.module.scss';
@@ -48,9 +49,9 @@ const SetPublic = (props: any) => {
 
     return (
       <div className={styles['pokemon']}>
-        <button onClick={() => handleSetToggle()}>
+        <Button onClickCallback={() => handleSetToggle()}>
           Compress Set <i className="fas fa-compress-arrows-alt"></i>
-        </button>
+        </Button>
         <form>
           {' '}
           {/* CHECK: do we even need disabled and readOnly? The inputs are already disabled*/}
@@ -437,14 +438,14 @@ const SetPublic = (props: any) => {
             <div className={styles['copied']}>Copied to Clipboard!!</div>
           ) : null}
           <div>
-            <button
-              onClick={() => {
+            <Button
+              onClickCallback={() => {
                 copyCodeToClipboard();
                 setTimeout(removeCopySuccess, 3000);
               }}
             >
               Copy Text
-            </button>
+            </Button>
             <Link
               to={{
                 pathname: `/share/${set.team_id}/${set.id}`,

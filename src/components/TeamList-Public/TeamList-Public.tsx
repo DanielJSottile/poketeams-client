@@ -1,4 +1,5 @@
 import React, { Fragment, useContext } from 'react';
+import Button from '../Button/Button';
 import TeamPublic from '../Team-Public/Team-Public';
 import PokeballLoader from '../Loaders/PokeballLoader/PokeballLoader';
 import LoadingBlack from '../Loaders/LoadingBlack/LoadingBlack';
@@ -33,33 +34,33 @@ const TeamListPublic = (props: any) => {
       <div className={styles['team-pagination']}>
         {page.value > 1 ? (
           <div className={styles['pagebutton']}>
-            <button
-              onClick={() => {
+            <Button
+              onClickCallback={() => {
                 handlePageDown();
               }}
             >
               {`Go to Previous 10 Teams`}{' '}
               <i className="fas fa-arrow-circle-left"></i>
-            </button>
-            <button
-              onClick={() => {
+            </Button>
+            <Button
+              onClickCallback={() => {
                 handlePageUp();
               }}
             >
               <i className="fas fa-arrow-circle-right"></i>{' '}
               {`Go to Next 10 Teams`}
-            </button>
+            </Button>
           </div>
         ) : (
           <div className={styles['pagebutton']}>
-            <button
-              onClick={() => {
+            <Button
+              onClickCallback={() => {
                 handlePageUp();
               }}
             >
               <i className="fas fa-arrow-circle-right"></i>{' '}
               {`Go to Next 10 Teams`}
-            </button>
+            </Button>
           </div>
         )}
         <span>{`Current Teams: ${page.value * 10 - 9} - ${

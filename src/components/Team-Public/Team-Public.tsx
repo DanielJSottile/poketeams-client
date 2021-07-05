@@ -2,6 +2,7 @@ import React, { Fragment, useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Input from '../Input/Input';
 import Image from '../Image/Image';
+import Button from '../Button/Button';
 import SetPublic from '../Set-Public/Set-Public';
 import GeneralContext from '../../contexts/GeneralContext';
 import showdownGenerate from '../../functions/generate';
@@ -102,9 +103,9 @@ const TeamPublic = (props: any) => {
           <div className={styles['team-header']}>
             <form className={styles['team-form']}>
               <div className={styles['team-title']}>
-                <button onClick={() => handleTeamToggle()}>
+                <Button onClickCallback={() => handleTeamToggle()}>
                   Compress Team <i className="fas fa-compress-arrows-alt"></i>
-                </button>
+                </Button>
                 <div className={styles['title-name']}>
                   <Input
                     htmlFor={'title-name'}
@@ -155,14 +156,14 @@ const TeamPublic = (props: any) => {
                 <div className={styles['copied']}>Copied to Clipboard!!</div>
               ) : null}
               <div>
-                <button
-                  onClick={() => {
+                <Button
+                  onClickCallback={() => {
                     copyCodeToClipboard();
                     setTimeout(removeCopySuccess, 3000);
                   }}
                 >
                   Copy Text
-                </button>
+                </Button>
                 <Link
                   to={{
                     pathname: `/share/${team.id}`,
