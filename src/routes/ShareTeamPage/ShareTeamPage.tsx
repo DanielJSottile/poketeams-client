@@ -1,55 +1,84 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, RouteComponentProps } from 'react-router-dom';
 import TeamPublicShare from '../../components/Team-Public-Share/Team-Public-Share';
 import apiService from '../../services/apiService';
 import styles from './ShareTeamPage.module.scss';
 
-// Interfaces
+export type MatchProps = {
+  /** match props */
+  team_id: string;
+};
 
-export interface Provider {
-  team?: any;
-  sets?: any;
+export interface PokemonTeam {
+  team_name: string;
+  team_description: string;
+  description: string;
+  id: number;
+  user_name: string;
+  date_created: string;
+  folder_id: number;
 }
 
-// Component
+export interface PokemonSet {
+  nickname: string;
+  species: string;
+  gender: string;
+  shiny: boolean;
+  item: string;
+  ability: string;
+  level: number;
+  happiness: number;
+  nature: string;
+  hp_ev: number;
+  atk_ev: number;
+  def_ev: number;
+  spa_ev: number;
+  spd_ev: number;
+  spe_ev: number;
+  hp_iv: number;
+  atk_iv: number;
+  def_iv: number;
+  spa_iv: number;
+  spd_iv: number;
+  spe_iv: number;
+  move_one: string;
+  move_two: string;
+  move_three: string;
+  move_four: string;
+  setExpandToggle: boolean;
+  deleteClicked: boolean;
+  copySuccess: boolean;
+  id: number;
+  team_id: number;
+}
 
-const ShareTeamPage = (props: any): JSX.Element => {
-  // Set State
-
-  const [state, setState] = useState<Provider>();
-
-  // Component LifeCycle
+const ShareTeamPage: React.FC<RouteComponentProps<MatchProps>> = ({
+  match,
+}): JSX.Element => {
+  const [team, setTeam] = useState([] as PokemonTeam[]);
+  const [sets, setPokemonSets] = useState([] as PokemonSet[]);
 
   useEffect(() => {
-    const id = props.match.params.team_id;
+    const id = Number(match.params.team_id);
     apiService
       .getSingleTeam(id)
       .then((data) => {
-        setState((oldVals) => ({ ...oldVals, team: [data] }));
+        setTeam([data]);
       })
-
-      /* Then we get the sets.  It doesn't matter if its done first
-    or not.  Before, we were passing it into the public sets, but 
-    this was causing a bug.  Instead, we pass these into a new
-    special public team share component that just has the one team
-    and the one set through props.  */
-
       .then(() => {
         apiService.getSetsForOneTeam(id).then((data) => {
-          setState((oldVals) => ({ ...oldVals, sets: data }));
+          setPokemonSets(data);
         });
       });
-  }, [props.match.params.team_id]);
-
-  // Final Render
+  }, [match.params.team_id]);
 
   return (
     <div>
       <Link className={styles['go-back']} to={'/'}>
         Go To PokéTeams <i className="fas fa-home"></i>
       </Link>
-      {state?.team[0] ? (
-        <TeamPublicShare team={state?.team[0]} sets={state?.sets} />
+      {team[0] ? (
+        <TeamPublicShare team={team[0]} sets={sets} />
       ) : (
         <h3>This team seems to not exist anymore</h3>
       )}

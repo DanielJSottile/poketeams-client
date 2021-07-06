@@ -7,7 +7,11 @@ import GeneralContext from '../../contexts/GeneralContext';
 
 export interface PokemonTeam {
   team_name: string;
+  team_description: string;
+  description: string;
   id: number;
+  user_name: string;
+  date_created: string;
   folder_id: number;
 }
 
@@ -27,7 +31,7 @@ const TeamListEdit = (props: any) => {
     .map((team: PokemonTeam, i) => {
       return (
         <TeamEdit
-          className="btn"
+          //className="btn"
           id={`${team.team_name}`}
           key={i}
           team={team}

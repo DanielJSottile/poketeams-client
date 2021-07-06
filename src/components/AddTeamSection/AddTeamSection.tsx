@@ -9,7 +9,11 @@ import styles from './AddTeamSection.module.scss';
 
 export interface PokemonTeam {
   team_name: string;
+  team_description: string;
+  description: string;
   id: number;
+  user_name: string;
+  date_created: string;
   folder_id: number;
 }
 
