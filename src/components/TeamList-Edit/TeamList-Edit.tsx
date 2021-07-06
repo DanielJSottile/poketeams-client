@@ -29,14 +29,7 @@ const TeamListEdit = (props: any) => {
       (team: PokemonTeam) => team.folder_id === Number(currentClickedFolder.id)
     )
     .map((team: PokemonTeam, i) => {
-      return (
-        <TeamEdit
-          //className="btn"
-          id={`${team.team_name}`}
-          key={i}
-          team={team}
-        />
-      );
+      return <TeamEdit id={`${team.team_name}`} key={i} team={team} />;
     });
 
   // Final Render
