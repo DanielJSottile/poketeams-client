@@ -12,6 +12,23 @@ import styles from './Team-Edit.module.scss';
 
 // Interfaces
 
+export interface PokemonTeam {
+  team_name: string;
+  team_description: string;
+  description: string;
+  id: number;
+  user_name: string;
+  date_created: string;
+  folder_id: number;
+}
+
+export type Props = {
+  /** pokemon team */
+  team: PokemonTeam;
+  /** id as a team name */
+  id: string;
+};
+
 export interface StringInput {
   value: string;
   touched: boolean;
@@ -31,13 +48,41 @@ export interface Provider {
 }
 
 export interface PokemonSet {
+  nickname: string;
+  species: string;
+  gender: string;
+  shiny: boolean;
+  item: string;
+  ability: string;
+  level: number;
+  happiness: number;
+  nature: string;
+  hp_ev: number;
+  atk_ev: number;
+  def_ev: number;
+  spa_ev: number;
+  spd_ev: number;
+  spe_ev: number;
+  hp_iv: number;
+  atk_iv: number;
+  def_iv: number;
+  spa_iv: number;
+  spd_iv: number;
+  spe_iv: number;
+  move_one: string;
+  move_two: string;
+  move_three: string;
+  move_four: string;
+  setExpandToggle: boolean;
+  deleteClicked: boolean;
+  copySuccess: boolean;
   id: number;
   team_id: number;
 }
 
 // Component
 
-const TeamEdit = (props: any) => {
+const TeamEdit: React.FC<Props> = ({ team, id }) => {
   // Set Context
 
   const GenCon = useContext(GeneralContext);
@@ -45,9 +90,9 @@ const TeamEdit = (props: any) => {
   // Set State
 
   const [state, setState] = useState({
-    team_name: { value: props.team.team_name || '', touched: false },
+    team_name: { value: team.team_name || '', touched: false },
     favorite_team: { value: false, touched: false },
-    description: { value: props.team.team_description || '', touched: false },
+    description: { value: team.team_description || '', touched: false },
     teamExpandToggle: true,
     deleteClicked: false,
     copySuccess: false,
@@ -81,8 +126,8 @@ const TeamEdit = (props: any) => {
     setState((oldVals) => ({
       ...oldVals,
       teamExpandToggle: !state.teamExpandToggle,
-      team_name: { value: props.team.team_name || '', touched: false },
-      description: { value: props.team.description || '', touched: false },
+      team_name: { value: team.team_name || '', touched: false },
+      description: { value: team.description || '', touched: false },
     }));
   };
 
@@ -126,8 +171,6 @@ const TeamEdit = (props: any) => {
   /* Set Up Common Definitions to be 
   Used in Expanded/Unexpanded views */
 
-  const { team, id } = props;
-
   const { userSets, handleUpdateTeam } = GenCon;
 
   const ps = [...new Set(userSets.map((set: PokemonSet) => set.id))];
@@ -155,7 +198,7 @@ const TeamEdit = (props: any) => {
           key={SetList.length}
           onClickCallback={(e) => {
             e.preventDefault();
-            handlePostNewPokemon(props.team.id); // we just need the id of the team.  this func fills out default vals.
+            handlePostNewPokemon(team.id); // we just need the id of the team.  this func fills out default vals.
           }}
         >
           Add Pokemon! +
@@ -175,7 +218,7 @@ const TeamEdit = (props: any) => {
           onClickCallback={() => {
             handleDeleteExpand();
             handleTeamToggle();
-            handleDeleteTeam(props.team.id);
+            handleDeleteTeam(team.id);
           }}
         >
           Yes <i className="fas fa-thumbs-up"></i>

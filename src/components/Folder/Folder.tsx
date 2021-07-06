@@ -2,25 +2,27 @@ import React, { useContext } from 'react';
 import Button from '../Button/Button';
 import GeneralContext from '../../contexts/GeneralContext';
 
-// Component
+type Props = {
+  /** id for folder*/
+  id?: string;
+  /** name for folder */
+  folder_name?: string | undefined;
+};
 
-const Folder = (props: any) => {
+const Folder: React.FC<Props> = ({ id = '', folder_name = '' }) => {
   // Set Context
 
-  const GenCon = useContext(GeneralContext);
-  const { handleCurrentFolderClicked } = GenCon;
+  const { handleCurrentFolderClicked } = useContext(GeneralContext);
 
   // Final Render
 
   return (
     <Button
       buttonClass="btn"
-      id={props.id}
-      onClickCallback={() =>
-        handleCurrentFolderClicked(props.folder_name, props.id)
-      }
+      id={id}
+      onClickCallback={() => handleCurrentFolderClicked(folder_name, id)}
     >
-      <i className="fas fa-folder"></i> {props.folder_name}
+      <i className="fas fa-folder"></i> {folder_name}
     </Button>
   );
 };

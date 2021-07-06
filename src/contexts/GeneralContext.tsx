@@ -6,9 +6,6 @@ import showdownParse from '../functions/parse';
 import showdownFolderParse from '../functions/parseFolder';
 import legality from '../functions/legality';
 
-/* This is very important.  React needs to have a Props type
-in order to actually pass the props. */
-
 // Types
 
 type Props = {
@@ -87,7 +84,7 @@ interface CreateProvider {
   // user set functions
   handleDeleteSet(team_id: number, set_id: number): any;
   handleUpdateSet(
-    id: number,
+    id: number | undefined,
     nickname: string,
     species: string,
     gender: string,
@@ -337,7 +334,7 @@ export const GeneralProvider = ({ children }: Props) => {
     }));
   };
 
-  const handleCurrentFolderClicked = (name: any, folder_id: any) => {
+  const handleCurrentFolderClicked = (name: string, folder_id: any) => {
     setState((oldVals) => ({
       ...oldVals,
       currentClickedFolder: { value: name, id: folder_id, touched: true },

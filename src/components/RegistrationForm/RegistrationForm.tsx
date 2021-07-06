@@ -5,31 +5,24 @@ import Input from '../Input/Input';
 import AuthApiService from '../../services/auth-api-service';
 import styles from './RegistrationForm.module.scss';
 
-// Interfaces
+type Props = {
+  /** folder that is being shared */
+  onRegistrationSuccess?: () => void;
+};
 
-export interface Provider {
-  error: string | null;
-}
-
-// Component
-
-const RegistrationForm = (props: any) => {
-  // Set State
-
-  const [state, setState] = useState<Provider>({ error: null });
-
-  // Set State Input Functions
+const RegistrationForm: React.FC<Props> = ({
+  onRegistrationSuccess = () => null,
+}) => {
+  const [error, setError] = useState('');
 
   const handleSubmit = (ev: any) => {
     ev.preventDefault();
     const { user_name, password, verifyPassword } = ev.target;
 
     if (password.value !== verifyPassword.value) {
-      return setState({ error: 'Your Passwords Do Not Match!' });
+      return setError('Your Passwords Do Not Match!');
     }
-
-    setState({ error: null });
-
+    setError('');
     AuthApiService.postUser({
       user_name: user_name.value,
       password: password.value,
@@ -37,20 +30,18 @@ const RegistrationForm = (props: any) => {
       .then((user) => {
         user_name.value = '';
         password.value = '';
-        props.onRegistrationSuccess();
+        onRegistrationSuccess();
       })
       .catch((res) => {
-        setState((oldVals) => ({ ...oldVals, error: res.error }));
+        setError(res.error);
       });
   };
-
-  // Final Render
 
   return (
     <form className={styles['RegistrationForm']} onSubmit={handleSubmit}>
       <div role="alert">
-        {state.error ? (
-          <p className={styles['error shake-horizontal']}>{state.error}</p>
+        {error ? (
+          <p className={styles['error shake-horizontal']}>{error}</p>
         ) : (
           <p className={styles['register-intro']}>
             Please create a unique username, and a password that is 8 characters

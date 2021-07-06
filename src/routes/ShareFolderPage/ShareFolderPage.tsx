@@ -1,40 +1,83 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, RouteComponentProps } from 'react-router-dom';
 import FolderPublicShare from '../../components/Folder-Public-Share/Folder-Public-Share';
 import * as array from 'lodash';
 import apiService from '../../services/apiService';
 import styles from './ShareFolderPage.module.scss';
 
-// Interfaces
+export type MatchParams = { folder_id: string };
 
-export interface Provider {
-  folder?: any;
-  teams?: any;
-  sets?: any;
+interface Folder {
+  date_created: string;
+  date_modified: string;
+  folder_name: string;
+  id: number;
+  user_id: number;
 }
 
-// Component
+export interface PokemonTeam {
+  team_name: string;
+  team_description: string;
+  description: string;
+  id: number;
+  user_name: string;
+  date_created: string;
+  folder_id: number;
+}
 
-const ShareFolderPage = (props: any): JSX.Element => {
+export interface PokemonSet {
+  nickname: string;
+  species: string;
+  gender: string;
+  shiny: boolean;
+  item: string;
+  ability: string;
+  level: number;
+  happiness: number;
+  nature: string;
+  hp_ev: number;
+  atk_ev: number;
+  def_ev: number;
+  spa_ev: number;
+  spd_ev: number;
+  spe_ev: number;
+  hp_iv: number;
+  atk_iv: number;
+  def_iv: number;
+  spa_iv: number;
+  spd_iv: number;
+  spe_iv: number;
+  move_one: string;
+  move_two: string;
+  move_three: string;
+  move_four: string;
+  setExpandToggle: boolean;
+  deleteClicked: boolean;
+  copySuccess: boolean;
+  id: number;
+  team_id: number;
+}
+
+const ShareFolderPage: React.FC<RouteComponentProps<MatchParams>> = ({
+  match,
+}): JSX.Element => {
   // Set State
 
-  const [state, setState] = useState<Provider>();
-
-  /* This acts as our ComponentDidMount that gets the team
-  specified in the url parameter.*/
-
-  // Component LifeCylce
+  // const [state, setState] = useState<Provider>();
+  const [folder, setFolder] = useState([] as Folder[]);
+  const [teams, setTeams] = useState([] as PokemonTeam[]);
+  const [sets, setSets] = useState([] as PokemonSet[]);
 
   useEffect(() => {
-    const id = props.match.params.folder_id;
+    const id = match.params.folder_id;
     apiService
-      .getSingleFolderPublic(id)
-      .then((data: any) => {
-        setState((oldVals) => ({ ...oldVals, folder: [data] }));
+      .getSingleFolderPublic(Number(id))
+      .then((data) => {
+        setFolder([data]);
       })
       .then(() => {
-        apiService.getTeamsForOneFolder(id).then((data: any) => {
-          setState((oldVals) => ({ ...oldVals, teams: data }));
+        apiService.getTeamsForOneFolder(Number(id)).then((data: any) => {
+          setTeams(data);
 
           /* Much like adding teams and folders via import, we have to 
               go through the teams and add their sets.  This can be done via
@@ -45,16 +88,12 @@ const ShareFolderPage = (props: any): JSX.Element => {
           });
 
           Promise.all(promiseArray).then((values: any) => {
-            // this comes back as an array of arrays.  we need one array of objects
-            // Lodash -> _.flattenDeep recursively flattens an array to its base level
-            let merged = array.flattenDeep(values);
-            /* we could also use values.flat() but this breaks in I.E, and the old version 
-                is 8 years old and looks horrible.*/
-            setState((oldVals) => ({ ...oldVals, sets: merged }));
+            const merged: PokemonSet[] = array.flattenDeep(values);
+            setSets(merged);
           });
         });
       });
-  }, [props.match.params.folder_id]);
+  }, [match.params.folder_id]);
 
   // Final Render
 
@@ -63,12 +102,8 @@ const ShareFolderPage = (props: any): JSX.Element => {
       <Link className={styles['go-back']} to={'/'}>
         Go To PokéTeams <i className="fas fa-home"></i>
       </Link>
-      {state?.folder[0] ? (
-        <FolderPublicShare
-          folder={state?.folder[0]}
-          teams={state?.teams}
-          sets={state?.sets}
-        />
+      {folder[0] ? (
+        <FolderPublicShare folder={folder[0]} teams={teams} sets={sets} />
       ) : (
         <h3>This folder seems to not exist anymore</h3>
       )}

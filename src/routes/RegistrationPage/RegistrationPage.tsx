@@ -8,7 +8,7 @@ import styles from './RegistrationPage.module.scss';
 const RegistrationPage = (props: any): JSX.Element => {
   // Handle Registration Success
 
-  const handleRegistrationSuccess = (user: any) => {
+  const handleRegistrationSuccess = () => {
     const { history } = props;
     history.push('/landing');
   };
