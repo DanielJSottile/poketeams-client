@@ -1,0 +1,98 @@
+@import '../../../../index.scss';
+
+.pokeball {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  margin: auto;
+}
+
+.pokeball:after {
+  content: '';
+  background: $pokeball-background;
+  height: 5px;
+  width: 60%;
+  border-radius: 100%;
+  position: absolute;
+  bottom: -2px;
+}
+
+.pokeball:before {
+  content: '';
+  position: absolute;
+  background-color: $pokeball-red;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  bottom: 26px;
+  right: 26px;
+  z-index: 4;
+  animation: capturing 0.6s alternate infinite ease-in-out,
+    flare 1s alternate infinite ease-in-out;
+}
+
+.pokeball > span {
+  position: relative;
+  z-index: 2;
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: $pokeball-red;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid black;
+  animation: capturing 0.6s alternate infinite ease-in-out;
+}
+
+.pokeball > span:after {
+  transform: rotate(-90deg);
+  content: '';
+  position: absolute;
+  width: 60px;
+  height: 120px;
+  background-color: white;
+  border: 4px solid black;
+  top: -4px;
+}
+
+.pokeball > span:before {
+  content: '';
+  position: absolute;
+  background-color: white;
+  width: 12px;
+  height: 12px;
+  border: 4px solid black;
+  border-radius: 50%;
+  bottom: 17px;
+  right: 17px;
+  z-index: 1;
+}
+
+/* AnimationFrames */
+@keyframes capturing {
+  0%,
+  90% {
+    transform: rotate(0deg) translatex(0);
+  }
+  20%,
+  80% {
+    transform: rotate(12deg) translatex(1px);
+  }
+  50%,
+  100% {
+    transform: rotate(-12deg) translatex(-2px);
+  }
+}
+
+@keyframes flare {
+  0%,
+  80% {
+    opacity: 0.2;
+  }
+  20%,
+  100% {
+    opacity: 0.6;
+  }
+}

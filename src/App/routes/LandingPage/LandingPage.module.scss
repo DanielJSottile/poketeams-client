@@ -1,0 +1,58 @@
+@import '../../../index.scss';
+
+.landingimg {
+  width: 300px;
+  border: 5px solid $med-dark-grey;
+  border-radius: 30px;
+}
+
+.landing-title {
+  width: 90%;
+  background-image: url('../../Images/PokeTeams.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 90%;
+  height: 12em;
+  margin: auto;
+}
+
+.public-entry,
+.register-entry {
+  display: block;
+  width: 200px;
+  text-align: center;
+  font-size: 16px;
+  font-family: $h2-font;
+  padding: 5px;
+  margin: auto;
+  margin-bottom: 40px;
+  border-radius: 40px;
+  border: 5px double $med-dark-grey;
+}
+
+.hook {
+  font-size: 32px;
+}
+
+.hook::before {
+  content: open-quote;
+}
+
+.hook::after {
+  content: close-quote;
+}
+
+@media (min-width: 600px) {
+  .landingimg {
+    width: 550px;
+  }
+}
+
+@media (min-width: 850px) {
+  /* Large Ipad Screen */
+
+  .landing-title {
+    background-size: 70%;
+    height: 15em;
+  }
+}

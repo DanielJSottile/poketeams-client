@@ -1,0 +1,40 @@
+@import '../../../index.scss';
+
+.submit {
+  display: inline-block;
+  text-shadow: none;
+  font-weight: bolder;
+  background-color: white;
+  font-size: 16px;
+  color: $med-dark-grey;
+  border-radius: 4px;
+  padding: 3px;
+  margin: 3px;
+  text-decoration: none;
+}
+
+.folders {
+  display: block;
+}
+
+.submit {
+  color: green;
+}
+
+.submit:disabled {
+  color: $pokeball-red;
+}
+
+.submit:hover {
+  background-color: $light-yellow;
+  transition: 0.3s;
+}
+
+.pokeball-div {
+  margin: 10px;
+}
+
+.hint {
+  font-size: 14px;
+  letter-spacing: 6px;
+}

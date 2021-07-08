@@ -1,0 +1,21 @@
+@import '../../../index.scss';
+
+.go-back {
+  font-family: $h3-font;
+  letter-spacing: 3px;
+  padding: 5px;
+  margin: 15px;
+  font-size: 32px;
+  border: 4px double $pokeball-red;
+  border-radius: 10px;
+  transition: 0.3s;
+}
+
+.go-back:hover {
+  background-color: $med-dark-grey;
+  color: white;
+  margin: 15px;
+  font-size: 32px;
+  border: 4px double $pure-yellow;
+  border-radius: 10px;
+}
