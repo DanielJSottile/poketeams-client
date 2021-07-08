@@ -11,7 +11,24 @@ import showdownFolderGenerate from '../../functions/generateFolder';
 import styles from './FoldersList.module.scss';
 
 const FoldersList: React.FC = () => {
-  const GenCon = useContext(GeneralContext);
+  const {
+    userFolders,
+    userTeams,
+    userSets,
+    folderAddClicked,
+    currentClickedFolder,
+    handleFolderAddClickExpand,
+    newFolderName,
+    newFolderImport,
+    validateNewFolderImport,
+    setNewFolderContents,
+    handlePostNewFolder,
+    setNewFolderName,
+    handleEditFolder,
+    validateNewFolderName,
+    handleCurrentFolderClicked,
+    handleDeleteFolder,
+  } = useContext(GeneralContext);
 
   const [state, setState] = useState({
     editClicked: false,
@@ -49,15 +66,6 @@ const FoldersList: React.FC = () => {
   /* Set Up Common Definitions to be 
   Used in Different views */
 
-  const {
-    userFolders,
-    userTeams,
-    userSets,
-    folderAddClicked,
-    currentClickedFolder,
-    handleFolderAddClickExpand,
-  } = GenCon;
-
   const folderList = userFolders.map((folder: any, i) => {
     return <Folder key={i} id={folder.id} folder_name={folder.folder_name} />;
   });
@@ -73,16 +81,6 @@ const FoldersList: React.FC = () => {
   });
 
   const renderExpanded = (): JSX.Element => {
-    const {
-      newFolderName,
-      newFolderImport,
-      validateNewFolderImport,
-      setNewFolderContents,
-      setNewFolderName,
-      handlePostNewFolder,
-      validateNewFolderName,
-    } = GenCon;
-
     return (
       <form>
         <div>
@@ -128,15 +126,6 @@ const FoldersList: React.FC = () => {
   };
 
   const renderEditExpand = (): JSX.Element => {
-    const {
-      newFolderName,
-      setNewFolderName,
-      handleEditFolder,
-      validateNewFolderName,
-      handleCurrentFolderClicked,
-      currentClickedFolder,
-    } = GenCon;
-
     return (
       <form>
         <Input
@@ -172,8 +161,6 @@ const FoldersList: React.FC = () => {
   };
 
   const renderDeleteExpand = (): JSX.Element => {
-    const { handleDeleteFolder } = GenCon;
-
     return (
       <div>
         <p>Are You Sure You'd Like to Delete this Folder?</p>

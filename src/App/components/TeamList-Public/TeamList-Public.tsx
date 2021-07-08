@@ -8,9 +8,8 @@ import styles from './TeamList-Public.module.scss';
 import { PokemonTeam } from '../../@types';
 
 const TeamListPublic: React.FC = (): JSX.Element => {
-  const GenCon = useContext(GeneralContext);
-
-  const { publicTeams, page, handlePageDown, handlePageUp } = GenCon;
+  const { publicTeams, page, handlePageDown, handlePageUp } =
+    useContext(GeneralContext);
 
   const TeamList = publicTeams.map((team: PokemonTeam, i) => {
     return <TeamPublic key={i} id={`${team.team_name}`} team={team} />;

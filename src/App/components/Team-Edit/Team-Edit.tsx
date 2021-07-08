@@ -37,7 +37,8 @@ export interface Provider {
 }
 
 const TeamEdit: React.FC<Props> = ({ team, id }): JSX.Element => {
-  const GenCon = useContext(GeneralContext);
+  const { userSets, handleUpdateTeam, handlePostNewPokemon, handleDeleteTeam } =
+    useContext(GeneralContext);
 
   const [state, setState] = useState({
     team_name: { value: team.team_name || '', touched: false },
@@ -115,8 +116,6 @@ const TeamEdit: React.FC<Props> = ({ team, id }): JSX.Element => {
   /* Set Up Common Definitions to be 
   Used in Expanded/Unexpanded views */
 
-  const { userSets, handleUpdateTeam } = GenCon;
-
   const ps = [...new Set(userSets.map((set: PokemonSet) => set.id))];
 
   const newPS = ps.map((id) =>
@@ -126,8 +125,6 @@ const TeamEdit: React.FC<Props> = ({ team, id }): JSX.Element => {
   const teamSets = newPS.filter((set: any) => set.team_id === team.id);
 
   const renderSetList = (teamSets: any) => {
-    const { handlePostNewPokemon } = GenCon;
-
     const SetList = teamSets.map((set: any, i: number) => {
       return <SetEdit key={i} set={set} />;
     });
@@ -149,8 +146,6 @@ const TeamEdit: React.FC<Props> = ({ team, id }): JSX.Element => {
   };
 
   const renderDeleteExpand = () => {
-    const { handleDeleteTeam } = GenCon;
-
     return (
       <div>
         <p>Are You Sure You'd Like to Delete this Team?</p>

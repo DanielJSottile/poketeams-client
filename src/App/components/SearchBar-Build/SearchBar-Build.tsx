@@ -5,8 +5,6 @@ import Button from '../Button/Button';
 import styles from './SearchBar-Build.module.scss';
 
 const SearchBarBuild: React.FC = () => {
-  const GenCon = useContext(GeneralContext);
-
   const {
     handleFilter,
     validateFilter,
@@ -14,7 +12,7 @@ const SearchBarBuild: React.FC = () => {
     filtersort,
     setFilter,
     setFilterSort,
-  } = GenCon;
+  } = useContext(GeneralContext);
 
   return (
     <div className={styles['searchbar']}>

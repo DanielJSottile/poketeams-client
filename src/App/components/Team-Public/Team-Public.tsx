@@ -19,7 +19,7 @@ export type Props = {
 };
 
 const TeamPublic: React.FC<Props> = ({ team, id }): JSX.Element => {
-  const GenCon = useContext(GeneralContext);
+  const { publicSets } = useContext(GeneralContext);
 
   const [state, setState] = useState({
     teamExpandToggle: true,
@@ -46,8 +46,6 @@ const TeamPublic: React.FC<Props> = ({ team, id }): JSX.Element => {
     navigator.clipboard.writeText(text); // this seems to work!
     setState((oldVals) => ({ ...oldVals, copySuccess: true }));
   };
-
-  const { publicSets } = GenCon;
 
   const ps = [...new Set(publicSets.map((set: PokemonSet) => set.id))];
 

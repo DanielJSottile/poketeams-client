@@ -5,9 +5,7 @@ import { PokemonTeam } from '../../@types';
 // import styles from './TeamList-Edit.module.scss';
 
 const TeamListEdit: React.FC = (): JSX.Element => {
-  const GenCon = useContext(GeneralContext);
-
-  const { userTeams, currentClickedFolder } = GenCon;
+  const { userTeams, currentClickedFolder } = useContext(GeneralContext);
 
   const TeamList = userTeams
     .filter(

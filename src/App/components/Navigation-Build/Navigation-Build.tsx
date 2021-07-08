@@ -12,11 +12,11 @@ interface MyToken {
 }
 
 const NavigationBuild: React.FC = () => {
-  const GenCon = useContext(GeneralContext);
+  const { clearUserState } = useContext(GeneralContext);
 
   const handleLogoutClick = () => {
     TokenService.clearAuthToken();
-    GenCon.clearUserState();
+    clearUserState();
   };
 
   const renderLogout = () => {

@@ -6,23 +6,24 @@ import Button from '../Button/Button';
 import styles from './AddTeamSection.module.scss';
 
 const AddTeamSection: React.FC = () => {
-  const GenCon = useContext(GeneralContext);
+  const {
+    newTeamName,
+    newTeamImport,
+    setNewTeamName,
+    setNewTeamContents,
+    handlePostNewTeam,
+    desc,
+    validateDesc,
+    setDesc,
+    validateNewTeamName,
+    validateNewTeamImport,
+    validateCurrentFolderClicked,
+    teamAddClicked,
+    currentClickedFolder,
+    handleTeamAddClickExpand,
+  } = useContext(GeneralContext);
 
   const renderExpanded = () => {
-    const {
-      newTeamName,
-      newTeamImport,
-      setNewTeamName,
-      setNewTeamContents,
-      handlePostNewTeam,
-      desc,
-      validateDesc,
-      setDesc,
-      validateNewTeamName,
-      validateNewTeamImport,
-      validateCurrentFolderClicked,
-    } = GenCon;
-
     return (
       <form>
         <Input
@@ -82,9 +83,6 @@ const AddTeamSection: React.FC = () => {
       </form>
     );
   };
-
-  const { teamAddClicked, currentClickedFolder, handleTeamAddClickExpand } =
-    GenCon;
 
   return (
     <Fragment>

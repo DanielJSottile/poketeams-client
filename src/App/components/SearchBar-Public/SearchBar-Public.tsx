@@ -5,10 +5,8 @@ import Button from '../Button/Button';
 import styles from './SearchBar-Public.module.scss';
 
 const SearchBarPublic: React.FC = () => {
-  const GenCon = useContext(GeneralContext);
-
   const { handleSearch, validateSearch, search, sort, setSearch, setSort } =
-    GenCon;
+    useContext(GeneralContext);
 
   return (
     <div className={styles['searchbar']}>
