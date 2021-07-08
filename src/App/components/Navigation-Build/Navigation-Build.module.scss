@@ -1,0 +1,48 @@
+@import '../../../index.scss';
+
+.user-welcome {
+  padding: 5px;
+  margin-right: 15px;
+  text-align: right;
+}
+
+.user-welcome:hover {
+  color: $pure-yellow;
+  transition: 0.5s;
+}
+
+.navbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.button_things,
+.user_things {
+  display: none;
+}
+
+.mobile-button {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+  padding: 10px;
+}
+
+.build-title {
+  background-image: url('../../Images/PokeTeams---Build.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 90%;
+  height: 12em;
+  margin: auto;
+}
+
+@media (min-width: 850px) {
+  /* Large Ipad Screen */
+
+  .build-title {
+    background-size: 70%;
+    height: 15em;
+  }
+}

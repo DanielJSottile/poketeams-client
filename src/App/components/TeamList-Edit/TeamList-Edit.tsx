@@ -1,0 +1,34 @@
+import React, { Fragment, useContext } from 'react';
+import TeamEdit from '../Team-Edit/Team-Edit';
+import GeneralContext from '../../contexts/GeneralContext';
+import { PokemonTeam } from '../../@types';
+// import styles from './TeamList-Edit.module.scss';
+
+const TeamListEdit: React.FC = (): JSX.Element => {
+  const GenCon = useContext(GeneralContext);
+
+  const { userTeams, currentClickedFolder } = GenCon;
+
+  const TeamList = userTeams
+    .filter(
+      (team: PokemonTeam) => team.folder_id === Number(currentClickedFolder.id)
+    )
+    .map((team: PokemonTeam, i) => {
+      return <TeamEdit id={`${team.team_name}`} key={i} team={team} />;
+    });
+
+  return (
+    <Fragment>
+      {TeamList.length > 0 ? (
+        TeamList
+      ) : (
+        <h3>
+          Either No Folder is Selected Or There Are No Teams! Make Teams with
+          Pokemon!
+        </h3>
+      )}
+    </Fragment>
+  );
+};
+
+export default TeamListEdit;
