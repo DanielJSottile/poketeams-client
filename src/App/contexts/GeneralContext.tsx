@@ -978,34 +978,26 @@ export const GeneralProvider = ({ children }: Props) => {
     setCurrentClickedFolder({ value: '', id: '', touched: false });
   };
 
-  const handleDeleteTeam = (team_id: any) => {
-    apiService.deleteUserTeam(Number(team_id));
+  const handleDeleteTeam = (team_id: number) => {
+    apiService.deleteUserTeam(team_id);
 
-    const newUserTeams = userTeams.filter(
-      (team) => Number(team.id) !== Number(team_id)
-    );
-    const newPublicTeams = publicTeams.filter(
-      (team) => Number(team.id) !== Number(team_id)
-    );
+    const newUserTeams = userTeams.filter((team) => team.id !== team_id);
+    const newPublicTeams = publicTeams.filter((team) => team.id !== team_id);
     setPublicTeams(newPublicTeams);
     setUserTeams(newUserTeams);
     setCurrentClickedTeam({ value: '', id: '', touched: false });
   };
 
-  const handleDeleteSet = (team_id: any, set_id: any) => {
-    apiService.deleteUserSet(Number(team_id), Number(set_id));
+  const handleDeleteSet = (team_id: number, set_id: number) => {
+    apiService.deleteUserSet(team_id, set_id);
 
-    const newUserSets = userSets.filter(
-      (set) => Number(set.id) !== Number(set_id)
-    );
-    const newPublicSets = publicSets.filter(
-      (set) => Number(set.id) !== Number(set_id)
-    );
+    const newUserSets = userSets.filter((set) => set.id !== set_id);
+    const newPublicSets = publicSets.filter((set) => set.id !== set_id);
     setPublicSets(newPublicSets);
     setUserSets(newUserSets);
   };
 
-  const handleSearch = (e: any) => {
+  const handleSearch = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     const query = `?page=${page}&sort=${sort.value || 'newest'}&species=${
       search.value.toLowerCase() || 'all'
@@ -1013,7 +1005,7 @@ export const GeneralProvider = ({ children }: Props) => {
     apiService.getTenTeamsSearch(query).then((teams) => {
       setPublicTeams(teams);
       setPublicSets([]);
-      teams.forEach((team: any) => {
+      teams.forEach((team: PokemonTeam) => {
         apiService.getSetsForOneTeam(team.id).then((sets) => {
           setPublicSets([...publicSets, ...sets]);
         });
