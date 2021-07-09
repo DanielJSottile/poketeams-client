@@ -18,73 +18,48 @@ export type Props = {
   id: string;
 };
 
-export interface StringInput {
-  value: string;
-  touched: boolean;
-}
-
-export interface BoolInput {
-  value: boolean;
-  touched: boolean;
-}
-
-export interface Provider {
-  team_name: StringInput;
-  favorite_team: BoolInput;
-  description: StringInput;
-  teamExpandToggle: boolean;
-  deleteClicked: boolean;
-}
-
 const TeamEdit: React.FC<Props> = ({ team, id }): JSX.Element => {
   const { userSets, handleUpdateTeam, handlePostNewPokemon, handleDeleteTeam } =
     useContext(GeneralContext);
 
-  const [state, setState] = useState({
-    team_name: { value: team.team_name || '', touched: false },
-    favorite_team: { value: false, touched: false },
-    description: { value: team.team_description || '', touched: false },
-    teamExpandToggle: true,
-    deleteClicked: false,
-    copySuccess: false,
+  const [teamName, setTeamName] = useState({
+    value: team.team_name || '',
+    touched: false,
   });
+  // const [favoriteTeam, setFavoriteTeam] = useState({ value: false, touched: false });
+  // TOOD: add this as a real feature
+  const [description, setDescription] = useState({
+    value: team.team_description || '',
+    touched: false,
+  });
+  const [teamExpandToggle, setTeamExpandToggle] = useState(true);
+  const [deleteClicked, setDeleteClicked] = useState(false);
+  const [copySuccess, setCopySuccess] = useState(false);
 
   const removeCopySuccess = (): any => {
-    setState((oldVals) => ({ ...oldVals, copySuccess: false }));
+    setCopySuccess(false);
   };
 
-  const setTeamName = (team_name: string) => {
-    setState((oldVals) => ({
-      ...oldVals,
-      team_name: { value: team_name, touched: true },
-    }));
+  const inputTeamName = (teamName: string) => {
+    setTeamName({ value: teamName, touched: true });
   };
 
-  // const setFavTeam = favorite_team => {
-  //   setState(oldVals => ({...oldVals, favorite_team: {value: favorite_team, touched: true}}))
+  // const setFavTeam = favoriteTeam => {
+  //   setFavoriteTeam({value: favoriteTeam, touched: true});
   // };
 
   const setDesc = (description: string) => {
-    setState((oldVals) => ({
-      ...oldVals,
-      description: { value: description, touched: true },
-    }));
+    setDescription({ value: description, touched: true });
   };
 
   const handleTeamToggle = () => {
-    setState((oldVals) => ({
-      ...oldVals,
-      teamExpandToggle: !state.teamExpandToggle,
-      team_name: { value: team.team_name || '', touched: false },
-      description: { value: team.description || '', touched: false },
-    }));
+    setTeamExpandToggle(!teamExpandToggle);
+    setTeamName({ value: team.team_name || '', touched: false });
+    setDescription({ value: team.description || '', touched: false });
   };
 
   const handleDeleteExpand = () => {
-    setState((oldVals) => ({
-      ...oldVals,
-      deleteClicked: !state.deleteClicked,
-    }));
+    setDeleteClicked(!deleteClicked);
   };
 
   const textArea: any = React.useRef(null);
@@ -94,19 +69,17 @@ const TeamEdit: React.FC<Props> = ({ team, id }): JSX.Element => {
     document.execCommand('copy'); // this seems to not work
     const text = textArea.current.defaultValue;
     navigator.clipboard.writeText(text); // this seems to work!
-    setState((oldVals) => ({ ...oldVals, copySuccess: true }));
+    setCopySuccess(true);
   };
 
   const validateTeamName = (): any => {
-    let team_name = state.team_name.value;
-    if (!team_name) {
+    if (!teamName.value) {
       return `Team MUST have a name!`;
     }
   };
 
   const validateDesc = (): any => {
-    let description = state.description.value;
-    if (typeof description !== 'string') {
+    if (typeof description.value !== 'string') {
       return `This should never come up, it is superflous`;
     }
   };
@@ -135,7 +108,8 @@ const TeamEdit: React.FC<Props> = ({ team, id }): JSX.Element => {
           key={SetList.length}
           onClickCallback={(e) => {
             e.preventDefault();
-            handlePostNewPokemon(team.id); // we just need the id of the team.  this func fills out default vals.
+            handlePostNewPokemon(team.id);
+            // we just need the id of the team.  this func fills out default vals.
           }}
         >
           Add Pokemon! +
@@ -188,10 +162,10 @@ const TeamEdit: React.FC<Props> = ({ team, id }): JSX.Element => {
                     inputHasError={false}
                     inputClass={styles['title']}
                     placeholder="e.g. Cool Team"
-                    value={state.team_name.value}
+                    value={teamName.value}
                     onChangeCallback={(
                       e: React.ChangeEvent<HTMLInputElement>
-                    ) => setTeamName(e.target.value)}
+                    ) => inputTeamName(e.target.value)}
                     type="text"
                     name="team-name"
                     id={`team-name-${team.id}`}
@@ -224,7 +198,7 @@ const TeamEdit: React.FC<Props> = ({ team, id }): JSX.Element => {
                 placeholder="e.g. description"
                 name="title-content"
                 id={`title-content-${team.id}`}
-                value={state.description.value}
+                value={description.value}
                 onChangeCallback={(e) => setDesc(e.target.value)}
               />
               <Button
@@ -232,18 +206,14 @@ const TeamEdit: React.FC<Props> = ({ team, id }): JSX.Element => {
                 disabled={validateTeamName() || validateDesc()}
                 onClickCallback={(e) => {
                   e.preventDefault();
-                  handleUpdateTeam(
-                    state.team_name.value,
-                    state.description.value,
-                    team.id
-                  );
+                  handleUpdateTeam(teamName.value, description.value, team.id);
                 }}
               >
                 Save Team Details <i className="fas fa-save"></i>
               </Button>
             </form>
             <div className={styles['export-team']}>
-              {state.copySuccess ? (
+              {copySuccess ? (
                 <div className={styles['copied']}>Copied to Clipboard!!</div>
               ) : null}
               <div>
@@ -295,7 +265,7 @@ const TeamEdit: React.FC<Props> = ({ team, id }): JSX.Element => {
             >
               <i className="fas fa-trash-alt"></i> Delete Team!
             </Button>
-            {state.deleteClicked ? renderDeleteExpand() : null}
+            {deleteClicked ? renderDeleteExpand() : null}
           </div>
         </div>
         {SetList}
@@ -347,7 +317,7 @@ const TeamEdit: React.FC<Props> = ({ team, id }): JSX.Element => {
 
   return (
     <Fragment>
-      {state.teamExpandToggle ? renderUnexpandedTeam() : renderExpandedTeam()}
+      {teamExpandToggle ? renderUnexpandedTeam() : renderExpandedTeam()}
     </Fragment>
   );
 };

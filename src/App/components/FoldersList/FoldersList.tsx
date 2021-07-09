@@ -30,25 +30,20 @@ const FoldersList: React.FC = () => {
     handleDeleteFolder,
   } = useContext(GeneralContext);
 
-  const [state, setState] = useState({
-    editClicked: false,
-    deleteClicked: false,
-    copySuccess: false,
-  });
+  const [editClicked, setEditClicked] = useState(false);
+  const [deleteClicked, setDeleteClicked] = useState(false);
+  const [copySuccess, setCopySuccess] = useState(false);
 
   const handleEditExpand = () => {
-    setState((oldVals) => ({ ...oldVals, editClicked: !state.editClicked }));
+    setEditClicked(!editClicked);
   };
 
   const handleDeleteExpand = () => {
-    setState((oldVals) => ({
-      ...oldVals,
-      deleteClicked: !state.deleteClicked,
-    }));
+    setDeleteClicked(!deleteClicked);
   };
 
-  const removeCopySuccess = (): any => {
-    setState((oldVals) => ({ ...oldVals, copySuccess: false }));
+  const removeCopySuccess = () => {
+    setCopySuccess(false);
   };
 
   const textArea: any = React.useRef(null);
@@ -58,7 +53,7 @@ const FoldersList: React.FC = () => {
     document.execCommand('copy'); // this seems to not work
     const text = textArea.current.defaultValue;
     navigator.clipboard.writeText(text); // this seems to work!
-    setState((oldVals) => ({ ...oldVals, copySuccess: true }));
+    setCopySuccess(true);
   };
 
   /* --------------------- */
@@ -216,7 +211,7 @@ const FoldersList: React.FC = () => {
           {currentClickedFolder.value ? (
             <div>
               <div className={styles['export-team']}>
-                {state.copySuccess ? (
+                {copySuccess ? (
                   <div className={styles['copied']}>Copied to Clipboard!!</div>
                 ) : null}
                 <div>
@@ -276,8 +271,8 @@ const FoldersList: React.FC = () => {
           ) : null}
         </div>
         <div>
-          {state.editClicked ? renderEditExpand() : null}
-          {state.deleteClicked ? renderDeleteExpand() : null}
+          {editClicked && renderEditExpand()}
+          {deleteClicked && renderDeleteExpand()}
         </div>
       </section>
     </Fragment>

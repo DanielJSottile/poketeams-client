@@ -21,20 +21,15 @@ export type Props = {
 const TeamPublic: React.FC<Props> = ({ team, id }): JSX.Element => {
   const { publicSets } = useContext(GeneralContext);
 
-  const [state, setState] = useState({
-    teamExpandToggle: true,
-    copySuccess: false,
-  });
+  const [teamExpandToggle, setTeamExpandToggle] = useState(true);
+  const [copySuccess, setCopySuccess] = useState(false);
 
   const handleTeamToggle = () => {
-    setState((oldVals) => ({
-      ...oldVals,
-      teamExpandToggle: !state.teamExpandToggle,
-    }));
+    setTeamExpandToggle(!teamExpandToggle);
   };
 
   const removeCopySuccess = (): any => {
-    setState((oldVals) => ({ ...oldVals, copySuccess: false }));
+    setCopySuccess(false);
   };
 
   const textArea: any = React.useRef(null);
@@ -44,7 +39,7 @@ const TeamPublic: React.FC<Props> = ({ team, id }): JSX.Element => {
     document.execCommand('copy'); // this seems to not work
     const text = textArea.current.defaultValue;
     navigator.clipboard.writeText(text); // this seems to work!
-    setState((oldVals) => ({ ...oldVals, copySuccess: true }));
+    setCopySuccess(true);
   };
 
   const ps = [...new Set(publicSets.map((set: PokemonSet) => set.id))];
@@ -117,7 +112,7 @@ const TeamPublic: React.FC<Props> = ({ team, id }): JSX.Element => {
               />
             </form>
             <div className={styles['export-team']}>
-              {state.copySuccess ? (
+              {copySuccess ? (
                 <div className={styles['copied']}>Copied to Clipboard!!</div>
               ) : null}
               <div>
@@ -205,7 +200,7 @@ const TeamPublic: React.FC<Props> = ({ team, id }): JSX.Element => {
 
   return (
     <Fragment>
-      {state.teamExpandToggle ? renderUnexpandedTeam() : renderExpandedTeam()}
+      {teamExpandToggle ? renderUnexpandedTeam() : renderExpandedTeam()}
     </Fragment>
   );
 };

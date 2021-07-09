@@ -20,20 +20,15 @@ export type Props = {
 };
 
 const TeamPublicShare: React.FC<Props> = ({ team, id, sets }): JSX.Element => {
-  const [state, setState] = useState({
-    teamExpandToggle: true,
-    copySuccess: false,
-  });
+  const [teamExpandToggle, setTeamExpandToggle] = useState(true);
+  const [copySuccess, setCopySuccess] = useState(false);
 
   const handleTeamToggle = () => {
-    setState((oldVals) => ({
-      ...oldVals,
-      teamExpandToggle: !state.teamExpandToggle,
-    }));
+    setTeamExpandToggle(!teamExpandToggle);
   };
 
-  const removeCopySuccess = (): any => {
-    setState((oldVals) => ({ ...oldVals, copySuccess: false }));
+  const removeCopySuccess = () => {
+    setCopySuccess(false);
   };
 
   const textArea: any = React.useRef(null);
@@ -43,7 +38,7 @@ const TeamPublicShare: React.FC<Props> = ({ team, id, sets }): JSX.Element => {
     document.execCommand('copy'); // this seems to not work
     const text = textArea.current.defaultValue;
     navigator.clipboard.writeText(text); // this seems to work!
-    setState((oldVals) => ({ ...oldVals, copySuccess: true }));
+    setCopySuccess(true);
   };
 
   const renderExpandedTeam = () => {
@@ -107,7 +102,7 @@ const TeamPublicShare: React.FC<Props> = ({ team, id, sets }): JSX.Element => {
               />
             </form>
             <div className={styles['export-team']}>
-              {state.copySuccess ? (
+              {copySuccess ? (
                 <div className={styles['copied']}>Copied to Clipboard!!</div>
               ) : null}
               <div>
@@ -197,7 +192,7 @@ const TeamPublicShare: React.FC<Props> = ({ team, id, sets }): JSX.Element => {
 
   return (
     <Fragment>
-      {state.teamExpandToggle ? renderUnexpandedTeam() : renderExpandedTeam()}
+      {teamExpandToggle ? renderUnexpandedTeam() : renderExpandedTeam()}
     </Fragment>
   );
 };

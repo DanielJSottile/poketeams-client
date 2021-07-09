@@ -15,20 +15,15 @@ export type Props = {
 };
 
 const SetPublic: React.FC<Props> = ({ set }): JSX.Element => {
-  const [state, setState] = useState({
-    setExpandToggle: true,
-    copySuccess: false,
-  });
+  const [expandToggle, setExpandToggle] = useState(false);
+  const [copySuccess, setCopySuccess] = useState(false);
 
   const handleSetToggle = () => {
-    setState((oldVals) => ({
-      ...oldVals,
-      setExpandToggle: !state.setExpandToggle,
-    }));
+    setExpandToggle(!expandToggle);
   };
 
-  const removeCopySuccess = (): any => {
-    setState((oldVals) => ({ ...oldVals, copySuccess: false }));
+  const removeCopySuccess = () => {
+    setCopySuccess(false);
   };
 
   const textArea: any = React.useRef(null);
@@ -38,7 +33,7 @@ const SetPublic: React.FC<Props> = ({ set }): JSX.Element => {
     document.execCommand('copy'); // this seems to not work
     const text = textArea.current.defaultValue;
     navigator.clipboard.writeText(text); // this seems to work!
-    setState((oldVals) => ({ ...oldVals, copySuccess: true }));
+    setCopySuccess(true);
   };
 
   const renderExpandedSet = () => {
@@ -429,7 +424,7 @@ const SetPublic: React.FC<Props> = ({ set }): JSX.Element => {
         </form>
 
         <div className={styles['export-pokemon']}>
-          {state.copySuccess ? (
+          {copySuccess ? (
             <div className={styles['copied']}>Copied to Clipboard!!</div>
           ) : null}
           <div>
@@ -511,7 +506,7 @@ const SetPublic: React.FC<Props> = ({ set }): JSX.Element => {
 
   return (
     <Fragment>
-      {state.setExpandToggle ? renderUnexpandedSet() : renderExpandedSet()}
+      {expandToggle ? renderUnexpandedSet() : renderExpandedSet()}
     </Fragment>
   );
 };

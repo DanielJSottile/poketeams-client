@@ -1,13 +1,12 @@
 @import '../../../index.scss';
 
-.tiny-icon {
-  height: 35px;
-}
-
 .sprites-row {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  .tiny-icon {
+    height: 35px;
+  }
 }
 
 .team-section {
