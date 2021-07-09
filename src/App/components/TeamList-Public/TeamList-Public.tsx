@@ -8,8 +8,7 @@ import styles from './TeamList-Public.module.scss';
 import { PokemonTeam } from '../../@types';
 
 const TeamListPublic: React.FC = (): JSX.Element => {
-  const { publicTeams, page, handlePageDown, handlePageUp } =
-    useContext(GeneralContext);
+  const { publicTeams, page, handlePage } = useContext(GeneralContext);
 
   const TeamList = publicTeams.map((team: PokemonTeam, i) => {
     return <TeamPublic key={i} id={`${team.team_name}`} team={team} />;
@@ -18,11 +17,11 @@ const TeamListPublic: React.FC = (): JSX.Element => {
   return (
     <Fragment>
       <div className={styles['team-pagination']}>
-        {page.value > 1 ? (
+        {page > 1 ? (
           <div className={styles['pagebutton']}>
             <Button
               onClickCallback={() => {
-                handlePageDown();
+                handlePage('down');
               }}
             >
               {`Go to Previous 10 Teams`}{' '}
@@ -30,7 +29,7 @@ const TeamListPublic: React.FC = (): JSX.Element => {
             </Button>
             <Button
               onClickCallback={() => {
-                handlePageUp();
+                handlePage('up');
               }}
             >
               <i className="fas fa-arrow-circle-right"></i>{' '}
@@ -41,7 +40,7 @@ const TeamListPublic: React.FC = (): JSX.Element => {
           <div className={styles['pagebutton']}>
             <Button
               onClickCallback={() => {
-                handlePageUp();
+                handlePage('up');
               }}
             >
               <i className="fas fa-arrow-circle-right"></i>{' '}
@@ -49,9 +48,7 @@ const TeamListPublic: React.FC = (): JSX.Element => {
             </Button>
           </div>
         )}
-        <span>{`Current Teams: ${page.value * 10 - 9} - ${
-          page.value * 10
-        }`}</span>
+        <span>{`Current Teams: ${page * 10 - 9} - ${page * 10}`}</span>
         <h3>Teams:</h3>
       </div>
       {TeamList.length > 0 ? (

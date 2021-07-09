@@ -10,7 +10,7 @@ const AddTeamSection: React.FC = () => {
     newTeamName,
     newTeamImport,
     setNewTeamName,
-    setNewTeamContents,
+    setNewTeamImport,
     handlePostNewTeam,
     desc,
     validateDesc,
@@ -20,7 +20,7 @@ const AddTeamSection: React.FC = () => {
     validateCurrentFolderClicked,
     teamAddClicked,
     currentClickedFolder,
-    handleTeamAddClickExpand,
+    setTeamAddClicked,
   } = useContext(GeneralContext);
 
   const renderExpanded = () => {
@@ -31,25 +31,29 @@ const AddTeamSection: React.FC = () => {
           containerClass={styles['team-name']}
           htmlFor="foldername"
           label="Team Name:"
-          validationCallback={validateNewTeamName()}
+          validationCallback={() => validateNewTeamName()}
           placeholder="e.g. My Cool Team"
           type="text"
           name="teamname"
           id="teamname"
           value={newTeamName.value}
-          onChangeCallback={(e) => setNewTeamName(e.target.value)}
+          onChangeCallback={(e) =>
+            setNewTeamName({ value: e.target.value, touched: true })
+          }
         />
         <TextArea
           containerClass={styles['team-import']}
           textAreaHasError
           htmlFor="title-content"
           label={'Description:'}
-          validationCallback={validateDesc()}
+          validationCallback={() => validateDesc()}
           placeholder="e.g. description"
           name="title-content"
           id="title-content"
           value={desc.value}
-          onChangeCallback={(e) => setDesc(e.target.value)}
+          onChangeCallback={(e) =>
+            setDesc({ value: e.target.value, touched: true })
+          }
         />
         <TextArea
           containerClass={styles['team-import']}
@@ -57,21 +61,23 @@ const AddTeamSection: React.FC = () => {
           isError={!!newTeamImport.value}
           htmlFor="team-import"
           label={'Description:'}
-          validationCallback={validateNewTeamImport()}
+          validationCallback={() => validateNewTeamImport()}
           placeholder="Optionally Import a proper Pokemon Showdown Team Here And It Will Fill Out Your Whole Team!"
           name="team-import"
           id="team-import-1"
           value={newTeamImport.value}
-          onChangeCallback={(e) => setNewTeamContents(e.target.value)}
+          onChangeCallback={(e) =>
+            setNewTeamImport({ value: e.target.value, touched: true })
+          }
         />
         <Button
           type="submit"
           buttonClass={styles['submit']}
           disabled={
-            validateNewTeamName() ||
-            validateNewTeamImport() ||
-            validateDesc() ||
-            validateCurrentFolderClicked()
+            !!validateNewTeamName() ||
+            !!validateNewTeamImport() ||
+            !!validateDesc() ||
+            !!validateCurrentFolderClicked()
           }
           onClickCallback={(e) => {
             e.preventDefault();
@@ -89,7 +95,7 @@ const AddTeamSection: React.FC = () => {
       <section className={styles['folders-list']}>
         <div>
           {currentClickedFolder.value ? (
-            <Button onClickCallback={() => handleTeamAddClickExpand()}>
+            <Button onClickCallback={() => setTeamAddClicked(!teamAddClicked)}>
               New Team <i className="far fa-plus-square"></i>
             </Button>
           ) : (

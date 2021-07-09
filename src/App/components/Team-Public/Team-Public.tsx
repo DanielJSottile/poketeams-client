@@ -49,8 +49,9 @@ const TeamPublic: React.FC<Props> = ({ team, id }): JSX.Element => {
 
   const ps = [...new Set(publicSets.map((set: PokemonSet) => set.id))];
 
-  const newPS = ps.map((id) =>
-    publicSets.find((set: PokemonSet) => set.id === id)
+  const newPS = ps.map(
+    (id) =>
+      publicSets.find((set: PokemonSet) => set.id === id) || ({} as PokemonSet)
   );
 
   const teamSets = newPS.filter((set: any) => set.team_id === team.id);

@@ -17,16 +17,16 @@ const FoldersList: React.FC = () => {
     userSets,
     folderAddClicked,
     currentClickedFolder,
-    handleFolderAddClickExpand,
+    setFolderAddClicked,
     newFolderName,
     newFolderImport,
     validateNewFolderImport,
-    setNewFolderContents,
+    setNewFolderImport,
     handlePostNewFolder,
     setNewFolderName,
     handleEditFolder,
     validateNewFolderName,
-    handleCurrentFolderClicked,
+    setCurrentClickedFolder,
     handleDeleteFolder,
   } = useContext(GeneralContext);
 
@@ -71,7 +71,7 @@ const FoldersList: React.FC = () => {
   });
 
   const folderTeams = userTeams.filter(
-    (team) => team.folder_id === currentClickedFolder.id
+    (team) => team.folder_id === Number(currentClickedFolder.id)
   );
 
   const input = folderTeams.map((team) => {
@@ -88,32 +88,36 @@ const FoldersList: React.FC = () => {
             inputHasError
             htmlFor="foldername"
             label="Folder Name:"
-            validationCallback={validateNewFolderName()}
+            validationCallback={() => validateNewFolderName()}
             placeholder="e.g. Good Teams"
             type="text"
             name="foldername"
             id="foldername"
             value={newFolderName.value}
-            onChangeCallback={(e) => setNewFolderName(e.target.value)}
+            onChangeCallback={(e) =>
+              setNewFolderName({ value: e.target.value, touched: true })
+            }
           />
           <TextArea
             containerClass={styles['folder-import']}
             textAreaHasError
             isError={!!newFolderImport.value}
-            validationCallback={validateNewFolderImport()}
+            validationCallback={() => validateNewFolderImport()}
             htmlFor="folder-import"
             label="Import Showdown Folder:"
             placeholder="Optionally Import a proper Pokemon Showdown Folder Here And It Will Fill Out The Entire Folder!"
             name="folder-import"
             id="team-import-1"
             value={newFolderImport.value}
-            onChangeCallback={(e) => setNewFolderContents(e.target.value)}
+            onChangeCallback={(e) =>
+              setNewFolderImport({ value: e.target.value, touched: true })
+            }
           />
         </div>
         <Button
           type="submit"
           buttonClass={styles['submit']}
-          disabled={validateNewFolderName() || validateNewFolderImport()}
+          disabled={!!validateNewFolderName() || !!validateNewFolderImport()}
           onClickCallback={(e) => {
             e.preventDefault();
             handlePostNewFolder();
@@ -132,26 +136,29 @@ const FoldersList: React.FC = () => {
           inputHasError
           htmlFor="foldername"
           label="Edit Folder Name:"
-          validationCallback={validateNewFolderName()}
+          validationCallback={() => validateNewFolderName()}
           placeholder="e.g. Good Teams"
           type="text"
           name="foldername"
           id="foldername"
           value={newFolderName.value}
-          onChangeCallback={(e) => setNewFolderName(e.target.value)}
+          onChangeCallback={(e) =>
+            setNewFolderName({ value: e.target.value, touched: true })
+          }
         />
         <Button
           type="submit"
           buttonClass={styles['submit']}
-          disabled={validateNewFolderName()}
+          disabled={!!validateNewFolderName()}
           onClickCallback={(e) => {
             e.preventDefault();
             handleEditFolder();
             handleEditExpand();
-            handleCurrentFolderClicked(
-              newFolderName.value,
-              currentClickedFolder.id
-            );
+            setCurrentClickedFolder({
+              value: newFolderName.value,
+              id: currentClickedFolder.id,
+              touched: true,
+            });
           }}
         >
           Submit <i className="far fa-check-circle"></i>
@@ -197,7 +204,9 @@ const FoldersList: React.FC = () => {
           )}
         </div>
         <div>
-          <Button onClickCallback={() => handleFolderAddClickExpand()}>
+          <Button
+            onClickCallback={() => setFolderAddClicked(!folderAddClicked)}
+          >
             New Folder <i className="fas fa-folder-plus"></i>
           </Button>
           {folderAddClicked ? renderExpanded() : null}

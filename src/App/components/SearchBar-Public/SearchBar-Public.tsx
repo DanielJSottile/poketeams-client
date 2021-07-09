@@ -21,7 +21,9 @@ const SearchBarPublic: React.FC = () => {
             labelIcon={<i className="fas fa-search"></i>}
             placeholder="e.g. Pikachu"
             value={search.value}
-            onChangeCallback={(e) => setSearch(e.target.value)}
+            onChangeCallback={(e) =>
+              setSearch({ value: e.target.value, touched: true })
+            }
             type="text"
             name="search"
             id="search"
@@ -33,7 +35,7 @@ const SearchBarPublic: React.FC = () => {
             name="sort"
             id="sort"
             value={sort.value}
-            onChange={(e) => setSort(e.target.value)}
+            onChange={(e) => setSort({ value: e.target.value, touched: true })}
           >
             <option value="newest">Newest</option>
             <option value="oldest">Oldest</option>

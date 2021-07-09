@@ -35,7 +35,7 @@ type Props = {
 const SetEdit: React.FC<Props> = ({ set }) => {
   const {
     newSetImport,
-    setNewSetContents,
+    setNewSetImport,
     validateNewSetImport,
     handleUpdateSetImport,
     handleUpdateSet,
@@ -322,11 +322,13 @@ const SetEdit: React.FC<Props> = ({ set }) => {
               name="pokemon-import"
               id={`pokemon-import-${set?.id}`}
               value={newSetImport.value}
-              onChangeCallback={(e) => setNewSetContents(e.target.value)}
+              onChangeCallback={(e) =>
+                setNewSetImport({ value: e.target.value, touched: true })
+              }
             />
             <Button
               type="submit"
-              disabled={validateNewSetImport()}
+              disabled={!!validateNewSetImport()}
               onClickCallback={(e) => {
                 e.preventDefault();
                 handleUpdateSetImport(Number(set?.id));

@@ -309,8 +309,11 @@ const TeamEdit: React.FC<Props> = ({ team, id }): JSX.Element => {
         <Image
           key={i}
           imageClass={styles['tiny-icon']}
-          src={legality.returnIconSprite(set.species, set.shiny)}
-          alt={set.species}
+          src={legality.returnIconSprite(
+            set?.species || '',
+            set?.shiny || false
+          )}
+          alt={set?.species || ''}
         />
       );
     });

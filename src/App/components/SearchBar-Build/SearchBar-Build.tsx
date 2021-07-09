@@ -27,7 +27,9 @@ const SearchBarBuild: React.FC = () => {
             labelIcon={<i className="fas fa-search"></i>}
             placeholder="e.g. Pikachu"
             value={filter.value}
-            onChangeCallback={(e) => setFilter(e.target.value)}
+            onChangeCallback={(e) =>
+              setFilter({ value: e.target.value, touched: true })
+            }
             type="text"
             name="search"
             id="search"
@@ -39,7 +41,9 @@ const SearchBarBuild: React.FC = () => {
             name="sort"
             id="sort"
             value={filtersort.value}
-            onChange={(e) => setFilterSort(e.target.value)}
+            onChange={(e) =>
+              setFilterSort({ value: e.target.value, touched: true })
+            }
           >
             <option value="newest">Newest</option>
             <option value="oldest">Oldest</option>

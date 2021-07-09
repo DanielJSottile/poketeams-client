@@ -10,13 +10,15 @@ type Props = {
 };
 
 const Folder: React.FC<Props> = ({ id = '', folder_name = '' }) => {
-  const { handleCurrentFolderClicked } = useContext(GeneralContext);
+  const { setCurrentClickedFolder } = useContext(GeneralContext);
 
   return (
     <Button
       buttonClass="btn"
       id={id}
-      onClickCallback={() => handleCurrentFolderClicked(folder_name, id)}
+      onClickCallback={() =>
+        setCurrentClickedFolder({ value: folder_name, id, touched: true })
+      }
     >
       <i className="fas fa-folder"></i> {folder_name}
     </Button>
