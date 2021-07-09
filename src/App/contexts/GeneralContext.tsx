@@ -310,7 +310,7 @@ export const GeneralProvider = ({ children }: Props) => {
       setPublicTeams(teams);
       setPublicSets([]);
       let newSets: PokemonSet[] = [];
-      teams.forEach((team: any) => {
+      teams.forEach((team: PokemonTeam) => {
         apiService.getSetsForOneTeam(team.id).then((sets) => {
           newSets = [...newSets, ...sets];
           setPublicSets(newSets);
@@ -348,7 +348,7 @@ export const GeneralProvider = ({ children }: Props) => {
     apiService.getTenTeamsSearch(query).then((teams) => {
       setPublicTeams(teams);
       setPublicSets([]);
-      teams.forEach((team: any) => {
+      teams.forEach((team: PokemonTeam) => {
         apiService.getSetsForOneTeam(team.id).then((sets) => {
           setPublicSets([...publicSets, ...sets]);
         });
@@ -379,23 +379,25 @@ export const GeneralProvider = ({ children }: Props) => {
   const validateNewFolderImport = (): string | boolean | undefined => {
     let flag;
     if (newFolderImport.value) {
-      showdownFolderParse(newFolderImport.value).forEach((fullteam: any) => {
-        const [teamName, sets]: any = Object.entries(fullteam)[0];
-        if (!teamName) {
-          flag = `You are missing the team name in the import for one of your teams!
+      showdownFolderParse(newFolderImport.value).forEach(
+        (fullteam: { string: PokemonSet[] }) => {
+          const [teamName, sets] = Object.entries(fullteam)[0];
+          if (!teamName) {
+            flag = `You are missing the team name in the import for one of your teams!
         Make sure that there is a team name before each group of sets
         (Hint: Should be formatted like this: === [format] Folder/Team Name ===)`;
-        }
+          }
 
-        sets.forEach((set: any) => {
-          if (!legality.isLegalSpecies(set.species)) {
-            flag = `There is an illegal species in your set.  Please check each line
+          sets.forEach((set: PokemonSet) => {
+            if (!legality.isLegalSpecies(set.species)) {
+              flag = `There is an illegal species in your set.  Please check each line
           and fix this to be in the proper format! 
           (Hint: It could be extra white space at the end because of Showdown's Exporter)
           (Hint: There could be a typo in your species name!)`;
-          }
-        });
-      });
+            }
+          });
+        }
+      );
     }
     return flag;
   };
