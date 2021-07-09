@@ -397,7 +397,7 @@ const SetEdit: React.FC<Props> = ({ set }) => {
                   label={'Shiny:'}
                   validationCallback={validateShiny()}
                   onChangeCallback={(e) =>
-                    setShiny({ value: !shiny, touched: true })
+                    setShiny({ value: e.currentTarget.checked, touched: true })
                   }
                   type="checkbox"
                   id="shiny-2"

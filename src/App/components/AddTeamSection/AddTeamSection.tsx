@@ -60,7 +60,8 @@ const AddTeamSection: React.FC = () => {
           textAreaHasError
           isError={!!newTeamImport.value}
           htmlFor="team-import"
-          label={'Description:'}
+          label={'Import Showdown Team: '}
+          labelIcon={<i className="fas fa-upload"></i>}
           validationCallback={() => validateNewTeamImport()}
           placeholder="Optionally Import a proper Pokemon Showdown Team Here And It Will Fill Out Your Whole Team!"
           name="team-import"
