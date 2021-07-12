@@ -419,7 +419,7 @@ export const GeneralProvider = ({ children }: Props) => {
   const validateNewTeamImport = (): string | boolean | undefined => {
     let flag;
     if (newTeamImport.value) {
-      showdownParse(newTeamImport.value).forEach((set: any) => {
+      showdownParse(newTeamImport.value).forEach((set: PokemonSet) => {
         if (!legality.isLegalSpecies(set.species)) {
           flag = `There is an illegal species in your set.  Please fix this to be in the proper format! 
         (Hint: It could be extra white space at the end because of Showdown's Exporter)
@@ -436,7 +436,7 @@ export const GeneralProvider = ({ children }: Props) => {
     if (showdownParse(newSetImport.value).length > 1) {
       flag = `You can only import 1 set here.`;
     }
-    showdownParse(newSetImport.value).forEach((set: any) => {
+    showdownParse(newSetImport.value).forEach((set: PokemonSet) => {
       if (!legality.isLegalSpecies(set.species)) {
         flag = `There is an illegal species in your set.  Please fix this to be in the proper format! 
         (Hint: It could be extra white space at the end because of Showdown's Exporter)
@@ -460,7 +460,7 @@ export const GeneralProvider = ({ children }: Props) => {
     return false;
   };
 
-  const handlePostNewFolder = (): any => {
+  const handlePostNewFolder = () => {
     let folder: PokemonFolder;
     apiService
       .postUserFolder(
@@ -475,7 +475,7 @@ export const GeneralProvider = ({ children }: Props) => {
         if (newFolderImport.value) {
           const parsed = showdownFolderParse(newFolderImport.value);
 
-          const teamPromises: Promise<any>[] = parsed.map(
+          const teamPromises: Promise<PokemonTeam>[] = parsed.map(
             (fullteam: object): Promise<any> => {
               const extract = Object.entries(fullteam)[0];
               const team_name = extract[0];
@@ -516,9 +516,9 @@ export const GeneralProvider = ({ children }: Props) => {
 
               const sets = Object.values(fullteam)[0];
 
-              return sets.map((set: any) => {
+              return sets.map((set: PokemonSet) => {
                 let def = {
-                  team_id: createdTeam.id,
+                  team_id: createdTeam?.id,
                   species: 'Pikachu',
                   level: 100,
                   shiny: false,
@@ -541,7 +541,7 @@ export const GeneralProvider = ({ children }: Props) => {
 
                 let s = {
                   ...def,
-                  team_id: createdTeam.id,
+                  team_id: createdTeam?.id,
                   nickname: set.nickname,
                   species: set.species,
                   gender: set.gender,
@@ -572,7 +572,7 @@ export const GeneralProvider = ({ children }: Props) => {
               });
             });
 
-            altered.forEach((sets: any) => {
+            altered.forEach((sets: PokemonSet[]) => {
               allSets = [...allSets, ...sets];
             });
 
@@ -586,7 +586,7 @@ export const GeneralProvider = ({ children }: Props) => {
             );
 
             Promise.all(setPromises).then((sets) => {
-              setUserSets([...userTeams, ...sets]);
+              setUserSets([...userTeams, ...sets]); // IS THIS INCORRECT??
             });
           });
         }
@@ -690,7 +690,7 @@ export const GeneralProvider = ({ children }: Props) => {
         if (newTeamImport.value) {
           const parsed = showdownParse(newTeamImport.value);
 
-          let setPromises = parsed.map((set: any) => {
+          let setPromises = parsed.map((set: PokemonSet) => {
             let def = {
               team_id: team.id,
               species: 'Pikachu',
