@@ -10,19 +10,19 @@ let _notIdleEvents = [
 const _FIVE_MINUTES_IN_MS = 5 * 60 * 1000;
 
 const IdleService = {
-  setIdleCallback(idleCallback: any): void {
+  setIdleCallback(idleCallback: () => void) {
     _idleCallback = idleCallback;
   },
-  resetIdleTimer(ev: any): void {
+  resetIdleTimer(ev: any) {
     clearTimeout(_timeoutId);
     _timeoutId = setTimeout(_idleCallback, _FIVE_MINUTES_IN_MS);
   },
-  registerIdleTimerResets(): void {
+  registerIdleTimerResets() {
     _notIdleEvents.forEach((event) =>
       document.addEventListener(event, IdleService.resetIdleTimer, true)
     );
   },
-  unRegisterIdleResets(): void {
+  unRegisterIdleResets() {
     clearTimeout(_timeoutId);
     _notIdleEvents.forEach((event) =>
       document.removeEventListener(event, IdleService.resetIdleTimer, true)

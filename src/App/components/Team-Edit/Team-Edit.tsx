@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useState } from 'react';
+import React, { Fragment, useContext, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import Input from '../Input/Input';
 import TextArea from '../TextArea/TextArea';
@@ -36,7 +36,7 @@ const TeamEdit: React.FC<Props> = ({ team, id }): JSX.Element => {
   const [deleteClicked, setDeleteClicked] = useState(false);
   const [copySuccess, setCopySuccess] = useState(false);
 
-  const removeCopySuccess = (): any => {
+  const removeCopySuccess = () => {
     setCopySuccess(false);
   };
 
@@ -62,26 +62,28 @@ const TeamEdit: React.FC<Props> = ({ team, id }): JSX.Element => {
     setDeleteClicked(!deleteClicked);
   };
 
-  const textArea: any = React.useRef(null);
+  const textArea = useRef<HTMLTextAreaElement>(null);
 
-  const copyCodeToClipboard = (): any => {
-    textArea.current.select();
+  const copyCodeToClipboard = () => {
+    textArea.current!.select();
     document.execCommand('copy'); // this seems to not work
-    const text = textArea.current.defaultValue;
+    const text = textArea.current!.defaultValue;
     navigator.clipboard.writeText(text); // this seems to work!
     setCopySuccess(true);
   };
 
-  const validateTeamName = (): any => {
+  const validateTeamName = (): string | boolean => {
     if (!teamName.value) {
       return `Team MUST have a name!`;
     }
+    return false;
   };
 
-  const validateDesc = (): any => {
+  const validateDesc = (): string | boolean => {
     if (typeof description.value !== 'string') {
       return `This should never come up, it is superflous`;
     }
+    return false;
   };
 
   /* ---------------- */
@@ -98,7 +100,7 @@ const TeamEdit: React.FC<Props> = ({ team, id }): JSX.Element => {
   const teamSets = newPS.filter((set: any) => set.team_id === team.id);
 
   const renderSetList = (teamSets: any) => {
-    const SetList = teamSets.map((set: any, i: number) => {
+    const SetList = teamSets.map((set: PokemonSet, i: number) => {
       return <SetEdit key={i} set={set} />;
     });
 
@@ -193,7 +195,7 @@ const TeamEdit: React.FC<Props> = ({ team, id }): JSX.Element => {
                 containerClass={styles['title-content']}
                 htmlFor="title-content"
                 label="Description:"
-                validationCallback={validateDesc()}
+                validationCallback={() => validateDesc()}
                 textAreaClass={styles['title-content desc']}
                 placeholder="e.g. description"
                 name="title-content"
@@ -203,7 +205,7 @@ const TeamEdit: React.FC<Props> = ({ team, id }): JSX.Element => {
               />
               <Button
                 type="submit"
-                disabled={validateTeamName() || validateDesc()}
+                disabled={!!validateTeamName() || !!validateDesc()}
                 onClickCallback={(e) => {
                   e.preventDefault();
                   handleUpdateTeam(teamName.value, description.value, team.id);

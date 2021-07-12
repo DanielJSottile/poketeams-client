@@ -10,7 +10,7 @@ import styles from './LandingPage.module.scss';
 type RouteState = {
   location: Location;
   history: History;
-  from: any;
+  from: LocationDescriptorObject<RouteState>;
 };
 
 const LandingPage: React.FC<

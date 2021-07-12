@@ -18,6 +18,7 @@ const TeamListPublicShare: React.FC<Props> = ({ teams, sets }): JSX.Element => {
   if (teams) {
     TeamList = teams?.map((team: PokemonTeam, i: number) => {
       const teamSets = sets?.filter((set: any) => {
+        // check in db
         return set.team_name === team.team_name;
       });
 

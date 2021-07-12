@@ -5,22 +5,22 @@ let _timeoutId: NodeJS.Timeout;
 const _TEN_SECONDS_IN_MS = 10000;
 
 const TokenService = {
-  saveAuthToken(token: any): void {
+  saveAuthToken(token: string) {
     window.localStorage.setItem(config.TOKEN_KEY, token);
   },
   getAuthToken(): string | null {
     return window.localStorage.getItem(config.TOKEN_KEY);
   },
-  clearAuthToken(): void {
+  clearAuthToken() {
     window.localStorage.removeItem(config.TOKEN_KEY);
   },
   hasAuthToken(): boolean {
     return !!TokenService.getAuthToken();
   },
-  parseJwt(jwt: any): unknown {
+  parseJwt(jwt: string) {
     return jwtDecode(jwt);
   },
-  parseAuthToken(): unknown {
+  parseAuthToken() {
     const authToken = TokenService.getAuthToken();
     if (authToken) return TokenService.parseJwt(authToken);
     else return undefined;
@@ -28,7 +28,7 @@ const TokenService = {
   _getMsUntilExpiry(payload: any): number {
     return payload.exp * 1000 - Date.now();
   },
-  queueCallbackBeforeExpiry(callback: any): void {
+  queueCallbackBeforeExpiry(callback: () => void): void {
     const msUntilExpiry = TokenService._getMsUntilExpiry(
       TokenService.parseAuthToken()
     );

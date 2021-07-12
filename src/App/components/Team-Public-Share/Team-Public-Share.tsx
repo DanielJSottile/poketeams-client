@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import Input from '../Input/Input';
 import TextArea from '../TextArea/TextArea';
@@ -31,18 +31,18 @@ const TeamPublicShare: React.FC<Props> = ({ team, id, sets }): JSX.Element => {
     setCopySuccess(false);
   };
 
-  const textArea: any = React.useRef(null);
+  const textArea = useRef<HTMLTextAreaElement>(null);
 
-  const copyCodeToClipboard = (): any => {
-    textArea.current.select();
+  const copyCodeToClipboard = () => {
+    textArea.current!.select();
     document.execCommand('copy'); // this seems to not work
-    const text = textArea.current.defaultValue;
+    const text = textArea.current!.defaultValue;
     navigator.clipboard.writeText(text); // this seems to work!
     setCopySuccess(true);
   };
 
   const renderExpandedTeam = () => {
-    const SetList = sets?.map((set: any, i: number) => {
+    const SetList = sets?.map((set: PokemonSet, i: number) => {
       return <SetPublic key={i} set={set} />;
     });
 
@@ -151,7 +151,7 @@ const TeamPublicShare: React.FC<Props> = ({ team, id, sets }): JSX.Element => {
   const renderUnexpandedTeam = () => {
     let spriteMap;
     if (sets) {
-      spriteMap = sets.map((set: any, i: number) => {
+      spriteMap = sets.map((set: PokemonSet, i: number) => {
         return (
           <Image
             key={i}

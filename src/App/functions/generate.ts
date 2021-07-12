@@ -1,6 +1,8 @@
 /* This generator function is designed to take a format of the outcome of the parser.js
 and turn it back into a string of text that matches the original format */
 
+import { PokemonSet } from '../@types';
+
 // Interfaces
 
 export interface PokeObject {
@@ -96,7 +98,7 @@ function ivGenerator(ob: PokeObject) {
 
 export default function showdownGenerate(input: any) {
   return input
-    .map((set: any) => {
+    .map((set: PokemonSet) => {
       let setArr = [];
 
       // handle first line first (redo this part pls)

@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useState } from 'react';
+import React, { Fragment, useContext, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import Input from '../Input/Input';
 import TextArea from '../TextArea/TextArea';
@@ -28,16 +28,16 @@ const TeamPublic: React.FC<Props> = ({ team, id }): JSX.Element => {
     setTeamExpandToggle(!teamExpandToggle);
   };
 
-  const removeCopySuccess = (): any => {
+  const removeCopySuccess = () => {
     setCopySuccess(false);
   };
 
-  const textArea: any = React.useRef(null);
+  const textArea = useRef<HTMLTextAreaElement>(null);
 
-  const copyCodeToClipboard = (): any => {
-    textArea.current.select();
+  const copyCodeToClipboard = () => {
+    textArea.current!.select();
     document.execCommand('copy'); // this seems to not work
-    const text = textArea.current.defaultValue;
+    const text = textArea.current!.defaultValue;
     navigator.clipboard.writeText(text); // this seems to work!
     setCopySuccess(true);
   };
@@ -49,7 +49,7 @@ const TeamPublic: React.FC<Props> = ({ team, id }): JSX.Element => {
       publicSets.find((set: PokemonSet) => set.id === id) || ({} as PokemonSet)
   );
 
-  const teamSets = newPS.filter((set: any) => set.team_id === team.id);
+  const teamSets = newPS.filter((set: PokemonSet) => set.team_id === team.id);
 
   const renderExpandedTeam = () => {
     const SetList = teamSets.map((set, i) => {

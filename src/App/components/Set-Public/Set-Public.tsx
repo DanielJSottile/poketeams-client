@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import Input from '../Input/Input';
 import TextArea from '../TextArea/TextArea';
@@ -26,12 +26,12 @@ const SetPublic: React.FC<Props> = ({ set }): JSX.Element => {
     setCopySuccess(false);
   };
 
-  const textArea: any = React.useRef(null);
+  const textArea = useRef<HTMLTextAreaElement>(null);
 
-  const copyCodeToClipboard = (): any => {
-    textArea.current.select();
+  const copyCodeToClipboard = () => {
+    textArea.current!.select();
     document.execCommand('copy'); // this seems to not work
-    const text = textArea.current.defaultValue;
+    const text = textArea.current!.defaultValue;
     navigator.clipboard.writeText(text); // this seems to work!
     setCopySuccess(true);
   };
@@ -109,7 +109,7 @@ const SetPublic: React.FC<Props> = ({ set }): JSX.Element => {
                 <div className={styles['type-icons']}>
                   {legality
                     .returnTypeIcon(legality.returnType(set.species))
-                    .map((type: any, i: number) => {
+                    .map((type: string, i: number) => {
                       return (
                         <Image
                           imageClass={styles['type-img']}
@@ -472,7 +472,7 @@ const SetPublic: React.FC<Props> = ({ set }): JSX.Element => {
   const renderUnexpandedSet = () => {
     const types = legality
       .returnTypeIcon(legality.returnType(set.species))
-      .map((type: any, i: number) => {
+      .map((type: string, i: number) => {
         return (
           <Image
             imageClass={styles['icon']}
