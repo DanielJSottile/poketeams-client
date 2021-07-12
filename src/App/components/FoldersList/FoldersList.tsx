@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useState } from 'react';
+import React, { Fragment, useContext, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import Folder from '../Folder/Folder';
 import Input from '../Input/Input';
@@ -9,6 +9,7 @@ import LoadingBlack from '../Loaders/LoadingBlack/LoadingBlack';
 import GeneralContext from '../../contexts/GeneralContext';
 import showdownFolderGenerate from '../../functions/generateFolder';
 import styles from './FoldersList.module.scss';
+import { PokemonFolder } from '../../@types';
 
 const FoldersList: React.FC = () => {
   const {
@@ -46,12 +47,12 @@ const FoldersList: React.FC = () => {
     setCopySuccess(false);
   };
 
-  const textArea: any = React.useRef(null);
+  const textArea = useRef<HTMLTextAreaElement>(null);
 
-  const copyCodeToClipboard = (): any => {
-    textArea.current.select();
+  const copyCodeToClipboard = () => {
+    textArea.current!.select();
     document.execCommand('copy'); // this seems to not work
-    const text = textArea.current.defaultValue;
+    const text = textArea.current!.defaultValue;
     navigator.clipboard.writeText(text); // this seems to work!
     setCopySuccess(true);
   };
@@ -61,7 +62,7 @@ const FoldersList: React.FC = () => {
   /* Set Up Common Definitions to be 
   Used in Different views */
 
-  const folderList = userFolders.map((folder: any, i) => {
+  const folderList = userFolders.map((folder: PokemonFolder, i) => {
     return <Folder key={i} id={folder.id} folder_name={folder.folder_name} />;
   });
 
@@ -71,7 +72,7 @@ const FoldersList: React.FC = () => {
 
   const input = folderTeams.map((team) => {
     const teamSets = userSets.filter((set) => set.team_id === team.id);
-    const teamName: any = team.team_name;
+    const teamName: string = team.team_name;
     return { [teamName]: teamSets };
   });
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, FormEvent } from 'react';
 import { Link } from 'react-router-dom';
 import Button from '../Button/Button';
 import Input from '../Input/Input';
@@ -15,9 +15,10 @@ const RegistrationForm: React.FC<Props> = ({
 }) => {
   const [error, setError] = useState('');
 
-  const handleSubmit = (ev: any) => {
+  const handleSubmit = (ev: FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
-    const { user_name, password, verifyPassword } = ev.target;
+    const { user_name, password, verifyPassword } =
+      ev.target as HTMLFormElement;
 
     if (password.value !== verifyPassword.value) {
       return setError('Your Passwords Do Not Match!');
@@ -27,7 +28,7 @@ const RegistrationForm: React.FC<Props> = ({
       user_name: user_name.value,
       password: password.value,
     })
-      .then((user) => {
+      .then(() => {
         user_name.value = '';
         password.value = '';
         onRegistrationSuccess();

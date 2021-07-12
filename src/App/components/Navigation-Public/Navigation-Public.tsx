@@ -7,7 +7,7 @@ import TokenService from '../../services/token-service';
 import styles from './Navigation-Public.module.scss';
 
 interface MyToken {
-  sub: any;
+  sub: string;
 }
 
 const NavigationPublic: React.FC = () => {

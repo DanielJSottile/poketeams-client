@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, FormEvent } from 'react';
 import Input from '../Input/Input';
 import Button from '../Button/Button';
 import TokenService from '../../services/token-service';
@@ -17,7 +17,7 @@ const LoginForm: React.FC<Props> = ({ onLoginSuccess }) => {
   const [userName, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmitJwtAuth = (ev: any) => {
+  const handleSubmitJwtAuth = (ev: FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
     setError(null);
 
@@ -25,7 +25,7 @@ const LoginForm: React.FC<Props> = ({ onLoginSuccess }) => {
       user_name: userName,
       password: password,
     })
-      .then((res: any) => {
+      .then((res) => {
         setUsername('');
         setPassword('');
         TokenService.saveAuthToken(res.authToken);

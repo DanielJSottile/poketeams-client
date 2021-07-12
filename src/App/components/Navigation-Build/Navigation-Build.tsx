@@ -7,8 +7,8 @@ import jwtDecode from 'jwt-decode';
 import styles from './Navigation-Build.module.scss';
 
 interface MyToken {
-  sub: any;
-  user_id: any;
+  sub: string;
+  user_id: string;
 }
 
 const NavigationBuild: React.FC = () => {
@@ -40,7 +40,7 @@ const NavigationBuild: React.FC = () => {
   };
 
   const renderUserWelcome = () => {
-    let user: any = '';
+    let user: string = '';
 
     if (TokenService.getAuthToken()) {
       user = jwtDecode<MyToken>(TokenService.getAuthToken() || '').sub;
