@@ -7,7 +7,7 @@ export interface PrivateRouteProps {
   path: string;
 }
 
-const PrivateRoute: React.FC<PrivateRouteProps> = ({
+const PrivateRoute: FunctionComponent<PrivateRouteProps> = ({
   component,
   ...props
 }): JSX.Element => {

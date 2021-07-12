@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useRef } from 'react';
+import React, { Fragment, useState, useRef, FunctionComponent } from 'react';
 import { Link } from 'react-router-dom';
 import Input from '../Input/Input';
 import TextArea from '../TextArea/TextArea';
@@ -19,7 +19,11 @@ export type Props = {
   id: string;
 };
 
-const TeamPublicShare: React.FC<Props> = ({ team, id, sets }): JSX.Element => {
+const TeamPublicShare: FunctionComponent<Props> = ({
+  team,
+  id,
+  sets,
+}): JSX.Element => {
   const [teamExpandToggle, setTeamExpandToggle] = useState(true);
   const [copySuccess, setCopySuccess] = useState(false);
 

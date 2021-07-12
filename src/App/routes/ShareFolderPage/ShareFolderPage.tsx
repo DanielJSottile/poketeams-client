@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, FunctionComponent } from 'react';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import FolderPublicShare from '../../components/Folder-Public-Share/Folder-Public-Share';
 import * as array from 'lodash';
@@ -8,7 +8,7 @@ import { PokemonFolder, PokemonTeam, PokemonSet } from '../../@types';
 
 export type MatchParams = { folder_id: string };
 
-const ShareFolderPage: React.FC<RouteComponentProps<MatchParams>> = ({
+const ShareFolderPage: FunctionComponent<RouteComponentProps<MatchParams>> = ({
   match,
 }): JSX.Element => {
   const [folder, setFolder] = useState([] as PokemonFolder[]);

@@ -476,7 +476,7 @@ export const GeneralProvider = ({ children }: Props) => {
           const parsed = showdownFolderParse(newFolderImport.value);
 
           const teamPromises: Promise<PokemonTeam>[] = parsed.map(
-            (fullteam: object): Promise<any> => {
+            (fullteam: { string: PokemonSet[] }): Promise<PokemonTeam> => {
               const extract = Object.entries(fullteam)[0];
               const team_name = extract[0];
               const desc = '';
@@ -576,7 +576,7 @@ export const GeneralProvider = ({ children }: Props) => {
               allSets = [...allSets, ...sets];
             });
 
-            const setPromises: Promise<any>[] = allSets.map(
+            const setPromises: Promise<PokemonSet>[] = allSets.map(
               (set: any): Promise<any> => {
                 return apiService.postUserSet(
                   set,
@@ -586,7 +586,7 @@ export const GeneralProvider = ({ children }: Props) => {
             );
 
             Promise.all(setPromises).then((sets) => {
-              setUserSets([...userTeams, ...sets]); // IS THIS INCORRECT??
+              setUserSets([...userSets, ...sets]);
             });
           });
         }
@@ -997,7 +997,7 @@ export const GeneralProvider = ({ children }: Props) => {
     setUserSets(newUserSets);
   };
 
-  const handleSearch = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleSearch = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     const query = `?page=${page}&sort=${sort.value || 'newest'}&species=${
       search.value.toLowerCase() || 'all'

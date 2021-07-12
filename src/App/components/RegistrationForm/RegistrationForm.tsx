@@ -1,4 +1,4 @@
-import React, { useState, FormEvent } from 'react';
+import React, { useState, FormEvent, FunctionComponent } from 'react';
 import { Link } from 'react-router-dom';
 import Button from '../Button/Button';
 import Input from '../Input/Input';
@@ -10,7 +10,7 @@ type Props = {
   onRegistrationSuccess?: () => void;
 };
 
-const RegistrationForm: React.FC<Props> = ({
+const RegistrationForm: FunctionComponent<Props> = ({
   onRegistrationSuccess = () => null,
 }) => {
   const [error, setError] = useState('');

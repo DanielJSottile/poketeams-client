@@ -1,4 +1,4 @@
-import React, { Fragment, useContext } from 'react';
+import React, { Fragment, useContext, FunctionComponent } from 'react';
 import Button from '../Button/Button';
 import TeamPublic from '../Team-Public/Team-Public';
 import PokeballLoader from '../Loaders/PokeballLoader/PokeballLoader';
@@ -7,7 +7,7 @@ import GeneralContext from '../../contexts/GeneralContext';
 import styles from './TeamList-Public.module.scss';
 import { PokemonTeam } from '../../@types';
 
-const TeamListPublic: React.FC = (): JSX.Element => {
+const TeamListPublic: FunctionComponent = (): JSX.Element => {
   const { publicTeams, page, handlePage } = useContext(GeneralContext);
 
   const TeamList = publicTeams.map((team: PokemonTeam, i) => {

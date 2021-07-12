@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useRef } from 'react';
+import React, { Fragment, useState, useRef, FunctionComponent } from 'react';
 import { Link } from 'react-router-dom';
 import Input from '../Input/Input';
 import TextArea from '../TextArea/TextArea';
@@ -14,7 +14,7 @@ export type Props = {
   set: PokemonSet;
 };
 
-const SetPublic: React.FC<Props> = ({ set }): JSX.Element => {
+const SetPublic: FunctionComponent<Props> = ({ set }): JSX.Element => {
   const [expandToggle, setExpandToggle] = useState(false);
   const [copySuccess, setCopySuccess] = useState(false);
 

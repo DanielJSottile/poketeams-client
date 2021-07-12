@@ -1,4 +1,10 @@
-import React, { Fragment, useContext, useState, useRef } from 'react';
+import React, {
+  Fragment,
+  useContext,
+  useState,
+  useRef,
+  FunctionComponent,
+} from 'react';
 import { Link } from 'react-router-dom';
 import Folder from '../Folder/Folder';
 import Input from '../Input/Input';
@@ -11,7 +17,7 @@ import showdownFolderGenerate from '../../functions/generateFolder';
 import styles from './FoldersList.module.scss';
 import { PokemonFolder } from '../../@types';
 
-const FoldersList: React.FC = () => {
+const FoldersList: FunctionComponent = () => {
   const {
     userFolders,
     userTeams,

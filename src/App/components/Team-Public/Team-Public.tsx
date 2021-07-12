@@ -1,4 +1,10 @@
-import React, { Fragment, useContext, useState, useRef } from 'react';
+import React, {
+  Fragment,
+  useContext,
+  useState,
+  useRef,
+  FunctionComponent,
+} from 'react';
 import { Link } from 'react-router-dom';
 import Input from '../Input/Input';
 import TextArea from '../TextArea/TextArea';
@@ -18,7 +24,7 @@ export type Props = {
   id: string;
 };
 
-const TeamPublic: React.FC<Props> = ({ team, id }): JSX.Element => {
+const TeamPublic: FunctionComponent<Props> = ({ team, id }): JSX.Element => {
   const { publicSets } = useContext(GeneralContext);
 
   const [teamExpandToggle, setTeamExpandToggle] = useState(true);

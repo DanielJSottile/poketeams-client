@@ -1,10 +1,10 @@
-import React, { useContext } from 'react';
+import React, { useContext, FunctionComponent } from 'react';
 import GeneralContext from '../../contexts/GeneralContext';
 import Input from '../Input/Input';
 import Button from '../Button/Button';
 import styles from './SearchBar-Build.module.scss';
 
-const SearchBarBuild: React.FC = () => {
+const SearchBarBuild: FunctionComponent = () => {
   const {
     handleFilter,
     validateFilter,

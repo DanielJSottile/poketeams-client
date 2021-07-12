@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import TeamsListPublicShare from '../TeamList-PublicShare/TeamList-PublicShare';
 import './Folder-Public-Share.module.scss';
 import { PokemonFolder, PokemonTeam, PokemonSet } from '../../@types';
 
-type Props = {
+type FolderPublicShareProps = {
   /** folder that is being shared */
   folder?: PokemonFolder;
   /** list of teams  */
@@ -12,7 +12,11 @@ type Props = {
   sets?: PokemonSet[];
 };
 
-const FolderPublicShare: React.FC<Props> = ({ folder, teams, sets }) => {
+const FolderPublicShare: FunctionComponent<FolderPublicShareProps> = ({
+  folder,
+  teams,
+  sets,
+}) => {
   return (
     <>
       <h3>

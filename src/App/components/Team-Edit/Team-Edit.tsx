@@ -1,4 +1,10 @@
-import React, { Fragment, useContext, useState, useRef } from 'react';
+import React, {
+  Fragment,
+  useContext,
+  useState,
+  useRef,
+  FunctionComponent,
+} from 'react';
 import { Link } from 'react-router-dom';
 import Input from '../Input/Input';
 import TextArea from '../TextArea/TextArea';
@@ -18,7 +24,7 @@ export type Props = {
   id: string;
 };
 
-const TeamEdit: React.FC<Props> = ({ team, id }): JSX.Element => {
+const TeamEdit: FunctionComponent<Props> = ({ team, id }): JSX.Element => {
   const { userSets, handleUpdateTeam, handlePostNewPokemon, handleDeleteTeam } =
     useContext(GeneralContext);
 
@@ -165,9 +171,7 @@ const TeamEdit: React.FC<Props> = ({ team, id }): JSX.Element => {
                     inputClass={styles['title']}
                     placeholder="e.g. Cool Team"
                     value={teamName.value}
-                    onChangeCallback={(
-                      e: React.ChangeEvent<HTMLInputElement>
-                    ) => inputTeamName(e.target.value)}
+                    onChangeCallback={(e) => inputTeamName(e.target.value)}
                     type="text"
                     name="team-name"
                     id={`team-name-${team.id}`}

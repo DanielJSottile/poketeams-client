@@ -1,7 +1,7 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, FunctionComponent } from 'react';
 import styles from './LoadingWhite.module.scss';
 
-const LoadingWhite: React.FC = () => {
+const LoadingWhite: FunctionComponent = () => {
   return (
     <Fragment>
       <div className={styles['loading-white']}></div>

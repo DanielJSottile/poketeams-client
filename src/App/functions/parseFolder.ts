@@ -1,9 +1,16 @@
+import { PokemonSet } from '../@types';
+
 /* This is based off the parse.ts file, but this is for the entire Folder import.  This may be 
 adapted in the future to import entire collections as it parses the same data. */
 
 // Helper Functions
 
-function evIvParser(string: string | null, val: string) {
+type ParseReturn = {
+  string: PokemonSet[];
+  [key: string]: PokemonSet[];
+};
+
+function evIvParser(string: string | null, val: string): number[] {
   let hpV = 0;
   let atkV = 0;
   let defV = 0;
@@ -52,7 +59,7 @@ function evIvParser(string: string | null, val: string) {
 
 // Parsing Function for Folder Format
 
-export default function showdownFolderParse(input: string) {
+export default function showdownFolderParse(input: string): ParseReturn[] {
   // Regular Expressions
 
   const FOLDERPARSE: RegExp = /^=== \[(.*)\] (.*)\/(.*) ===$/;
@@ -81,7 +88,7 @@ export default function showdownFolderParse(input: string) {
   let ability: string | null = null;
   let shiny: boolean = false;
   let nature: string | null = null;
-  let moves: any[] = [];
+  let moves: string[] = [];
 
   // parsing into teams if they exist (if they don't, theres no double line break)
 
@@ -211,8 +218,8 @@ export default function showdownFolderParse(input: string) {
 
       return setFinal;
     });
-    const final: any = {};
-    final[teamname] = setList;
+    const final = {} as ParseReturn;
+    final[teamname] = setList as PokemonSet[];
     return final;
   });
 }

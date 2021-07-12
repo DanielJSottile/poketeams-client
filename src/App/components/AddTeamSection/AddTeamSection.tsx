@@ -1,11 +1,11 @@
-import React, { Fragment, useContext } from 'react';
+import React, { Fragment, useContext, FunctionComponent } from 'react';
 import GeneralContext from '../../contexts/GeneralContext';
 import Input from '../Input/Input';
 import TextArea from '../TextArea/TextArea';
 import Button from '../Button/Button';
 import styles from './AddTeamSection.module.scss';
 
-const AddTeamSection: React.FC = () => {
+const AddTeamSection: FunctionComponent = () => {
   const {
     newTeamName,
     newTeamImport,

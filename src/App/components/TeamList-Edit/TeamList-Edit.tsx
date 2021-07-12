@@ -1,10 +1,10 @@
-import React, { Fragment, useContext } from 'react';
+import React, { Fragment, useContext, FunctionComponent } from 'react';
 import TeamEdit from '../Team-Edit/Team-Edit';
 import GeneralContext from '../../contexts/GeneralContext';
 import { PokemonTeam } from '../../@types';
 // import styles from './TeamList-Edit.module.scss';
 
-const TeamListEdit: React.FC = (): JSX.Element => {
+const TeamListEdit: FunctionComponent = (): JSX.Element => {
   const { userTeams, currentClickedFolder } = useContext(GeneralContext);
 
   const TeamList = userTeams

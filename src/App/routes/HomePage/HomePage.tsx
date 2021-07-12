@@ -1,9 +1,9 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, FunctionComponent } from 'react';
 import NavigationPublic from '../../components/Navigation-Public/Navigation-Public';
 import TeamListPublic from '../../components/TeamList-Public/TeamList-Public';
 import Footer from '../../components/Footer/Footer';
 
-const HomePage: React.FC = (): JSX.Element => {
+const HomePage: FunctionComponent = (): JSX.Element => {
   return (
     <Fragment>
       <NavigationPublic />

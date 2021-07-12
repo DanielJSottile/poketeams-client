@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, FunctionComponent } from 'react';
 import { Link } from 'react-router-dom';
 import SearchBarBuild from '../SearchBar-Build/SearchBar-Build';
 import GeneralContext from '../../contexts/GeneralContext';
@@ -11,7 +11,7 @@ interface MyToken {
   user_id: string;
 }
 
-const NavigationBuild: React.FC = () => {
+const NavigationBuild: FunctionComponent = () => {
   const { clearUserState } = useContext(GeneralContext);
 
   const handleLogoutClick = () => {

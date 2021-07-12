@@ -1,4 +1,10 @@
-import React, { Fragment, useContext, useState, useRef } from 'react';
+import React, {
+  Fragment,
+  useContext,
+  useState,
+  useRef,
+  FunctionComponent,
+} from 'react';
 import { Link } from 'react-router-dom';
 import Input from '../Input/Input';
 import TextArea from '../TextArea/TextArea';
@@ -32,7 +38,7 @@ type Props = {
   set?: PokemonSet;
 };
 
-const SetEdit: React.FC<Props> = ({ set }) => {
+const SetEdit: FunctionComponent<Props> = ({ set }) => {
   const {
     newSetImport,
     setNewSetImport,

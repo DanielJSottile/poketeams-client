@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FunctionComponent, MouseEvent, ReactNode } from 'react';
 
 type Props = {
   /** class for the label */
@@ -8,14 +8,14 @@ type Props = {
   /** boolean for whether the input is disabled */
   disabled?: boolean;
   /** function used for onChange for the input */
-  onClickCallback?: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  onClickCallback?: (e: MouseEvent<HTMLButtonElement>) => void;
   /** string of input type */
   type?: 'button' | 'submit' | 'reset' | undefined;
   /** button children */
-  children?: React.ReactNode | JSX.Element;
+  children?: ReactNode | JSX.Element;
 };
 
-const Button: React.FC<Props> = ({
+const Button: FunctionComponent<Props> = ({
   id = '',
   buttonClass = '',
   onClickCallback = () => null,

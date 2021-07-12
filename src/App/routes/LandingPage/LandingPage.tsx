@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, FunctionComponent } from 'react';
 import { StaticContext } from 'react-router';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import { Location, History, LocationDescriptorObject } from 'history';
@@ -13,7 +13,7 @@ type RouteState = {
   from: LocationDescriptorObject<RouteState>;
 };
 
-const LandingPage: React.FC<
+const LandingPage: FunctionComponent<
   RouteComponentProps<{}, StaticContext, RouteState>
 > = ({ location, history }): JSX.Element => {
   const handleLoginSucess = (): void => {

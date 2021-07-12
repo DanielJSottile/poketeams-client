@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, FunctionComponent } from 'react';
 import TeamPublicShare from '../Team-Public-Share/Team-Public-Share';
 import PokeballLoader from '../Loaders/PokeballLoader/PokeballLoader';
 import LoadingBlack from '../Loaders/LoadingBlack/LoadingBlack';
@@ -12,7 +12,10 @@ export type Props = {
   sets: PokemonSet[] | undefined;
 };
 
-const TeamListPublicShare: React.FC<Props> = ({ teams, sets }): JSX.Element => {
+const TeamListPublicShare: FunctionComponent<Props> = ({
+  teams,
+  sets,
+}): JSX.Element => {
   let TeamList: JSX.Element[] = [];
 
   if (teams) {

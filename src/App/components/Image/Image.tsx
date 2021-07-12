@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 
-type Props = {
+type ImageProps = {
   /** class for input container */
   containerClass?: string;
   /** class for the image */
@@ -11,7 +11,7 @@ type Props = {
   alt: string;
 };
 
-const Image: React.FC<Props> = ({
+const Image: FunctionComponent<ImageProps> = ({
   containerClass = '',
   imageClass = '',
   src,

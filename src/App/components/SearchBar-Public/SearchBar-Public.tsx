@@ -1,10 +1,10 @@
-import React, { useContext } from 'react';
+import React, { useContext, FunctionComponent } from 'react';
 import GeneralContext from '../../contexts/GeneralContext';
 import Input from '../Input/Input';
 import Button from '../Button/Button';
 import styles from './SearchBar-Public.module.scss';
 
-const SearchBarPublic: React.FC = () => {
+const SearchBarPublic: FunctionComponent = () => {
   const { handleSearch, validateSearch, search, sort, setSearch, setSort } =
     useContext(GeneralContext);
 
@@ -44,9 +44,7 @@ const SearchBarPublic: React.FC = () => {
           </select>
           <Button
             type="submit"
-            onClickCallback={(
-              e: React.MouseEvent<HTMLButtonElement, MouseEvent>
-            ) => {
+            onClickCallback={(e) => {
               handleSearch(e);
             }}
           >

@@ -8,7 +8,7 @@ export interface PublicOnlyRouteProps {
   path: string;
 }
 
-const PublicOnlyRoute: React.FC<PublicOnlyRouteProps> = ({
+const PublicOnlyRoute: FunctionComponent<PublicOnlyRouteProps> = ({
   component,
   ...props
 }): JSX.Element => {

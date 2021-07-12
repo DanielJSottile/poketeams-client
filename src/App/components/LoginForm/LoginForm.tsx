@@ -1,4 +1,9 @@
-import React, { useContext, useState, FormEvent } from 'react';
+import React, {
+  useContext,
+  useState,
+  FormEvent,
+  FunctionComponent,
+} from 'react';
 import Input from '../Input/Input';
 import Button from '../Button/Button';
 import TokenService from '../../services/token-service';
@@ -11,7 +16,7 @@ type Props = {
   onLoginSuccess: () => void;
 };
 
-const LoginForm: React.FC<Props> = ({ onLoginSuccess }) => {
+const LoginForm: FunctionComponent<Props> = ({ onLoginSuccess }) => {
   const { getUserState } = useContext(GeneralContext);
   const [error, setError] = useState(null);
   const [userName, setUsername] = useState('');

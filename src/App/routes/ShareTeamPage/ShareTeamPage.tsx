@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, FunctionComponent } from 'react';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import TeamPublicShare from '../../components/Team-Public-Share/Team-Public-Share';
 import apiService from '../../services/apiService';
@@ -10,7 +10,7 @@ export type MatchProps = {
   team_id: string;
 };
 
-const ShareTeamPage: React.FC<RouteComponentProps<MatchProps>> = ({
+const ShareTeamPage: FunctionComponent<RouteComponentProps<MatchProps>> = ({
   match,
 }): JSX.Element => {
   const [team, setTeam] = useState([] as PokemonTeam[]);
