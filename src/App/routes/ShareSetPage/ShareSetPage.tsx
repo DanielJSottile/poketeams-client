@@ -10,10 +10,6 @@ export type MatchParams = {
   set_id: string;
 };
 
-export interface Provider {
-  set: object[];
-}
-
 const ShareSetPage: FunctionComponent<RouteComponentProps<MatchParams>> = ({
   match,
 }): JSX.Element => {

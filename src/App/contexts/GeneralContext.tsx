@@ -20,7 +20,7 @@ import {
   InputWithId,
 } from '../@types';
 
-type Props = {
+type ContextProps = {
   children: ReactNode;
 };
 
@@ -235,7 +235,7 @@ const GeneralContext = createContext<GeneralContextValues>({
 
 export default GeneralContext;
 
-export const GeneralProvider = ({ children }: Props) => {
+export const GeneralProvider = ({ children }: ContextProps): JSX.Element => {
   // const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userFolders, setUserFolders] = useState<PokemonFolder[]>([]);
   const [userTeams, setUserTeams] = useState<PokemonTeam[]>([]);
@@ -389,7 +389,7 @@ export const GeneralProvider = ({ children }: Props) => {
 
             let allSets: PokemonSet[] = [];
 
-            let altered = parsed.map((fullteam: object) => {
+            const altered = parsed.map((fullteam: object) => {
               const createdTeam = newVals.find(
                 (team) => team.team_name === Object.keys(fullteam)[0]
               );
@@ -397,7 +397,7 @@ export const GeneralProvider = ({ children }: Props) => {
               const sets = Object.values(fullteam)[0];
 
               return sets.map((set: PokemonSet) => {
-                let def = {
+                const def = {
                   team_id: createdTeam?.id,
                   species: 'Pikachu',
                   level: 100,
@@ -419,7 +419,7 @@ export const GeneralProvider = ({ children }: Props) => {
                   move_one: 'Tackle',
                 };
 
-                let s = {
+                const s = {
                   ...def,
                   team_id: createdTeam?.id,
                   nickname: set.nickname,
@@ -481,27 +481,27 @@ export const GeneralProvider = ({ children }: Props) => {
   const handlePostNewPokemon = (
     team_id: number,
     nickname: string | undefined,
-    species: string = 'Pikachu',
+    species = 'Pikachu',
     gender: string | undefined,
     item: string | undefined,
     ability: string | undefined,
-    level: number = 100,
-    shiny: boolean = false,
-    happiness: number = 255,
-    nature: string = 'Adamant',
-    hp_ev: number = 0,
-    atk_ev: number = 0,
-    def_ev: number = 0,
-    spa_ev: number = 0,
-    spd_ev: number = 0,
-    spe_ev: number = 0,
-    hp_iv: number = 31,
-    atk_iv: number = 31,
-    def_iv: number = 31,
-    spa_iv: number = 31,
-    spd_iv: number = 31,
-    spe_iv: number = 31,
-    move_one: string = 'Tackle',
+    level = 100,
+    shiny = false,
+    happiness = 255,
+    nature = 'Adamant',
+    hp_ev = 0,
+    atk_ev = 0,
+    def_ev = 0,
+    spa_ev = 0,
+    spd_ev = 0,
+    spe_ev = 0,
+    hp_iv = 31,
+    atk_iv = 31,
+    def_iv = 31,
+    spa_iv = 31,
+    spd_iv = 31,
+    spe_iv = 31,
+    move_one = 'Tackle',
     move_two: string | undefined,
     move_three: string | undefined,
     move_four: string | undefined
@@ -566,8 +566,8 @@ export const GeneralProvider = ({ children }: Props) => {
         if (newTeamImport.value) {
           const parsed = showdownParse(newTeamImport.value);
 
-          let setPromises = parsed.map((set: PokemonSet) => {
-            let def = {
+          const setPromises = parsed.map((set: PokemonSet) => {
+            const def = {
               team_id: team.id,
               species: 'Pikachu',
               level: 100,
@@ -589,7 +589,7 @@ export const GeneralProvider = ({ children }: Props) => {
               move_one: 'Tackle',
             };
 
-            let set_body = {
+            const set_body = {
               ...def,
               team_id: team.id,
               nickname: set.nickname,

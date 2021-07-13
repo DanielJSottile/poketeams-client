@@ -2,13 +2,13 @@ import POKEMON from './pokemon';
 
 // Regular Expressions
 
-const ALL: RegExp = /^(.*)\W(.*)$/;
-const TYPENULL: RegExp = /^(.*):\W(.*)$/;
-const MIME: RegExp = /^(.*).\W(.*)$/;
-const BADBIRB: RegExp = /^(.*)’(.*)$/;
-const FARGALAR: RegExp = /^(.*)'(.*)$/;
-const MIMEJR: RegExp = /^(.*)\W(.*).$/;
-const MIMEGALAR: RegExp = /^(.*). (.*)$/;
+const ALL = /^(.*)\W(.*)$/;
+const TYPENULL = /^(.*):\W(.*)$/;
+const MIME = /^(.*).\W(.*)$/;
+const BADBIRB = /^(.*)’(.*)$/;
+const FARGALAR = /^(.*)'(.*)$/;
+const MIMEJR = /^(.*)\W(.*).$/;
+const MIMEGALAR = /^(.*). (.*)$/;
 
 // List of 'Exceptions' to regular Regex rules
 
@@ -138,7 +138,6 @@ const LEGALITY = {
       species.toLowerCase() === 'farfetch’d-galar' ||
       species.toLowerCase() === 'sirfetch’d-mega'
     ) {
-      // very stupid on Showdown to use the different single quote symbol...
       return true;
     }
     if (POKEMON.has(this.removeWhiteSpaceHyphen(species))) {
@@ -150,7 +149,7 @@ const LEGALITY = {
     }
   },
 
-  findSpecies(species: string) {
+  findSpecies(species: string): any {
     if (this.isLegalSpecies(species)) {
       return POKEMON.get(this.removeWhiteSpaceHyphen(species));
     }
@@ -167,7 +166,7 @@ const LEGALITY = {
 
   returnGenderStatus(species: string): boolean | string {
     if (this.isLegalSpecies(species)) {
-      let pokemon = this.findSpecies(species);
+      const pokemon = this.findSpecies(species);
       if (Object.keys(pokemon)?.includes('genderLock')) {
         return pokemon?.genderLock;
       }
@@ -180,7 +179,7 @@ const LEGALITY = {
   // The function below makes things a bit cleaner.
 
   cleanSpecies(species: string, shiny: boolean, REGEX: RegExp): string {
-    let match = species.match(REGEX);
+    const match = species.match(REGEX);
     species = '';
     const cleanMatch = match!.slice(1);
     cleanMatch.forEach((part) => {

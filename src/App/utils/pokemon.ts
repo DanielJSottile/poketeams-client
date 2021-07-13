@@ -3,7 +3,7 @@ legality reasons. This is not used to create new data, just make the site more u
 It's based off of some code from my custom Pokemon Showdown server but I basically just 
 needed something that held the species and type, I added and took away a few fields*/
 
-let BattlePokedex: object = {
+const BattlePokedex: Record<string, unknown> = {
   mebiusanpast: {
     num: 0,
     species: 'Mebiusan-Past',
@@ -17493,6 +17493,6 @@ let BattlePokedex: object = {
   },
 };
 
-const POKEMON: Map<string, any> = new Map(Object.entries(BattlePokedex));
+const POKEMON: Map<string, unknown> = new Map(Object.entries(BattlePokedex));
 
 export default POKEMON;

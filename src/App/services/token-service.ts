@@ -9,19 +9,19 @@ type Payload = {
 };
 
 const TokenService = {
-  saveAuthToken(token: string) {
+  saveAuthToken(token: string): void {
     window.localStorage.setItem(config.TOKEN_KEY, token);
   },
   getAuthToken(): string | null {
     return window.localStorage.getItem(config.TOKEN_KEY);
   },
-  clearAuthToken() {
+  clearAuthToken(): void {
     window.localStorage.removeItem(config.TOKEN_KEY);
   },
   hasAuthToken(): boolean {
     return !!TokenService.getAuthToken();
   },
-  parseJwt(jwt: string) {
+  parseJwt(jwt: string): any {
     return jwtDecode(jwt);
   },
   parseAuthToken(): Payload | undefined {
@@ -32,13 +32,13 @@ const TokenService = {
   _getMsUntilExpiry(payload: Payload | undefined): number {
     return (payload?.exp || 0) * 1000 - Date.now();
   },
-  queueCallbackBeforeExpiry(callback: () => void) {
+  queueCallbackBeforeExpiry(callback: () => void): void {
     const msUntilExpiry = TokenService._getMsUntilExpiry(
       TokenService.parseAuthToken()
     );
     _timeoutId = setTimeout(callback, msUntilExpiry - _TEN_SECONDS_IN_MS);
   },
-  clearCallbackBeforeExpiry() {
+  clearCallbackBeforeExpiry(): void {
     clearTimeout(_timeoutId);
   },
 };

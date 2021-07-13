@@ -14,7 +14,11 @@ type RouteState = {
 };
 
 const LandingPage: FunctionComponent<
-  RouteComponentProps<{}, StaticContext, RouteState>
+  RouteComponentProps<
+    { [x: string]: string | undefined },
+    StaticContext,
+    RouteState
+  >
 > = ({ location, history }): JSX.Element => {
   const handleLoginSucess = (): void => {
     const destination: LocationDescriptorObject<RouteState> =

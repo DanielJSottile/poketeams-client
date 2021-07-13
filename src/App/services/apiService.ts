@@ -400,7 +400,7 @@ const apiService = {
     );
   },
 
-  postUserTeam(body: object, userid: number): Promise<PokemonTeam> {
+  postUserTeam(body: PokemonTeam, userid: number): Promise<PokemonTeam> {
     return fetch(`${config.API_ENDPOINT}/build/teams/${userid}`, {
       method: 'POST',
       headers: {
@@ -413,7 +413,7 @@ const apiService = {
     );
   },
 
-  postUserSet(body: object, userid: number): Promise<PokemonSet> {
+  postUserSet(body: PokemonSet, userid: number): Promise<PokemonSet> {
     return fetch(`${config.API_ENDPOINT}/build/sets/${userid}`, {
       method: 'POST',
       headers: {
@@ -450,7 +450,10 @@ const apiService = {
     });
   },
 
-  patchUserTeam(body: object, userid: number): Promise<Response> {
+  patchUserTeam(
+    body: Record<string, unknown>,
+    userid: number
+  ): Promise<Response> {
     return fetch(`${config.API_ENDPOINT}/build/teams/${userid}`, {
       method: 'PATCH',
       headers: {
@@ -464,7 +467,10 @@ const apiService = {
     });
   },
 
-  patchUserSet(body: object, userid: number): Promise<Response> {
+  patchUserSet(
+    body: Record<string, unknown>,
+    userid: number
+  ): Promise<Response> {
     return fetch(`${config.API_ENDPOINT}/build/sets/${userid}`, {
       method: 'PATCH',
       headers: {

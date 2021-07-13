@@ -2,7 +2,6 @@ import React, {
   Fragment,
   useContext,
   useState,
-  useRef,
   FunctionComponent,
 } from 'react';
 import { Link } from 'react-router-dom';
@@ -18,6 +17,7 @@ import {
   validateNewFolderImport,
   validateNewFolderName,
 } from '../../utils/validations';
+import { useClipboard } from '../../utils/customHooks';
 import styles from './FoldersList.module.scss';
 import { PokemonFolder } from '../../@types';
 
@@ -41,7 +41,8 @@ const FoldersList: FunctionComponent = () => {
 
   const [editClicked, setEditClicked] = useState(false);
   const [deleteClicked, setDeleteClicked] = useState(false);
-  const [copySuccess, setCopySuccess] = useState(false);
+  const { copySuccess, textArea, setCopySuccess, copyCodeToClipboard } =
+    useClipboard();
 
   const handleEditExpand = () => {
     setEditClicked(!editClicked);
@@ -49,20 +50,6 @@ const FoldersList: FunctionComponent = () => {
 
   const handleDeleteExpand = () => {
     setDeleteClicked(!deleteClicked);
-  };
-
-  const removeCopySuccess = () => {
-    setCopySuccess(false);
-  };
-
-  const textArea = useRef<HTMLTextAreaElement>(null);
-
-  const copyCodeToClipboard = () => {
-    textArea.current!.select();
-    document.execCommand('copy'); // this seems to not work
-    const text = textArea.current!.defaultValue;
-    navigator.clipboard.writeText(text); // this seems to work!
-    setCopySuccess(true);
   };
 
   /* --------------------- */
@@ -216,21 +203,21 @@ const FoldersList: FunctionComponent = () => {
           >
             New Folder <i className="fas fa-folder-plus"></i>
           </Button>
-          {folderAddClicked ? renderExpanded() : null}
+          {folderAddClicked && renderExpanded()}
         </div>
         <div>
           <span>{`Current Folder: ${currentClickedFolder.value}`}</span>
-          {currentClickedFolder.value ? (
+          {currentClickedFolder.value && (
             <div>
               <div className={styles['export-team']}>
-                {copySuccess ? (
+                {copySuccess && (
                   <div className={styles['copied']}>Copied to Clipboard!!</div>
-                ) : null}
+                )}
                 <div>
                   <Button
                     onClickCallback={() => {
                       copyCodeToClipboard();
-                      setTimeout(removeCopySuccess, 3000);
+                      setTimeout(() => setCopySuccess(false), 3000);
                     }}
                   >
                     Copy Text
@@ -280,7 +267,7 @@ const FoldersList: FunctionComponent = () => {
                 Delete <i className="fas fa-trash-alt"></i>
               </Button>
             </div>
-          ) : null}
+          )}
         </div>
         <div>
           {editClicked && renderEditExpand()}

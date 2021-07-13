@@ -1,6 +1,6 @@
 let _timeoutId: NodeJS.Timeout;
 let _idleCallback: () => void;
-let _notIdleEvents = [
+const _notIdleEvents = [
   'mousedown',
   'mousemove',
   'keypress',
@@ -10,19 +10,19 @@ let _notIdleEvents = [
 const _FIVE_MINUTES_IN_MS = 300000;
 
 const IdleService = {
-  setIdleCallback(idleCallback: () => void) {
+  setIdleCallback(idleCallback: () => void): void {
     _idleCallback = idleCallback;
   },
-  resetIdleTimer(ev: Event) {
+  resetIdleTimer(): void {
     clearTimeout(_timeoutId);
     _timeoutId = setTimeout(_idleCallback, _FIVE_MINUTES_IN_MS);
   },
-  registerIdleTimerResets() {
+  registerIdleTimerResets(): void {
     _notIdleEvents.forEach((event) =>
       document.addEventListener(event, IdleService.resetIdleTimer, true)
     );
   },
-  unRegisterIdleResets() {
+  unRegisterIdleResets(): void {
     clearTimeout(_timeoutId);
     _notIdleEvents.forEach((event) =>
       document.removeEventListener(event, IdleService.resetIdleTimer, true)

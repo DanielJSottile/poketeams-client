@@ -2,7 +2,6 @@ import React, {
   Fragment,
   useContext,
   useState,
-  useRef,
   FunctionComponent,
 } from 'react';
 import { Link } from 'react-router-dom';
@@ -14,6 +13,8 @@ import SetEdit from '../Set-Edit/Set-Edit';
 import GeneralContext from '../../contexts/GeneralContext';
 import showdownGenerate from '../../utils/generate';
 import legality from '../../utils/legality';
+import { validateTeamName, validateDesc } from '../../utils/validations';
+import { useClipboard } from '../../utils/customHooks';
 import styles from './Team-Edit.module.scss';
 import { PokemonTeam, PokemonSet } from '../../@types';
 
@@ -43,11 +44,8 @@ const TeamEdit: FunctionComponent<TeamEditProps> = ({
   });
   const [teamExpandToggle, setTeamExpandToggle] = useState(true);
   const [deleteClicked, setDeleteClicked] = useState(false);
-  const [copySuccess, setCopySuccess] = useState(false);
-
-  const removeCopySuccess = () => {
-    setCopySuccess(false);
-  };
+  const { copySuccess, textArea, setCopySuccess, copyCodeToClipboard } =
+    useClipboard();
 
   const inputTeamName = (teamName: string) => {
     setTeamName({ value: teamName, touched: true });
@@ -69,30 +67,6 @@ const TeamEdit: FunctionComponent<TeamEditProps> = ({
 
   const handleDeleteExpand = () => {
     setDeleteClicked(!deleteClicked);
-  };
-
-  const textArea = useRef<HTMLTextAreaElement>(null);
-
-  const copyCodeToClipboard = () => {
-    textArea.current!.select();
-    document.execCommand('copy'); // this seems to not work
-    const text = textArea.current!.defaultValue;
-    navigator.clipboard.writeText(text); // this seems to work!
-    setCopySuccess(true);
-  };
-
-  const validateTeamName = (): string | boolean => {
-    if (!teamName.value) {
-      return `Team MUST have a name!`;
-    }
-    return false;
-  };
-
-  const validateDesc = (): string | boolean => {
-    if (typeof description.value !== 'string') {
-      return `This should never come up, it is superflous`;
-    }
-    return false;
   };
 
   /* ---------------- */
@@ -167,7 +141,7 @@ const TeamEdit: FunctionComponent<TeamEditProps> = ({
                   <label htmlFor="title-name">Team Name:</label>
                   {
                     <p className="error-validate shake-horizontal">
-                      {validateTeamName()}
+                      {validateTeamName(teamName)}
                     </p>
                   }
                   <Input
@@ -203,7 +177,7 @@ const TeamEdit: FunctionComponent<TeamEditProps> = ({
                 containerClass={styles['title-content']}
                 htmlFor="title-content"
                 label="Description:"
-                validationCallback={() => validateDesc()}
+                validationCallback={() => validateDesc(description)}
                 textAreaClass={styles['title-content desc']}
                 placeholder="e.g. description"
                 name="title-content"
@@ -213,7 +187,9 @@ const TeamEdit: FunctionComponent<TeamEditProps> = ({
               />
               <Button
                 type="submit"
-                disabled={!!validateTeamName() || !!validateDesc()}
+                disabled={
+                  !!validateTeamName(teamName) || !!validateDesc(description)
+                }
                 onClickCallback={(e) => {
                   e.preventDefault();
                   handleUpdateTeam(teamName.value, description.value, team.id);
@@ -223,14 +199,14 @@ const TeamEdit: FunctionComponent<TeamEditProps> = ({
               </Button>
             </form>
             <div className={styles['export-team']}>
-              {copySuccess ? (
+              {copySuccess && (
                 <div className={styles['copied']}>Copied to Clipboard!!</div>
-              ) : null}
+              )}
               <div>
                 <Button
                   onClickCallback={() => {
                     copyCodeToClipboard();
-                    setTimeout(removeCopySuccess, 3000);
+                    setTimeout(() => setCopySuccess(false), 3000);
                   }}
                 >
                   Copy Text
@@ -275,7 +251,7 @@ const TeamEdit: FunctionComponent<TeamEditProps> = ({
             >
               <i className="fas fa-trash-alt"></i> Delete Team!
             </Button>
-            {deleteClicked ? renderDeleteExpand() : null}
+            {deleteClicked && renderDeleteExpand()}
           </div>
         </div>
         {SetList}
@@ -284,7 +260,7 @@ const TeamEdit: FunctionComponent<TeamEditProps> = ({
   };
 
   const renderUnexpandedTeam = () => {
-    let spriteMap = teamSets.map((set, i) => {
+    const spriteMap = teamSets.map((set, i) => {
       return (
         <Image
           key={i}

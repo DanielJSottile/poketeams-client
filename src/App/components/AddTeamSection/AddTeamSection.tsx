@@ -104,7 +104,7 @@ const AddTeamSection: FunctionComponent = () => {
           ) : (
             <h4>Click a Folder to add Teams!</h4>
           )}
-          {teamAddClicked ? renderExpanded() : null}
+          {teamAddClicked && renderExpanded()}
         </div>
         <h3>Teams:</h3>
       </section>

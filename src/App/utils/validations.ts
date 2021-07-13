@@ -264,3 +264,10 @@ export const validateMoves = (
   }
   return false;
 };
+
+export const validateTeamName = (teamName: TextInput): string | boolean => {
+  if (!teamName.value) {
+    return `Team MUST have a name!`;
+  }
+  return false;
+};

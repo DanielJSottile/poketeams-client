@@ -40,7 +40,7 @@ const NavigationBuild: FunctionComponent = () => {
   };
 
   const renderUserWelcome = () => {
-    let user: string = '';
+    let user = '';
 
     if (TokenService.getAuthToken()) {
       user = jwtDecode<MyToken>(TokenService.getAuthToken() || '').sub;

@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useRef, FunctionComponent } from 'react';
+import React, { Fragment, useState, FunctionComponent } from 'react';
 import { Link } from 'react-router-dom';
 import Input from '../Input/Input';
 import TextArea from '../TextArea/TextArea';
@@ -6,6 +6,7 @@ import Image from '../Image/Image';
 import Button from '../Button/Button';
 import showdownGenerate from '../../utils/generate';
 import legality from '../../utils/legality';
+import { useClipboard } from '../../utils/customHooks';
 import styles from './Set-Public.module.scss';
 import { PokemonSet } from '../../@types';
 
@@ -16,24 +17,11 @@ export type SetPublicProps = {
 
 const SetPublic: FunctionComponent<SetPublicProps> = ({ set }): JSX.Element => {
   const [expandToggle, setExpandToggle] = useState(false);
-  const [copySuccess, setCopySuccess] = useState(false);
+  const { copySuccess, textArea, setCopySuccess, copyCodeToClipboard } =
+    useClipboard();
 
   const handleSetToggle = () => {
     setExpandToggle(!expandToggle);
-  };
-
-  const removeCopySuccess = () => {
-    setCopySuccess(false);
-  };
-
-  const textArea = useRef<HTMLTextAreaElement>(null);
-
-  const copyCodeToClipboard = () => {
-    textArea.current!.select();
-    document.execCommand('copy'); // this seems to not work
-    const text = textArea.current!.defaultValue;
-    navigator.clipboard.writeText(text); // this seems to work!
-    setCopySuccess(true);
   };
 
   const renderExpandedSet = () => {
@@ -424,14 +412,14 @@ const SetPublic: FunctionComponent<SetPublicProps> = ({ set }): JSX.Element => {
         </form>
 
         <div className={styles['export-pokemon']}>
-          {copySuccess ? (
+          {copySuccess && (
             <div className={styles['copied']}>Copied to Clipboard!!</div>
-          ) : null}
+          )}
           <div>
             <Button
               onClickCallback={() => {
                 copyCodeToClipboard();
-                setTimeout(removeCopySuccess, 3000);
+                setTimeout(() => setCopySuccess(false), 3000);
               }}
             >
               Copy Text

@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useRef, FunctionComponent } from 'react';
+import React, { Fragment, useState, FunctionComponent } from 'react';
 import { Link } from 'react-router-dom';
 import Input from '../Input/Input';
 import TextArea from '../TextArea/TextArea';
@@ -7,6 +7,7 @@ import Button from '../Button/Button';
 import SetPublic from '../Set-Public/Set-Public';
 import showdownGenerate from '../../utils/generate';
 import legality from '../../utils/legality';
+import { useClipboard } from '../../utils/customHooks';
 import styles from './Team-Public-Share.module.scss';
 import { PokemonTeam, PokemonSet } from '../../@types';
 
@@ -25,24 +26,11 @@ const TeamPublicShare: FunctionComponent<TeamPublicShareProps> = ({
   sets,
 }): JSX.Element => {
   const [teamExpandToggle, setTeamExpandToggle] = useState(true);
-  const [copySuccess, setCopySuccess] = useState(false);
+  const { copySuccess, textArea, setCopySuccess, copyCodeToClipboard } =
+    useClipboard();
 
   const handleTeamToggle = () => {
     setTeamExpandToggle(!teamExpandToggle);
-  };
-
-  const removeCopySuccess = () => {
-    setCopySuccess(false);
-  };
-
-  const textArea = useRef<HTMLTextAreaElement>(null);
-
-  const copyCodeToClipboard = () => {
-    textArea.current!.select();
-    document.execCommand('copy'); // this seems to not work
-    const text = textArea.current!.defaultValue;
-    navigator.clipboard.writeText(text); // this seems to work!
-    setCopySuccess(true);
   };
 
   const renderExpandedTeam = () => {
@@ -106,14 +94,14 @@ const TeamPublicShare: FunctionComponent<TeamPublicShareProps> = ({
               />
             </form>
             <div className={styles['export-team']}>
-              {copySuccess ? (
+              {copySuccess && (
                 <div className={styles['copied']}>Copied to Clipboard!!</div>
-              ) : null}
+              )}
               <div>
                 <Button
                   onClickCallback={() => {
                     copyCodeToClipboard();
-                    setTimeout(removeCopySuccess, 3000);
+                    setTimeout(() => setCopySuccess(false), 3000);
                   }}
                 >
                   Copy Text

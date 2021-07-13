@@ -2,6 +2,8 @@
 Python standard things like .partion have been changed to .split, and the way the Regex is
 handled is a bit different from Python, but the code is essentially the same. */
 
+import { PokemonSet } from '../@types';
+
 // Helper Functions
 
 function evIvParser(string: string | null, val: string) {
@@ -27,11 +29,11 @@ function evIvParser(string: string | null, val: string) {
 
   const evIvRE = /(\d{1,3}) (.*)/;
 
-  let evArr = string.split('/');
+  const evArr = string.split('/');
 
   evArr.forEach((value) => {
-    let trim = value.trim();
-    let match = trim.match(evIvRE);
+    const trim = value.trim();
+    const match = trim.match(evIvRE);
 
     if (match![2] === 'HP') {
       hpV = Number(match![1]);
@@ -53,17 +55,17 @@ function evIvParser(string: string | null, val: string) {
 
 // Parsing Function for Teams and Sets Formats
 
-export default function showdownParse(input: string) {
+export default function showdownParse(input: string): PokemonSet[] {
   let item: string | null = null;
   let gender: string | null = null;
-  let species: string = 'Pikachu';
+  let species = 'Pikachu';
   let nickname: string | null = null;
-  let level: number = 100;
-  let happiness: number = 255;
+  let level = 100;
+  let happiness = 255;
   let ev: string | null = null;
   let iv: string | null = null;
   let ability: string | null = null;
-  let shiny: boolean = false;
+  let shiny = false;
   let nature: string | null = null;
   let moves: string[] = [];
 
@@ -101,32 +103,32 @@ export default function showdownParse(input: string) {
     moves = [];
 
     if (NICKNAME_GEN_AND_ITEM_RE.test(s)) {
-      let sngi = s.match(NICKNAME_GEN_AND_ITEM_RE);
+      const sngi = s.match(NICKNAME_GEN_AND_ITEM_RE);
       nickname = sngi![1].trim();
       species = sngi![2].trim();
       gender = sngi![3].trim();
       item = sngi![4].trim();
     } else if (NICKNAME_NO_ITEM_RE.test(s)) {
-      let ns = s.match(NICKNAME_NO_ITEM_RE);
+      const ns = s.match(NICKNAME_NO_ITEM_RE);
       nickname = ns![1].trim();
       species = ns![2].trim();
     } else if (NICKNAME_AND_ITEM_RE.test(s)) {
-      let sni = s.match(NICKNAME_AND_ITEM_RE);
+      const sni = s.match(NICKNAME_AND_ITEM_RE);
       nickname = sni![1].trim();
       species = sni![2].trim();
       item = sni![3].trim();
     } else if (NICKNAME_GEN_NO_ITEM_RE.test(s)) {
-      let sng = s.match(NICKNAME_GEN_NO_ITEM_RE);
+      const sng = s.match(NICKNAME_GEN_NO_ITEM_RE);
       nickname = sng![1].trim();
       species = sng![2].trim();
       gender = sng![3].trim();
     } else if (NO_NICKNAME_GEN_AND_ITEM_RE.test(s)) {
-      let sgi = s.match(NO_NICKNAME_GEN_AND_ITEM_RE);
+      const sgi = s.match(NO_NICKNAME_GEN_AND_ITEM_RE);
       species = sgi![1].trim();
       gender = sgi![2].trim();
       item = sgi![3].trim();
     } else if (NO_NICKNAME_AND_ITEM_RE.test(s)) {
-      let si = s.match(NO_NICKNAME_AND_ITEM_RE);
+      const si = s.match(NO_NICKNAME_AND_ITEM_RE);
       species = si![1].trim();
       item = si![2].trim();
     } else {
@@ -157,7 +159,7 @@ export default function showdownParse(input: string) {
       }
     }
 
-    let setFinal = {
+    const setFinal = {
       nickname: nickname,
       species: species,
       gender: gender,

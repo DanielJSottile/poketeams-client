@@ -2,7 +2,6 @@ import React, {
   Fragment,
   useContext,
   useState,
-  useRef,
   FunctionComponent,
 } from 'react';
 import { Link } from 'react-router-dom';
@@ -30,6 +29,7 @@ import {
   validateIvs,
   validateMoves,
 } from '../../utils/validations';
+import { useClipboard } from '../../utils/customHooks';
 import styles from './Set-Edit.module.scss';
 import { PokemonSet } from '../../@types';
 
@@ -140,7 +140,8 @@ const SetEdit: FunctionComponent<SetEditProps> = ({ set }) => {
   });
   const [expandToggle, setExpandToggle] = useState(true);
   const [deleteClicked, setDeleteClicked] = useState(false);
-  const [copySuccess, setCopySuccess] = useState(false);
+  const { copySuccess, textArea, setCopySuccess, copyCodeToClipboard } =
+    useClipboard();
 
   const setFields = (setImport: string) => {
     const parse = showdownParse(setImport)[0];
@@ -171,16 +172,6 @@ const SetEdit: FunctionComponent<SetEditProps> = ({ set }) => {
     setMoveThree({ value: parse.move_three || '', touched: false });
     setMoveFour({ value: parse.move_four || '', touched: false });
     setDeleteClicked(false);
-  };
-
-  const textArea = useRef<HTMLTextAreaElement>(null);
-
-  const copyCodeToClipboard = () => {
-    textArea.current!.select();
-    document.execCommand('copy'); // this seems to not work
-    const text = textArea.current!.defaultValue;
-    navigator.clipboard.writeText(text); // this seems to work!
-    setCopySuccess(true);
   };
 
   const renderExpandedSet = () => {
@@ -713,9 +704,9 @@ const SetEdit: FunctionComponent<SetEditProps> = ({ set }) => {
         </form>
 
         <div className={styles['export-pokemon']}>
-          {copySuccess ? (
+          {copySuccess && (
             <div className={styles['copied']}>Copied to Clipboard!!</div>
-          ) : null}
+          )}
           <div>
             <Button
               onClickCallback={() => {
@@ -762,7 +753,7 @@ const SetEdit: FunctionComponent<SetEditProps> = ({ set }) => {
           >
             <i className="fas fa-trash-alt"></i> Delete Set!
           </Button>
-          {deleteClicked ? renderDeleteExpand() : null}
+          {deleteClicked && renderDeleteExpand()}
         </div>
       </div>
     );
