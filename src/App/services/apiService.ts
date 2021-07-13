@@ -73,7 +73,8 @@ const apiService = {
       });
   },
 
-  getLikesforOneTeam(team_id: number): Promise<any> {
+  getLikesforOneTeam(team_id: number): Promise<unknown> {
+    // Not sure what this returns rn
     let error: Error;
     return fetch(`${config.API_ENDPOINT}/all/${team_id}/likes`, {
       method: 'GET',
@@ -94,7 +95,7 @@ const apiService = {
       });
   },
 
-  getSetsForOneTeam(team_id: number): Promise<any> {
+  getSetsForOneTeam(team_id: number): Promise<PokemonSet[]> {
     let error: Error;
     return fetch(`${config.API_ENDPOINT}/all/${team_id}/sets`, {
       method: 'GET',
@@ -399,7 +400,7 @@ const apiService = {
     );
   },
 
-  postUserTeam(body: object, userid: number): Promise<any> {
+  postUserTeam(body: object, userid: number): Promise<PokemonTeam> {
     return fetch(`${config.API_ENDPOINT}/build/teams/${userid}`, {
       method: 'POST',
       headers: {

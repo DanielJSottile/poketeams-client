@@ -36,7 +36,7 @@ const ShareFolderPage: FunctionComponent<RouteComponentProps<MatchParams>> = ({
               return apiService.getSetsForOneTeam(team.id);
             });
 
-            Promise.all(promiseArray).then((values: PokemonSet[]) => {
+            Promise.all(promiseArray).then((values: PokemonSet[][]) => {
               const merged: PokemonSet[] = array.flattenDeep(values);
               setSets(merged);
             });

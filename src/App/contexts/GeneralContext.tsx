@@ -680,11 +680,7 @@ export const GeneralProvider = ({ children }: Props) => {
           ...userTeams,
           {
             ...team,
-            folder_name: currentClickedFolder.value,
-            user_id: jwtDecode<MyToken>(TokenService.getAuthToken() || '')
-              .user_id,
-            user_name: jwtDecode<MyToken>(TokenService.getAuthToken() || '')
-              .sub,
+            folder_id: Number(currentClickedFolder.id),
           },
         ]);
         if (newTeamImport.value) {

@@ -5,7 +5,7 @@ import TokenService from '../../services/token-service';
 
 export interface PrivateRouteProps {
   component: LazyExoticComponent<
-    FunctionComponent<RouteComponentProps<{}, StaticContext, any>>
+    FunctionComponent<RouteComponentProps<{}, StaticContext, unknown>>
   >;
   path: string;
 }
