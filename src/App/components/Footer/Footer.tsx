@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 
-const Footer: React.FC = () => {
+const Footer: FunctionComponent = () => {
   return (
     <footer>{`Created by Daniel Sottile || © July 2021 || Pokémon is © 1995-2021 Nintendo`}</footer>
   );

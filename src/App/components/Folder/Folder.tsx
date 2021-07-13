@@ -1,22 +1,31 @@
-import React, { useContext } from 'react';
+import React, { useContext, FunctionComponent } from 'react';
 import Button from '../Button/Button';
 import GeneralContext from '../../contexts/GeneralContext';
 
-type Props = {
+type FolderProps = {
   /** id for folder*/
-  id?: string;
+  id?: number;
   /** name for folder */
   folder_name?: string | undefined;
 };
 
-const Folder: React.FC<Props> = ({ id = '', folder_name = '' }) => {
-  const { handleCurrentFolderClicked } = useContext(GeneralContext);
+const Folder: FunctionComponent<FolderProps> = ({
+  id = '',
+  folder_name = '',
+}) => {
+  const { setCurrentClickedFolder } = useContext(GeneralContext);
 
   return (
     <Button
       buttonClass="btn"
-      id={id}
-      onClickCallback={() => handleCurrentFolderClicked(folder_name, id)}
+      id={id.toString()}
+      onClickCallback={() =>
+        setCurrentClickedFolder({
+          value: folder_name,
+          id: id.toString(),
+          touched: true,
+        })
+      }
     >
       <i className="fas fa-folder"></i> {folder_name}
     </Button>

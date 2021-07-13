@@ -1,7 +1,7 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, FunctionComponent } from 'react';
 import styles from './PokeballLoader.module.scss';
 
-const PokeballLoader: React.FC = () => {
+const PokeballLoader: FunctionComponent = () => {
   return (
     <Fragment>
       <div className={styles['pokeball']}>

@@ -17,15 +17,15 @@ export interface PokemonTeam {
 }
 
 export interface PokemonSet {
-  nickname: string;
+  nickname: string | null;
   species: string;
-  gender: string;
+  gender: string | null;
   shiny: boolean;
-  item: string;
-  ability: string;
+  item: string | null;
+  ability: string | null;
   level: number;
   happiness: number;
-  nature: string;
+  nature: string | null;
   hp_ev: number;
   atk_ev: number;
   def_ev: number;
@@ -39,12 +39,12 @@ export interface PokemonSet {
   spd_iv: number;
   spe_iv: number;
   move_one: string;
-  move_two: string;
-  move_three: string;
-  move_four: string;
+  move_two: string | null;
+  move_three: string | null;
+  move_four: string | null;
   setExpandToggle?: boolean;
   deleteClicked?: boolean;
   copySuccess?: boolean;
-  id: number;
-  team_id: number;
+  id?: number;
+  team_id?: number;
 }

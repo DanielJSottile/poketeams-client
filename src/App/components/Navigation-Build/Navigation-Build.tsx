@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, FunctionComponent } from 'react';
 import { Link } from 'react-router-dom';
 import SearchBarBuild from '../SearchBar-Build/SearchBar-Build';
 import GeneralContext from '../../contexts/GeneralContext';
@@ -7,16 +7,16 @@ import jwtDecode from 'jwt-decode';
 import styles from './Navigation-Build.module.scss';
 
 interface MyToken {
-  sub: any;
-  user_id: any;
+  sub: string;
+  user_id: string;
 }
 
-const NavigationBuild: React.FC = () => {
-  const GenCon = useContext(GeneralContext);
+const NavigationBuild: FunctionComponent = () => {
+  const { clearUserState } = useContext(GeneralContext);
 
   const handleLogoutClick = () => {
     TokenService.clearAuthToken();
-    GenCon.clearUserState();
+    clearUserState();
   };
 
   const renderLogout = () => {
@@ -40,7 +40,7 @@ const NavigationBuild: React.FC = () => {
   };
 
   const renderUserWelcome = () => {
-    let user: any = '';
+    let user: string = '';
 
     if (TokenService.getAuthToken()) {
       user = jwtDecode<MyToken>(TokenService.getAuthToken() || '').sub;

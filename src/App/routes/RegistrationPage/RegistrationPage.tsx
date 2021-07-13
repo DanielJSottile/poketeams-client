@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, FunctionComponent } from 'react';
 import { History } from 'history';
 import RegistrationForm from '../../components/RegistrationForm/RegistrationForm';
 import Footer from '../../components/Footer/Footer';
@@ -8,7 +8,7 @@ type RegistrationProps = {
   history: History;
 };
 
-const RegistrationPage: React.FC<RegistrationProps> = ({
+const RegistrationPage: FunctionComponent<RegistrationProps> = ({
   history,
 }): JSX.Element => {
   const handleRegistrationSuccess = () => {

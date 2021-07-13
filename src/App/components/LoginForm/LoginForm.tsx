@@ -1,4 +1,9 @@
-import React, { useContext, useState } from 'react';
+import React, {
+  useContext,
+  useState,
+  FormEvent,
+  FunctionComponent,
+} from 'react';
 import Input from '../Input/Input';
 import Button from '../Button/Button';
 import TokenService from '../../services/token-service';
@@ -6,18 +11,18 @@ import GeneralContext from '../../contexts/GeneralContext';
 import AuthApiService from '../../services/auth-api-service';
 import styles from './LoginForm.module.scss';
 
-type Props = {
+type LoginFormProps = {
   /** onLoginSuccess Function */
   onLoginSuccess: () => void;
 };
 
-const LoginForm: React.FC<Props> = ({ onLoginSuccess }) => {
+const LoginForm: FunctionComponent<LoginFormProps> = ({ onLoginSuccess }) => {
   const { getUserState } = useContext(GeneralContext);
   const [error, setError] = useState(null);
   const [userName, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmitJwtAuth = (ev: any) => {
+  const handleSubmitJwtAuth = (ev: FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
     setError(null);
 
@@ -25,7 +30,7 @@ const LoginForm: React.FC<Props> = ({ onLoginSuccess }) => {
       user_name: userName,
       password: password,
     })
-      .then((res: any) => {
+      .then((res) => {
         setUsername('');
         setPassword('');
         TokenService.saveAuthToken(res.authToken);

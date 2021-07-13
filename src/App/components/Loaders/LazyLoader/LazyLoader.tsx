@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import PokeballLoader from '../PokeballLoader/PokeballLoader';
 import LoadingBlack from '../LoadingBlack/LoadingBlack';
 import styles from './LazyLoader.module.scss';
 
-const LazyLoader: React.FC = () => {
+const LazyLoader: FunctionComponent = () => {
   return (
     <div className={styles['lazy-loader']}>
       <PokeballLoader />

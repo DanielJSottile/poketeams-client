@@ -1,4 +1,10 @@
-import React, { Fragment, useContext, useState } from 'react';
+import React, {
+  Fragment,
+  useContext,
+  useState,
+  useRef,
+  FunctionComponent,
+} from 'react';
 import { Link } from 'react-router-dom';
 import Input from '../Input/Input';
 import TextArea from '../TextArea/TextArea';
@@ -11,103 +17,82 @@ import legality from '../../functions/legality';
 import styles from './Team-Edit.module.scss';
 import { PokemonTeam, PokemonSet } from '../../@types';
 
-export type Props = {
+export type TeamEditProps = {
   /** pokemon team */
   team: PokemonTeam;
   /** id as a team name */
   id: string;
 };
 
-export interface StringInput {
-  value: string;
-  touched: boolean;
-}
+const TeamEdit: FunctionComponent<TeamEditProps> = ({
+  team,
+  id,
+}): JSX.Element => {
+  const { userSets, handleUpdateTeam, handlePostNewPokemon, handleDeleteTeam } =
+    useContext(GeneralContext);
 
-export interface BoolInput {
-  value: boolean;
-  touched: boolean;
-}
-
-export interface Provider {
-  team_name: StringInput;
-  favorite_team: BoolInput;
-  description: StringInput;
-  teamExpandToggle: boolean;
-  deleteClicked: boolean;
-}
-
-const TeamEdit: React.FC<Props> = ({ team, id }): JSX.Element => {
-  const GenCon = useContext(GeneralContext);
-
-  const [state, setState] = useState({
-    team_name: { value: team.team_name || '', touched: false },
-    favorite_team: { value: false, touched: false },
-    description: { value: team.team_description || '', touched: false },
-    teamExpandToggle: true,
-    deleteClicked: false,
-    copySuccess: false,
+  const [teamName, setTeamName] = useState({
+    value: team.team_name || '',
+    touched: false,
   });
+  // const [favoriteTeam, setFavoriteTeam] = useState({ value: false, touched: false });
+  // TOOD: add this as a real feature
+  const [description, setDescription] = useState({
+    value: team.team_description || '',
+    touched: false,
+  });
+  const [teamExpandToggle, setTeamExpandToggle] = useState(true);
+  const [deleteClicked, setDeleteClicked] = useState(false);
+  const [copySuccess, setCopySuccess] = useState(false);
 
-  const removeCopySuccess = (): any => {
-    setState((oldVals) => ({ ...oldVals, copySuccess: false }));
+  const removeCopySuccess = () => {
+    setCopySuccess(false);
   };
 
-  const setTeamName = (team_name: string) => {
-    setState((oldVals) => ({
-      ...oldVals,
-      team_name: { value: team_name, touched: true },
-    }));
+  const inputTeamName = (teamName: string) => {
+    setTeamName({ value: teamName, touched: true });
   };
 
-  // const setFavTeam = favorite_team => {
-  //   setState(oldVals => ({...oldVals, favorite_team: {value: favorite_team, touched: true}}))
+  // const setFavTeam = favoriteTeam => {
+  //   setFavoriteTeam({value: favoriteTeam, touched: true});
   // };
 
   const setDesc = (description: string) => {
-    setState((oldVals) => ({
-      ...oldVals,
-      description: { value: description, touched: true },
-    }));
+    setDescription({ value: description, touched: true });
   };
 
   const handleTeamToggle = () => {
-    setState((oldVals) => ({
-      ...oldVals,
-      teamExpandToggle: !state.teamExpandToggle,
-      team_name: { value: team.team_name || '', touched: false },
-      description: { value: team.description || '', touched: false },
-    }));
+    setTeamExpandToggle(!teamExpandToggle);
+    setTeamName({ value: team.team_name || '', touched: false });
+    setDescription({ value: team.description || '', touched: false });
   };
 
   const handleDeleteExpand = () => {
-    setState((oldVals) => ({
-      ...oldVals,
-      deleteClicked: !state.deleteClicked,
-    }));
+    setDeleteClicked(!deleteClicked);
   };
 
-  const textArea: any = React.useRef(null);
+  const textArea = useRef<HTMLTextAreaElement>(null);
 
-  const copyCodeToClipboard = (): any => {
-    textArea.current.select();
+  const copyCodeToClipboard = () => {
+    textArea.current!.select();
     document.execCommand('copy'); // this seems to not work
-    const text = textArea.current.defaultValue;
+    const text = textArea.current!.defaultValue;
     navigator.clipboard.writeText(text); // this seems to work!
-    setState((oldVals) => ({ ...oldVals, copySuccess: true }));
+    setCopySuccess(true);
   };
 
-  const validateTeamName = (): any => {
-    let team_name = state.team_name.value;
-    if (!team_name) {
+  const validateTeamName = (): string | boolean => {
+    if (!teamName.value) {
       return `Team MUST have a name!`;
     }
+    return false;
   };
 
-  const validateDesc = (): any => {
-    let description = state.description.value;
-    if (typeof description !== 'string') {
+  const validateDesc = (): string | boolean => {
+    if (typeof description.value !== 'string') {
       return `This should never come up, it is superflous`;
     }
+    return false;
   };
 
   /* ---------------- */
@@ -115,20 +100,17 @@ const TeamEdit: React.FC<Props> = ({ team, id }): JSX.Element => {
   /* Set Up Common Definitions to be 
   Used in Expanded/Unexpanded views */
 
-  const { userSets, handleUpdateTeam } = GenCon;
-
   const ps = [...new Set(userSets.map((set: PokemonSet) => set.id))];
 
-  const newPS = ps.map((id) =>
-    userSets.find((set: PokemonSet) => set.id === id)
+  const newPS = ps.map(
+    (id) =>
+      userSets.find((set: PokemonSet) => set.id === id) || ({} as PokemonSet)
   );
 
-  const teamSets = newPS.filter((set: any) => set.team_id === team.id);
+  const teamSets = newPS.filter((set: PokemonSet) => set.team_id === team.id);
 
-  const renderSetList = (teamSets: any) => {
-    const { handlePostNewPokemon } = GenCon;
-
-    const SetList = teamSets.map((set: any, i: number) => {
+  const renderSetList = (teamSets: PokemonSet[]) => {
+    const SetList = teamSets.map((set: PokemonSet, i: number) => {
       return <SetEdit key={i} set={set} />;
     });
 
@@ -138,7 +120,8 @@ const TeamEdit: React.FC<Props> = ({ team, id }): JSX.Element => {
           key={SetList.length}
           onClickCallback={(e) => {
             e.preventDefault();
-            handlePostNewPokemon(team.id); // we just need the id of the team.  this func fills out default vals.
+            handlePostNewPokemon(team.id);
+            // we just need the id of the team.  this func fills out default vals.
           }}
         >
           Add Pokemon! +
@@ -149,8 +132,6 @@ const TeamEdit: React.FC<Props> = ({ team, id }): JSX.Element => {
   };
 
   const renderDeleteExpand = () => {
-    const { handleDeleteTeam } = GenCon;
-
     return (
       <div>
         <p>Are You Sure You'd Like to Delete this Team?</p>
@@ -193,10 +174,8 @@ const TeamEdit: React.FC<Props> = ({ team, id }): JSX.Element => {
                     inputHasError={false}
                     inputClass={styles['title']}
                     placeholder="e.g. Cool Team"
-                    value={state.team_name.value}
-                    onChangeCallback={(
-                      e: React.ChangeEvent<HTMLInputElement>
-                    ) => setTeamName(e.target.value)}
+                    value={teamName.value}
+                    onChangeCallback={(e) => inputTeamName(e.target.value)}
                     type="text"
                     name="team-name"
                     id={`team-name-${team.id}`}
@@ -224,31 +203,27 @@ const TeamEdit: React.FC<Props> = ({ team, id }): JSX.Element => {
                 containerClass={styles['title-content']}
                 htmlFor="title-content"
                 label="Description:"
-                validationCallback={validateDesc()}
+                validationCallback={() => validateDesc()}
                 textAreaClass={styles['title-content desc']}
                 placeholder="e.g. description"
                 name="title-content"
                 id={`title-content-${team.id}`}
-                value={state.description.value}
+                value={description.value}
                 onChangeCallback={(e) => setDesc(e.target.value)}
               />
               <Button
                 type="submit"
-                disabled={validateTeamName() || validateDesc()}
+                disabled={!!validateTeamName() || !!validateDesc()}
                 onClickCallback={(e) => {
                   e.preventDefault();
-                  handleUpdateTeam(
-                    state.team_name.value,
-                    state.description.value,
-                    team.id
-                  );
+                  handleUpdateTeam(teamName.value, description.value, team.id);
                 }}
               >
                 Save Team Details <i className="fas fa-save"></i>
               </Button>
             </form>
             <div className={styles['export-team']}>
-              {state.copySuccess ? (
+              {copySuccess ? (
                 <div className={styles['copied']}>Copied to Clipboard!!</div>
               ) : null}
               <div>
@@ -300,7 +275,7 @@ const TeamEdit: React.FC<Props> = ({ team, id }): JSX.Element => {
             >
               <i className="fas fa-trash-alt"></i> Delete Team!
             </Button>
-            {state.deleteClicked ? renderDeleteExpand() : null}
+            {deleteClicked ? renderDeleteExpand() : null}
           </div>
         </div>
         {SetList}
@@ -314,8 +289,11 @@ const TeamEdit: React.FC<Props> = ({ team, id }): JSX.Element => {
         <Image
           key={i}
           imageClass={styles['tiny-icon']}
-          src={legality.returnIconSprite(set.species, set.shiny)}
-          alt={set.species}
+          src={legality.returnIconSprite(
+            set?.species || '',
+            set?.shiny || false
+          )}
+          alt={set?.species || ''}
         />
       );
     });
@@ -349,7 +327,7 @@ const TeamEdit: React.FC<Props> = ({ team, id }): JSX.Element => {
 
   return (
     <Fragment>
-      {state.teamExpandToggle ? renderUnexpandedTeam() : renderExpandedTeam()}
+      {teamExpandToggle ? renderUnexpandedTeam() : renderExpandedTeam()}
     </Fragment>
   );
 };

@@ -1,4 +1,10 @@
-import React, { Fragment, useContext, useState } from 'react';
+import React, {
+  Fragment,
+  useContext,
+  useState,
+  useRef,
+  FunctionComponent,
+} from 'react';
 import { Link } from 'react-router-dom';
 import Input from '../Input/Input';
 import TextArea from '../TextArea/TextArea';
@@ -11,51 +17,48 @@ import legality from '../../functions/legality';
 import styles from './Team-Public.module.scss';
 import { PokemonTeam, PokemonSet } from '../../@types';
 
-export type Props = {
+export type TeamPublicProps = {
   /** pokemon team */
   team: PokemonTeam;
   /** id */
   id: string;
 };
 
-const TeamPublic: React.FC<Props> = ({ team, id }): JSX.Element => {
-  const GenCon = useContext(GeneralContext);
+const TeamPublic: FunctionComponent<TeamPublicProps> = ({
+  team,
+  id,
+}): JSX.Element => {
+  const { publicSets } = useContext(GeneralContext);
 
-  const [state, setState] = useState({
-    teamExpandToggle: true,
-    copySuccess: false,
-  });
+  const [teamExpandToggle, setTeamExpandToggle] = useState(true);
+  const [copySuccess, setCopySuccess] = useState(false);
 
   const handleTeamToggle = () => {
-    setState((oldVals) => ({
-      ...oldVals,
-      teamExpandToggle: !state.teamExpandToggle,
-    }));
+    setTeamExpandToggle(!teamExpandToggle);
   };
 
-  const removeCopySuccess = (): any => {
-    setState((oldVals) => ({ ...oldVals, copySuccess: false }));
+  const removeCopySuccess = () => {
+    setCopySuccess(false);
   };
 
-  const textArea: any = React.useRef(null);
+  const textArea = useRef<HTMLTextAreaElement>(null);
 
-  const copyCodeToClipboard = (): any => {
-    textArea.current.select();
+  const copyCodeToClipboard = () => {
+    textArea.current!.select();
     document.execCommand('copy'); // this seems to not work
-    const text = textArea.current.defaultValue;
+    const text = textArea.current!.defaultValue;
     navigator.clipboard.writeText(text); // this seems to work!
-    setState((oldVals) => ({ ...oldVals, copySuccess: true }));
+    setCopySuccess(true);
   };
-
-  const { publicSets } = GenCon;
 
   const ps = [...new Set(publicSets.map((set: PokemonSet) => set.id))];
 
-  const newPS = ps.map((id) =>
-    publicSets.find((set: PokemonSet) => set.id === id)
+  const newPS = ps.map(
+    (id) =>
+      publicSets.find((set: PokemonSet) => set.id === id) || ({} as PokemonSet)
   );
 
-  const teamSets = newPS.filter((set: any) => set.team_id === team.id);
+  const teamSets = newPS.filter((set: PokemonSet) => set.team_id === team.id);
 
   const renderExpandedTeam = () => {
     const SetList = teamSets.map((set, i) => {
@@ -118,7 +121,7 @@ const TeamPublic: React.FC<Props> = ({ team, id }): JSX.Element => {
               />
             </form>
             <div className={styles['export-team']}>
-              {state.copySuccess ? (
+              {copySuccess ? (
                 <div className={styles['copied']}>Copied to Clipboard!!</div>
               ) : null}
               <div>
@@ -206,7 +209,7 @@ const TeamPublic: React.FC<Props> = ({ team, id }): JSX.Element => {
 
   return (
     <Fragment>
-      {state.teamExpandToggle ? renderUnexpandedTeam() : renderExpandedTeam()}
+      {teamExpandToggle ? renderUnexpandedTeam() : renderExpandedTeam()}
     </Fragment>
   );
 };

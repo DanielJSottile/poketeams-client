@@ -1,5 +1,4 @@
-import * as React from 'react';
-import { useState, useEffect } from 'react';
+import React, { FunctionComponent, useState, useEffect } from 'react';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import SetPublic from '../../components/Set-Public/Set-Public';
 import apiService from '../../services/apiService';
@@ -15,7 +14,7 @@ export interface Provider {
   set: object[];
 }
 
-const ShareSetPage: React.FC<RouteComponentProps<MatchParams>> = ({
+const ShareSetPage: FunctionComponent<RouteComponentProps<MatchParams>> = ({
   match,
 }): JSX.Element => {
   const [set, setPokemonSet] = useState([] as PokemonSet[]);

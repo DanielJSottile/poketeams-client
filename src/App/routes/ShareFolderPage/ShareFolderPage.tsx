@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, FunctionComponent } from 'react';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import FolderPublicShare from '../../components/Folder-Public-Share/Folder-Public-Share';
 import * as array from 'lodash';
@@ -8,7 +8,7 @@ import { PokemonFolder, PokemonTeam, PokemonSet } from '../../@types';
 
 export type MatchParams = { folder_id: string };
 
-const ShareFolderPage: React.FC<RouteComponentProps<MatchParams>> = ({
+const ShareFolderPage: FunctionComponent<RouteComponentProps<MatchParams>> = ({
   match,
 }): JSX.Element => {
   const [folder, setFolder] = useState([] as PokemonFolder[]);
@@ -23,22 +23,24 @@ const ShareFolderPage: React.FC<RouteComponentProps<MatchParams>> = ({
         setFolder([data]);
       })
       .then(() => {
-        apiService.getTeamsForOneFolder(Number(id)).then((data: any) => {
-          setTeams(data);
+        apiService
+          .getTeamsForOneFolder(Number(id))
+          .then((data: PokemonTeam[]) => {
+            setTeams(data);
 
-          /* Much like adding teams and folders via import, we have to 
+            /* Much like adding teams and folders via import, we have to 
               go through the teams and add their sets.  This can be done via
               a Promise Array. */
 
-          const promiseArray = data.map((team: any) => {
-            return apiService.getSetsForOneTeam(team.id);
-          });
+            const promiseArray = data.map((team: PokemonTeam) => {
+              return apiService.getSetsForOneTeam(team.id);
+            });
 
-          Promise.all(promiseArray).then((values: any) => {
-            const merged: PokemonSet[] = array.flattenDeep(values);
-            setSets(merged);
+            Promise.all(promiseArray).then((values: PokemonSet[][]) => {
+              const merged: PokemonSet[] = array.flattenDeep(values);
+              setSets(merged);
+            });
           });
-        });
       });
   }, [match.params.folder_id]);
 

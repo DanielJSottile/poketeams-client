@@ -1,13 +1,16 @@
 import React, { LazyExoticComponent, FunctionComponent } from 'react';
-import { Route, Redirect } from 'react-router-dom';
+import { Route, Redirect, RouteComponentProps } from 'react-router-dom';
+import { StaticContext } from 'react-router';
 import TokenService from '../../services/token-service';
 
 export interface PrivateRouteProps {
-  component: LazyExoticComponent<FunctionComponent<any>>;
+  component: LazyExoticComponent<
+    FunctionComponent<RouteComponentProps<{}, StaticContext, unknown>>
+  >;
   path: string;
 }
 
-const PrivateRoute: React.FC<PrivateRouteProps> = ({
+const PrivateRoute: FunctionComponent<PrivateRouteProps> = ({
   component,
   ...props
 }): JSX.Element => {

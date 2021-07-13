@@ -150,7 +150,7 @@ const LEGALITY = {
     }
   },
 
-  findSpecies(species: string): any {
+  findSpecies(species: string) {
     if (this.isLegalSpecies(species)) {
       return POKEMON.get(this.removeWhiteSpaceHyphen(species));
     }
@@ -165,7 +165,7 @@ const LEGALITY = {
     return types;
   },
 
-  returnGenderStatus(species: string): any {
+  returnGenderStatus(species: string): boolean | string {
     if (this.isLegalSpecies(species)) {
       let pokemon = this.findSpecies(species);
       if (Object.keys(pokemon)?.includes('genderLock')) {
@@ -173,6 +173,7 @@ const LEGALITY = {
       }
       return false;
     }
+    return false;
   },
 
   // These two functions in tandem return valid icon sprites based off of Pokemon Showdown's sprite index.

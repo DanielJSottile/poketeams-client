@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useRef, FunctionComponent } from 'react';
 import { Link } from 'react-router-dom';
 import Input from '../Input/Input';
 import TextArea from '../TextArea/TextArea';
@@ -9,36 +9,31 @@ import legality from '../../functions/legality';
 import styles from './Set-Public.module.scss';
 import { PokemonSet } from '../../@types';
 
-export type Props = {
+export type SetPublicProps = {
   /** Pokemon Set */
   set: PokemonSet;
 };
 
-const SetPublic: React.FC<Props> = ({ set }): JSX.Element => {
-  const [state, setState] = useState({
-    setExpandToggle: true,
-    copySuccess: false,
-  });
+const SetPublic: FunctionComponent<SetPublicProps> = ({ set }): JSX.Element => {
+  const [expandToggle, setExpandToggle] = useState(false);
+  const [copySuccess, setCopySuccess] = useState(false);
 
   const handleSetToggle = () => {
-    setState((oldVals) => ({
-      ...oldVals,
-      setExpandToggle: !state.setExpandToggle,
-    }));
+    setExpandToggle(!expandToggle);
   };
 
-  const removeCopySuccess = (): any => {
-    setState((oldVals) => ({ ...oldVals, copySuccess: false }));
+  const removeCopySuccess = () => {
+    setCopySuccess(false);
   };
 
-  const textArea: any = React.useRef(null);
+  const textArea = useRef<HTMLTextAreaElement>(null);
 
-  const copyCodeToClipboard = (): any => {
-    textArea.current.select();
+  const copyCodeToClipboard = () => {
+    textArea.current!.select();
     document.execCommand('copy'); // this seems to not work
-    const text = textArea.current.defaultValue;
+    const text = textArea.current!.defaultValue;
     navigator.clipboard.writeText(text); // this seems to work!
-    setState((oldVals) => ({ ...oldVals, copySuccess: true }));
+    setCopySuccess(true);
   };
 
   const renderExpandedSet = () => {
@@ -114,7 +109,7 @@ const SetPublic: React.FC<Props> = ({ set }): JSX.Element => {
                 <div className={styles['type-icons']}>
                   {legality
                     .returnTypeIcon(legality.returnType(set.species))
-                    .map((type: any, i: number) => {
+                    .map((type: string, i: number) => {
                       return (
                         <Image
                           imageClass={styles['type-img']}
@@ -429,7 +424,7 @@ const SetPublic: React.FC<Props> = ({ set }): JSX.Element => {
         </form>
 
         <div className={styles['export-pokemon']}>
-          {state.copySuccess ? (
+          {copySuccess ? (
             <div className={styles['copied']}>Copied to Clipboard!!</div>
           ) : null}
           <div>
@@ -477,7 +472,7 @@ const SetPublic: React.FC<Props> = ({ set }): JSX.Element => {
   const renderUnexpandedSet = () => {
     const types = legality
       .returnTypeIcon(legality.returnType(set.species))
-      .map((type: any, i: number) => {
+      .map((type: string, i: number) => {
         return (
           <Image
             imageClass={styles['icon']}
@@ -511,7 +506,7 @@ const SetPublic: React.FC<Props> = ({ set }): JSX.Element => {
 
   return (
     <Fragment>
-      {state.setExpandToggle ? renderUnexpandedSet() : renderExpandedSet()}
+      {expandToggle ? renderUnexpandedSet() : renderExpandedSet()}
     </Fragment>
   );
 };

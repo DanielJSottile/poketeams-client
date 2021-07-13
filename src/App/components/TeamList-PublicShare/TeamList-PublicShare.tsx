@@ -1,24 +1,27 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, FunctionComponent } from 'react';
 import TeamPublicShare from '../Team-Public-Share/Team-Public-Share';
 import PokeballLoader from '../Loaders/PokeballLoader/PokeballLoader';
 import LoadingBlack from '../Loaders/LoadingBlack/LoadingBlack';
 import styles from './TeamList-PublicShare.module.scss';
 import { PokemonTeam, PokemonSet } from '../../@types';
 
-export type Props = {
+export type TeamListPublicShareProps = {
   /** List of Pokemon Teams */
   teams: PokemonTeam[] | undefined;
   /** List of Pokemon Sets */
-  sets: PokemonSet[] | undefined;
+  sets: PokemonSet[];
 };
 
-const TeamListPublicShare: React.FC<Props> = ({ teams, sets }): JSX.Element => {
+const TeamListPublicShare: FunctionComponent<TeamListPublicShareProps> = ({
+  teams,
+  sets,
+}): JSX.Element => {
   let TeamList: JSX.Element[] = [];
 
   if (teams) {
     TeamList = teams?.map((team: PokemonTeam, i: number) => {
-      const teamSets = sets?.filter((set: any) => {
-        return set.team_name === team.team_name;
+      const teamSets = sets?.filter((set: PokemonSet) => {
+        return set.team_id === team.id;
       });
 
       return (

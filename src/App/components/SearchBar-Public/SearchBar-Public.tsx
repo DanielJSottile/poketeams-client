@@ -1,14 +1,12 @@
-import React, { useContext } from 'react';
+import React, { useContext, FunctionComponent } from 'react';
 import GeneralContext from '../../contexts/GeneralContext';
 import Input from '../Input/Input';
 import Button from '../Button/Button';
 import styles from './SearchBar-Public.module.scss';
 
-const SearchBarPublic: React.FC = () => {
-  const GenCon = useContext(GeneralContext);
-
+const SearchBarPublic: FunctionComponent = () => {
   const { handleSearch, validateSearch, search, sort, setSearch, setSort } =
-    GenCon;
+    useContext(GeneralContext);
 
   return (
     <div className={styles['searchbar']}>
@@ -23,7 +21,9 @@ const SearchBarPublic: React.FC = () => {
             labelIcon={<i className="fas fa-search"></i>}
             placeholder="e.g. Pikachu"
             value={search.value}
-            onChangeCallback={(e) => setSearch(e.target.value)}
+            onChangeCallback={(e) =>
+              setSearch({ value: e.target.value, touched: true })
+            }
             type="text"
             name="search"
             id="search"
@@ -35,7 +35,7 @@ const SearchBarPublic: React.FC = () => {
             name="sort"
             id="sort"
             value={sort.value}
-            onChange={(e) => setSort(e.target.value)}
+            onChange={(e) => setSort({ value: e.target.value, touched: true })}
           >
             <option value="newest">Newest</option>
             <option value="oldest">Oldest</option>
@@ -44,9 +44,7 @@ const SearchBarPublic: React.FC = () => {
           </select>
           <Button
             type="submit"
-            onClickCallback={(
-              e: React.MouseEvent<HTMLButtonElement, MouseEvent>
-            ) => {
+            onClickCallback={(e) => {
               handleSearch(e);
             }}
           >

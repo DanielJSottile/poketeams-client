@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { StrictMode } from 'react';
 import * as ReactDOM from 'react-dom';
 import App from './App/App';
 import * as serviceWorker from './serviceWorker';
@@ -8,13 +8,13 @@ import './index.scss';
 
 const rootNode: HTMLElement | null = document.getElementById('root');
 ReactDOM.render(
-  <React.StrictMode>
+  <StrictMode>
     <BrowserRouter>
       <GeneralProvider>
         <App />
       </GeneralProvider>
     </BrowserRouter>
-  </React.StrictMode>,
+  </StrictMode>,
   rootNode
 );
 

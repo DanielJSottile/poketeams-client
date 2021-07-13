@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { FunctionComponent, ChangeEvent } from 'react';
 
-type Props = {
+type InputProps = {
   /** class for input container */
   containerClass?: string;
   /** id for the form the input lives in */
@@ -24,7 +24,7 @@ type Props = {
   /** placeholder string */
   placeholder?: string;
   /** function used for onChange for the input */
-  onChangeCallback?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangeCallback?: (e: ChangeEvent<HTMLInputElement>) => void;
   /** string of input type */
   type?: string;
   /** string of input name for form*/
@@ -47,7 +47,7 @@ type Props = {
   disabled?: boolean;
 };
 
-const Input: React.FC<Props> = ({
+const Input: FunctionComponent<InputProps> = ({
   containerClass = '',
   htmlFor = '',
   labelClass = '',
@@ -56,18 +56,18 @@ const Input: React.FC<Props> = ({
   inputHasError = false,
   isError = false,
   validationCallback = () => null,
-  inputClass = '',
+  inputClass,
   value = '',
-  placeholder = '',
+  placeholder,
   onChangeCallback = () => null,
   type = '',
   name = '',
   id = '',
   readOnly = false,
   checked = false,
-  min = 0,
-  max = 0,
-  autoComplete = '',
+  min,
+  max,
+  autoComplete,
   required = false,
   disabled = false,
 }) => {

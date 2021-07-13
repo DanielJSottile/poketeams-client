@@ -1,28 +1,29 @@
-import React, { Fragment, useContext } from 'react';
+import React, { Fragment, useContext, FunctionComponent } from 'react';
 import GeneralContext from '../../contexts/GeneralContext';
 import Input from '../Input/Input';
 import TextArea from '../TextArea/TextArea';
 import Button from '../Button/Button';
 import styles from './AddTeamSection.module.scss';
 
-const AddTeamSection: React.FC = () => {
-  const GenCon = useContext(GeneralContext);
+const AddTeamSection: FunctionComponent = () => {
+  const {
+    newTeamName,
+    newTeamImport,
+    setNewTeamName,
+    setNewTeamImport,
+    handlePostNewTeam,
+    desc,
+    validateDesc,
+    setDesc,
+    validateNewTeamName,
+    validateNewTeamImport,
+    validateCurrentFolderClicked,
+    teamAddClicked,
+    currentClickedFolder,
+    setTeamAddClicked,
+  } = useContext(GeneralContext);
 
   const renderExpanded = () => {
-    const {
-      newTeamName,
-      newTeamImport,
-      setNewTeamName,
-      setNewTeamContents,
-      handlePostNewTeam,
-      desc,
-      validateDesc,
-      setDesc,
-      validateNewTeamName,
-      validateNewTeamImport,
-      validateCurrentFolderClicked,
-    } = GenCon;
-
     return (
       <form>
         <Input
@@ -30,47 +31,54 @@ const AddTeamSection: React.FC = () => {
           containerClass={styles['team-name']}
           htmlFor="foldername"
           label="Team Name:"
-          validationCallback={validateNewTeamName()}
+          validationCallback={() => validateNewTeamName()}
           placeholder="e.g. My Cool Team"
           type="text"
           name="teamname"
           id="teamname"
           value={newTeamName.value}
-          onChangeCallback={(e) => setNewTeamName(e.target.value)}
+          onChangeCallback={(e) =>
+            setNewTeamName({ value: e.target.value, touched: true })
+          }
         />
         <TextArea
           containerClass={styles['team-import']}
           textAreaHasError
           htmlFor="title-content"
           label={'Description:'}
-          validationCallback={validateDesc()}
+          validationCallback={() => validateDesc()}
           placeholder="e.g. description"
           name="title-content"
           id="title-content"
           value={desc.value}
-          onChangeCallback={(e) => setDesc(e.target.value)}
+          onChangeCallback={(e) =>
+            setDesc({ value: e.target.value, touched: true })
+          }
         />
         <TextArea
           containerClass={styles['team-import']}
           textAreaHasError
           isError={!!newTeamImport.value}
           htmlFor="team-import"
-          label={'Description:'}
-          validationCallback={validateNewTeamImport()}
+          label={'Import Showdown Team: '}
+          labelIcon={<i className="fas fa-upload"></i>}
+          validationCallback={() => validateNewTeamImport()}
           placeholder="Optionally Import a proper Pokemon Showdown Team Here And It Will Fill Out Your Whole Team!"
           name="team-import"
           id="team-import-1"
           value={newTeamImport.value}
-          onChangeCallback={(e) => setNewTeamContents(e.target.value)}
+          onChangeCallback={(e) =>
+            setNewTeamImport({ value: e.target.value, touched: true })
+          }
         />
         <Button
           type="submit"
           buttonClass={styles['submit']}
           disabled={
-            validateNewTeamName() ||
-            validateNewTeamImport() ||
-            validateDesc() ||
-            validateCurrentFolderClicked()
+            !!validateNewTeamName() ||
+            !!validateNewTeamImport() ||
+            !!validateDesc() ||
+            !!validateCurrentFolderClicked()
           }
           onClickCallback={(e) => {
             e.preventDefault();
@@ -83,15 +91,12 @@ const AddTeamSection: React.FC = () => {
     );
   };
 
-  const { teamAddClicked, currentClickedFolder, handleTeamAddClickExpand } =
-    GenCon;
-
   return (
     <Fragment>
       <section className={styles['folders-list']}>
         <div>
           {currentClickedFolder.value ? (
-            <Button onClickCallback={() => handleTeamAddClickExpand()}>
+            <Button onClickCallback={() => setTeamAddClicked(!teamAddClicked)}>
               New Team <i className="far fa-plus-square"></i>
             </Button>
           ) : (

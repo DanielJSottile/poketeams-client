@@ -1,4 +1,10 @@
-import React, { Fragment, useContext, useState } from 'react';
+import React, {
+  Fragment,
+  useContext,
+  useState,
+  useRef,
+  FunctionComponent,
+} from 'react';
 import { Link } from 'react-router-dom';
 import Folder from '../Folder/Folder';
 import Input from '../Input/Input';
@@ -9,39 +15,52 @@ import LoadingBlack from '../Loaders/LoadingBlack/LoadingBlack';
 import GeneralContext from '../../contexts/GeneralContext';
 import showdownFolderGenerate from '../../functions/generateFolder';
 import styles from './FoldersList.module.scss';
+import { PokemonFolder } from '../../@types';
 
-const FoldersList: React.FC = () => {
-  const GenCon = useContext(GeneralContext);
+const FoldersList: FunctionComponent = () => {
+  const {
+    userFolders,
+    userTeams,
+    userSets,
+    folderAddClicked,
+    currentClickedFolder,
+    setFolderAddClicked,
+    newFolderName,
+    newFolderImport,
+    validateNewFolderImport,
+    setNewFolderImport,
+    handlePostNewFolder,
+    setNewFolderName,
+    handleEditFolder,
+    validateNewFolderName,
+    setCurrentClickedFolder,
+    handleDeleteFolder,
+  } = useContext(GeneralContext);
 
-  const [state, setState] = useState({
-    editClicked: false,
-    deleteClicked: false,
-    copySuccess: false,
-  });
+  const [editClicked, setEditClicked] = useState(false);
+  const [deleteClicked, setDeleteClicked] = useState(false);
+  const [copySuccess, setCopySuccess] = useState(false);
 
   const handleEditExpand = () => {
-    setState((oldVals) => ({ ...oldVals, editClicked: !state.editClicked }));
+    setEditClicked(!editClicked);
   };
 
   const handleDeleteExpand = () => {
-    setState((oldVals) => ({
-      ...oldVals,
-      deleteClicked: !state.deleteClicked,
-    }));
+    setDeleteClicked(!deleteClicked);
   };
 
-  const removeCopySuccess = (): any => {
-    setState((oldVals) => ({ ...oldVals, copySuccess: false }));
+  const removeCopySuccess = () => {
+    setCopySuccess(false);
   };
 
-  const textArea: any = React.useRef(null);
+  const textArea = useRef<HTMLTextAreaElement>(null);
 
-  const copyCodeToClipboard = (): any => {
-    textArea.current.select();
+  const copyCodeToClipboard = () => {
+    textArea.current!.select();
     document.execCommand('copy'); // this seems to not work
-    const text = textArea.current.defaultValue;
+    const text = textArea.current!.defaultValue;
     navigator.clipboard.writeText(text); // this seems to work!
-    setState((oldVals) => ({ ...oldVals, copySuccess: true }));
+    setCopySuccess(true);
   };
 
   /* --------------------- */
@@ -49,40 +68,21 @@ const FoldersList: React.FC = () => {
   /* Set Up Common Definitions to be 
   Used in Different views */
 
-  const {
-    userFolders,
-    userTeams,
-    userSets,
-    folderAddClicked,
-    currentClickedFolder,
-    handleFolderAddClickExpand,
-  } = GenCon;
-
-  const folderList = userFolders.map((folder: any, i) => {
+  const folderList = userFolders.map((folder: PokemonFolder, i) => {
     return <Folder key={i} id={folder.id} folder_name={folder.folder_name} />;
   });
 
   const folderTeams = userTeams.filter(
-    (team) => team.folder_id === currentClickedFolder.id
+    (team) => team.folder_id === Number(currentClickedFolder.id)
   );
 
   const input = folderTeams.map((team) => {
     const teamSets = userSets.filter((set) => set.team_id === team.id);
-    const teamName: any = team.team_name;
+    const teamName: string = team.team_name;
     return { [teamName]: teamSets };
   });
 
   const renderExpanded = (): JSX.Element => {
-    const {
-      newFolderName,
-      newFolderImport,
-      validateNewFolderImport,
-      setNewFolderContents,
-      setNewFolderName,
-      handlePostNewFolder,
-      validateNewFolderName,
-    } = GenCon;
-
     return (
       <form>
         <div>
@@ -90,32 +90,36 @@ const FoldersList: React.FC = () => {
             inputHasError
             htmlFor="foldername"
             label="Folder Name:"
-            validationCallback={validateNewFolderName()}
+            validationCallback={() => validateNewFolderName()}
             placeholder="e.g. Good Teams"
             type="text"
             name="foldername"
             id="foldername"
             value={newFolderName.value}
-            onChangeCallback={(e) => setNewFolderName(e.target.value)}
+            onChangeCallback={(e) =>
+              setNewFolderName({ value: e.target.value, touched: true })
+            }
           />
           <TextArea
             containerClass={styles['folder-import']}
             textAreaHasError
             isError={!!newFolderImport.value}
-            validationCallback={validateNewFolderImport()}
+            validationCallback={() => validateNewFolderImport()}
             htmlFor="folder-import"
             label="Import Showdown Folder:"
             placeholder="Optionally Import a proper Pokemon Showdown Folder Here And It Will Fill Out The Entire Folder!"
             name="folder-import"
             id="team-import-1"
             value={newFolderImport.value}
-            onChangeCallback={(e) => setNewFolderContents(e.target.value)}
+            onChangeCallback={(e) =>
+              setNewFolderImport({ value: e.target.value, touched: true })
+            }
           />
         </div>
         <Button
           type="submit"
           buttonClass={styles['submit']}
-          disabled={validateNewFolderName() || validateNewFolderImport()}
+          disabled={!!validateNewFolderName() || !!validateNewFolderImport()}
           onClickCallback={(e) => {
             e.preventDefault();
             handlePostNewFolder();
@@ -128,41 +132,35 @@ const FoldersList: React.FC = () => {
   };
 
   const renderEditExpand = (): JSX.Element => {
-    const {
-      newFolderName,
-      setNewFolderName,
-      handleEditFolder,
-      validateNewFolderName,
-      handleCurrentFolderClicked,
-      currentClickedFolder,
-    } = GenCon;
-
     return (
       <form>
         <Input
           inputHasError
           htmlFor="foldername"
           label="Edit Folder Name:"
-          validationCallback={validateNewFolderName()}
+          validationCallback={() => validateNewFolderName()}
           placeholder="e.g. Good Teams"
           type="text"
           name="foldername"
           id="foldername"
           value={newFolderName.value}
-          onChangeCallback={(e) => setNewFolderName(e.target.value)}
+          onChangeCallback={(e) =>
+            setNewFolderName({ value: e.target.value, touched: true })
+          }
         />
         <Button
           type="submit"
           buttonClass={styles['submit']}
-          disabled={validateNewFolderName()}
+          disabled={!!validateNewFolderName()}
           onClickCallback={(e) => {
             e.preventDefault();
             handleEditFolder();
             handleEditExpand();
-            handleCurrentFolderClicked(
-              newFolderName.value,
-              currentClickedFolder.id
-            );
+            setCurrentClickedFolder({
+              value: newFolderName.value,
+              id: currentClickedFolder.id,
+              touched: true,
+            });
           }}
         >
           Submit <i className="far fa-check-circle"></i>
@@ -172,8 +170,6 @@ const FoldersList: React.FC = () => {
   };
 
   const renderDeleteExpand = (): JSX.Element => {
-    const { handleDeleteFolder } = GenCon;
-
     return (
       <div>
         <p>Are You Sure You'd Like to Delete this Folder?</p>
@@ -210,7 +206,9 @@ const FoldersList: React.FC = () => {
           )}
         </div>
         <div>
-          <Button onClickCallback={() => handleFolderAddClickExpand()}>
+          <Button
+            onClickCallback={() => setFolderAddClicked(!folderAddClicked)}
+          >
             New Folder <i className="fas fa-folder-plus"></i>
           </Button>
           {folderAddClicked ? renderExpanded() : null}
@@ -220,7 +218,7 @@ const FoldersList: React.FC = () => {
           {currentClickedFolder.value ? (
             <div>
               <div className={styles['export-team']}>
-                {state.copySuccess ? (
+                {copySuccess ? (
                   <div className={styles['copied']}>Copied to Clipboard!!</div>
                 ) : null}
                 <div>
@@ -280,8 +278,8 @@ const FoldersList: React.FC = () => {
           ) : null}
         </div>
         <div>
-          {state.editClicked ? renderEditExpand() : null}
-          {state.deleteClicked ? renderDeleteExpand() : null}
+          {editClicked && renderEditExpand()}
+          {deleteClicked && renderDeleteExpand()}
         </div>
       </section>
     </Fragment>

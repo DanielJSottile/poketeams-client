@@ -1,4 +1,9 @@
-import React from 'react';
+import React, {
+  ChangeEvent,
+  ForwardRefExoticComponent,
+  RefAttributes,
+  forwardRef,
+} from 'react';
 
 type Props = {
   /** class for text area container */
@@ -24,7 +29,7 @@ type Props = {
   /** placeholder string */
   placeholder?: string;
   /** function used for onChange for the text area */
-  onChangeCallback?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  onChangeCallback?: (e: ChangeEvent<HTMLTextAreaElement>) => void;
   /** string of text area name for form*/
   name?: string;
   /** string of text area id */
@@ -39,9 +44,9 @@ type Props = {
   disabled?: boolean;
 };
 
-const TextArea: React.ForwardRefExoticComponent<
-  Props & React.RefAttributes<HTMLTextAreaElement>
-> = React.forwardRef<HTMLTextAreaElement, Props>(
+const TextArea: ForwardRefExoticComponent<
+  Props & RefAttributes<HTMLTextAreaElement>
+> = forwardRef<HTMLTextAreaElement, Props>(
   (
     {
       containerClass = '',

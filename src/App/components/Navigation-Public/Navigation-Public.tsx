@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, FunctionComponent } from 'react';
 import { Link } from 'react-router-dom';
 import SearchBar from '../SearchBar-Public/SearchBar-Public';
 import GeneralContext from '../../contexts/GeneralContext';
@@ -7,15 +7,15 @@ import TokenService from '../../services/token-service';
 import styles from './Navigation-Public.module.scss';
 
 interface MyToken {
-  sub: any;
+  sub: string;
 }
 
-const NavigationPublic: React.FC = () => {
-  const GenCon = useContext(GeneralContext);
+const NavigationPublic: FunctionComponent = () => {
+  const { clearUserState } = useContext(GeneralContext);
 
   const handleLogoutClick = () => {
     TokenService.clearAuthToken();
-    GenCon.clearUserState();
+    clearUserState();
   };
 
   const renderLogout = () => {

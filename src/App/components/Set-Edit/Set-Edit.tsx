@@ -1,4 +1,10 @@
-import React, { Fragment, useContext, useState } from 'react';
+import React, {
+  Fragment,
+  useContext,
+  useState,
+  useRef,
+  FunctionComponent,
+} from 'react';
 import { Link } from 'react-router-dom';
 import Input from '../Input/Input';
 import TextArea from '../TextArea/TextArea';
@@ -27,15 +33,15 @@ export interface BoolInput {
   touched: boolean;
 }
 
-type Props = {
+type SetEditProps = {
   /** Pokemon Set */
-  set?: PokemonSet;
+  set: PokemonSet;
 };
 
-const SetEdit: React.FC<Props> = ({ set }) => {
+const SetEdit: FunctionComponent<SetEditProps> = ({ set }) => {
   const {
     newSetImport,
-    setNewSetContents,
+    setNewSetImport,
     validateNewSetImport,
     handleUpdateSetImport,
     handleUpdateSet,
@@ -137,7 +143,7 @@ const SetEdit: React.FC<Props> = ({ set }) => {
   const [deleteClicked, setDeleteClicked] = useState(false);
   const [copySuccess, setCopySuccess] = useState(false);
 
-  const setFields = (setImport: any) => {
+  const setFields = (setImport: string) => {
     const parse = showdownParse(setImport)[0];
 
     setNickname({ value: parse.nickname || '', touched: false });
@@ -168,57 +174,64 @@ const SetEdit: React.FC<Props> = ({ set }) => {
     setDeleteClicked(false);
   };
 
-  const textArea: any = React.useRef(null);
+  const textArea = useRef<HTMLTextAreaElement>(null);
 
-  const copyCodeToClipboard = (): any => {
-    textArea.current.select();
+  const copyCodeToClipboard = () => {
+    textArea.current!.select();
     document.execCommand('copy'); // this seems to not work
-    const text = textArea.current.defaultValue;
+    const text = textArea.current!.defaultValue;
     navigator.clipboard.writeText(text); // this seems to work!
     setCopySuccess(true);
   };
 
-  const validateNickname = (): any => {
+  const validateNickname = (): string | boolean => {
     // TODO: check against Legal Nintendo filter!
     if (typeof nickname.value !== 'string') {
       return `This is just superflous it should never come up.`;
     }
+    return false;
   };
 
-  const validateItem = (): any => {
+  const validateItem = (): string | boolean => {
     // TODO: check against list of Items!
     if (typeof item.value !== 'string') {
       return `This is just superflous it should never come up.`;
     }
+    return false;
   };
 
-  const validateAbility = (): any => {
+  const validateAbility = (): string | boolean => {
     // TODO: check against list of Abilities!
     if (typeof ability.value !== 'string') {
       return `This is just superflous it should never come up.`;
     }
+    return false;
   };
 
-  const validateNature = (): any => {
+  const validateNature = (): string | boolean => {
     // TODO: check against list of Natures!
     if (typeof nature.value !== 'string') {
       return `This is just superflous it should never come up.`;
     }
+    return false;
   };
 
-  const validateShiny = (): any => {
+  const validateShiny = (): string | boolean => {
     if (typeof shiny.value !== 'boolean') {
       return `This is just superflous it should never come up.`;
     }
+    return false;
   };
 
-  const validateSpecies = (): any => {
+  const validateSpecies = (): string | boolean => {
     if (!legality.isLegalSpecies(species.value.toString())) {
       return `Must be an 'existing' Pokemon species or form styled via '[species]-[form]'!`;
     }
+
+    return false;
   };
 
-  const validateGender = (): any => {
+  const validateGender = (): string | boolean => {
     if (legality.returnGenderStatus(species.value)) {
       if (
         gender.value.toString().trim() !==
@@ -229,23 +242,26 @@ const SetEdit: React.FC<Props> = ({ set }) => {
         )}'.`;
       }
     }
+    return false;
   };
 
-  const validateLevel = (): any => {
+  const validateLevel = (): string | boolean => {
     // TODO: Integrate custom level flag
     if (Number(level.value) > 100 || Number(level.value) < 1) {
       return `Level must be between 1 and 100`;
     }
+    return false;
   };
 
-  const validateHappiness = (): any => {
+  const validateHappiness = (): string | boolean => {
     if (Number(happiness.value) > 255 || Number(happiness.value) < 0) {
       return `Hapiness must be between 0 and 255`;
     }
+
+    return false;
   };
 
-  const validateEvs = () => {
-    let flag;
+  const validateEvs = (): string | boolean => {
     const evArr = [
       Number(hpEv.value),
       Number(atkEv.value),
@@ -260,14 +276,13 @@ const SetEdit: React.FC<Props> = ({ set }) => {
 
     evArr.forEach((ev) => {
       if (ev > 252 || ev < 0) {
-        flag = `EV's must be set from 0 to 255`;
+        return `EV's must be set from 0 to 255`;
       }
     });
-    return flag;
+    return false;
   };
 
   const validateIvs = () => {
-    let flag;
     const ivArr = [
       Number(hpIv.value),
       Number(atkIv.value),
@@ -279,13 +294,13 @@ const SetEdit: React.FC<Props> = ({ set }) => {
 
     ivArr.forEach((iv) => {
       if (iv > 31 || iv < 0) {
-        flag = `IV's must be set from 0 to 31`;
+        return `IV's must be set from 0 to 31`;
       }
     });
-    return flag;
+    return false;
   };
 
-  const validateMoves = (): any => {
+  const validateMoves = (): string | boolean => {
     if (!moveOne) {
       return `Pokemon must have at least ONE move; make sure it is in the top input box.`;
     }
@@ -298,6 +313,7 @@ const SetEdit: React.FC<Props> = ({ set }) => {
     ) {
       return `This is just superflous it should never come up.`;
     }
+    return false;
   };
 
   const renderExpandedSet = () => {
@@ -322,11 +338,13 @@ const SetEdit: React.FC<Props> = ({ set }) => {
               name="pokemon-import"
               id={`pokemon-import-${set?.id}`}
               value={newSetImport.value}
-              onChangeCallback={(e) => setNewSetContents(e.target.value)}
+              onChangeCallback={(e) =>
+                setNewSetImport({ value: e.target.value, touched: true })
+              }
             />
             <Button
               type="submit"
-              disabled={validateNewSetImport()}
+              disabled={!!validateNewSetImport()}
               onClickCallback={(e) => {
                 e.preventDefault();
                 handleUpdateSetImport(Number(set?.id));
@@ -347,7 +365,7 @@ const SetEdit: React.FC<Props> = ({ set }) => {
                   htmlFor={'pokemon-name'}
                   label={'Species: '}
                   inputClass={styles['pokemon-name']}
-                  validationCallback={validateSpecies()}
+                  validationCallback={() => validateSpecies()}
                   onChangeCallback={(e) =>
                     setSpecies({ value: e.target.value, touched: true })
                   }
@@ -363,7 +381,7 @@ const SetEdit: React.FC<Props> = ({ set }) => {
                   htmlFor={'pokemon-nickname'}
                   label={'Nickname: (optional)'}
                   inputClass={styles['pokemon-name']}
-                  validationCallback={validateNickname()}
+                  validationCallback={() => validateNickname()}
                   onChangeCallback={(e) =>
                     setNickname({ value: e.target.value, touched: true })
                   }
@@ -378,7 +396,7 @@ const SetEdit: React.FC<Props> = ({ set }) => {
                   htmlFor={'pokemon-gender'}
                   label={'Gender: '}
                   inputClass={styles['pokemon-gender']}
-                  validationCallback={validateGender()}
+                  validationCallback={() => validateGender()}
                   onChangeCallback={(e) =>
                     setGender({ value: e.target.value, touched: true })
                   }
@@ -393,9 +411,9 @@ const SetEdit: React.FC<Props> = ({ set }) => {
                   isError={species.touched}
                   htmlFor={'shiny'}
                   label={'Shiny:'}
-                  validationCallback={validateShiny()}
+                  validationCallback={() => validateShiny()}
                   onChangeCallback={(e) =>
-                    setShiny({ value: !shiny, touched: true })
+                    setShiny({ value: e.currentTarget.checked, touched: true })
                   }
                   type="checkbox"
                   id="shiny-2"
@@ -413,7 +431,7 @@ const SetEdit: React.FC<Props> = ({ set }) => {
                 <div className={styles['type-icons']}>
                   {legality
                     .returnTypeIcon(legality.returnType(species.value))
-                    .map((type: any, i: number) => {
+                    .map((type: string, i: number) => {
                       return (
                         <Image
                           imageClass={styles['type-img']}
@@ -435,7 +453,7 @@ const SetEdit: React.FC<Props> = ({ set }) => {
                 htmlFor={'pokemon-level'}
                 label={'Level: '}
                 inputClass={styles['pokemon-level']}
-                validationCallback={validateLevel()}
+                validationCallback={() => validateLevel()}
                 onChangeCallback={(e) =>
                   setLevel({ value: Number(e.target.value), touched: true })
                 }
@@ -450,7 +468,7 @@ const SetEdit: React.FC<Props> = ({ set }) => {
                 htmlFor={'pokemon-item'}
                 label={'Item: (optional)'}
                 inputClass={styles['pokemon-item']}
-                validationCallback={validateItem()}
+                validationCallback={() => validateItem()}
                 onChangeCallback={(e) =>
                   setItem({ value: e.target.value, touched: true })
                 }
@@ -465,7 +483,7 @@ const SetEdit: React.FC<Props> = ({ set }) => {
                 htmlFor={'pokemon-ability'}
                 label={'Ability: (optional)'}
                 inputClass={styles['pokemon-ability']}
-                validationCallback={validateAbility()}
+                validationCallback={() => validateAbility()}
                 onChangeCallback={(e) =>
                   setAbility({ value: e.target.value, touched: true })
                 }
@@ -480,7 +498,7 @@ const SetEdit: React.FC<Props> = ({ set }) => {
                 htmlFor={'pokemon-nature'}
                 label={'Nature: (optional)'}
                 inputClass={styles['pokemon-nature']}
-                validationCallback={validateNature()}
+                validationCallback={() => validateNature()}
                 onChangeCallback={(e) =>
                   setNature({ value: e.target.value, touched: true })
                 }
@@ -496,7 +514,7 @@ const SetEdit: React.FC<Props> = ({ set }) => {
                 htmlFor={'pokemon-happiness'}
                 label={'Happiness:'}
                 inputClass={styles['pokemon-happiness']}
-                validationCallback={validateHappiness()}
+                validationCallback={() => validateHappiness()}
                 onChangeCallback={(e) =>
                   setHappiness({ value: Number(e.target.value), touched: true })
                 }
@@ -782,13 +800,13 @@ const SetEdit: React.FC<Props> = ({ set }) => {
             <Button
               type="submit"
               disabled={
-                validateSpecies() ||
-                validateGender() ||
-                validateLevel() ||
-                validateHappiness() ||
-                validateEvs() ||
-                validateIvs() ||
-                validateMoves()
+                !!validateSpecies() ||
+                !!validateGender() ||
+                !!validateLevel() ||
+                !!validateHappiness() ||
+                !!validateEvs() ||
+                !!validateIvs() ||
+                !!validateMoves()
               }
               onClickCallback={(e) => {
                 e.preventDefault();
@@ -886,7 +904,7 @@ const SetEdit: React.FC<Props> = ({ set }) => {
   const renderUnexpandedSet = () => {
     const types = legality
       .returnTypeIcon(legality.returnType(set?.species || ''))
-      .map((type: any, i: number) => {
+      .map((type: string, i: number) => {
         return (
           <Image
             imageClass={styles['icon']}
