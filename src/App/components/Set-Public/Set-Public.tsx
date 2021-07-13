@@ -9,12 +9,12 @@ import legality from '../../functions/legality';
 import styles from './Set-Public.module.scss';
 import { PokemonSet } from '../../@types';
 
-export type Props = {
+export type SetPublicProps = {
   /** Pokemon Set */
   set: PokemonSet;
 };
 
-const SetPublic: FunctionComponent<Props> = ({ set }): JSX.Element => {
+const SetPublic: FunctionComponent<SetPublicProps> = ({ set }): JSX.Element => {
   const [expandToggle, setExpandToggle] = useState(false);
   const [copySuccess, setCopySuccess] = useState(false);
 

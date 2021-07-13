@@ -5,14 +5,14 @@ import LoadingBlack from '../Loaders/LoadingBlack/LoadingBlack';
 import styles from './TeamList-PublicShare.module.scss';
 import { PokemonTeam, PokemonSet } from '../../@types';
 
-export type Props = {
+export type TeamListPublicShareProps = {
   /** List of Pokemon Teams */
   teams: PokemonTeam[] | undefined;
   /** List of Pokemon Sets */
   sets: PokemonSet[];
 };
 
-const TeamListPublicShare: FunctionComponent<Props> = ({
+const TeamListPublicShare: FunctionComponent<TeamListPublicShareProps> = ({
   teams,
   sets,
 }): JSX.Element => {

@@ -33,12 +33,12 @@ export interface BoolInput {
   touched: boolean;
 }
 
-type Props = {
+type SetEditProps = {
   /** Pokemon Set */
   set: PokemonSet;
 };
 
-const SetEdit: FunctionComponent<Props> = ({ set }) => {
+const SetEdit: FunctionComponent<SetEditProps> = ({ set }) => {
   const {
     newSetImport,
     setNewSetImport,

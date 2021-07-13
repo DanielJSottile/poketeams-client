@@ -10,7 +10,7 @@ import legality from '../../functions/legality';
 import styles from './Team-Public-Share.module.scss';
 import { PokemonTeam, PokemonSet } from '../../@types';
 
-export type Props = {
+export type TeamPublicShareProps = {
   /** Pokemon team */
   team: PokemonTeam;
   /** Pokemon Sets */
@@ -19,7 +19,7 @@ export type Props = {
   id: string;
 };
 
-const TeamPublicShare: FunctionComponent<Props> = ({
+const TeamPublicShare: FunctionComponent<TeamPublicShareProps> = ({
   team,
   id,
   sets,

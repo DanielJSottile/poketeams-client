@@ -5,12 +5,12 @@ import Input from '../Input/Input';
 import AuthApiService from '../../services/auth-api-service';
 import styles from './RegistrationForm.module.scss';
 
-type Props = {
+type RegistrationFormProps = {
   /** folder that is being shared */
   onRegistrationSuccess?: () => void;
 };
 
-const RegistrationForm: FunctionComponent<Props> = ({
+const RegistrationForm: FunctionComponent<RegistrationFormProps> = ({
   onRegistrationSuccess = () => null,
 }) => {
   const [error, setError] = useState('');

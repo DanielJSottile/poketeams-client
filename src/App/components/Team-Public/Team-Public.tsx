@@ -17,14 +17,17 @@ import legality from '../../functions/legality';
 import styles from './Team-Public.module.scss';
 import { PokemonTeam, PokemonSet } from '../../@types';
 
-export type Props = {
+export type TeamPublicProps = {
   /** pokemon team */
   team: PokemonTeam;
   /** id */
   id: string;
 };
 
-const TeamPublic: FunctionComponent<Props> = ({ team, id }): JSX.Element => {
+const TeamPublic: FunctionComponent<TeamPublicProps> = ({
+  team,
+  id,
+}): JSX.Element => {
   const { publicSets } = useContext(GeneralContext);
 
   const [teamExpandToggle, setTeamExpandToggle] = useState(true);

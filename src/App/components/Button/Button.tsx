@@ -1,6 +1,6 @@
 import React, { FunctionComponent, MouseEvent, ReactNode } from 'react';
 
-type Props = {
+type ButtonProps = {
   /** class for the label */
   buttonClass?: string;
   /** string of input id */
@@ -15,7 +15,7 @@ type Props = {
   children?: ReactNode | JSX.Element;
 };
 
-const Button: FunctionComponent<Props> = ({
+const Button: FunctionComponent<ButtonProps> = ({
   id = '',
   buttonClass = '',
   onClickCallback = () => null,

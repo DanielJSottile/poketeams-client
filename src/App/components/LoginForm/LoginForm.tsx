@@ -11,12 +11,12 @@ import GeneralContext from '../../contexts/GeneralContext';
 import AuthApiService from '../../services/auth-api-service';
 import styles from './LoginForm.module.scss';
 
-type Props = {
+type LoginFormProps = {
   /** onLoginSuccess Function */
   onLoginSuccess: () => void;
 };
 
-const LoginForm: FunctionComponent<Props> = ({ onLoginSuccess }) => {
+const LoginForm: FunctionComponent<LoginFormProps> = ({ onLoginSuccess }) => {
   const { getUserState } = useContext(GeneralContext);
   const [error, setError] = useState(null);
   const [userName, setUsername] = useState('');

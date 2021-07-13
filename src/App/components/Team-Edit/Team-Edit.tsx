@@ -17,14 +17,17 @@ import legality from '../../functions/legality';
 import styles from './Team-Edit.module.scss';
 import { PokemonTeam, PokemonSet } from '../../@types';
 
-export type Props = {
+export type TeamEditProps = {
   /** pokemon team */
   team: PokemonTeam;
   /** id as a team name */
   id: string;
 };
 
-const TeamEdit: FunctionComponent<Props> = ({ team, id }): JSX.Element => {
+const TeamEdit: FunctionComponent<TeamEditProps> = ({
+  team,
+  id,
+}): JSX.Element => {
   const { userSets, handleUpdateTeam, handlePostNewPokemon, handleDeleteTeam } =
     useContext(GeneralContext);
 
