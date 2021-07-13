@@ -12,8 +12,8 @@ import Image from '../Image/Image';
 import Button from '../Button/Button';
 import SetEdit from '../Set-Edit/Set-Edit';
 import GeneralContext from '../../contexts/GeneralContext';
-import showdownGenerate from '../../functions/generate';
-import legality from '../../functions/legality';
+import showdownGenerate from '../../utils/generate';
+import legality from '../../utils/legality';
 import styles from './Team-Edit.module.scss';
 import { PokemonTeam, PokemonSet } from '../../@types';
 

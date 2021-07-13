@@ -13,7 +13,11 @@ import Button from '../Button/Button';
 import PokeballLoader from '../Loaders/PokeballLoader/PokeballLoader';
 import LoadingBlack from '../Loaders/LoadingBlack/LoadingBlack';
 import GeneralContext from '../../contexts/GeneralContext';
-import showdownFolderGenerate from '../../functions/generateFolder';
+import showdownFolderGenerate from '../../utils/generateFolder';
+import {
+  validateNewFolderImport,
+  validateNewFolderName,
+} from '../../utils/validations';
 import styles from './FoldersList.module.scss';
 import { PokemonFolder } from '../../@types';
 
@@ -27,12 +31,10 @@ const FoldersList: FunctionComponent = () => {
     setFolderAddClicked,
     newFolderName,
     newFolderImport,
-    validateNewFolderImport,
     setNewFolderImport,
     handlePostNewFolder,
     setNewFolderName,
     handleEditFolder,
-    validateNewFolderName,
     setCurrentClickedFolder,
     handleDeleteFolder,
   } = useContext(GeneralContext);
@@ -90,7 +92,7 @@ const FoldersList: FunctionComponent = () => {
             inputHasError
             htmlFor="foldername"
             label="Folder Name:"
-            validationCallback={() => validateNewFolderName()}
+            validationCallback={() => validateNewFolderName(newFolderName)}
             placeholder="e.g. Good Teams"
             type="text"
             name="foldername"
@@ -104,7 +106,7 @@ const FoldersList: FunctionComponent = () => {
             containerClass={styles['folder-import']}
             textAreaHasError
             isError={!!newFolderImport.value}
-            validationCallback={() => validateNewFolderImport()}
+            validationCallback={() => validateNewFolderImport(newFolderImport)}
             htmlFor="folder-import"
             label="Import Showdown Folder:"
             placeholder="Optionally Import a proper Pokemon Showdown Folder Here And It Will Fill Out The Entire Folder!"
@@ -119,7 +121,10 @@ const FoldersList: FunctionComponent = () => {
         <Button
           type="submit"
           buttonClass={styles['submit']}
-          disabled={!!validateNewFolderName() || !!validateNewFolderImport()}
+          disabled={
+            !!validateNewFolderName(newFolderName) ||
+            !!validateNewFolderImport(newFolderImport)
+          }
           onClickCallback={(e) => {
             e.preventDefault();
             handlePostNewFolder();
@@ -138,7 +143,7 @@ const FoldersList: FunctionComponent = () => {
           inputHasError
           htmlFor="foldername"
           label="Edit Folder Name:"
-          validationCallback={() => validateNewFolderName()}
+          validationCallback={() => validateNewFolderName(newFolderName)}
           placeholder="e.g. Good Teams"
           type="text"
           name="foldername"
@@ -151,7 +156,7 @@ const FoldersList: FunctionComponent = () => {
         <Button
           type="submit"
           buttonClass={styles['submit']}
-          disabled={!!validateNewFolderName()}
+          disabled={!!validateNewFolderName(newFolderImport)}
           onClickCallback={(e) => {
             e.preventDefault();
             handleEditFolder();

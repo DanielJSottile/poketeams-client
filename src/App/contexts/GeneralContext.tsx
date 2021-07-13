@@ -10,23 +10,19 @@ import React, {
 import apiService from '../services/apiService';
 import TokenService from '../services/token-service';
 import jwtDecode from 'jwt-decode';
-import showdownParse from '../functions/parse';
-import showdownFolderParse from '../functions/parseFolder';
-import legality from '../functions/legality';
-import { PokemonFolder, PokemonTeam, PokemonSet } from '../@types';
+import showdownParse from '../utils/parse';
+import showdownFolderParse from '../utils/parseFolder';
+import {
+  PokemonFolder,
+  PokemonTeam,
+  PokemonSet,
+  TextInput,
+  InputWithId,
+} from '../@types';
 
 type Props = {
   children: ReactNode;
 };
-
-type Input = {
-  value: string;
-  touched: boolean;
-};
-
-interface InputWithId extends Input {
-  id: string;
-}
 
 export interface MyToken {
   sub: string;
@@ -40,19 +36,19 @@ interface GeneralContextValues {
   publicTeams: PokemonTeam[];
   publicSets: PokemonSet[];
   folderAddClicked: boolean;
-  newFolderName: Input;
-  newFolderImport: Input;
+  newFolderName: TextInput;
+  newFolderImport: TextInput;
   teamAddClicked: boolean;
   currentClickedTeam: InputWithId;
-  newTeamName: Input;
+  newTeamName: TextInput;
   currentClickedFolder: InputWithId;
-  desc: Input;
-  newTeamImport: Input;
-  newSetImport: Input;
-  search: Input;
-  sort: Input;
-  filter: Input;
-  filtersort: Input;
+  desc: TextInput;
+  newTeamImport: TextInput;
+  newSetImport: TextInput;
+  search: TextInput;
+  sort: TextInput;
+  filter: TextInput;
+  filtersort: TextInput;
   page: number;
   setUserFolders: Dispatch<SetStateAction<PokemonFolder[]>>;
   setUserTeams: Dispatch<SetStateAction<PokemonTeam[]>>;
@@ -60,28 +56,19 @@ interface GeneralContextValues {
   setPublicTeams: Dispatch<SetStateAction<PokemonTeam[]>>;
   setPublicSets: Dispatch<SetStateAction<PokemonSet[]>>;
   setFolderAddClicked: (toggle: boolean) => void;
-  setNewFolderName: (name: Input) => void;
-  setNewFolderImport: (name: Input) => void;
+  setNewFolderName: (name: TextInput) => void;
+  setNewFolderImport: (name: TextInput) => void;
   setTeamAddClicked: (toggle: boolean) => void;
-  setNewTeamName: (name: Input) => void;
+  setNewTeamName: (name: TextInput) => void;
   setCurrentClickedFolder: (folder: InputWithId) => void;
-  setDesc: (name: Input) => void;
-  setNewTeamImport: (name: Input) => void;
-  setNewSetImport: (name: Input) => void;
-  setSearch: (name: Input) => void;
-  setSort: (name: Input) => void;
-  setFilter: (name: Input) => void;
-  setFilterSort: (name: Input) => void;
+  setDesc: (name: TextInput) => void;
+  setNewTeamImport: (name: TextInput) => void;
+  setNewSetImport: (name: TextInput) => void;
+  setSearch: (name: TextInput) => void;
+  setSort: (name: TextInput) => void;
+  setFilter: (name: TextInput) => void;
+  setFilterSort: (name: TextInput) => void;
   handlePostNewTeam: () => void;
-  validateDesc: () => string | boolean;
-  validateNewTeamName: () => string | boolean;
-  validateNewTeamImport: () => string | boolean | undefined;
-  validateCurrentFolderClicked: () => string | boolean;
-  validateNewFolderImport: () => string | boolean | undefined;
-  validateNewFolderName: () => string | boolean | undefined;
-  validateFilter: () => string | boolean;
-  validateSearch: () => string | boolean;
-  validateNewSetImport: () => string | boolean | undefined;
   handlePostNewFolder: () => void;
   handleEditFolder: () => void;
   handleDeleteFolder: () => void;
@@ -230,15 +217,6 @@ const GeneralContext = createContext<GeneralContextValues>({
   setFilter: () => null,
   setFilterSort: () => null,
   handlePostNewTeam: () => null,
-  validateDesc: () => false,
-  validateNewTeamName: () => false,
-  validateNewTeamImport: () => false,
-  validateCurrentFolderClicked: () => false,
-  validateNewFolderImport: () => false,
-  validateNewFolderName: () => false,
-  validateFilter: () => false,
-  validateSearch: () => false,
-  validateNewSetImport: () => false,
   handlePostNewFolder: () => null,
   handleEditFolder: () => null,
   handleDeleteFolder: () => null,
@@ -360,104 +338,6 @@ export const GeneralProvider = ({ children }: Props) => {
     setUserFolders([]);
     setUserTeams([]);
     setUserSets([]);
-  };
-
-  const validateNewFolderName = (): string | boolean => {
-    if (!newFolderName.value) {
-      return `Please provide a folder name!`;
-    }
-    return false;
-  };
-
-  const validateCurrentFolderClicked = (): string | boolean => {
-    if (!currentClickedFolder.id) {
-      return `You'll need to click on a folder in order to add a team!`;
-    }
-    return false;
-  };
-
-  const validateNewFolderImport = (): string | boolean | undefined => {
-    let flag;
-    if (newFolderImport.value) {
-      showdownFolderParse(newFolderImport.value).forEach(
-        (fullteam: { string: PokemonSet[] }) => {
-          const [teamName, sets] = Object.entries(fullteam)[0];
-          if (!teamName) {
-            flag = `You are missing the team name in the import for one of your teams!
-        Make sure that there is a team name before each group of sets
-        (Hint: Should be formatted like this: === [format] Folder/Team Name ===)`;
-          }
-
-          sets.forEach((set: PokemonSet) => {
-            if (!legality.isLegalSpecies(set.species)) {
-              flag = `There is an illegal species in your set.  Please check each line
-          and fix this to be in the proper format! 
-          (Hint: It could be extra white space at the end because of Showdown's Exporter)
-          (Hint: There could be a typo in your species name!)`;
-            }
-          });
-        }
-      );
-    }
-    return flag;
-  };
-
-  const validateNewTeamName = (): string | boolean => {
-    if (!newTeamName.value) {
-      return `Please provide a team name!`;
-    }
-    return false;
-  };
-
-  const validateDesc = (): string | boolean => {
-    if (typeof desc.value !== 'string') {
-      return `This should never come up, it is superflous`;
-    }
-    return false;
-  };
-
-  const validateNewTeamImport = (): string | boolean | undefined => {
-    let flag;
-    if (newTeamImport.value) {
-      showdownParse(newTeamImport.value).forEach((set: PokemonSet) => {
-        if (!legality.isLegalSpecies(set.species)) {
-          flag = `There is an illegal species in your set.  Please fix this to be in the proper format! 
-        (Hint: It could be extra white space at the end because of Showdown's Exporter)
-        (Hint: There could be a typo in your species name!)`;
-        }
-      });
-    }
-    return flag;
-  };
-
-  const validateNewSetImport = (): string | boolean | undefined => {
-    let flag;
-
-    if (showdownParse(newSetImport.value).length > 1) {
-      flag = `You can only import 1 set here.`;
-    }
-    showdownParse(newSetImport.value).forEach((set: PokemonSet) => {
-      if (!legality.isLegalSpecies(set.species)) {
-        flag = `There is an illegal species in your set.  Please fix this to be in the proper format! 
-        (Hint: It could be extra white space at the end because of Showdown's Exporter)
-        (Hint: There could be a typo in your species name!)`;
-      }
-    });
-    return flag;
-  };
-
-  const validateSearch = (): string | boolean => {
-    if (!legality.isLegalSpecies(search.value.toString().trim())) {
-      return `Must be an 'existing' Pokemon species or form styled via '[species]-[form]'!`;
-    }
-    return false;
-  };
-
-  const validateFilter = (): string | boolean => {
-    if (!legality.isLegalSpecies(filter.value.toString().trim())) {
-      return `Must be an 'existing' Pokemon species or form styled via '[species]-[form]'!`;
-    }
-    return false;
   };
 
   const handlePostNewFolder = () => {
@@ -1065,15 +945,6 @@ export const GeneralProvider = ({ children }: Props) => {
     setNewSetImport,
     setCurrentClickedFolder,
     setDesc,
-    validateCurrentFolderClicked,
-    validateNewTeamName,
-    validateDesc,
-    validateFilter,
-    validateNewFolderImport,
-    validateNewFolderName,
-    validateNewSetImport,
-    validateNewTeamImport,
-    validateSearch,
     handleDeleteFolder,
     handleDeleteSet,
     handleDeleteTeam,

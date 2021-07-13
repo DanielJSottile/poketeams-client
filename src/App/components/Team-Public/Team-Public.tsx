@@ -12,8 +12,8 @@ import Image from '../Image/Image';
 import Button from '../Button/Button';
 import SetPublic from '../Set-Public/Set-Public';
 import GeneralContext from '../../contexts/GeneralContext';
-import showdownGenerate from '../../functions/generate';
-import legality from '../../functions/legality';
+import showdownGenerate from '../../utils/generate';
+import legality from '../../utils/legality';
 import styles from './Team-Public.module.scss';
 import { PokemonTeam, PokemonSet } from '../../@types';
 

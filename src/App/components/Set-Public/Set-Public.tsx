@@ -4,8 +4,8 @@ import Input from '../Input/Input';
 import TextArea from '../TextArea/TextArea';
 import Image from '../Image/Image';
 import Button from '../Button/Button';
-import showdownGenerate from '../../functions/generate';
-import legality from '../../functions/legality';
+import showdownGenerate from '../../utils/generate';
+import legality from '../../utils/legality';
 import styles from './Set-Public.module.scss';
 import { PokemonSet } from '../../@types';
 

@@ -48,3 +48,22 @@ export interface PokemonSet {
   id?: number;
   team_id?: number;
 }
+
+export type TextInput = {
+  value: string;
+  touched: boolean;
+};
+
+type OmitInput = Omit<TextInput, 'value'>;
+
+export interface InputWithId extends TextInput {
+  id: string;
+}
+
+export interface NumberInput extends OmitInput {
+  value: number;
+}
+
+export interface BoolInput extends OmitInput {
+  value: boolean;
+}

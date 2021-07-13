@@ -5,8 +5,8 @@ import TextArea from '../TextArea/TextArea';
 import Image from '../Image/Image';
 import Button from '../Button/Button';
 import SetPublic from '../Set-Public/Set-Public';
-import showdownGenerate from '../../functions/generate';
-import legality from '../../functions/legality';
+import showdownGenerate from '../../utils/generate';
+import legality from '../../utils/legality';
 import styles from './Team-Public-Share.module.scss';
 import { PokemonTeam, PokemonSet } from '../../@types';
 
