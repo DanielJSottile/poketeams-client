@@ -577,7 +577,7 @@ export const GeneralProvider = ({ children }: Props) => {
             });
 
             const setPromises: Promise<PokemonSet>[] = allSets.map(
-              (set: any): Promise<any> => {
+              (set: PokemonSet): Promise<PokemonSet> => {
                 return apiService.postUserSet(
                   set,
                   jwtDecode<MyToken>(TokenService.getAuthToken() || '').user_id
