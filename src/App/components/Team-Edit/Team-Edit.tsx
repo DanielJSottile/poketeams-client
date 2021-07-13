@@ -99,13 +99,14 @@ const TeamEdit: FunctionComponent<Props> = ({ team, id }): JSX.Element => {
 
   const ps = [...new Set(userSets.map((set: PokemonSet) => set.id))];
 
-  const newPS = ps.map((id) =>
-    userSets.find((set: PokemonSet) => set.id === id)
+  const newPS = ps.map(
+    (id) =>
+      userSets.find((set: PokemonSet) => set.id === id) || ({} as PokemonSet)
   );
 
-  const teamSets = newPS.filter((set: any) => set.team_id === team.id);
+  const teamSets = newPS.filter((set: PokemonSet) => set.team_id === team.id);
 
-  const renderSetList = (teamSets: any) => {
+  const renderSetList = (teamSets: PokemonSet[]) => {
     const SetList = teamSets.map((set: PokemonSet, i: number) => {
       return <SetEdit key={i} set={set} />;
     });

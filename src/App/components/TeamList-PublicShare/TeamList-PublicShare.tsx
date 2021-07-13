@@ -9,7 +9,7 @@ export type Props = {
   /** List of Pokemon Teams */
   teams: PokemonTeam[] | undefined;
   /** List of Pokemon Sets */
-  sets: PokemonSet[] | undefined;
+  sets: PokemonSet[];
 };
 
 const TeamListPublicShare: FunctionComponent<Props> = ({
@@ -20,9 +20,8 @@ const TeamListPublicShare: FunctionComponent<Props> = ({
 
   if (teams) {
     TeamList = teams?.map((team: PokemonTeam, i: number) => {
-      const teamSets = sets?.filter((set: any) => {
-        // check in db
-        return set.team_name === team.team_name;
+      const teamSets = sets?.filter((set: PokemonSet) => {
+        return set.team_id === team.id;
       });
 
       return (

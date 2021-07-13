@@ -1,11 +1,17 @@
 import config from '../../config';
 import TokenService from './token-service';
+import { PokemonFolder, PokemonTeam, PokemonSet } from '../@types';
 
 // PUBLIC SIDE
 
+type Error = {
+  code: number;
+  message?: string;
+};
+
 const apiService = {
-  getTenTeamsDefault(): Promise<any> {
-    let error: any;
+  getTenTeamsDefault(): Promise<PokemonTeam[]> {
+    let error: Error;
     return fetch(`${config.API_ENDPOINT}/all`, {
       method: 'GET',
       headers: {},
@@ -25,8 +31,8 @@ const apiService = {
       });
   },
 
-  getTenTeamsSearch(query: string): Promise<any> {
-    let error: any;
+  getTenTeamsSearch(query: string): Promise<PokemonTeam[]> {
+    let error: Error;
     return fetch(`${config.API_ENDPOINT}/all/search${query}`, {
       method: 'GET',
       headers: {},
@@ -46,8 +52,8 @@ const apiService = {
       });
   },
 
-  getSetsforTenTeams(): Promise<any> {
-    let error: any;
+  getSetsforTenTeams(): Promise<PokemonSet[]> {
+    let error: Error;
     return fetch(`${config.API_ENDPOINT}/all/sets`, {
       method: 'GET',
       headers: {},
@@ -68,7 +74,7 @@ const apiService = {
   },
 
   getLikesforOneTeam(team_id: number): Promise<any> {
-    let error: any;
+    let error: Error;
     return fetch(`${config.API_ENDPOINT}/all/${team_id}/likes`, {
       method: 'GET',
       headers: {},
@@ -89,7 +95,7 @@ const apiService = {
   },
 
   getSetsForOneTeam(team_id: number): Promise<any> {
-    let error: any;
+    let error: Error;
     return fetch(`${config.API_ENDPOINT}/all/${team_id}/sets`, {
       method: 'GET',
       headers: {},
@@ -109,8 +115,8 @@ const apiService = {
       });
   },
 
-  getTeamsForOneFolder(folder_id: number): Promise<any> {
-    let error: any;
+  getTeamsForOneFolder(folder_id: number): Promise<PokemonTeam[]> {
+    let error: Error;
     return fetch(`${config.API_ENDPOINT}/all/${folder_id}/teams`, {
       method: 'GET',
       headers: {},
@@ -130,8 +136,8 @@ const apiService = {
       });
   },
 
-  getSingleTeam(team_id: number): Promise<any> {
-    let error: any;
+  getSingleTeam(team_id: number): Promise<PokemonTeam> {
+    let error: Error;
     return fetch(`${config.API_ENDPOINT}/all/${team_id}`, {
       method: 'GET',
       headers: {},
@@ -151,8 +157,8 @@ const apiService = {
       });
   },
 
-  getSingleSet(set_id: number): Promise<any> {
-    let error: any;
+  getSingleSet(set_id: number): Promise<PokemonSet> {
+    let error: Error;
     return fetch(`${config.API_ENDPOINT}/all/set/${set_id}`, {
       method: 'GET',
       headers: {},
@@ -176,8 +182,8 @@ const apiService = {
 
   // GET
 
-  getSingleFolder(folder_id: number): Promise<any> {
-    let error: any;
+  getSingleFolder(folder_id: number): Promise<PokemonFolder> {
+    let error: Error;
     return fetch(`${config.API_ENDPOINT}/build/folder/${folder_id}`, {
       method: 'GET',
       headers: {
@@ -200,8 +206,8 @@ const apiService = {
       });
   },
 
-  getSingleFolderPublic(folder_id: number): Promise<any> {
-    let error: any;
+  getSingleFolderPublic(folder_id: number): Promise<PokemonFolder> {
+    let error: Error;
     return fetch(`${config.API_ENDPOINT}/all/folderpublic/${folder_id}`, {
       method: 'GET',
       headers: {},
@@ -221,8 +227,8 @@ const apiService = {
       });
   },
 
-  getUserFolders(user_id: number): Promise<any> {
-    let error: any;
+  getUserFolders(user_id: number): Promise<PokemonFolder[]> {
+    let error: Error;
     return fetch(`${config.API_ENDPOINT}/build/folders/${user_id}`, {
       method: 'GET',
       headers: {
@@ -245,8 +251,8 @@ const apiService = {
       });
   },
 
-  getUserTeams(user_id: number): Promise<any> {
-    let error: any;
+  getUserTeams(user_id: number): Promise<PokemonTeam[]> {
+    let error: Error;
     return fetch(`${config.API_ENDPOINT}/build/teams/${user_id}`, {
       method: 'GET',
       headers: {
@@ -268,8 +274,8 @@ const apiService = {
         return data;
       });
   },
-  getUserSets(user_id: number): Promise<any> {
-    let error: any;
+  getUserSets(user_id: number): Promise<PokemonSet[]> {
+    let error: Error;
     return fetch(`${config.API_ENDPOINT}/build/sets/${user_id}`, {
       method: 'GET',
       headers: {
@@ -292,8 +298,11 @@ const apiService = {
       });
   },
 
-  getUserFoldersFilter(user_id: number, query: string): Promise<any> {
-    let error: any;
+  getUserFoldersFilter(
+    user_id: number,
+    query: string
+  ): Promise<PokemonFolder[]> {
+    let error: Error;
     return fetch(
       `${config.API_ENDPOINT}/build/folders/${user_id}/filter${query}`,
       {
@@ -319,8 +328,8 @@ const apiService = {
       });
   },
 
-  getUserTeamsFilter(user_id: number, query: string): Promise<any> {
-    let error: any;
+  getUserTeamsFilter(user_id: number, query: string): Promise<PokemonTeam[]> {
+    let error: Error;
     return fetch(
       `${config.API_ENDPOINT}/build/teams/${user_id}/filter${query}`,
       {
@@ -345,8 +354,8 @@ const apiService = {
         return data;
       });
   },
-  getUserSetsFilter(user_id: number, query: string): Promise<any> {
-    let error: any;
+  getUserSetsFilter(user_id: number, query: string): Promise<PokemonSet[]> {
+    let error: Error;
     return fetch(
       `${config.API_ENDPOINT}/build/sets/${user_id}/filter${query}`,
       {
@@ -374,7 +383,7 @@ const apiService = {
 
   // POST
 
-  postUserFolder(foldername: string, userid: number): Promise<any> {
+  postUserFolder(foldername: string, userid: number): Promise<PokemonFolder> {
     return fetch(`${config.API_ENDPOINT}/build/folders/${userid}`, {
       method: 'POST',
       headers: {
@@ -403,7 +412,7 @@ const apiService = {
     );
   },
 
-  postUserSet(body: object, userid: number): Promise<any> {
+  postUserSet(body: object, userid: number): Promise<PokemonSet> {
     return fetch(`${config.API_ENDPOINT}/build/sets/${userid}`, {
       method: 'POST',
       headers: {
@@ -422,7 +431,7 @@ const apiService = {
     foldername: string,
     iden: string,
     userid: number
-  ): Promise<any> {
+  ): Promise<Response> {
     return fetch(`${config.API_ENDPOINT}/build/folders/${userid}`, {
       method: 'PATCH',
       headers: {
@@ -440,7 +449,7 @@ const apiService = {
     });
   },
 
-  patchUserTeam(body: object, userid: number): Promise<any> {
+  patchUserTeam(body: object, userid: number): Promise<Response> {
     return fetch(`${config.API_ENDPOINT}/build/teams/${userid}`, {
       method: 'PATCH',
       headers: {
@@ -454,7 +463,7 @@ const apiService = {
     });
   },
 
-  patchUserSet(body: object, userid: number): Promise<any> {
+  patchUserSet(body: object, userid: number): Promise<Response> {
     return fetch(`${config.API_ENDPOINT}/build/sets/${userid}`, {
       method: 'PATCH',
       headers: {
@@ -470,7 +479,7 @@ const apiService = {
 
   // DELETE
 
-  deleteUserFolder(folder_id: number): Promise<any> {
+  deleteUserFolder(folder_id: number): Promise<Response> {
     return fetch(`${config.API_ENDPOINT}/build/folder/${folder_id}`, {
       method: 'DELETE',
       headers: {
@@ -483,7 +492,7 @@ const apiService = {
     });
   },
 
-  deleteUserTeam(team_id: number): Promise<any> {
+  deleteUserTeam(team_id: number): Promise<Response> {
     return fetch(`${config.API_ENDPOINT}/build/team/${team_id}`, {
       method: 'DELETE',
       headers: {
@@ -496,7 +505,7 @@ const apiService = {
     });
   },
 
-  deleteUserSet(team_id: number, set_id: number): Promise<any> {
+  deleteUserSet(team_id: number, set_id: number): Promise<Response> {
     return fetch(`${config.API_ENDPOINT}/build/set/${team_id}/${set_id}`, {
       method: 'DELETE',
       headers: {

@@ -35,7 +35,7 @@ export interface BoolInput {
 
 type Props = {
   /** Pokemon Set */
-  set?: PokemonSet;
+  set: PokemonSet;
 };
 
 const SetEdit: FunctionComponent<Props> = ({ set }) => {

@@ -14,7 +14,7 @@ export type Props = {
   /** Pokemon team */
   team: PokemonTeam;
   /** Pokemon Sets */
-  sets: PokemonSet[] | undefined;
+  sets: PokemonSet[];
   /** id as a string */
   id: string;
 };

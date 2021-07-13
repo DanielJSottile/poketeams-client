@@ -9,7 +9,7 @@ type FolderPublicShareProps = {
   /** list of teams  */
   teams?: PokemonTeam[];
   /** list of sets for teams */
-  sets?: PokemonSet[];
+  sets: PokemonSet[];
 };
 
 const FolderPublicShare: FunctionComponent<FolderPublicShareProps> = ({

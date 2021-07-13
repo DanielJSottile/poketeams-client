@@ -96,7 +96,7 @@ function ivGenerator(ob: PokeObject) {
 
 // Generator Function
 
-export default function showdownGenerate(input: any) {
+export default function showdownGenerate(input: PokemonSet[]) {
   return input
     .map((set: PokemonSet) => {
       let setArr = [];

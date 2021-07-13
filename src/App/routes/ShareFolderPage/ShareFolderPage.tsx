@@ -23,22 +23,24 @@ const ShareFolderPage: FunctionComponent<RouteComponentProps<MatchParams>> = ({
         setFolder([data]);
       })
       .then(() => {
-        apiService.getTeamsForOneFolder(Number(id)).then((data: any) => {
-          setTeams(data);
+        apiService
+          .getTeamsForOneFolder(Number(id))
+          .then((data: PokemonTeam[]) => {
+            setTeams(data);
 
-          /* Much like adding teams and folders via import, we have to 
+            /* Much like adding teams and folders via import, we have to 
               go through the teams and add their sets.  This can be done via
               a Promise Array. */
 
-          const promiseArray = data.map((team: any) => {
-            return apiService.getSetsForOneTeam(team.id);
-          });
+            const promiseArray = data.map((team: PokemonTeam) => {
+              return apiService.getSetsForOneTeam(team.id);
+            });
 
-          Promise.all(promiseArray).then((values: any) => {
-            const merged: PokemonSet[] = array.flattenDeep(values);
-            setSets(merged);
+            Promise.all(promiseArray).then((values: PokemonSet[]) => {
+              const merged: PokemonSet[] = array.flattenDeep(values);
+              setSets(merged);
+            });
           });
-        });
       });
   }, [match.params.folder_id]);
 
