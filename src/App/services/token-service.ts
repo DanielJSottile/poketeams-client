@@ -4,6 +4,10 @@ import config from '../../config';
 let _timeoutId: NodeJS.Timeout;
 const _TEN_SECONDS_IN_MS = 10000;
 
+type Payload = {
+  exp: number;
+};
+
 const TokenService = {
   saveAuthToken(token: string) {
     window.localStorage.setItem(config.TOKEN_KEY, token);
@@ -20,21 +24,21 @@ const TokenService = {
   parseJwt(jwt: string) {
     return jwtDecode(jwt);
   },
-  parseAuthToken() {
+  parseAuthToken(): Payload | undefined {
     const authToken = TokenService.getAuthToken();
-    if (authToken) return TokenService.parseJwt(authToken);
+    if (authToken) return TokenService.parseJwt(authToken) as Payload;
     else return undefined;
   },
-  _getMsUntilExpiry(payload: any): number {
-    return payload.exp * 1000 - Date.now();
+  _getMsUntilExpiry(payload: Payload | undefined): number {
+    return (payload?.exp || 0) * 1000 - Date.now();
   },
-  queueCallbackBeforeExpiry(callback: () => void): void {
+  queueCallbackBeforeExpiry(callback: () => void) {
     const msUntilExpiry = TokenService._getMsUntilExpiry(
       TokenService.parseAuthToken()
     );
     _timeoutId = setTimeout(callback, msUntilExpiry - _TEN_SECONDS_IN_MS);
   },
-  clearCallbackBeforeExpiry(): void {
+  clearCallbackBeforeExpiry() {
     clearTimeout(_timeoutId);
   },
 };

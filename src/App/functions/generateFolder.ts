@@ -1,7 +1,11 @@
 /* This generator function is designed to take a format of the outcome of the parser.js
 and turn it back into a string of text that matches the original format */
-
+import { PokemonSet } from '../@types';
 // Interfaces
+
+type Input = {
+  [x: string]: PokemonSet[];
+};
 
 export interface PokeObject {
   hp_ev: number;
@@ -94,17 +98,17 @@ function ivGenerator(ob: PokeObject) {
 
 // Folder Generate Function
 
-export default function folderGenerate(folderName: string, input: any) {
+export default function folderGenerate(folderName: string, input: Input[]) {
   return input
-    .map((team: any) => {
-      const [teamName, sets]: any = Object.entries(team)[0];
+    .map((team: Input) => {
+      const [teamName, sets] = Object.entries(team)[0];
 
       // handle the first line
       let teamArr = [];
 
       teamArr.push(`=== [gen8] ${folderName}/${teamName} ===`);
 
-      const teamSets = sets.map((set: any) => {
+      const teamSets = sets.map((set: PokemonSet) => {
         let setArr = [];
 
         if (set.nickname && set.gender && set.item) {
