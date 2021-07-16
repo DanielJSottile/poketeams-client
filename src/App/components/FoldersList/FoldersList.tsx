@@ -7,10 +7,10 @@ import React, {
 import { Link } from 'react-router-dom';
 import Folder from '../Folder/Folder';
 import Input from '../Input/Input';
-import TextArea from '../TextArea/TextArea';
-import Button from '../Button/Button';
-import PokeballLoader from '../Loaders/PokeballLoader/PokeballLoader';
-import LoadingBlack from '../Loaders/LoadingBlack/LoadingBlack';
+import TextArea from '../TextArea';
+import Button from '../Button';
+import PokeballLoader from '../Loaders/PokeballLoader';
+import LoadingBlack from '../Loaders/LoadingBlack';
 import GeneralContext from '../../contexts/GeneralContext';
 import showdownFolderGenerate from '../../utils/generateFolder';
 import {

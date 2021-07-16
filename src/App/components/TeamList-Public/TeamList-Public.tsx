@@ -1,8 +1,8 @@
 import React, { Fragment, useContext, FunctionComponent } from 'react';
-import Button from '../Button/Button';
-import TeamPublic from '../Team-Public/Team-Public';
-import PokeballLoader from '../Loaders/PokeballLoader/PokeballLoader';
-import LoadingBlack from '../Loaders/LoadingBlack/LoadingBlack';
+import Button from '../Button';
+import TeamPublic from '../Team-Public';
+import PokeballLoader from '../Loaders/PokeballLoader';
+import LoadingBlack from '../Loaders/LoadingBlack';
 import GeneralContext from '../../contexts/GeneralContext';
 import styles from './TeamList-Public.module.scss';
 import { PokemonTeam } from '../../@types';

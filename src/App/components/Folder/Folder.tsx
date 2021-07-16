@@ -1,5 +1,5 @@
 import React, { useContext, FunctionComponent } from 'react';
-import Button from '../Button/Button';
+import Button from '../Button';
 import GeneralContext from '../../contexts/GeneralContext';
 
 type FolderProps = {

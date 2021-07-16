@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import TeamsListPublicShare from '../TeamList-PublicShare/TeamList-PublicShare';
+import TeamsListPublicShare from '../TeamList-PublicShare';
 import './Folder-Public-Share.module.scss';
 import { PokemonFolder, PokemonTeam, PokemonSet } from '../../@types';
 

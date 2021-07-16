@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
-import PokeballLoader from '../PokeballLoader/PokeballLoader';
-import LoadingBlack from '../LoadingBlack/LoadingBlack';
+import PokeballLoader from '../PokeballLoader';
+import LoadingBlack from '../LoadingBlack';
 import styles from './LazyLoader.module.scss';
 
 const LazyLoader: FunctionComponent = () => {

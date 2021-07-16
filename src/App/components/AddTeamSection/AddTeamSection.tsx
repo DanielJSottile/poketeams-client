@@ -1,8 +1,8 @@
 import React, { Fragment, useContext, FunctionComponent } from 'react';
 import GeneralContext from '../../contexts/GeneralContext';
-import Input from '../Input/Input';
-import TextArea from '../TextArea/TextArea';
-import Button from '../Button/Button';
+import Input from '../Input';
+import TextArea from '../TextArea';
+import Button from '../Button';
 import {
   validateDesc,
   validateNewTeamName,

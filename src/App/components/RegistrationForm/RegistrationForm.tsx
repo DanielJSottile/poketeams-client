@@ -1,7 +1,7 @@
 import React, { useState, FormEvent, FunctionComponent } from 'react';
 import { Link } from 'react-router-dom';
-import Button from '../Button/Button';
-import Input from '../Input/Input';
+import Button from '../Button';
+import Input from '../Input';
 import AuthApiService from '../../services/auth-api-service';
 import styles from './RegistrationForm.module.scss';
 

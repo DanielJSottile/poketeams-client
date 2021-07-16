@@ -4,8 +4,8 @@ import React, {
   FormEvent,
   FunctionComponent,
 } from 'react';
-import Input from '../Input/Input';
-import Button from '../Button/Button';
+import Input from '../Input';
+import Button from '../Button';
 import TokenService from '../../services/token-service';
 import GeneralContext from '../../contexts/GeneralContext';
 import AuthApiService from '../../services/auth-api-service';

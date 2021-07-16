@@ -1,9 +1,9 @@
 import React, { Fragment, useState, FunctionComponent } from 'react';
 import { Link } from 'react-router-dom';
-import Input from '../Input/Input';
-import TextArea from '../TextArea/TextArea';
-import Image from '../Image/Image';
-import Button from '../Button/Button';
+import Input from '../Input';
+import TextArea from '../TextArea';
+import Image from '../Image';
+import Button from '../Button';
 import showdownGenerate from '../../utils/generate';
 import legality from '../../utils/legality';
 import { useClipboard } from '../../utils/customHooks';
