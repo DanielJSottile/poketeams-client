@@ -1,3 +1,5 @@
+import { LocationDescriptorObject } from 'history';
+
 export interface PokemonFolder {
   date_created: string;
   date_modified: string;

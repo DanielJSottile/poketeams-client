@@ -19,6 +19,7 @@ import {
   MRRIME,
   TYPENULLSTRING,
 } from './constants';
+import { PokemonEntry } from '../@types';
 
 const birdCheck = (species: string) => {
   return (
@@ -47,7 +48,7 @@ const LEGALITY = {
     }
   },
 
-  findSpecies(species: string): any {
+  findSpecies(species: string): PokemonEntry | undefined {
     if (this.isLegalSpecies(species)) {
       return POKEMON.get(this.removeWhiteSpaceHyphen(species));
     }
@@ -57,15 +58,17 @@ const LEGALITY = {
     let types: string[] = ['???'];
 
     if (this.isLegalSpecies(species)) {
-      types = this.findSpecies(species)!.types;
+      types = this.findSpecies(species)?.types || [];
     }
     return types;
   },
 
-  returnGenderStatus(species: string): boolean | string {
+  returnGenderStatus(species: string): boolean | string | null | undefined {
     if (this.isLegalSpecies(species)) {
-      const pokemon = this.findSpecies(species);
-      if (Object.keys(pokemon)?.includes('genderLock')) {
+      const pokemon = this.findSpecies(species) || ({} as PokemonEntry);
+      if (
+        (Object.keys(pokemon) as (keyof PokemonEntry)[])?.includes('genderLock')
+      ) {
         return pokemon?.genderLock;
       }
       return false;
@@ -78,20 +81,26 @@ const LEGALITY = {
 
   cleanSpecies(species: string, shiny: boolean, REGEX: RegExp): string {
     const match = species.match(REGEX);
-    species = '';
-    const cleanMatch = match!.slice(1);
-    cleanMatch.forEach((part) => {
-      species = species + `${part}`;
-    });
-    if (!shiny) {
-      return `https://play.pokemonshowdown.com/sprites/ani/${species.toLowerCase()}.gif`;
-    } else {
-      return `https://play.pokemonshowdown.com/sprites/ani-shiny/${species.toLowerCase()}.gif`;
+    if (match) {
+      species = '';
+      const cleanMatch = match.slice(1);
+      cleanMatch.forEach((part) => {
+        species = species + `${part}`;
+      });
+      if (!shiny) {
+        return `https://play.pokemonshowdown.com/sprites/ani/${species.toLowerCase()}.gif`;
+      } else {
+        return `https://play.pokemonshowdown.com/sprites/ani-shiny/${species.toLowerCase()}.gif`;
+      }
     }
+    return species;
   },
 
   returnIconSprite(species: string, shiny: boolean): string {
-    if (this.isLegalSpecies(species) && this.findSpecies(species).num > 0) {
+    if (
+      (this.isLegalSpecies(species) && this.findSpecies(species)?.num) ||
+      0 > 0
+    ) {
       if (INFINITE.includes(species.toLowerCase())) {
         return `https://imgur.com/m0p2ljo.png`;
       }

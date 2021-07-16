@@ -21,12 +21,12 @@ const TokenService = {
   hasAuthToken(): boolean {
     return !!TokenService.getAuthToken();
   },
-  parseJwt(jwt: string): any {
+  parseJwt(jwt: string): Payload {
     return jwtDecode(jwt);
   },
   parseAuthToken(): Payload | undefined {
     const authToken = TokenService.getAuthToken();
-    if (authToken) return TokenService.parseJwt(authToken) as Payload;
+    if (authToken) return TokenService.parseJwt(authToken);
     else return undefined;
   },
   _getMsUntilExpiry(payload: Payload | undefined): number {

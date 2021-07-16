@@ -13,8 +13,8 @@ export type MatchProps = {
 const ShareTeamPage: FunctionComponent<RouteComponentProps<MatchProps>> = ({
   match,
 }): JSX.Element => {
-  const [team, setTeam] = useState([] as PokemonTeam[]);
-  const [sets, setPokemonSets] = useState([] as PokemonSet[]);
+  const [team, setTeam] = useState<PokemonTeam[]>([]);
+  const [sets, setPokemonSets] = useState<PokemonSet[]>([]);
 
   useEffect(() => {
     const id = Number(match.params.team_id);
