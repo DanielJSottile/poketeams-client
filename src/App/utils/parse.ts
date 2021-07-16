@@ -3,6 +3,14 @@ Python standard things like .partion have been changed to .split, and the way th
 handled is a bit different from Python, but the code is essentially the same. */
 
 import { PokemonSet } from '../@types';
+import {
+  NICKNAME_GEN_AND_ITEM_RE,
+  NICKNAME_AND_ITEM_RE,
+  NICKNAME_GEN_NO_ITEM_RE,
+  NICKNAME_NO_ITEM_RE,
+  NO_NICKNAME_GEN_AND_ITEM_RE,
+  NO_NICKNAME_AND_ITEM_RE,
+} from './constants';
 
 // Helper Functions
 
@@ -68,15 +76,6 @@ export default function showdownParse(input: string): PokemonSet[] {
   let shiny = false;
   let nature: string | null = null;
   let moves: string[] = [];
-
-  // Regular Expressions
-
-  const NICKNAME_GEN_AND_ITEM_RE = /^(.*) \((.*)\) \(([MF])\) @ (.*)$/;
-  const NICKNAME_AND_ITEM_RE = /^(.*) \((.{2,})\) @ (.*)$/;
-  const NICKNAME_GEN_NO_ITEM_RE = /^(.*) \((.*)\) \(([MF])\)$/;
-  const NICKNAME_NO_ITEM_RE = /^(.*) \((.*)\)$/;
-  const NO_NICKNAME_GEN_AND_ITEM_RE = /^(.*) \(([MF])\) @ (.*)$/;
-  const NO_NICKNAME_AND_ITEM_RE = /^(.*) @ (.*)$/;
 
   // parsing into teams if they exist (if they don't, theres no double line break)
 

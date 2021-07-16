@@ -8,7 +8,6 @@ export interface PokemonFolder {
 
 export interface PokemonTeam {
   team_name: string;
-  team_description: string;
   description: string;
   id: number;
   user_name: string;
@@ -67,3 +66,17 @@ export interface NumberInput extends OmitInput {
 export interface BoolInput extends OmitInput {
   value: boolean;
 }
+
+export type ParseReturn = {
+  string: PokemonSet[];
+  [key: string]: PokemonSet[];
+};
+
+export type PokemonSetPost = Omit<PokemonSet, 'id'>;
+
+export type PokemonTeamPost = Omit<
+  PokemonTeam,
+  'id' | 'user_name' | 'date_created'
+>;
+
+export type PokemonFolderPost = Omit<PokemonFolder, 'id'>;

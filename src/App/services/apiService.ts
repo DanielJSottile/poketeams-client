@@ -1,6 +1,11 @@
 import config from '../../config';
 import TokenService from './token-service';
-import { PokemonFolder, PokemonTeam, PokemonSet } from '../@types';
+import {
+  PokemonFolder,
+  PokemonTeam,
+  PokemonSet,
+  PokemonTeamPost,
+} from '../@types';
 
 // PUBLIC SIDE
 
@@ -400,7 +405,7 @@ const apiService = {
     );
   },
 
-  postUserTeam(body: PokemonTeam, userid: number): Promise<PokemonTeam> {
+  postUserTeam(body: PokemonTeamPost, userid: number): Promise<PokemonTeam> {
     return fetch(`${config.API_ENDPOINT}/build/teams/${userid}`, {
       method: 'POST',
       headers: {

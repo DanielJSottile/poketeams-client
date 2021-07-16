@@ -1,14 +1,18 @@
-import { PokemonSet } from '../@types';
+import { PokemonSet, ParseReturn } from '../@types';
+import {
+  FOLDERPARSE,
+  NICKNAME_GEN_AND_ITEM_RE,
+  NICKNAME_AND_ITEM_RE,
+  NICKNAME_GEN_NO_ITEM_RE,
+  NICKNAME_NO_ITEM_RE,
+  NO_NICKNAME_GEN_AND_ITEM_RE,
+  NO_NICKNAME_AND_ITEM_RE,
+} from './constants';
 
 /* This is based off the parse.ts file, but this is for the entire Folder import.  This may be 
 adapted in the future to import entire collections as it parses the same data. */
 
 // Helper Functions
-
-type ParseReturn = {
-  string: PokemonSet[];
-  [key: string]: PokemonSet[];
-};
 
 function evIvParser(string: string | null, val: string): number[] {
   let hpV = 0;
@@ -60,17 +64,6 @@ function evIvParser(string: string | null, val: string): number[] {
 // Parsing Function for Folder Format
 
 export default function showdownFolderParse(input: string): ParseReturn[] {
-  // Regular Expressions
-
-  const FOLDERPARSE = /^=== \[(.*)\] (.*)\/(.*) ===$/;
-  const NICKNAME_GEN_AND_ITEM_RE = /^(.*) \((.*)\) \(([MF])\) @ (.*)$/;
-  const NICKNAME_AND_ITEM_RE = /^(.*) \((.{2,})\) @ (.*)$/;
-  const NICKNAME_GEN_NO_ITEM_RE = /^(.*) \((.*)\) \(([MF])\)$/;
-  const NICKNAME_NO_ITEM_RE = /^(.*) \((.*)\)$/;
-  const NO_NICKNAME_GEN_AND_ITEM_RE = /^(.*) \(([MF])\) @ (.*)$/;
-  const NO_NICKNAME_AND_ITEM_RE = /^(.*) @ (.*)$/;
-
-  // eslint-disable-next-line
   // TODO: Add this as part of the teams
   let format: string;
   // eslint-disable-next-line

@@ -1,143 +1,41 @@
 import POKEMON from './pokemon';
+import {
+  ALL,
+  TYPENULL,
+  MIME,
+  BADBIRB,
+  FARGALAR,
+  MIMEJR,
+  MIMEGALAR,
+  EXCEPTIONS,
+  INFINITE,
+  FARFETCHD,
+  FARFETCDGALAR,
+  SIRFETCHD,
+  SIRFECHDMEGA,
+  MIMEJRSTRING,
+  MRMIME,
+  MRMIMEGALAR,
+  MRRIME,
+  TYPENULLSTRING,
+} from './constants';
 
-// Regular Expressions
-
-const ALL = /^(.*)\W(.*)$/;
-const TYPENULL = /^(.*):\W(.*)$/;
-const MIME = /^(.*).\W(.*)$/;
-const BADBIRB = /^(.*)’(.*)$/;
-const FARGALAR = /^(.*)'(.*)$/;
-const MIMEJR = /^(.*)\W(.*).$/;
-const MIMEGALAR = /^(.*). (.*)$/;
-
-// List of 'Exceptions' to regular Regex rules
-
-const exceptions: string[] = [
-  'vivillon-icy snow',
-  'vivillon-high plains',
-  'alcremie-ruby-cream',
-  'alcremie-matcha-cream',
-  'alcremie-mint-cream',
-  'alcremie-lemon-cream',
-  'alcremie-salted-cream',
-  'alcremie-ruby-swirl',
-  'alcremie-caramel-swirl',
-  'alcremie-rainbow-swirl',
-  'charizard-mega-y',
-  'charizard-mega-x',
-  'mewtwo-mega-y',
-  'mewtwo-mega-x',
-  'darmanitan-galar-zen',
-  'ho-oh',
-  'kommo-o',
-  'jangmo-o',
-  'hakamo-o',
-  "sirfetch'd",
-  'sirfetch’d',
-  "farfetch'd",
-  'farfetch’d',
-  'necrozma-dusk-mane',
-  'necrozma-dawn-wings',
-  'tapu bulu',
-  'tapu lele',
-  'tapu fini',
-  'tapu koko',
-  'nidoran-m',
-  'nidoran-f',
-  'urshifu-rapid-strike',
-];
-
-// List of Custom Pokemon
-
-const infinite: string[] = [
-  'arcanine-mega',
-  'rapidash-mega',
-  'meganium-mega',
-  'octillery-mega',
-  'sunflora-mega',
-  'dunsparce-mega',
-  'mightyena-mega',
-  'delcatty-mega',
-  'flygon-mega',
-  'milotic-mega',
-  'castform-mega',
-  'luxray-mega',
-  'floatzel-mega',
-  'togekiss-mega',
-  'yanmega-mega',
-  'cresselia-mega',
-  'darkrai-mega',
-  'samurott-mega',
-  'klinklang-mega',
-  'beartic-mega',
-  'noivern-mega',
-  'golisopod-mega',
-  'cinderace-mega',
-  "sirfetch'd-mega",
-  'sirfetch’d-mega',
-  'tyranitar-gmax',
-  'regigigas-gmax',
-  'jellicent-gmax',
-  'hydreigon-gmax',
-  'rotom-dex',
-  'rotom-phone',
-  'rotom-melee',
-  'rotom-speak',
-  'chesnaught-clemont',
-  'delphox-serena',
-  'unown-origin',
-  'unown-alphabet',
-  'kyurem-omnipotent',
-  'mewtwo-armored',
-  'nihilego-fusion',
-  'guzzlord-fusion',
-  'celebi-aumagari',
-  'arceus-infinite',
-  'silvally-infinite',
-  'castform-sandy',
-  'castform-nasty',
-  'alcremie-black-forest',
-  'arceus-aumagari',
-  'mantine-aumagari',
-  'mantyke-aumagari',
-  'raikou-aumagari',
-  'entei-aumagari',
-  'suicune-aumagari',
-  'gible-aumagari',
-  'gabite-aumagari',
-  'garchomp-aumagari',
-  'hippowdon-aumagari',
-  'pawniard-aumagari',
-  'dubsknight',
-  'drilbur-aumagari',
-  'excadrill-aumagari',
-  'urshifu-dragon-fist',
-  'urshifu-tiger-claw',
-
-  // not actually Custom, but not added into Showdown Yet
-  // TODO: Check if these were added
-  'venusaur-gmax',
-  'blastoise-gmax',
-  'cinderace-gmax',
-  'rillaboom-gmax',
-];
-
-// Legality Object With Methods
+const birdCheck = (species: string) => {
+  return (
+    species.toLowerCase() === FARFETCHD ||
+    species.toLowerCase() === SIRFETCHD ||
+    species.toLowerCase() === FARFETCDGALAR ||
+    species.toLowerCase() === SIRFECHDMEGA
+  );
+};
 
 const LEGALITY = {
-  // Legality
-
   removeWhiteSpaceHyphen(string: string): string {
     return string.replace(/-|:|'|\|.|’|\s/g, '').toLowerCase();
   },
 
   isLegalSpecies(species: string): boolean {
-    if (
-      species.toLowerCase() === 'farfetch’d' ||
-      species.toLowerCase() === 'sirfetch’d' ||
-      species.toLowerCase() === 'farfetch’d-galar' ||
-      species.toLowerCase() === 'sirfetch’d-mega'
-    ) {
+    if (birdCheck(species)) {
       return true;
     }
     if (POKEMON.has(this.removeWhiteSpaceHyphen(species))) {
@@ -194,36 +92,31 @@ const LEGALITY = {
 
   returnIconSprite(species: string, shiny: boolean): string {
     if (this.isLegalSpecies(species) && this.findSpecies(species).num > 0) {
-      if (infinite.includes(species.toLowerCase())) {
+      if (INFINITE.includes(species.toLowerCase())) {
         return `https://imgur.com/m0p2ljo.png`;
       }
 
-      if (exceptions.includes(species.toLowerCase())) {
+      if (EXCEPTIONS.includes(species.toLowerCase())) {
         return this.cleanSpecies(species, shiny, ALL);
-      } else if (species.toLowerCase() === 'type: null') {
+      } else if (species.toLowerCase() === TYPENULLSTRING) {
         // special case for typenull
         return this.cleanSpecies(species, shiny, TYPENULL);
       } else if (
-        species.toLowerCase() === 'mr. mime' ||
-        species.toLowerCase() === 'mr. rime'
+        species.toLowerCase() === MRMIME ||
+        species.toLowerCase() === MRRIME
       ) {
         // special case for mr. mime and rime
         return this.cleanSpecies(species, shiny, MIME);
-      } else if (
-        species.toLowerCase() === 'farfetch’d' ||
-        species.toLowerCase() === 'sirfetch’d' ||
-        species.toLowerCase() === 'farfetch’d-galar' ||
-        species.toLowerCase() === 'sirfetch’d-mega'
-      ) {
+      } else if (birdCheck(species)) {
         // special case for the bad symbol on Showdown...
         return this.cleanSpecies(species, shiny, BADBIRB);
       } else if (species.toLowerCase() === "farfetch'd-galar") {
         // special case for farfetch'd galar
         return this.cleanSpecies(species, shiny, FARGALAR);
-      } else if (species.toLowerCase() === 'mime jr.') {
+      } else if (species.toLowerCase() === MIMEJRSTRING) {
         // special case for mime jr.
         return this.cleanSpecies(species, shiny, MIMEJR);
-      } else if (species.toLowerCase() === 'mr. mime-galar') {
+      } else if (species.toLowerCase() === MRMIMEGALAR) {
         // special case for mr. mime galar
         return this.cleanSpecies(species, shiny, MIMEGALAR);
       }
@@ -265,7 +158,7 @@ const LEGALITY = {
           return `https://imgur.com/c4gnllj.png`;
         case 'ice':
           return `https://imgur.com/3NLAUft.png`;
-        case 'infinite':
+        case 'INFINITE':
           return `https://imgur.com/pINWaZD.png`;
         case 'normal':
           return `https://imgur.com/f4bdXSF.png`;

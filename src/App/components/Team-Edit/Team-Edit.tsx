@@ -29,8 +29,12 @@ const TeamEdit: FunctionComponent<TeamEditProps> = ({
   team,
   id,
 }): JSX.Element => {
-  const { userSets, handleUpdateTeam, handlePostNewPokemon, handleDeleteTeam } =
-    useContext(GeneralContext);
+  const {
+    userSets,
+    handleUpdateTeam,
+    handleCreateDefaultPokemon,
+    handleDeleteTeam,
+  } = useContext(GeneralContext);
 
   const [teamName, setTeamName] = useState({
     value: team.team_name || '',
@@ -39,7 +43,7 @@ const TeamEdit: FunctionComponent<TeamEditProps> = ({
   // const [favoriteTeam, setFavoriteTeam] = useState({ value: false, touched: false });
   // TOOD: add this as a real feature
   const [description, setDescription] = useState({
-    value: team.team_description || '',
+    value: team.description || '',
     touched: false,
   });
   const [teamExpandToggle, setTeamExpandToggle] = useState(true);
@@ -94,7 +98,7 @@ const TeamEdit: FunctionComponent<TeamEditProps> = ({
           key={SetList.length}
           onClickCallback={(e) => {
             e.preventDefault();
-            handlePostNewPokemon(team.id);
+            !!team.id && handleCreateDefaultPokemon(team.id);
             // we just need the id of the team.  this func fills out default vals.
           }}
         >
@@ -113,7 +117,7 @@ const TeamEdit: FunctionComponent<TeamEditProps> = ({
           onClickCallback={() => {
             handleDeleteExpand();
             handleTeamToggle();
-            handleDeleteTeam(team.id);
+            team.id && handleDeleteTeam(team.id);
           }}
         >
           Yes <i className="fas fa-thumbs-up"></i>
@@ -158,7 +162,7 @@ const TeamEdit: FunctionComponent<TeamEditProps> = ({
                 <p>By {team.user_name}</p>
                 <p>
                   Created on:{' '}
-                  {new Date(team.date_created).toLocaleString('en-GB', {
+                  {new Date(team.date_created || '').toLocaleString('en-GB', {
                     weekday: 'long',
                     year: 'numeric',
                     month: 'long',
@@ -192,7 +196,12 @@ const TeamEdit: FunctionComponent<TeamEditProps> = ({
                 }
                 onClickCallback={(e) => {
                   e.preventDefault();
-                  handleUpdateTeam(teamName.value, description.value, team.id);
+                  !!team.id &&
+                    handleUpdateTeam(
+                      teamName.value,
+                      description.value,
+                      team.id
+                    );
                 }}
               >
                 Save Team Details <i className="fas fa-save"></i>
@@ -288,7 +297,7 @@ const TeamEdit: FunctionComponent<TeamEditProps> = ({
             <div className={styles['sprites-row']}>{spriteMap}</div>
             <p>
               Created on:{' '}
-              {new Date(team.date_created).toLocaleString('en-GB', {
+              {new Date(team.date_created || '').toLocaleString('en-GB', {
                 weekday: 'long',
                 year: 'numeric',
                 month: 'long',

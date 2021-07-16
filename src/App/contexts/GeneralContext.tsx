@@ -18,6 +18,7 @@ import {
   PokemonSet,
   TextInput,
   InputWithId,
+  ParseReturn,
 } from '../@types';
 
 type ContextProps = {
@@ -105,34 +106,7 @@ interface GeneralContextValues {
   ) => void;
   handleDeleteSet: (teamId: number, setId: number) => void;
   handleUpdateTeam: (teamName: string, desc: string, teamId: number) => void;
-  handlePostNewPokemon: (
-    team_id: number,
-    nickname?: string,
-    species?: string,
-    gender?: string,
-    item?: string,
-    ability?: string,
-    level?: number,
-    shiny?: boolean,
-    happiness?: number,
-    nature?: string,
-    hp_ev?: number,
-    atk_ev?: number,
-    def_ev?: number,
-    spa_ev?: number,
-    spd_ev?: number,
-    spe_ev?: number,
-    hp_iv?: number,
-    atk_iv?: number,
-    def_iv?: number,
-    spa_iv?: number,
-    spd_iv?: number,
-    spe_iv?: number,
-    move_one?: string,
-    move_two?: string,
-    move_three?: string,
-    move_four?: string
-  ) => void;
+  handleCreateDefaultPokemon: (team_id: number) => void;
   handleDeleteTeam: (teamId: number) => void;
   handlePage: (direction: 'up' | 'down') => void;
   getUserState: () => void;
@@ -226,7 +200,7 @@ const GeneralContext = createContext<GeneralContextValues>({
   handleUpdateSet: () => null,
   handleDeleteSet: () => null,
   handleUpdateTeam: () => null,
-  handlePostNewPokemon: () => null,
+  handleCreateDefaultPokemon: () => null,
   handleDeleteTeam: () => null,
   handlePage: () => null,
   getUserState: () => null,
@@ -289,10 +263,11 @@ export const GeneralProvider = ({ children }: ContextProps): JSX.Element => {
       setPublicSets([]);
       let newSets: PokemonSet[] = [];
       teams.forEach((team: PokemonTeam) => {
-        apiService.getSetsForOneTeam(team.id).then((sets) => {
-          newSets = [...newSets, ...sets];
-          setPublicSets(newSets);
-        });
+        !!team.id &&
+          apiService.getSetsForOneTeam(team.id).then((sets) => {
+            newSets = [...newSets, ...sets];
+            setPublicSets(newSets);
+          });
       });
     });
   }, [page, search.value, sort.value]);
@@ -327,9 +302,10 @@ export const GeneralProvider = ({ children }: ContextProps): JSX.Element => {
       setPublicTeams(teams);
       setPublicSets([]);
       teams.forEach((team: PokemonTeam) => {
-        apiService.getSetsForOneTeam(team.id).then((sets) => {
-          setPublicSets([...publicSets, ...sets]);
-        });
+        !!team.id &&
+          apiService.getSetsForOneTeam(team.id).then((sets) => {
+            setPublicSets([...publicSets, ...sets]);
+          });
       });
     });
   };
@@ -389,7 +365,7 @@ export const GeneralProvider = ({ children }: ContextProps): JSX.Element => {
 
             let allSets: PokemonSet[] = [];
 
-            const altered = parsed.map((fullteam: object) => {
+            const altered = parsed.map((fullteam: ParseReturn) => {
               const createdTeam = newVals.find(
                 (team) => team.team_name === Object.keys(fullteam)[0]
               );
@@ -478,61 +454,34 @@ export const GeneralProvider = ({ children }: ContextProps): JSX.Element => {
       });
   };
 
-  const handlePostNewPokemon = (
-    team_id: number,
-    nickname: string | undefined,
-    species = 'Pikachu',
-    gender: string | undefined,
-    item: string | undefined,
-    ability: string | undefined,
-    level = 100,
-    shiny = false,
-    happiness = 255,
-    nature = 'Adamant',
-    hp_ev = 0,
-    atk_ev = 0,
-    def_ev = 0,
-    spa_ev = 0,
-    spd_ev = 0,
-    spe_ev = 0,
-    hp_iv = 31,
-    atk_iv = 31,
-    def_iv = 31,
-    spa_iv = 31,
-    spd_iv = 31,
-    spe_iv = 31,
-    move_one = 'Tackle',
-    move_two: string | undefined,
-    move_three: string | undefined,
-    move_four: string | undefined
-  ) => {
+  const handleCreateDefaultPokemon = (team_id: number) => {
     const set_body = {
       team_id,
-      nickname,
-      species,
-      gender,
-      item,
-      ability,
-      level,
-      shiny,
-      happiness,
-      nature,
-      hp_ev,
-      atk_ev,
-      def_ev,
-      spa_ev,
-      spd_ev,
-      spe_ev,
-      hp_iv,
-      atk_iv,
-      def_iv,
-      spa_iv,
-      spd_iv,
-      spe_iv,
-      move_one,
-      move_two,
-      move_three,
-      move_four,
+      nickname: null,
+      species: 'Pikachu',
+      gender: null,
+      item: null,
+      ability: null,
+      level: 100,
+      shiny: false,
+      happiness: 255,
+      nature: 'Adamant',
+      hp_ev: 0,
+      atk_ev: 0,
+      def_ev: 0,
+      spa_ev: 0,
+      spd_ev: 0,
+      spe_ev: 0,
+      hp_iv: 31,
+      atk_iv: 31,
+      def_iv: 31,
+      spa_iv: 31,
+      spd_iv: 31,
+      spe_iv: 31,
+      move_one: 'Tackle',
+      move_two: null,
+      move_three: null,
+      move_four: null,
     };
 
     apiService
@@ -547,7 +496,7 @@ export const GeneralProvider = ({ children }: ContextProps): JSX.Element => {
     const body = {
       team_name: newTeamName.value,
       description: desc.value,
-      folder_id: currentClickedFolder.id,
+      folder_id: Number(currentClickedFolder.id),
     };
 
     apiService
@@ -882,9 +831,10 @@ export const GeneralProvider = ({ children }: ContextProps): JSX.Element => {
       setPublicTeams(teams);
       setPublicSets([]);
       teams.forEach((team: PokemonTeam) => {
-        apiService.getSetsForOneTeam(team.id).then((sets) => {
-          setPublicSets([...publicSets, ...sets]);
-        });
+        !!team.id &&
+          apiService.getSetsForOneTeam(team.id).then((sets) => {
+            setPublicSets([...publicSets, ...sets]);
+          });
       });
     });
   };
@@ -951,7 +901,7 @@ export const GeneralProvider = ({ children }: ContextProps): JSX.Element => {
     handleEditFolder,
     handleFilter,
     handlePostNewFolder,
-    handlePostNewPokemon,
+    handleCreateDefaultPokemon,
     handleSearch,
     handleUpdateSet,
     handleUpdateSetImport,

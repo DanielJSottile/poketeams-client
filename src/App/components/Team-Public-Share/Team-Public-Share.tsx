@@ -65,7 +65,7 @@ const TeamPublicShare: FunctionComponent<TeamPublicShareProps> = ({
                 <p>By {team.user_name}</p>
                 <p>
                   Created on:{' '}
-                  {new Date(team.date_created).toLocaleString('en-GB', {
+                  {new Date(team.date_created || '').toLocaleString('en-GB', {
                     weekday: 'long',
                     year: 'numeric',
                     month: 'long',
@@ -169,7 +169,7 @@ const TeamPublicShare: FunctionComponent<TeamPublicShareProps> = ({
             <div className={styles['sprites-row']}>{spriteMap}</div>
             <p>
               Created on:{' '}
-              {new Date(team.date_created).toLocaleString('en-GB', {
+              {new Date(team.date_created || '').toLocaleString('en-GB', {
                 weekday: 'long',
                 year: 'numeric',
                 month: 'long',
