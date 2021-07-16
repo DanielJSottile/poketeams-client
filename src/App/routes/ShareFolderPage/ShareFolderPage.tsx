@@ -1,6 +1,8 @@
 import React, { useState, useEffect, FunctionComponent } from 'react';
 import { Link, RouteComponentProps } from 'react-router-dom';
-import FolderPublicShare from '../../components/Folder-Public-Share/Folder-Public-Share';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHome } from '@fortawesome/free-solid-svg-icons';
+import FolderPublicShare from '../../components/Folder-Public-Share';
 import * as array from 'lodash';
 import apiService from '../../services/apiService';
 import styles from './ShareFolderPage.module.scss';
@@ -47,7 +49,7 @@ const ShareFolderPage: FunctionComponent<RouteComponentProps<MatchParams>> = ({
   return (
     <div>
       <Link className={styles['go-back']} to={'/'}>
-        Go To PokéTeams <i className="fas fa-home"></i>
+        Go To PokéTeams <FontAwesomeIcon icon={faHome} />
       </Link>
       {folder[0] ? (
         <FolderPublicShare folder={folder[0]} teams={teams} sets={sets} />

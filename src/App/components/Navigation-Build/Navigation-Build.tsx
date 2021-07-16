@@ -1,5 +1,12 @@
 import React, { useContext, FunctionComponent } from 'react';
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faSignOutAlt,
+  faSignInAlt,
+  faHome,
+  faHammer,
+} from '@fortawesome/free-solid-svg-icons';
 import SearchBarBuild from '../SearchBar-Build';
 import GeneralContext from '../../contexts/GeneralContext';
 import TokenService from '../../services/token-service';
@@ -23,7 +30,7 @@ const NavigationBuild: FunctionComponent = () => {
     return (
       <div className={styles['navigation-logged-in']}>
         <Link onClick={handleLogoutClick} to="/landing">
-          Logout <i className="fas fa-sign-out-alt"></i>
+          Logout <FontAwesomeIcon icon={faSignOutAlt} />
         </Link>
       </div>
     );
@@ -33,7 +40,7 @@ const NavigationBuild: FunctionComponent = () => {
     return (
       <div className={styles['navigation-logged-out']}>
         <Link to="/landing">
-          Log In <i className="fas fa-sign-in-alt"></i>
+          Log In <FontAwesomeIcon icon={faSignInAlt} />
         </Link>
       </div>
     );
@@ -58,18 +65,18 @@ const NavigationBuild: FunctionComponent = () => {
         <div className={styles['navbar']}>
           <div className={styles['button_things']}>
             <Link to="/">
-              <i className="fas fa-home"></i> Home
+              <FontAwesomeIcon icon={faHome} /> Home
             </Link>
             <Link to="/build">
-              <i className="fas fa-hammer"></i> Build!
+              <FontAwesomeIcon icon={faHome} /> Build!
             </Link>
           </div>
           <div className={styles['mobile-button']}>
             <Link to="/">
-              <i className="fas fa-home"></i> Home
+              <FontAwesomeIcon icon={faHome} /> Home
             </Link>
             <Link to="/build">
-              <i className="fas fa-hammer"></i> Build!
+              <FontAwesomeIcon icon={faHammer} /> Build!
             </Link>
             {TokenService.hasAuthToken() ? renderLogout() : renderLogin()}
           </div>

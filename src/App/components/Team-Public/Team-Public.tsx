@@ -5,6 +5,11 @@ import React, {
   FunctionComponent,
 } from 'react';
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faCompressArrowsAlt,
+  faShareSquare,
+} from '@fortawesome/free-solid-svg-icons';
 import Input from '../Input';
 import TextArea from '../TextArea';
 import Image from '../Image';
@@ -59,7 +64,7 @@ const TeamPublic: FunctionComponent<TeamPublicProps> = ({
             <form className={styles['team-form']}>
               <div className={styles['team-title']}>
                 <Button onClickCallback={() => handleTeamToggle()}>
-                  Compress Team <i className="fas fa-compress-arrows-alt"></i>
+                  Compress Team <FontAwesomeIcon icon={faCompressArrowsAlt} />
                 </Button>
                 <div className={styles['title-name']}>
                   <Input
@@ -127,7 +132,7 @@ const TeamPublic: FunctionComponent<TeamPublicProps> = ({
                   }}
                   target="_blank"
                 >
-                  Share This Team! <i className="fas fa-share-square"></i>
+                  Share This Team! <FontAwesomeIcon icon={faShareSquare} />
                 </Link>
                 <Input
                   inputHasError={false}

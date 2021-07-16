@@ -5,6 +5,16 @@ import React, {
   FunctionComponent,
 } from 'react';
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faThumbsUp,
+  faThumbsDown,
+  faCompressArrowsAlt,
+  faSave,
+  faShareSquare,
+  faDownload,
+  faTrashAlt,
+} from '@fortawesome/free-solid-svg-icons';
 import Input from '../Input';
 import TextArea from '../TextArea';
 import Image from '../Image';
@@ -120,10 +130,10 @@ const TeamEdit: FunctionComponent<TeamEditProps> = ({
             team.id && handleDeleteTeam(team.id);
           }}
         >
-          Yes <i className="fas fa-thumbs-up"></i>
+          Yes <FontAwesomeIcon icon={faThumbsUp} />
         </Button>
         <Button onClickCallback={() => handleDeleteExpand()}>
-          No <i className="fas fa-thumbs-down"></i>
+          No <FontAwesomeIcon icon={faThumbsDown} />
         </Button>
       </div>
     );
@@ -139,7 +149,7 @@ const TeamEdit: FunctionComponent<TeamEditProps> = ({
             <form className={styles['team-form']}>
               <div className={styles['team-title']}>
                 <Button onClickCallback={() => handleTeamToggle()}>
-                  Compress Team <i className="fas fa-compress-arrows-alt"></i>
+                  Compress Team <FontAwesomeIcon icon={faCompressArrowsAlt} />
                 </Button>
                 <div className={styles['title-name']}>
                   <label htmlFor="title-name">Team Name:</label>
@@ -204,7 +214,7 @@ const TeamEdit: FunctionComponent<TeamEditProps> = ({
                     );
                 }}
               >
-                Save Team Details <i className="fas fa-save"></i>
+                Save Team Details <FontAwesomeIcon icon={faSave} />
               </Button>
             </form>
             <div className={styles['export-team']}>
@@ -227,7 +237,7 @@ const TeamEdit: FunctionComponent<TeamEditProps> = ({
                   }}
                   target="_blank"
                 >
-                  Share This Team! <i className="fas fa-share-square"></i>
+                  Share This Team! <FontAwesomeIcon icon={faShareSquare} />
                 </Link>
                 <Input
                   inputHasError={false}
@@ -238,7 +248,7 @@ const TeamEdit: FunctionComponent<TeamEditProps> = ({
                 />
               </div>
               <label htmlFor="edit-team">
-                Export Team: <i className="fas fa-download"></i>
+                Export Team: <FontAwesomeIcon icon={faDownload} />
               </label>
               <TextArea
                 textAreaHasError={false}
@@ -258,7 +268,7 @@ const TeamEdit: FunctionComponent<TeamEditProps> = ({
                 handleDeleteExpand();
               }}
             >
-              <i className="fas fa-trash-alt"></i> Delete Team!
+              <FontAwesomeIcon icon={faTrashAlt} /> Delete Team!
             </Button>
             {deleteClicked && renderDeleteExpand()}
           </div>

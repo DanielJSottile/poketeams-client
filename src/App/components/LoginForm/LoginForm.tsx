@@ -4,6 +4,8 @@ import React, {
   FormEvent,
   FunctionComponent,
 } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSignInAlt } from '@fortawesome/free-solid-svg-icons';
 import Input from '../Input';
 import Button from '../Button';
 import TokenService from '../../services/token-service';
@@ -77,7 +79,7 @@ const LoginForm: FunctionComponent<LoginFormProps> = ({ onLoginSuccess }) => {
         value={password}
       />
       <Button type="submit">
-        Log In <i className="fas fa-sign-in-alt"></i>
+        Log In <FontAwesomeIcon icon={faSignInAlt} />
       </Button>
     </form>
   );

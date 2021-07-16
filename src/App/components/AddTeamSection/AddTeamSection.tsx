@@ -1,4 +1,10 @@
 import React, { Fragment, useContext, FunctionComponent } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faUpload,
+  faCheckCircle,
+  faPlusSquare,
+} from '@fortawesome/free-solid-svg-icons';
 import GeneralContext from '../../contexts/GeneralContext';
 import Input from '../Input';
 import TextArea from '../TextArea';
@@ -63,7 +69,7 @@ const AddTeamSection: FunctionComponent = () => {
           isError={!!newTeamImport.value}
           htmlFor="team-import"
           label={'Import Showdown Team: '}
-          labelIcon={<i className="fas fa-upload"></i>}
+          labelIcon={<FontAwesomeIcon icon={faUpload} />}
           validationCallback={() => validateNewTeamImport(newTeamImport)}
           placeholder="Optionally Import a proper Pokemon Showdown Team Here And It Will Fill Out Your Whole Team!"
           name="team-import"
@@ -87,7 +93,7 @@ const AddTeamSection: FunctionComponent = () => {
             handlePostNewTeam();
           }}
         >
-          Submit <i className="far fa-check-circle"></i>
+          Submit <FontAwesomeIcon icon={faCheckCircle} />
         </Button>
       </form>
     );
@@ -99,7 +105,7 @@ const AddTeamSection: FunctionComponent = () => {
         <div>
           {currentClickedFolder.value ? (
             <Button onClickCallback={() => setTeamAddClicked(!teamAddClicked)}>
-              New Team <i className="far fa-plus-square"></i>
+              New Team <FontAwesomeIcon icon={faPlusSquare} />
             </Button>
           ) : (
             <h4>Click a Folder to add Teams!</h4>

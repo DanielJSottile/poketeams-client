@@ -1,4 +1,6 @@
 import React, { useContext, FunctionComponent } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFolder } from '@fortawesome/free-solid-svg-icons';
 import Button from '../Button';
 import GeneralContext from '../../contexts/GeneralContext';
 
@@ -27,7 +29,7 @@ const Folder: FunctionComponent<FolderProps> = ({
         })
       }
     >
-      <i className="fas fa-folder"></i> {folder_name}
+      <FontAwesomeIcon icon={faFolder} /> {folder_name}
     </Button>
   );
 };

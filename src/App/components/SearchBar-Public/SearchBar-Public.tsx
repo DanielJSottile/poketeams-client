@@ -1,4 +1,10 @@
 import React, { useContext, FunctionComponent } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faSearch,
+  faSort,
+  faExclamation,
+} from '@fortawesome/free-solid-svg-icons';
 import GeneralContext from '../../contexts/GeneralContext';
 import Input from '../Input';
 import Button from '../Button';
@@ -19,7 +25,7 @@ const SearchBarPublic: FunctionComponent = () => {
             validationCallback={() => validateSearch(search)}
             inputClass={styles['s-input']}
             label={'Search: '}
-            labelIcon={<i className="fas fa-search"></i>}
+            labelIcon={<FontAwesomeIcon icon={faSearch} />}
             placeholder="e.g. Pikachu"
             value={search.value}
             onChangeCallback={(e) =>
@@ -30,7 +36,8 @@ const SearchBarPublic: FunctionComponent = () => {
             id="search"
           />
           <label htmlFor="sort">
-            Sort By:<i className="fas fa-sort"></i>{' '}
+            Sort By:
+            <FontAwesomeIcon icon={faSort} />{' '}
           </label>
           <select
             name="sort"
@@ -49,7 +56,7 @@ const SearchBarPublic: FunctionComponent = () => {
               handleSearch(e);
             }}
           >
-            Go <i className="fas fa-exclamation"></i>
+            Go <FontAwesomeIcon icon={faExclamation} />
           </Button>
         </div>
       </form>
