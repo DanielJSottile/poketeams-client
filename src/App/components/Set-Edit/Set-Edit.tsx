@@ -5,6 +5,18 @@ import React, {
   FunctionComponent,
 } from 'react';
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faCompressArrowsAlt,
+  faUpload,
+  faCheckCircle,
+  faSave,
+  faShareSquare,
+  faDownload,
+  faTrashAlt,
+  faThumbsUp,
+  faThumbsDown,
+} from '@fortawesome/free-solid-svg-icons';
 import Input from '../Input';
 import TextArea from '../TextArea';
 import Image from '../Image';
@@ -178,12 +190,12 @@ const SetEdit: FunctionComponent<SetEditProps> = ({ set }) => {
     return (
       <div className={styles['pokemon']}>
         <Button onClickCallback={() => setExpandToggle(!expandToggle)}>
-          Compress Set <i className="fas fa-compress-arrows-alt"></i>
+          Compress Set <FontAwesomeIcon icon={faCompressArrowsAlt} />
         </Button>
         <form>
           <div className={styles['pokemon-import']}>
             <label htmlFor="pokemon-import">
-              Import Pokemon Set: <i className="fas fa-upload"></i>
+              Import Pokemon Set: <FontAwesomeIcon icon={faUpload} />
             </label>
             {newSetImport.value !== '' && (
               <p className="error-validate shake-horizontal">
@@ -209,7 +221,7 @@ const SetEdit: FunctionComponent<SetEditProps> = ({ set }) => {
                 setFields(newSetImport.value);
               }}
             >
-              Submit <i className="fas fa-check-circle"></i>
+              Submit <FontAwesomeIcon icon={faCheckCircle} />
             </Button>
           </div>
         </form>
@@ -698,7 +710,7 @@ const SetEdit: FunctionComponent<SetEditProps> = ({ set }) => {
                 );
               }}
             >
-              Save Set Details <i className="fas fa-save"></i>
+              Save Set Details <FontAwesomeIcon icon={faSave} />
             </Button>
           </div>
         </form>
@@ -723,7 +735,7 @@ const SetEdit: FunctionComponent<SetEditProps> = ({ set }) => {
               }}
               target="_blank"
             >
-              Share This Set! <i className="fas fa-share-square"></i>
+              Share This Set! <FontAwesomeIcon icon={faShareSquare} />
             </Link>
             <Input
               inputHasError={false}
@@ -737,7 +749,7 @@ const SetEdit: FunctionComponent<SetEditProps> = ({ set }) => {
             textAreaHasError
             htmlFor="export-pokemon"
             label="Export Pokemon: "
-            labelIcon={<i className="fas fa-download"></i>}
+            labelIcon={<FontAwesomeIcon icon={faDownload} />}
             ref={textArea}
             readOnly
             name="export-pokemon"
@@ -751,7 +763,8 @@ const SetEdit: FunctionComponent<SetEditProps> = ({ set }) => {
               setDeleteClicked(!deleteClicked);
             }}
           >
-            <i className="fas fa-trash-alt"></i> Delete Set!
+            <FontAwesomeIcon icon={faTrashAlt} />
+            Delete Set!
           </Button>
           {deleteClicked && renderDeleteExpand()}
         </div>
@@ -818,10 +831,10 @@ const SetEdit: FunctionComponent<SetEditProps> = ({ set }) => {
             setDeleteClicked(!deleteClicked);
           }}
         >
-          Yes <i className="fas fa-thumbs-up"></i>
+          Yes <FontAwesomeIcon icon={faThumbsUp} />
         </Button>
         <Button onClickCallback={() => setDeleteClicked(!deleteClicked)}>
-          No <i className="fas fa-thumbs-down"></i>
+          No <FontAwesomeIcon icon={faThumbsDown} />
         </Button>
       </div>
     );

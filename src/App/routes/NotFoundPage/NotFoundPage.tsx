@@ -1,4 +1,6 @@
 import React, { FunctionComponent } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHome } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import Image from '../../components/Image/Image';
 import styles from './NotFoundPage.module.scss';
@@ -13,7 +15,7 @@ const NotFoundPage: FunctionComponent = (): JSX.Element => {
       />
       <h2 className={styles['statement']}>Page Not Found. Please Go back.</h2>
       <Link className={styles['go-back']} to={'/'}>
-        Go To PokéTeams <i className="fas fa-home"></i>
+        Go To PokéTeams <FontAwesomeIcon icon={faHome} />
       </Link>
     </div>
   );

@@ -1,5 +1,10 @@
 import React, { Fragment, useState, FunctionComponent } from 'react';
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faCompressArrowsAlt,
+  faShareSquare,
+} from '@fortawesome/free-solid-svg-icons';
 import Input from '../Input';
 import TextArea from '../TextArea';
 import Image from '../Image';
@@ -28,7 +33,7 @@ const SetPublic: FunctionComponent<SetPublicProps> = ({ set }): JSX.Element => {
     return (
       <div className={styles['pokemon']}>
         <Button onClickCallback={() => handleSetToggle()}>
-          Compress Set <i className="fas fa-compress-arrows-alt"></i>
+          Compress Set <FontAwesomeIcon icon={faCompressArrowsAlt} />
         </Button>
         <form>
           {' '}
@@ -431,7 +436,7 @@ const SetPublic: FunctionComponent<SetPublicProps> = ({ set }): JSX.Element => {
               }}
               target="_blank"
             >
-              Share This Set! <i className="fas fa-share-square"></i>
+              Share This Set! <FontAwesomeIcon icon={faShareSquare} />
             </Link>
             <Input
               inputHasError={false}

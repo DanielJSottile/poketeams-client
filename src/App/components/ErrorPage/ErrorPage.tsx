@@ -1,4 +1,6 @@
 import React, { Component, ReactNode } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHome } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 
 export default class ErrorPage extends Component {
@@ -16,7 +18,7 @@ export default class ErrorPage extends Component {
           <h1>Something seems to have gone wrong!</h1>
           <p>Try refreshing the page or returning to HOME</p>
           <Link to="/">
-            <i className="fas fa-home"></i> Home
+            <FontAwesomeIcon icon={faHome} /> Home
           </Link>
         </main>
       );

@@ -1,6 +1,8 @@
 import React, { useState, useEffect, FunctionComponent } from 'react';
 import { Link, RouteComponentProps } from 'react-router-dom';
-import TeamPublicShare from '../../components/Team-Public-Share/Team-Public-Share';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHome } from '@fortawesome/free-solid-svg-icons';
+import TeamPublicShare from '../../components/Team-Public-Share';
 import apiService from '../../services/apiService';
 import styles from './ShareTeamPage.module.scss';
 import { PokemonTeam, PokemonSet } from '../../@types';
@@ -33,7 +35,7 @@ const ShareTeamPage: FunctionComponent<RouteComponentProps<MatchProps>> = ({
   return (
     <div>
       <Link className={styles['go-back']} to={'/'}>
-        Go To PokéTeams <i className="fas fa-home"></i>
+        Go To PokéTeams <FontAwesomeIcon icon={faHome} />
       </Link>
       {team[0] ? (
         <TeamPublicShare

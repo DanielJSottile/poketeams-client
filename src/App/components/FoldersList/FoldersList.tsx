@@ -5,6 +5,17 @@ import React, {
   FunctionComponent,
 } from 'react';
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faCheckCircle,
+  faThumbsDown,
+  faThumbsUp,
+  faFolderPlus,
+  faShareSquare,
+  faDownload,
+  faEdit,
+  faTrashAlt,
+} from '@fortawesome/free-solid-svg-icons';
 import Folder from '../Folder/Folder';
 import Input from '../Input/Input';
 import TextArea from '../TextArea';
@@ -117,7 +128,7 @@ const FoldersList: FunctionComponent = () => {
             handlePostNewFolder();
           }}
         >
-          Submit <i className="far fa-check-circle"></i>
+          Submit <FontAwesomeIcon icon={faCheckCircle} />
         </Button>
       </form>
     );
@@ -155,7 +166,7 @@ const FoldersList: FunctionComponent = () => {
             });
           }}
         >
-          Submit <i className="far fa-check-circle"></i>
+          Submit <FontAwesomeIcon icon={faCheckCircle} />
         </Button>
       </form>
     );
@@ -171,10 +182,10 @@ const FoldersList: FunctionComponent = () => {
             handleDeleteExpand();
           }}
         >
-          Yes <i className="fas fa-thumbs-up"></i>
+          Yes <FontAwesomeIcon icon={faThumbsUp} />
         </Button>
         <Button onClickCallback={() => handleDeleteExpand()}>
-          No <i className="fas fa-thumbs-down"></i>
+          No <FontAwesomeIcon icon={faThumbsDown} />
         </Button>
       </div>
     );
@@ -201,7 +212,7 @@ const FoldersList: FunctionComponent = () => {
           <Button
             onClickCallback={() => setFolderAddClicked(!folderAddClicked)}
           >
-            New Folder <i className="fas fa-folder-plus"></i>
+            New Folder <FontAwesomeIcon icon={faFolderPlus} />
           </Button>
           {folderAddClicked && renderExpanded()}
         </div>
@@ -234,7 +245,7 @@ const FoldersList: FunctionComponent = () => {
                     }}
                     target="_blank"
                   >
-                    Share This Folder! <i className="fas fa-share-square"></i>
+                    Share This Folder! <FontAwesomeIcon icon={faShareSquare} />
                   </Link>
                   <Input
                     inputHasError={false}
@@ -245,7 +256,7 @@ const FoldersList: FunctionComponent = () => {
                   />
                 </div>
                 <label htmlFor="edit-team">
-                  Export Folder: <i className="fas fa-download"></i>
+                  Export Folder: <FontAwesomeIcon icon={faDownload} />
                 </label>
                 <TextArea
                   textAreaHasError={false}
@@ -261,10 +272,10 @@ const FoldersList: FunctionComponent = () => {
                 />
               </div>
               <Button onClickCallback={() => handleEditExpand()}>
-                <i className="fas fa-edit"></i> Edit
+                <FontAwesomeIcon icon={faEdit} /> Edit
               </Button>
               <Button onClickCallback={() => handleDeleteExpand()}>
-                Delete <i className="fas fa-trash-alt"></i>
+                Delete <FontAwesomeIcon icon={faTrashAlt} />
               </Button>
             </div>
           )}

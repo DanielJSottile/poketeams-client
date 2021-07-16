@@ -1,4 +1,9 @@
 import React, { Fragment, useContext, FunctionComponent } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faArrowCircleLeft,
+  faArrowCircleRight,
+} from '@fortawesome/free-solid-svg-icons';
 import Button from '../Button';
 import TeamPublic from '../Team-Public';
 import PokeballLoader from '../Loaders/PokeballLoader';
@@ -25,14 +30,14 @@ const TeamListPublic: FunctionComponent = (): JSX.Element => {
               }}
             >
               {`Go to Previous 10 Teams`}{' '}
-              <i className="fas fa-arrow-circle-left"></i>
+              <FontAwesomeIcon icon={faArrowCircleLeft} />
             </Button>
             <Button
               onClickCallback={() => {
                 handlePage('up');
               }}
             >
-              <i className="fas fa-arrow-circle-right"></i>{' '}
+              <FontAwesomeIcon icon={faArrowCircleRight} />{' '}
               {`Go to Next 10 Teams`}
             </Button>
           </div>
@@ -43,7 +48,7 @@ const TeamListPublic: FunctionComponent = (): JSX.Element => {
                 handlePage('up');
               }}
             >
-              <i className="fas fa-arrow-circle-right"></i>{' '}
+              <FontAwesomeIcon icon={faArrowCircleRight} />{' '}
               {`Go to Next 10 Teams`}
             </Button>
           </div>
