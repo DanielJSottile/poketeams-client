@@ -1,7 +1,7 @@
 import React, { useContext, FunctionComponent } from 'react';
 import GeneralContext from '../../contexts/GeneralContext';
-import Input from '../Input/Input';
-import Button from '../Button/Button';
+import Input from '../Input';
+import Button from '../Button';
 import { validateSearch } from '../../utils/validations';
 import styles from './SearchBar-Build.module.scss';
 

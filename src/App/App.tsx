@@ -1,24 +1,18 @@
 import React, { Fragment, lazy, Suspense, FunctionComponent } from 'react';
 import { Route, Switch } from 'react-router-dom';
-import ErrorPage from './components/ErrorPage/ErrorPage';
+import ErrorPage from './components/ErrorPage';
 import PrivateRoute from './components/Utils/PrivateRoute';
 import PublicOnlyRoute from './components/Utils/PublicOnlyRoute';
-import LazyLoader from './components/Loaders/LazyLoader/LazyLoader';
+import LazyLoader from './components/Loaders/LazyLoader';
 
-const BuildPage = lazy(() => import('./routes/BuildPage/BuildPage'));
-const HomePage = lazy(() => import('./routes/HomePage/HomePage'));
-const LandingPage = lazy(() => import('./routes/LandingPage/LandingPage'));
-const NotFoundPage = lazy(() => import('./routes/NotFoundPage/NotFoundPage'));
-const ShareSetPage = lazy(() => import('./routes/ShareSetPage/ShareSetPage'));
-const ShareTeamPage = lazy(
-  () => import('./routes/ShareTeamPage/ShareTeamPage')
-);
-const ShareFolderPage = lazy(
-  () => import('./routes/ShareFolderPage/ShareFolderPage')
-);
-const RegistrationPage = lazy(
-  () => import('./routes/RegistrationPage/RegistrationPage')
-);
+const BuildPage = lazy(() => import('./routes/BuildPage'));
+const HomePage = lazy(() => import('./routes/HomePage'));
+const LandingPage = lazy(() => import('./routes/LandingPage'));
+const NotFoundPage = lazy(() => import('./routes/NotFoundPage'));
+const ShareSetPage = lazy(() => import('./routes/ShareSetPage'));
+const ShareTeamPage = lazy(() => import('./routes/ShareTeamPage'));
+const ShareFolderPage = lazy(() => import('./routes/ShareFolderPage'));
+const RegistrationPage = lazy(() => import('./routes/RegistrationPage'));
 
 const App: FunctionComponent = () => {
   return (

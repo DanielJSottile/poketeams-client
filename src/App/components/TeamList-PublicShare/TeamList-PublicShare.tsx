@@ -1,7 +1,7 @@
 import React, { Fragment, FunctionComponent } from 'react';
-import TeamPublicShare from '../Team-Public-Share/Team-Public-Share';
-import PokeballLoader from '../Loaders/PokeballLoader/PokeballLoader';
-import LoadingBlack from '../Loaders/LoadingBlack/LoadingBlack';
+import TeamPublicShare from '../Team-Public-Share';
+import PokeballLoader from '../Loaders/PokeballLoader';
+import LoadingBlack from '../Loaders/LoadingBlack';
 import styles from './TeamList-PublicShare.module.scss';
 import { PokemonTeam, PokemonSet } from '../../@types';
 

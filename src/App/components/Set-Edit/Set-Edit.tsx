@@ -5,11 +5,11 @@ import React, {
   FunctionComponent,
 } from 'react';
 import { Link } from 'react-router-dom';
-import Input from '../Input/Input';
-import TextArea from '../TextArea/TextArea';
-import Image from '../Image/Image';
-import Button from '../Button/Button';
-import LoadingSets from '../Loaders/LoadingSets/LoadingSets';
+import Input from '../Input';
+import TextArea from '../TextArea';
+import Image from '../Image';
+import Button from '../Button';
+import LoadingSets from '../Loaders/LoadingSets';
 import GeneralContext from '../../contexts/GeneralContext';
 import showdownGenerate from '../../utils/generate';
 import showdownParse from '../../utils/parse';

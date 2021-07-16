@@ -1,6 +1,6 @@
 import React, { useContext, FunctionComponent } from 'react';
 import { Link } from 'react-router-dom';
-import SearchBarBuild from '../SearchBar-Build/SearchBar-Build';
+import SearchBarBuild from '../SearchBar-Build';
 import GeneralContext from '../../contexts/GeneralContext';
 import TokenService from '../../services/token-service';
 import jwtDecode from 'jwt-decode';
