@@ -81,25 +81,22 @@ const LEGALITY = {
 
   cleanSpecies(species: string, shiny: boolean, REGEX: RegExp): string {
     const match = species.match(REGEX);
-    if (match) {
-      species = '';
-      const cleanMatch = match.slice(1);
-      cleanMatch.forEach((part) => {
-        species = species + `${part}`;
-      });
-      if (!shiny) {
-        return `https://play.pokemonshowdown.com/sprites/ani/${species.toLowerCase()}.gif`;
-      } else {
-        return `https://play.pokemonshowdown.com/sprites/ani-shiny/${species.toLowerCase()}.gif`;
-      }
+    species = '';
+    const cleanMatch = match!.slice(1);
+    cleanMatch.forEach((part) => {
+      species = species + `${part}`;
+    });
+    if (!shiny) {
+      return `https://play.pokemonshowdown.com/sprites/ani/${species.toLowerCase()}.gif`;
+    } else {
+      return `https://play.pokemonshowdown.com/sprites/ani-shiny/${species.toLowerCase()}.gif`;
     }
-    return species;
   },
 
   returnIconSprite(species: string, shiny: boolean): string {
     if (
-      (this.isLegalSpecies(species) && this.findSpecies(species)?.num) ||
-      0 > 0
+      this.isLegalSpecies(species) &&
+      (this.findSpecies(species)?.num || 0) > 0
     ) {
       if (INFINITE.includes(species.toLowerCase())) {
         return `https://imgur.com/m0p2ljo.png`;
