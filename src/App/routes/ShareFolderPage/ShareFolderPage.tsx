@@ -11,9 +11,9 @@ export type MatchParams = { folder_id: string };
 const ShareFolderPage: FunctionComponent<RouteComponentProps<MatchParams>> = ({
   match,
 }): JSX.Element => {
-  const [folder, setFolder] = useState([] as PokemonFolder[]);
-  const [teams, setTeams] = useState([] as PokemonTeam[]);
-  const [sets, setSets] = useState([] as PokemonSet[]);
+  const [folder, setFolder] = useState<PokemonFolder[]>([]);
+  const [teams, setTeams] = useState<PokemonTeam[]>([]);
+  const [sets, setSets] = useState<PokemonSet[]>([]);
 
   useEffect(() => {
     const id = match.params.folder_id;

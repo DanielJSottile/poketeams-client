@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ChangeEvent } from 'react';
+import React, { FunctionComponent, ChangeEvent, ReactNode } from 'react';
 
 type InputProps = {
   /** class for input container */
@@ -16,7 +16,7 @@ type InputProps = {
   /** determines if the error is triggered or not */
   isError?: boolean;
   /** function used to validate the input and provide feedback errors*/
-  validationCallback?: () => void;
+  validationCallback?: () => ReactNode;
   /** style for the input */
   inputClass?: string;
   /** value of the input */
@@ -80,7 +80,9 @@ const Input: FunctionComponent<InputProps> = ({
         </label>
       )}
       {isError && inputHasError && (
-        <p className="error-validate shake-horizontal">{validationCallback}</p>
+        <p className="error-validate shake-horizontal">
+          {validationCallback()}
+        </p>
       )}
       <input
         className={inputClass}

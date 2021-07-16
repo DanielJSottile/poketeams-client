@@ -2,7 +2,6 @@ import React, {
   Fragment,
   useContext,
   useState,
-  useRef,
   FunctionComponent,
 } from 'react';
 import { Link } from 'react-router-dom';
@@ -13,7 +12,12 @@ import Button from '../Button/Button';
 import PokeballLoader from '../Loaders/PokeballLoader/PokeballLoader';
 import LoadingBlack from '../Loaders/LoadingBlack/LoadingBlack';
 import GeneralContext from '../../contexts/GeneralContext';
-import showdownFolderGenerate from '../../functions/generateFolder';
+import showdownFolderGenerate from '../../utils/generateFolder';
+import {
+  validateNewFolderImport,
+  validateNewFolderName,
+} from '../../utils/validations';
+import { useClipboard } from '../../utils/customHooks';
 import styles from './FoldersList.module.scss';
 import { PokemonFolder } from '../../@types';
 
@@ -27,19 +31,18 @@ const FoldersList: FunctionComponent = () => {
     setFolderAddClicked,
     newFolderName,
     newFolderImport,
-    validateNewFolderImport,
     setNewFolderImport,
     handlePostNewFolder,
     setNewFolderName,
     handleEditFolder,
-    validateNewFolderName,
     setCurrentClickedFolder,
     handleDeleteFolder,
   } = useContext(GeneralContext);
 
   const [editClicked, setEditClicked] = useState(false);
   const [deleteClicked, setDeleteClicked] = useState(false);
-  const [copySuccess, setCopySuccess] = useState(false);
+  const { copySuccess, textArea, setCopySuccess, copyCodeToClipboard } =
+    useClipboard();
 
   const handleEditExpand = () => {
     setEditClicked(!editClicked);
@@ -47,20 +50,6 @@ const FoldersList: FunctionComponent = () => {
 
   const handleDeleteExpand = () => {
     setDeleteClicked(!deleteClicked);
-  };
-
-  const removeCopySuccess = () => {
-    setCopySuccess(false);
-  };
-
-  const textArea = useRef<HTMLTextAreaElement>(null);
-
-  const copyCodeToClipboard = () => {
-    textArea.current!.select();
-    document.execCommand('copy'); // this seems to not work
-    const text = textArea.current!.defaultValue;
-    navigator.clipboard.writeText(text); // this seems to work!
-    setCopySuccess(true);
   };
 
   /* --------------------- */
@@ -90,7 +79,7 @@ const FoldersList: FunctionComponent = () => {
             inputHasError
             htmlFor="foldername"
             label="Folder Name:"
-            validationCallback={() => validateNewFolderName()}
+            validationCallback={() => validateNewFolderName(newFolderName)}
             placeholder="e.g. Good Teams"
             type="text"
             name="foldername"
@@ -104,7 +93,7 @@ const FoldersList: FunctionComponent = () => {
             containerClass={styles['folder-import']}
             textAreaHasError
             isError={!!newFolderImport.value}
-            validationCallback={() => validateNewFolderImport()}
+            validationCallback={() => validateNewFolderImport(newFolderImport)}
             htmlFor="folder-import"
             label="Import Showdown Folder:"
             placeholder="Optionally Import a proper Pokemon Showdown Folder Here And It Will Fill Out The Entire Folder!"
@@ -119,7 +108,10 @@ const FoldersList: FunctionComponent = () => {
         <Button
           type="submit"
           buttonClass={styles['submit']}
-          disabled={!!validateNewFolderName() || !!validateNewFolderImport()}
+          disabled={
+            !!validateNewFolderName(newFolderName) ||
+            !!validateNewFolderImport(newFolderImport)
+          }
           onClickCallback={(e) => {
             e.preventDefault();
             handlePostNewFolder();
@@ -138,7 +130,7 @@ const FoldersList: FunctionComponent = () => {
           inputHasError
           htmlFor="foldername"
           label="Edit Folder Name:"
-          validationCallback={() => validateNewFolderName()}
+          validationCallback={() => validateNewFolderName(newFolderName)}
           placeholder="e.g. Good Teams"
           type="text"
           name="foldername"
@@ -151,7 +143,7 @@ const FoldersList: FunctionComponent = () => {
         <Button
           type="submit"
           buttonClass={styles['submit']}
-          disabled={!!validateNewFolderName()}
+          disabled={!!validateNewFolderName(newFolderImport)}
           onClickCallback={(e) => {
             e.preventDefault();
             handleEditFolder();
@@ -211,21 +203,21 @@ const FoldersList: FunctionComponent = () => {
           >
             New Folder <i className="fas fa-folder-plus"></i>
           </Button>
-          {folderAddClicked ? renderExpanded() : null}
+          {folderAddClicked && renderExpanded()}
         </div>
         <div>
           <span>{`Current Folder: ${currentClickedFolder.value}`}</span>
-          {currentClickedFolder.value ? (
+          {currentClickedFolder.value && (
             <div>
               <div className={styles['export-team']}>
-                {copySuccess ? (
+                {copySuccess && (
                   <div className={styles['copied']}>Copied to Clipboard!!</div>
-                ) : null}
+                )}
                 <div>
                   <Button
                     onClickCallback={() => {
                       copyCodeToClipboard();
-                      setTimeout(removeCopySuccess, 3000);
+                      setTimeout(() => setCopySuccess(false), 3000);
                     }}
                   >
                     Copy Text
@@ -275,7 +267,7 @@ const FoldersList: FunctionComponent = () => {
                 Delete <i className="fas fa-trash-alt"></i>
               </Button>
             </div>
-          ) : null}
+          )}
         </div>
         <div>
           {editClicked && renderEditExpand()}

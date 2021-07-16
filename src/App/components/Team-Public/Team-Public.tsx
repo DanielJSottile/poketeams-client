@@ -2,7 +2,6 @@ import React, {
   Fragment,
   useContext,
   useState,
-  useRef,
   FunctionComponent,
 } from 'react';
 import { Link } from 'react-router-dom';
@@ -12,8 +11,9 @@ import Image from '../Image/Image';
 import Button from '../Button/Button';
 import SetPublic from '../Set-Public/Set-Public';
 import GeneralContext from '../../contexts/GeneralContext';
-import showdownGenerate from '../../functions/generate';
-import legality from '../../functions/legality';
+import showdownGenerate from '../../utils/generate';
+import legality from '../../utils/legality';
+import { useClipboard } from '../../utils/customHooks';
 import styles from './Team-Public.module.scss';
 import { PokemonTeam, PokemonSet } from '../../@types';
 
@@ -31,24 +31,11 @@ const TeamPublic: FunctionComponent<TeamPublicProps> = ({
   const { publicSets } = useContext(GeneralContext);
 
   const [teamExpandToggle, setTeamExpandToggle] = useState(true);
-  const [copySuccess, setCopySuccess] = useState(false);
+  const { copySuccess, textArea, setCopySuccess, copyCodeToClipboard } =
+    useClipboard();
 
   const handleTeamToggle = () => {
     setTeamExpandToggle(!teamExpandToggle);
-  };
-
-  const removeCopySuccess = () => {
-    setCopySuccess(false);
-  };
-
-  const textArea = useRef<HTMLTextAreaElement>(null);
-
-  const copyCodeToClipboard = () => {
-    textArea.current!.select();
-    document.execCommand('copy'); // this seems to not work
-    const text = textArea.current!.defaultValue;
-    navigator.clipboard.writeText(text); // this seems to work!
-    setCopySuccess(true);
   };
 
   const ps = [...new Set(publicSets.map((set: PokemonSet) => set.id))];
@@ -92,7 +79,7 @@ const TeamPublic: FunctionComponent<TeamPublicProps> = ({
                 <p>By {team.user_name}</p>
                 <p>
                   Created on:{' '}
-                  {new Date(team.date_created).toLocaleString('en-GB', {
+                  {new Date(team.date_created || '').toLocaleString('en-GB', {
                     weekday: 'long',
                     year: 'numeric',
                     month: 'long',
@@ -121,14 +108,14 @@ const TeamPublic: FunctionComponent<TeamPublicProps> = ({
               />
             </form>
             <div className={styles['export-team']}>
-              {copySuccess ? (
+              {copySuccess && (
                 <div className={styles['copied']}>Copied to Clipboard!!</div>
-              ) : null}
+              )}
               <div>
                 <Button
                   onClickCallback={() => {
                     copyCodeToClipboard();
-                    setTimeout(removeCopySuccess, 3000);
+                    setTimeout(() => setCopySuccess(false), 3000);
                   }}
                 >
                   Copy Text
@@ -169,7 +156,7 @@ const TeamPublic: FunctionComponent<TeamPublicProps> = ({
   };
 
   const renderUnexpandedTeam = () => {
-    let spriteMap = teamSets.map((set, i) => {
+    const spriteMap = teamSets.map((set, i) => {
       return (
         <Image
           key={i}
@@ -194,7 +181,7 @@ const TeamPublic: FunctionComponent<TeamPublicProps> = ({
             <div className={styles['sprites-row']}>{spriteMap}</div>
             <p>
               Created on:{' '}
-              {new Date(team.date_created).toLocaleString('en-GB', {
+              {new Date(team.date_created || '').toLocaleString('en-GB', {
                 weekday: 'long',
                 year: 'numeric',
                 month: 'long',

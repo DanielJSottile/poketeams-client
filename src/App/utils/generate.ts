@@ -23,7 +23,7 @@ export interface PokeObject {
 // Helper Functions
 
 function evGenerator(ob: PokeObject) {
-  let evArr = [];
+  const evArr = [];
 
   if (
     ob.hp_ev === 0 &&
@@ -59,7 +59,7 @@ function evGenerator(ob: PokeObject) {
 }
 
 function ivGenerator(ob: PokeObject) {
-  let ivArr = [];
+  const ivArr = [];
 
   if (
     ob.hp_iv === 31 &&
@@ -96,10 +96,10 @@ function ivGenerator(ob: PokeObject) {
 
 // Generator Function
 
-export default function showdownGenerate(input: PokemonSet[]) {
+export default function showdownGenerate(input: PokemonSet[]): string {
   return input
     .map((set: PokemonSet) => {
-      let setArr = [];
+      const setArr = [];
 
       // handle first line first (redo this part pls)
 

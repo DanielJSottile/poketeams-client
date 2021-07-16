@@ -25,7 +25,7 @@ export interface PokeObject {
 // Helper Functions
 
 function evGenerator(ob: PokeObject) {
-  let evArr = [];
+  const evArr = [];
 
   if (
     ob.hp_ev === 0 &&
@@ -61,7 +61,7 @@ function evGenerator(ob: PokeObject) {
 }
 
 function ivGenerator(ob: PokeObject) {
-  let ivArr = [];
+  const ivArr = [];
 
   if (
     ob.hp_iv === 31 &&
@@ -98,7 +98,10 @@ function ivGenerator(ob: PokeObject) {
 
 // Folder Generate Function
 
-export default function folderGenerate(folderName: string, input: Input[]) {
+export default function folderGenerate(
+  folderName: string,
+  input: Input[]
+): string {
   return input
     .map((team: Input) => {
       const [teamName, sets] = Object.entries(team)[0];
@@ -109,7 +112,7 @@ export default function folderGenerate(folderName: string, input: Input[]) {
       teamArr.push(`=== [gen8] ${folderName}/${teamName} ===`);
 
       const teamSets = sets.map((set: PokemonSet) => {
-        let setArr = [];
+        const setArr = [];
 
         if (set.nickname && set.gender && set.item) {
           // nick, gender, item

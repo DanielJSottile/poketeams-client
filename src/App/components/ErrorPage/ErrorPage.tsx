@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
+import React, { Component, ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 
 export default class ErrorPage extends Component {
   state = { error: null };
 
-  static getDerivedStateFormError(error: string) {
+  static getDerivedStateFormError(error: string): string {
     return error;
   }
 
-  render() {
+  render(): ReactNode {
     if (this.state.error) {
       return (
         <main className="error-page">

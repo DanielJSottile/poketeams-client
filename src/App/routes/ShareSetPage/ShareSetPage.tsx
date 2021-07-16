@@ -10,14 +10,10 @@ export type MatchParams = {
   set_id: string;
 };
 
-export interface Provider {
-  set: object[];
-}
-
 const ShareSetPage: FunctionComponent<RouteComponentProps<MatchParams>> = ({
   match,
 }): JSX.Element => {
-  const [set, setPokemonSet] = useState([] as PokemonSet[]);
+  const [set, setPokemonSet] = useState<PokemonSet[]>([]);
 
   useEffect(() => {
     apiService.getSingleSet(Number(match.params.set_id)).then((data) => {

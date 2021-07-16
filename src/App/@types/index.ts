@@ -8,7 +8,6 @@ export interface PokemonFolder {
 
 export interface PokemonTeam {
   team_name: string;
-  team_description: string;
   description: string;
   id: number;
   user_name: string;
@@ -48,3 +47,87 @@ export interface PokemonSet {
   id?: number;
   team_id?: number;
 }
+
+export type TextInput = {
+  value: string;
+  touched: boolean;
+};
+
+type OmitInput = Omit<TextInput, 'value'>;
+
+export interface InputWithId extends TextInput {
+  id: string;
+}
+
+export interface NumberInput extends OmitInput {
+  value: number;
+}
+
+export interface BoolInput extends OmitInput {
+  value: boolean;
+}
+
+export type ParseReturn = {
+  string: PokemonSet[];
+  [key: string]: PokemonSet[];
+};
+
+export type PokemonSetPost = Omit<PokemonSet, 'id'>;
+
+export type PokemonTeamPost = Omit<
+  PokemonTeam,
+  'id' | 'user_name' | 'date_created'
+>;
+
+export type PokemonFolderPost = Omit<PokemonFolder, 'id'>;
+
+interface BaseStats {
+  hp: number;
+  atk: number;
+  def: number;
+  spa: number;
+  spd: number;
+  spe: number;
+}
+
+interface Abilities {
+  0: string;
+  1?: string;
+  H?: string;
+  S?: string;
+}
+
+interface GenderRatio {
+  M: number;
+  F: number;
+}
+
+export type PokemonEntry = {
+  num: number;
+  species: string;
+  baseForme?: string;
+  baseSpecies?: string;
+  forme?: string;
+  types: string[];
+  genderRatio?: GenderRatio;
+  gender?: string | null;
+  genderLock?: boolean | string | null;
+  baseStats: BaseStats;
+  maxHP?: number;
+  abilities: Abilities;
+  heightm: number;
+  weightkg: number;
+  color: string;
+  prevo?: string;
+  evoItem?: string;
+  evoCondition?: string;
+  evoType?: string;
+  evoMove?: string;
+  evoLevel?: number;
+  evos?: string[];
+  eggGroups: string[];
+  inheritsFrom?: string;
+  canHatch?: boolean;
+  otherFormes?: string[];
+  otherForms?: string[];
+};

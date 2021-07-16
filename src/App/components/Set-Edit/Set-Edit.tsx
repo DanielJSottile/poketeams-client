@@ -2,7 +2,6 @@ import React, {
   Fragment,
   useContext,
   useState,
-  useRef,
   FunctionComponent,
 } from 'react';
 import { Link } from 'react-router-dom';
@@ -12,26 +11,27 @@ import Image from '../Image/Image';
 import Button from '../Button/Button';
 import LoadingSets from '../Loaders/LoadingSets/LoadingSets';
 import GeneralContext from '../../contexts/GeneralContext';
-import showdownGenerate from '../../functions/generate';
-import showdownParse from '../../functions/parse';
-import legality from '../../functions/legality';
+import showdownGenerate from '../../utils/generate';
+import showdownParse from '../../utils/parse';
+import legality from '../../utils/legality';
+import {
+  validateNewSetImport,
+  validateSpecies,
+  validateNickname,
+  validateItem,
+  validateAbility,
+  validateShiny,
+  validateGender,
+  validateLevel,
+  validateNature,
+  validateHappiness,
+  validateEvs,
+  validateIvs,
+  validateMoves,
+} from '../../utils/validations';
+import { useClipboard } from '../../utils/customHooks';
 import styles from './Set-Edit.module.scss';
 import { PokemonSet } from '../../@types';
-
-export interface StringInput {
-  value: string;
-  touched: boolean;
-}
-
-export interface IntInput {
-  value: number;
-  touched: boolean;
-}
-
-export interface BoolInput {
-  value: boolean;
-  touched: boolean;
-}
 
 type SetEditProps = {
   /** Pokemon Set */
@@ -42,7 +42,6 @@ const SetEdit: FunctionComponent<SetEditProps> = ({ set }) => {
   const {
     newSetImport,
     setNewSetImport,
-    validateNewSetImport,
     handleUpdateSetImport,
     handleUpdateSet,
     handleDeleteSet,
@@ -141,7 +140,8 @@ const SetEdit: FunctionComponent<SetEditProps> = ({ set }) => {
   });
   const [expandToggle, setExpandToggle] = useState(true);
   const [deleteClicked, setDeleteClicked] = useState(false);
-  const [copySuccess, setCopySuccess] = useState(false);
+  const { copySuccess, textArea, setCopySuccess, copyCodeToClipboard } =
+    useClipboard();
 
   const setFields = (setImport: string) => {
     const parse = showdownParse(setImport)[0];
@@ -174,148 +174,6 @@ const SetEdit: FunctionComponent<SetEditProps> = ({ set }) => {
     setDeleteClicked(false);
   };
 
-  const textArea = useRef<HTMLTextAreaElement>(null);
-
-  const copyCodeToClipboard = () => {
-    textArea.current!.select();
-    document.execCommand('copy'); // this seems to not work
-    const text = textArea.current!.defaultValue;
-    navigator.clipboard.writeText(text); // this seems to work!
-    setCopySuccess(true);
-  };
-
-  const validateNickname = (): string | boolean => {
-    // TODO: check against Legal Nintendo filter!
-    if (typeof nickname.value !== 'string') {
-      return `This is just superflous it should never come up.`;
-    }
-    return false;
-  };
-
-  const validateItem = (): string | boolean => {
-    // TODO: check against list of Items!
-    if (typeof item.value !== 'string') {
-      return `This is just superflous it should never come up.`;
-    }
-    return false;
-  };
-
-  const validateAbility = (): string | boolean => {
-    // TODO: check against list of Abilities!
-    if (typeof ability.value !== 'string') {
-      return `This is just superflous it should never come up.`;
-    }
-    return false;
-  };
-
-  const validateNature = (): string | boolean => {
-    // TODO: check against list of Natures!
-    if (typeof nature.value !== 'string') {
-      return `This is just superflous it should never come up.`;
-    }
-    return false;
-  };
-
-  const validateShiny = (): string | boolean => {
-    if (typeof shiny.value !== 'boolean') {
-      return `This is just superflous it should never come up.`;
-    }
-    return false;
-  };
-
-  const validateSpecies = (): string | boolean => {
-    if (!legality.isLegalSpecies(species.value.toString())) {
-      return `Must be an 'existing' Pokemon species or form styled via '[species]-[form]'!`;
-    }
-
-    return false;
-  };
-
-  const validateGender = (): string | boolean => {
-    if (legality.returnGenderStatus(species.value)) {
-      if (
-        gender.value.toString().trim() !==
-        legality.returnGenderStatus(species.value)
-      ) {
-        return `This species is locked to a gender of '${legality.returnGenderStatus(
-          species.value
-        )}'.`;
-      }
-    }
-    return false;
-  };
-
-  const validateLevel = (): string | boolean => {
-    // TODO: Integrate custom level flag
-    if (Number(level.value) > 100 || Number(level.value) < 1) {
-      return `Level must be between 1 and 100`;
-    }
-    return false;
-  };
-
-  const validateHappiness = (): string | boolean => {
-    if (Number(happiness.value) > 255 || Number(happiness.value) < 0) {
-      return `Hapiness must be between 0 and 255`;
-    }
-
-    return false;
-  };
-
-  const validateEvs = (): string | boolean => {
-    const evArr = [
-      Number(hpEv.value),
-      Number(atkEv.value),
-      Number(defEv.value),
-      Number(spAEv.value),
-      Number(spDEv.value),
-      Number(speEv.value),
-    ];
-
-    /* While normally EV's can only have 508 (510) in total, 
-    because Hackmons is a thing, we don't check this.*/
-
-    evArr.forEach((ev) => {
-      if (ev > 252 || ev < 0) {
-        return `EV's must be set from 0 to 255`;
-      }
-    });
-    return false;
-  };
-
-  const validateIvs = () => {
-    const ivArr = [
-      Number(hpIv.value),
-      Number(atkIv.value),
-      Number(defIv.value),
-      Number(spAIv.value),
-      Number(spDIv.value),
-      Number(speIv.value),
-    ];
-
-    ivArr.forEach((iv) => {
-      if (iv > 31 || iv < 0) {
-        return `IV's must be set from 0 to 31`;
-      }
-    });
-    return false;
-  };
-
-  const validateMoves = (): string | boolean => {
-    if (!moveOne) {
-      return `Pokemon must have at least ONE move; make sure it is in the top input box.`;
-    }
-
-    if (
-      typeof moveOne.value !== 'string' ||
-      typeof moveTwo.value !== 'string' ||
-      typeof moveThree.value !== 'string' ||
-      typeof moveFour.value !== 'string'
-    ) {
-      return `This is just superflous it should never come up.`;
-    }
-    return false;
-  };
-
   const renderExpandedSet = () => {
     return (
       <div className={styles['pokemon']}>
@@ -329,7 +187,7 @@ const SetEdit: FunctionComponent<SetEditProps> = ({ set }) => {
             </label>
             {newSetImport.value !== '' && (
               <p className="error-validate shake-horizontal">
-                {validateNewSetImport()}
+                {validateNewSetImport(newSetImport)}
               </p>
             )}
             <TextArea
@@ -344,7 +202,7 @@ const SetEdit: FunctionComponent<SetEditProps> = ({ set }) => {
             />
             <Button
               type="submit"
-              disabled={!!validateNewSetImport()}
+              disabled={!!validateNewSetImport(newSetImport)}
               onClickCallback={(e) => {
                 e.preventDefault();
                 handleUpdateSetImport(Number(set?.id));
@@ -365,7 +223,7 @@ const SetEdit: FunctionComponent<SetEditProps> = ({ set }) => {
                   htmlFor={'pokemon-name'}
                   label={'Species: '}
                   inputClass={styles['pokemon-name']}
-                  validationCallback={() => validateSpecies()}
+                  validationCallback={() => validateSpecies(species)}
                   onChangeCallback={(e) =>
                     setSpecies({ value: e.target.value, touched: true })
                   }
@@ -381,7 +239,7 @@ const SetEdit: FunctionComponent<SetEditProps> = ({ set }) => {
                   htmlFor={'pokemon-nickname'}
                   label={'Nickname: (optional)'}
                   inputClass={styles['pokemon-name']}
-                  validationCallback={() => validateNickname()}
+                  validationCallback={() => validateNickname(nickname)}
                   onChangeCallback={(e) =>
                     setNickname({ value: e.target.value, touched: true })
                   }
@@ -396,7 +254,7 @@ const SetEdit: FunctionComponent<SetEditProps> = ({ set }) => {
                   htmlFor={'pokemon-gender'}
                   label={'Gender: '}
                   inputClass={styles['pokemon-gender']}
-                  validationCallback={() => validateGender()}
+                  validationCallback={() => validateGender(gender, species)}
                   onChangeCallback={(e) =>
                     setGender({ value: e.target.value, touched: true })
                   }
@@ -411,7 +269,7 @@ const SetEdit: FunctionComponent<SetEditProps> = ({ set }) => {
                   isError={species.touched}
                   htmlFor={'shiny'}
                   label={'Shiny:'}
-                  validationCallback={() => validateShiny()}
+                  validationCallback={() => validateShiny(shiny)}
                   onChangeCallback={(e) =>
                     setShiny({ value: e.currentTarget.checked, touched: true })
                   }
@@ -453,7 +311,7 @@ const SetEdit: FunctionComponent<SetEditProps> = ({ set }) => {
                 htmlFor={'pokemon-level'}
                 label={'Level: '}
                 inputClass={styles['pokemon-level']}
-                validationCallback={() => validateLevel()}
+                validationCallback={() => validateLevel(level)}
                 onChangeCallback={(e) =>
                   setLevel({ value: Number(e.target.value), touched: true })
                 }
@@ -468,7 +326,7 @@ const SetEdit: FunctionComponent<SetEditProps> = ({ set }) => {
                 htmlFor={'pokemon-item'}
                 label={'Item: (optional)'}
                 inputClass={styles['pokemon-item']}
-                validationCallback={() => validateItem()}
+                validationCallback={() => validateItem(item)}
                 onChangeCallback={(e) =>
                   setItem({ value: e.target.value, touched: true })
                 }
@@ -483,7 +341,7 @@ const SetEdit: FunctionComponent<SetEditProps> = ({ set }) => {
                 htmlFor={'pokemon-ability'}
                 label={'Ability: (optional)'}
                 inputClass={styles['pokemon-ability']}
-                validationCallback={() => validateAbility()}
+                validationCallback={() => validateAbility(ability)}
                 onChangeCallback={(e) =>
                   setAbility({ value: e.target.value, touched: true })
                 }
@@ -498,7 +356,7 @@ const SetEdit: FunctionComponent<SetEditProps> = ({ set }) => {
                 htmlFor={'pokemon-nature'}
                 label={'Nature: (optional)'}
                 inputClass={styles['pokemon-nature']}
-                validationCallback={() => validateNature()}
+                validationCallback={() => validateNature(nature)}
                 onChangeCallback={(e) =>
                   setNature({ value: e.target.value, touched: true })
                 }
@@ -514,7 +372,7 @@ const SetEdit: FunctionComponent<SetEditProps> = ({ set }) => {
                 htmlFor={'pokemon-happiness'}
                 label={'Happiness:'}
                 inputClass={styles['pokemon-happiness']}
-                validationCallback={() => validateHappiness()}
+                validationCallback={() => validateHappiness(happiness)}
                 onChangeCallback={(e) =>
                   setHappiness({ value: Number(e.target.value), touched: true })
                 }
@@ -531,7 +389,7 @@ const SetEdit: FunctionComponent<SetEditProps> = ({ set }) => {
               <div className={styles['evs']}>
                 {
                   <p className="error-validate shake-horizontal">
-                    {validateEvs()}
+                    {validateEvs(hpEv, atkEv, defEv, spAEv, spDEv, speEv)}
                   </p>
                 }
                 <Input
@@ -640,7 +498,7 @@ const SetEdit: FunctionComponent<SetEditProps> = ({ set }) => {
               <div className={styles['ivs']}>
                 {
                   <p className="error-validate shake-horizontal">
-                    {validateIvs()}
+                    {validateIvs(hpIv, atkIv, defIv, spAIv, spDIv, speIv)}
                   </p>
                 }
                 <Input
@@ -800,13 +658,13 @@ const SetEdit: FunctionComponent<SetEditProps> = ({ set }) => {
             <Button
               type="submit"
               disabled={
-                !!validateSpecies() ||
-                !!validateGender() ||
-                !!validateLevel() ||
-                !!validateHappiness() ||
-                !!validateEvs() ||
-                !!validateIvs() ||
-                !!validateMoves()
+                !!validateSpecies(species) ||
+                !!validateGender(gender, species) ||
+                !!validateLevel(level) ||
+                !!validateHappiness(happiness) ||
+                !!validateEvs(hpEv, atkEv, defEv, spAEv, spDEv, speEv) ||
+                !!validateIvs(hpIv, atkIv, defIv, spAIv, spDIv, speIv) ||
+                !!validateMoves(moveOne, moveTwo, moveThree, moveFour)
               }
               onClickCallback={(e) => {
                 e.preventDefault();
@@ -846,9 +704,9 @@ const SetEdit: FunctionComponent<SetEditProps> = ({ set }) => {
         </form>
 
         <div className={styles['export-pokemon']}>
-          {copySuccess ? (
+          {copySuccess && (
             <div className={styles['copied']}>Copied to Clipboard!!</div>
-          ) : null}
+          )}
           <div>
             <Button
               onClickCallback={() => {
@@ -895,7 +753,7 @@ const SetEdit: FunctionComponent<SetEditProps> = ({ set }) => {
           >
             <i className="fas fa-trash-alt"></i> Delete Set!
           </Button>
-          {deleteClicked ? renderDeleteExpand() : null}
+          {deleteClicked && renderDeleteExpand()}
         </div>
       </div>
     );

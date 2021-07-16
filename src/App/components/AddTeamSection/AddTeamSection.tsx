@@ -3,6 +3,12 @@ import GeneralContext from '../../contexts/GeneralContext';
 import Input from '../Input/Input';
 import TextArea from '../TextArea/TextArea';
 import Button from '../Button/Button';
+import {
+  validateDesc,
+  validateNewTeamName,
+  validateNewTeamImport,
+  validateCurrentFolderClicked,
+} from '../../utils/validations';
 import styles from './AddTeamSection.module.scss';
 
 const AddTeamSection: FunctionComponent = () => {
@@ -13,11 +19,7 @@ const AddTeamSection: FunctionComponent = () => {
     setNewTeamImport,
     handlePostNewTeam,
     desc,
-    validateDesc,
     setDesc,
-    validateNewTeamName,
-    validateNewTeamImport,
-    validateCurrentFolderClicked,
     teamAddClicked,
     currentClickedFolder,
     setTeamAddClicked,
@@ -31,7 +33,7 @@ const AddTeamSection: FunctionComponent = () => {
           containerClass={styles['team-name']}
           htmlFor="foldername"
           label="Team Name:"
-          validationCallback={() => validateNewTeamName()}
+          validationCallback={() => validateNewTeamName(newTeamName)}
           placeholder="e.g. My Cool Team"
           type="text"
           name="teamname"
@@ -46,7 +48,7 @@ const AddTeamSection: FunctionComponent = () => {
           textAreaHasError
           htmlFor="title-content"
           label={'Description:'}
-          validationCallback={() => validateDesc()}
+          validationCallback={() => validateDesc(desc)}
           placeholder="e.g. description"
           name="title-content"
           id="title-content"
@@ -62,7 +64,7 @@ const AddTeamSection: FunctionComponent = () => {
           htmlFor="team-import"
           label={'Import Showdown Team: '}
           labelIcon={<i className="fas fa-upload"></i>}
-          validationCallback={() => validateNewTeamImport()}
+          validationCallback={() => validateNewTeamImport(newTeamImport)}
           placeholder="Optionally Import a proper Pokemon Showdown Team Here And It Will Fill Out Your Whole Team!"
           name="team-import"
           id="team-import-1"
@@ -75,10 +77,10 @@ const AddTeamSection: FunctionComponent = () => {
           type="submit"
           buttonClass={styles['submit']}
           disabled={
-            !!validateNewTeamName() ||
-            !!validateNewTeamImport() ||
-            !!validateDesc() ||
-            !!validateCurrentFolderClicked()
+            !!validateNewTeamName(newTeamName) ||
+            !!validateNewTeamImport(newTeamImport) ||
+            !!validateDesc(desc) ||
+            !!validateCurrentFolderClicked(currentClickedFolder)
           }
           onClickCallback={(e) => {
             e.preventDefault();
@@ -102,7 +104,7 @@ const AddTeamSection: FunctionComponent = () => {
           ) : (
             <h4>Click a Folder to add Teams!</h4>
           )}
-          {teamAddClicked ? renderExpanded() : null}
+          {teamAddClicked && renderExpanded()}
         </div>
         <h3>Teams:</h3>
       </section>

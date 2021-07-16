@@ -2,17 +2,12 @@ import React, { useContext, FunctionComponent } from 'react';
 import GeneralContext from '../../contexts/GeneralContext';
 import Input from '../Input/Input';
 import Button from '../Button/Button';
+import { validateSearch } from '../../utils/validations';
 import styles from './SearchBar-Build.module.scss';
 
 const SearchBarBuild: FunctionComponent = () => {
-  const {
-    handleFilter,
-    validateFilter,
-    filter,
-    filtersort,
-    setFilter,
-    setFilterSort,
-  } = useContext(GeneralContext);
+  const { handleFilter, filter, filtersort, setFilter, setFilterSort } =
+    useContext(GeneralContext);
 
   return (
     <div className={styles['searchbar']}>
@@ -21,7 +16,7 @@ const SearchBarBuild: FunctionComponent = () => {
           <Input
             inputHasError
             isError={!!filter.value}
-            validationCallback={validateFilter}
+            validationCallback={() => validateSearch(filter)}
             inputClass={styles['s-input']}
             label={'Search: '}
             labelIcon={<i className="fas fa-search"></i>}

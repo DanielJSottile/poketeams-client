@@ -10,23 +10,20 @@ import React, {
 import apiService from '../services/apiService';
 import TokenService from '../services/token-service';
 import jwtDecode from 'jwt-decode';
-import showdownParse from '../functions/parse';
-import showdownFolderParse from '../functions/parseFolder';
-import legality from '../functions/legality';
-import { PokemonFolder, PokemonTeam, PokemonSet } from '../@types';
+import showdownParse from '../utils/parse';
+import showdownFolderParse from '../utils/parseFolder';
+import {
+  PokemonFolder,
+  PokemonTeam,
+  PokemonSet,
+  TextInput,
+  InputWithId,
+  ParseReturn,
+} from '../@types';
 
-type Props = {
+type ContextProps = {
   children: ReactNode;
 };
-
-type Input = {
-  value: string;
-  touched: boolean;
-};
-
-interface InputWithId extends Input {
-  id: string;
-}
 
 export interface MyToken {
   sub: string;
@@ -40,19 +37,19 @@ interface GeneralContextValues {
   publicTeams: PokemonTeam[];
   publicSets: PokemonSet[];
   folderAddClicked: boolean;
-  newFolderName: Input;
-  newFolderImport: Input;
+  newFolderName: TextInput;
+  newFolderImport: TextInput;
   teamAddClicked: boolean;
   currentClickedTeam: InputWithId;
-  newTeamName: Input;
+  newTeamName: TextInput;
   currentClickedFolder: InputWithId;
-  desc: Input;
-  newTeamImport: Input;
-  newSetImport: Input;
-  search: Input;
-  sort: Input;
-  filter: Input;
-  filtersort: Input;
+  desc: TextInput;
+  newTeamImport: TextInput;
+  newSetImport: TextInput;
+  search: TextInput;
+  sort: TextInput;
+  filter: TextInput;
+  filtersort: TextInput;
   page: number;
   setUserFolders: Dispatch<SetStateAction<PokemonFolder[]>>;
   setUserTeams: Dispatch<SetStateAction<PokemonTeam[]>>;
@@ -60,28 +57,19 @@ interface GeneralContextValues {
   setPublicTeams: Dispatch<SetStateAction<PokemonTeam[]>>;
   setPublicSets: Dispatch<SetStateAction<PokemonSet[]>>;
   setFolderAddClicked: (toggle: boolean) => void;
-  setNewFolderName: (name: Input) => void;
-  setNewFolderImport: (name: Input) => void;
+  setNewFolderName: (name: TextInput) => void;
+  setNewFolderImport: (name: TextInput) => void;
   setTeamAddClicked: (toggle: boolean) => void;
-  setNewTeamName: (name: Input) => void;
+  setNewTeamName: (name: TextInput) => void;
   setCurrentClickedFolder: (folder: InputWithId) => void;
-  setDesc: (name: Input) => void;
-  setNewTeamImport: (name: Input) => void;
-  setNewSetImport: (name: Input) => void;
-  setSearch: (name: Input) => void;
-  setSort: (name: Input) => void;
-  setFilter: (name: Input) => void;
-  setFilterSort: (name: Input) => void;
+  setDesc: (name: TextInput) => void;
+  setNewTeamImport: (name: TextInput) => void;
+  setNewSetImport: (name: TextInput) => void;
+  setSearch: (name: TextInput) => void;
+  setSort: (name: TextInput) => void;
+  setFilter: (name: TextInput) => void;
+  setFilterSort: (name: TextInput) => void;
   handlePostNewTeam: () => void;
-  validateDesc: () => string | boolean;
-  validateNewTeamName: () => string | boolean;
-  validateNewTeamImport: () => string | boolean | undefined;
-  validateCurrentFolderClicked: () => string | boolean;
-  validateNewFolderImport: () => string | boolean | undefined;
-  validateNewFolderName: () => string | boolean | undefined;
-  validateFilter: () => string | boolean;
-  validateSearch: () => string | boolean;
-  validateNewSetImport: () => string | boolean | undefined;
   handlePostNewFolder: () => void;
   handleEditFolder: () => void;
   handleDeleteFolder: () => void;
@@ -118,34 +106,7 @@ interface GeneralContextValues {
   ) => void;
   handleDeleteSet: (teamId: number, setId: number) => void;
   handleUpdateTeam: (teamName: string, desc: string, teamId: number) => void;
-  handlePostNewPokemon: (
-    team_id: number,
-    nickname?: string,
-    species?: string,
-    gender?: string,
-    item?: string,
-    ability?: string,
-    level?: number,
-    shiny?: boolean,
-    happiness?: number,
-    nature?: string,
-    hp_ev?: number,
-    atk_ev?: number,
-    def_ev?: number,
-    spa_ev?: number,
-    spd_ev?: number,
-    spe_ev?: number,
-    hp_iv?: number,
-    atk_iv?: number,
-    def_iv?: number,
-    spa_iv?: number,
-    spd_iv?: number,
-    spe_iv?: number,
-    move_one?: string,
-    move_two?: string,
-    move_three?: string,
-    move_four?: string
-  ) => void;
+  handleCreateDefaultPokemon: (team_id: number) => void;
   handleDeleteTeam: (teamId: number) => void;
   handlePage: (direction: 'up' | 'down') => void;
   getUserState: () => void;
@@ -230,15 +191,6 @@ const GeneralContext = createContext<GeneralContextValues>({
   setFilter: () => null,
   setFilterSort: () => null,
   handlePostNewTeam: () => null,
-  validateDesc: () => false,
-  validateNewTeamName: () => false,
-  validateNewTeamImport: () => false,
-  validateCurrentFolderClicked: () => false,
-  validateNewFolderImport: () => false,
-  validateNewFolderName: () => false,
-  validateFilter: () => false,
-  validateSearch: () => false,
-  validateNewSetImport: () => false,
   handlePostNewFolder: () => null,
   handleEditFolder: () => null,
   handleDeleteFolder: () => null,
@@ -248,7 +200,7 @@ const GeneralContext = createContext<GeneralContextValues>({
   handleUpdateSet: () => null,
   handleDeleteSet: () => null,
   handleUpdateTeam: () => null,
-  handlePostNewPokemon: () => null,
+  handleCreateDefaultPokemon: () => null,
   handleDeleteTeam: () => null,
   handlePage: () => null,
   getUserState: () => null,
@@ -257,7 +209,7 @@ const GeneralContext = createContext<GeneralContextValues>({
 
 export default GeneralContext;
 
-export const GeneralProvider = ({ children }: Props) => {
+export const GeneralProvider = ({ children }: ContextProps): JSX.Element => {
   // const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userFolders, setUserFolders] = useState<PokemonFolder[]>([]);
   const [userTeams, setUserTeams] = useState<PokemonTeam[]>([]);
@@ -311,10 +263,11 @@ export const GeneralProvider = ({ children }: Props) => {
       setPublicSets([]);
       let newSets: PokemonSet[] = [];
       teams.forEach((team: PokemonTeam) => {
-        apiService.getSetsForOneTeam(team.id).then((sets) => {
-          newSets = [...newSets, ...sets];
-          setPublicSets(newSets);
-        });
+        !!team.id &&
+          apiService.getSetsForOneTeam(team.id).then((sets) => {
+            newSets = [...newSets, ...sets];
+            setPublicSets(newSets);
+          });
       });
     });
   }, [page, search.value, sort.value]);
@@ -349,9 +302,10 @@ export const GeneralProvider = ({ children }: Props) => {
       setPublicTeams(teams);
       setPublicSets([]);
       teams.forEach((team: PokemonTeam) => {
-        apiService.getSetsForOneTeam(team.id).then((sets) => {
-          setPublicSets([...publicSets, ...sets]);
-        });
+        !!team.id &&
+          apiService.getSetsForOneTeam(team.id).then((sets) => {
+            setPublicSets([...publicSets, ...sets]);
+          });
       });
     });
   };
@@ -360,104 +314,6 @@ export const GeneralProvider = ({ children }: Props) => {
     setUserFolders([]);
     setUserTeams([]);
     setUserSets([]);
-  };
-
-  const validateNewFolderName = (): string | boolean => {
-    if (!newFolderName.value) {
-      return `Please provide a folder name!`;
-    }
-    return false;
-  };
-
-  const validateCurrentFolderClicked = (): string | boolean => {
-    if (!currentClickedFolder.id) {
-      return `You'll need to click on a folder in order to add a team!`;
-    }
-    return false;
-  };
-
-  const validateNewFolderImport = (): string | boolean | undefined => {
-    let flag;
-    if (newFolderImport.value) {
-      showdownFolderParse(newFolderImport.value).forEach(
-        (fullteam: { string: PokemonSet[] }) => {
-          const [teamName, sets] = Object.entries(fullteam)[0];
-          if (!teamName) {
-            flag = `You are missing the team name in the import for one of your teams!
-        Make sure that there is a team name before each group of sets
-        (Hint: Should be formatted like this: === [format] Folder/Team Name ===)`;
-          }
-
-          sets.forEach((set: PokemonSet) => {
-            if (!legality.isLegalSpecies(set.species)) {
-              flag = `There is an illegal species in your set.  Please check each line
-          and fix this to be in the proper format! 
-          (Hint: It could be extra white space at the end because of Showdown's Exporter)
-          (Hint: There could be a typo in your species name!)`;
-            }
-          });
-        }
-      );
-    }
-    return flag;
-  };
-
-  const validateNewTeamName = (): string | boolean => {
-    if (!newTeamName.value) {
-      return `Please provide a team name!`;
-    }
-    return false;
-  };
-
-  const validateDesc = (): string | boolean => {
-    if (typeof desc.value !== 'string') {
-      return `This should never come up, it is superflous`;
-    }
-    return false;
-  };
-
-  const validateNewTeamImport = (): string | boolean | undefined => {
-    let flag;
-    if (newTeamImport.value) {
-      showdownParse(newTeamImport.value).forEach((set: PokemonSet) => {
-        if (!legality.isLegalSpecies(set.species)) {
-          flag = `There is an illegal species in your set.  Please fix this to be in the proper format! 
-        (Hint: It could be extra white space at the end because of Showdown's Exporter)
-        (Hint: There could be a typo in your species name!)`;
-        }
-      });
-    }
-    return flag;
-  };
-
-  const validateNewSetImport = (): string | boolean | undefined => {
-    let flag;
-
-    if (showdownParse(newSetImport.value).length > 1) {
-      flag = `You can only import 1 set here.`;
-    }
-    showdownParse(newSetImport.value).forEach((set: PokemonSet) => {
-      if (!legality.isLegalSpecies(set.species)) {
-        flag = `There is an illegal species in your set.  Please fix this to be in the proper format! 
-        (Hint: It could be extra white space at the end because of Showdown's Exporter)
-        (Hint: There could be a typo in your species name!)`;
-      }
-    });
-    return flag;
-  };
-
-  const validateSearch = (): string | boolean => {
-    if (!legality.isLegalSpecies(search.value.toString().trim())) {
-      return `Must be an 'existing' Pokemon species or form styled via '[species]-[form]'!`;
-    }
-    return false;
-  };
-
-  const validateFilter = (): string | boolean => {
-    if (!legality.isLegalSpecies(filter.value.toString().trim())) {
-      return `Must be an 'existing' Pokemon species or form styled via '[species]-[form]'!`;
-    }
-    return false;
   };
 
   const handlePostNewFolder = () => {
@@ -509,7 +365,7 @@ export const GeneralProvider = ({ children }: Props) => {
 
             let allSets: PokemonSet[] = [];
 
-            let altered = parsed.map((fullteam: object) => {
+            const altered = parsed.map((fullteam: ParseReturn) => {
               const createdTeam = newVals.find(
                 (team) => team.team_name === Object.keys(fullteam)[0]
               );
@@ -517,7 +373,7 @@ export const GeneralProvider = ({ children }: Props) => {
               const sets = Object.values(fullteam)[0];
 
               return sets.map((set: PokemonSet) => {
-                let def = {
+                const def = {
                   team_id: createdTeam?.id,
                   species: 'Pikachu',
                   level: 100,
@@ -539,7 +395,7 @@ export const GeneralProvider = ({ children }: Props) => {
                   move_one: 'Tackle',
                 };
 
-                let s = {
+                const s = {
                   ...def,
                   team_id: createdTeam?.id,
                   nickname: set.nickname,
@@ -598,61 +454,34 @@ export const GeneralProvider = ({ children }: Props) => {
       });
   };
 
-  const handlePostNewPokemon = (
-    team_id: number,
-    nickname: string | undefined,
-    species: string = 'Pikachu',
-    gender: string | undefined,
-    item: string | undefined,
-    ability: string | undefined,
-    level: number = 100,
-    shiny: boolean = false,
-    happiness: number = 255,
-    nature: string = 'Adamant',
-    hp_ev: number = 0,
-    atk_ev: number = 0,
-    def_ev: number = 0,
-    spa_ev: number = 0,
-    spd_ev: number = 0,
-    spe_ev: number = 0,
-    hp_iv: number = 31,
-    atk_iv: number = 31,
-    def_iv: number = 31,
-    spa_iv: number = 31,
-    spd_iv: number = 31,
-    spe_iv: number = 31,
-    move_one: string = 'Tackle',
-    move_two: string | undefined,
-    move_three: string | undefined,
-    move_four: string | undefined
-  ) => {
+  const handleCreateDefaultPokemon = (team_id: number) => {
     const set_body = {
       team_id,
-      nickname,
-      species,
-      gender,
-      item,
-      ability,
-      level,
-      shiny,
-      happiness,
-      nature,
-      hp_ev,
-      atk_ev,
-      def_ev,
-      spa_ev,
-      spd_ev,
-      spe_ev,
-      hp_iv,
-      atk_iv,
-      def_iv,
-      spa_iv,
-      spd_iv,
-      spe_iv,
-      move_one,
-      move_two,
-      move_three,
-      move_four,
+      nickname: null,
+      species: 'Pikachu',
+      gender: null,
+      item: null,
+      ability: null,
+      level: 100,
+      shiny: false,
+      happiness: 255,
+      nature: 'Adamant',
+      hp_ev: 0,
+      atk_ev: 0,
+      def_ev: 0,
+      spa_ev: 0,
+      spd_ev: 0,
+      spe_ev: 0,
+      hp_iv: 31,
+      atk_iv: 31,
+      def_iv: 31,
+      spa_iv: 31,
+      spd_iv: 31,
+      spe_iv: 31,
+      move_one: 'Tackle',
+      move_two: null,
+      move_three: null,
+      move_four: null,
     };
 
     apiService
@@ -667,7 +496,7 @@ export const GeneralProvider = ({ children }: Props) => {
     const body = {
       team_name: newTeamName.value,
       description: desc.value,
-      folder_id: currentClickedFolder.id,
+      folder_id: Number(currentClickedFolder.id),
     };
 
     apiService
@@ -686,8 +515,8 @@ export const GeneralProvider = ({ children }: Props) => {
         if (newTeamImport.value) {
           const parsed = showdownParse(newTeamImport.value);
 
-          let setPromises = parsed.map((set: PokemonSet) => {
-            let def = {
+          const setPromises = parsed.map((set: PokemonSet) => {
+            const def = {
               team_id: team.id,
               species: 'Pikachu',
               level: 100,
@@ -709,7 +538,7 @@ export const GeneralProvider = ({ children }: Props) => {
               move_one: 'Tackle',
             };
 
-            let set_body = {
+            const set_body = {
               ...def,
               team_id: team.id,
               nickname: set.nickname,
@@ -1002,9 +831,10 @@ export const GeneralProvider = ({ children }: Props) => {
       setPublicTeams(teams);
       setPublicSets([]);
       teams.forEach((team: PokemonTeam) => {
-        apiService.getSetsForOneTeam(team.id).then((sets) => {
-          setPublicSets([...publicSets, ...sets]);
-        });
+        !!team.id &&
+          apiService.getSetsForOneTeam(team.id).then((sets) => {
+            setPublicSets([...publicSets, ...sets]);
+          });
       });
     });
   };
@@ -1065,22 +895,13 @@ export const GeneralProvider = ({ children }: Props) => {
     setNewSetImport,
     setCurrentClickedFolder,
     setDesc,
-    validateCurrentFolderClicked,
-    validateNewTeamName,
-    validateDesc,
-    validateFilter,
-    validateNewFolderImport,
-    validateNewFolderName,
-    validateNewSetImport,
-    validateNewTeamImport,
-    validateSearch,
     handleDeleteFolder,
     handleDeleteSet,
     handleDeleteTeam,
     handleEditFolder,
     handleFilter,
     handlePostNewFolder,
-    handlePostNewPokemon,
+    handleCreateDefaultPokemon,
     handleSearch,
     handleUpdateSet,
     handleUpdateSetImport,
