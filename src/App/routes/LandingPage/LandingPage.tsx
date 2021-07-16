@@ -6,7 +6,6 @@ import Image from '../../components/Image/Image';
 import Footer from '../../components/Footer/Footer';
 import LoginForm from '../../components/LoginForm/LoginForm';
 import styles from './LandingPage.module.scss';
-// import {RouteState} from '../../@types'
 
 type RouteState = {
   location: Location;
@@ -23,7 +22,7 @@ const LandingPage: FunctionComponent<
 > = ({ location, history }): JSX.Element => {
   const handleLoginSucess = (): void => {
     const destination: LocationDescriptorObject<RouteState> =
-      (location.state || {}).from || '/';
+      location.state.from || '/';
     history.push(destination);
   };
 
