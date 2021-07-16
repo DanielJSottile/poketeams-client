@@ -222,7 +222,7 @@ export const validateIvs = (
   spAIv: NumberInput,
   spDIv: NumberInput,
   speIv: NumberInput
-) => {
+): boolean => {
   const ivArr = [
     Number(hpIv.value),
     Number(atkIv.value),

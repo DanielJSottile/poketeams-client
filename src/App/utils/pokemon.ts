@@ -3,56 +3,9 @@ legality reasons. This is not used to create new data, just make the site more u
 It's based off of some code from my custom Pokemon Showdown server but I basically just 
 needed something that held the species and type, I added and took away a few fields*/
 
-interface BaseStats {
-  hp: number;
-  atk: number;
-  def: number;
-  spa: number;
-  spd: number;
-  spe: number;
-}
+// TODO: Move into server as part of the DB.
 
-interface Abilities {
-  0: string;
-  1?: string;
-  H?: string;
-  S?: string;
-}
-
-interface GenderRatio {
-  M: number;
-  F: number;
-}
-
-type PokemonEntry = {
-  num: number;
-  species: string;
-  baseForme?: string;
-  baseSpecies?: string;
-  forme?: string;
-  types: string[];
-  genderRatio?: GenderRatio;
-  gender?: string | null;
-  genderLock?: boolean | string | null;
-  baseStats: BaseStats;
-  maxHP?: number;
-  abilities: Abilities;
-  heightm: number;
-  weightkg: number;
-  color: string;
-  prevo?: string;
-  evoItem?: string;
-  evoCondition?: string;
-  evoType?: string;
-  evoMove?: string;
-  evoLevel?: number;
-  evos?: string[];
-  eggGroups: string[];
-  inheritsFrom?: string;
-  canHatch?: boolean;
-  otherFormes?: string[];
-  otherForms?: string[];
-};
+import { PokemonEntry } from '../@types';
 
 const BattlePokedex: Record<string, PokemonEntry> = {
   mebiusanpast: {

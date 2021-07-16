@@ -80,3 +80,54 @@ export type PokemonTeamPost = Omit<
 >;
 
 export type PokemonFolderPost = Omit<PokemonFolder, 'id'>;
+
+interface BaseStats {
+  hp: number;
+  atk: number;
+  def: number;
+  spa: number;
+  spd: number;
+  spe: number;
+}
+
+interface Abilities {
+  0: string;
+  1?: string;
+  H?: string;
+  S?: string;
+}
+
+interface GenderRatio {
+  M: number;
+  F: number;
+}
+
+export type PokemonEntry = {
+  num: number;
+  species: string;
+  baseForme?: string;
+  baseSpecies?: string;
+  forme?: string;
+  types: string[];
+  genderRatio?: GenderRatio;
+  gender?: string | null;
+  genderLock?: boolean | string | null;
+  baseStats: BaseStats;
+  maxHP?: number;
+  abilities: Abilities;
+  heightm: number;
+  weightkg: number;
+  color: string;
+  prevo?: string;
+  evoItem?: string;
+  evoCondition?: string;
+  evoType?: string;
+  evoMove?: string;
+  evoLevel?: number;
+  evos?: string[];
+  eggGroups: string[];
+  inheritsFrom?: string;
+  canHatch?: boolean;
+  otherFormes?: string[];
+  otherForms?: string[];
+};

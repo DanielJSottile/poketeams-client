@@ -43,18 +43,18 @@ function evIvParser(string: string | null, val: string): number[] {
     const trim = value.trim();
     const match = trim.match(evIvRE);
 
-    if (match![2] === 'HP') {
-      hpV = Number(match![1]);
-    } else if (match![2] === 'Atk') {
-      atkV = Number(match![1]);
-    } else if (match![2] === 'Def') {
-      defV = Number(match![1]);
-    } else if (match![2] === 'SpA') {
-      spaV = Number(match![1]);
-    } else if (match![2] === 'SpD') {
-      spdV = Number(match![1]);
-    } else if (match![2] === 'Spe') {
-      speV = Number(match![1]);
+    if (match && match[2] === 'HP') {
+      hpV = Number(match[1]);
+    } else if (match && match[2] === 'Atk') {
+      atkV = Number(match[1]);
+    } else if (match && match[2] === 'Def') {
+      defV = Number(match[1]);
+    } else if (match && match[2] === 'SpA') {
+      spaV = Number(match[1]);
+    } else if (match && match[2] === 'SpD') {
+      spdV = Number(match[1]);
+    } else if (match && match[2] === 'Spe') {
+      speV = Number(match[1]);
     }
   });
 
@@ -66,7 +66,6 @@ function evIvParser(string: string | null, val: string): number[] {
 export default function showdownFolderParse(input: string): ParseReturn[] {
   // TODO: Add this as part of the teams
   let format: string;
-  // eslint-disable-next-line
   // TODO: Check against the folder name
   let folder: string;
   let teamname: string;
@@ -94,12 +93,12 @@ export default function showdownFolderParse(input: string): ParseReturn[] {
     const idLine = lineList[0].trim();
 
     if (FOLDERPARSE.test(idLine)) {
-      const folderMatch = idLine.match(FOLDERPARSE);
+      const folderMatch = idLine.match(FOLDERPARSE) || [];
       // eslint-disable-next-line
-      format = folderMatch![1].trim(); // unused for now
+      format = folderMatch[1].trim(); // unused for now
       // eslint-disable-next-line
-      folder = folderMatch![2].trim(); // might be needed for validation, dont need now
-      teamname = folderMatch![3].trim(); // use this!
+      folder = folderMatch[2].trim(); // might be needed for validation, dont need now
+      teamname = folderMatch[3].trim(); // use this!
     }
 
     const teamList = lineList.slice(1);
@@ -125,34 +124,34 @@ export default function showdownFolderParse(input: string): ParseReturn[] {
       const s = lineList[0].trim();
 
       if (NICKNAME_GEN_AND_ITEM_RE.test(s)) {
-        const sngi = s.match(NICKNAME_GEN_AND_ITEM_RE);
-        nickname = sngi![1].trim();
-        species = sngi![2].trim();
-        gender = sngi![3].trim();
-        item = sngi![4].trim();
+        const sngi = s.match(NICKNAME_GEN_AND_ITEM_RE) || [];
+        nickname = sngi[1].trim();
+        species = sngi[2].trim();
+        gender = sngi[3].trim();
+        item = sngi[4].trim();
       } else if (NICKNAME_NO_ITEM_RE.test(s)) {
-        const ns = s.match(NICKNAME_NO_ITEM_RE);
-        nickname = ns![1].trim();
-        species = ns![2].trim();
+        const ns = s.match(NICKNAME_NO_ITEM_RE) || [];
+        nickname = ns[1].trim();
+        species = ns[2].trim();
       } else if (NICKNAME_AND_ITEM_RE.test(s)) {
-        const sni = s.match(NICKNAME_AND_ITEM_RE);
-        nickname = sni![1].trim();
-        species = sni![2].trim();
-        item = sni![3].trim();
+        const sni = s.match(NICKNAME_AND_ITEM_RE) || [];
+        nickname = sni[1].trim();
+        species = sni[2].trim();
+        item = sni[3].trim();
       } else if (NICKNAME_GEN_NO_ITEM_RE.test(s)) {
-        const sng = s.match(NICKNAME_GEN_NO_ITEM_RE);
-        nickname = sng![1].trim();
-        species = sng![2].trim();
-        gender = sng![3].trim();
+        const sng = s.match(NICKNAME_GEN_NO_ITEM_RE) || [];
+        nickname = sng[1].trim();
+        species = sng[2].trim();
+        gender = sng[3].trim();
       } else if (NO_NICKNAME_GEN_AND_ITEM_RE.test(s)) {
-        const sgi = s.match(NO_NICKNAME_GEN_AND_ITEM_RE);
-        species = sgi![1].trim();
-        gender = sgi![2].trim();
-        item = sgi![3].trim();
+        const sgi = s.match(NO_NICKNAME_GEN_AND_ITEM_RE) || [];
+        species = sgi[1].trim();
+        gender = sgi[2].trim();
+        item = sgi[3].trim();
       } else if (NO_NICKNAME_AND_ITEM_RE.test(s)) {
-        const si = s.match(NO_NICKNAME_AND_ITEM_RE);
-        species = si![1].trim();
-        item = si![2].trim();
+        const si = s.match(NO_NICKNAME_AND_ITEM_RE) || [];
+        species = si[1].trim();
+        item = si[2].trim();
       } else {
         species = s;
       }
