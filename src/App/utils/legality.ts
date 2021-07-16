@@ -81,16 +81,19 @@ const LEGALITY = {
 
   cleanSpecies(species: string, shiny: boolean, REGEX: RegExp): string {
     const match = species.match(REGEX);
-    species = '';
-    const cleanMatch = match!.slice(1);
-    cleanMatch.forEach((part) => {
-      species = species + `${part}`;
-    });
-    if (!shiny) {
-      return `https://play.pokemonshowdown.com/sprites/ani/${species.toLowerCase()}.gif`;
-    } else {
-      return `https://play.pokemonshowdown.com/sprites/ani-shiny/${species.toLowerCase()}.gif`;
+    if (match) {
+      species = '';
+      const cleanMatch = match.slice(1);
+      cleanMatch.forEach((part) => {
+        species = species + `${part}`;
+      });
+      if (!shiny) {
+        return `https://play.pokemonshowdown.com/sprites/ani/${species.toLowerCase()}.gif`;
+      } else {
+        return `https://play.pokemonshowdown.com/sprites/ani-shiny/${species.toLowerCase()}.gif`;
+      }
     }
+    return species;
   },
 
   returnIconSprite(species: string, shiny: boolean): string {
