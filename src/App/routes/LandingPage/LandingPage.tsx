@@ -22,7 +22,7 @@ const LandingPage: FunctionComponent<
 > = ({ location, history }): JSX.Element => {
   const handleLoginSucess = (): void => {
     const destination: LocationDescriptorObject<RouteState> =
-      location.state.from || '/';
+      (location.state || {}).from || '/';
     history.push(destination);
   };
 
