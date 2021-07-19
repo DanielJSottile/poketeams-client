@@ -23,23 +23,15 @@ type NavigationProps = {
 const Navigation: FunctionComponent<NavigationProps> = ({ isPublic }) => {
   const { handleLogoutClick, isLoggedIn, user } = useContext(UserContext);
 
-  const renderLogout = () => {
+  const renderLogInOut = () => {
     return (
-      <div className={styles['navigation-logged-in']}>
-        <NavLink onClick={handleLogoutClick} to="/landing">
-          Logout <FontAwesomeIcon icon={faSignOutAlt} />
-        </NavLink>
-      </div>
-    );
-  };
-
-  const renderLogin = () => {
-    return (
-      <div className={styles['navigation-logged-out']}>
-        <NavLink to="/landing">
-          Log In <FontAwesomeIcon icon={faSignInAlt} />
-        </NavLink>
-      </div>
+      <NavLink
+        onClick={isLoggedIn ? handleLogoutClick : () => null}
+        to="/landing"
+      >
+        {isLoggedIn ? 'Logout' : 'Log In'}{' '}
+        <FontAwesomeIcon icon={isLoggedIn ? faSignOutAlt : faSignInAlt} />
+      </NavLink>
     );
   };
 
@@ -72,14 +64,12 @@ const Navigation: FunctionComponent<NavigationProps> = ({ isPublic }) => {
               <NavLink to="/build">
                 <FontAwesomeIcon icon={faHammer} /> Build!
               </NavLink>
-              {isLoggedIn ? renderLogout() : renderLogin()}
+              {renderLogInOut()}
             </div>
             <div className={styles['search-cont']}>
               <SearchBar isPublic={isPublic} />
             </div>
-            <div className={styles['user_things']}>
-              {isLoggedIn ? renderLogout() : renderLogin()}
-            </div>
+            <div className={styles['user_things']}>{renderLogInOut()}</div>
           </div>
         </div>
       </nav>
