@@ -12,7 +12,7 @@ import jwtDecode from 'jwt-decode';
 interface UserContextValues {
   isLoggedIn: boolean;
   user: string;
-  userId: string;
+  userId: number;
   handleLogoutClick: () => void;
 }
 
@@ -23,13 +23,13 @@ type UserContextProps = {
 const UserContext = createContext<UserContextValues>({
   isLoggedIn: false,
   user: '',
-  userId: '',
+  userId: 0,
   handleLogoutClick: () => null,
 });
 
 interface MyToken {
   sub: string;
-  user_id: string;
+  user_id: number;
 }
 
 export default UserContext;
@@ -39,7 +39,7 @@ export const UserContextProvider = ({
 }: UserContextProps): JSX.Element => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState('');
-  const [userId, setUserId] = useState('');
+  const [userId, setUserId] = useState(0);
   const { clearUserState } = useContext(GeneralContext);
 
   useEffect(() => {
