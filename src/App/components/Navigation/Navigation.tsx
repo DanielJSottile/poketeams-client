@@ -10,28 +10,18 @@ import {
 import PokeTeamsIcon from '../../Images/PokeTeams.png';
 import Image from '../Image';
 import SearchBar from '../SearchBar';
-import GeneralContext from '../../contexts/GeneralContext';
-import TokenService from '../../services/token-service';
-import jwtDecode from 'jwt-decode';
+import UserContext from '../../contexts/UserContext';
 import styles from './Navigation.module.scss';
 
 type NavigationProps = {
-  /** determines whether to render public or private navbar */
+  /** determines whether to render public or private navbar
+   * This will be determined by isLoggedIn from UserContext at the highest page level
+   */
   isPublic: boolean;
 };
 
-interface MyToken {
-  sub: string;
-  user_id: string;
-}
-
 const Navigation: FunctionComponent<NavigationProps> = ({ isPublic }) => {
-  const { clearUserState } = useContext(GeneralContext);
-
-  const handleLogoutClick = () => {
-    TokenService.clearAuthToken();
-    clearUserState();
-  };
+  const { handleLogoutClick, isLoggedIn, user } = useContext(UserContext);
 
   const renderLogout = () => {
     return (
@@ -54,10 +44,7 @@ const Navigation: FunctionComponent<NavigationProps> = ({ isPublic }) => {
   };
 
   const renderUserWelcome = () => {
-    let user = '';
-
-    if (TokenService.getAuthToken()) {
-      user = jwtDecode<MyToken>(TokenService.getAuthToken() || '').sub;
+    if (isLoggedIn) {
       return <h2>{`Welcome, ${user}!`}</h2>;
     } else {
       return <h2>{`Click the Login Button to Log In!`}</h2>;
@@ -85,13 +72,13 @@ const Navigation: FunctionComponent<NavigationProps> = ({ isPublic }) => {
               <NavLink to="/build">
                 <FontAwesomeIcon icon={faHammer} /> Build!
               </NavLink>
-              {TokenService.hasAuthToken() ? renderLogout() : renderLogin()}
+              {isLoggedIn ? renderLogout() : renderLogin()}
             </div>
             <div className={styles['search-cont']}>
               <SearchBar isPublic={isPublic} />
             </div>
             <div className={styles['user_things']}>
-              {TokenService.hasAuthToken() ? renderLogout() : renderLogin()}
+              {isLoggedIn ? renderLogout() : renderLogin()}
             </div>
           </div>
         </div>

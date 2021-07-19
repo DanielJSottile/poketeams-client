@@ -1,7 +1,11 @@
-import React, { LazyExoticComponent, FunctionComponent } from 'react';
+import React, {
+  LazyExoticComponent,
+  FunctionComponent,
+  useContext,
+} from 'react';
 import { Route, Redirect, RouteComponentProps } from 'react-router-dom';
 import { StaticContext } from 'react-router';
-import TokenService from '../../services/token-service';
+import UserContext from '../../contexts/UserContext';
 
 export interface PrivateRouteProps {
   component: LazyExoticComponent<
@@ -20,12 +24,13 @@ const PrivateRoute: FunctionComponent<PrivateRouteProps> = ({
   component,
   ...props
 }): JSX.Element => {
+  const { isLoggedIn } = useContext(UserContext);
   const Component = component;
   return (
     <Route
       {...props}
       render={(componentProps) =>
-        TokenService.hasAuthToken() ? (
+        isLoggedIn ? (
           <Component {...componentProps} />
         ) : (
           <Redirect

@@ -5,6 +5,7 @@ import React, {
   createContext,
   ReactNode,
 } from 'react';
+import { useLocation, useHistory } from 'react-router';
 import GeneralContext from './GeneralContext';
 import TokenService from '../services/token-service';
 import jwtDecode from 'jwt-decode';
@@ -41,16 +42,25 @@ export const UserContextProvider = ({
   const [user, setUser] = useState('');
   const [userId, setUserId] = useState(0);
   const { clearUserState } = useContext(GeneralContext);
+  const location = useLocation();
+  const history = useHistory();
 
   useEffect(() => {
     setIsLoggedIn(!!TokenService.getAuthToken());
-    setUser(jwtDecode<MyToken>(TokenService.getAuthToken() || '').sub);
-    setUserId(jwtDecode<MyToken>(TokenService.getAuthToken() || '').user_id);
-  }, []);
+  }, [location]);
 
-  const handleLogoutClick = () => {
-    TokenService.clearAuthToken();
+  useEffect(() => {
+    if (isLoggedIn) {
+      setUser(jwtDecode<MyToken>(TokenService.getAuthToken() || '').sub);
+      setUserId(jwtDecode<MyToken>(TokenService.getAuthToken() || '').user_id);
+    }
+  }, [isLoggedIn]);
+
+  const handleLogoutClick = async () => {
+    console.log('i logged out');
+    await TokenService.clearAuthToken();
     clearUserState();
+    history.push('/landing');
   };
 
   const value = {

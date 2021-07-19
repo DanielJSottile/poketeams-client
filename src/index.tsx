@@ -5,14 +5,17 @@ import * as serviceWorker from './serviceWorker';
 import { BrowserRouter } from 'react-router-dom';
 import { GeneralProvider } from './App/contexts/GeneralContext';
 import './index.scss';
+import { UserContextProvider } from './App/contexts/UserContext';
 
 const rootNode: HTMLElement | null = document.getElementById('root');
 ReactDOM.render(
   <StrictMode>
     <BrowserRouter>
-      <GeneralProvider>
-        <App />
-      </GeneralProvider>
+      <UserContextProvider>
+        <GeneralProvider>
+          <App />
+        </GeneralProvider>
+      </UserContextProvider>
     </BrowserRouter>
   </StrictMode>,
   rootNode
