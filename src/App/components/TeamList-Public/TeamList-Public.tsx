@@ -6,8 +6,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import Button from '../Button';
 import TeamPublic from '../Team-Public';
-import PokeballLoader from '../Loaders/PokeballLoader';
-import LoadingBlack from '../Loaders/LoadingBlack';
+import LazyLoader from '../Loaders/LazyLoader';
 import GeneralContext from '../../contexts/GeneralContext';
 import styles from './TeamList-Public.module.scss';
 import { PokemonTeam } from '../../@types';
@@ -59,11 +58,11 @@ const TeamListPublic: FunctionComponent = (): JSX.Element => {
       {TeamList.length > 0 ? (
         TeamList
       ) : (
-        <div className={styles['pokeball-div']}>
-          <PokeballLoader />
-          <LoadingBlack />
-          <h3 className={styles['hint']}>(Hint: There May Be No Teams)</h3>
-        </div>
+        <LazyLoader
+          containerClass={styles['pokeball-div']}
+          messageClass={styles['hint']}
+          message={'(Hint: There May Be No Teams)'}
+        />
       )}
     </Fragment>
   );
