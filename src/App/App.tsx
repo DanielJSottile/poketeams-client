@@ -1,4 +1,4 @@
-import React, { Fragment, lazy, Suspense, FunctionComponent } from 'react';
+import React, { lazy, Suspense, FunctionComponent } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import ErrorPage from './components/ErrorPage';
 import PrivateRoute from './components/Utils/PrivateRoute';
@@ -16,7 +16,7 @@ const RegistrationPage = lazy(() => import('./routes/RegistrationPage'));
 
 const App: FunctionComponent = () => {
   return (
-    <Fragment>
+    <>
       <main>
         <ErrorPage>
           <Suspense
@@ -50,7 +50,7 @@ const App: FunctionComponent = () => {
           </Suspense>
         </ErrorPage>
       </main>
-    </Fragment>
+    </>
   );
 };
 

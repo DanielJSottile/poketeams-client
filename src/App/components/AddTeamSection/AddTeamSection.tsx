@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, FunctionComponent } from 'react';
+import React, { useContext, FunctionComponent } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faUpload,
@@ -100,7 +100,7 @@ const AddTeamSection: FunctionComponent = () => {
   };
 
   return (
-    <Fragment>
+    <>
       <section className={styles['folders-list']}>
         <div>
           {currentClickedFolder.value ? (
@@ -114,7 +114,7 @@ const AddTeamSection: FunctionComponent = () => {
         </div>
         <h3>Teams:</h3>
       </section>
-    </Fragment>
+    </>
   );
 };
 

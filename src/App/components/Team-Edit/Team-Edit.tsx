@@ -1,9 +1,4 @@
-import React, {
-  Fragment,
-  useContext,
-  useState,
-  FunctionComponent,
-} from 'react';
+import React, { useContext, useState, FunctionComponent } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -321,9 +316,7 @@ const TeamEdit: FunctionComponent<TeamEditProps> = ({
   };
 
   return (
-    <Fragment>
-      {teamExpandToggle ? renderUnexpandedTeam() : renderExpandedTeam()}
-    </Fragment>
+    <>{teamExpandToggle ? renderUnexpandedTeam() : renderExpandedTeam()}</>
   );
 };
 

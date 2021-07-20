@@ -1,4 +1,4 @@
-import React, { Fragment, useState, FunctionComponent } from 'react';
+import React, { useState, FunctionComponent } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -477,7 +477,7 @@ const SetPublic: FunctionComponent<SetPublicProps> = ({ set }): JSX.Element => {
       });
 
     return (
-      <Fragment>
+      <>
         <div className={styles['pokemon']}>
           <div className={styles['closed']} onClick={() => handleSetToggle()}>
             <div className={styles['inside']}>
@@ -493,15 +493,11 @@ const SetPublic: FunctionComponent<SetPublicProps> = ({ set }): JSX.Element => {
             <div className={styles['inside']}>{types}</div>
           </div>
         </div>
-      </Fragment>
+      </>
     );
   };
 
-  return (
-    <Fragment>
-      {expandToggle ? renderUnexpandedSet() : renderExpandedSet()}
-    </Fragment>
-  );
+  return <>{expandToggle ? renderUnexpandedSet() : renderExpandedSet()}</>;
 };
 
 export default SetPublic;

@@ -1,4 +1,4 @@
-import React, { Fragment, FunctionComponent } from 'react';
+import React, { FunctionComponent } from 'react';
 import Navigation from '../../components/Navigation';
 import AddTeamSection from '../../components/AddTeamSection/AddTeamSection';
 import TeamListEdit from '../../components/TeamList-Edit/TeamList-Edit';
@@ -7,7 +7,7 @@ import Footer from '../../components/Footer/Footer';
 
 const BuildPage: FunctionComponent = (): JSX.Element => {
   return (
-    <Fragment>
+    <>
       <Navigation isPublic={false} />
       <main>
         <header role="banner">
@@ -17,7 +17,7 @@ const BuildPage: FunctionComponent = (): JSX.Element => {
         <TeamListEdit />
         <Footer />
       </main>
-    </Fragment>
+    </>
   );
 };
 

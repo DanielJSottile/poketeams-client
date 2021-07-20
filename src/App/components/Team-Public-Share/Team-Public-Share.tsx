@@ -1,4 +1,4 @@
-import React, { Fragment, useState, FunctionComponent } from 'react';
+import React, { useState, FunctionComponent } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -188,9 +188,7 @@ const TeamPublicShare: FunctionComponent<TeamPublicShareProps> = ({
   };
 
   return (
-    <Fragment>
-      {teamExpandToggle ? renderUnexpandedTeam() : renderExpandedTeam()}
-    </Fragment>
+    <>{teamExpandToggle ? renderUnexpandedTeam() : renderExpandedTeam()}</>
   );
 };
 

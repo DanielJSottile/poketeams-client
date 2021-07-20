@@ -1,11 +1,11 @@
-import React, { Fragment, FunctionComponent } from 'react';
+import React, { FunctionComponent } from 'react';
 import Navigation from '../../components/Navigation';
 import TeamListPublic from '../../components/TeamList-Public/TeamList-Public';
 import Footer from '../../components/Footer/Footer';
 
 const HomePage: FunctionComponent = (): JSX.Element => {
   return (
-    <Fragment>
+    <>
       <Navigation isPublic />
       <main>
         <header role="banner">
@@ -14,7 +14,7 @@ const HomePage: FunctionComponent = (): JSX.Element => {
         <TeamListPublic />
         <Footer />
       </main>
-    </Fragment>
+    </>
   );
 };
 
