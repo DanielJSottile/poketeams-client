@@ -73,7 +73,7 @@ interface GeneralContextValues {
   handlePostNewFolder: () => void;
   handleEditFolder: () => void;
   handleDeleteFolder: () => void;
-  handleFilter: () => void;
+  handleFilter: (e: MouseEvent<HTMLButtonElement>) => void;
   handleSearch: (e: MouseEvent<HTMLButtonElement>) => void;
   handleUpdateSetImport: (id: number) => void;
   handleUpdateSet: (
@@ -270,7 +270,7 @@ export const GeneralProvider = ({ children }: ContextProps): JSX.Element => {
           });
       });
     });
-  }, [page, search.value, sort.value]);
+  }, [page]);
 
   const getUserState = () => {
     if (TokenService.getAuthToken()) {

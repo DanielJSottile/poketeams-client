@@ -1,0 +1,107 @@
+@import '../../../index.scss';
+
+.user-welcome {
+  padding: 0.3125rem;
+  margin-right: 0.9375rem;
+  text-align: right;
+}
+
+.user-welcome:hover {
+  color: $pure-yellow;
+  transition: 0.5s;
+}
+
+.logo-with-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 1.25rem;
+  h2 {
+    font-size: 2.1875rem;
+  }
+}
+
+.navbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.button_things,
+.user_things {
+  display: none;
+}
+
+.logo-title {
+  width: 100%;
+}
+
+.mobile-button {
+  display: flex;
+  flex-direction: column;
+  margin: 0.625rem;
+  padding: 0.625rem;
+}
+
+.navigation-body {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 440px) {
+  .logo-with-text {
+    h2 {
+      margin: 0;
+      font-size: 3.4375rem;
+    }
+  }
+}
+
+@media (min-width: 700px) {
+  .navbar {
+    flex-direction: column;
+    justify-content: unset;
+    margin-bottom: 1.5rem;
+  }
+  .mobile-button {
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    a {
+      width: 6.25rem;
+    }
+  }
+}
+
+@media (min-width: 1200px) {
+  /* Desktop */
+
+  .navbar {
+    align-items: flex-end;
+    width: 80%;
+  }
+
+  .navigation-body {
+    display: flex;
+    flex-direction: row;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+  .mobile-button {
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    margin: 0.625rem 0 0.625rem 0.625rem;
+    padding: 0.625rem 0 0.625rem 0.625rem;
+    a {
+      width: 6.25rem;
+    }
+  }
+
+  .logo-with-text {
+    align-items: flex-end;
+    h2 {
+      margin-bottom: 0.6rem;
+    }
+  }
+}
