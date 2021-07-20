@@ -1,9 +1,4 @@
-import React, {
-  Fragment,
-  useContext,
-  useState,
-  FunctionComponent,
-} from 'react';
+import React, { useContext, useState, FunctionComponent } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -191,7 +186,7 @@ const FoldersList: FunctionComponent = () => {
   };
 
   return (
-    <Fragment>
+    <>
       <section className={styles['folders-list']}>
         <h3>Folders:</h3>
         <div className={styles['folders']}>
@@ -282,7 +277,7 @@ const FoldersList: FunctionComponent = () => {
           {deleteClicked && renderDeleteExpand()}
         </div>
       </section>
-    </Fragment>
+    </>
   );
 };
 

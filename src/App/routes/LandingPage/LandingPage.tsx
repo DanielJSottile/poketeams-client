@@ -1,4 +1,4 @@
-import React, { Fragment, FunctionComponent } from 'react';
+import React, { FunctionComponent } from 'react';
 import { StaticContext } from 'react-router';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import { Location, History, LocationDescriptorObject } from 'history';
@@ -27,7 +27,7 @@ const LandingPage: FunctionComponent<
   };
 
   return (
-    <Fragment>
+    <>
       <header role="banner">
         <div className={styles['landing-title']}></div>
         <h2>store. organize. edit. share.</h2>
@@ -109,7 +109,7 @@ const LandingPage: FunctionComponent<
         </p>
       </section>
       <Footer />
-    </Fragment>
+    </>
   );
 };
 

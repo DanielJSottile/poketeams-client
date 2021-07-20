@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, FunctionComponent } from 'react';
+import React, { useContext, FunctionComponent } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faArrowCircleLeft,
@@ -19,7 +19,7 @@ const TeamListPublic: FunctionComponent = (): JSX.Element => {
   });
 
   return (
-    <Fragment>
+    <>
       <div className={styles['team-pagination']}>
         {page > 1 ? (
           <div className={styles['pagebutton']}>
@@ -64,7 +64,7 @@ const TeamListPublic: FunctionComponent = (): JSX.Element => {
           message={'(Hint: There May Be No Teams)'}
         />
       )}
-    </Fragment>
+    </>
   );
 };
 

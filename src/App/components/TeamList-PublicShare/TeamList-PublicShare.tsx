@@ -1,4 +1,4 @@
-import React, { Fragment, FunctionComponent } from 'react';
+import React, { FunctionComponent } from 'react';
 import TeamPublicShare from '../Team-Public-Share';
 import LazyLoader from '../Loaders/LazyLoader';
 import styles from './TeamList-PublicShare.module.scss';
@@ -35,7 +35,7 @@ const TeamListPublicShare: FunctionComponent<TeamListPublicShareProps> = ({
   }
 
   return (
-    <Fragment>
+    <>
       {TeamList ? (
         TeamList
       ) : (
@@ -45,7 +45,7 @@ const TeamListPublicShare: FunctionComponent<TeamListPublicShareProps> = ({
           message={'(Hint: There May Be No Teams)'}
         />
       )}
-    </Fragment>
+    </>
   );
 };
 

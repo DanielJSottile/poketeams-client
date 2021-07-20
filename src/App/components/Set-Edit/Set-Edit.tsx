@@ -1,9 +1,4 @@
-import React, {
-  Fragment,
-  useContext,
-  useState,
-  FunctionComponent,
-} from 'react';
+import React, { useContext, useState, FunctionComponent } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -794,7 +789,7 @@ const SetEdit: FunctionComponent<SetEditProps> = ({ set }) => {
     );
 
     return (
-      <Fragment>
+      <>
         <div className={styles['pokemon']}>
           <div
             className={styles['closed']}
@@ -817,7 +812,7 @@ const SetEdit: FunctionComponent<SetEditProps> = ({ set }) => {
             </div>
           </div>
         </div>
-      </Fragment>
+      </>
     );
   };
 
@@ -840,11 +835,7 @@ const SetEdit: FunctionComponent<SetEditProps> = ({ set }) => {
     );
   };
 
-  return (
-    <Fragment>
-      {expandToggle ? renderUnexpandedSet() : renderExpandedSet()}
-    </Fragment>
-  );
+  return <>{expandToggle ? renderUnexpandedSet() : renderExpandedSet()}</>;
 };
 
 export default SetEdit;

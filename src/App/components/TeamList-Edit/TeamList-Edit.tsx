@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, FunctionComponent } from 'react';
+import React, { useContext, FunctionComponent } from 'react';
 import TeamEdit from '../Team-Edit';
 import GeneralContext from '../../contexts/GeneralContext';
 import { PokemonTeam } from '../../@types';
@@ -16,7 +16,7 @@ const TeamListEdit: FunctionComponent = (): JSX.Element => {
     });
 
   return (
-    <Fragment>
+    <>
       {TeamList.length > 0 ? (
         TeamList
       ) : (
@@ -25,7 +25,7 @@ const TeamListEdit: FunctionComponent = (): JSX.Element => {
           Pokemon!
         </h3>
       )}
-    </Fragment>
+    </>
   );
 };
 

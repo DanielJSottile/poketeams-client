@@ -1,12 +1,8 @@
-import React, { Fragment, FunctionComponent } from 'react';
+import React, { FunctionComponent } from 'react';
 import styles from './LoadingSets.module.scss';
 
 const LoadingSets: FunctionComponent = () => {
-  return (
-    <Fragment>
-      <div className={styles['loading-sets']}></div>
-    </Fragment>
-  );
+  return <div className={styles['loading-sets']} />;
 };
 
 export default LoadingSets;

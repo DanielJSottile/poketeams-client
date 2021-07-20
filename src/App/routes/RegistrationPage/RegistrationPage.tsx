@@ -1,4 +1,4 @@
-import React, { Fragment, FunctionComponent } from 'react';
+import React, { FunctionComponent } from 'react';
 import { History } from 'history';
 import RegistrationForm from '../../components/RegistrationForm/RegistrationForm';
 import Footer from '../../components/Footer/Footer';
@@ -16,7 +16,7 @@ const RegistrationPage: FunctionComponent<RegistrationProps> = ({
   };
 
   return (
-    <Fragment>
+    <>
       <section>
         <div className={styles['landing-title']}></div>
         <h2>Create Your Account!</h2>
@@ -48,7 +48,7 @@ const RegistrationPage: FunctionComponent<RegistrationProps> = ({
         </p>
       </section>
       <Footer />
-    </Fragment>
+    </>
   );
 };
 
