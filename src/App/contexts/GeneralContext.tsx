@@ -270,7 +270,7 @@ export const GeneralProvider = ({ children }: ContextProps): JSX.Element => {
           });
       });
     });
-  }, [page, search.value, sort.value]);
+  }, [page]);
 
   const getUserState = () => {
     if (TokenService.getAuthToken()) {
