@@ -22,7 +22,7 @@ type UserContextProps = {
 };
 
 const UserContext = createContext<UserContextValues>({
-  isLoggedIn: false,
+  isLoggedIn: !!TokenService.getAuthToken(),
   user: '',
   userId: 0,
   handleLogoutClick: () => null,

@@ -1,4 +1,4 @@
-import React, { useContext, FunctionComponent } from 'react';
+import React, { useContext, FunctionComponent, MouseEvent } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faSearch,
@@ -10,6 +10,7 @@ import Input from '../Input';
 import Button from '../Button';
 import { validateSearch } from '../../utils/validations';
 import styles from './SearchBar.module.scss';
+import { TextInput } from '../../@types';
 
 type SearchBarProps = {
   /** passed in from Navigation, determines whether to use search or filter */
@@ -31,10 +32,13 @@ const SearchBar: FunctionComponent<SearchBarProps> = ({ isPublic }) => {
   } = useContext(GeneralContext);
 
   const searchInput = isPublic ? search : filter;
-  const handleSearchOrFilter = isPublic ? handleSearch : handleFilter;
-  const setSearchOrFilter = isPublic ? setSearch : setFilter;
+  const handleSearchOrFilter = (e: MouseEvent<HTMLButtonElement>) =>
+    isPublic ? handleSearch(e) : handleFilter(e);
+  const setSearchOrFilter = (input: TextInput) =>
+    isPublic ? setSearch(input) : setFilter(input);
   const sortOrFilterSort = isPublic ? sort : filtersort;
-  const setSortOrFilterSort = isPublic ? setSort : setFilterSort;
+  const setSortOrFilterSort = (input: TextInput) =>
+    isPublic ? setSort(input) : setFilterSort(input);
 
   return (
     <div className={styles['searchbar']}>
@@ -80,7 +84,6 @@ const SearchBar: FunctionComponent<SearchBarProps> = ({ isPublic }) => {
             buttonClass={styles['button']}
             type="submit"
             onClickCallback={(e) => {
-              e.preventDefault();
               handleSearchOrFilter(e);
             }}
           >

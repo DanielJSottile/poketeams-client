@@ -1,15 +1,15 @@
 import React, {
   useState,
   useEffect,
-  useContext,
   createContext,
   ReactNode,
   MouseEvent,
   Dispatch,
   SetStateAction,
 } from 'react';
-import UserContext from './UserContext';
 import apiService from '../services/apiService';
+import TokenService from '../services/token-service';
+import jwtDecode from 'jwt-decode';
 import showdownParse from '../utils/parse';
 import showdownFolderParse from '../utils/parseFolder';
 import {
@@ -73,7 +73,7 @@ interface GeneralContextValues {
   handlePostNewFolder: () => void;
   handleEditFolder: () => void;
   handleDeleteFolder: () => void;
-  handleFilter: () => void;
+  handleFilter: (e: MouseEvent<HTMLButtonElement>) => void;
   handleSearch: (e: MouseEvent<HTMLButtonElement>) => void;
   handleUpdateSetImport: (id: number) => void;
   handleUpdateSet: (
@@ -252,8 +252,6 @@ export const GeneralProvider = ({ children }: ContextProps): JSX.Element => {
   const [filtersort, setFilterSort] = useState({ value: '', touched: false });
   const [page, setPage] = useState(1);
 
-  const { user, userId, isLoggedIn } = useContext(UserContext);
-
   useEffect(() => {
     getUserState();
 
@@ -275,16 +273,20 @@ export const GeneralProvider = ({ children }: ContextProps): JSX.Element => {
   }, [page, search.value, sort.value]);
 
   const getUserState = () => {
-    if (isLoggedIn) {
-      apiService.getUserFolders(userId).then((data) => {
+    if (TokenService.getAuthToken()) {
+      const user_id = jwtDecode<MyToken>(
+        TokenService.getAuthToken() || ''
+      ).user_id;
+
+      apiService.getUserFolders(user_id).then((data) => {
         setUserFolders(data);
       });
 
-      apiService.getUserTeams(userId).then((data) => {
+      apiService.getUserTeams(user_id).then((data) => {
         setUserTeams(data);
       });
 
-      apiService.getUserSets(userId).then((data) => {
+      apiService.getUserSets(user_id).then((data) => {
         setUserSets(data);
       });
     }
@@ -317,7 +319,10 @@ export const GeneralProvider = ({ children }: ContextProps): JSX.Element => {
   const handlePostNewFolder = () => {
     let folder: PokemonFolder;
     apiService
-      .postUserFolder(newFolderName.value, userId)
+      .postUserFolder(
+        newFolderName.value,
+        jwtDecode<MyToken>(TokenService.getAuthToken() || '').user_id
+      )
       .then((f) => {
         folder = f;
         setUserFolders([...userFolders, folder]);
@@ -338,7 +343,10 @@ export const GeneralProvider = ({ children }: ContextProps): JSX.Element => {
                 folder_id: folderId,
               };
 
-              return apiService.postUserTeam(body, userId);
+              return apiService.postUserTeam(
+                body,
+                jwtDecode<MyToken>(TokenService.getAuthToken() || '').user_id
+              );
             }
           );
 
@@ -347,8 +355,10 @@ export const GeneralProvider = ({ children }: ContextProps): JSX.Element => {
               return {
                 ...team,
                 folder_name: folder.folder_name,
-                user_id: userId,
-                user_name: user,
+                user_id: jwtDecode<MyToken>(TokenService.getAuthToken() || '')
+                  .user_id,
+                user_name: jwtDecode<MyToken>(TokenService.getAuthToken() || '')
+                  .sub,
               };
             });
             setUserTeams([...userTeams, ...newVals]);
@@ -424,7 +434,10 @@ export const GeneralProvider = ({ children }: ContextProps): JSX.Element => {
 
             const setPromises: Promise<PokemonSet>[] = allSets.map(
               (set: PokemonSet): Promise<PokemonSet> => {
-                return apiService.postUserSet(set, userId);
+                return apiService.postUserSet(
+                  set,
+                  jwtDecode<MyToken>(TokenService.getAuthToken() || '').user_id
+                );
               }
             );
 
@@ -472,7 +485,10 @@ export const GeneralProvider = ({ children }: ContextProps): JSX.Element => {
     };
 
     apiService
-      .postUserSet(set_body, userId)
+      .postUserSet(
+        set_body,
+        jwtDecode<MyToken>(TokenService.getAuthToken() || '').user_id
+      )
       .then((set) => setUserSets([...userSets, set]));
   };
 
@@ -483,78 +499,86 @@ export const GeneralProvider = ({ children }: ContextProps): JSX.Element => {
       folder_id: Number(currentClickedFolder.id),
     };
 
-    apiService.postUserTeam(body, userId).then((team) => {
-      setUserTeams([
-        ...userTeams,
-        {
-          ...team,
-          folder_id: Number(currentClickedFolder.id),
-        },
-      ]);
-      if (newTeamImport.value) {
-        const parsed = showdownParse(newTeamImport.value);
+    apiService
+      .postUserTeam(
+        body,
+        jwtDecode<MyToken>(TokenService.getAuthToken() || '').user_id
+      )
+      .then((team) => {
+        setUserTeams([
+          ...userTeams,
+          {
+            ...team,
+            folder_id: Number(currentClickedFolder.id),
+          },
+        ]);
+        if (newTeamImport.value) {
+          const parsed = showdownParse(newTeamImport.value);
 
-        const setPromises = parsed.map((set: PokemonSet) => {
-          const def = {
-            team_id: team.id,
-            species: 'Pikachu',
-            level: 100,
-            shiny: false,
-            happiness: 255,
-            nature: 'Adamant',
-            hp_ev: 0,
-            atk_ev: 0,
-            def_ev: 0,
-            spa_ev: 0,
-            spd_ev: 0,
-            spe_ev: 0,
-            hp_iv: 31,
-            atk_iv: 31,
-            def_iv: 31,
-            spa_iv: 31,
-            spd_iv: 31,
-            spe_iv: 31,
-            move_one: 'Tackle',
-          };
+          const setPromises = parsed.map((set: PokemonSet) => {
+            const def = {
+              team_id: team.id,
+              species: 'Pikachu',
+              level: 100,
+              shiny: false,
+              happiness: 255,
+              nature: 'Adamant',
+              hp_ev: 0,
+              atk_ev: 0,
+              def_ev: 0,
+              spa_ev: 0,
+              spd_ev: 0,
+              spe_ev: 0,
+              hp_iv: 31,
+              atk_iv: 31,
+              def_iv: 31,
+              spa_iv: 31,
+              spd_iv: 31,
+              spe_iv: 31,
+              move_one: 'Tackle',
+            };
 
-          const set_body = {
-            ...def,
-            team_id: team.id,
-            nickname: set.nickname,
-            species: set.species,
-            gender: set.gender,
-            item: set.item,
-            ability: set.ability,
-            level: set.level,
-            shiny: set.shiny,
-            happiness: set.happiness,
-            nature: set.nature,
-            hp_ev: set.hp_ev,
-            atk_ev: set.atk_ev,
-            def_ev: set.def_ev,
-            spa_ev: set.spa_ev,
-            spd_ev: set.spd_ev,
-            spe_ev: set.spe_ev,
-            hp_iv: set.hp_iv,
-            atk_iv: set.atk_iv,
-            def_iv: set.def_iv,
-            spa_iv: set.spa_iv,
-            spd_iv: set.spd_iv,
-            spe_iv: set.spe_iv,
-            move_one: set.move_one,
-            move_two: set.move_two,
-            move_three: set.move_three,
-            move_four: set.move_four,
-          };
+            const set_body = {
+              ...def,
+              team_id: team.id,
+              nickname: set.nickname,
+              species: set.species,
+              gender: set.gender,
+              item: set.item,
+              ability: set.ability,
+              level: set.level,
+              shiny: set.shiny,
+              happiness: set.happiness,
+              nature: set.nature,
+              hp_ev: set.hp_ev,
+              atk_ev: set.atk_ev,
+              def_ev: set.def_ev,
+              spa_ev: set.spa_ev,
+              spd_ev: set.spd_ev,
+              spe_ev: set.spe_ev,
+              hp_iv: set.hp_iv,
+              atk_iv: set.atk_iv,
+              def_iv: set.def_iv,
+              spa_iv: set.spa_iv,
+              spd_iv: set.spd_iv,
+              spe_iv: set.spe_iv,
+              move_one: set.move_one,
+              move_two: set.move_two,
+              move_three: set.move_three,
+              move_four: set.move_four,
+            };
 
-          return apiService.postUserSet(set_body, userId);
-        });
+            return apiService.postUserSet(
+              set_body,
+              jwtDecode<MyToken>(TokenService.getAuthToken() || '').user_id
+            );
+          });
 
-        Promise.all(setPromises).then((sets) => {
-          setUserSets([...userSets, ...sets]);
-        });
-      }
-    });
+          Promise.all(setPromises).then((sets) => {
+            setUserSets([...userSets, ...sets]);
+          });
+        }
+      });
     setTeamAddClicked(!teamAddClicked);
     setNewTeamName({ value: '', touched: false });
     setDesc({ value: '', touched: false });
@@ -562,6 +586,10 @@ export const GeneralProvider = ({ children }: ContextProps): JSX.Element => {
   };
 
   const handleEditFolder = () => {
+    const userId = jwtDecode<MyToken>(
+      TokenService.getAuthToken() || ''
+    ).user_id;
+
     apiService.patchUserFolder(
       newFolderName.value,
       currentClickedFolder.id,
@@ -581,6 +609,9 @@ export const GeneralProvider = ({ children }: ContextProps): JSX.Element => {
 
   const handleUpdateTeam = (teamname: string, desc: string, id: number) => {
     const body = { id: id, team_name: teamname, description: desc };
+    const userId = jwtDecode<MyToken>(
+      TokenService.getAuthToken() || ''
+    ).user_id;
     apiService.patchUserTeam(body, userId);
 
     const team = { team_name: teamname, description: desc };
@@ -648,6 +679,10 @@ export const GeneralProvider = ({ children }: ContextProps): JSX.Element => {
       move_three: move_three,
       move_four: move_four,
     };
+
+    const userId = jwtDecode<MyToken>(
+      TokenService.getAuthToken() || ''
+    ).user_id;
     apiService.patchUserSet(body, userId);
 
     const set = {
@@ -687,6 +722,9 @@ export const GeneralProvider = ({ children }: ContextProps): JSX.Element => {
 
   const handleUpdateSetImport = (id: number) => {
     const parsed = showdownParse(newSetImport.value)[0];
+    const userId = jwtDecode<MyToken>(
+      TokenService.getAuthToken() || ''
+    ).user_id;
 
     const body = {
       id: id,
@@ -805,11 +843,14 @@ export const GeneralProvider = ({ children }: ContextProps): JSX.Element => {
     const query = `?sort=${filtersort.value || 'newest'}&species=${
       filter.value.toLowerCase() || 'all'
     }`;
-    if (isLoggedIn) {
-      apiService.getUserFoldersFilter(userId, query).then((data) => {
+    if (TokenService.getAuthToken()) {
+      const user_id = jwtDecode<MyToken>(
+        TokenService.getAuthToken() || ''
+      ).user_id;
+      apiService.getUserFoldersFilter(user_id, query).then((data) => {
         setUserFolders(data);
       });
-      apiService.getUserTeamsFilter(userId, query).then((data) => {
+      apiService.getUserTeamsFilter(user_id, query).then((data) => {
         setUserTeams(data);
       });
     }

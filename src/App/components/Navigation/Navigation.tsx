@@ -1,5 +1,5 @@
 import React, { useContext, FunctionComponent } from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faSignOutAlt,
@@ -10,20 +10,31 @@ import {
 import PokeTeamsIcon from '../../Images/PokeTeams.png';
 import Image from '../Image';
 import SearchBar from '../SearchBar';
-import UserContext from '../../contexts/UserContext';
+import GeneralContext from '../../contexts/GeneralContext';
+import TokenService from '../../services/token-service';
+import jwtDecode from 'jwt-decode';
 import styles from './Navigation.module.scss';
 
 type NavigationProps = {
-  /** determines whether to render public or private navbar
-   * This will be determined by isLoggedIn from UserContext at the highest page level
-   */
+  /** determines whether to render public or private navbar */
   isPublic: boolean;
 };
 
+interface MyToken {
+  sub: string;
+  user_id: string;
+}
+
 const Navigation: FunctionComponent<NavigationProps> = ({ isPublic }) => {
-  const { handleLogoutClick, isLoggedIn, user } = useContext(UserContext);
+  const { clearUserState } = useContext(GeneralContext);
+
+  const handleLogoutClick = () => {
+    TokenService.clearAuthToken();
+    clearUserState();
+  };
 
   const renderLogInOut = () => {
+    const isLoggedIn = !!TokenService.hasAuthToken();
     return (
       <NavLink
         onClick={isLoggedIn ? handleLogoutClick : () => null}
@@ -36,7 +47,10 @@ const Navigation: FunctionComponent<NavigationProps> = ({ isPublic }) => {
   };
 
   const renderUserWelcome = () => {
-    if (isLoggedIn) {
+    let user = '';
+
+    if (TokenService.getAuthToken()) {
+      user = jwtDecode<MyToken>(TokenService.getAuthToken() || '').sub;
       return <h2>{`Welcome, ${user}!`}</h2>;
     } else {
       return <h2>{`Click the Login Button to Log In!`}</h2>;
