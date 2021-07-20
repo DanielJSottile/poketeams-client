@@ -1,9 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`<TeamListEdit/> snapshot 1`] = `
-<Fragment>
-  <h3>
-    Either No Folder is Selected Or There Are No Teams! Make Teams with Pokemon!
-  </h3>
-</Fragment>
-`;
