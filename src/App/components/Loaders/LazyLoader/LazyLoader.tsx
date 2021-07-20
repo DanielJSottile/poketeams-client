@@ -1,13 +1,28 @@
 import React, { FunctionComponent } from 'react';
+import classnames from 'classnames';
 import PokeballLoader from '../PokeballLoader';
-import LoadingBlack from '../LoadingBlack';
+import Loading from '../Loading';
 import styles from './LazyLoader.module.scss';
 
-const LazyLoader: FunctionComponent = () => {
+type LazyLoaderProps = {
+  /** class for the entire container, is appended to the existing class */
+  containerClass?: string;
+  /** an alternate message to be appended to the bottom */
+  message?: string;
+  /** an alternate class for the message */
+  messageClass?: string;
+};
+
+const LazyLoader: FunctionComponent<LazyLoaderProps> = ({
+  containerClass = '',
+  message = '',
+  messageClass = '',
+}) => {
   return (
-    <div className={styles['lazy-loader']}>
+    <div className={classnames(styles['lazy-loader'], containerClass)}>
       <PokeballLoader />
-      <LoadingBlack />
+      <Loading isDefaultLoader />
+      {!!message && <h3 className={messageClass}>{message}</h3>}
     </div>
   );
 };

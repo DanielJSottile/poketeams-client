@@ -20,8 +20,7 @@ import Folder from '../Folder/Folder';
 import Input from '../Input/Input';
 import TextArea from '../TextArea';
 import Button from '../Button';
-import PokeballLoader from '../Loaders/PokeballLoader';
-import LoadingBlack from '../Loaders/LoadingBlack';
+import LazyLoader from '../Loaders/LazyLoader';
 import GeneralContext from '../../contexts/GeneralContext';
 import showdownFolderGenerate from '../../utils/generateFolder';
 import {
@@ -199,13 +198,11 @@ const FoldersList: FunctionComponent = () => {
           {folderList.length > 0 ? (
             folderList
           ) : (
-            <div className={styles['pokeball-div']}>
-              <PokeballLoader />
-              <LoadingBlack />
-              <h3 className={styles['hint']}>
-                (Hint: There May Be No Folders! Click Below to Start!)
-              </h3>
-            </div>
+            <LazyLoader
+              containerClass={styles['pokeball-div']}
+              messageClass={styles['hint']}
+              message={'(Hint: There May Be No Folders! Click Below to Start!)'}
+            />
           )}
         </div>
         <div>

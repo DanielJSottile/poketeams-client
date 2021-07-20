@@ -1,7 +1,6 @@
 import React, { Fragment, FunctionComponent } from 'react';
 import TeamPublicShare from '../Team-Public-Share';
-import PokeballLoader from '../Loaders/PokeballLoader';
-import LoadingBlack from '../Loaders/LoadingBlack';
+import LazyLoader from '../Loaders/LazyLoader';
 import styles from './TeamList-PublicShare.module.scss';
 import { PokemonTeam, PokemonSet } from '../../@types';
 
@@ -40,11 +39,11 @@ const TeamListPublicShare: FunctionComponent<TeamListPublicShareProps> = ({
       {TeamList ? (
         TeamList
       ) : (
-        <div className={styles['pokeball-div']}>
-          <PokeballLoader />
-          <LoadingBlack />
-          <h3 className={styles['hint']}>(Hint: There May Be No Teams)</h3>
-        </div>
+        <LazyLoader
+          containerClass={styles['pokeball-div']}
+          messageClass={styles['hint']}
+          message={'(Hint: There May Be No Teams)'}
+        />
       )}
     </Fragment>
   );
