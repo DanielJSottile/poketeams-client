@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import Navigation from '../../components/Navigation';
-import TeamListPublic from '../../components/TeamList-Public/TeamList-Public';
+import TeamList from '../../components/TeamList';
 import Footer from '../../components/Footer/Footer';
 
 const HomePage: FunctionComponent = (): JSX.Element => {
@@ -11,7 +11,7 @@ const HomePage: FunctionComponent = (): JSX.Element => {
         <header role="banner">
           <h2>Results:</h2>
         </header>
-        <TeamListPublic />
+        <TeamList isPublic />
         <Footer />
       </main>
     </>

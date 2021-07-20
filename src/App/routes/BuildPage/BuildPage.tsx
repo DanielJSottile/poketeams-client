@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import Navigation from '../../components/Navigation';
 import AddTeamSection from '../../components/AddTeamSection/AddTeamSection';
-import TeamListEdit from '../../components/TeamList-Edit/TeamList-Edit';
+import TeamList from '../../components/TeamList';
 import FolderList from '../../components/FoldersList/FoldersList';
 import Footer from '../../components/Footer/Footer';
 
@@ -14,7 +14,7 @@ const BuildPage: FunctionComponent = (): JSX.Element => {
           <FolderList />
         </header>
         <AddTeamSection />
-        <TeamListEdit />
+        <TeamList isPublic={false} />
         <Footer />
       </main>
     </>
