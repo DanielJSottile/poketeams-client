@@ -56,8 +56,8 @@ export const UserContextProvider = ({
     }
   }, [isLoggedIn]);
 
-  const handleLogoutClick = async () => {
-    await TokenService.clearAuthToken();
+  const handleLogoutClick = () => {
+    TokenService.clearAuthToken();
     clearUserState();
     /* I am unsure why the NavLink isnt doing this, 
     but i suspect it's trying to navigate while logged in still,
