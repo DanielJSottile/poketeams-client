@@ -106,10 +106,7 @@ const ExpandedTeam: FunctionComponent<ExpandedTeamProps> = ({
               textAreaHasError={!isPublic}
               disabled={isPublic}
               readOnly={isPublic}
-              containerClass={classnames(
-                styles['title-content'],
-                styles['desc-container']
-              )}
+              containerClass={styles['desc-container']}
               htmlFor="title-content"
               label="Description:"
               validationCallback={() => validateDesc(description)}
@@ -173,11 +170,16 @@ const ExpandedTeam: FunctionComponent<ExpandedTeamProps> = ({
                 value={`poketeams.now.sh/share/${team.id}`}
               />
             </div>
-            <label htmlFor="edit-team">
+            {/* <label htmlFor="edit-team">
               Export Team: <FontAwesomeIcon icon={faDownload} />
-            </label>
+            </label> */}
             <TextArea
               textAreaHasError={false}
+              containerClass={styles['export-container']}
+              htmlFor={'edit-team'}
+              label={'Export Team: '}
+              labelIcon={<FontAwesomeIcon icon={faDownload} />}
+              labelClass={styles['override-label']}
               ref={textArea}
               disabled
               readOnly
