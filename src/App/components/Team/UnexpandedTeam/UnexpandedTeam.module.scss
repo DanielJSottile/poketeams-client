@@ -1,0 +1,49 @@
+@import '../../../../index.scss';
+
+.sprites-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  .tiny-icon {
+    height: 35px;
+  }
+}
+
+.team-closed {
+  font-size: 14px;
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-around;
+  align-content: center;
+  align-self: center;
+  border: 1px solid $med-dark-grey;
+  border-radius: 10px;
+  padding: 5px;
+}
+
+.team-section {
+  padding: 2px 2px;
+  color: $med-dark-grey;
+  border-radius: 4px;
+  text-shadow: 1px 1px white;
+  background-color: $super-light-cream;
+}
+
+.team-section:nth-child(even) {
+  color: $super-light-cream;
+  text-shadow: 1px 1px $super-dark-red;
+  background-color: $pokeball-red;
+}
+
+.team-section:hover {
+  cursor: pointer;
+  background-color: $med-light-yellow;
+  transition: 0.3s;
+}
+
+.team-section:nth-child(even):hover {
+  cursor: pointer;
+  background-color: $light-pokeball-red;
+  transition: 0.3s;
+}

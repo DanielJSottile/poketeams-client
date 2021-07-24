@@ -1,6 +1,5 @@
 import React, { useContext, FunctionComponent } from 'react';
-import TeamPublic from '../Team-Public'; // will eventually just be team
-import TeamEdit from '../Team-Edit';
+import Team from '../Team';
 import LazyLoader from '../Loaders/LazyLoader';
 import TeamListPagination from './TeamListPagination';
 import GeneralContext from '../../contexts/GeneralContext';
@@ -19,7 +18,7 @@ const TeamList: FunctionComponent<TeamListProps> = ({
     useContext(GeneralContext);
 
   const publicTeamList = publicTeams.map((team: PokemonTeam, i) => {
-    return <TeamPublic key={i} id={`${team.team_name}`} team={team} />;
+    return <Team isPublic key={i} id={`${team.team_name}`} team={team} />;
   });
 
   const privateTeamList = userTeams
@@ -27,7 +26,9 @@ const TeamList: FunctionComponent<TeamListProps> = ({
       (team: PokemonTeam) => team.folder_id === Number(currentClickedFolder.id)
     )
     .map((team: PokemonTeam, i) => {
-      return <TeamEdit id={`${team.team_name}`} key={i} team={team} />;
+      return (
+        <Team isPublic={false} id={`${team.team_name}`} key={i} team={team} />
+      );
     });
 
   const teamList = isPublic ? publicTeamList : privateTeamList;
