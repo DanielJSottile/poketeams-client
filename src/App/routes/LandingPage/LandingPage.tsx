@@ -36,6 +36,13 @@ const LandingPage: FunctionComponent<
         <header>
           <h3 className={styles['hook']}>Gotta Store 'em All!</h3>
         </header>
+        <div>
+          <span>
+            Please Mind the Mess! We are working on updating the site both
+            internally and design wise, so things may be horribly broken for a
+            while.
+          </span>
+        </div>
         <div className={styles['login-div']}>
           <LoginForm onLoginSuccess={handleLoginSucess} />
           <p>Not A Member? </p>

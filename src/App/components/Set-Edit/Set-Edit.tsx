@@ -773,7 +773,7 @@ const SetEdit: FunctionComponent<SetEditProps> = ({ set }) => {
       .map((type: string, i: number) => {
         return (
           <Image
-            imageClass={styles['icon']}
+            imageClass={styles['type-img']}
             key={i}
             src={`${type}`}
             alt={`${i + 1}`}

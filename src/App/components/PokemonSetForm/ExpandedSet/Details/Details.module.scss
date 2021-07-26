@@ -1,0 +1,72 @@
+@import '../../../../../index.scss';
+
+.details,
+.stats {
+  display: flex;
+  justify-content: space-evenly;
+  background-color: $super-light-cream;
+  border: 1px solid $med-dark-grey;
+  border-radius: 10px;
+  padding: 5px;
+  margin: auto;
+  width: 85%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stats {
+  flex-direction: row;
+}
+
+.details {
+  flex-direction: column;
+}
+
+.evs {
+  display: flex;
+  text-align: left;
+  flex-direction: column;
+}
+
+.ivs {
+  display: flex;
+  text-align: left;
+  flex-direction: column;
+}
+
+@media (min-width: 850px) {
+  /* Large Ipad Screen */
+
+  .details {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .stats {
+    width: 33%;
+  }
+}
+
+@media (min-width: 1200px) {
+  /* Large Ipad Screen */
+
+  .details {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+  }
+
+  .stats {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+  }
+
+  .evs,
+  .ivs {
+    display: flex;
+    flex-direction: row;
+  }
+}

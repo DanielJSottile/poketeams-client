@@ -1,0 +1,51 @@
+@import '../../../../index.scss';
+
+.type-img {
+  height: unset;
+  width: 100px;
+}
+
+.pokemon {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  border: 1px solid $med-dark-grey;
+  border-radius: 10px;
+  padding: 5px;
+  margin: 10px;
+}
+
+.pokemon:hover {
+  color: $med-dark-grey;
+  text-shadow: none;
+  background-color: $super-light-cream;
+  transition: 0.3s;
+}
+
+.closed {
+  font-size: 16px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-content: center;
+  align-self: center;
+}
+
+.inside {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+}
+
+.icon {
+  margin: 1px;
+  height: 100px;
+}
+
+@media (min-width: 850px) {
+  /* Large Ipad Screen */
+
+  .type-img {
+    margin: 1px;
+  }
+}

@@ -88,10 +88,11 @@
 
 .icon {
   margin: 1px;
-  transform: scale(0.5);
+  height: 100px;
 }
 
 .type-img {
+  height: unset;
   width: 100px;
 }
 
@@ -106,7 +107,7 @@
 
 .inside {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-self: center;
 }
 
