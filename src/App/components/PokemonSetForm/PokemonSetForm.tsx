@@ -146,9 +146,6 @@ const PokemonSetForm: FunctionComponent<PokemonSetFormProps> = ({
     setDeleteClicked(false);
   };
 
-  const effortValueArray = [{}, {}, {}, {}, {}, {}];
-  const individualValueArray = [{}, {}, {}, {}, {}, {}];
-
   return (
     <>
       {expandToggle ? (
