@@ -31,8 +31,7 @@ const TeamPublicShare: FunctionComponent<TeamPublicShareProps> = ({
   sets,
 }): JSX.Element => {
   const [teamExpandToggle, setTeamExpandToggle] = useState(true);
-  const { copySuccess, textArea, setCopySuccess, copyCodeToClipboard } =
-    useClipboard();
+  const { copySuccess, textArea, copyCodeToClipboard } = useClipboard();
 
   const handleTeamToggle = () => {
     setTeamExpandToggle(!teamExpandToggle);
@@ -99,14 +98,11 @@ const TeamPublicShare: FunctionComponent<TeamPublicShareProps> = ({
               />
             </form>
             <div className={styles['export-team']}>
-              {copySuccess && (
-                <div className={styles['copied']}>Copied to Clipboard!!</div>
-              )}
               <div>
                 <Button
                   onClickCallback={() => {
                     copyCodeToClipboard();
-                    setTimeout(() => setCopySuccess(false), 3000);
+                    copySuccess();
                   }}
                 >
                   Copy Text

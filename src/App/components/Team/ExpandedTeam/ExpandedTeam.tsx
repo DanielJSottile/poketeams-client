@@ -9,6 +9,7 @@ import {
   faTrashAlt,
 } from '@fortawesome/free-solid-svg-icons';
 import classnames from 'classnames';
+import toast from 'react-hot-toast';
 import Button from '../../Button';
 import Input from '../../Input';
 import TextArea from '../../TextArea';
@@ -51,10 +52,11 @@ const ExpandedTeam: FunctionComponent<ExpandedTeamProps> = ({
   inputTeamName,
   setDesc,
 }) => {
-  const { copySuccess, textArea, setCopySuccess, copyCodeToClipboard } =
-    useClipboard();
+  const { copySuccess, textArea, copyCodeToClipboard } = useClipboard();
 
   const { handleUpdateTeam } = useContext(GeneralContext);
+
+  const deleteSuccess = () => toast.success('Team Deleted!');
 
   return (
     <section className={styles['team-section']} id={`${id}`}>
@@ -143,14 +145,11 @@ const ExpandedTeam: FunctionComponent<ExpandedTeamProps> = ({
             )}
           </form>
           <div className={styles['export-team']}>
-            {copySuccess && (
-              <div className={styles['copied']}>Copied to Clipboard!!</div>
-            )}
             <div>
               <Button
                 onClickCallback={() => {
                   copyCodeToClipboard();
-                  setTimeout(() => setCopySuccess(false), 3000);
+                  copySuccess();
                 }}
               >
                 Copy Text
@@ -209,6 +208,7 @@ const ExpandedTeam: FunctionComponent<ExpandedTeamProps> = ({
                 handleDeleteExpand();
                 handleTeamToggle();
                 team.id && handleDeleteTeam(team.id);
+                deleteSuccess();
               }}
               noCallback={() => handleDeleteExpand()}
             />

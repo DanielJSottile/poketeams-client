@@ -3,19 +3,19 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faCheckCircle,
-  faThumbsDown,
-  faThumbsUp,
   faFolderPlus,
   faShareSquare,
   faDownload,
   faEdit,
   faTrashAlt,
 } from '@fortawesome/free-solid-svg-icons';
+import toast from 'react-hot-toast';
 import Folder from '../Folder/Folder';
 import Input from '../Input/Input';
 import TextArea from '../TextArea';
 import Button from '../Button';
 import LazyLoader from '../Loaders/LazyLoader';
+import DeleteExpand from '../DeleteExpand';
 import GeneralContext from '../../contexts/GeneralContext';
 import showdownFolderGenerate from '../../utils/generateFolder';
 import {
@@ -46,8 +46,7 @@ const FoldersList: FunctionComponent = () => {
 
   const [editClicked, setEditClicked] = useState(false);
   const [deleteClicked, setDeleteClicked] = useState(false);
-  const { copySuccess, textArea, setCopySuccess, copyCodeToClipboard } =
-    useClipboard();
+  const { copySuccess, textArea, copyCodeToClipboard } = useClipboard();
 
   const handleEditExpand = () => {
     setEditClicked(!editClicked);
@@ -56,6 +55,8 @@ const FoldersList: FunctionComponent = () => {
   const handleDeleteExpand = () => {
     setDeleteClicked(!deleteClicked);
   };
+
+  const deleteSuccess = () => toast.success('Folder Deleted!');
 
   /* --------------------- */
 
@@ -166,25 +167,6 @@ const FoldersList: FunctionComponent = () => {
     );
   };
 
-  const renderDeleteExpand = (): JSX.Element => {
-    return (
-      <div>
-        <p>Are You Sure You'd Like to Delete this Folder?</p>
-        <Button
-          onClickCallback={() => {
-            handleDeleteFolder();
-            handleDeleteExpand();
-          }}
-        >
-          Yes <FontAwesomeIcon icon={faThumbsUp} />
-        </Button>
-        <Button onClickCallback={() => handleDeleteExpand()}>
-          No <FontAwesomeIcon icon={faThumbsDown} />
-        </Button>
-      </div>
-    );
-  };
-
   return (
     <>
       <section className={styles['folders-list']}>
@@ -213,14 +195,11 @@ const FoldersList: FunctionComponent = () => {
           {currentClickedFolder.value && (
             <div>
               <div className={styles['export-team']}>
-                {copySuccess && (
-                  <div className={styles['copied']}>Copied to Clipboard!!</div>
-                )}
                 <div>
                   <Button
                     onClickCallback={() => {
                       copyCodeToClipboard();
-                      setTimeout(() => setCopySuccess(false), 3000);
+                      copySuccess();
                     }}
                   >
                     Copy Text
@@ -274,7 +253,17 @@ const FoldersList: FunctionComponent = () => {
         </div>
         <div>
           {editClicked && renderEditExpand()}
-          {deleteClicked && renderDeleteExpand()}
+          {deleteClicked && (
+            <DeleteExpand
+              message={"Are You Sure You'd Like to Delete this Folder?"}
+              yesCallback={() => {
+                handleDeleteFolder();
+                handleDeleteExpand();
+                deleteSuccess();
+              }}
+              noCallback={() => handleDeleteExpand()}
+            />
+          )}
         </div>
       </section>
     </>
