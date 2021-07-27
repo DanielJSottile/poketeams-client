@@ -1,0 +1,52 @@
+@import '../../../../../../index.scss';
+
+.sprites {
+  display: flex;
+  flex-direction: column;
+}
+
+.type-img {
+  height: unset;
+  width: 100px;
+}
+
+@media (min-width: 700px) {
+  /* Medium Screen */
+
+  .type-icons {
+    display: flex;
+    flex-direction: column;
+    align-content: space-around;
+    align-self: center;
+  }
+}
+
+@media (min-width: 850px) {
+  /* Large Ipad Screen */
+
+  .sprites {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .type-icons {
+    display: flex;
+    flex-direction: column;
+    align-content: space-around;
+    align-self: center;
+  }
+
+  .type-img {
+    margin: 1px;
+  }
+}
+
+@media (min-width: 1200px) {
+  /* Large Ipad Screen */
+
+  .sprites {
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+  }
+}

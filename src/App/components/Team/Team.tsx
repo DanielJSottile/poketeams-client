@@ -1,7 +1,6 @@
 import React, { useContext, useState, FunctionComponent } from 'react';
 import Button from '../Button';
-import SetEdit from '../Set-Edit';
-import SetPublic from '../Set-Edit';
+import PokemonSetForm from '../PokemonSetForm';
 import GeneralContext from '../../contexts/GeneralContext';
 import { PokemonTeam, PokemonSet } from '../../@types';
 import ExpandedTeam from './ExpandedTeam';
@@ -79,11 +78,7 @@ const Team: FunctionComponent<TeamProps> = ({
 
   const renderSetList = (teamSets: PokemonSet[]) => {
     const SetList = teamSets.map((set: PokemonSet, i: number) => {
-      return isPublic ? (
-        <SetPublic key={i} set={set} />
-      ) : (
-        <SetEdit key={i} set={set} />
-      );
+      return <PokemonSetForm key={i} set={set} isPublic={isPublic} />;
     });
 
     if (SetList.length < 6 && !isPublic) {

@@ -124,7 +124,9 @@ const ExpandedTeam: FunctionComponent<ExpandedTeamProps> = ({
               <Button
                 type="submit"
                 disabled={
-                  !!validateTeamName(teamName) || !!validateDesc(description)
+                  !!validateTeamName(teamName) ||
+                  !!validateDesc(description) ||
+                  isPublic
                 }
                 onClickCallback={(e) => {
                   e.preventDefault();
@@ -213,7 +215,7 @@ const ExpandedTeam: FunctionComponent<ExpandedTeamProps> = ({
           )}
         </div>
       </div>
-      {setList}
+      <div className={styles['set-list-grid']}>{setList}</div>
     </section>
   );
 };

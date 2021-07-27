@@ -1,0 +1,54 @@
+@import '../../../../index.scss';
+
+.pokemon {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  border: 1px solid $med-dark-grey;
+  border-radius: 10px;
+  padding: 5px;
+  margin: 10px;
+}
+
+.pokemon:hover {
+  color: $med-dark-grey;
+  text-shadow: none;
+  background-color: $super-light-cream;
+  transition: 0.3s;
+}
+
+.pokemon-import {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 65%;
+  margin: auto;
+}
+
+.export-pokemon {
+  background-color: $super-light-cream;
+  border: 1px solid $med-dark-grey;
+  border-radius: 10px;
+  padding: 5px;
+  margin: auto;
+  width: 85%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media (min-width: 700px) {
+  /* Medium Screen */
+
+  .pokemon-import {
+    width: 35%;
+  }
+}
+
+@media (min-width: 850px) {
+  /* Large Ipad Screen */
+
+  .pokemon-import {
+    width: 45%;
+  }
+}

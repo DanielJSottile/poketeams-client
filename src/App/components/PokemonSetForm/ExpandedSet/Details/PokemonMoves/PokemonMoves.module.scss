@@ -1,0 +1,35 @@
+@import '../../../../../../index.scss';
+
+.moves {
+  display: flex;
+  flex-direction: column;
+}
+
+.label-as-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.pokemon-move {
+  color: $med-dark-grey;
+  text-emphasis: bold;
+  text-align: center;
+  width: 85%;
+  margin: auto;
+  font-size: 16px;
+  padding: 5px;
+  margin: 5px;
+  border: 1px solid $pure-yellow;
+  border-radius: 20px;
+  background: white;
+}
+
+@media (min-width: 1200px) {
+  /* Large Ipad Screen */
+
+  .moves {
+    display: flex;
+    flex-direction: row;
+    padding: 15px;
+  }
+}

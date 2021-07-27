@@ -9,7 +9,7 @@ import Input from '../Input/Input';
 import TextArea from '../TextArea';
 import Image from '../Image';
 import Button from '../Button';
-import SetPublic from '../Set-Public';
+import PokemonSetForm from '../PokemonSetForm';
 import showdownGenerate from '../../utils/generate';
 import legality from '../../utils/legality';
 import { useClipboard } from '../../utils/customHooks';
@@ -40,7 +40,7 @@ const TeamPublicShare: FunctionComponent<TeamPublicShareProps> = ({
 
   const renderExpandedTeam = () => {
     const SetList = sets?.map((set: PokemonSet, i: number) => {
-      return <SetPublic key={i} set={set} />;
+      return <PokemonSetForm key={i} set={set} isPublic />;
     });
 
     return (
