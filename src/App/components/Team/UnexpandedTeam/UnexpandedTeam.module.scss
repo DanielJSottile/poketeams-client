@@ -1,9 +1,8 @@
 @import '../../../../index.scss';
 
 .sprites-row {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(6, auto);
   .tiny-icon {
     height: 35px;
   }
