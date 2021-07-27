@@ -6,7 +6,7 @@ interface PokemonValue {
   isEffortValue: boolean;
   label: string;
   onChangeCallback: (e: ChangeEvent<HTMLInputElement>) => void;
-  value: any;
+  value: number;
   name: string;
   id: string;
 }
