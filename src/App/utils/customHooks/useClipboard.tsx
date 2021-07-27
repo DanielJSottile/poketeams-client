@@ -1,14 +1,14 @@
-import { useState, useRef } from 'react';
+import { useRef } from 'react';
+import toast from 'react-hot-toast';
 
 interface ClipboardReturn {
-  copySuccess: boolean;
+  copySuccess: () => string;
   textArea: React.RefObject<HTMLTextAreaElement>;
-  setCopySuccess: React.Dispatch<React.SetStateAction<boolean>>;
   copyCodeToClipboard: () => void;
 }
 
 const useClipboard = (): ClipboardReturn => {
-  const [copySuccess, setCopySuccess] = useState(false);
+  const copySuccess = () => toast.success('Copied to Clipboard!!');
   const textArea = useRef<HTMLTextAreaElement>(null);
 
   const copyCodeToClipboard = () => {
@@ -16,14 +16,12 @@ const useClipboard = (): ClipboardReturn => {
       textArea.current.select();
       const text = textArea.current.defaultValue;
       navigator.clipboard.writeText(text);
-      setCopySuccess(true);
     }
   };
 
   return {
     copySuccess,
     textArea,
-    setCopySuccess,
     copyCodeToClipboard,
   };
 };

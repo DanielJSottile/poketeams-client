@@ -13,6 +13,7 @@ import {
   faDownload,
   faTrashAlt,
 } from '@fortawesome/free-solid-svg-icons';
+import { Toaster } from 'react-hot-toast';
 import Button from '../../Button';
 import Input from '../../Input';
 import TextArea from '../../TextArea';
@@ -148,14 +149,10 @@ const ExpandedSet: FunctionComponent<ExpandedSetProps> = ({
     handleDeleteSet,
   } = useContext(GeneralContext);
 
-  const { copySuccess, textArea, setCopySuccess, copyCodeToClipboard } =
-    useClipboard();
+  const { copySuccess, textArea, copyCodeToClipboard } = useClipboard();
 
   return (
     <div className={styles['pokemon']}>
-      {/* <Button onClickCallback={() => handleSetToggle()}>
-        Compress Set <FontAwesomeIcon icon={faCompressArrowsAlt} />
-      </Button> */}
       {!isPublic && (
         <form>
           <div className={styles['pokemon-import']}>
@@ -257,14 +254,12 @@ const ExpandedSet: FunctionComponent<ExpandedSetProps> = ({
       </form>
 
       <div className={styles['export-pokemon']}>
-        {copySuccess && (
-          <div className={styles['copied']}>Copied to Clipboard!!</div>
-        )}
+        <Toaster />
         <div>
           <Button
             onClickCallback={() => {
               copyCodeToClipboard();
-              setTimeout(() => setCopySuccess(false), 3000);
+              copySuccess();
             }}
           >
             Copy Text

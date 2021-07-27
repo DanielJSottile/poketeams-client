@@ -11,6 +11,7 @@ import {
   faEdit,
   faTrashAlt,
 } from '@fortawesome/free-solid-svg-icons';
+import { Toaster } from 'react-hot-toast';
 import Folder from '../Folder/Folder';
 import Input from '../Input/Input';
 import TextArea from '../TextArea';
@@ -46,8 +47,7 @@ const FoldersList: FunctionComponent = () => {
 
   const [editClicked, setEditClicked] = useState(false);
   const [deleteClicked, setDeleteClicked] = useState(false);
-  const { copySuccess, textArea, setCopySuccess, copyCodeToClipboard } =
-    useClipboard();
+  const { copySuccess, textArea, copyCodeToClipboard } = useClipboard();
 
   const handleEditExpand = () => {
     setEditClicked(!editClicked);
@@ -213,14 +213,12 @@ const FoldersList: FunctionComponent = () => {
           {currentClickedFolder.value && (
             <div>
               <div className={styles['export-team']}>
-                {copySuccess && (
-                  <div className={styles['copied']}>Copied to Clipboard!!</div>
-                )}
+                <Toaster />
                 <div>
                   <Button
                     onClickCallback={() => {
                       copyCodeToClipboard();
-                      setTimeout(() => setCopySuccess(false), 3000);
+                      copySuccess();
                     }}
                   >
                     Copy Text
