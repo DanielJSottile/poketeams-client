@@ -112,7 +112,6 @@ const PokemonSetForm: FunctionComponent<PokemonSetFormProps> = ({
     value: set?.move_four || '',
     touched: false,
   });
-  const [expandToggle, setExpandToggle] = useState(true); // remove
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [deleteClicked, setDeleteClicked] = useState(false);
 
