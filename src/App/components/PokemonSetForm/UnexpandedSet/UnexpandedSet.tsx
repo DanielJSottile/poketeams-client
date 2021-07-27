@@ -6,12 +6,12 @@ import styles from './UnexpandedSet.module.scss';
 
 type UnexpandedSetProps = {
   set: PokemonSet;
-  handleSetToggle: () => void;
+  handleSetModal: () => void;
 };
 
 const UnexpandedSet: FunctionComponent<UnexpandedSetProps> = ({
   set,
-  handleSetToggle,
+  handleSetModal,
 }): JSX.Element => {
   const types = legality
     .returnTypeIcon(legality.returnType(set?.species || ''))
@@ -28,8 +28,8 @@ const UnexpandedSet: FunctionComponent<UnexpandedSetProps> = ({
 
   return (
     <>
-      <div className={styles['pokemon']}>
-        <div className={styles['closed']} onClick={() => handleSetToggle()}>
+      <div className={styles['pokemon']} onClick={() => handleSetModal()}>
+        <div className={styles['closed']}>
           <div className={styles['inside']}>
             <Image
               imageClass={styles['icon']}

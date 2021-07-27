@@ -56,7 +56,6 @@ type ExpandedSetProps = {
   moveThree: TextInput;
   moveFour: TextInput;
   deleteClicked: boolean;
-  handleSetToggle: () => void;
   setFields: (setImport: string) => void;
   setSpecies: Dispatch<SetStateAction<TextInput>>;
   setNickname: Dispatch<SetStateAction<TextInput>>;
@@ -115,7 +114,6 @@ const ExpandedSet: FunctionComponent<ExpandedSetProps> = ({
   moveThree,
   moveFour,
   deleteClicked,
-  handleSetToggle,
   setFields,
   setSpecies,
   setNickname,
@@ -156,9 +154,9 @@ const ExpandedSet: FunctionComponent<ExpandedSetProps> = ({
 
   return (
     <div className={styles['pokemon']}>
-      <Button onClickCallback={() => handleSetToggle()}>
+      {/* <Button onClickCallback={() => handleSetToggle()}>
         Compress Set <FontAwesomeIcon icon={faCompressArrowsAlt} />
-      </Button>
+      </Button> */}
       {!isPublic && (
         <form>
           <div className={styles['pokemon-import']}>

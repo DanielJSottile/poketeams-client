@@ -4,6 +4,7 @@ import showdownParse from '../../utils/parse';
 import { PokemonSet } from '../../@types';
 import ExpandedSet from './ExpandedSet';
 import UnexpandedSet from './UnexpandedSet';
+import Modal from '../Modal';
 
 type PokemonSetFormProps = {
   /** Pokemon Set */
@@ -16,8 +17,8 @@ const PokemonSetForm: FunctionComponent<PokemonSetFormProps> = ({
   set,
   isPublic,
 }) => {
-  const handleSetToggle = () => {
-    setExpandToggle(!expandToggle);
+  const handleSetModal = () => {
+    setIsModalOpen(!isModalOpen);
   };
 
   const [nickname, setNickname] = useState({
@@ -148,9 +149,9 @@ const PokemonSetForm: FunctionComponent<PokemonSetFormProps> = ({
 
   return (
     <>
-      {expandToggle ? (
-        <UnexpandedSet set={set} handleSetToggle={handleSetToggle} />
-      ) : (
+      <UnexpandedSet set={set} handleSetModal={handleSetModal} />
+
+      <Modal isModalOpen={isModalOpen} handleSetModal={handleSetModal}>
         <ExpandedSet
           set={set}
           isPublic={isPublic}
@@ -180,7 +181,6 @@ const PokemonSetForm: FunctionComponent<PokemonSetFormProps> = ({
           moveThree={moveThree}
           moveFour={moveFour}
           deleteClicked={deleteClicked}
-          handleSetToggle={handleSetToggle}
           setFields={setFields}
           setSpecies={setSpecies}
           setNickname={setNickname}
@@ -209,7 +209,7 @@ const PokemonSetForm: FunctionComponent<PokemonSetFormProps> = ({
           setMoveFour={setMoveFour}
           setDeleteClicked={setDeleteClicked}
         />
-      )}
+      </Modal>
     </>
   );
 };
