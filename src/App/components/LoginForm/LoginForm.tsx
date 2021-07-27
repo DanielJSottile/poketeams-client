@@ -69,6 +69,7 @@ const LoginForm: FunctionComponent<LoginFormProps> = ({ onLoginSuccess }) => {
         inputHasError={false}
         htmlFor="password"
         label="Password"
+        placeholder="Password"
         type="password"
         autoComplete="current-password"
         name="password"
@@ -78,7 +79,7 @@ const LoginForm: FunctionComponent<LoginFormProps> = ({ onLoginSuccess }) => {
         }}
         value={password}
       />
-      <Button type="submit">
+      <Button type="submit" buttonClass={styles['login-button']}>
         Log In <FontAwesomeIcon icon={faSignInAlt} />
       </Button>
     </form>

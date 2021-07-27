@@ -19,7 +19,7 @@ const RegistrationPage: FunctionComponent<RegistrationProps> = ({
     <>
       <section>
         <div className={styles['landing-title']}></div>
-        <h2>Create Your Account!</h2>
+        <h2 className={styles['heading-text']}>Create Your Account!</h2>
         <div className={styles['registration-form-container']}>
           <RegistrationForm onRegistrationSuccess={handleRegistrationSuccess} />
         </div>

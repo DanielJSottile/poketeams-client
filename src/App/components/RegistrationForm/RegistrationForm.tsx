@@ -4,6 +4,7 @@ import Button from '../Button';
 import Input from '../Input';
 import AuthApiService from '../../services/auth-api-service';
 import styles from './RegistrationForm.module.scss';
+import { TextInput } from '../../@types';
 
 type RegistrationFormProps = {
   /** folder that is being shared */
@@ -14,23 +15,34 @@ const RegistrationForm: FunctionComponent<RegistrationFormProps> = ({
   onRegistrationSuccess = () => null,
 }) => {
   const [error, setError] = useState('');
+  const [username, setUsername] = useState<TextInput>({
+    value: '',
+    touched: false,
+  });
+  const [password, setPassword] = useState<TextInput>({
+    value: '',
+    touched: false,
+  });
+  const [verifyPassword, setVerifyPassword] = useState<TextInput>({
+    value: '',
+    touched: false,
+  });
 
   const handleSubmit = (ev: FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
-    const { user_name, password, verifyPassword } =
-      ev.target as HTMLFormElement;
 
     if (password.value !== verifyPassword.value) {
       return setError('Your Passwords Do Not Match!');
     }
     setError('');
     AuthApiService.postUser({
-      user_name: user_name.value,
+      user_name: username.value,
       password: password.value,
     })
       .then(() => {
-        user_name.value = '';
-        password.value = '';
+        setUsername({ value: '', touched: false });
+        setPassword({ value: '', touched: false });
+        setVerifyPassword({ value: '', touched: false });
         onRegistrationSuccess();
       })
       .catch((res) => {
@@ -53,8 +65,15 @@ const RegistrationForm: FunctionComponent<RegistrationFormProps> = ({
       <Input
         containerClass={styles['user_name']}
         inputHasError={false}
+        onChangeCallback={(e) =>
+          setUsername({ value: e.target.value, touched: true })
+        }
+        value={username.value}
+        inputClass={styles['width-override']}
         htmlFor="RegistrationForm__user_name"
         label="User name &#42;"
+        labelClass={styles['width-override']}
+        placeholder="Username"
         name="user_name"
         type="text"
         required
@@ -63,8 +82,15 @@ const RegistrationForm: FunctionComponent<RegistrationFormProps> = ({
       <Input
         containerClass={styles['password']}
         inputHasError={false}
+        onChangeCallback={(e) =>
+          setPassword({ value: e.target.value, touched: true })
+        }
+        value={password.value}
+        inputClass={styles['width-override']}
         htmlFor="RegistrationForm__password"
         label="Password &#42;"
+        labelClass={styles['width-override']}
+        placeholder="Password"
         name="password"
         type="password"
         required
@@ -73,8 +99,15 @@ const RegistrationForm: FunctionComponent<RegistrationFormProps> = ({
       <Input
         containerClass={styles['verifyPassword']}
         inputHasError={false}
+        onChangeCallback={(e) =>
+          setVerifyPassword({ value: e.target.value, touched: true })
+        }
+        value={verifyPassword.value}
+        inputClass={styles['width-override']}
         htmlFor="RegistrationForm__verifyPassword"
         label="Verify Password &#42;"
+        labelClass={styles['width-override']}
+        placeholder="Verify Password"
         name="verifyPassword"
         type="password"
         required

@@ -12,13 +12,17 @@
   }
 }
 
+.heading-text {
+  margin: 0;
+}
+
 .landing-title {
   width: 90%;
   background-image: url('../../Images/PokeTeams.png');
   background-repeat: no-repeat;
   background-position: center;
   background-size: 90%;
-  height: 12em;
+  height: 6em;
   margin: auto;
 }
 
@@ -35,6 +39,6 @@
 
   .landing-title {
     background-size: 70%;
-    height: 15em;
+    height: 10em;
   }
 }

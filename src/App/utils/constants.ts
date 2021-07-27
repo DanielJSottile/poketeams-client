@@ -15,6 +15,9 @@ export const FARGALAR = /^(.*)'(.*)$/;
 export const MIMEJR = /^(.*)\W(.*).$/;
 export const MIMEGALAR = /^(.*). (.*)$/;
 
+export const REGEX_UPPER_LOWER_NUMBER_SPECIAL =
+  /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[*.!@$%^&(){}[\]:;<>,.?~_+-=|])[\S]+/;
+
 // List of 'Exceptions' to regular Regex rules
 
 export const EXCEPTIONS: string[] = [

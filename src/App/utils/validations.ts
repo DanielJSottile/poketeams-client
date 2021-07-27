@@ -5,6 +5,7 @@ import {
   NumberInput,
   BoolInput,
 } from '../@types';
+import { REGEX_UPPER_LOWER_NUMBER_SPECIAL } from './constants';
 import showdownParse from './parse';
 import showdownFolderParse from './parseFolder';
 import legality from './legality';
@@ -264,6 +265,37 @@ export const validateMoves = (
 export const validateTeamName = (teamName: TextInput): string | boolean => {
   if (!teamName.value) {
     return `Team MUST have a name!`;
+  }
+  return false;
+};
+
+export const validatePassword = (password: TextInput): string | boolean => {
+  if (password.value.length < 8) {
+    return `Password is too short.  Must be longer than 8 characters.
+      Password cannot start or end with empty spaces.
+      Password must contain an uppercase, lowercase, number and a special char.`;
+  }
+  if (password.value.length > 72) {
+    return `Password is too long.  Password must be less than 72 characters.
+      Password cannot start or end with empty spaces.
+      Password must contain an uppercase, lowercase, number and a special char.`;
+  }
+  if (password.value.startsWith(' ') || password.value.endsWith(' ')) {
+    return `Password cannot start or end with empty spaces.
+      Password must contain an uppercase, lowercase, number and a special char`;
+  }
+  if (!REGEX_UPPER_LOWER_NUMBER_SPECIAL.test(password.value)) {
+    return 'Password must contain one upper case, lower case, number and special character';
+  }
+  return false;
+};
+
+export const validateVerifyPassword = (
+  password: TextInput,
+  verifyPassword: TextInput
+): string | boolean => {
+  if (password.value !== verifyPassword.value) {
+    return 'Passwords must match';
   }
   return false;
 };
