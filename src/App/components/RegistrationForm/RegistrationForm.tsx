@@ -32,7 +32,8 @@ const RegistrationForm: FunctionComponent<RegistrationFormProps> = ({
     ev.preventDefault();
 
     if (password.value !== verifyPassword.value) {
-      return setError('Your Passwords Do Not Match!');
+      setError('Your Passwords Do Not Match!');
+      return;
     }
     setError('');
     AuthApiService.postUser({
