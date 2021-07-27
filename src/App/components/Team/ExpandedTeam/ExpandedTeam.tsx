@@ -9,6 +9,7 @@ import {
   faTrashAlt,
 } from '@fortawesome/free-solid-svg-icons';
 import classnames from 'classnames';
+import toast from 'react-hot-toast';
 import Button from '../../Button';
 import Input from '../../Input';
 import TextArea from '../../TextArea';
@@ -54,6 +55,8 @@ const ExpandedTeam: FunctionComponent<ExpandedTeamProps> = ({
   const { copySuccess, textArea, copyCodeToClipboard } = useClipboard();
 
   const { handleUpdateTeam } = useContext(GeneralContext);
+
+  const deleteSuccess = () => toast.success('Team Deleted!');
 
   return (
     <section className={styles['team-section']} id={`${id}`}>
@@ -205,6 +208,7 @@ const ExpandedTeam: FunctionComponent<ExpandedTeamProps> = ({
                 handleDeleteExpand();
                 handleTeamToggle();
                 team.id && handleDeleteTeam(team.id);
+                deleteSuccess();
               }}
               noCallback={() => handleDeleteExpand()}
             />

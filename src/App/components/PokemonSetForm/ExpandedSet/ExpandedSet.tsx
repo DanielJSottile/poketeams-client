@@ -13,6 +13,7 @@ import {
   faDownload,
   faTrashAlt,
 } from '@fortawesome/free-solid-svg-icons';
+import toast from 'react-hot-toast';
 import Button from '../../Button';
 import Input from '../../Input';
 import TextArea from '../../TextArea';
@@ -149,6 +150,8 @@ const ExpandedSet: FunctionComponent<ExpandedSetProps> = ({
   } = useContext(GeneralContext);
 
   const { copySuccess, textArea, copyCodeToClipboard } = useClipboard();
+
+  const deleteSuccess = () => toast.success('Set Deleted!');
 
   return (
     <div className={styles['pokemon']}>
@@ -309,6 +312,7 @@ const ExpandedSet: FunctionComponent<ExpandedSetProps> = ({
             yesCallback={() => {
               handleDeleteSet(set?.team_id || NaN, set?.id || NaN);
               setDeleteClicked(!deleteClicked);
+              deleteSuccess();
             }}
             noCallback={() => setDeleteClicked(!deleteClicked)}
           />

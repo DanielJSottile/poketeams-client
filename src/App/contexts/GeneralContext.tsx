@@ -7,6 +7,7 @@ import React, {
   Dispatch,
   SetStateAction,
 } from 'react';
+import toast from 'react-hot-toast';
 import apiService from '../services/apiService';
 import TokenService from '../services/token-service';
 import jwtDecode from 'jwt-decode';
@@ -318,6 +319,7 @@ export const GeneralProvider = ({ children }: ContextProps): JSX.Element => {
 
   const handlePostNewFolder = () => {
     let folder: PokemonFolder;
+    const folderSuccessToast = () => toast.success('Posted New Folder!!');
     apiService
       .postUserFolder(
         newFolderName.value,
@@ -326,6 +328,7 @@ export const GeneralProvider = ({ children }: ContextProps): JSX.Element => {
       .then((f) => {
         folder = f;
         setUserFolders([...userFolders, folder]);
+        folderSuccessToast();
       })
       .then(() => {
         if (newFolderImport.value) {
@@ -447,6 +450,11 @@ export const GeneralProvider = ({ children }: ContextProps): JSX.Element => {
           });
         }
       })
+      .catch((error) => {
+        const folderErrorToast = () =>
+          toast.error(`Posting New Folder Failed: ${error}`);
+        folderErrorToast();
+      })
       .then(() => {
         setFolderAddClicked(!folderAddClicked);
         setNewFolderName({ value: '', touched: false });
@@ -484,12 +492,22 @@ export const GeneralProvider = ({ children }: ContextProps): JSX.Element => {
       move_four: null,
     };
 
+    const setSuccessToast = () => toast.success('Posted New Pokemon Set!!');
+
     apiService
       .postUserSet(
         set_body,
         jwtDecode<MyToken>(TokenService.getAuthToken() || '').user_id
       )
-      .then((set) => setUserSets([...userSets, set]));
+      .then((set) => {
+        setSuccessToast();
+        setUserSets([...userSets, set]);
+      })
+      .catch((error) => {
+        const setErrorToast = () =>
+          toast.error(`Posting New Pokemon Set Failed: ${error}`);
+        setErrorToast();
+      });
   };
 
   const handlePostNewTeam = () => {
@@ -499,12 +517,15 @@ export const GeneralProvider = ({ children }: ContextProps): JSX.Element => {
       folder_id: Number(currentClickedFolder.id),
     };
 
+    const teamSuccessToast = () => toast.success('Posted New Team!!');
+
     apiService
       .postUserTeam(
         body,
         jwtDecode<MyToken>(TokenService.getAuthToken() || '').user_id
       )
       .then((team) => {
+        teamSuccessToast();
         setUserTeams([
           ...userTeams,
           {
@@ -578,6 +599,11 @@ export const GeneralProvider = ({ children }: ContextProps): JSX.Element => {
             setUserSets([...userSets, ...sets]);
           });
         }
+      })
+      .catch((error) => {
+        const teamErrorToast = () =>
+          toast.error(`Posting New Team Failed: ${error}`);
+        teamErrorToast();
       });
     setTeamAddClicked(!teamAddClicked);
     setNewTeamName({ value: '', touched: false });
@@ -590,11 +616,18 @@ export const GeneralProvider = ({ children }: ContextProps): JSX.Element => {
       TokenService.getAuthToken() || ''
     ).user_id;
 
-    apiService.patchUserFolder(
-      newFolderName.value,
-      currentClickedFolder.id,
-      userId
-    );
+    const folderSuccessToast = () => toast.success('Edited Folder!!');
+
+    apiService
+      .patchUserFolder(newFolderName.value, currentClickedFolder.id, userId)
+      .then(() => {
+        folderSuccessToast();
+      })
+      .catch((error) => {
+        const setErrorToast = () =>
+          toast.error(`Editing Folder Failed: ${error}`);
+        setErrorToast();
+      });
 
     const folder = { folder_name: newFolderName.value };
 
@@ -612,7 +645,17 @@ export const GeneralProvider = ({ children }: ContextProps): JSX.Element => {
     const userId = jwtDecode<MyToken>(
       TokenService.getAuthToken() || ''
     ).user_id;
-    apiService.patchUserTeam(body, userId);
+    const teamSuccessToast = () => toast.success('Edited Team!!');
+    apiService
+      .patchUserTeam(body, userId)
+      .then(() => {
+        teamSuccessToast();
+      })
+      .catch((error) => {
+        const setErrorToast = () =>
+          toast.error(`Editing Team Failed: ${error}`);
+        setErrorToast();
+      });
 
     const team = { team_name: teamname, description: desc };
 
@@ -683,7 +726,18 @@ export const GeneralProvider = ({ children }: ContextProps): JSX.Element => {
     const userId = jwtDecode<MyToken>(
       TokenService.getAuthToken() || ''
     ).user_id;
-    apiService.patchUserSet(body, userId);
+
+    const setSuccessToast = () => toast.success('Edited Pokemon Set!!');
+    apiService
+      .patchUserSet(body, userId)
+      .then(() => {
+        setSuccessToast();
+      })
+      .catch((error) => {
+        const setErrorToast = () =>
+          toast.error(`Editing Pokemon Set Failed: ${error}`);
+        setErrorToast();
+      });
 
     const set = {
       nickname,
@@ -726,6 +780,8 @@ export const GeneralProvider = ({ children }: ContextProps): JSX.Element => {
       TokenService.getAuthToken() || ''
     ).user_id;
 
+    const setSuccessToast = () => toast.success('Team Import Successful!!');
+
     const body = {
       id: id,
       nickname: parsed.nickname,
@@ -754,7 +810,16 @@ export const GeneralProvider = ({ children }: ContextProps): JSX.Element => {
       move_three: parsed.move_three,
       move_four: parsed.move_four,
     };
-    apiService.patchUserSet(body, userId);
+    apiService
+      .patchUserSet(body, userId)
+      .then(() => {
+        setSuccessToast();
+      })
+      .catch((error) => {
+        const setErrorToast = () =>
+          toast.error(`Pokemon Set Import Failed: ${error}`);
+        setErrorToast();
+      });
 
     const set = {
       nickname: parsed.nickname,
