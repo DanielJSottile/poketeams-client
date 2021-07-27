@@ -9,7 +9,6 @@ import {
   faTrashAlt,
 } from '@fortawesome/free-solid-svg-icons';
 import classnames from 'classnames';
-import { Toaster } from 'react-hot-toast';
 import Button from '../../Button';
 import Input from '../../Input';
 import TextArea from '../../TextArea';
@@ -143,7 +142,6 @@ const ExpandedTeam: FunctionComponent<ExpandedTeamProps> = ({
             )}
           </form>
           <div className={styles['export-team']}>
-            <Toaster />
             <div>
               <Button
                 onClickCallback={() => {

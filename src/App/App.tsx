@@ -1,5 +1,6 @@
 import React, { lazy, Suspense, FunctionComponent } from 'react';
 import { Route, Switch } from 'react-router-dom';
+import { Toaster } from 'react-hot-toast';
 import ErrorPage from './components/ErrorPage';
 import PrivateRoute from './components/Utils/PrivateRoute';
 import PublicOnlyRoute from './components/Utils/PublicOnlyRoute';
@@ -49,6 +50,7 @@ const App: FunctionComponent = () => {
             </Switch>
           </Suspense>
         </ErrorPage>
+        <Toaster />
       </main>
     </>
   );

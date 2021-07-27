@@ -11,7 +11,6 @@ import {
   faEdit,
   faTrashAlt,
 } from '@fortawesome/free-solid-svg-icons';
-import { Toaster } from 'react-hot-toast';
 import Folder from '../Folder/Folder';
 import Input from '../Input/Input';
 import TextArea from '../TextArea';
@@ -213,7 +212,6 @@ const FoldersList: FunctionComponent = () => {
           {currentClickedFolder.value && (
             <div>
               <div className={styles['export-team']}>
-                <Toaster />
                 <div>
                   <Button
                     onClickCallback={() => {

@@ -13,7 +13,6 @@ import {
   faDownload,
   faTrashAlt,
 } from '@fortawesome/free-solid-svg-icons';
-import { Toaster } from 'react-hot-toast';
 import Button from '../../Button';
 import Input from '../../Input';
 import TextArea from '../../TextArea';
@@ -254,7 +253,6 @@ const ExpandedSet: FunctionComponent<ExpandedSetProps> = ({
       </form>
 
       <div className={styles['export-pokemon']}>
-        <Toaster />
         <div>
           <Button
             onClickCallback={() => {

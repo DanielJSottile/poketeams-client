@@ -5,7 +5,6 @@ import {
   faCompressArrowsAlt,
   faShareSquare,
 } from '@fortawesome/free-solid-svg-icons';
-import { Toaster } from 'react-hot-toast';
 import Input from '../Input/Input';
 import TextArea from '../TextArea';
 import Image from '../Image';
@@ -99,7 +98,6 @@ const TeamPublicShare: FunctionComponent<TeamPublicShareProps> = ({
               />
             </form>
             <div className={styles['export-team']}>
-              <Toaster />
               <div>
                 <Button
                   onClickCallback={() => {
