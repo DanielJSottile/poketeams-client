@@ -47,7 +47,7 @@ const RegistrationPage: FunctionComponent<RegistrationProps> = ({
             PokéTeams
           </span>
           <Link className={styles['no-styling']} to={'/privacy-policy'}>
-            Privacy Statement.
+            Privacy Policy.
           </Link>
         </div>
       </section>
