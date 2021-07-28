@@ -5,41 +5,18 @@
   grid-template-columns: repeat(1, auto);
 }
 
-.team-section {
-  padding: 2px 2px;
-  color: $med-dark-grey;
-  border-radius: 4px;
-  text-shadow: 1px 1px white;
-  background-color: $super-light-cream;
-}
-
-.team-section:nth-child(even) {
-  color: $super-light-cream;
-  text-shadow: 1px 1px $super-dark-red;
-  background-color: $pokeball-red;
-}
-
-.override-label {
-  color: $light-grey !important;
-}
-
-.team-section:hover {
-  cursor: pointer;
-  background-color: $med-light-yellow;
-  transition: 0.3s;
-}
-
-.team-section:nth-child(even):hover {
-  cursor: pointer;
-  background-color: $light-pokeball-red;
-  transition: 0.3s;
+.export-team {
+  border-radius: 10px;
+  padding: 5px;
+  margin: auto;
+  width: 85%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .team {
-  background-color: $pokeball-red;
   color: $super-light-cream;
-  text-shadow: 1px 1px $super-dark-red;
-  border: 1px solid $med-dark-grey;
   border-radius: 10px;
   padding: 2px;
   margin: 5px;
@@ -53,21 +30,55 @@
   }
 }
 
-.team:hover {
-  background-color: $light-pokeball-red;
-  transition: 0.3s;
+.team-section {
+  padding: 2px 2px;
+  color: $super-light-cream;
+  border-radius: 4px;
+  background-color: $oxford-blue;
+  .team {
+    background-color: $prussian-blue;
+  }
+  .set-list-grid {
+    background-color: $oxford-blue;
+    div {
+      background-color: $prussian-blue;
+    }
+  }
 }
 
-.export-team {
-  background-color: $super-light-cream;
-  border: 1px solid $med-dark-grey;
-  border-radius: 10px;
-  padding: 5px;
-  margin: auto;
-  width: 85%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.team-section:nth-child(even) {
+  color: $super-light-cream;
+  background-color: $prussian-blue;
+  .team {
+    background-color: $oxford-blue;
+  }
+  .set-list-grid {
+    background-color: $prussian-blue;
+    div {
+      background-color: $oxford-blue;
+    }
+  }
+}
+
+.team-section:hover {
+  cursor: pointer;
+  // background-color: $med-light-yellow;
+  // transition: 0.3s;
+}
+
+.team-section:nth-child(even):hover {
+  cursor: pointer;
+  // background-color: $light-pokeball-$prussian-blue;
+  // transition: 0.3s;
+}
+
+.team:nth-child(even) {
+  background-color: $oxford-blue;
+}
+
+.team:hover {
+  // background-color: $prussian-blue;
+  // transition: 0.3s;
 }
 
 .team-title {
@@ -113,7 +124,7 @@
 .copied {
   font-size: 16px;
   text-shadow: none;
-  color: green;
+  color: $oxford-blue;
   -webkit-animation: fade-out 3s ease-out both;
   animation: fade-out 3s ease-out both;
 }

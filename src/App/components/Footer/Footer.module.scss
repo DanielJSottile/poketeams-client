@@ -1,0 +1,16 @@
+@import '../../../index.scss';
+
+.small-logo-image {
+  width: 25%;
+}
+
+.no-styling {
+  font-size: 12px;
+  background-color: transparent;
+  color: white;
+  text-decoration: underline;
+  &:hover {
+    background-color: transparent;
+    color: $azure;
+  }
+}

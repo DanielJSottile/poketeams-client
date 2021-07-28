@@ -1,5 +1,8 @@
+@import '../../../index.scss';
+
 .perks {
   ul {
+    padding: 0;
     margin: auto;
     margin-bottom: 30px;
     width: 75%;
@@ -12,17 +15,33 @@
   }
 }
 
+.no-styling {
+  background-color: transparent;
+  color: white;
+  text-decoration: underline;
+  &:hover {
+    background-color: transparent;
+    color: $azure;
+  }
+}
+
+.heading-text {
+  margin: 0 0 1rem 0;
+}
+
 .landing-title {
   width: 90%;
   background-image: url('../../Images/PokeTeams.png');
   background-repeat: no-repeat;
   background-position: center;
   background-size: 90%;
-  height: 12em;
+  height: 6em;
   margin: auto;
 }
 
 .terms-of-service {
+  max-width: 650px;
+  margin: auto;
   font-size: 14px;
 }
 
@@ -35,6 +54,6 @@
 
   .landing-title {
     background-size: 70%;
-    height: 15em;
+    height: 10em;
   }
 }

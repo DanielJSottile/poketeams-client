@@ -1,0 +1,79 @@
+@import '../../../index.scss';
+
+.container {
+  .landing-title {
+    width: 90%;
+    background-image: url('../../Images/PokeTeams.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 90%;
+    height: 7em;
+    margin: auto;
+  }
+  ul {
+    padding: 0;
+    margin: auto;
+    max-width: 650px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+  li {
+    text-align: left;
+    list-style-type: square;
+    font-size: 1rem;
+  }
+  h1 {
+    font-size: 2rem;
+  }
+  h2 {
+    font-size: 1.5rem;
+  }
+  h3 {
+    font-size: 1.25rem;
+  }
+  p {
+    margin: auto;
+    text-align: left;
+    font-size: 1rem;
+  }
+  a {
+    background-color: transparent;
+    color: white;
+    text-decoration: underline;
+    &:hover {
+      background-color: transparent;
+      color: $azure;
+    }
+  }
+  .go-back-button {
+    background-color: $super-light-cream;
+    color: $med-dark-grey;
+    text-decoration: none;
+    display: block;
+    width: 200px;
+    text-align: center;
+    font-size: 16px;
+    font-family: $h2-font;
+    padding: 5px;
+    margin: auto;
+    border-radius: 40px;
+    border: 5px double $med-dark-grey;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1rem;
+    margin-bottom: 0;
+    &:hover {
+      color: $azure;
+    }
+  }
+}
+
+@media (min-width: 850px) {
+  /* Large Ipad Screen */
+  .container {
+    .landing-title {
+      background-size: 70%;
+      height: 10em;
+    }
+  }
+}

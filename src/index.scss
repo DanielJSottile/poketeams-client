@@ -1,27 +1,33 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato&family=Montserrat+Alternates:wght@900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Sedgwick+Ave+Display&display=swap');
+//@import url('https://fonts.googleapis.com/css2?family=Sedgwick+Ave+Display&display=swap');
 
 /* FONTS */
 $body-font: 'Oswald', sans-serif;
-$h1-font: 'Sedgwick Ave Display', cursive;
+$h1-font: 'Anton', sans-serif;
 $h2-font: 'Montserrat Alternates', sans-serif;
 $h3-font: 'Anton', sans-serif;
 
 /* COLOR SCHEME */
 $pokeball-background: #00000033;
-$error-blue: #6898ff;
+$error-blue: #6898ff; // remove
 $super-dark-red: #3a0000;
-$deep-red: #961b1b;
-$pokeball-red: #d42929;
-$light-pokeball-red: #ff4b4b;
-$pure-yellow: #ffe600;
+$deep-red: #961b1b; // remove
+$pokeball-red: #d42929; // remove
+$light-pokeball-red: #ff4b4b; // remove
+$pure-yellow: #ffe600; // remove
 $med-light-yellow: #ffffaf;
 $light-yellow: #fff597;
 $super-light-cream: #ffffee;
 $light-grey: #cfcfcf;
 $med-dark-grey: #444444;
+
+/* NEW COLORS */
+$oxford-blue: #122645;
+$prussian-blue: #25344a;
+$dark-cornflower-blue: #2a4875;
+$azure: #3e88f7;
 
 * {
   box-sizing: border-box;
@@ -43,9 +49,8 @@ nav,
 footer {
   padding: 1% 0;
   font-size: 12px;
-  color: white;
-  text-shadow: 1px 1px $med-dark-grey;
-  background-color: $deep-red;
+  color: $super-light-cream;
+  background-color: $dark-cornflower-blue;
 }
 
 nav {
@@ -56,15 +61,14 @@ nav {
 }
 
 header {
+  color: $super-light-cream;
   padding: 5px 5px;
 }
 
 h1 {
   font-family: $h1-font;
-  color: $pure-yellow;
   letter-spacing: 5px;
   font-size: 55px;
-  text-shadow: 1px 5px $med-dark-grey;
   margin-top: 1px;
   margin-bottom: 15px;
 }
@@ -79,17 +83,14 @@ h3 {
 }
 
 section {
-  padding: 2px 2px;
-  color: $med-dark-grey;
-  border-radius: 4px;
-  text-shadow: 1px 1px white;
-  background-color: $super-light-cream;
+  padding: 1rem 1rem;
+  color: $super-light-cream;
+  background-color: $prussian-blue;
 }
 
 section:nth-child(even) {
   color: $super-light-cream;
-  text-shadow: 1px 1px $super-dark-red;
-  background-color: $pokeball-red;
+  background-color: $oxford-blue;
 }
 
 p {
@@ -103,12 +104,18 @@ p + p {
 
 input,
 select {
-  border: 1px solid $pure-yellow;
+  border: none;
   border-radius: 10px;
   font-family: $body-font;
   background-color: white;
   margin-left: 10px;
   margin-right: 10px;
+}
+
+input {
+  &::placeholder {
+    font-style: italic;
+  }
 }
 
 .btn,
@@ -117,10 +124,13 @@ button {
   background-color: white;
   font-size: 16px;
   color: $med-dark-grey;
-  border: 1px solid $pure-yellow;
+  border: none;
   border-radius: 4px;
   padding: 3px;
   margin: 3px;
+  &:disabled {
+    color: $light-grey;
+  }
 }
 
 a {
@@ -137,16 +147,17 @@ a {
 }
 
 a:hover,
-button:hover {
+button:hover:enabled {
   background-color: $light-yellow;
   transition: 0.3s;
 }
 
 textarea {
+  background-color: $super-light-cream;
   font-family: $body-font;
   font-weight: 800;
   text-align: left;
-  border: 1px solid $pure-yellow;
+  border: none;
   resize: none;
   border-radius: 10px;
   width: 100%;
@@ -154,14 +165,8 @@ textarea {
 }
 
 label {
-  color: $light-grey;
+  color: $super-light-cream;
   text-shadow: 1px 1px $super-dark-red;
-}
-
-img {
-  padding: 5px;
-  margin: auto;
-  align-self: center;
 }
 
 .error-login {
@@ -181,35 +186,4 @@ img {
   text-shadow: 1px 1px $med-dark-grey;
   font-weight: bold;
   font-size: 14px;
-}
-
-.login-div {
-  width: 85%;
-  margin: auto;
-  margin-bottom: 30px;
-  padding: 5px;
-  border: 4px double $pure-yellow;
-  border-radius: 40px;
-}
-
-@media (min-width: 600px) {
-  .login-div {
-    width: 65%;
-  }
-}
-
-@media (min-width: 700px) {
-  /* Medium Screen */
-
-  .login-div {
-    width: 45%;
-  }
-}
-
-@media (min-width: 850px) {
-  /* Large Ipad Screen */
-
-  .login-div {
-    width: 35%;
-  }
 }

@@ -1,12 +1,13 @@
 @import '../../../index.scss';
 
-.RegistrationForm {
+.registration-form {
+  background-color: $dark-cornflower-blue;
   margin: auto;
   margin-bottom: 30px;
   width: 80%;
   padding: 15px;
-  border: 6px double $med-dark-grey;
-  border-radius: 10px;
+  border: 6px double $super-light-cream;
+  border-radius: 0.25rem;
 }
 
 div.registration-form-container {
@@ -14,53 +15,37 @@ div.registration-form-container {
     font-family: $h3-font;
     letter-spacing: 3px;
     text-shadow: none;
-    color: $med-dark-grey;
+    color: $super-light-cream;
   }
 
   input {
     font-size: 18px;
-    border: 2px solid $pokeball-red;
-  }
-
-  button {
-    font-family: $h3-font;
-    letter-spacing: 3px;
-    padding: 5px;
-    margin: 15px;
-    font-size: 32px;
-    border: 4px double $pokeball-red;
-    border-radius: 10px;
-    transition: 0.3s;
-  }
-
-  button:hover {
-    background-color: $med-dark-grey;
-    color: white;
-    margin: 15px;
-    font-size: 32px;
-    border: 4px double $pure-yellow;
-    border-radius: 10px;
+    border: none;
   }
 }
 
-.go-back {
-  font-family: $h3-font;
-  letter-spacing: 3px;
+.required-text {
+  font-size: 0.75rem;
+  width: 90%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.register-button,
+.go-back-button {
+  display: block;
+  width: 200px;
+  text-align: center;
+  font-size: 16px;
+  font-family: $h2-font;
   padding: 5px;
-  margin: 15px;
-  font-size: 32px;
-  border: 4px double $pokeball-red;
-  border-radius: 10px;
-  transition: 0.3s;
-}
-
-.go-back:hover {
-  background-color: $med-dark-grey;
-  color: white;
-  margin: 15px;
-  font-size: 32px;
-  border: 4px double $pure-yellow;
-  border-radius: 10px;
+  margin: auto;
+  border-radius: 40px;
+  border: 5px double $med-dark-grey;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 1rem;
+  margin-bottom: 0;
 }
 
 .user_name,
@@ -175,6 +160,15 @@ div.registration-form-container {
   .user_name,
   .password,
   .verifyPassword {
+    flex-direction: row;
+  }
+
+  .width-override {
+    width: 50%;
+  }
+
+  .button-container {
+    display: flex;
     flex-direction: row;
   }
 }

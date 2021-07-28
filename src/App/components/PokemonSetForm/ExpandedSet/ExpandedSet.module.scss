@@ -4,17 +4,16 @@
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  border: 1px solid $med-dark-grey;
   border-radius: 10px;
   padding: 5px;
   margin: 10px;
 }
 
 .pokemon:hover {
-  color: $med-dark-grey;
-  text-shadow: none;
-  background-color: $super-light-cream;
-  transition: 0.3s;
+  // color: $med-dark-grey;
+  // text-shadow: none;
+  // background-color: $super-light-cream;
+  // transition: 0.3s;
 }
 
 .pokemon-import {
@@ -26,8 +25,7 @@
 }
 
 .export-pokemon {
-  background-color: $super-light-cream;
-  border: 1px solid $med-dark-grey;
+  background-color: $prussian-blue;
   border-radius: 10px;
   padding: 5px;
   margin: auto;
