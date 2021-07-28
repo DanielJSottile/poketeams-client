@@ -159,8 +159,15 @@ const TeamPublicShare: FunctionComponent<TeamPublicShareProps> = ({
     return (
       <section className={styles['team-section']} id={`${id}`}>
         <div
+          role="button"
+          tabIndex={0}
           className={styles['team-closed']}
           onClick={() => handleTeamToggle()}
+          onKeyPress={(e) => {
+            if (e.key === 'Enter' || e.key === 'Space') {
+              handleTeamToggle();
+            }
+          }}
         >
           <div>
             <h3>{team.team_name}</h3>

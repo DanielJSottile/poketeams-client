@@ -69,7 +69,7 @@ const SearchBar: FunctionComponent<SearchBarProps> = ({ isPublic }) => {
               name="sort"
               id="sort"
               value={sortOrFilterSort.value}
-              onChange={(e) =>
+              onBlur={(e) =>
                 setSortOrFilterSort({ value: e.target.value, touched: true })
               }
             >

@@ -28,7 +28,17 @@ const UnexpandedSet: FunctionComponent<UnexpandedSetProps> = ({
 
   return (
     <>
-      <div className={styles['pokemon']} onClick={() => handleSetModal()}>
+      <div
+        role="button"
+        tabIndex={0}
+        className={styles['pokemon']}
+        onClick={() => handleSetModal()}
+        onKeyPress={(e) => {
+          if (e.key === 'Enter' || e.key === 'Space') {
+            handleSetModal();
+          }
+        }}
+      >
         <div className={styles['closed']}>
           <div className={styles['inside']}>
             <Image
