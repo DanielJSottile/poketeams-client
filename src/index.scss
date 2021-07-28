@@ -61,6 +61,7 @@ nav {
 }
 
 header {
+  color: $super-light-cream;
   padding: 5px 5px;
 }
 
@@ -152,6 +153,7 @@ button:hover:enabled {
 }
 
 textarea {
+  background-color: $super-light-cream;
   font-family: $body-font;
   font-weight: 800;
   text-align: left;

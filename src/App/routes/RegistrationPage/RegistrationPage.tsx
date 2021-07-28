@@ -38,20 +38,18 @@ const RegistrationPage: FunctionComponent<RegistrationProps> = ({
       </section>
       <section>
         <div className={styles['terms-of-service']}>
+          <span>By creating an account, you agree to the</span>
+          <Link className={styles['no-styling']} to={'/terms-and-conditions'}>
+            Terms And Conditions
+          </Link>
           <span>
-            {' '}
-            By creating an account, you agree to the *Terms of Service. For more
-            information about PokéTeam's privacy practices, see the PokéTeams
+            . For more information about PokéTeam's privacy practices, see the
+            PokéTeams
           </span>
           <Link className={styles['no-styling']} to={'/privacy-policy'}>
             Privacy Statement.
           </Link>
         </div>
-
-        <p className={styles['notice']}>
-          *Not Yet Implemented. Sorry! Just know we're working on keeping your
-          data secure!
-        </p>
       </section>
       <Footer />
     </>

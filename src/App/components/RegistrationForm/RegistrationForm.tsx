@@ -1,5 +1,5 @@
 import React, { useState, FormEvent, FunctionComponent } from 'react';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHandPointLeft, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import Button from '../Button';
@@ -20,6 +20,7 @@ type RegistrationFormProps = {
 const RegistrationForm: FunctionComponent<RegistrationFormProps> = ({
   onRegistrationSuccess = () => null,
 }) => {
+  const history = useHistory();
   const [error, setError] = useState('');
   const [username, setUsername] = useState<TextInput>({
     value: '',
@@ -58,14 +59,15 @@ const RegistrationForm: FunctionComponent<RegistrationFormProps> = ({
   };
 
   return (
-    <form className={styles['RegistrationForm']} onSubmit={handleSubmit}>
+    <form className={styles['registration-form']} onSubmit={handleSubmit}>
       <div role="alert">
         {error ? (
           <p className={styles['error shake-horizontal']}>{error}</p>
         ) : (
           <p className={styles['register-intro']}>
             Please create a unique username, and a password that is 8 characters
-            and contains an uppercase, lowercase, number and a special char.
+            and contains an uppercase, lowercase, number and a special
+            character.
           </p>
         )}
       </div>
@@ -133,9 +135,14 @@ const RegistrationForm: FunctionComponent<RegistrationFormProps> = ({
         >
           Register <FontAwesomeIcon icon={faUserPlus} />
         </Button>
-        <Link className={styles['go-back-button']} to={'/landing'}>
+        <Button
+          buttonClass={styles['go-back-button']}
+          onClickCallback={() => {
+            history.goBack();
+          }}
+        >
           Go Back <FontAwesomeIcon icon={faHandPointLeft} />
-        </Link>
+        </Button>
       </div>
     </form>
   );

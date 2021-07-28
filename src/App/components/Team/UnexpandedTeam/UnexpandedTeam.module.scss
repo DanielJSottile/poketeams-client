@@ -18,33 +18,29 @@
   justify-content: space-around;
   align-content: center;
   align-self: center;
-  border: 1px solid $med-dark-grey;
-  border-radius: 10px;
   padding: 5px;
 }
 
 .team-section {
   padding: 2px 2px;
-  color: $med-dark-grey;
-  border-radius: 4px;
-  text-shadow: 1px 1px white;
-  background-color: $super-light-cream;
+  color: $super-light-cream;
+  background-color: $prussian-blue;
+  border-top: 1px solid $super-light-cream;
+  border-bottom: 1px solid $super-light-cream;
 }
 
 .team-section:nth-child(even) {
-  color: $super-light-cream;
-  text-shadow: 1px 1px $super-dark-red;
-  background-color: $pokeball-red;
+  background-color: $oxford-blue;
 }
 
 .team-section:hover {
   cursor: pointer;
-  background-color: $med-light-yellow;
-  transition: 0.3s;
+  // background-color: $med-light-yellow;
+  // transition: 0.3s;
 }
 
 .team-section:nth-child(even):hover {
   cursor: pointer;
-  background-color: $light-pokeball-red;
-  transition: 0.3s;
+  // background-color: $light-pokeball-red;
+  // transition: 0.3s;
 }

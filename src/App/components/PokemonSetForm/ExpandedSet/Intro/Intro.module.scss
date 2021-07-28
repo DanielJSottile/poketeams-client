@@ -1,8 +1,7 @@
 @import '../../../../../index.scss';
 
 .pokemon-intro {
-  background-color: $super-light-cream;
-  border: 1px solid $med-dark-grey;
+  background-color: $prussian-blue;
   border-radius: 10px;
   padding: 5px;
   margin: 10px;
@@ -31,7 +30,6 @@
   text-emphasis: bold;
   text-align: center;
   font-size: 22px;
-  border: 1px solid $pure-yellow;
   width: 100%;
   margin: auto;
   border-radius: 20px;
@@ -47,7 +45,6 @@
   font-size: 16px;
   padding: 5px;
   margin: 5px;
-  border: 1px solid $pure-yellow;
   border-radius: 20px;
   background: white;
 }

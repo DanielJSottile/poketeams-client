@@ -1,5 +1,5 @@
-import React, { lazy, Suspense, FunctionComponent } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import React, { lazy, Suspense, useEffect, FunctionComponent } from 'react';
+import { Route, Switch, useLocation } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import ErrorPage from './components/ErrorPage';
 import PrivateRoute from './components/Utils/PrivateRoute';
@@ -15,8 +15,15 @@ const ShareTeamPage = lazy(() => import('./routes/ShareTeamPage'));
 const ShareFolderPage = lazy(() => import('./routes/ShareFolderPage'));
 const RegistrationPage = lazy(() => import('./routes/RegistrationPage'));
 const PrivacyPolicy = lazy(() => import('./routes/PrivacyPolicy'));
+const TermsAndConditions = lazy(() => import('./routes/TermsAndConditions'));
 
 const App: FunctionComponent = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    setTimeout(() => window.scrollTo(0, 0), 1);
+  }, [location]);
+
   return (
     <>
       <main>
@@ -41,15 +48,18 @@ const App: FunctionComponent = () => {
                 path={'/share/user/folder/:folder_id'}
                 component={ShareFolderPage}
               />
+              <Route exact path={'/privacy-policy'} component={PrivacyPolicy} />
+              <Route
+                exact
+                path={'/terms-and-conditions'}
+                component={TermsAndConditions}
+              />
               <PublicOnlyRoute path={'/landing'} component={LandingPage} />
               <PublicOnlyRoute
                 path={'/register'}
                 component={RegistrationPage}
               />
-              <PublicOnlyRoute
-                path={'/privacy-policy'}
-                component={PrivacyPolicy}
-              />
+
               <PrivateRoute path={'/build'} component={BuildPage} />
               <Route component={NotFoundPage} />
             </Switch>

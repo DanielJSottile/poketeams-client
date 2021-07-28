@@ -1,14 +1,29 @@
 import React, { FunctionComponent } from 'react';
-import { Link } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHandPointLeft } from '@fortawesome/free-solid-svg-icons';
+import Button from '../../components/Button';
 import Footer from '../../components/Footer';
 import styles from './PrivacyPolicy.module.scss';
 
 const PrivacyPolicy: FunctionComponent = () => {
+  const history = useHistory();
   return (
     <div className={styles['container']}>
       <section>
         <div className={styles['landing-title']}></div>
-        <h1>Privacy Policy</h1>
+        <div>
+          <h1>Privacy Policy</h1>
+          <Button
+            buttonClass={styles['go-back-button']}
+            onClickCallback={() => {
+              history.goBack();
+            }}
+          >
+            Go Back <FontAwesomeIcon icon={faHandPointLeft} />
+          </Button>
+        </div>
+
         <p>Last updated: July 28, 2021</p>
         <p>
           This Privacy Policy describes Our policies and procedures on the

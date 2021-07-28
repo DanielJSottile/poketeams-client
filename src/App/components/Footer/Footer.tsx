@@ -1,4 +1,5 @@
 import React, { FunctionComponent } from 'react';
+import { Link } from 'react-router-dom';
 import Image from '../Image';
 import PokeTeamsLogo from '../../Images/PokeTeams.png';
 import styles from './Footer.module.scss';
@@ -12,6 +13,15 @@ const Footer: FunctionComponent = () => {
         alt="PokeTeams Logo"
       />
       <span>{`Created by Daniel Sottile || © July 2021 || Pokémon is © 1995-2021 Nintendo`}</span>
+      <div>
+        <Link className={styles['no-styling']} to={'/privacy-policy'}>
+          Privacy Policy
+        </Link>{' '}
+        ||{' '}
+        <Link className={styles['no-styling']} to={'/terms-and-conditions'}>
+          Terms and Conditions
+        </Link>
+      </div>
     </footer>
   );
 };
