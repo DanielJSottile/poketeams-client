@@ -6,6 +6,7 @@ import React, {
 } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSignInAlt } from '@fortawesome/free-solid-svg-icons';
+import toast from 'react-hot-toast';
 import Input from '../Input';
 import Button from '../Button';
 import TokenService from '../../services/token-service';
@@ -20,19 +21,20 @@ type LoginFormProps = {
 
 const LoginForm: FunctionComponent<LoginFormProps> = ({ onLoginSuccess }) => {
   const { getUserState } = useContext(GeneralContext);
-  const [error, setError] = useState(null);
   const [userName, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   const handleSubmitJwtAuth = (ev: FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
-    setError(null);
 
     AuthApiService.postLogin({
       user_name: userName,
       password: password,
     })
       .then((res) => {
+        const successToast = () =>
+          toast.success(`Login Successful: Welcome!! ${userName}`);
+        successToast();
         setUsername('');
         setPassword('');
         TokenService.saveAuthToken(res.authToken);
@@ -40,17 +42,13 @@ const LoginForm: FunctionComponent<LoginFormProps> = ({ onLoginSuccess }) => {
         onLoginSuccess();
       })
       .catch((res) => {
-        setError(res.error);
+        const errorToast = () => toast.error(`Login Failed: ${res.error}!!`);
+        errorToast();
       });
   };
 
   return (
     <form className={styles['signup-form']} onSubmit={handleSubmitJwtAuth}>
-      <div role="alert">
-        {error && (
-          <p className={styles['error-login shake-horizontal']}>{error}</p>
-        )}
-      </div>
       <Input
         inputHasError={false}
         htmlFor="user_name"

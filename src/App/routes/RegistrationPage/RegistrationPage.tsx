@@ -1,4 +1,5 @@
 import React, { FunctionComponent } from 'react';
+import { Link } from 'react-router-dom';
 import { History } from 'history';
 import RegistrationForm from '../../components/RegistrationForm/RegistrationForm';
 import Footer from '../../components/Footer/Footer';
@@ -36,11 +37,16 @@ const RegistrationPage: FunctionComponent<RegistrationProps> = ({
         </div>
       </section>
       <section>
-        <p className={styles['terms-of-service']}>
-          By creating an account, you agree to the *Terms of Service. For more
-          information about PokéTeam's privacy practices, see the PokéTeams
-          *Privacy Statement.
-        </p>
+        <div className={styles['terms-of-service']}>
+          <span>
+            {' '}
+            By creating an account, you agree to the *Terms of Service. For more
+            information about PokéTeam's privacy practices, see the PokéTeams
+          </span>
+          <Link className={styles['no-styling']} to={'/privacy-policy'}>
+            Privacy Statement.
+          </Link>
+        </div>
 
         <p className={styles['notice']}>
           *Not Yet Implemented. Sorry! Just know we're working on keeping your

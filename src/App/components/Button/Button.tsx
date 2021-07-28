@@ -19,7 +19,7 @@ const Button: FunctionComponent<ButtonProps> = ({
   id = '',
   buttonClass = '',
   onClickCallback = () => null,
-  disabled = false,
+  disabled,
   type,
   children,
 }) => {

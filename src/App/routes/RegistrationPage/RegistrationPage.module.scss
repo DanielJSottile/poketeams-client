@@ -1,5 +1,8 @@
+@import '../../../index.scss';
+
 .perks {
   ul {
+    padding: 0;
     margin: auto;
     margin-bottom: 30px;
     width: 75%;
@@ -12,8 +15,18 @@
   }
 }
 
+.no-styling {
+  background-color: transparent;
+  color: white;
+  text-decoration: underline;
+  &:hover {
+    background-color: transparent;
+    color: $azure;
+  }
+}
+
 .heading-text {
-  margin: 0;
+  margin: 0 0 1rem 0;
 }
 
 .landing-title {

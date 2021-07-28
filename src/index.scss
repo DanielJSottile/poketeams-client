@@ -1,11 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;300&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Sedgwick+Ave+Display&display=swap');
+//@import url('https://fonts.googleapis.com/css2?family=Sedgwick+Ave+Display&display=swap');
 
 /* FONTS */
 $body-font: 'Oswald', sans-serif;
-$h1-font: 'Sedgwick Ave Display', cursive;
+$h1-font: 'Anton', sans-serif;
 $h2-font: 'Montserrat Alternates', sans-serif;
 $h3-font: 'Anton', sans-serif;
 
@@ -27,6 +27,7 @@ $med-dark-grey: #444444;
 $oxford-blue: #122645;
 $prussian-blue: #25344a;
 $dark-cornflower-blue: #2a4875;
+$azure: #3e88f7;
 
 * {
   box-sizing: border-box;
@@ -65,10 +66,8 @@ header {
 
 h1 {
   font-family: $h1-font;
-  color: $pure-yellow;
   letter-spacing: 5px;
   font-size: 55px;
-  text-shadow: 1px 5px $med-dark-grey;
   margin-top: 1px;
   margin-bottom: 15px;
 }
@@ -128,6 +127,9 @@ button {
   border-radius: 4px;
   padding: 3px;
   margin: 3px;
+  &:disabled {
+    color: $light-grey;
+  }
 }
 
 a {
@@ -144,7 +146,7 @@ a {
 }
 
 a:hover,
-button:hover {
+button:hover:enabled {
   background-color: $light-yellow;
   transition: 0.3s;
 }
@@ -163,12 +165,6 @@ textarea {
 label {
   color: $super-light-cream;
   text-shadow: 1px 1px $super-dark-red;
-}
-
-img {
-  padding: 5px;
-  margin: auto;
-  align-self: center;
 }
 
 .error-login {

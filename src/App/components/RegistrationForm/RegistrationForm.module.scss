@@ -21,46 +21,30 @@ div.registration-form-container {
     font-size: 18px;
     border: none;
   }
-
-  button {
-    font-family: $h3-font;
-    letter-spacing: 3px;
-    padding: 5px;
-    margin: 15px;
-    font-size: 32px;
-    border: 4px double $pokeball-red;
-    border-radius: 10px;
-    transition: 0.3s;
-  }
-
-  button:hover {
-    background-color: $med-dark-grey;
-    color: white;
-    margin: 15px;
-    font-size: 32px;
-    border: 4px double $pure-yellow;
-    border-radius: 10px;
-  }
 }
 
-.go-back {
-  font-family: $h3-font;
-  letter-spacing: 3px;
+.required-text {
+  font-size: 0.75rem;
+  width: 90%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.register-button,
+.go-back-button {
+  display: block;
+  width: 200px;
+  text-align: center;
+  font-size: 16px;
+  font-family: $h2-font;
   padding: 5px;
-  margin: 15px;
-  font-size: 32px;
-  border: 4px double $pokeball-red;
-  border-radius: 10px;
-  transition: 0.3s;
-}
-
-.go-back:hover {
-  background-color: $med-dark-grey;
-  color: white;
-  margin: 15px;
-  font-size: 32px;
-  border: 4px double $pure-yellow;
-  border-radius: 10px;
+  margin: auto;
+  border-radius: 40px;
+  border: 5px double $med-dark-grey;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 1rem;
+  margin-bottom: 0;
 }
 
 .user_name,
@@ -180,5 +164,10 @@ div.registration-form-container {
 
   .width-override {
     width: 50%;
+  }
+
+  .button-container {
+    display: flex;
+    flex-direction: row;
   }
 }

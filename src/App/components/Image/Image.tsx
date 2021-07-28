@@ -12,8 +12,8 @@ type ImageProps = {
 };
 
 const Image: FunctionComponent<ImageProps> = ({
-  containerClass = '',
-  imageClass = '',
+  containerClass,
+  imageClass,
   src,
   alt,
 }) => {

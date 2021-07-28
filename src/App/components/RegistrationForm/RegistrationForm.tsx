@@ -1,7 +1,13 @@
 import React, { useState, FormEvent, FunctionComponent } from 'react';
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHandPointLeft, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import Button from '../Button';
 import Input from '../Input';
+import {
+  validateVerifyPassword,
+  validatePassword,
+} from '../../utils/validations';
 import AuthApiService from '../../services/auth-api-service';
 import styles from './RegistrationForm.module.scss';
 import { TextInput } from '../../@types';
@@ -72,7 +78,7 @@ const RegistrationForm: FunctionComponent<RegistrationFormProps> = ({
         value={username.value}
         inputClass={styles['width-override']}
         htmlFor="RegistrationForm__user_name"
-        label="User name &#42;"
+        label="Username &#42;"
         labelClass={styles['width-override']}
         placeholder="Username"
         name="user_name"
@@ -114,10 +120,21 @@ const RegistrationForm: FunctionComponent<RegistrationFormProps> = ({
         required
         id="RegistrationForm__verifyPassword"
       />
-      <div className={styles['go-back-links']}>
-        <Button type="submit">Register</Button>
-        <Link className={styles['go-back']} to={'/landing'}>
-          Go Back
+      <span className={styles['required-text']}>&#42; Required</span>
+      <div className={styles['button-container']}>
+        <Button
+          buttonClass={styles['register-button']}
+          type="submit"
+          disabled={
+            !username.value ||
+            !!validatePassword(password) ||
+            !!validateVerifyPassword(password, verifyPassword)
+          }
+        >
+          Register <FontAwesomeIcon icon={faUserPlus} />
+        </Button>
+        <Link className={styles['go-back-button']} to={'/landing'}>
+          Go Back <FontAwesomeIcon icon={faHandPointLeft} />
         </Link>
       </div>
     </form>

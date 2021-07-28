@@ -14,6 +14,7 @@ const ShareSetPage = lazy(() => import('./routes/ShareSetPage'));
 const ShareTeamPage = lazy(() => import('./routes/ShareTeamPage'));
 const ShareFolderPage = lazy(() => import('./routes/ShareFolderPage'));
 const RegistrationPage = lazy(() => import('./routes/RegistrationPage'));
+const PrivacyPolicy = lazy(() => import('./routes/PrivacyPolicy'));
 
 const App: FunctionComponent = () => {
   return (
@@ -44,6 +45,10 @@ const App: FunctionComponent = () => {
               <PublicOnlyRoute
                 path={'/register'}
                 component={RegistrationPage}
+              />
+              <PublicOnlyRoute
+                path={'/privacy-policy'}
+                component={PrivacyPolicy}
               />
               <PrivateRoute path={'/build'} component={BuildPage} />
               <Route component={NotFoundPage} />

@@ -1,0 +1,56 @@
+@import '../../../index.scss';
+
+.container {
+  .landing-title {
+    width: 90%;
+    background-image: url('../../Images/PokeTeams.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 90%;
+    height: 6em;
+    margin: auto;
+  }
+  ul {
+    padding: 0;
+    margin: auto;
+    margin-bottom: 30px;
+    width: 75%;
+  }
+  li {
+    text-align: left;
+    list-style-type: square;
+    font-size: 1rem;
+  }
+  h1 {
+    font-size: 2rem;
+  }
+  h2 {
+    font-size: 1.5rem;
+  }
+  h3 {
+    font-size: 1.25rem;
+  }
+  p {
+    text-align: left;
+    font-size: 1rem;
+  }
+  a {
+    background-color: transparent;
+    color: white;
+    text-decoration: underline;
+    &:hover {
+      background-color: transparent;
+      color: $azure;
+    }
+  }
+}
+
+@media (min-width: 850px) {
+  /* Large Ipad Screen */
+  .container {
+    .landing-title {
+      background-size: 70%;
+      height: 10em;
+    }
+  }
+}

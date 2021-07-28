@@ -62,20 +62,22 @@ const LandingPage: FunctionComponent<
       </section>
 
       <section>
-        <header>
-          <h3>Store your teams like never before!</h3>
-        </header>
-        <Image
-          imageClass={styles['landingimg']}
-          src="https://imgur.com/9wYBaMQ.png"
-          alt="organize page"
-        />
-        <p>
-          PokeTeams goes above and beyond the average pastebin in order for you
-          to import, save, and organize your teams from Pokemon Showdown into a
-          secure database. Never lose a team again! Say goodbye to Pastebin's
-          forever!
-        </p>
+        <ScrollAnimation animateIn={styles['fade-in']} animateOnce={true}>
+          <header>
+            <h3>Store your teams like never before!</h3>
+          </header>
+          <Image
+            imageClass={styles['landingimg']}
+            src="https://imgur.com/9wYBaMQ.png"
+            alt="organize page"
+          />
+          <p>
+            PokeTeams goes above and beyond the average pastebin in order for
+            you to import, save, and organize your teams from Pokemon Showdown
+            into a secure database. Never lose a team again! Say goodbye to
+            Pastebin's forever!
+          </p>
+        </ScrollAnimation>
       </section>
 
       <section>
