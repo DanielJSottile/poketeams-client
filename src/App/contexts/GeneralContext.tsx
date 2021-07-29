@@ -3,7 +3,6 @@ import React, {
   useEffect,
   createContext,
   ReactNode,
-  MouseEvent,
   Dispatch,
   SetStateAction,
 } from 'react';
@@ -881,7 +880,6 @@ export const GeneralProvider = ({ children }: ContextProps): JSX.Element => {
       setPublicTeams(teams);
       teams.forEach((team: PokemonTeam) => {
         apiService.getSetsForOneTeam(team.id).then((sets) => {
-          console.log('im called');
           setPublicSets([...publicSets, ...sets]);
         });
       });
