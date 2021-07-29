@@ -8,6 +8,8 @@ import {
   faDownload,
   faEdit,
   faTrashAlt,
+  faClipboard,
+  faBan,
 } from '@fortawesome/free-solid-svg-icons';
 import toast from 'react-hot-toast';
 import Folder from '../Folder/Folder';
@@ -49,10 +51,12 @@ const FoldersList: FunctionComponent = () => {
   const { copySuccess, textArea, copyCodeToClipboard } = useClipboard();
 
   const handleEditExpand = () => {
+    setDeleteClicked(false);
     setEditClicked(!editClicked);
   };
 
   const handleDeleteExpand = () => {
+    setEditClicked(false);
     setDeleteClicked(!deleteClicked);
   };
 
@@ -149,7 +153,7 @@ const FoldersList: FunctionComponent = () => {
         <Button
           type="submit"
           buttonClass={styles['submit']}
-          disabled={!!validateNewFolderName(newFolderImport)}
+          disabled={!!validateNewFolderName(newFolderName)}
           onClickCallback={(e) => {
             e.preventDefault();
             handleEditFolder();
@@ -159,6 +163,7 @@ const FoldersList: FunctionComponent = () => {
               id: currentClickedFolder.id,
               touched: true,
             });
+            setNewFolderName({ value: '', touched: false });
           }}
         >
           Submit <FontAwesomeIcon icon={faCheckCircle} />
@@ -171,6 +176,7 @@ const FoldersList: FunctionComponent = () => {
     <>
       <section className={styles['folders-list']}>
         <h3>Folders:</h3>
+        <span>{`Current Folder: ${currentClickedFolder.value}`}</span>
         <div className={styles['folders']}>
           {folderList.length > 0 ? (
             folderList
@@ -185,50 +191,73 @@ const FoldersList: FunctionComponent = () => {
         <div>
           <Button
             onClickCallback={() => setFolderAddClicked(!folderAddClicked)}
+            buttonClass={styles['add-folder-button']}
           >
-            New Folder <FontAwesomeIcon icon={faFolderPlus} />
+            {folderAddClicked ? (
+              <span>
+                Cancel <FontAwesomeIcon icon={faBan} />
+              </span>
+            ) : (
+              <span>
+                New Folder <FontAwesomeIcon icon={faFolderPlus} />
+              </span>
+            )}
           </Button>
           {folderAddClicked && renderExpanded()}
         </div>
         <div>
-          <span>{`Current Folder: ${currentClickedFolder.value}`}</span>
           {currentClickedFolder.value && (
             <div>
-              <div className={styles['export-team']}>
+              <div className={styles['export-folder']}>
                 <div>
-                  <Button
-                    onClickCallback={() => {
-                      copyCodeToClipboard();
-                      copySuccess();
-                    }}
-                  >
-                    Copy Text
-                  </Button>
-                  <Link
-                    to={{
-                      pathname: `/share/user/folder/${currentClickedFolder.id}`,
-                      state: {
-                        folders: userFolders,
-                        teams: userTeams,
-                        sets: userSets,
-                        input: input,
-                      },
-                    }}
-                    target="_blank"
-                  >
-                    Share This Folder! <FontAwesomeIcon icon={faShareSquare} />
-                  </Link>
-                  <Input
-                    inputHasError={false}
-                    disabled
-                    type="text"
-                    readOnly
-                    value={`poketeams.now.sh/share/user/folder/${currentClickedFolder.id}`}
-                  />
+                  <div className={styles['buttons']}>
+                    <div className={styles['inner-buttons']}>
+                      <label
+                        htmlFor="export-folder"
+                        className={styles['label']}
+                      >
+                        Export Folder: <FontAwesomeIcon icon={faDownload} />
+                      </label>
+                      <Button
+                        onClickCallback={() => {
+                          copyCodeToClipboard();
+                          copySuccess();
+                        }}
+                        buttonClass={styles['copy-text-button']}
+                      >
+                        Copy Text <FontAwesomeIcon icon={faClipboard} />
+                      </Button>
+                    </div>
+                    <div className={styles['inner-buttons']}>
+                      <Link
+                        className={styles['share-link']}
+                        to={{
+                          pathname: `/share/user/folder/${currentClickedFolder.id}`,
+                          state: {
+                            folders: userFolders,
+                            teams: userTeams,
+                            sets: userSets,
+                            input: input,
+                          },
+                        }}
+                        target="_blank"
+                      >
+                        Share This Folder!{' '}
+                        <FontAwesomeIcon icon={faShareSquare} />
+                      </Link>
+
+                      <Input
+                        inputHasError={false}
+                        inputClass={styles['share-input']}
+                        disabled
+                        type="text"
+                        readOnly
+                        value={`poketeams.now.sh/share/user/folder/${currentClickedFolder.id}`}
+                      />
+                    </div>
+                  </div>
                 </div>
-                <label htmlFor="edit-team">
-                  Export Folder: <FontAwesomeIcon icon={faDownload} />
-                </label>
+
                 <TextArea
                   textAreaHasError={false}
                   ref={textArea}
@@ -242,11 +271,33 @@ const FoldersList: FunctionComponent = () => {
                   )}
                 />
               </div>
-              <Button onClickCallback={() => handleEditExpand()}>
-                <FontAwesomeIcon icon={faEdit} /> Edit
+              <Button
+                onClickCallback={() => handleEditExpand()}
+                buttonClass={styles['edit']}
+              >
+                {editClicked ? (
+                  <span>
+                    Cancel <FontAwesomeIcon icon={faBan} />
+                  </span>
+                ) : (
+                  <span>
+                    <FontAwesomeIcon icon={faEdit} /> Edit
+                  </span>
+                )}
               </Button>
-              <Button onClickCallback={() => handleDeleteExpand()}>
-                Delete <FontAwesomeIcon icon={faTrashAlt} />
+              <Button
+                onClickCallback={() => handleDeleteExpand()}
+                buttonClass={styles['delete']}
+              >
+                {deleteClicked ? (
+                  <span>
+                    Cancel <FontAwesomeIcon icon={faBan} />
+                  </span>
+                ) : (
+                  <span>
+                    Delete <FontAwesomeIcon icon={faTrashAlt} />
+                  </span>
+                )}
               </Button>
             </div>
           )}

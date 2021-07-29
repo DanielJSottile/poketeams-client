@@ -19,6 +19,11 @@
   align-content: center;
   align-self: center;
   padding: 5px;
+  &:hover {
+    cursor: pointer;
+    background-color: $azure;
+    transition: 0.3s;
+  }
 }
 
 .team-section {
@@ -35,12 +40,6 @@
 
 .team-section:hover {
   cursor: pointer;
-  // background-color: $med-light-yellow;
-  // transition: 0.3s;
-}
-
-.team-section:nth-child(even):hover {
-  cursor: pointer;
-  // background-color: $light-pokeball-red;
-  // transition: 0.3s;
+  background-color: $azure;
+  transition: 0.3s;
 }

@@ -56,7 +56,7 @@ const SearchBar: FunctionComponent<SearchBarProps> = ({ isPublic }) => {
             validationCallback={() => validateSearch(searchInput)}
             inputClass={styles['s-input']}
             labelClass={styles['label-font']}
-            label={'Search: '}
+            label={isPublic ? 'Search: ' : 'Filter: '}
             labelIcon={<FontAwesomeIcon icon={faSearch} />}
             placeholder="e.g. Pikachu"
             value={searchInput.value}
@@ -90,7 +90,7 @@ const SearchBar: FunctionComponent<SearchBarProps> = ({ isPublic }) => {
           </div>
 
           <Button
-            buttonClass={styles['button']}
+            buttonClass={styles['go-button']}
             type="submit"
             onClickCallback={(e) => {
               handleSearchOrFilter(e);

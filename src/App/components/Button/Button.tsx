@@ -1,8 +1,15 @@
-import React, { FunctionComponent, MouseEvent, ReactNode } from 'react';
+import React, {
+  FunctionComponent,
+  MouseEvent,
+  ReactNode,
+  CSSProperties,
+} from 'react';
 
 type ButtonProps = {
-  /** class for the label */
+  /** class for the button */
   buttonClass?: string;
+  /** styles for the button */
+  buttonStyles?: CSSProperties;
   /** string of input id */
   id?: string;
   /** boolean for whether the input is disabled */
@@ -18,6 +25,7 @@ type ButtonProps = {
 const Button: FunctionComponent<ButtonProps> = ({
   id = '',
   buttonClass = '',
+  buttonStyles,
   onClickCallback = () => null,
   disabled,
   type,
@@ -26,6 +34,7 @@ const Button: FunctionComponent<ButtonProps> = ({
   return (
     <button
       id={id}
+      style={buttonStyles}
       className={buttonClass}
       disabled={disabled}
       onClick={onClickCallback}
