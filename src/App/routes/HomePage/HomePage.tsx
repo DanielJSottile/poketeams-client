@@ -8,10 +8,7 @@ const HomePage: FunctionComponent = (): JSX.Element => {
   return (
     <div>
       <Navigation isPublic />
-      <main className={styles['container']}>
-        <header role="banner">
-          <h2>Results:</h2>
-        </header>
+      <main>
         <TeamList isPublic />
         <Footer />
       </main>

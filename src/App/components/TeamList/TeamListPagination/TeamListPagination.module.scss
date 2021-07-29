@@ -3,4 +3,30 @@
 .team-pagination {
   background-color: $oxford-blue;
   color: $super-light-cream;
+  padding-bottom: 1rem;
+}
+
+.flex-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.button-class {
+  font-family: $body-font;
+  width: 10.25rem;
+}
+
+.no-margin {
+  margin: 0;
+}
+
+@media (min-width: 700px) {
+  .flex-container {
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-evenly;
+    max-width: 650px;
+    margin: auto;
+    padding-top: 1rem;
+  }
 }
