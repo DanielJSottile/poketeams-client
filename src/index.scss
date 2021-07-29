@@ -180,9 +180,10 @@ label {
 }
 
 .error-validate {
+  position: absolute;
   text-align: center;
   text-align: center;
-  color: $error-blue;
+  color: $super-light-cream;
   text-shadow: 1px 1px $med-dark-grey;
   font-weight: bold;
   font-size: 14px;

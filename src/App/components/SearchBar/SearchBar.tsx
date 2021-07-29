@@ -32,11 +32,17 @@ const SearchBar: FunctionComponent<SearchBarProps> = ({ isPublic }) => {
   } = useContext(GeneralContext);
 
   const searchInput = isPublic ? search : filter;
-  const handleSearchOrFilter = (e: MouseEvent<HTMLButtonElement>) =>
-    isPublic ? handleSearch(e) : handleFilter(e);
+
+  const handleSearchOrFilter = (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    isPublic ? handleSearch() : handleFilter();
+  };
+
   const setSearchOrFilter = (input: TextInput) =>
     isPublic ? setSearch(input) : setFilter(input);
+
   const sortOrFilterSort = isPublic ? sort : filtersort;
+
   const setSortOrFilterSort = (input: TextInput) =>
     isPublic ? setSort(input) : setFilterSort(input);
 

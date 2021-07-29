@@ -74,8 +74,8 @@ interface GeneralContextValues {
   handlePostNewFolder: () => void;
   handleEditFolder: () => void;
   handleDeleteFolder: () => void;
-  handleFilter: (e: MouseEvent<HTMLButtonElement>) => void;
-  handleSearch: (e: MouseEvent<HTMLButtonElement>) => void;
+  handleFilter: () => void;
+  handleSearch: () => void;
   handleUpdateSetImport: (id: number) => void;
   handleUpdateSet: (
     id: number | undefined,
@@ -291,24 +291,6 @@ export const GeneralProvider = ({ children }: ContextProps): JSX.Element => {
         setUserSets(data);
       });
     }
-  };
-
-  const handlePage = (direction: 'up' | 'down') => {
-    setPage(direction === 'up' ? page + 1 : page - 1);
-
-    const query = `?page=${page}&sort=${sort.value || 'newest'}&species=${
-      search.value.toLowerCase() || 'all'
-    }`;
-    apiService.getTenTeamsSearch(query).then((teams) => {
-      setPublicTeams(teams);
-      setPublicSets([]);
-      teams.forEach((team: PokemonTeam) => {
-        !!team.id &&
-          apiService.getSetsForOneTeam(team.id).then((sets) => {
-            setPublicSets([...publicSets, ...sets]);
-          });
-      });
-    });
   };
 
   const clearUserState = () => {
@@ -887,27 +869,36 @@ export const GeneralProvider = ({ children }: ContextProps): JSX.Element => {
     setUserSets(newUserSets);
   };
 
-  const handleSearch = (e: MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    const query = `?page=${page}&sort=${sort.value || 'newest'}&species=${
+  const createQuery = () => {
+    return `?page=${page}&sort=${sort.value || 'newest'}&species=${
       search.value.toLowerCase() || 'all'
     }`;
+  };
+
+  const searchTenTeamsWithSets = () => {
+    const query = createQuery();
     apiService.getTenTeamsSearch(query).then((teams) => {
       setPublicTeams(teams);
-      setPublicSets([]);
       teams.forEach((team: PokemonTeam) => {
-        !!team.id &&
-          apiService.getSetsForOneTeam(team.id).then((sets) => {
-            setPublicSets([...publicSets, ...sets]);
-          });
+        apiService.getSetsForOneTeam(team.id).then((sets) => {
+          console.log('im called');
+          setPublicSets([...publicSets, ...sets]);
+        });
       });
     });
   };
 
+  const handlePage = (direction: 'up' | 'down') => {
+    setPage(direction === 'up' ? page + 1 : page - 1);
+    searchTenTeamsWithSets();
+  };
+
+  const handleSearch = () => {
+    searchTenTeamsWithSets();
+  };
+
   const handleFilter = () => {
-    const query = `?sort=${filtersort.value || 'newest'}&species=${
-      filter.value.toLowerCase() || 'all'
-    }`;
+    const query = createQuery();
     if (TokenService.getAuthToken()) {
       const user_id = jwtDecode<MyToken>(
         TokenService.getAuthToken() || ''
