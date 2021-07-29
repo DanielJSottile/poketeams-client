@@ -5,7 +5,8 @@
   display: flex;
   flex-direction: column;
   margin: auto;
-  height: 7.8125rem;
+  width: min-content;
+  height: 7.7rem;
 }
 
 .search {
@@ -24,7 +25,7 @@
   flex-direction: row;
   label,
   select {
-    font-size: 1rem;
+    font-size: 0.8rem;
   }
   label {
     font-family: $h2-font;
@@ -51,6 +52,7 @@
     align-items: center;
     flex-direction: row;
     margin: 0;
+    width: unset;
     height: unset;
   }
 

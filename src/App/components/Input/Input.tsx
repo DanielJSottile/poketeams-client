@@ -1,4 +1,6 @@
 import React, { FunctionComponent, ChangeEvent, ReactNode } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 
 type InputProps = {
   /** class for input container */
@@ -79,11 +81,6 @@ const Input: FunctionComponent<InputProps> = ({
           {labelIcon}
         </label>
       )}
-      {isError && inputHasError && (
-        <p className="error-validate shake-horizontal">
-          {validationCallback()}
-        </p>
-      )}
       <input
         className={inputClass}
         placeholder={placeholder}
@@ -100,6 +97,14 @@ const Input: FunctionComponent<InputProps> = ({
         required={required}
         disabled={disabled}
       />
+      {isError && inputHasError && (
+        <p className="error-validate shake-horizontal">
+          {!!validationCallback() && (
+            <FontAwesomeIcon icon={faExclamationTriangle} />
+          )}{' '}
+          {validationCallback()}
+        </p>
+      )}
     </div>
   );
 };
