@@ -9,7 +9,8 @@ import GeneralContext from '../../../contexts/GeneralContext';
 import styles from './TeamListPagination.module.scss';
 
 const TeamListPagination: FunctionComponent = () => {
-  const { page, handlePage } = useContext(GeneralContext);
+  const { page, handlePage, publicTeams } = useContext(GeneralContext);
+  const searchCheck = publicTeams.length === 10;
   return (
     <div className={styles['team-pagination']}>
       <div className={styles['flex-container']}>
@@ -17,15 +18,20 @@ const TeamListPagination: FunctionComponent = () => {
           <h2 className={styles['no-margin']}>Results:</h2>
         </header>
         <div className={styles['pagebutton']}>
-          <Button
-            buttonClass={styles['button-class']}
-            onClickCallback={() => {
-              handlePage('up');
-            }}
-          >
-            <FontAwesomeIcon icon={faArrowCircleRight} />{' '}
-            {`Go to Next 10 Teams`}
-          </Button>
+          {searchCheck && (
+            <Button
+              buttonClass={styles['button-class']}
+              onClickCallback={() => {
+                if (searchCheck) {
+                  handlePage('up');
+                }
+              }}
+            >
+              <FontAwesomeIcon icon={faArrowCircleRight} />{' '}
+              {`Go to Next 10 Teams`}
+            </Button>
+          )}
+
           {page > 1 && (
             <Button
               buttonClass={styles['button-class']}
