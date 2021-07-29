@@ -1,8 +1,10 @@
 import React, { useContext, FunctionComponent } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFolder } from '@fortawesome/free-solid-svg-icons';
+import classnames from 'classnames';
 import Button from '../Button';
 import GeneralContext from '../../contexts/GeneralContext';
+import styles from './Folder.module.scss';
 
 type FolderProps = {
   /** id for folder*/
@@ -15,11 +17,14 @@ const Folder: FunctionComponent<FolderProps> = ({
   id = '',
   folder_name = '',
 }) => {
-  const { setCurrentClickedFolder } = useContext(GeneralContext);
+  const { setCurrentClickedFolder, currentClickedFolder } =
+    useContext(GeneralContext);
 
   return (
     <Button
-      buttonClass="btn"
+      buttonClass={classnames(styles['button-styling'], {
+        [styles['active']]: currentClickedFolder.id === id.toString(),
+      })}
       id={id.toString()}
       onClickCallback={() =>
         setCurrentClickedFolder({
@@ -29,7 +34,8 @@ const Folder: FunctionComponent<FolderProps> = ({
         })
       }
     >
-      <FontAwesomeIcon icon={faFolder} /> {folder_name}
+      <FontAwesomeIcon icon={faFolder} size="6x" />
+      <span className={styles['font']}>{folder_name}</span>
     </Button>
   );
 };

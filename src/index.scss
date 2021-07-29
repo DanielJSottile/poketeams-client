@@ -62,7 +62,6 @@ nav {
 
 header {
   color: $super-light-cream;
-  padding: 5px 5px;
 }
 
 h1 {
@@ -107,7 +106,7 @@ select {
   border: none;
   border-radius: 10px;
   font-family: $body-font;
-  background-color: white;
+  background-color: $super-light-cream;
   margin-left: 10px;
   margin-right: 10px;
 }
@@ -121,7 +120,7 @@ input {
 .btn,
 button {
   font-weight: bolder;
-  background-color: white;
+  background-color: $super-light-cream;
   font-size: 16px;
   color: $med-dark-grey;
   border: none;
@@ -137,7 +136,7 @@ a {
   display: inline-block;
   text-shadow: none;
   font-weight: bolder;
-  background-color: white;
+  background-color: $super-light-cream;
   font-size: 16px;
   color: $med-dark-grey;
   border-radius: 4px;

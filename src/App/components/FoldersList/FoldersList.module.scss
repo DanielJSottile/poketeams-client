@@ -4,13 +4,58 @@
   display: inline-block;
   text-shadow: none;
   font-weight: bolder;
-  background-color: white;
+  background-color: $super-light-cream;
   font-size: 16px;
   color: $med-dark-grey;
   border-radius: 4px;
   padding: 3px;
   margin: 3px;
   text-decoration: none;
+}
+
+.buttons {
+  margin: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.add-folder-button,
+.copy-text-button,
+.share-link,
+.submit,
+.edit,
+.delete {
+  text-align: center;
+  font-family: $body-font;
+  padding: 5px;
+  border-radius: 40px;
+  border: 5px double $med-dark-grey;
+}
+
+.copy-text-button {
+  font-size: 1rem;
+  margin: auto;
+}
+
+.share-link {
+  width: max-content;
+  margin: auto;
+}
+
+.submit,
+.edit,
+.delete {
+  width: 9.375rem;
+  margin: auto;
+}
+
+.add-folder-button {
+  width: 200px;
+  font-size: 1.5rem;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 1rem;
+  margin-bottom: 0;
 }
 
 .folders {
@@ -21,14 +66,14 @@
   color: green;
 }
 
-.submit:disabled {
-  color: $pokeball-red;
-}
+// .submit:disabled {
+//   color: $pokeball-red;
+// }
 
-.submit:hover {
-  background-color: $light-yellow;
-  transition: 0.3s;
-}
+// .submit:hover {
+//   background-color: $light-yellow;
+//   transition: 0.3s;
+// }
 
 .pokeball-div {
   margin: 10px;
@@ -37,4 +82,34 @@
 .hint {
   font-size: 14px;
   letter-spacing: 6px;
+}
+
+.share-input {
+  width: 12.1875rem;
+  padding: 0.3125rem;
+}
+
+@media (min-width: 700px) {
+  .buttons {
+    margin: 2rem 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    .inner-buttons {
+      display: flex;
+      flex-direction: row;
+      .label {
+        padding-right: 1rem;
+      }
+    }
+  }
+}
+
+@media (min-width: 800px) {
+  .export-folder,
+  .folder-import {
+    width: 85%;
+    margin: auto;
+  }
 }

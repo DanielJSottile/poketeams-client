@@ -16,6 +16,9 @@ export const validateNewFolderName = (
   if (!newFolderName.value) {
     return `Please provide a folder name!`;
   }
+  if (newFolderName.value.length > 30) {
+    return `Folder name is over 30 characters!`;
+  }
   return false;
 };
 

@@ -1,27 +1,16 @@
+@import '../../../index.scss';
+
 .submit {
   display: inline-block;
   text-shadow: none;
   font-weight: bolder;
-  background-color: white;
+  background-color: $super-light-cream;
   font-size: 16px;
   color: #444;
   border-radius: 4px;
   padding: 3px;
   margin: 3px;
   text-decoration: none;
-}
-
-.submit {
-  color: green;
-}
-
-.submit:disabled {
-  color: red;
-}
-
-.submit:hover {
-  background-color: rgb(255, 245, 151);
-  transition: 0.3s;
 }
 
 .team-import {
