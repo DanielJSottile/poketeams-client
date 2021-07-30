@@ -69,11 +69,7 @@ const ExpandedTeam: FunctionComponent<ExpandedTeamProps> = ({
               </Button>
               <div className={styles['title-name']}>
                 <label htmlFor="title-name">Team Name:</label>
-                {
-                  <p className="error-validate shake-horizontal">
-                    {validateTeamName(teamName)}
-                  </p>
-                }
+                {<p className="error-validate">{validateTeamName(teamName)}</p>}
                 <Input
                   inputHasError={false}
                   disabled={isPublic}

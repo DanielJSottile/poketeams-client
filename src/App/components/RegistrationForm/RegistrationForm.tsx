@@ -62,7 +62,7 @@ const RegistrationForm: FunctionComponent<RegistrationFormProps> = ({
     <form className={styles['registration-form']} onSubmit={handleSubmit}>
       <div role="alert">
         {error ? (
-          <p className={styles['error shake-horizontal']}>{error}</p>
+          <p className={styles['error']}>{error}</p>
         ) : (
           <p className={styles['register-intro']}>
             Please create a unique username, and a password that is 8 characters

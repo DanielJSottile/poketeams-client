@@ -613,7 +613,8 @@ export const GeneralProvider = ({ children }: ContextProps): JSX.Element => {
       TokenService.getAuthToken() || ''
     ).user_id;
 
-    const folderSuccessToast = () => toast.success('Edited Folder!!');
+    const folderSuccessToast = () =>
+      toast.success('Successfully Edited Folder!!');
 
     apiService
       .patchUserFolder(newFolderName.value, currentClickedFolder.id, userId)
@@ -642,7 +643,7 @@ export const GeneralProvider = ({ children }: ContextProps): JSX.Element => {
     const userId = jwtDecode<MyToken>(
       TokenService.getAuthToken() || ''
     ).user_id;
-    const teamSuccessToast = () => toast.success('Edited Team!!');
+    const teamSuccessToast = () => toast.success('Successfully Edited Team!!');
     apiService
       .patchUserTeam(body, userId)
       .then(() => {
@@ -724,7 +725,8 @@ export const GeneralProvider = ({ children }: ContextProps): JSX.Element => {
       TokenService.getAuthToken() || ''
     ).user_id;
 
-    const setSuccessToast = () => toast.success('Edited Pokemon Set!!');
+    const setSuccessToast = () =>
+      toast.success('Successfully Edited Pokemon Set!!');
     apiService
       .patchUserSet(body, userId)
       .then(() => {

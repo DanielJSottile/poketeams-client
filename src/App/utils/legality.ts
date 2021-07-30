@@ -167,7 +167,7 @@ const LEGALITY = {
           return `https://imgur.com/c4gnllj.png`;
         case 'ice':
           return `https://imgur.com/3NLAUft.png`;
-        case 'INFINITE':
+        case 'infinite':
           return `https://imgur.com/pINWaZD.png`;
         case 'normal':
           return `https://imgur.com/f4bdXSF.png`;

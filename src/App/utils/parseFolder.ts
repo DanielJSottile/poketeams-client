@@ -68,7 +68,7 @@ export default function showdownFolderParse(input: string): ParseReturn[] {
   let format: string;
   // TODO: Check against the folder name
   let folder: string;
-  let teamname: string;
+  let teamname = '';
   let item: string | null = null;
   let gender: string | null = null;
   let species = 'Pikachu';

@@ -266,22 +266,24 @@ const Details: FunctionComponent<DetailsProps> = ({
       />
       <div className={styles['stats']}>
         <div className={styles['evs']}>
-          {!isPublic && (
-            <p className="error-validate shake-horizontal">
-              {validateEvs(hpEv, atkEv, defEv, spAEv, spDEv, speEv)}
-            </p>
-          )}
+          {!isPublic &&
+            !!validateEvs(hpEv, atkEv, defEv, spAEv, spDEv, speEv) && (
+              <p className="error-validate">
+                {validateEvs(hpEv, atkEv, defEv, spAEv, spDEv, speEv)}
+              </p>
+            )}
           <PokemonValueInputs
             valueArray={EffortValueArray}
             isPublic={isPublic}
           />
         </div>
         <div className={styles['ivs']}>
-          {!isPublic && (
-            <p className="error-validate shake-horizontal">
-              {validateIvs(hpIv, atkIv, defIv, spAIv, spDIv, speIv)}
-            </p>
-          )}
+          {!isPublic &&
+            !!validateIvs(hpIv, atkIv, defIv, spAIv, spDIv, speIv) && (
+              <p className="error-validate">
+                {validateIvs(hpIv, atkIv, defIv, spAIv, spDIv, speIv)}
+              </p>
+            )}
           <PokemonValueInputs
             valueArray={IndividualValueArray}
             isPublic={isPublic}
