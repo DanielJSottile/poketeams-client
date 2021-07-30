@@ -252,12 +252,14 @@ export const GeneralProvider = ({ children }: ContextProps): JSX.Element => {
   const [filtersort, setFilterSort] = useState({ value: '', touched: false });
   const [page, setPage] = useState(1);
 
-  useEffect(() => {
-    getUserState();
-
-    const query = `?page=${page}&sort=${sort.value || 'newest'}&species=${
+  const createQuery = () => {
+    return `?page=${page}&sort=${sort.value || 'newest'}&species=${
       search.value.toLowerCase() || 'all'
     }`;
+  };
+
+  const searchTenTeamsWithSets = () => {
+    const query = createQuery();
     apiService.getTenTeamsSearch(query).then((teams) => {
       setPublicTeams(teams);
       setPublicSets([]);
@@ -270,6 +272,11 @@ export const GeneralProvider = ({ children }: ContextProps): JSX.Element => {
           });
       });
     });
+  };
+
+  useEffect(() => {
+    getUserState();
+    searchTenTeamsWithSets();
   }, [page]);
 
   const getUserState = () => {
@@ -866,24 +873,6 @@ export const GeneralProvider = ({ children }: ContextProps): JSX.Element => {
     const newPublicSets = publicSets.filter((set) => set.id !== set_id);
     setPublicSets(newPublicSets);
     setUserSets(newUserSets);
-  };
-
-  const createQuery = () => {
-    return `?page=${page}&sort=${sort.value || 'newest'}&species=${
-      search.value.toLowerCase() || 'all'
-    }`;
-  };
-
-  const searchTenTeamsWithSets = () => {
-    const query = createQuery();
-    apiService.getTenTeamsSearch(query).then((teams) => {
-      setPublicTeams(teams);
-      teams.forEach((team: PokemonTeam) => {
-        apiService.getSetsForOneTeam(team.id).then((sets) => {
-          setPublicSets([...publicSets, ...sets]);
-        });
-      });
-    });
   };
 
   const handlePage = (direction: 'up' | 'down') => {
