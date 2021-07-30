@@ -252,24 +252,40 @@ export const GeneralProvider = ({ children }: ContextProps): JSX.Element => {
   const [filtersort, setFilterSort] = useState({ value: '', touched: false });
   const [page, setPage] = useState(1);
 
-  useEffect(() => {
-    getUserState();
-
-    const query = `?page=${page}&sort=${sort.value || 'newest'}&species=${
+  const createQuery = () => {
+    return `?page=${page}&sort=${sort.value || 'newest'}&species=${
       search.value.toLowerCase() || 'all'
     }`;
+  };
+
+  const searchTenTeamsWithSets = () => {
+    const query = createQuery();
     apiService.getTenTeamsSearch(query).then((teams) => {
-      setPublicTeams(teams);
-      setPublicSets([]);
-      let newSets: PokemonSet[] = [];
-      teams.forEach((team: PokemonTeam) => {
-        !!team.id &&
-          apiService.getSetsForOneTeam(team.id).then((sets) => {
-            newSets = [...newSets, ...sets];
-            setPublicSets(newSets);
-          });
-      });
+      if (teams.length) {
+        setPublicTeams(teams);
+        setPublicSets([]);
+        let newSets: PokemonSet[] = [];
+        teams.forEach((team: PokemonTeam) => {
+          !!team.id &&
+            apiService.getSetsForOneTeam(team.id).then((sets) => {
+              newSets = [...newSets, ...sets];
+              setPublicSets(newSets);
+            });
+        });
+      } else {
+        const searchFail = () =>
+          toast.error(
+            'Search returned 0 results or no more teams.  Please try again with other parameters or go back.'
+          );
+        searchFail();
+        return;
+      }
     });
+  };
+
+  useEffect(() => {
+    getUserState();
+    searchTenTeamsWithSets();
   }, [page]);
 
   const getUserState = () => {
@@ -597,7 +613,8 @@ export const GeneralProvider = ({ children }: ContextProps): JSX.Element => {
       TokenService.getAuthToken() || ''
     ).user_id;
 
-    const folderSuccessToast = () => toast.success('Edited Folder!!');
+    const folderSuccessToast = () =>
+      toast.success('Successfully Edited Folder!!');
 
     apiService
       .patchUserFolder(newFolderName.value, currentClickedFolder.id, userId)
@@ -626,7 +643,7 @@ export const GeneralProvider = ({ children }: ContextProps): JSX.Element => {
     const userId = jwtDecode<MyToken>(
       TokenService.getAuthToken() || ''
     ).user_id;
-    const teamSuccessToast = () => toast.success('Edited Team!!');
+    const teamSuccessToast = () => toast.success('Successfully Edited Team!!');
     apiService
       .patchUserTeam(body, userId)
       .then(() => {
@@ -708,7 +725,8 @@ export const GeneralProvider = ({ children }: ContextProps): JSX.Element => {
       TokenService.getAuthToken() || ''
     ).user_id;
 
-    const setSuccessToast = () => toast.success('Edited Pokemon Set!!');
+    const setSuccessToast = () =>
+      toast.success('Successfully Edited Pokemon Set!!');
     apiService
       .patchUserSet(body, userId)
       .then(() => {
@@ -866,24 +884,6 @@ export const GeneralProvider = ({ children }: ContextProps): JSX.Element => {
     const newPublicSets = publicSets.filter((set) => set.id !== set_id);
     setPublicSets(newPublicSets);
     setUserSets(newUserSets);
-  };
-
-  const createQuery = () => {
-    return `?page=${page}&sort=${sort.value || 'newest'}&species=${
-      search.value.toLowerCase() || 'all'
-    }`;
-  };
-
-  const searchTenTeamsWithSets = () => {
-    const query = createQuery();
-    apiService.getTenTeamsSearch(query).then((teams) => {
-      setPublicTeams(teams);
-      teams.forEach((team: PokemonTeam) => {
-        apiService.getSetsForOneTeam(team.id).then((sets) => {
-          setPublicSets([...publicSets, ...sets]);
-        });
-      });
-    });
   };
 
   const handlePage = (direction: 'up' | 'down') => {

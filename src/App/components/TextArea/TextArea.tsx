@@ -3,7 +3,10 @@ import React, {
   ForwardRefExoticComponent,
   RefAttributes,
   forwardRef,
+  ReactNode,
 } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 
 type Props = {
   /** class for text area container */
@@ -21,7 +24,7 @@ type Props = {
   /** determines if the error is triggered or not */
   isError?: boolean;
   /** function used to validate the text area and provide feedback errors*/
-  validationCallback?: () => void;
+  validationCallback?: () => ReactNode;
   /** style for the text area */
   textAreaClass?: string;
   /** value of the text area */
@@ -78,11 +81,6 @@ const TextArea: ForwardRefExoticComponent<
             {labelIcon}
           </label>
         )}
-        {isError && textAreaHasError && (
-          <p className="error-validate shake-horizontal">
-            {validationCallback}
-          </p>
-        )}
         <textarea
           ref={ref}
           className={textAreaClass}
@@ -96,6 +94,12 @@ const TextArea: ForwardRefExoticComponent<
           required={required}
           disabled={disabled}
         />
+        {isError && textAreaHasError && !!validationCallback() && (
+          <p className="error-validate">
+            <FontAwesomeIcon icon={faExclamationTriangle} />{' '}
+            {validationCallback()}
+          </p>
+        )}
       </div>
     );
   }

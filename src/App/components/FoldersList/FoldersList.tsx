@@ -102,7 +102,7 @@ const FoldersList: FunctionComponent = () => {
           <TextArea
             containerClass={styles['folder-import']}
             textAreaHasError
-            isError={!!newFolderImport.value}
+            isError={!!newFolderImport.value.length}
             validationCallback={() => validateNewFolderImport(newFolderImport)}
             htmlFor="folder-import"
             label="Import Showdown Folder:"
@@ -120,7 +120,8 @@ const FoldersList: FunctionComponent = () => {
           buttonClass={styles['submit']}
           disabled={
             !!validateNewFolderName(newFolderName) ||
-            !!validateNewFolderImport(newFolderImport)
+            (!!validateNewFolderImport(newFolderImport) &&
+              !!newFolderImport.value)
           }
           onClickCallback={(e) => {
             e.preventDefault();

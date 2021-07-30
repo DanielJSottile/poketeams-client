@@ -35,25 +35,32 @@ export const validateNewFolderImport = (
   newFolderImport: TextInput
 ): string | boolean => {
   if (newFolderImport.value) {
-    showdownFolderParse(newFolderImport.value).forEach(
-      (fullteam: { string: PokemonSet[] }) => {
-        const [teamName, sets] = Object.entries(fullteam)[0];
-        if (!teamName) {
-          return `You are missing the team name in the import for one of your teams!
+    const folderParse = showdownFolderParse(newFolderImport.value);
+    if (
+      folderParse.some((fullteam) => {
+        const [teamName] = Object.entries(fullteam)[0];
+        return !teamName;
+      })
+    ) {
+      return `You are missing the team name in the import for one of your teams!
       Make sure that there is a team name before each group of sets
       (Hint: Should be formatted like this: === [format] Folder/Team Name ===)`;
-        }
+    }
 
-        sets.forEach((set: PokemonSet) => {
-          if (!legality.isLegalSpecies(set.species)) {
-            return `There is an illegal species in your set.  Please check each line
-        and fix this to be in the proper format! 
-        (Hint: It could be extra white space at the end because of Showdown's Exporter)
-        (Hint: There could be a typo in your species name!)`;
-          }
+    if (
+      folderParse.some((fullteam) => {
+        const [, sets] = Object.entries(fullteam)[0];
+        return sets.some((set) => {
+          return !legality.isLegalSpecies(set.species);
         });
-      }
-    );
+      })
+    ) {
+      return `There is an illegal species in your set.  Please check each line
+      and fix this to be in the proper format!
+        (Hint: It could be extra white space at the end because of Showdown's Exporter)
+       (Hint: There could be a typo in your species name!)`;
+    }
+    return false;
   }
   return false;
 };
@@ -78,13 +85,15 @@ export const validateNewTeamImport = (
   newTeamImport: TextInput
 ): string | boolean => {
   if (newTeamImport.value) {
-    showdownParse(newTeamImport.value).forEach((set: PokemonSet) => {
-      if (!legality.isLegalSpecies(set.species)) {
-        return `There is an illegal species in your set.  Please fix this to be in the proper format! 
+    if (
+      showdownParse(newTeamImport.value).some((set: PokemonSet) => {
+        return !legality.isLegalSpecies(set.species);
+      })
+    ) {
+      return `There is an illegal species in your set.  Please fix this to be in the proper format! 
       (Hint: It could be extra white space at the end because of Showdown's Exporter)
       (Hint: There could be a typo in your species name!)`;
-      }
-    });
+    }
   }
   return false;
 };
@@ -95,13 +104,15 @@ export const validateNewSetImport = (
   if (showdownParse(newSetImport.value).length > 1) {
     return `You can only import 1 set here.`;
   }
-  showdownParse(newSetImport.value).forEach((set: PokemonSet) => {
-    if (!legality.isLegalSpecies(set.species)) {
-      return `There is an illegal species in your set.  Please fix this to be in the proper format! 
-      (Hint: It could be extra white space at the end because of Showdown's Exporter)
-      (Hint: There could be a typo in your species name!)`;
-    }
-  });
+  if (
+    showdownParse(newSetImport.value).some((set: PokemonSet) => {
+      return !legality.isLegalSpecies(set.species);
+    })
+  ) {
+    return `There is an illegal species in your set.  Please fix this to be in the proper format! 
+    (Hint: It could be extra white space at the end because of Showdown's Exporter)
+    (Hint: There could be a typo in your species name!)`;
+  }
   return false;
 };
 
@@ -211,11 +222,13 @@ export const validateEvs = (
   /* While normally EV's can only have 508 (510) in total, 
   because Hackmons is a thing, we don't check this.*/
 
-  evArr.forEach((ev) => {
-    if (ev > 252 || ev < 0) {
-      return `EV's must be set from 0 to 255`;
-    }
-  });
+  if (
+    evArr.some((ev) => {
+      return ev > 252 || ev < 0;
+    })
+  ) {
+    return `EV's must be set from 0 to 255`;
+  }
   return false;
 };
 
@@ -226,7 +239,7 @@ export const validateIvs = (
   spAIv: NumberInput,
   spDIv: NumberInput,
   speIv: NumberInput
-): boolean => {
+): string | boolean => {
   const ivArr = [
     Number(hpIv.value),
     Number(atkIv.value),
@@ -236,11 +249,13 @@ export const validateIvs = (
     Number(speIv.value),
   ];
 
-  ivArr.forEach((iv) => {
-    if (iv > 31 || iv < 0) {
-      return `IV's must be set from 0 to 31`;
-    }
-  });
+  if (
+    ivArr.some((iv) => {
+      return iv > 31 || iv < 0;
+    })
+  ) {
+    return `IV's must be set from 0 to 31`;
+  }
   return false;
 };
 

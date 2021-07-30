@@ -161,11 +161,7 @@ const ExpandedSet: FunctionComponent<ExpandedSetProps> = ({
             <label htmlFor="pokemon-import">
               Import Pokemon Set: <FontAwesomeIcon icon={faUpload} />
             </label>
-            {newSetImport.value !== '' && (
-              <p className="error-validate shake-horizontal">
-                {validateNewSetImport(newSetImport)}
-              </p>
-            )}
+
             <TextArea
               textAreaHasError={false}
               placeholder="Import a Pokemon Showdown Set Here And It Will Re-populate The Field:"
@@ -176,6 +172,11 @@ const ExpandedSet: FunctionComponent<ExpandedSetProps> = ({
                 setNewSetImport({ value: e.target.value, touched: true })
               }
             />
+            {newSetImport.value !== '' && (
+              <p className="error-validate">
+                {validateNewSetImport(newSetImport)}
+              </p>
+            )}
             <Button
               type="submit"
               disabled={!!validateNewSetImport(newSetImport)}

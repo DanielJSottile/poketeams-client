@@ -97,11 +97,9 @@ const Input: FunctionComponent<InputProps> = ({
         required={required}
         disabled={disabled}
       />
-      {isError && inputHasError && (
-        <p className="error-validate shake-horizontal">
-          {!!validationCallback() && (
-            <FontAwesomeIcon icon={faExclamationTriangle} />
-          )}{' '}
+      {isError && inputHasError && !!validationCallback() && (
+        <p className="error-validate">
+          <FontAwesomeIcon icon={faExclamationTriangle} />{' '}
           {validationCallback()}
         </p>
       )}
