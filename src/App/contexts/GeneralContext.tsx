@@ -261,16 +261,25 @@ export const GeneralProvider = ({ children }: ContextProps): JSX.Element => {
   const searchTenTeamsWithSets = () => {
     const query = createQuery();
     apiService.getTenTeamsSearch(query).then((teams) => {
-      setPublicTeams(teams);
-      setPublicSets([]);
-      let newSets: PokemonSet[] = [];
-      teams.forEach((team: PokemonTeam) => {
-        !!team.id &&
-          apiService.getSetsForOneTeam(team.id).then((sets) => {
-            newSets = [...newSets, ...sets];
-            setPublicSets(newSets);
-          });
-      });
+      if (teams.length) {
+        setPublicTeams(teams);
+        setPublicSets([]);
+        let newSets: PokemonSet[] = [];
+        teams.forEach((team: PokemonTeam) => {
+          !!team.id &&
+            apiService.getSetsForOneTeam(team.id).then((sets) => {
+              newSets = [...newSets, ...sets];
+              setPublicSets(newSets);
+            });
+        });
+      } else {
+        const searchFail = () =>
+          toast.error(
+            'Search returned 0 results or no more teams.  Please try again with other parameters or go back.'
+          );
+        searchFail();
+        return;
+      }
     });
   };
 
