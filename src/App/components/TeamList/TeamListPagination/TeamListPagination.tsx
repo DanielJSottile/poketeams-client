@@ -18,6 +18,17 @@ const TeamListPagination: FunctionComponent = () => {
           <h2 className={styles['no-margin']}>Results:</h2>
         </header>
         <div className={styles['pagebutton']}>
+          {page > 1 && (
+            <Button
+              buttonClass={styles['button-class']}
+              onClickCallback={() => {
+                handlePage('down');
+              }}
+            >
+              {`Go to Previous 10 Teams`}{' '}
+              <FontAwesomeIcon icon={faArrowCircleLeft} />
+            </Button>
+          )}
           {searchCheck && (
             <Button
               buttonClass={styles['button-class']}
@@ -29,18 +40,6 @@ const TeamListPagination: FunctionComponent = () => {
             >
               <FontAwesomeIcon icon={faArrowCircleRight} />{' '}
               {`Go to Next 10 Teams`}
-            </Button>
-          )}
-
-          {page > 1 && (
-            <Button
-              buttonClass={styles['button-class']}
-              onClickCallback={() => {
-                handlePage('down');
-              }}
-            >
-              {`Go to Previous 10 Teams`}{' '}
-              <FontAwesomeIcon icon={faArrowCircleLeft} />
             </Button>
           )}
         </div>
