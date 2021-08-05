@@ -8,6 +8,7 @@ import {
   faDownload,
   faTrashAlt,
   faClipboard,
+  faBan,
 } from '@fortawesome/free-solid-svg-icons';
 import classnames from 'classnames';
 import toast from 'react-hot-toast';
@@ -62,13 +63,13 @@ const ExpandedTeam: FunctionComponent<ExpandedTeamProps> = ({
   return (
     <section className={styles['team-section']} id={`${id}`}>
       <div className={styles['team']}>
+        <Button
+          onClickCallback={() => handleTeamToggle()}
+          buttonClass={styles['compress-button']}
+        >
+          <FontAwesomeIcon icon={faCompressArrowsAlt} />
+        </Button>
         <div className={styles['team-header']}>
-          <Button
-            onClickCallback={() => handleTeamToggle()}
-            buttonClass={styles['compress-button']}
-          >
-            <FontAwesomeIcon icon={faCompressArrowsAlt} />
-          </Button>
           <form className={styles['team-form']}>
             <div className={styles['team-title']}>
               <div className={styles['title-name']}>
@@ -89,8 +90,7 @@ const ExpandedTeam: FunctionComponent<ExpandedTeamProps> = ({
                   id={`team-name-${team.id}`}
                 />
               </div>
-              <p>By {team.user_name}</p>
-              <p>
+              <p className={styles['title-text']}>
                 Created on:{' '}
                 {new Date(team.date_created || '').toLocaleString('en-GB', {
                   weekday: 'long',
@@ -98,6 +98,9 @@ const ExpandedTeam: FunctionComponent<ExpandedTeamProps> = ({
                   month: 'long',
                   day: 'numeric',
                 })}
+              </p>
+              <p className={styles['title-text']}>
+                Created By: {team.user_name}
               </p>
               {/*<div className="title-form">
                 <label htmlFor={`favorite-id-${team.id}`}>Favorite</label>
@@ -149,36 +152,40 @@ const ExpandedTeam: FunctionComponent<ExpandedTeamProps> = ({
           </form>
           <div className={styles['export-team']}>
             <div className={styles['buttons']}>
-              <label htmlFor="edit-team" className={styles['override-label']}>
-                Export Team: <FontAwesomeIcon icon={faDownload} />
-              </label>
-              <Button
-                onClickCallback={() => {
-                  copyCodeToClipboard();
-                  copySuccess();
-                }}
-                buttonClass={styles['copy-text-button']}
-              >
-                Copy Text <FontAwesomeIcon icon={faClipboard} />
-              </Button>
-              <Link
-                to={{
-                  pathname: `/share/${team.id}`,
-                  state: { singleteam: team, sets: teamSets },
-                }}
-                target="_blank"
-                className={styles['share-link']}
-              >
-                Share This Team! <FontAwesomeIcon icon={faShareSquare} />
-              </Link>
-              <Input
-                inputHasError={false}
-                inputClass={styles['share-input']}
-                disabled
-                type="text"
-                readOnly
-                value={`poketeams.now.sh/share/${team.id}`}
-              />
+              <div className={styles['upper-buttons']}>
+                <label htmlFor="edit-team" className={styles['override-label']}>
+                  Export Team: <FontAwesomeIcon icon={faDownload} />
+                </label>
+                <Button
+                  onClickCallback={() => {
+                    copyCodeToClipboard();
+                    copySuccess();
+                  }}
+                  buttonClass={styles['copy-text-button']}
+                >
+                  Copy Text <FontAwesomeIcon icon={faClipboard} />
+                </Button>
+              </div>
+              <div className={styles['inner-buttons']}>
+                <Link
+                  to={{
+                    pathname: `/share/${team.id}`,
+                    state: { singleteam: team, sets: teamSets },
+                  }}
+                  target="_blank"
+                  className={styles['share-link']}
+                >
+                  Share This Team! <FontAwesomeIcon icon={faShareSquare} />
+                </Link>
+                <Input
+                  inputHasError={false}
+                  inputClass={styles['share-input']}
+                  disabled
+                  type="text"
+                  readOnly
+                  value={`poketeams.now.sh/share/${team.id}`}
+                />
+              </div>
             </div>
 
             <TextArea
@@ -202,7 +209,15 @@ const ExpandedTeam: FunctionComponent<ExpandedTeamProps> = ({
                 handleDeleteExpand();
               }}
             >
-              <FontAwesomeIcon icon={faTrashAlt} /> Delete Team!
+              {deleteClicked ? (
+                <span>
+                  Cancel <FontAwesomeIcon icon={faBan} />
+                </span>
+              ) : (
+                <span>
+                  Delete Team! <FontAwesomeIcon icon={faTrashAlt} />
+                </span>
+              )}
             </Button>
           )}
           {deleteClicked && !isPublic && (

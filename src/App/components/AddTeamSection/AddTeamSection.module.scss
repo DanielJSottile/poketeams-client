@@ -43,4 +43,11 @@
 .submit {
   width: 9.375rem;
   margin: auto;
+  color: green;
+}
+
+@media (min-width: 700px) {
+  .team-import {
+    width: 85%;
+  }
 }

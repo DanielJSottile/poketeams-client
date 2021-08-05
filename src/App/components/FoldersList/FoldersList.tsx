@@ -296,7 +296,7 @@ const FoldersList: FunctionComponent = () => {
                   </span>
                 ) : (
                   <span>
-                    Delete <FontAwesomeIcon icon={faTrashAlt} />
+                    Delete Folder! <FontAwesomeIcon icon={faTrashAlt} />
                   </span>
                 )}
               </Button>

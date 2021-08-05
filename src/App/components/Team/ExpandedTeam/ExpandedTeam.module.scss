@@ -15,6 +15,10 @@
   margin: 2rem;
   display: flex;
   flex-direction: column;
+  .upper-buttons {
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 .copy-text-button,
@@ -127,10 +131,10 @@
 
 .title {
   color: $med-dark-grey;
+  font-family: $h1-font;
   text-emphasis: bold;
   text-align: center;
-  font-size: 22px;
-  border: 1px solid $pure-yellow;
+  font-size: 2.5rem;
   width: 100%;
   margin: auto;
   border-radius: 20px;
@@ -163,6 +167,11 @@
   background-color: transparent;
   color: $super-light-cream;
   font-size: 2.5rem;
+  &:hover:enabled {
+    cursor: pointer;
+    background-color: unset;
+    color: $light-yellow;
+  }
 }
 
 .copied {
@@ -209,32 +218,53 @@
 @media (min-width: 700px) {
   /* Medium Screen */
 
+  .team-title {
+    flex-direction: row;
+    align-content: center;
+    width: 85%;
+    .title-name {
+      width: unset;
+    }
+    .title-text {
+      margin: auto;
+    }
+  }
+
   .team-header {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
   }
 
   .team-form {
     margin-top: unset;
-    width: 50%;
+  }
+
+  .buttons {
+    margin: 2rem 0;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    .upper-buttons {
+      flex-direction: row;
+    }
+    .inner-buttons {
+      display: flex;
+      flex-direction: row;
+      .label {
+        padding-right: 1rem;
+      }
+    }
   }
 
   .export-team {
-    width: 35%;
+    width: 85%;
   }
 
   .set-list-grid {
     display: grid;
     grid-template-columns: repeat(2, auto);
-  }
-}
-
-@media (min-width: 850px) {
-  /* Large Ipad Screen */
-
-  .export-team {
-    width: 45%;
   }
 }
 
