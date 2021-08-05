@@ -16,6 +16,42 @@
   }
 }
 
+.spin {
+  transition: transform 0.2s ease-in-out;
+  transform: rotate(180deg);
+}
+
+.spin-back {
+  transition: transform 0.2s ease-in-out;
+}
+
+.mobile-menu {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  font-size: 2rem;
+  padding: 0.25rem 0.25rem 0rem 0.25rem;
+  background-color: transparent;
+  color: $super-light-cream;
+  &:hover:enabled {
+    background-color: unset;
+  }
+}
+
+.mobile-buttons {
+  position: absolute;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-direction: column;
+  top: 60px;
+  left: 20px;
+  background-color: $dark-cornflower-blue;
+  a {
+    width: 6.25rem;
+  }
+}
+
 .navbar {
   display: flex;
   flex-direction: row;
@@ -31,11 +67,8 @@
   width: 100%;
 }
 
-.mobile-button {
-  display: flex;
-  flex-direction: column;
-  margin: 0.625rem;
-  padding: 0.625rem;
+.desktop-button {
+  display: none;
 }
 
 .navigation-body {
@@ -61,12 +94,18 @@
     margin-left: auto;
     margin-right: 50px;
   }
-  .mobile-button {
+  .mobile-menu,
+  .mobile-buttons {
+    display: none;
+  }
+  .desktop-button {
+    display: flex;
     justify-content: flex-end;
     align-items: center;
     flex-direction: row;
     margin-right: 0;
     padding-right: 0;
+    padding-bottom: 1rem;
     a {
       width: 6.25rem;
     }
@@ -90,7 +129,7 @@
     padding-left: 1.25rem;
     padding-right: 1.25rem;
   }
-  .mobile-button {
+  .desktop-button {
     justify-content: center;
     align-items: center;
     flex-direction: row;

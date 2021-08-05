@@ -54,6 +54,7 @@ const SearchBar: FunctionComponent<SearchBarProps> = ({ isPublic }) => {
             inputHasError
             isError={!!searchInput.value}
             validationCallback={() => validateSearch(searchInput)}
+            containerClass={styles['search-container']}
             inputClass={styles['s-input']}
             labelClass={styles['label-font']}
             label={isPublic ? 'Search: ' : 'Filter: '}
