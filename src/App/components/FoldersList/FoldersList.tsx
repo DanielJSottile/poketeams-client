@@ -212,7 +212,7 @@ const FoldersList: FunctionComponent = () => {
               <div className={styles['export-folder']}>
                 <div>
                   <div className={styles['buttons']}>
-                    <div className={styles['inner-buttons']}>
+                    <div className={styles['upper-buttons']}>
                       <label
                         htmlFor="export-folder"
                         className={styles['label']}

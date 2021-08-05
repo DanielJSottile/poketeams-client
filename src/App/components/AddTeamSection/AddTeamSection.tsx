@@ -4,6 +4,7 @@ import {
   faUpload,
   faCheckCircle,
   faPlusSquare,
+  faBan,
 } from '@fortawesome/free-solid-svg-icons';
 import GeneralContext from '../../contexts/GeneralContext';
 import Input from '../Input';
@@ -104,8 +105,19 @@ const AddTeamSection: FunctionComponent = () => {
       <section className={styles['folders-list']}>
         <div>
           {currentClickedFolder.value ? (
-            <Button onClickCallback={() => setTeamAddClicked(!teamAddClicked)}>
-              New Team <FontAwesomeIcon icon={faPlusSquare} />
+            <Button
+              onClickCallback={() => setTeamAddClicked(!teamAddClicked)}
+              buttonClass={styles['add-team-button']}
+            >
+              {teamAddClicked ? (
+                <span>
+                  Cancel <FontAwesomeIcon icon={faBan} />
+                </span>
+              ) : (
+                <span>
+                  New Team <FontAwesomeIcon icon={faPlusSquare} />
+                </span>
+              )}
             </Button>
           ) : (
             <h4>Click a Folder to add Teams!</h4>

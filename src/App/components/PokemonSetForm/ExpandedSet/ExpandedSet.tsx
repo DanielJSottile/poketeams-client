@@ -12,6 +12,7 @@ import {
   faShareSquare,
   faDownload,
   faTrashAlt,
+  faClipboard,
 } from '@fortawesome/free-solid-svg-icons';
 import toast from 'react-hot-toast';
 import Button from '../../Button';
@@ -263,8 +264,9 @@ const ExpandedSet: FunctionComponent<ExpandedSetProps> = ({
               copyCodeToClipboard();
               copySuccess();
             }}
+            buttonClass={styles['copy-text-button']}
           >
-            Copy Text
+            Copy Text <FontAwesomeIcon icon={faClipboard} />
           </Button>
           <Link
             to={{

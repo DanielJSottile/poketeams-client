@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faCompressArrowsAlt,
   faShareSquare,
+  faClipboard,
 } from '@fortawesome/free-solid-svg-icons';
 import Input from '../Input/Input';
 import TextArea from '../TextArea';
@@ -104,8 +105,9 @@ const TeamPublicShare: FunctionComponent<TeamPublicShareProps> = ({
                     copyCodeToClipboard();
                     copySuccess();
                   }}
+                  buttonClass={styles['copy-text-button']}
                 >
-                  Copy Text
+                  Copy Text <FontAwesomeIcon icon={faClipboard} />
                 </Button>
                 <Link
                   to={{

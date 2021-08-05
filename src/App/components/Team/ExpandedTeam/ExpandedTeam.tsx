@@ -7,6 +7,7 @@ import {
   faShareSquare,
   faDownload,
   faTrashAlt,
+  faClipboard,
 } from '@fortawesome/free-solid-svg-icons';
 import classnames from 'classnames';
 import toast from 'react-hot-toast';
@@ -62,11 +63,14 @@ const ExpandedTeam: FunctionComponent<ExpandedTeamProps> = ({
     <section className={styles['team-section']} id={`${id}`}>
       <div className={styles['team']}>
         <div className={styles['team-header']}>
+          <Button
+            onClickCallback={() => handleTeamToggle()}
+            buttonClass={styles['compress-button']}
+          >
+            <FontAwesomeIcon icon={faCompressArrowsAlt} />
+          </Button>
           <form className={styles['team-form']}>
             <div className={styles['team-title']}>
-              <Button onClickCallback={() => handleTeamToggle()}>
-                Compress Team <FontAwesomeIcon icon={faCompressArrowsAlt} />
-              </Button>
               <div className={styles['title-name']}>
                 <label htmlFor="title-name">Team Name:</label>
                 {!!validateTeamName(teamName) && (
@@ -128,6 +132,7 @@ const ExpandedTeam: FunctionComponent<ExpandedTeamProps> = ({
                   !!validateDesc(description) ||
                   isPublic
                 }
+                buttonClass={styles['save-team-button']}
                 onClickCallback={(e) => {
                   e.preventDefault();
                   !!team.id &&
@@ -143,14 +148,18 @@ const ExpandedTeam: FunctionComponent<ExpandedTeamProps> = ({
             )}
           </form>
           <div className={styles['export-team']}>
-            <div>
+            <div className={styles['buttons']}>
+              <label htmlFor="edit-team" className={styles['override-label']}>
+                Export Team: <FontAwesomeIcon icon={faDownload} />
+              </label>
               <Button
                 onClickCallback={() => {
                   copyCodeToClipboard();
                   copySuccess();
                 }}
+                buttonClass={styles['copy-text-button']}
               >
-                Copy Text
+                Copy Text <FontAwesomeIcon icon={faClipboard} />
               </Button>
               <Link
                 to={{
@@ -158,27 +167,23 @@ const ExpandedTeam: FunctionComponent<ExpandedTeamProps> = ({
                   state: { singleteam: team, sets: teamSets },
                 }}
                 target="_blank"
+                className={styles['share-link']}
               >
                 Share This Team! <FontAwesomeIcon icon={faShareSquare} />
               </Link>
               <Input
                 inputHasError={false}
+                inputClass={styles['share-input']}
                 disabled
                 type="text"
                 readOnly
                 value={`poketeams.now.sh/share/${team.id}`}
               />
             </div>
-            {/* <label htmlFor="edit-team">
-              Export Team: <FontAwesomeIcon icon={faDownload} />
-            </label> */}
+
             <TextArea
               textAreaHasError={false}
               containerClass={styles['export-container']}
-              htmlFor={'edit-team'}
-              label={'Export Team: '}
-              labelIcon={<FontAwesomeIcon icon={faDownload} />}
-              labelClass={styles['override-label']}
               ref={textArea}
               disabled
               readOnly
@@ -191,6 +196,7 @@ const ExpandedTeam: FunctionComponent<ExpandedTeamProps> = ({
         <div>
           {!isPublic && (
             <Button
+              buttonClass={styles['delete']}
               onClickCallback={(e) => {
                 e.preventDefault();
                 handleDeleteExpand();
