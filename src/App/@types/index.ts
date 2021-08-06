@@ -110,7 +110,6 @@ export type PokemonEntry = {
   forme?: string;
   types: string[];
   genderRatio?: GenderRatio;
-  gender?: string | null;
   genderLock?: boolean | string | null;
   baseStats: BaseStats;
   maxHP?: number;

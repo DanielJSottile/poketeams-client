@@ -5,6 +5,7 @@ import GeneralContext from '../../contexts/GeneralContext';
 import { PokemonTeam, PokemonSet } from '../../@types';
 import ExpandedTeam from './ExpandedTeam';
 import UnexpandedTeam from './UnexpandedTeam';
+import styles from './Team.module.scss';
 
 export type TeamProps = {
   /** pokemon team */
@@ -84,6 +85,7 @@ const Team: FunctionComponent<TeamProps> = ({
     if (SetList.length < 6 && !isPublic) {
       SetList.push(
         <Button
+          buttonClass={styles['add-pokemon-button']}
           key={SetList.length}
           onClickCallback={(e) => {
             e.preventDefault();

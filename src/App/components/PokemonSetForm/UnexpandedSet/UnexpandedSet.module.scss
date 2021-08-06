@@ -15,6 +15,7 @@
 }
 
 .closed {
+  width: 100%;
   font-size: 16px;
   display: flex;
   flex-direction: row;
@@ -24,6 +25,8 @@
 }
 
 .inside {
+  font-family: $h1-font;
+  font-size: 0.75rem;
   display: flex;
   flex-direction: column;
   align-self: center;
@@ -31,7 +34,37 @@
 
 .icon {
   margin: 1px;
-  height: 100px;
+  height: 50px;
+}
+
+.male,
+.female {
+  font-size: 1rem;
+  text-shadow: 1px 1px $super-light-cream;
+}
+
+.male {
+  color: skyblue;
+}
+
+.female {
+  color: pink;
+}
+
+.italic {
+  font-family: $body-font;
+  font-style: italic;
+}
+
+.shiny {
+  margin-bottom: 2px;
+  color: $pokeball-red;
+}
+
+@media (min-width: 450px) {
+  .icon {
+    height: 6.25rem;
+  }
 }
 
 @media (min-width: 850px) {

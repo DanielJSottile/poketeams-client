@@ -96,8 +96,13 @@
   }
   .set-list-grid {
     background-color: $oxford-blue;
-    div {
-      background-color: $prussian-blue;
+  }
+  .set-list-grid > div {
+    background-color: $prussian-blue;
+    &:hover {
+      transition: 0.3s;
+      cursor: pointer;
+      background-color: $azure;
     }
   }
 }
@@ -110,8 +115,13 @@
   }
   .set-list-grid {
     background-color: $prussian-blue;
-    div {
-      background-color: $oxford-blue;
+  }
+  .set-list-grid > div {
+    background-color: $oxford-blue;
+    &:hover {
+      transition: 0.3s;
+      cursor: pointer;
+      background-color: $azure;
     }
   }
 }
@@ -124,7 +134,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  width: 85%;
+  width: 100%;
   margin: auto;
   align-items: center;
 }
@@ -134,7 +144,7 @@
   font-family: $h1-font;
   text-emphasis: bold;
   text-align: center;
-  font-size: 2.5rem;
+  font-size: 1.5rem;
   width: 100%;
   margin: auto;
   border-radius: 20px;
@@ -145,7 +155,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 65%;
+  width: 100%;
   margin: auto;
 }
 
