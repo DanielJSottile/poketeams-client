@@ -52,10 +52,15 @@
 @media (min-width: 700px) {
   /* Medium Screen */
 
+  .pokemon-intro {
+    display: block;
+    flex-direction: unset;
+  }
+
   .name-sprite {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
   }
 }
 

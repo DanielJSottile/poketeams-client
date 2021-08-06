@@ -31,7 +31,7 @@ const PokemonMoves: FunctionComponent<PokemonMoveProps> = ({
   return (
     <div className={styles['moves']}>
       <Input
-        containerClass={styles['label-as-row']}
+        containerClass={styles['label-direction']}
         inputHasError={false}
         htmlFor={'pokemon-moves'}
         label={'Moves:'}
