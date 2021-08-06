@@ -1,0 +1,62 @@
+@import '../../../index.scss';
+
+.buttons {
+  margin: 2rem;
+  display: flex;
+  flex-direction: column;
+  .upper-buttons {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.copy-text-button,
+.share-link {
+  text-align: center;
+  font-family: $body-font;
+  padding: 5px;
+  border-radius: 40px;
+  border: 5px double $med-dark-grey;
+}
+
+.copy-text-button {
+  font-size: 1rem;
+  margin: auto;
+}
+
+.share-link {
+  width: max-content;
+  margin: auto;
+}
+
+.share-input {
+  width: 12.1875rem;
+  padding: 0.3125rem;
+}
+
+@media (min-width: 700px) {
+  .buttons {
+    margin: 2rem 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    .upper-buttons {
+      flex-direction: row;
+    }
+    .inner-buttons {
+      display: flex;
+      flex-direction: row;
+      .label {
+        padding-right: 1rem;
+      }
+    }
+  }
+}
+
+@media (min-width: 800px) {
+  .export-text {
+    width: 85%;
+    margin: auto;
+  }
+}
