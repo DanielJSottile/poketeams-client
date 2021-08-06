@@ -17,6 +17,10 @@
   margin: 2rem;
   display: flex;
   flex-direction: column;
+  .upper-buttons {
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 .add-folder-button,
@@ -66,15 +70,6 @@
   color: green;
 }
 
-// .submit:disabled {
-//   color: $pokeball-red;
-// }
-
-// .submit:hover {
-//   background-color: $light-yellow;
-//   transition: 0.3s;
-// }
-
 .pokeball-div {
   margin: 10px;
 }
@@ -96,6 +91,9 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    .upper-buttons {
+      flex-direction: row;
+    }
     .inner-buttons {
       display: flex;
       flex-direction: row;

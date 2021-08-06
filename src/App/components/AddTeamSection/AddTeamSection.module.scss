@@ -17,6 +17,37 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 65%;
+  width: 100%;
   margin: auto;
+  margin-bottom: 0.5rem;
+}
+
+.add-team-button,
+.submit {
+  text-align: center;
+  font-family: $body-font;
+  padding: 5px;
+  border-radius: 40px;
+  border: 5px double $med-dark-grey;
+}
+
+.add-team-button {
+  width: 200px;
+  font-size: 1.5rem;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 1rem;
+  margin-bottom: 0;
+}
+
+.submit {
+  width: 9.375rem;
+  margin: auto;
+  color: green;
+}
+
+@media (min-width: 700px) {
+  .team-import {
+    width: 85%;
+  }
 }
