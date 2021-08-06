@@ -5,24 +5,10 @@
   grid-template-columns: repeat(1, auto);
 }
 
-/* --- */
-
 .team-form {
   margin-top: -3.125rem;
 }
 
-.buttons {
-  margin: 2rem;
-  display: flex;
-  flex-direction: column;
-  .upper-buttons {
-    display: flex;
-    flex-direction: column;
-  }
-}
-
-.copy-text-button,
-.share-link,
 .save-team-button,
 .submit,
 .edit,
@@ -34,12 +20,6 @@
   border: 5px double $med-dark-grey;
 }
 
-.copy-text-button {
-  font-size: 1rem;
-  margin: auto;
-}
-
-.share-link,
 .save-team-button {
   width: max-content;
   margin: auto;
@@ -54,22 +34,6 @@
 .delete {
   width: 9.375rem;
   margin: auto;
-}
-
-.share-input {
-  width: 12.1875rem;
-  padding: 0.3125rem;
-}
-
-/* --- */
-
-.export-team {
-  border-radius: 10px;
-  padding: 5px;
-  margin: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
 .team {
@@ -166,10 +130,6 @@
   background: $super-light-cream;
 }
 
-.export-container {
-  width: 100%;
-}
-
 .compress-button {
   position: relative;
   top: -0.625rem;
@@ -182,14 +142,6 @@
     background-color: unset;
     color: $light-yellow;
   }
-}
-
-.copied {
-  font-size: 16px;
-  text-shadow: none;
-  color: $oxford-blue;
-  -webkit-animation: fade-out 3s ease-out both;
-  animation: fade-out 3s ease-out both;
 }
 
 .white-text-area {
@@ -248,28 +200,6 @@
 
   .team-form {
     margin-top: unset;
-  }
-
-  .buttons {
-    margin: 2rem 0;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    .upper-buttons {
-      flex-direction: row;
-    }
-    .inner-buttons {
-      display: flex;
-      flex-direction: row;
-      .label {
-        padding-right: 1rem;
-      }
-    }
-  }
-
-  .export-team {
-    width: 85%;
   }
 
   .set-list-grid {
