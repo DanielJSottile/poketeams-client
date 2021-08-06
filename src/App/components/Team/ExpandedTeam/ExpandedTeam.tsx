@@ -1,13 +1,9 @@
 import React, { useContext, FunctionComponent } from 'react';
-import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faCompressArrowsAlt,
   faSave,
-  faShareSquare,
-  faDownload,
   faTrashAlt,
-  faClipboard,
   faBan,
 } from '@fortawesome/free-solid-svg-icons';
 import classnames from 'classnames';
@@ -15,9 +11,9 @@ import toast from 'react-hot-toast';
 import Button from '../../Button';
 import Input from '../../Input';
 import TextArea from '../../TextArea';
+import ExportText from '../../ExportText';
 import GeneralContext from '../../../contexts/GeneralContext';
 import showdownGenerate from '../../../utils/generate';
-import { useClipboard } from '../../../utils/customHooks';
 import { validateTeamName, validateDesc } from '../../../utils/validations';
 import { PokemonTeam, PokemonSet, TextInput } from '../../../@types';
 import styles from './ExpandedTeam.module.scss';
@@ -54,8 +50,6 @@ const ExpandedTeam: FunctionComponent<ExpandedTeamProps> = ({
   inputTeamName,
   setDesc,
 }) => {
-  const { copySuccess, textArea, copyCodeToClipboard } = useClipboard();
-
   const { handleUpdateTeam } = useContext(GeneralContext);
 
   const deleteSuccess = () => toast.success('Team Deleted!');
@@ -150,55 +144,15 @@ const ExpandedTeam: FunctionComponent<ExpandedTeamProps> = ({
               </Button>
             )}
           </form>
-          <div className={styles['export-team']}>
-            <div className={styles['buttons']}>
-              <div className={styles['upper-buttons']}>
-                <label htmlFor="edit-team" className={styles['override-label']}>
-                  Export Team: <FontAwesomeIcon icon={faDownload} />
-                </label>
-                <Button
-                  onClickCallback={() => {
-                    copyCodeToClipboard();
-                    copySuccess();
-                  }}
-                  buttonClass={styles['copy-text-button']}
-                >
-                  Copy Text <FontAwesomeIcon icon={faClipboard} />
-                </Button>
-              </div>
-              <div className={styles['inner-buttons']}>
-                <Link
-                  to={{
-                    pathname: `/share/${team.id}`,
-                    state: { singleteam: team, sets: teamSets },
-                  }}
-                  target="_blank"
-                  className={styles['share-link']}
-                >
-                  Share This Team! <FontAwesomeIcon icon={faShareSquare} />
-                </Link>
-                <Input
-                  inputHasError={false}
-                  inputClass={styles['share-input']}
-                  disabled
-                  type="text"
-                  readOnly
-                  value={`poketeams.now.sh/share/${team.id}`}
-                />
-              </div>
-            </div>
-
-            <TextArea
-              textAreaHasError={false}
-              containerClass={styles['export-container']}
-              ref={textArea}
-              disabled
-              readOnly
-              name="export-team"
-              id={`export-team-${team.id}`}
-              value={showdownGenerate(teamSets)}
-            />
-          </div>
+          <ExportText
+            exportText={'Export Team:'}
+            shareText={'Share This Team!'}
+            linkPathname={`/share/${team.id}`}
+            linkState={{ singleteam: team, sets: teamSets }}
+            inputValue={`poketeams.now.sh/share/${team.id}`}
+            textAreaId={`export-team-${team.id}`}
+            textAreaValue={showdownGenerate(teamSets)}
+          />
         </div>
         <div>
           {!isPublic && (

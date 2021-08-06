@@ -1,14 +1,10 @@
 import React, { useContext, useState, FunctionComponent } from 'react';
-import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faCheckCircle,
   faFolderPlus,
-  faShareSquare,
-  faDownload,
   faEdit,
   faTrashAlt,
-  faClipboard,
   faBan,
 } from '@fortawesome/free-solid-svg-icons';
 import toast from 'react-hot-toast';
@@ -16,6 +12,7 @@ import Folder from '../Folder/Folder';
 import Input from '../Input/Input';
 import TextArea from '../TextArea';
 import Button from '../Button';
+import ExportText from '../ExportText';
 import LazyLoader from '../Loaders/LazyLoader';
 import DeleteExpand from '../DeleteExpand';
 import GeneralContext from '../../contexts/GeneralContext';
@@ -24,7 +21,6 @@ import {
   validateNewFolderImport,
   validateNewFolderName,
 } from '../../utils/validations';
-import { useClipboard } from '../../utils/customHooks';
 import styles from './FoldersList.module.scss';
 import { PokemonFolder } from '../../@types';
 
@@ -48,7 +44,6 @@ const FoldersList: FunctionComponent = () => {
 
   const [editClicked, setEditClicked] = useState(false);
   const [deleteClicked, setDeleteClicked] = useState(false);
-  const { copySuccess, textArea, copyCodeToClipboard } = useClipboard();
 
   const handleEditExpand = () => {
     setDeleteClicked(false);
@@ -209,69 +204,23 @@ const FoldersList: FunctionComponent = () => {
         <div>
           {currentClickedFolder.value && (
             <div>
-              <div className={styles['export-folder']}>
-                <div>
-                  <div className={styles['buttons']}>
-                    <div className={styles['upper-buttons']}>
-                      <label
-                        htmlFor="export-folder"
-                        className={styles['label']}
-                      >
-                        Export Folder: <FontAwesomeIcon icon={faDownload} />
-                      </label>
-                      <Button
-                        onClickCallback={() => {
-                          copyCodeToClipboard();
-                          copySuccess();
-                        }}
-                        buttonClass={styles['copy-text-button']}
-                      >
-                        Copy Text <FontAwesomeIcon icon={faClipboard} />
-                      </Button>
-                    </div>
-                    <div className={styles['inner-buttons']}>
-                      <Link
-                        className={styles['share-link']}
-                        to={{
-                          pathname: `/share/user/folder/${currentClickedFolder.id}`,
-                          state: {
-                            folders: userFolders,
-                            teams: userTeams,
-                            sets: userSets,
-                            input: input,
-                          },
-                        }}
-                        target="_blank"
-                      >
-                        Share This Folder!{' '}
-                        <FontAwesomeIcon icon={faShareSquare} />
-                      </Link>
-
-                      <Input
-                        inputHasError={false}
-                        inputClass={styles['share-input']}
-                        disabled
-                        type="text"
-                        readOnly
-                        value={`poketeams.now.sh/share/user/folder/${currentClickedFolder.id}`}
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                <TextArea
-                  textAreaHasError={false}
-                  ref={textArea}
-                  disabled
-                  readOnly
-                  name="export-folder"
-                  id={`export-folder-${currentClickedFolder.id}`}
-                  value={showdownFolderGenerate(
-                    currentClickedFolder.value,
-                    input
-                  )}
-                />
-              </div>
+              <ExportText
+                exportText={'Export Folder:'}
+                shareText={'Share This Folder!'}
+                linkPathname={`/share/user/folder/${currentClickedFolder.id}`}
+                linkState={{
+                  folders: userFolders,
+                  teams: userTeams,
+                  sets: userSets,
+                  input: input,
+                }}
+                inputValue={`poketeams.now.sh/share/user/folder/${currentClickedFolder.id}`}
+                textAreaId={`export-folder-${currentClickedFolder.id}`}
+                textAreaValue={showdownFolderGenerate(
+                  currentClickedFolder.value,
+                  input
+                )}
+              />
               <Button
                 onClickCallback={() => handleEditExpand()}
                 buttonClass={styles['edit']}

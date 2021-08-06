@@ -4,25 +4,20 @@ import React, {
   Dispatch,
   SetStateAction,
 } from 'react';
-import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faUpload,
   faCheckCircle,
-  faShareSquare,
-  faDownload,
   faTrashAlt,
-  faClipboard,
 } from '@fortawesome/free-solid-svg-icons';
 import toast from 'react-hot-toast';
 import Button from '../../Button';
-import Input from '../../Input';
 import TextArea from '../../TextArea';
+import ExportText from '../../ExportText';
 import DeleteExpand from '../../DeleteExpand';
 import Intro from './Intro';
 import Details from './Details';
 import GeneralContext from '../../../contexts/GeneralContext';
-import { useClipboard } from '../../../utils/customHooks';
 import { validateNewSetImport } from '../../../utils/validations';
 import showdownGenerate from '../../../utils/generate';
 import { BoolInput, NumberInput, PokemonSet, TextInput } from '../../../@types';
@@ -150,8 +145,6 @@ const ExpandedSet: FunctionComponent<ExpandedSetProps> = ({
     handleDeleteSet,
   } = useContext(GeneralContext);
 
-  const { copySuccess, textArea, copyCodeToClipboard } = useClipboard();
-
   const deleteSuccess = () => toast.success('Set Deleted!');
 
   return (
@@ -256,48 +249,16 @@ const ExpandedSet: FunctionComponent<ExpandedSetProps> = ({
           setMoveFour={setMoveFour}
         />
       </form>
+      <ExportText
+        exportText={'Export Pokemon:'}
+        shareText={'Share This Pokemon Set!'}
+        linkPathname={`/share/${set?.team_id}/${set?.id}`}
+        linkState={{ singleSet: set }}
+        inputValue={`poketeams.now.sh/${set?.team_id}/${set?.id}`}
+        textAreaId={`export-pokemon${set.id}`}
+        textAreaValue={showdownGenerate([set])}
+      />
 
-      <div className={styles['export-pokemon']}>
-        <div>
-          <Button
-            onClickCallback={() => {
-              copyCodeToClipboard();
-              copySuccess();
-            }}
-            buttonClass={styles['copy-text-button']}
-          >
-            Copy Text <FontAwesomeIcon icon={faClipboard} />
-          </Button>
-          <Link
-            to={{
-              pathname: `/share/${set?.team_id}/${set?.id}`,
-              state: { singleSet: set },
-            }}
-            target="_blank"
-          >
-            Share This Set! <FontAwesomeIcon icon={faShareSquare} />
-          </Link>
-          <Input
-            inputHasError={false}
-            type="text"
-            readOnly
-            value={`poketeams.now.sh/${set?.team_id}/${set?.id}`}
-          />
-        </div>
-        <TextArea
-          containerClass={styles['export-pokemon']}
-          textAreaHasError
-          htmlFor="export-pokemon"
-          label="Export Pokemon: "
-          labelIcon={<FontAwesomeIcon icon={faDownload} />}
-          ref={textArea}
-          disabled
-          readOnly
-          name="export-pokemon"
-          id="export-pokemon-2"
-          value={showdownGenerate([set])}
-        />
-      </div>
       <div>
         {!isPublic && (
           <Button
