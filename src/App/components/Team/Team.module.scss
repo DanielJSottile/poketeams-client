@@ -1,0 +1,15 @@
+@import '../../../index.scss';
+
+.add-pokemon-button {
+  width: 200px;
+  font-size: 1.5rem;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  font-family: $body-font;
+  padding: 5px;
+  border-radius: 40px;
+  border: 5px double $med-dark-grey;
+}
