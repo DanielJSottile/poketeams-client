@@ -5,8 +5,7 @@ import React, {
   forwardRef,
   ReactNode,
 } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
+import ValidationError from '../ValidationError';
 
 type Props = {
   /** class for text area container */
@@ -45,6 +44,8 @@ type Props = {
   required?: boolean;
   /** boolean for whether the text area is disabled */
   disabled?: boolean;
+  /** position of validation error (parent must be position: relative) */
+  errorPosition?: string;
 };
 
 const TextArea: ForwardRefExoticComponent<
@@ -70,6 +71,7 @@ const TextArea: ForwardRefExoticComponent<
       autoComplete = '',
       required = false,
       disabled = false,
+      errorPosition = '',
     },
     ref
   ): JSX.Element => {
@@ -94,12 +96,11 @@ const TextArea: ForwardRefExoticComponent<
           required={required}
           disabled={disabled}
         />
-        {isError && textAreaHasError && !!validationCallback() && (
-          <p className="error-validate">
-            <FontAwesomeIcon icon={faExclamationTriangle} />{' '}
-            {validationCallback()}
-          </p>
-        )}
+        <ValidationError
+          errorBoolean={isError && textAreaHasError}
+          validationCallback={validationCallback}
+          errorPosition={errorPosition}
+        />
       </div>
     );
   }

@@ -22,6 +22,7 @@ import { validateNewSetImport } from '../../../utils/validations';
 import showdownGenerate from '../../../utils/generate';
 import { BoolInput, NumberInput, PokemonSet, TextInput } from '../../../@types';
 import styles from './ExpandedSet.module.scss';
+import ValidationError from '../../ValidationError';
 
 type ExpandedSetProps = {
   set: PokemonSet;
@@ -152,12 +153,13 @@ const ExpandedSet: FunctionComponent<ExpandedSetProps> = ({
       {!isPublic && (
         <form>
           <div className={styles['pokemon-import']}>
-            <label htmlFor="pokemon-import">
-              Import Pokemon Set: <FontAwesomeIcon icon={faUpload} />
-            </label>
-
             <TextArea
-              textAreaHasError={false}
+              containerClass={styles['import-width']}
+              htmlFor={'pokemon-import'}
+              label={'Import Pokemon Set:'}
+              labelIcon={<FontAwesomeIcon icon={faUpload} />}
+              textAreaHasError
+              isError={newSetImport.value !== ''}
               placeholder="Import a Pokemon Showdown Set Here And It Will Re-populate The Field:"
               name="pokemon-import"
               id={`pokemon-import-${set?.id}`}
@@ -165,13 +167,10 @@ const ExpandedSet: FunctionComponent<ExpandedSetProps> = ({
               onChangeCallback={(e) =>
                 setNewSetImport({ value: e.target.value, touched: true })
               }
+              validationCallback={() => validateNewSetImport(newSetImport)}
             />
-            {newSetImport.value !== '' && (
-              <p className="error-validate">
-                {validateNewSetImport(newSetImport)}
-              </p>
-            )}
             <Button
+              buttonClass={styles['submit']}
               type="submit"
               disabled={!!validateNewSetImport(newSetImport)}
               onClickCallback={(e) => {

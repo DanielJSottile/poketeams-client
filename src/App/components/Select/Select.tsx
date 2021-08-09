@@ -1,6 +1,5 @@
 import React, { FunctionComponent, ChangeEvent, ReactNode } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
+import ValidationError from '../ValidationError';
 
 interface Option {
   value: string;
@@ -40,6 +39,8 @@ type SelectProps = {
   required?: boolean;
   /** boolean for whether the select is disabled */
   disabled?: boolean;
+  /** position of validation error (parent must be position: relative) */
+  errorPosition?: string;
 };
 
 const Select: FunctionComponent<SelectProps> = ({
@@ -59,6 +60,7 @@ const Select: FunctionComponent<SelectProps> = ({
   id = '',
   required = false,
   disabled = false,
+  errorPosition = '',
 }) => {
   return (
     <div className={containerClass}>
@@ -78,16 +80,17 @@ const Select: FunctionComponent<SelectProps> = ({
         required={required}
         disabled={disabled}
       >
-        {options.map((option) => (
-          <option value={option.value}>{option.label}</option>
+        {options.map((option, i) => (
+          <option value={option.value} key={`${i}-${option.label}`}>
+            {option.label}
+          </option>
         ))}
       </select>
-      {isError && selectHasError && !!validationCallback() && (
-        <p className="error-validate">
-          <FontAwesomeIcon icon={faExclamationTriangle} />{' '}
-          {validationCallback()}
-        </p>
-      )}
+      <ValidationError
+        errorBoolean={isError && selectHasError}
+        validationCallback={validationCallback}
+        errorPosition={errorPosition}
+      />
     </div>
   );
 };

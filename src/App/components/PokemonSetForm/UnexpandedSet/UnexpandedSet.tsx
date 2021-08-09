@@ -37,7 +37,6 @@ const UnexpandedSet: FunctionComponent<UnexpandedSetProps> = ({
   };
 
   const renderGender = (set: PokemonSet) => {
-    console.log(findSpeciesGender(set), set.species);
     if (findSpeciesGender(set) === false) {
       return (
         <span>

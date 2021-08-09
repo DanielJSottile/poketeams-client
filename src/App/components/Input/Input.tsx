@@ -1,6 +1,5 @@
 import React, { FunctionComponent, ChangeEvent, ReactNode } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
+import ValidationError from '../ValidationError';
 
 type InputProps = {
   /** class for input container */
@@ -47,6 +46,8 @@ type InputProps = {
   required?: boolean;
   /** boolean for whether the input is disabled */
   disabled?: boolean;
+  /** position of validation error (parent must be position: relative) */
+  errorPosition?: string;
 };
 
 const Input: FunctionComponent<InputProps> = ({
@@ -72,6 +73,7 @@ const Input: FunctionComponent<InputProps> = ({
   autoComplete,
   required = false,
   disabled = false,
+  errorPosition = '',
 }) => {
   return (
     <div className={containerClass}>
@@ -97,12 +99,11 @@ const Input: FunctionComponent<InputProps> = ({
         required={required}
         disabled={disabled}
       />
-      {isError && inputHasError && !!validationCallback() && (
-        <p className="error-validate">
-          <FontAwesomeIcon icon={faExclamationTriangle} />{' '}
-          {validationCallback()}
-        </p>
-      )}
+      <ValidationError
+        errorBoolean={isError && inputHasError}
+        validationCallback={validationCallback}
+        errorPosition={errorPosition}
+      />
     </div>
   );
 };
