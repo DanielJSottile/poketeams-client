@@ -47,21 +47,21 @@ const Intro: FunctionComponent<IntroProps> = ({
   setGender,
   setShiny,
 }) => {
-  const createGenderOptions = (set: PokemonSet): Option[] => {
-    if (legality.returnGenderStatus(set.species) === false) {
+  const createGenderOptions = (species: string): Option[] => {
+    if (legality.returnGenderStatus(species) === false) {
       return [
         { value: '', label: 'Male or Female \u2642 / \u2640' },
         { value: 'M', label: 'Male \u2642' },
         { value: 'F', label: 'Female \u2640' },
       ];
     }
-    if (legality.returnGenderStatus(set.species) === 'M') {
+    if (legality.returnGenderStatus(species) === 'M') {
       return [{ value: 'M', label: 'Male' }];
     }
-    if (legality.returnGenderStatus(set.species) === 'F') {
+    if (legality.returnGenderStatus(species) === 'F') {
       return [{ value: 'F', label: 'Female' }];
     }
-    if (legality.returnGenderStatus(set.species) === null) {
+    if (legality.returnGenderStatus(species) === null) {
       return [{ value: 'N', label: 'No Gender' }];
     }
     return [];
@@ -119,26 +119,11 @@ const Intro: FunctionComponent<IntroProps> = ({
             value={isPublic ? set.gender || '' : gender.value}
             name="pokemon-gender"
             id={`pokemon-gender-${set?.id}`}
-            disabled={isPublic}
-            options={createGenderOptions(set)}
+            disabled={isPublic || !legality.isLegalSpecies(species.value)}
+            options={createGenderOptions(
+              isPublic ? set.species || '' : species.value
+            )}
           />
-          {/* <Input
-            inputHasError={!isPublic}
-            htmlFor={'pokemon-gender'}
-            label={'Gender: '}
-            inputClass={styles['pokemon-gender']}
-            validationCallback={() => validateGender(gender, species)}
-            onChangeCallback={(e) =>
-              setGender({ value: e.target.value, touched: true })
-            }
-            placeholder="F, M, or N"
-            value={isPublic ? set.gender || '' : gender.value}
-            type="text"
-            name="pokemon-gender"
-            id={`pokemon-gender-${set?.id}`}
-            disabled={isPublic}
-            readOnly={isPublic}
-          /> */}
           <Input
             inputHasError={!isPublic}
             isError={species.touched}

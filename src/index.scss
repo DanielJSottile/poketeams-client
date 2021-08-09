@@ -148,6 +148,7 @@ a {
 
 a:hover,
 button:hover:enabled {
+  cursor: pointer;
   background-color: $light-yellow;
   transition: 0.3s;
 }
