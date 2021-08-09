@@ -1,5 +1,15 @@
 @import '../../../../index.scss';
 
+.delete {
+  text-align: center;
+  font-family: $body-font;
+  padding: 5px;
+  border-radius: 40px;
+  border: 5px double $med-dark-grey;
+  width: 9.375rem;
+  margin: auto;
+}
+
 .submit {
   display: inline-block;
   text-shadow: none;

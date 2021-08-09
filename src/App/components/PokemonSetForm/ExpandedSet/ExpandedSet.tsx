@@ -22,7 +22,6 @@ import { validateNewSetImport } from '../../../utils/validations';
 import showdownGenerate from '../../../utils/generate';
 import { BoolInput, NumberInput, PokemonSet, TextInput } from '../../../@types';
 import styles from './ExpandedSet.module.scss';
-import ValidationError from '../../ValidationError';
 
 type ExpandedSetProps = {
   set: PokemonSet;
@@ -264,6 +263,7 @@ const ExpandedSet: FunctionComponent<ExpandedSetProps> = ({
             onClickCallback={() => {
               setDeleteClicked(!deleteClicked);
             }}
+            buttonClass={styles['delete']}
           >
             <FontAwesomeIcon icon={faTrashAlt} />
             Delete Set!
