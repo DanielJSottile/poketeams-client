@@ -88,28 +88,6 @@ const SearchBar: FunctionComponent<SearchBarProps> = ({ isPublic }) => {
               { value: 'rev alphabetical', label: 'Z - A' },
             ]}
           />
-          {/* <div className={styles['select']}>
-            <label htmlFor="sort">
-              Sort By: <FontAwesomeIcon icon={faSort} />
-            </label>
-            <select
-              name="sort"
-              id="sort"
-              value={sortOrFilterSort.value}
-              onChange={(e) =>
-                setSortOrFilterSort({ value: e.target.value, touched: true })
-              }
-              onBlur={(e) =>
-                setSortOrFilterSort({ value: e.target.value, touched: true })
-              }
-            >
-              <option value="newest">Newest</option>
-              <option value="oldest">Oldest</option>
-              <option value="alphabetical">A - Z</option>
-              <option value="rev alphabetical">Z - A</option>
-            </select>
-          </div> */}
-
           <Button
             buttonClass={styles['go-button']}
             type="submit"
