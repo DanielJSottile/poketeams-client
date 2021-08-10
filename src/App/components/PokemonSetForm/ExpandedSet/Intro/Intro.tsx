@@ -1,5 +1,11 @@
-import React, { FunctionComponent, Dispatch, SetStateAction } from 'react';
+import React, {
+  FunctionComponent,
+  Dispatch,
+  SetStateAction,
+  ReactNode,
+} from 'react';
 import Input from '../../../Input';
+import Select from '../../../Select';
 import Sprites from './Sprites';
 import {
   validateSpecies,
@@ -9,6 +15,7 @@ import {
 } from '../../../../utils/validations';
 import { PokemonSet, TextInput, BoolInput } from '../../../../@types';
 import styles from './Intro.module.scss';
+import legality from '../../../../utils/legality';
 
 type IntroProps = {
   isPublic: boolean;
@@ -23,6 +30,11 @@ type IntroProps = {
   setShiny: Dispatch<SetStateAction<BoolInput>>;
 };
 
+interface Option {
+  value: string;
+  label: ReactNode;
+}
+
 const Intro: FunctionComponent<IntroProps> = ({
   isPublic,
   set,
@@ -35,6 +47,26 @@ const Intro: FunctionComponent<IntroProps> = ({
   setGender,
   setShiny,
 }) => {
+  const createGenderOptions = (species: string): Option[] => {
+    if (legality.returnGenderStatus(species) === false) {
+      return [
+        { value: '', label: 'Male or Female \u2642 / \u2640' },
+        { value: 'M', label: 'Male \u2642' },
+        { value: 'F', label: 'Female \u2640' },
+      ];
+    }
+    if (legality.returnGenderStatus(species) === 'M') {
+      return [{ value: 'M', label: 'Male' }];
+    }
+    if (legality.returnGenderStatus(species) === 'F') {
+      return [{ value: 'F', label: 'Female' }];
+    }
+    if (legality.returnGenderStatus(species) === null) {
+      return [{ value: '', label: 'No Gender' }];
+    }
+    return [];
+  };
+
   return (
     <div className={styles['pokemon-intro']}>
       <div className={styles['name-sprite']}>
@@ -62,7 +94,7 @@ const Intro: FunctionComponent<IntroProps> = ({
             isError={species.touched}
             htmlFor={'pokemon-nickname'}
             label={'Nickname: (optional)'}
-            inputClass={styles['pokemon-name']}
+            inputClass={styles['pokemon-nickname']}
             validationCallback={() => validateNickname(nickname)}
             onChangeCallback={(e) =>
               setNickname({ value: e.target.value, touched: true })
@@ -75,22 +107,22 @@ const Intro: FunctionComponent<IntroProps> = ({
             disabled={isPublic}
             readOnly={isPublic}
           />
-          <Input
-            inputHasError={!isPublic}
+          <Select
+            selectHasError={!isPublic}
             htmlFor={'pokemon-gender'}
             label={'Gender: '}
-            inputClass={styles['pokemon-gender']}
+            selectClass={styles['pokemon-gender']}
             validationCallback={() => validateGender(gender, species)}
             onChangeCallback={(e) =>
               setGender({ value: e.target.value, touched: true })
             }
-            placeholder="F, M, or N"
             value={isPublic ? set.gender || '' : gender.value}
-            type="text"
             name="pokemon-gender"
             id={`pokemon-gender-${set?.id}`}
-            disabled={isPublic}
-            readOnly={isPublic}
+            disabled={isPublic || !legality.isLegalSpecies(species.value)}
+            options={createGenderOptions(
+              isPublic ? set.species || '' : species.value
+            )}
           />
           <Input
             inputHasError={!isPublic}

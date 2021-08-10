@@ -27,6 +27,18 @@
 
 .pokemon-name {
   color: $med-dark-grey;
+  font-family: $h1-font;
+  text-emphasis: bold;
+  text-align: center;
+  font-size: 1.5rem;
+  width: 100%;
+  margin: auto;
+  border-radius: 20px;
+  background: $super-light-cream;
+}
+
+.pokemon-nickname {
+  color: $med-dark-grey;
   text-emphasis: bold;
   text-align: center;
   font-size: 22px;
@@ -52,10 +64,15 @@
 @media (min-width: 700px) {
   /* Medium Screen */
 
+  .pokemon-intro {
+    display: block;
+    flex-direction: unset;
+  }
+
   .name-sprite {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
   }
 }
 

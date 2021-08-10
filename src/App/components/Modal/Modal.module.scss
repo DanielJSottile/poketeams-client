@@ -30,11 +30,11 @@
   top: 0;
   right: 0.5rem;
   border: none;
-}
-
-.icon {
-  &:hover {
+  background-color: transparent;
+  color: $super-light-cream;
+  &:hover:enabled {
     transition: 0.3s;
+    background-color: transparent;
     color: $light-pokeball-red;
   }
 }

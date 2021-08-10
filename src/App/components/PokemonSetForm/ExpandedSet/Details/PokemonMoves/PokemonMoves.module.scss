@@ -5,9 +5,10 @@
   flex-direction: column;
 }
 
-.label-as-row {
+.label-direction {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  align-items: center;
 }
 
 .pokemon-move {
@@ -30,5 +31,10 @@
     display: flex;
     flex-direction: row;
     padding: 15px;
+  }
+
+  .label-direction {
+    display: flex;
+    flex-direction: row;
   }
 }

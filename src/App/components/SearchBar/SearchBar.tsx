@@ -8,6 +8,7 @@ import {
 import GeneralContext from '../../contexts/GeneralContext';
 import Input from '../Input';
 import Button from '../Button';
+import Select from '../Select';
 import { validateSearch } from '../../utils/validations';
 import styles from './SearchBar.module.scss';
 import { TextInput } from '../../@types';
@@ -68,28 +69,25 @@ const SearchBar: FunctionComponent<SearchBarProps> = ({ isPublic }) => {
             name="search"
             id="search"
           />
-          <div className={styles['select']}>
-            <label htmlFor="sort">
-              Sort By: <FontAwesomeIcon icon={faSort} />
-            </label>
-            <select
-              name="sort"
-              id="sort"
-              value={sortOrFilterSort.value}
-              onChange={(e) =>
-                setSortOrFilterSort({ value: e.target.value, touched: true })
-              }
-              onBlur={(e) =>
-                setSortOrFilterSort({ value: e.target.value, touched: true })
-              }
-            >
-              <option value="newest">Newest</option>
-              <option value="oldest">Oldest</option>
-              <option value="alphabetical">A - Z</option>
-              <option value="rev alphabetical">Z - A</option>
-            </select>
-          </div>
-
+          <Select
+            selectHasError={false}
+            containerClass={styles['select']}
+            htmlFor="sort"
+            label="Sort By: "
+            labelIcon={<FontAwesomeIcon icon={faSort} />}
+            name="sort"
+            id="sort"
+            value={sortOrFilterSort.value}
+            onChangeCallback={(e) =>
+              setSortOrFilterSort({ value: e.target.value, touched: true })
+            }
+            options={[
+              { value: 'newest', label: 'Newest' },
+              { value: 'oldest', label: 'Oldest' },
+              { value: 'alphabetical', label: 'A - Z' },
+              { value: 'rev alphabetical', label: 'Z - A' },
+            ]}
+          />
           <Button
             buttonClass={styles['go-button']}
             type="submit"

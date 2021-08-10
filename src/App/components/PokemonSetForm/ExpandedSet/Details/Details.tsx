@@ -28,6 +28,7 @@ import {
   NumberInput,
 } from '../../../../@types';
 import styles from './Details.module.scss';
+import ValidationError from '../../../ValidationError';
 
 type DetailsProps = {
   set: PokemonSet;
@@ -266,24 +267,24 @@ const Details: FunctionComponent<DetailsProps> = ({
       />
       <div className={styles['stats']}>
         <div className={styles['evs']}>
-          {!isPublic &&
-            !!validateEvs(hpEv, atkEv, defEv, spAEv, spDEv, speEv) && (
-              <p className="error-validate">
-                {validateEvs(hpEv, atkEv, defEv, spAEv, spDEv, speEv)}
-              </p>
-            )}
+          <ValidationError
+            errorBoolean={!isPublic}
+            validationCallback={() =>
+              validateEvs(hpEv, atkEv, defEv, spAEv, spDEv, speEv)
+            }
+          />
           <PokemonValueInputs
             valueArray={EffortValueArray}
             isPublic={isPublic}
           />
         </div>
         <div className={styles['ivs']}>
-          {!isPublic &&
-            !!validateIvs(hpIv, atkIv, defIv, spAIv, spDIv, speIv) && (
-              <p className="error-validate">
-                {validateIvs(hpIv, atkIv, defIv, spAIv, spDIv, speIv)}
-              </p>
-            )}
+          <ValidationError
+            errorBoolean={!isPublic}
+            validationCallback={() =>
+              validateIvs(hpIv, atkIv, defIv, spAIv, spDIv, speIv)
+            }
+          />
           <PokemonValueInputs
             valueArray={IndividualValueArray}
             isPublic={isPublic}
@@ -315,6 +316,7 @@ const Details: FunctionComponent<DetailsProps> = ({
             !!validateMoves(moveOne, moveTwo, moveThree, moveFour) ||
             isPublic
           }
+          buttonClass={styles['save-set-button']}
           onClickCallback={(e) => {
             e.preventDefault();
             handleUpdateSet(

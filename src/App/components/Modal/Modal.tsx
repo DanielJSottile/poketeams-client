@@ -31,11 +31,7 @@ const Modal: FunctionComponent<ModalProps> = ({
               onClickCallback={() => handleSetModal()}
               buttonClass={styles['close-button']}
             >
-              <FontAwesomeIcon
-                icon={faWindowClose}
-                size={'3x'}
-                className={styles['icon']}
-              />
+              <FontAwesomeIcon icon={faWindowClose} size={'3x'} />
             </Button>
             {children}
           </div>

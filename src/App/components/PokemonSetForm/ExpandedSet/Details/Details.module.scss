@@ -15,6 +15,17 @@
   align-items: center;
 }
 
+.save-set-button {
+  text-align: center;
+  font-family: $body-font;
+  padding: 5px;
+  border-radius: 40px;
+  border: 5px double $med-dark-grey;
+  width: max-content;
+  margin: auto;
+  margin-top: 1rem;
+}
+
 .stats {
   flex-direction: row;
 }
