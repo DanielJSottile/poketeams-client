@@ -67,18 +67,17 @@ const ExpandedTeam: FunctionComponent<ExpandedTeamProps> = ({
           <form className={styles['team-form']}>
             <div className={styles['team-title']}>
               <div className={styles['title-name']}>
-                <Input
+                <TextArea
                   label={'Team Name:'}
                   htmlFor={'title-name'}
-                  inputHasError={false}
+                  textAreaHasError={false}
                   disabled={isPublic}
                   readOnly={isPublic}
-                  inputClass={styles['title']}
+                  textAreaClass={styles['title']}
                   placeholder="e.g. Cool Team"
                   value={isPublic ? team.team_name : teamName.value}
                   onChangeCallback={(e) => inputTeamName(e.target.value)}
                   validationCallback={() => validateTeamName(teamName)}
-                  type="text"
                   name="team-name"
                   id={`team-name-${team.id}`}
                 />

@@ -62,7 +62,7 @@ const Intro: FunctionComponent<IntroProps> = ({
       return [{ value: 'F', label: 'Female' }];
     }
     if (legality.returnGenderStatus(species) === null) {
-      return [{ value: 'N', label: 'No Gender' }];
+      return [{ value: '', label: 'No Gender' }];
     }
     return [];
   };
@@ -94,7 +94,7 @@ const Intro: FunctionComponent<IntroProps> = ({
             isError={species.touched}
             htmlFor={'pokemon-nickname'}
             label={'Nickname: (optional)'}
-            inputClass={styles['pokemon-name']}
+            inputClass={styles['pokemon-nickname']}
             validationCallback={() => validateNickname(nickname)}
             onChangeCallback={(e) =>
               setNickname({ value: e.target.value, touched: true })
