@@ -16,7 +16,7 @@ import ExportText from '../ExportText';
 import LazyLoader from '../Loaders/LazyLoader';
 import DeleteExpand from '../DeleteExpand';
 import GeneralContext from '../../contexts/GeneralContext';
-import showdownFolderGenerate from '../../utils/generateFolder';
+import { showdownFolderGenerate } from '../../utils/functions';
 import {
   validateNewFolderImport,
   validateNewFolderName,
