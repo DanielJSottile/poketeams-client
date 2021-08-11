@@ -11,7 +11,7 @@ import TextArea from '../TextArea';
 import Image from '../Image';
 import Button from '../Button';
 import PokemonSetForm from '../PokemonSetForm';
-import showdownGenerate from '../../utils/generate';
+import { showdownGenerate } from '../../utils/functions';
 import legality from '../../utils/legality';
 import { useClipboard } from '../../utils/customHooks';
 import styles from './Team-Public-Share.module.scss';

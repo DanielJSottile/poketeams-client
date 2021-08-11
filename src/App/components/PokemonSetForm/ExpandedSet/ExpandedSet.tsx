@@ -19,7 +19,7 @@ import Intro from './Intro';
 import Details from './Details';
 import GeneralContext from '../../../contexts/GeneralContext';
 import { validateNewSetImport } from '../../../utils/validations';
-import showdownGenerate from '../../../utils/generate';
+import { showdownGenerate } from '../../../utils/functions';
 import { BoolInput, NumberInput, PokemonSet, TextInput } from '../../../@types';
 import styles from './ExpandedSet.module.scss';
 

@@ -9,11 +9,10 @@ import {
 import classnames from 'classnames';
 import toast from 'react-hot-toast';
 import Button from '../../Button';
-import Input from '../../Input';
 import TextArea from '../../TextArea';
 import ExportText from '../../ExportText';
 import GeneralContext from '../../../contexts/GeneralContext';
-import showdownGenerate from '../../../utils/generate';
+import { showdownGenerate } from '../../../utils/functions';
 import { validateTeamName, validateDesc } from '../../../utils/validations';
 import { PokemonTeam, PokemonSet, TextInput } from '../../../@types';
 import styles from './ExpandedTeam.module.scss';

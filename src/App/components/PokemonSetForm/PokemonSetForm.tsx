@@ -1,5 +1,5 @@
 import React, { useState, FunctionComponent } from 'react';
-import showdownParse from '../../utils/parse';
+import { showdownParse } from '../../utils/functions';
 
 import { PokemonSet } from '../../@types';
 import ExpandedSet from './ExpandedSet';

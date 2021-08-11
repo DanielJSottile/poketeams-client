@@ -10,8 +10,8 @@ import toast from 'react-hot-toast';
 import apiService from '../services/apiService';
 import TokenService from '../services/token-service';
 import jwtDecode from 'jwt-decode';
-import showdownParse from '../utils/parse';
-import showdownFolderParse from '../utils/parseFolder';
+import { showdownParse } from '../utils/functions';
+import { showdownFolderParse } from '../utils/functions';
 import {
   PokemonFolder,
   PokemonTeam,

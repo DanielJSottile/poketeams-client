@@ -6,8 +6,7 @@ import {
   BoolInput,
 } from '../@types';
 import { REGEX_UPPER_LOWER_NUMBER_SPECIAL } from './constants';
-import showdownParse from './parse';
-import showdownFolderParse from './parseFolder';
+import { showdownParse, showdownFolderParse } from './functions';
 import legality from './legality';
 
 export const validateNewFolderName = (
