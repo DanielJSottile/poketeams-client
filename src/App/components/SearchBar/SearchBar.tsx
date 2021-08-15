@@ -90,6 +90,7 @@ const SearchBar: FunctionComponent<SearchBarProps> = ({ isPublic }) => {
           />
           <Button
             buttonClass={styles['go-button']}
+            id="go-button"
             type="submit"
             onClickCallback={(e) => {
               handleSearchOrFilter(e);

@@ -80,8 +80,11 @@ const Select: FunctionComponent<SelectProps> = ({
         required={required}
         disabled={disabled}
       >
-        {options.map((option, i) => (
-          <option value={option.value} key={`${i}-${option.label}`}>
+        {options.map((option) => (
+          <option
+            value={option.value}
+            key={`${new Date().getTime()}-${option.label}`}
+          >
             {option.label}
           </option>
         ))}

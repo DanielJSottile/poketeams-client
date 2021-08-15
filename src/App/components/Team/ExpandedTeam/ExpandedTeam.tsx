@@ -126,6 +126,7 @@ const ExpandedTeam: FunctionComponent<ExpandedTeamProps> = ({
                   !!validateDesc(description) ||
                   isPublic
                 }
+                id={`save-team-button-${id}`}
                 buttonClass={styles['save-team-button']}
                 onClickCallback={(e) => {
                   e.preventDefault();

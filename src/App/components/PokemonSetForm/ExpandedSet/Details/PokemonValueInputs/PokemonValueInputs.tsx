@@ -21,9 +21,9 @@ const PokemonValueInputs: FunctionComponent<PokemonValueInputsProps> = ({
   isPublic,
 }) => {
   const renderInputs = () =>
-    valueArray.map((value, i) => (
+    valueArray.map((value) => (
       <Input
-        key={`${i}-${value.label}`}
+        key={`${new Date().getTime()}-${value.label}`}
         containerClass={styles['stat']}
         inputHasError={false}
         htmlFor={value.name}

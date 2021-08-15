@@ -17,13 +17,13 @@ const UnexpandedSet: FunctionComponent<UnexpandedSetProps> = ({
 }): JSX.Element => {
   const types = legality
     .returnTypeIcon(legality.returnType(set?.species || ''))
-    .map((type: string, i: number) => {
+    .map((type: string) => {
       return (
         <Image
           imageClass={styles['type-img']}
-          key={i}
+          key={new Date().getTime()}
           src={`${type}`}
-          alt={`${i + 1}`}
+          alt={`${type}-icon`}
         />
       );
     });
