@@ -20,13 +20,13 @@ const Sprites: FunctionComponent<SpritesProps> = ({ species, shiny }) => {
       <div className={styles['type-icons']}>
         {legality
           .returnTypeIcon(legality.returnType(species.value))
-          .map((type: string, i: number) => {
+          .map((type: string) => {
             return (
               <Image
                 imageClass={styles['type-img']}
                 src={`${type}`}
-                key={i}
-                alt={`${i + 1}`}
+                key={new Date().getTime()}
+                alt={`${type}-icon`}
               />
             );
           })}
