@@ -21,7 +21,7 @@ const UnexpandedSet: FunctionComponent<UnexpandedSetProps> = ({
       return (
         <Image
           imageClass={styles['type-img']}
-          key={new Date().getTime()}
+          key={`${new Date().getTime()}-${type}`}
           src={`${type}`}
           alt={`${type}-icon`}
         />

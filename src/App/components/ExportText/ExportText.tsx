@@ -73,6 +73,7 @@ const ExportText: FunctionComponent<ExportTextProps> = ({
             </Link>
 
             <Input
+              id="share-input"
               inputHasError={false}
               inputClass={styles['share-input']}
               disabled
