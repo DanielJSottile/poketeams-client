@@ -62,8 +62,10 @@ const FoldersList: FunctionComponent = () => {
   /* Set Up Common Definitions to be 
   Used in Different views */
 
-  const folderList = userFolders.map((folder: PokemonFolder, i) => {
-    return <Folder key={i} id={folder.id} folder_name={folder.folder_name} />;
+  const folderList = userFolders.map((folder: PokemonFolder) => {
+    return (
+      <Folder key={folder.id} id={folder.id} folder_name={folder.folder_name} />
+    );
   });
 
   const folderTeams = userTeams.filter(

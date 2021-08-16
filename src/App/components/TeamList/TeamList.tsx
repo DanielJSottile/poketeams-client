@@ -17,17 +17,22 @@ const TeamList: FunctionComponent<TeamListProps> = ({
   const { userTeams, currentClickedFolder, publicTeams } =
     useContext(GeneralContext);
 
-  const publicTeamList = publicTeams.map((team: PokemonTeam, i) => {
-    return <Team isPublic key={i} id={`${team.team_name}`} team={team} />;
+  const publicTeamList = publicTeams.map((team: PokemonTeam) => {
+    return <Team isPublic key={team.id} id={`${team.team_name}`} team={team} />;
   });
 
   const privateTeamList = userTeams
     .filter(
       (team: PokemonTeam) => team.folder_id === Number(currentClickedFolder.id)
     )
-    .map((team: PokemonTeam, i) => {
+    .map((team: PokemonTeam) => {
       return (
-        <Team isPublic={false} id={`${team.team_name}`} key={i} team={team} />
+        <Team
+          isPublic={false}
+          id={`${team.team_name}`}
+          key={team.id}
+          team={team}
+        />
       );
     });
 
