@@ -25,7 +25,7 @@ const Sprites: FunctionComponent<SpritesProps> = ({ species, shiny }) => {
               <Image
                 imageClass={styles['type-img']}
                 src={`${type}`}
-                key={new Date().getTime()}
+                key={`${new Date().getTime()}-${type}`}
                 alt={`${type}-icon`}
               />
             );

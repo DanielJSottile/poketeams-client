@@ -78,8 +78,8 @@ const Team: FunctionComponent<TeamProps> = ({
   );
 
   const renderSetList = (teamSets: PokemonSet[]) => {
-    const SetList = teamSets.map((set: PokemonSet, i: number) => {
-      return <PokemonSetForm key={i} set={set} isPublic={isPublic} />;
+    const SetList = teamSets.map((set: PokemonSet) => {
+      return <PokemonSetForm key={set.id} set={set} isPublic={isPublic} />;
     });
 
     if (SetList.length < 6 && !isPublic) {

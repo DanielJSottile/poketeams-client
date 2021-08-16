@@ -16,10 +16,10 @@ const UnexpandedTeam: FunctionComponent<UnexpandedTeamProps> = ({
   teamSets,
   handleTeamToggle,
 }) => {
-  const spriteMap = teamSets.map((set, i) => {
+  const spriteMap = teamSets.map((set) => {
     return (
       <Image
-        key={i}
+        key={set.id}
         imageClass={styles['tiny-icon']}
         src={legality.returnIconSprite(set.species, set.shiny)}
         alt={set.species}

@@ -316,6 +316,7 @@ const Details: FunctionComponent<DetailsProps> = ({
             !!validateMoves(moveOne, moveTwo, moveThree, moveFour) ||
             isPublic
           }
+          id={'save-set-button'}
           buttonClass={styles['save-set-button']}
           onClickCallback={(e) => {
             e.preventDefault();

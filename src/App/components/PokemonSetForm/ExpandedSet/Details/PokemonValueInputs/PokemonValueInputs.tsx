@@ -23,7 +23,7 @@ const PokemonValueInputs: FunctionComponent<PokemonValueInputsProps> = ({
   const renderInputs = () =>
     valueArray.map((value) => (
       <Input
-        key={`${new Date().getTime()}-${value.label}`}
+        key={`${new Date().getTime()}-${value.id}`}
         containerClass={styles['stat']}
         inputHasError={false}
         htmlFor={value.name}

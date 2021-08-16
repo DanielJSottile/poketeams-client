@@ -18,14 +18,14 @@ const TeamListPublicShare: FunctionComponent<TeamListPublicShareProps> = ({
   let TeamList: JSX.Element[] = [];
 
   if (teams) {
-    TeamList = teams?.map((team: PokemonTeam, i: number) => {
+    TeamList = teams?.map((team: PokemonTeam) => {
       const teamSets = sets?.filter((set: PokemonSet) => {
         return set.team_id === team.id;
       });
 
       return (
         <TeamPublicShare
-          key={i}
+          key={team.id}
           id={`${team.team_name}`}
           team={team}
           sets={teamSets}

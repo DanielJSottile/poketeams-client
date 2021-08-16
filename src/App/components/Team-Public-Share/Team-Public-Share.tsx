@@ -39,8 +39,8 @@ const TeamPublicShare: FunctionComponent<TeamPublicShareProps> = ({
   };
 
   const renderExpandedTeam = () => {
-    const SetList = sets?.map((set: PokemonSet, i: number) => {
-      return <PokemonSetForm key={i} set={set} isPublic />;
+    const SetList = sets?.map((set: PokemonSet) => {
+      return <PokemonSetForm key={set.id} set={set} isPublic />;
     });
 
     return (
@@ -146,10 +146,10 @@ const TeamPublicShare: FunctionComponent<TeamPublicShareProps> = ({
   const renderUnexpandedTeam = () => {
     let spriteMap;
     if (sets) {
-      spriteMap = sets.map((set: PokemonSet, i: number) => {
+      spriteMap = sets.map((set: PokemonSet) => {
         return (
           <Image
-            key={i}
+            key={set.id}
             imageClass={styles['tiny-icon']}
             src={legality.returnIconSprite(set.species, set.shiny)}
             alt={set.species}
