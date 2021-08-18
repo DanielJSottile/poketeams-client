@@ -147,6 +147,8 @@ export const evIvParser = (string: string | null, val: string): number[] => {
   return [hpV, atkV, defV, spaV, spdV, speV];
 };
 
+/** GENERATE FUNCTION */
+
 export const generate = (sets: PokemonSet[]): string[] => {
   return sets.map((set: PokemonSet) => {
     const setArr = [];
@@ -190,6 +192,10 @@ export const generate = (sets: PokemonSet[]): string[] => {
 
     if (set.shiny) {
       setArr.push(`Shiny: Yes`);
+    }
+
+    if (set.gigantamax) {
+      setArr.push(`Gigantamax: Yes`);
     }
 
     if (set.happiness < 255) {
@@ -264,6 +270,8 @@ export const showdownFolderGenerate = (
     .join('\n\n\n');
 };
 
+/** PARSE */
+
 export const parse = (teamList: string[]): PokemonSet[] => {
   let item: string | null = null;
   let gender: string | null = null;
@@ -275,6 +283,7 @@ export const parse = (teamList: string[]): PokemonSet[] => {
   let iv: string | null = null;
   let ability: string | null = null;
   let shiny = false;
+  let gigantamax = false;
   let nature: string | null = null;
   let moves: string[] = [];
 
@@ -295,6 +304,7 @@ export const parse = (teamList: string[]): PokemonSet[] => {
     iv = null;
     ability = null;
     shiny = false;
+    gigantamax = false;
     nature = null;
     moves = [];
 
@@ -340,6 +350,8 @@ export const parse = (teamList: string[]): PokemonSet[] => {
         level = Number(line.split(': ')[1]);
       } else if (line.startsWith('Shiny:')) {
         shiny = true;
+      } else if (line.startsWith('Gigantamax:')) {
+        gigantamax = true;
       } else if (line.startsWith('Happiness:')) {
         happiness = Number(line.split(': ')[1]);
       } else if (line.startsWith('EVs:')) {
@@ -363,6 +375,7 @@ export const parse = (teamList: string[]): PokemonSet[] => {
       ability: ability,
       level: level,
       shiny: shiny,
+      gigantamax: gigantamax,
       happiness: happiness,
       hp_ev: evIvParser(ev, 'ev')[0],
       atk_ev: evIvParser(ev, 'ev')[1],

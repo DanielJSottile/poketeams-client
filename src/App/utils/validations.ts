@@ -161,6 +161,13 @@ export const validateShiny = (shiny: BoolInput): string | boolean => {
   return false;
 };
 
+export const validateGigantamax = (gigantamax: BoolInput): string | boolean => {
+  if (typeof gigantamax.value !== 'boolean') {
+    return `This is just superflous it should never come up.`;
+  }
+  return false;
+};
+
 export const validateSpecies = (species: TextInput): string | boolean => {
   if (!legality.isLegalSpecies(species.value.toString())) {
     return `Must be an 'existing' Pokemon species or form styled via '[species]-[form]'!`;

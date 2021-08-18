@@ -30,6 +30,7 @@ type ExpandedSetProps = {
   nickname: TextInput;
   gender: TextInput;
   shiny: BoolInput;
+  gigantamax: BoolInput;
   level: NumberInput;
   item: TextInput;
   ability: TextInput;
@@ -57,6 +58,7 @@ type ExpandedSetProps = {
   setNickname: Dispatch<SetStateAction<TextInput>>;
   setGender: Dispatch<SetStateAction<TextInput>>;
   setShiny: Dispatch<SetStateAction<BoolInput>>;
+  setGigantamax: Dispatch<SetStateAction<BoolInput>>;
   setLevel: Dispatch<SetStateAction<NumberInput>>;
   setItem: Dispatch<SetStateAction<TextInput>>;
   setAbility: Dispatch<SetStateAction<TextInput>>;
@@ -88,6 +90,7 @@ const ExpandedSet: FunctionComponent<ExpandedSetProps> = ({
   nickname,
   gender,
   shiny,
+  gigantamax,
   level,
   item,
   ability,
@@ -115,6 +118,7 @@ const ExpandedSet: FunctionComponent<ExpandedSetProps> = ({
   setNickname,
   setGender,
   setShiny,
+  setGigantamax,
   setLevel,
   setItem,
   setAbility,
@@ -191,10 +195,12 @@ const ExpandedSet: FunctionComponent<ExpandedSetProps> = ({
           nickname={nickname}
           gender={gender}
           shiny={shiny}
+          gigantamax={gigantamax}
           setSpecies={setSpecies}
           setNickname={setNickname}
           setGender={setGender}
           setShiny={setShiny}
+          setGigantamax={setGigantamax}
         />
         <Details
           isPublic={isPublic}
@@ -203,6 +209,7 @@ const ExpandedSet: FunctionComponent<ExpandedSetProps> = ({
           nickname={nickname}
           gender={gender}
           shiny={shiny}
+          gigantamax={gigantamax}
           level={level}
           item={item}
           ability={ability}

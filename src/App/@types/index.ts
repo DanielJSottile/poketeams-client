@@ -20,6 +20,7 @@ export interface PokemonSet {
   species: string;
   gender: string | null;
   shiny: boolean;
+  gigantamax: boolean;
   item: string | null;
   ability: string | null;
   level: number;

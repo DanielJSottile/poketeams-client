@@ -37,6 +37,10 @@ const PokemonSetForm: FunctionComponent<PokemonSetFormProps> = ({
     value: set?.shiny || false,
     touched: false,
   });
+  const [gigantamax, setGigantamax] = useState({
+    value: set?.gigantamax || false,
+    touched: false,
+  });
   const [item, setItem] = useState({ value: set?.item || '', touched: false });
   const [ability, setAbility] = useState({
     value: set?.ability || '',
@@ -114,7 +118,6 @@ const PokemonSetForm: FunctionComponent<PokemonSetFormProps> = ({
   });
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [deleteClicked, setDeleteClicked] = useState(false);
-
   const setFields = (setImport: string) => {
     const parse = showdownParse(setImport)[0];
 
@@ -122,6 +125,7 @@ const PokemonSetForm: FunctionComponent<PokemonSetFormProps> = ({
     setSpecies({ value: parse.species || 'Pikachu', touched: false });
     setGender({ value: parse.gender || '', touched: false });
     setShiny({ value: parse.shiny || false, touched: false });
+    setGigantamax({ value: parse.gigantamax || false, touched: false });
     setItem({ value: parse.item || '', touched: false });
     setAbility({ value: parse.ability || '', touched: false });
     setLevel({ value: parse.level || 100, touched: false });
@@ -158,6 +162,7 @@ const PokemonSetForm: FunctionComponent<PokemonSetFormProps> = ({
           nickname={nickname}
           gender={gender}
           shiny={shiny}
+          gigantamax={gigantamax}
           level={level}
           item={item}
           ability={ability}
@@ -185,6 +190,7 @@ const PokemonSetForm: FunctionComponent<PokemonSetFormProps> = ({
           setNickname={setNickname}
           setGender={setGender}
           setShiny={setShiny}
+          setGigantamax={setGigantamax}
           setLevel={setLevel}
           setItem={setItem}
           setAbility={setAbility}
