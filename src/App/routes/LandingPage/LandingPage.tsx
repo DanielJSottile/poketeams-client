@@ -44,9 +44,9 @@ const LandingPage: FunctionComponent<
             while.
           </span>
           <span>
-            New 8-18-2021: Gigantamax field has been added! For specific Pokemon
-            that can be Gigantamaxed, the field exists to be edited in the Build
-            section.
+            New - 8-18-2021: Gigantamax field has been added! For specific
+            Pokemon that can be Gigantamaxed, the field exists to be edited in
+            the Build section.
           </span>
         </div>
         <div className={styles['login-div']}>
