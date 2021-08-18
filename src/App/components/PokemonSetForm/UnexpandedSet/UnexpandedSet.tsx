@@ -4,6 +4,8 @@ import { faMars, faVenus, faStar } from '@fortawesome/free-solid-svg-icons';
 import Image from '../../Image';
 import legality from '../../../utils/legality';
 import { PokemonSet } from '../../../@types';
+import gmaxIcon from '../../../Images/gmax-icon.png';
+import megaEvolutionIcon from '../../../Images/mega-evolution.png';
 import styles from './UnexpandedSet.module.scss';
 
 type UnexpandedSetProps = {
@@ -88,12 +90,27 @@ const UnexpandedSet: FunctionComponent<UnexpandedSetProps> = ({
           </div>
           <div className={styles['inside']}>
             <span className={styles['italic']}>{set.nickname || ''}</span>
-            <span>
-              {set.species || ''}{' '}
+            <div className={styles['species-row']}>
+              <span>{set.species || ''} </span>
+              {legality.isMegaEvolution(set.species) && (
+                <Image
+                  src={megaEvolutionIcon}
+                  alt={'mega-evolution-icon'}
+                  imageClass={styles['mega-icon']}
+                />
+              )}
+              {(set.gigantamax || legality.isGigantamaxForm(set.species)) && (
+                <Image
+                  src={gmaxIcon}
+                  alt={'gigantamax-icon'}
+                  imageClass={styles['gmax-icon']}
+                />
+              )}
               {set.shiny && (
                 <FontAwesomeIcon icon={faStar} className={styles['shiny']} />
               )}
-            </span>
+            </div>
+
             <span>
               Lv. {set.level} {renderGender(set)}
             </span>

@@ -18,6 +18,9 @@ import {
   MRMIMEGALAR,
   MRRIME,
   TYPENULLSTRING,
+  CANGIGANTAMAXLIST,
+  GIGANTAMAXLIST,
+  MEGAEVOLUTIONLIST,
 } from './constants';
 import { PokemonEntry } from '../@types';
 
@@ -30,7 +33,7 @@ const birdCheck = (species: string) => {
   );
 };
 
-const LEGALITY = {
+const legaltiy = {
   removeWhiteSpaceHyphen(string: string): string {
     return string.replace(/-|:|'|\|.|’|\s/g, '').toLowerCase();
   },
@@ -189,6 +192,35 @@ const LEGALITY = {
     });
     return urls;
   },
+  isGigantamaxSpecies(species: string): boolean {
+    if (
+      this.isLegalSpecies(species) &&
+      (this.findSpecies(species)?.num || 0) > 0
+    ) {
+      return GIGANTAMAXLIST.concat(CANGIGANTAMAXLIST).includes(
+        species.toLowerCase()
+      );
+    }
+    return false;
+  },
+  isGigantamaxForm(species: string): boolean {
+    if (
+      this.isLegalSpecies(species) &&
+      (this.findSpecies(species)?.num || 0) > 0
+    ) {
+      return GIGANTAMAXLIST.includes(species.toLowerCase());
+    }
+    return false;
+  },
+  isMegaEvolution(species: string): boolean {
+    if (
+      this.isLegalSpecies(species) &&
+      (this.findSpecies(species)?.num || 0) > 0
+    ) {
+      return MEGAEVOLUTIONLIST.includes(species.toLowerCase());
+    }
+    return false;
+  },
 };
 
-export default LEGALITY;
+export default legaltiy;

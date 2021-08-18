@@ -37,6 +37,7 @@ type DetailsProps = {
   nickname: TextInput;
   gender: TextInput;
   shiny: BoolInput;
+  gigantamax: BoolInput;
   level: NumberInput;
   item: TextInput;
   ability: TextInput;
@@ -88,6 +89,7 @@ const Details: FunctionComponent<DetailsProps> = ({
   nickname,
   gender,
   shiny,
+  gigantamax,
   level,
   item,
   ability,
@@ -326,6 +328,7 @@ const Details: FunctionComponent<DetailsProps> = ({
               species.value,
               gender.value,
               shiny.value,
+              gigantamax.value,
               item.value,
               ability.value,
               level.value,

@@ -12,6 +12,7 @@ import {
   validateNickname,
   validateGender,
   validateShiny,
+  validateGigantamax,
 } from '../../../../utils/validations';
 import { PokemonSet, TextInput, BoolInput } from '../../../../@types';
 import styles from './Intro.module.scss';
@@ -24,10 +25,12 @@ type IntroProps = {
   nickname: TextInput;
   gender: TextInput;
   shiny: BoolInput;
+  gigantamax: BoolInput;
   setSpecies: Dispatch<SetStateAction<TextInput>>;
   setNickname: Dispatch<SetStateAction<TextInput>>;
   setGender: Dispatch<SetStateAction<TextInput>>;
   setShiny: Dispatch<SetStateAction<BoolInput>>;
+  setGigantamax: Dispatch<SetStateAction<BoolInput>>;
 };
 
 interface Option {
@@ -42,10 +45,12 @@ const Intro: FunctionComponent<IntroProps> = ({
   nickname,
   gender,
   shiny,
+  gigantamax,
   setSpecies,
   setNickname,
   setGender,
   setShiny,
+  setGigantamax,
 }) => {
   const createGenderOptions = (species: string): Option[] => {
     if (legality.returnGenderStatus(species) === false) {
@@ -145,6 +150,29 @@ const Intro: FunctionComponent<IntroProps> = ({
             disabled={isPublic}
             readOnly={isPublic}
           />
+          {!!legality.isGigantamaxSpecies(set.species) && (
+            <Input
+              inputHasError={!isPublic}
+              isError={species.touched}
+              htmlFor={'gigantamax'}
+              label={'Gigantamax:'}
+              validationCallback={() => validateGigantamax(gigantamax)}
+              onChangeCallback={(e) =>
+                setGigantamax({ value: e.currentTarget.checked, touched: true })
+              }
+              type="checkbox"
+              id="gigantamax"
+              name="gigantamax"
+              checked={isPublic ? set.gigantamax || false : gigantamax.value}
+              value={
+                isPublic
+                  ? (set.gigantamax || false).toString()
+                  : gigantamax.value.toString()
+              }
+              disabled={isPublic}
+              readOnly={isPublic}
+            />
+          )}
         </div>
         <Sprites species={species} shiny={shiny} />
       </div>
