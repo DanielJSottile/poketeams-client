@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFolder } from '@fortawesome/free-solid-svg-icons';
 import TeamsListPublicShare from '../TeamList-PublicShare';
-import './Folder-Public-Share.module.scss';
+import styles from './FolderPublicShare.module.scss';
 import { PokemonFolder, PokemonTeam, PokemonSet } from '../../@types';
 
 type FolderPublicShareProps = {
@@ -21,7 +21,7 @@ const FolderPublicShare: FunctionComponent<FolderPublicShareProps> = ({
 }) => {
   return (
     <>
-      <h3>
+      <h3 className={styles['foldername']}>
         <FontAwesomeIcon icon={faFolder} /> {folder?.folder_name}
       </h3>
       <TeamsListPublicShare teams={teams} sets={sets} />

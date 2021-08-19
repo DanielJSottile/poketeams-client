@@ -33,7 +33,7 @@ const ShareTeamPage: FunctionComponent<RouteComponentProps<MatchProps>> = ({
   }, [match.params.team_id]);
 
   return (
-    <div>
+    <div className={styles['container']}>
       <Link className={styles['go-back']} to={'/'}>
         Go To PokéTeams <FontAwesomeIcon icon={faHome} />
       </Link>
