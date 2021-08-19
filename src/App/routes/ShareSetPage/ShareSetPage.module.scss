@@ -1,21 +1,21 @@
 @import '../../../index.scss';
 
+.container {
+  background-color: $oxford-blue;
+}
+
 .go-back {
   font-family: $h3-font;
   letter-spacing: 3px;
   padding: 5px;
   margin: 15px;
   font-size: 32px;
-  border: 4px double $pokeball-red;
+  border: 4px double $med-dark-grey;
   border-radius: 10px;
   transition: 0.3s;
-}
-
-.go-back:hover {
-  background-color: $med-dark-grey;
-  color: $super-light-cream;
-  margin: 15px;
-  font-size: 32px;
-  border: 4px double $pure-yellow;
-  border-radius: 10px;
+  &:hover,
+  &:hover:enabled {
+    color: $azure;
+    transition: 0.3s;
+  }
 }

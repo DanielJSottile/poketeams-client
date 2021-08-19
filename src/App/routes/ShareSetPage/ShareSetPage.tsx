@@ -24,7 +24,7 @@ const ShareSetPage: FunctionComponent<RouteComponentProps<MatchParams>> = ({
   }, [match.params.set_id]);
 
   return (
-    <div>
+    <div className={styles['container']}>
       <Link className={styles['go-back']} to={'/'}>
         Go To PokéTeams <FontAwesomeIcon icon={faHome} />
       </Link>

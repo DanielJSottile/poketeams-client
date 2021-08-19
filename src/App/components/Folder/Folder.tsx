@@ -8,9 +8,9 @@ import styles from './Folder.module.scss';
 
 type FolderProps = {
   /** id for folder*/
-  id?: number;
+  id: number;
   /** name for folder */
-  folder_name?: string | undefined;
+  folder_name: string | undefined;
 };
 
 const Folder: FunctionComponent<FolderProps> = ({
