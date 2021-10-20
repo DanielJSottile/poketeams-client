@@ -1,7 +1,9 @@
 import React, { lazy, Suspense, useEffect, FunctionComponent } from 'react';
 import { Route, Switch, useLocation } from 'react-router-dom';
+import { useHistory } from 'react-router';
 import { Toaster } from 'react-hot-toast';
-import ErrorPage from './components/ErrorPage';
+import { ErrorBoundary } from 'react-error-boundary';
+import ErrorFallback from './components/ErrorFallback';
 import PrivateRoute from './components/Utils/PrivateRoute';
 import PublicOnlyRoute from './components/Utils/PublicOnlyRoute';
 import LazyLoader from './components/Loaders/LazyLoader';
@@ -24,10 +26,17 @@ const App: FunctionComponent = () => {
     setTimeout(() => window.scrollTo(0, 0), 1);
   }, [location]);
 
+  const history = useHistory();
+
   return (
     <>
       <main>
-        <ErrorPage>
+        <ErrorBoundary
+          FallbackComponent={ErrorFallback}
+          onReset={() => {
+            history.push('/');
+          }}
+        >
           <Suspense
             fallback={
               <div>
@@ -64,7 +73,7 @@ const App: FunctionComponent = () => {
               <Route component={NotFoundPage} />
             </Switch>
           </Suspense>
-        </ErrorPage>
+        </ErrorBoundary>
         <Toaster />
       </main>
     </>
