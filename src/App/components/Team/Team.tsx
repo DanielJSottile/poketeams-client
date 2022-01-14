@@ -68,8 +68,6 @@ const Team: FunctionComponent<TeamProps> = ({
   /* Set Up Common Definitions to be 
   Used in Expanded/Unexpanded views */
 
-  //const pokemonSets = isPublic ? publicSets : userSets;
-
   const pokemonSets = passedTeamSets
     ? passedTeamSets
     : isPublic
