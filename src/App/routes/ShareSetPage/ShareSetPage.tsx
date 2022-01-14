@@ -15,11 +15,11 @@ export type MatchParams = {
 const ShareSetPage: FunctionComponent<RouteComponentProps<MatchParams>> = ({
   match,
 }): JSX.Element => {
-  const [set, setPokemonSet] = useState<PokemonSet[]>([]);
+  const [set, setPokemonSet] = useState<PokemonSet | null>(null);
 
   useEffect(() => {
     apiService.getSingleSet(Number(match.params.set_id)).then((data) => {
-      setPokemonSet([data]);
+      setPokemonSet(data);
     });
   }, [match.params.set_id]);
 
@@ -28,8 +28,10 @@ const ShareSetPage: FunctionComponent<RouteComponentProps<MatchParams>> = ({
       <Link className={styles['go-back']} to={'/'}>
         Go To PokéTeams <FontAwesomeIcon icon={faHome} />
       </Link>
-      {set[0] ? (
-        <PokemonSetForm set={set[0]} isPublic />
+      {set ? (
+        <div className={styles['set-list-grid']}>
+          <PokemonSetForm set={set} isPublic />
+        </div>
       ) : (
         <h3>This set seems to not exist anymore</h3>
       )}

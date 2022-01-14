@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFolder } from '@fortawesome/free-solid-svg-icons';
-import TeamsListPublicShare from '../TeamList-PublicShare';
+import TeamsListPublicShare from '../TeamListPublicShare';
 import styles from './FolderPublicShare.module.scss';
 import { PokemonFolder, PokemonTeam, PokemonSet } from '../../@types';
 
@@ -14,6 +14,7 @@ type FolderPublicShareProps = {
   sets: PokemonSet[];
 };
 
+/** @todo: remove this eventually */
 const FolderPublicShare: FunctionComponent<FolderPublicShareProps> = ({
   folder,
   teams,
