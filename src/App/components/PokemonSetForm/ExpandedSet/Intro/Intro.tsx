@@ -4,9 +4,8 @@ import React, {
   SetStateAction,
   ReactNode,
 } from 'react';
-import Input from '../../../Input';
-import Select from '../../../Select';
-import Sprites from './Sprites';
+import { PokemonSet, TextInput, BoolInput } from '../../../../@types';
+import legality from '../../../../utils/legality';
 import {
   validateSpecies,
   validateNickname,
@@ -14,9 +13,10 @@ import {
   validateShiny,
   validateGigantamax,
 } from '../../../../utils/validations';
-import { PokemonSet, TextInput, BoolInput } from '../../../../@types';
+import Input from '../../../Input';
+import Select from '../../../Select';
 import styles from './Intro.module.scss';
-import legality from '../../../../utils/legality';
+import Sprites from './Sprites';
 
 type IntroProps = {
   isPublic: boolean;
