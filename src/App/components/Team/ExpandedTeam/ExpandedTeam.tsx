@@ -1,22 +1,22 @@
 import React, { useContext, FunctionComponent } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faCompressArrowsAlt,
   faSave,
   faTrashAlt,
   faBan,
 } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classnames from 'classnames';
-import toast from 'react-hot-toast';
-import Button from '../../Button';
-import TextArea from '../../TextArea';
-import ExportText from '../../ExportText';
+import { toast } from 'react-hot-toast';
+import { PokemonTeam, PokemonSet, TextInput } from '../../../@types';
 import GeneralContext from '../../../contexts/GeneralContext';
 import { showdownGenerate } from '../../../utils/functions';
 import { validateTeamName, validateDesc } from '../../../utils/validations';
-import { PokemonTeam, PokemonSet, TextInput } from '../../../@types';
-import styles from './ExpandedTeam.module.scss';
+import Button from '../../Button';
 import DeleteExpand from '../../DeleteExpand';
+import ExportText from '../../ExportText';
+import TextArea from '../../TextArea';
+import styles from './ExpandedTeam.module.scss';
 
 type ExpandedTeamProps = {
   isPublic: boolean;

@@ -4,24 +4,24 @@ import React, {
   Dispatch,
   SetStateAction,
 } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faUpload,
   faCheckCircle,
   faTrashAlt,
 } from '@fortawesome/free-solid-svg-icons';
-import toast from 'react-hot-toast';
-import Button from '../../Button';
-import TextArea from '../../TextArea';
-import ExportText from '../../ExportText';
-import DeleteExpand from '../../DeleteExpand';
-import Intro from './Intro';
-import Details from './Details';
-import GeneralContext from '../../../contexts/GeneralContext';
-import { validateNewSetImport } from '../../../utils/validations';
-import { showdownGenerate } from '../../../utils/functions';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { toast } from 'react-hot-toast';
 import { BoolInput, NumberInput, PokemonSet, TextInput } from '../../../@types';
+import GeneralContext from '../../../contexts/GeneralContext';
+import { showdownGenerate } from '../../../utils/functions';
+import { validateNewSetImport } from '../../../utils/validations';
+import Button from '../../Button';
+import DeleteExpand from '../../DeleteExpand';
+import ExportText from '../../ExportText';
+import TextArea from '../../TextArea';
+import Details from './Details';
 import styles from './ExpandedSet.module.scss';
+import Intro from './Intro';
 
 type ExpandedSetProps = {
   set: PokemonSet;

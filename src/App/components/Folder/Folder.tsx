@@ -1,9 +1,9 @@
 import React, { useContext, FunctionComponent } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFolder } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classnames from 'classnames';
-import Button from '../Button';
 import GeneralContext from '../../contexts/GeneralContext';
+import Button from '../Button';
 import styles from './Folder.module.scss';
 
 type FolderProps = {

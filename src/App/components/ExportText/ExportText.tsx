@@ -1,16 +1,16 @@
 import React, { FunctionComponent } from 'react';
-import { Link } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faDownload,
   faClipboard,
   faShareSquare,
 } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Link } from 'react-router-dom';
+import { PokemonFolder, PokemonTeam, PokemonSet } from '../../@types';
+import { useClipboard } from '../../utils/customHooks';
 import Button from '../Button';
 import Input from '../Input';
 import TextArea from '../TextArea';
-import { useClipboard } from '../../utils/customHooks';
-import { PokemonFolder, PokemonTeam, PokemonSet } from '../../@types';
 import styles from './ExportText.module.scss';
 
 interface LinkState {

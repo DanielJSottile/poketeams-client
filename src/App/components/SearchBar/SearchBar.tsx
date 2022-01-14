@@ -1,17 +1,19 @@
 import React, { useContext, FunctionComponent, MouseEvent } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faSearch,
   faSort,
   faExclamation,
 } from '@fortawesome/free-solid-svg-icons';
-import GeneralContext from '../../contexts/GeneralContext';
-import Input from '../Input';
-import Button from '../Button';
-import Select from '../Select';
-import { validateSearch } from '../../utils/validations';
-import styles from './SearchBar.module.scss';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { TextInput } from '../../@types';
+import GeneralContext from '../../contexts/GeneralContext';
+import { validateSearch } from '../../utils/validations';
+import Button from '../Button';
+import Input from '../Input';
+import Select from '../Select';
+import styles from './SearchBar.module.scss';
+
+//test
 
 type SearchBarProps = {
   /** passed in from Navigation, determines whether to use search or filter */

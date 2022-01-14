@@ -1,21 +1,21 @@
 import React, { useContext, FunctionComponent } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faUpload,
   faCheckCircle,
   faPlusSquare,
   faBan,
 } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import GeneralContext from '../../contexts/GeneralContext';
-import Input from '../Input';
-import TextArea from '../TextArea';
-import Button from '../Button';
 import {
   validateDesc,
   validateNewTeamName,
   validateNewTeamImport,
   validateCurrentFolderClicked,
 } from '../../utils/validations';
+import Button from '../Button';
+import Input from '../Input';
+import TextArea from '../TextArea';
 import styles from './AddTeamSection.module.scss';
 
 const AddTeamSection: FunctionComponent = () => {

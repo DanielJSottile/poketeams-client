@@ -4,14 +4,14 @@ import React, {
   FormEvent,
   FunctionComponent,
 } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSignInAlt } from '@fortawesome/free-solid-svg-icons';
-import toast from 'react-hot-toast';
-import Input from '../Input';
-import Button from '../Button';
-import TokenService from '../../services/token-service';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { toast } from 'react-hot-toast';
 import GeneralContext from '../../contexts/GeneralContext';
 import AuthApiService from '../../services/auth-api-service';
+import TokenService from '../../services/token-service';
+import Button from '../Button';
+import Input from '../Input';
 import styles from './LoginForm.module.scss';
 
 type LoginFormProps = {

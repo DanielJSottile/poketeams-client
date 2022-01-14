@@ -1,8 +1,12 @@
 import React from 'react';
-import { FallbackProps } from 'react-error-boundary';
+import { faHome } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
-import { faHome } from '@fortawesome/free-solid-svg-icons';
+
+interface FallbackProps {
+  error: Error;
+  resetErrorBoundary: (...args: Array<unknown>) => void;
+}
 
 const ErrorFallback = ({
   error,
@@ -10,7 +14,7 @@ const ErrorFallback = ({
 }: FallbackProps): JSX.Element => {
   return (
     <main className="error-page">
-      <h1>{error.message}</h1>
+      <h3>{error.message}</h3>
       <h1>Something seems to have gone wrong!</h1>
       <button onClick={resetErrorBoundary}>
         Try clicking this button or returning to HOME

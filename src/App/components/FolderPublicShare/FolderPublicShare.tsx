@@ -1,9 +1,9 @@
 import React, { FunctionComponent } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFolder } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { PokemonFolder, PokemonTeam, PokemonSet } from '../../@types';
 import TeamsListPublicShare from '../TeamListPublicShare';
 import styles from './FolderPublicShare.module.scss';
-import { PokemonFolder, PokemonTeam, PokemonSet } from '../../@types';
 
 type FolderPublicShareProps = {
   /** folder that is being shared */

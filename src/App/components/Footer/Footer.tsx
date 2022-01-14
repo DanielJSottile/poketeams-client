@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { Link } from 'react-router-dom';
-import Image from '../Image';
 import PokeTeamsLogo from '../../Images/PokeTeams.png';
+import Image from '../Image';
 import styles from './Footer.module.scss';
 
 const Footer: FunctionComponent = () => {

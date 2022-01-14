@@ -1,5 +1,4 @@
 import React, { useContext, useState, FunctionComponent } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faCheckCircle,
   faFolderPlus,
@@ -7,22 +6,23 @@ import {
   faTrashAlt,
   faBan,
 } from '@fortawesome/free-solid-svg-icons';
-import toast from 'react-hot-toast';
-import Folder from '../Folder/Folder';
-import Input from '../Input/Input';
-import TextArea from '../TextArea';
-import Button from '../Button';
-import ExportText from '../ExportText';
-import LazyLoader from '../Loaders/LazyLoader';
-import DeleteExpand from '../DeleteExpand';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { toast } from 'react-hot-toast';
+import { PokemonFolder } from '../../@types';
 import GeneralContext from '../../contexts/GeneralContext';
 import { showdownFolderGenerate } from '../../utils/functions';
 import {
   validateNewFolderImport,
   validateNewFolderName,
 } from '../../utils/validations';
+import Button from '../Button';
+import DeleteExpand from '../DeleteExpand';
+import ExportText from '../ExportText';
+import Folder from '../Folder/Folder';
+import Input from '../Input/Input';
+import LazyLoader from '../Loaders/LazyLoader';
+import TextArea from '../TextArea';
 import styles from './FoldersList.module.scss';
-import { PokemonFolder } from '../../@types';
 
 const FoldersList: FunctionComponent = () => {
   const {
