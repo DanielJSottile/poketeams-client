@@ -60,12 +60,12 @@
   },
   "devDependencies": {
     "@babel/helper-regex": "^7.10.5",
-    "@typescript-eslint/eslint-plugin": "^4.28.3",
-    "@typescript-eslint/parser": "^4.28.3",
+    "@typescript-eslint/eslint-plugin": "^5.6.0",
+    "@typescript-eslint/parser": "^5.6.0",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.6",
     "enzyme-to-json": "^3.6.1",
-    "eslint": "^7.30.0",
+    "eslint": "^7.32.0",
     "eslint-plugin-jsx-a11y": "^6.4.1"
   }
 }
