@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import TeamPublicShare from '../TeamPublicShare';
+import Team from '../Team';
 import LazyLoader from '../Loaders/LazyLoader';
 import styles from './TeamListPublicShare.module.scss';
 import { PokemonTeam, PokemonSet } from '../../@types';
@@ -11,6 +11,7 @@ export type TeamListPublicShareProps = {
   sets: PokemonSet[];
 };
 
+/** @todo: remove this eventually */
 const TeamListPublicShare: FunctionComponent<TeamListPublicShareProps> = ({
   teams,
   sets,
@@ -24,11 +25,12 @@ const TeamListPublicShare: FunctionComponent<TeamListPublicShareProps> = ({
       });
 
       return (
-        <TeamPublicShare
+        <Team
+          isPublic
           key={team.id}
           id={`${team.team_name}`}
           team={team}
-          sets={teamSets}
+          passedTeamSets={teamSets}
         />
       );
     });

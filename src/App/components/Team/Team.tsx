@@ -14,12 +14,16 @@ export type TeamProps = {
   id: string;
   /** determines whether team is public or private */
   isPublic: boolean;
+  /** pokemon sets, passed in usually from share page */
+  /** @todo: find a way to eithe make this how its done, or remove */
+  passedTeamSets?: PokemonSet[];
 };
 
 const Team: FunctionComponent<TeamProps> = ({
   team,
   id,
   isPublic,
+  passedTeamSets,
 }): JSX.Element => {
   const { userSets, publicSets, handleCreateDefaultPokemon, handleDeleteTeam } =
     useContext(GeneralContext);
@@ -64,7 +68,13 @@ const Team: FunctionComponent<TeamProps> = ({
   /* Set Up Common Definitions to be 
   Used in Expanded/Unexpanded views */
 
-  const pokemonSets = isPublic ? publicSets : userSets;
+  //const pokemonSets = isPublic ? publicSets : userSets;
+
+  const pokemonSets = passedTeamSets
+    ? passedTeamSets
+    : isPublic
+    ? publicSets
+    : userSets;
 
   const pokemonSetsList = [
     ...new Set(pokemonSets.map((set: PokemonSet) => set.id)),

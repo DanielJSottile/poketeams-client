@@ -2,7 +2,8 @@ import React, { useState, useEffect, FunctionComponent } from 'react';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome } from '@fortawesome/free-solid-svg-icons';
-import TeamPublicShare from '../../components/Team-Public-Share';
+//import TeamPublicShare from '../../components/TeamPublicShare';
+import Team from '../../components/Team';
 import apiService from '../../services/apiService';
 import styles from './ShareTeamPage.module.scss';
 import { PokemonTeam, PokemonSet } from '../../@types';
@@ -38,10 +39,11 @@ const ShareTeamPage: FunctionComponent<RouteComponentProps<MatchProps>> = ({
         Go To PokéTeams <FontAwesomeIcon icon={faHome} />
       </Link>
       {team[0] ? (
-        <TeamPublicShare
-          team={team[0]}
+        <Team
+          isPublic
           id={team[0].id.toString()}
-          sets={sets}
+          team={team[0]}
+          passedTeamSets={sets}
         />
       ) : (
         <h3>This team seems to not exist anymore</h3>

@@ -2,6 +2,7 @@
 
 .container {
   background-color: $oxford-blue;
+  height: 100vh;
 }
 
 .go-back {
@@ -17,5 +18,18 @@
   &:hover:enabled {
     color: $azure;
     transition: 0.3s;
+  }
+}
+
+.set-list-grid {
+  color: $super-light-cream;
+  background-color: $oxford-blue;
+}
+.set-list-grid > div {
+  background-color: $prussian-blue;
+  &:hover {
+    transition: 0.3s;
+    cursor: pointer;
+    background-color: $azure;
   }
 }
