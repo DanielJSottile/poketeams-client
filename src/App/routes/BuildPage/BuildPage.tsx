@@ -1,9 +1,9 @@
 import React, { FunctionComponent } from 'react';
-import Navigation from '../../components/Navigation';
 import AddTeamSection from '../../components/AddTeamSection/AddTeamSection';
-import TeamList from '../../components/TeamList';
 import FolderList from '../../components/FoldersList/FoldersList';
 import Footer from '../../components/Footer/Footer';
+import Navigation from '../../components/Navigation';
+import TeamList from '../../components/TeamList';
 
 const BuildPage: FunctionComponent = (): JSX.Element => {
   return (

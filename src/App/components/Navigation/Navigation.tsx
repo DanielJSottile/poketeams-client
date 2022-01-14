@@ -1,6 +1,4 @@
 import React, { useContext, useState, FunctionComponent } from 'react';
-import { NavLink } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faSignOutAlt,
   faSignInAlt,
@@ -9,14 +7,16 @@ import {
   faBars,
   faTimes,
 } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classnames from 'classnames';
-import PokeTeamsIcon from '../../Images/PokeTeams.png';
-import Image from '../Image';
-import Button from '../Button';
-import SearchBar from '../SearchBar';
-import GeneralContext from '../../contexts/GeneralContext';
-import TokenService from '../../services/token-service';
 import jwtDecode from 'jwt-decode';
+import { NavLink } from 'react-router-dom';
+import GeneralContext from '../../contexts/GeneralContext';
+import PokeTeamsIcon from '../../Images/PokeTeams.png';
+import TokenService from '../../services/token-service';
+import Button from '../Button';
+import Image from '../Image';
+import SearchBar from '../SearchBar';
 import styles from './Navigation.module.scss';
 
 type NavigationProps = {

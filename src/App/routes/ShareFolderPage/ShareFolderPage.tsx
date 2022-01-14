@@ -1,12 +1,12 @@
 import React, { useState, useEffect, FunctionComponent } from 'react';
-import { Link, RouteComponentProps } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome } from '@fortawesome/free-solid-svg-icons';
-import FolderPublicShare from '../../components/FolderPublicShare';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as array from 'lodash';
+import { Link, RouteComponentProps } from 'react-router-dom';
+import { PokemonFolder, PokemonTeam, PokemonSet } from '../../@types';
+import FolderPublicShare from '../../components/FolderPublicShare';
 import apiService from '../../services/apiService';
 import styles from './ShareFolderPage.module.scss';
-import { PokemonFolder, PokemonTeam, PokemonSet } from '../../@types';
 
 export type MatchParams = { folder_id: string };
 

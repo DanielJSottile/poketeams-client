@@ -5,10 +5,10 @@ import React, {
   createContext,
   ReactNode,
 } from 'react';
-import { useLocation, useHistory } from 'react-router';
-import GeneralContext from './GeneralContext';
-import TokenService from '../services/token-service';
 import jwtDecode from 'jwt-decode';
+import { useLocation, useHistory } from 'react-router';
+import TokenService from '../services/token-service';
+import GeneralContext from './GeneralContext';
 
 interface UserContextValues {
   isLoggedIn: boolean;

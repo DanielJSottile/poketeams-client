@@ -1,4 +1,4 @@
-import POKEMON from './pokemon';
+import { PokemonEntry } from '../@types';
 import {
   ALL,
   TYPENULL,
@@ -22,7 +22,7 @@ import {
   GIGANTAMAXLIST,
   MEGAEVOLUTIONLIST,
 } from './constants';
-import { PokemonEntry } from '../@types';
+import POKEMON from './pokemon';
 
 const birdCheck = (species: string) => {
   return (

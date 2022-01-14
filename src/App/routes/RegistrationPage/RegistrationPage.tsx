@@ -1,8 +1,8 @@
 import React, { FunctionComponent } from 'react';
-import { Link } from 'react-router-dom';
 import { History } from 'history';
-import RegistrationForm from '../../components/RegistrationForm/RegistrationForm';
+import { Link } from 'react-router-dom';
 import Footer from '../../components/Footer/Footer';
+import RegistrationForm from '../../components/RegistrationForm/RegistrationForm';
 import styles from './RegistrationPage.module.scss';
 
 type RegistrationProps = {

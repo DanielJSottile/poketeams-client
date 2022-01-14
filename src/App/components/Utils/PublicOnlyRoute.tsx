@@ -1,6 +1,6 @@
 import React, { LazyExoticComponent, FunctionComponent } from 'react';
-import { Route, Redirect, RouteComponentProps } from 'react-router-dom';
 import { StaticContext } from 'react-router';
+import { Route, Redirect, RouteComponentProps } from 'react-router-dom';
 import TokenService from '../../services/token-service';
 
 export interface PublicOnlyRouteProps {

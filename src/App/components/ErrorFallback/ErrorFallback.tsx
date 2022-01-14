@@ -1,12 +1,8 @@
 import React from 'react';
 import { faHome } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { FallbackProps } from 'react-error-boundary';
 import { Link } from 'react-router-dom';
-
-interface FallbackProps {
-  error: Error;
-  resetErrorBoundary: (...args: Array<unknown>) => void;
-}
 
 const ErrorFallback = ({
   error,

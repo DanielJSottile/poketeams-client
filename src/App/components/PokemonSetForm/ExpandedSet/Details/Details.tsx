@@ -5,12 +5,14 @@ import React, {
   Dispatch,
   SetStateAction,
 } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSave } from '@fortawesome/free-solid-svg-icons';
-import Button from '../../../Button';
-import PokemonDetails from './PokemonDetails';
-import PokemonValueInputs from './PokemonValueInputs';
-import PokemonMoves from './PokemonMoves';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  PokemonSet,
+  TextInput,
+  BoolInput,
+  NumberInput,
+} from '../../../../@types';
 import GeneralContext from '../../../../contexts/GeneralContext';
 import {
   validateSpecies,
@@ -21,14 +23,12 @@ import {
   validateIvs,
   validateMoves,
 } from '../../../../utils/validations';
-import {
-  PokemonSet,
-  TextInput,
-  BoolInput,
-  NumberInput,
-} from '../../../../@types';
-import styles from './Details.module.scss';
+import Button from '../../../Button';
 import ValidationError from '../../../ValidationError';
+import styles from './Details.module.scss';
+import PokemonDetails from './PokemonDetails';
+import PokemonMoves from './PokemonMoves';
+import PokemonValueInputs from './PokemonValueInputs';
 
 type DetailsProps = {
   set: PokemonSet;

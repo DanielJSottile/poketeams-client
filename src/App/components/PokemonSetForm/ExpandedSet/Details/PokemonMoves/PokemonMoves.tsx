@@ -1,6 +1,6 @@
 import React, { FunctionComponent, Dispatch, SetStateAction } from 'react';
-import Input from '../../../../Input';
 import { PokemonSet, TextInput } from '../../../../../@types';
+import Input from '../../../../Input';
 import styles from './PokemonMoves.module.scss';
 
 type PokemonMoveProps = {

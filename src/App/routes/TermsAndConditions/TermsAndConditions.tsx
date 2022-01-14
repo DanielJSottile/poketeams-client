@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
-import { useHistory, Link } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHandPointLeft } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useHistory, Link } from 'react-router-dom';
 import Button from '../../components/Button';
 import Footer from '../../components/Footer';
 import styles from './TermsAndConditions.module.scss';

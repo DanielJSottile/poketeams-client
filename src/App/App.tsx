@@ -1,12 +1,12 @@
 import React, { lazy, Suspense, useEffect, FunctionComponent } from 'react';
-import { Route, Switch, useLocation } from 'react-router-dom';
-import { useHistory } from 'react-router';
-import { Toaster } from 'react-hot-toast';
 import { ErrorBoundary } from 'react-error-boundary';
+import { Toaster } from 'react-hot-toast';
+import { useHistory } from 'react-router';
+import { Route, Switch, useLocation } from 'react-router-dom';
 import ErrorFallback from './components/ErrorFallback';
+import LazyLoader from './components/Loaders/LazyLoader';
 import PrivateRoute from './components/Utils/PrivateRoute';
 import PublicOnlyRoute from './components/Utils/PublicOnlyRoute';
-import LazyLoader from './components/Loaders/LazyLoader';
 
 const BuildPage = lazy(() => import('./routes/BuildPage'));
 const HomePage = lazy(() => import('./routes/HomePage'));

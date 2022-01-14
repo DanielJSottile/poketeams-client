@@ -1,16 +1,16 @@
 import React, { useState, FormEvent, FunctionComponent } from 'react';
-import { useHistory } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHandPointLeft, faUserPlus } from '@fortawesome/free-solid-svg-icons';
-import Button from '../Button';
-import Input from '../Input';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useHistory } from 'react-router-dom';
+import { TextInput } from '../../@types';
+import AuthApiService from '../../services/auth-api-service';
 import {
   validateVerifyPassword,
   validatePassword,
 } from '../../utils/validations';
-import AuthApiService from '../../services/auth-api-service';
+import Button from '../Button';
+import Input from '../Input';
 import styles from './RegistrationForm.module.scss';
-import { TextInput } from '../../@types';
 
 type RegistrationFormProps = {
   /** folder that is being shared */

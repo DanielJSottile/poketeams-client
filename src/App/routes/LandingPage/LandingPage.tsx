@@ -1,10 +1,10 @@
 import React, { FunctionComponent } from 'react';
-import { StaticContext } from 'react-router';
-import { Link, RouteComponentProps } from 'react-router-dom';
 import { Location, History, LocationDescriptorObject } from 'history';
 import ScrollAnimation from 'react-animate-on-scroll';
-import Image from '../../components/Image/Image';
+import { StaticContext } from 'react-router';
+import { Link, RouteComponentProps } from 'react-router-dom';
 import Footer from '../../components/Footer/Footer';
+import Image from '../../components/Image/Image';
 import LoginForm from '../../components/LoginForm/LoginForm';
 import styles from './LandingPage.module.scss';
 

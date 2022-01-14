@@ -1,11 +1,11 @@
 import React, { FunctionComponent, useState, useEffect } from 'react';
-import { Link, RouteComponentProps } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Link, RouteComponentProps } from 'react-router-dom';
+import { PokemonSet } from '../../@types';
 import PokemonSetForm from '../../components/PokemonSetForm';
 import apiService from '../../services/apiService';
 import styles from './ShareSetPage.module.scss';
-import { PokemonSet } from '../../@types';
 
 export type MatchParams = {
   /** match param */

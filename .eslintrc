@@ -7,7 +7,8 @@
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:jsx-a11y/recommended",
-    "plugin:import/recommended"
+    "plugin:import/recommended",
+    "plugin:import/typescript"
   ],
   "rules": {
     "semi": 0,
@@ -41,12 +42,5 @@
         }
       }
     ]
-  },
-  "settings": {
-    "import/resolver": {
-      "node": {
-        "extensions": [".js", ".jsx", ".ts", ".tsx"]
-      }
-    }
   }
 }

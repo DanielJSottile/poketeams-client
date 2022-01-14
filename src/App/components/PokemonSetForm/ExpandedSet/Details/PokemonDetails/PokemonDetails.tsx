@@ -1,5 +1,5 @@
 import React, { FunctionComponent, Dispatch, SetStateAction } from 'react';
-import Input from '../../../../Input';
+import { NumberInput, PokemonSet, TextInput } from '../../../../../@types';
 import {
   validateItem,
   validateAbility,
@@ -7,7 +7,7 @@ import {
   validateNature,
   validateHappiness,
 } from '../../../../../utils/validations';
-import { NumberInput, PokemonSet, TextInput } from '../../../../../@types';
+import Input from '../../../../Input';
 import styles from './PokemonDetails.module.scss';
 
 type PokemonDetailsProps = {

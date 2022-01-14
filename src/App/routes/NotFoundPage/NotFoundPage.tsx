@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
 import Image from '../../components/Image/Image';
 import DizzyPikachu from '../../Images/dizzy-pikachu-shuffle.png';

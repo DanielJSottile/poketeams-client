@@ -1,11 +1,11 @@
 import React, { useContext, FunctionComponent } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faArrowCircleLeft,
   faArrowCircleRight,
 } from '@fortawesome/free-solid-svg-icons';
-import Button from '../../Button';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import GeneralContext from '../../../contexts/GeneralContext';
+import Button from '../../Button';
 import styles from './TeamListPagination.module.scss';
 
 const TeamListPagination: FunctionComponent = () => {
