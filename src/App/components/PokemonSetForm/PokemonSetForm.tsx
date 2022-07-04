@@ -1,10 +1,10 @@
 import React, { useState, FunctionComponent } from 'react';
+import { PokemonSet } from '../../@types';
 import { showdownParse } from '../../utils/functions';
 
-import { PokemonSet } from '../../@types';
+import Modal from '../Modal';
 import ExpandedSet from './ExpandedSet';
 import UnexpandedSet from './UnexpandedSet';
-import Modal from '../Modal';
 
 type PokemonSetFormProps = {
   /** Pokemon Set */

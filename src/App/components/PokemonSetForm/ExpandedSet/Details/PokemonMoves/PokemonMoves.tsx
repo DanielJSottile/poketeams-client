@@ -1,6 +1,6 @@
 import React, { FunctionComponent, Dispatch, SetStateAction } from 'react';
-import Input from '../../../../Input';
 import { PokemonSet, TextInput } from '../../../../../@types';
+import Input from '../../../../Input';
 import styles from './PokemonMoves.module.scss';
 
 type PokemonMoveProps = {
@@ -36,13 +36,13 @@ const PokemonMoves: FunctionComponent<PokemonMoveProps> = ({
         htmlFor={'pokemon-moves'}
         label={'Moves:'}
         inputClass={styles['pokemon-move']}
-        placeholder="Tackle"
+        placeholder='Tackle'
         value={isPublic ? set.move_one || 'Tackle' : moveOne.value}
         onChangeCallback={(e) =>
           setMoveOne({ value: e.target.value, touched: true })
         }
-        type="text"
-        name="pokemon-move"
+        type='text'
+        name='pokemon-move'
         id={`pokemon-${set?.id}-move-1`}
         disabled={isPublic}
         readOnly={isPublic}
@@ -54,8 +54,8 @@ const PokemonMoves: FunctionComponent<PokemonMoveProps> = ({
         onChangeCallback={(e) =>
           setMoveTwo({ value: e.target.value, touched: true })
         }
-        type="text"
-        name="pokemon-move"
+        type='text'
+        name='pokemon-move'
         id={`pokemon-${set?.id}-move-2`}
         disabled={isPublic}
         readOnly={isPublic}
@@ -67,8 +67,8 @@ const PokemonMoves: FunctionComponent<PokemonMoveProps> = ({
         onChangeCallback={(e) =>
           setMoveThree({ value: e.target.value, touched: true })
         }
-        type="text"
-        name="pokemon-move"
+        type='text'
+        name='pokemon-move'
         id={`pokemon-${set?.id}-move-3`}
         disabled={isPublic}
         readOnly={isPublic}
@@ -80,8 +80,8 @@ const PokemonMoves: FunctionComponent<PokemonMoveProps> = ({
         onChangeCallback={(e) =>
           setMoveFour({ value: e.target.value, touched: true })
         }
-        type="text"
-        name="pokemon-move"
+        type='text'
+        name='pokemon-move'
         id={`pokemon-${set?.id}-move-4`}
         disabled={isPublic}
         readOnly={isPublic}

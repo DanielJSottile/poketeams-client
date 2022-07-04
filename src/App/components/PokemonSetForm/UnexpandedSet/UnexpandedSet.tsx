@@ -1,11 +1,11 @@
 import React, { FunctionComponent } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMars, faVenus, faStar } from '@fortawesome/free-solid-svg-icons';
-import Image from '../../Image';
-import legality from '../../../utils/legality';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { PokemonSet } from '../../../@types';
 import gmaxIcon from '../../../Images/gmax-icon.png';
 import megaEvolutionIcon from '../../../Images/mega-evolution.png';
+import legality from '../../../utils/legality';
+import Image from '../../Image';
 import styles from './UnexpandedSet.module.scss';
 
 type UnexpandedSetProps = {
@@ -70,7 +70,7 @@ const UnexpandedSet: FunctionComponent<UnexpandedSetProps> = ({
   return (
     <>
       <div
-        role="button"
+        role='button'
         tabIndex={0}
         className={styles['pokemon']}
         onClick={() => handleSetModal()}

@@ -1,6 +1,4 @@
 import React, { useContext, useState, FunctionComponent } from 'react';
-import { NavLink } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faSignOutAlt,
   faSignInAlt,
@@ -9,14 +7,16 @@ import {
   faBars,
   faTimes,
 } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classnames from 'classnames';
-import PokeTeamsIcon from '../../Images/PokeTeams.png';
-import Image from '../Image';
-import Button from '../Button';
-import SearchBar from '../SearchBar';
-import GeneralContext from '../../contexts/GeneralContext';
-import TokenService from '../../services/token-service';
 import jwtDecode from 'jwt-decode';
+import { NavLink } from 'react-router-dom';
+import GeneralContext from '../../contexts/GeneralContext';
+import PokeTeamsIcon from '../../Images/PokeTeams.png';
+import TokenService from '../../services/token-service';
+import Button from '../Button';
+import Image from '../Image';
+import SearchBar from '../SearchBar';
 import styles from './Navigation.module.scss';
 
 type NavigationProps = {
@@ -43,7 +43,7 @@ const Navigation: FunctionComponent<NavigationProps> = ({ isPublic }) => {
     return (
       <NavLink
         onClick={isLoggedIn ? handleLogoutClick : () => null}
-        to="/landing"
+        to='/landing'
       >
         {isLoggedIn ? 'Logout' : 'Log In'}{' '}
         <FontAwesomeIcon icon={isLoggedIn ? faSignOutAlt : faSignInAlt} />
@@ -64,7 +64,7 @@ const Navigation: FunctionComponent<NavigationProps> = ({ isPublic }) => {
 
   return (
     <div>
-      <nav role="navigation">
+      <nav role='navigation'>
         <Button
           buttonClass={styles['mobile-menu']}
           onClickCallback={() => setToggleMenu(!toggleMenu)}
@@ -79,10 +79,10 @@ const Navigation: FunctionComponent<NavigationProps> = ({ isPublic }) => {
         </Button>
         {toggleMenu && (
           <div className={styles['mobile-buttons']}>
-            <NavLink to="/" onClick={() => setToggleMenu(false)}>
+            <NavLink to='/' onClick={() => setToggleMenu(false)}>
               <FontAwesomeIcon icon={faHome} /> Home
             </NavLink>
-            <NavLink to="/build" onClick={() => setToggleMenu(false)}>
+            <NavLink to='/build' onClick={() => setToggleMenu(false)}>
               <FontAwesomeIcon icon={faHammer} /> Build!
             </NavLink>
             {renderLogInOut()}
@@ -93,17 +93,17 @@ const Navigation: FunctionComponent<NavigationProps> = ({ isPublic }) => {
           <div className={styles['logo-with-text']}>
             <Image
               src={PokeTeamsIcon}
-              alt="PokeTeams Logo"
+              alt='PokeTeams Logo'
               imageClass={styles['logo-title']}
             />
             <h2>{isPublic ? 'Home' : 'Build'}</h2>
           </div>
           <div className={styles['navbar']}>
             <div className={styles['desktop-button']}>
-              <NavLink to="/">
+              <NavLink to='/'>
                 <FontAwesomeIcon icon={faHome} /> Home
               </NavLink>
-              <NavLink to="/build">
+              <NavLink to='/build'>
                 <FontAwesomeIcon icon={faHammer} /> Build!
               </NavLink>
               {renderLogInOut()}

@@ -1,5 +1,4 @@
 import React, { useContext, useState, FunctionComponent } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faCheckCircle,
   faFolderPlus,
@@ -7,22 +6,23 @@ import {
   faTrashAlt,
   faBan,
 } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import toast from 'react-hot-toast';
-import Folder from '../Folder/Folder';
-import Input from '../Input/Input';
-import TextArea from '../TextArea';
-import Button from '../Button';
-import ExportText from '../ExportText';
-import LazyLoader from '../Loaders/LazyLoader';
-import DeleteExpand from '../DeleteExpand';
+import { PokemonFolder } from '../../@types';
 import GeneralContext from '../../contexts/GeneralContext';
 import { showdownFolderGenerate } from '../../utils/functions';
 import {
   validateNewFolderImport,
   validateNewFolderName,
 } from '../../utils/validations';
+import Button from '../Button';
+import DeleteExpand from '../DeleteExpand';
+import ExportText from '../ExportText';
+import Folder from '../Folder/Folder';
+import Input from '../Input/Input';
+import LazyLoader from '../Loaders/LazyLoader';
+import TextArea from '../TextArea';
 import styles from './FoldersList.module.scss';
-import { PokemonFolder } from '../../@types';
 
 const FoldersList: FunctionComponent = () => {
   const {
@@ -84,13 +84,13 @@ const FoldersList: FunctionComponent = () => {
         <div>
           <Input
             inputHasError
-            htmlFor="foldername"
-            label="Folder Name:"
+            htmlFor='foldername'
+            label='Folder Name:'
             validationCallback={() => validateNewFolderName(newFolderName)}
-            placeholder="e.g. Good Teams"
-            type="text"
-            name="foldername"
-            id="foldername"
+            placeholder='e.g. Good Teams'
+            type='text'
+            name='foldername'
+            id='foldername'
             value={newFolderName.value}
             onChangeCallback={(e) =>
               setNewFolderName({ value: e.target.value, touched: true })
@@ -101,11 +101,11 @@ const FoldersList: FunctionComponent = () => {
             textAreaHasError
             isError={!!newFolderImport.value.length}
             validationCallback={() => validateNewFolderImport(newFolderImport)}
-            htmlFor="folder-import"
-            label="Import Showdown Folder:"
-            placeholder="Optionally Import a proper Pokemon Showdown Folder Here And It Will Fill Out The Entire Folder!"
-            name="folder-import"
-            id="team-import-1"
+            htmlFor='folder-import'
+            label='Import Showdown Folder:'
+            placeholder='Optionally Import a proper Pokemon Showdown Folder Here And It Will Fill Out The Entire Folder!'
+            name='folder-import'
+            id='team-import-1'
             value={newFolderImport.value}
             onChangeCallback={(e) =>
               setNewFolderImport({ value: e.target.value, touched: true })
@@ -113,7 +113,7 @@ const FoldersList: FunctionComponent = () => {
           />
         </div>
         <Button
-          type="submit"
+          type='submit'
           buttonClass={styles['submit']}
           disabled={
             !!validateNewFolderName(newFolderName) ||
@@ -136,20 +136,20 @@ const FoldersList: FunctionComponent = () => {
       <form>
         <Input
           inputHasError
-          htmlFor="foldername"
-          label="Edit Folder Name:"
+          htmlFor='foldername'
+          label='Edit Folder Name:'
           validationCallback={() => validateNewFolderName(newFolderName)}
-          placeholder="e.g. Good Teams"
-          type="text"
-          name="foldername"
-          id="foldername"
+          placeholder='e.g. Good Teams'
+          type='text'
+          name='foldername'
+          id='foldername'
           value={newFolderName.value}
           onChangeCallback={(e) =>
             setNewFolderName({ value: e.target.value, touched: true })
           }
         />
         <Button
-          type="submit"
+          type='submit'
           buttonClass={styles['submit']}
           disabled={!!validateNewFolderName(newFolderName)}
           onClickCallback={(e) => {

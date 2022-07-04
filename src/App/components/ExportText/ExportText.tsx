@@ -1,16 +1,16 @@
 import React, { FunctionComponent } from 'react';
-import { Link } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faDownload,
   faClipboard,
   faShareSquare,
 } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Link } from 'react-router-dom';
+import { PokemonFolder, PokemonTeam, PokemonSet } from '../../@types';
+import { useClipboard } from '../../utils/customHooks';
 import Button from '../Button';
 import Input from '../Input';
 import TextArea from '../TextArea';
-import { useClipboard } from '../../utils/customHooks';
-import { PokemonFolder, PokemonTeam, PokemonSet } from '../../@types';
 import styles from './ExportText.module.scss';
 
 interface LinkState {
@@ -47,7 +47,7 @@ const ExportText: FunctionComponent<ExportTextProps> = ({
       <div>
         <div className={styles['buttons']}>
           <div className={styles['upper-buttons']}>
-            <label htmlFor="export-text" className={styles['label']}>
+            <label htmlFor='export-text' className={styles['label']}>
               {exportText} <FontAwesomeIcon icon={faDownload} />
             </label>
             <Button
@@ -67,17 +67,17 @@ const ExportText: FunctionComponent<ExportTextProps> = ({
                 pathname: linkPathname,
                 state: linkState,
               }}
-              target="_blank"
+              target='_blank'
             >
               {shareText} <FontAwesomeIcon icon={faShareSquare} />
             </Link>
 
             <Input
-              id="share-input"
+              id='share-input'
               inputHasError={false}
               inputClass={styles['share-input']}
               disabled
-              type="text"
+              type='text'
               readOnly
               value={inputValue}
             />
@@ -90,7 +90,7 @@ const ExportText: FunctionComponent<ExportTextProps> = ({
         ref={textArea}
         disabled
         readOnly
-        name="export-text"
+        name='export-text'
         id={textAreaId}
         value={textAreaValue}
       />

@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faThumbsUp, faThumbsDown } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Button from '../Button';
 
 type DeleteExpandProps = {

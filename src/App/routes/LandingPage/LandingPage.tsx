@@ -1,10 +1,10 @@
 import React, { FunctionComponent } from 'react';
-import { StaticContext } from 'react-router';
-import { Link, RouteComponentProps } from 'react-router-dom';
 import { Location, History, LocationDescriptorObject } from 'history';
 import ScrollAnimation from 'react-animate-on-scroll';
-import Image from '../../components/Image/Image';
+import { StaticContext } from 'react-router';
+import { Link, RouteComponentProps } from 'react-router-dom';
 import Footer from '../../components/Footer/Footer';
+import Image from '../../components/Image/Image';
 import LoginForm from '../../components/LoginForm/LoginForm';
 import styles from './LandingPage.module.scss';
 
@@ -29,7 +29,7 @@ const LandingPage: FunctionComponent<
 
   return (
     <>
-      <header role="banner" className={styles['header']}>
+      <header role='banner' className={styles['header']}>
         <div className={styles['landing-title']}></div>
         <h2 className={styles['header-text']}>store. organize. edit. share.</h2>
       </header>
@@ -53,13 +53,13 @@ const LandingPage: FunctionComponent<
           <LoginForm onLoginSuccess={handleLoginSucess} />
           <div>
             <p>Not A Member? </p>
-            <Link className={styles['register-entry']} to="/register">
+            <Link className={styles['register-entry']} to='/register'>
               Register Here:
             </Link>
           </div>
           <div>
             <p>Or...</p>
-            <Link className={styles['public-entry']} to="/">
+            <Link className={styles['public-entry']} to='/'>
               Find Teams Here!
             </Link>
           </div>
@@ -73,8 +73,8 @@ const LandingPage: FunctionComponent<
           </header>
           <Image
             imageClass={styles['landingimg']}
-            src="https://imgur.com/9wYBaMQ.png"
-            alt="organize page"
+            src='https://imgur.com/9wYBaMQ.png'
+            alt='organize page'
           />
           <p>
             PokeTeams goes above and beyond the average pastebin in order for
@@ -92,8 +92,8 @@ const LandingPage: FunctionComponent<
           </header>
           <Image
             imageClass={styles['landingimg']}
-            src="https://imgur.com/HR1yjKA.png"
-            alt="edit set"
+            src='https://imgur.com/HR1yjKA.png'
+            alt='edit set'
           />
           <p>
             Once you've uploaded your teams, you'll be able to edit them by hand
@@ -109,8 +109,8 @@ const LandingPage: FunctionComponent<
           </header>
           <Image
             imageClass={styles['landingimg']}
-            src="https://imgur.com/JwMxPdp.png"
-            alt="search"
+            src='https://imgur.com/JwMxPdp.png'
+            alt='search'
           />
           <p>
             PokeTeams lets you search the database by specific Pokemon species,
@@ -127,8 +127,8 @@ const LandingPage: FunctionComponent<
           </header>
           <Image
             imageClass={styles['landingimg']}
-            src="https://imgur.com/JWIgCyL.png"
-            alt="export"
+            src='https://imgur.com/JWIgCyL.png'
+            alt='export'
           />
           <p>
             Most importantly, you can share both full teams and Pokemon sets

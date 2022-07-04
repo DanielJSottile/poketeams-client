@@ -4,9 +4,8 @@ import React, {
   SetStateAction,
   ReactNode,
 } from 'react';
-import Input from '../../../Input';
-import Select from '../../../Select';
-import Sprites from './Sprites';
+import { PokemonSet, TextInput, BoolInput } from '../../../../@types';
+import legality from '../../../../utils/legality';
 import {
   validateSpecies,
   validateNickname,
@@ -14,9 +13,10 @@ import {
   validateShiny,
   validateGigantamax,
 } from '../../../../utils/validations';
-import { PokemonSet, TextInput, BoolInput } from '../../../../@types';
+import Input from '../../../Input';
+import Select from '../../../Select';
 import styles from './Intro.module.scss';
-import legality from '../../../../utils/legality';
+import Sprites from './Sprites';
 
 type IntroProps = {
   isPublic: boolean;
@@ -86,10 +86,10 @@ const Intro: FunctionComponent<IntroProps> = ({
             onChangeCallback={(e) =>
               setSpecies({ value: e.target.value, touched: true })
             }
-            placeholder="e.g. Pikachu"
+            placeholder='e.g. Pikachu'
             value={isPublic ? set.species || 'Pikachu' : species.value}
-            type="text"
-            name="pokemon-name"
+            type='text'
+            name='pokemon-name'
             id={`pokemon-name-${set?.id}`}
             disabled={isPublic}
             readOnly={isPublic}
@@ -106,8 +106,8 @@ const Intro: FunctionComponent<IntroProps> = ({
             }
             placeholder={species.value}
             value={isPublic ? set.nickname || '' : nickname.value}
-            type="text"
-            name="pokemon-nickname"
+            type='text'
+            name='pokemon-nickname'
             id={`pokemon-nickname-${set?.id}`}
             disabled={isPublic}
             readOnly={isPublic}
@@ -122,7 +122,7 @@ const Intro: FunctionComponent<IntroProps> = ({
               setGender({ value: e.target.value, touched: true })
             }
             value={isPublic ? set.gender || '' : gender.value}
-            name="pokemon-gender"
+            name='pokemon-gender'
             id={`pokemon-gender-${set?.id}`}
             disabled={isPublic || !legality.isLegalSpecies(species.value)}
             options={createGenderOptions(
@@ -138,9 +138,9 @@ const Intro: FunctionComponent<IntroProps> = ({
             onChangeCallback={(e) =>
               setShiny({ value: e.currentTarget.checked, touched: true })
             }
-            type="checkbox"
-            id="shiny-2"
-            name="shiny"
+            type='checkbox'
+            id='shiny-2'
+            name='shiny'
             checked={isPublic ? set.shiny || false : shiny.value}
             value={
               isPublic
@@ -160,9 +160,9 @@ const Intro: FunctionComponent<IntroProps> = ({
               onChangeCallback={(e) =>
                 setGigantamax({ value: e.currentTarget.checked, touched: true })
               }
-              type="checkbox"
-              id="gigantamax"
-              name="gigantamax"
+              type='checkbox'
+              id='gigantamax'
+              name='gigantamax'
               checked={isPublic ? set.gigantamax || false : gigantamax.value}
               value={
                 isPublic

@@ -1,10 +1,10 @@
 import React, { useContext, FunctionComponent } from 'react';
-import Team from '../Team';
-import LazyLoader from '../Loaders/LazyLoader';
-import TeamListPagination from './TeamListPagination';
-import GeneralContext from '../../contexts/GeneralContext';
-import styles from './TeamList.module.scss';
 import { PokemonTeam } from '../../@types';
+import GeneralContext from '../../contexts/GeneralContext';
+import LazyLoader from '../Loaders/LazyLoader';
+import Team from '../Team';
+import styles from './TeamList.module.scss';
+import TeamListPagination from './TeamListPagination';
 
 type TeamListProps = {
   /** determines whether the list is public or private */

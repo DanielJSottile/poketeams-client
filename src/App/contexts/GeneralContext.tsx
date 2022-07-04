@@ -6,12 +6,8 @@ import React, {
   Dispatch,
   SetStateAction,
 } from 'react';
-import toast from 'react-hot-toast';
-import apiService from '../services/apiService';
-import TokenService from '../services/token-service';
 import jwtDecode from 'jwt-decode';
-import { showdownParse } from '../utils/functions';
-import { showdownFolderParse } from '../utils/functions';
+import toast from 'react-hot-toast';
 import {
   PokemonFolder,
   PokemonTeam,
@@ -20,6 +16,9 @@ import {
   InputWithId,
   ParseReturn,
 } from '../@types';
+import apiService from '../services/apiService';
+import TokenService from '../services/token-service';
+import { showdownParse, showdownFolderParse } from '../utils/functions';
 
 type ContextProps = {
   children: ReactNode;

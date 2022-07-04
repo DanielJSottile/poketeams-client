@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
-import Image from '../../../../Image';
-import legality from '../../../../../utils/legality';
 import { BoolInput, TextInput } from '../../../../../@types';
+import legality from '../../../../../utils/legality';
+import Image from '../../../../Image';
 import styles from './Sprites.module.scss';
 
 type SpritesProps = {

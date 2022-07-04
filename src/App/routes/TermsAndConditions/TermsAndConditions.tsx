@@ -1,13 +1,13 @@
 import React, { FunctionComponent } from 'react';
-import { useHistory, Link } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHandPointLeft } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useNavigate, Link } from 'react-router-dom';
 import Button from '../../components/Button';
 import Footer from '../../components/Footer';
 import styles from './TermsAndConditions.module.scss';
 
 const TermsAndConditions: FunctionComponent = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
   return (
     <div className={styles['container']}>
       <section>
@@ -19,7 +19,7 @@ const TermsAndConditions: FunctionComponent = () => {
           <Button
             buttonClass={styles['go-back-button']}
             onClickCallback={() => {
-              history.goBack();
+              navigate(-1);
             }}
           >
             Go Back <FontAwesomeIcon icon={faHandPointLeft} />
@@ -100,8 +100,8 @@ const TermsAndConditions: FunctionComponent = () => {
           Conditions were created with the help of the{' '}
           <Link
             to={{ pathname: 'https://www.termsandconditionsgenerator.com' }}
-            target="_blank"
-            rel="noopener noreferrer"
+            target='_blank'
+            rel='noopener noreferrer'
           >
             Terms And Conditions Generator
           </Link>

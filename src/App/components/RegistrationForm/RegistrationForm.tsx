@@ -1,16 +1,16 @@
 import React, { useState, FormEvent, FunctionComponent } from 'react';
-import { useHistory } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHandPointLeft, faUserPlus } from '@fortawesome/free-solid-svg-icons';
-import Button from '../Button';
-import Input from '../Input';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useNavigate } from 'react-router-dom';
+import { TextInput } from '../../@types';
+import AuthApiService from '../../services/auth-api-service';
 import {
   validateVerifyPassword,
   validatePassword,
 } from '../../utils/validations';
-import AuthApiService from '../../services/auth-api-service';
+import Button from '../Button';
+import Input from '../Input';
 import styles from './RegistrationForm.module.scss';
-import { TextInput } from '../../@types';
 
 type RegistrationFormProps = {
   /** folder that is being shared */
@@ -20,7 +20,7 @@ type RegistrationFormProps = {
 const RegistrationForm: FunctionComponent<RegistrationFormProps> = ({
   onRegistrationSuccess = () => null,
 }) => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const [error, setError] = useState('');
   const [username, setUsername] = useState<TextInput>({
     value: '',
@@ -60,7 +60,7 @@ const RegistrationForm: FunctionComponent<RegistrationFormProps> = ({
 
   return (
     <form className={styles['registration-form']} onSubmit={handleSubmit}>
-      <div role="alert">
+      <div role='alert'>
         {error ? (
           <p className={styles['error']}>{error}</p>
         ) : (
@@ -79,14 +79,14 @@ const RegistrationForm: FunctionComponent<RegistrationFormProps> = ({
         }
         value={username.value}
         inputClass={styles['width-override']}
-        htmlFor="RegistrationForm__user_name"
-        label="Username &#42;"
+        htmlFor='RegistrationForm__user_name'
+        label='Username &#42;'
         labelClass={styles['width-override']}
-        placeholder="Username"
-        name="user_name"
-        type="text"
+        placeholder='Username'
+        name='user_name'
+        type='text'
         required
-        id="RegistrationForm__user_name"
+        id='RegistrationForm__user_name'
       />
       <Input
         containerClass={styles['password']}
@@ -96,14 +96,14 @@ const RegistrationForm: FunctionComponent<RegistrationFormProps> = ({
         }
         value={password.value}
         inputClass={styles['width-override']}
-        htmlFor="RegistrationForm__password"
-        label="Password &#42;"
+        htmlFor='RegistrationForm__password'
+        label='Password &#42;'
         labelClass={styles['width-override']}
-        placeholder="Password"
-        name="password"
-        type="password"
+        placeholder='Password'
+        name='password'
+        type='password'
         required
-        id="RegistrationForm__password"
+        id='RegistrationForm__password'
       />
       <Input
         containerClass={styles['verifyPassword']}
@@ -113,20 +113,20 @@ const RegistrationForm: FunctionComponent<RegistrationFormProps> = ({
         }
         value={verifyPassword.value}
         inputClass={styles['width-override']}
-        htmlFor="RegistrationForm__verifyPassword"
-        label="Verify Password &#42;"
+        htmlFor='RegistrationForm__verifyPassword'
+        label='Verify Password &#42;'
         labelClass={styles['width-override']}
-        placeholder="Verify Password"
-        name="verifyPassword"
-        type="password"
+        placeholder='Verify Password'
+        name='verifyPassword'
+        type='password'
         required
-        id="RegistrationForm__verifyPassword"
+        id='RegistrationForm__verifyPassword'
       />
       <span className={styles['required-text']}>&#42; Required</span>
       <div className={styles['button-container']}>
         <Button
           buttonClass={styles['register-button']}
-          type="submit"
+          type='submit'
           disabled={
             !username.value ||
             !!validatePassword(password) ||
@@ -138,7 +138,7 @@ const RegistrationForm: FunctionComponent<RegistrationFormProps> = ({
         <Button
           buttonClass={styles['go-back-button']}
           onClickCallback={() => {
-            history.goBack();
+            navigate(-1);
           }}
         >
           Go Back <FontAwesomeIcon icon={faHandPointLeft} />

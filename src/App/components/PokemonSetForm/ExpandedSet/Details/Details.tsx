@@ -5,13 +5,16 @@ import React, {
   Dispatch,
   SetStateAction,
 } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSave } from '@fortawesome/free-solid-svg-icons';
-import Button from '../../../Button';
-import PokemonDetails from './PokemonDetails';
-import PokemonValueInputs from './PokemonValueInputs';
-import PokemonMoves from './PokemonMoves';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  PokemonSet,
+  TextInput,
+  BoolInput,
+  NumberInput,
+} from '../../../../@types';
 import GeneralContext from '../../../../contexts/GeneralContext';
+import { numberInputOnChange } from '../../../../utils/functions';
 import {
   validateSpecies,
   validateGender,
@@ -21,15 +24,12 @@ import {
   validateIvs,
   validateMoves,
 } from '../../../../utils/validations';
-import { numberInputOnChange } from '../../../../utils/functions';
-import {
-  PokemonSet,
-  TextInput,
-  BoolInput,
-  NumberInput,
-} from '../../../../@types';
-import styles from './Details.module.scss';
+import Button from '../../../Button';
 import ValidationError from '../../../ValidationError';
+import styles from './Details.module.scss';
+import PokemonDetails from './PokemonDetails';
+import PokemonMoves from './PokemonMoves';
+import PokemonValueInputs from './PokemonValueInputs';
 
 type DetailsProps = {
   set: PokemonSet;
@@ -308,7 +308,7 @@ const Details: FunctionComponent<DetailsProps> = ({
       />
       {!isPublic && (
         <Button
-          type="submit"
+          type='submit'
           disabled={
             !!validateSpecies(species) ||
             !!validateGender(gender, species) ||

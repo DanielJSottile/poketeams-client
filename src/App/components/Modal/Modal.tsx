@@ -1,7 +1,7 @@
 import React, { FunctionComponent, ReactNode, ReactPortal } from 'react';
-import { createPortal } from 'react-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faWindowClose } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { createPortal } from 'react-dom';
 import Button from '../Button';
 import styles from './Modal.module.scss';
 

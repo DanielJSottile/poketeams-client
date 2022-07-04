@@ -1,12 +1,11 @@
 import React, { lazy, Suspense, useEffect, FunctionComponent } from 'react';
-import { Route, Switch, useLocation } from 'react-router-dom';
-import { useHistory } from 'react-router';
-import { Toaster } from 'react-hot-toast';
 import { ErrorBoundary } from 'react-error-boundary';
+import { Toaster } from 'react-hot-toast';
+import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import ErrorFallback from './components/ErrorFallback';
+import LazyLoader from './components/Loaders/LazyLoader';
 import PrivateRoute from './components/Utils/PrivateRoute';
 import PublicOnlyRoute from './components/Utils/PublicOnlyRoute';
-import LazyLoader from './components/Loaders/LazyLoader';
 
 const BuildPage = lazy(() => import('./routes/BuildPage'));
 const HomePage = lazy(() => import('./routes/HomePage'));
@@ -26,7 +25,7 @@ const App: FunctionComponent = () => {
     setTimeout(() => window.scrollTo(0, 0), 1);
   }, [location]);
 
-  const history = useHistory();
+  const navigate = useNavigate();
 
   return (
     <>
@@ -34,7 +33,7 @@ const App: FunctionComponent = () => {
         <ErrorBoundary
           FallbackComponent={ErrorFallback}
           onReset={() => {
-            history.push('/');
+            navigate('/');
           }}
         >
           <Suspense
@@ -44,34 +43,59 @@ const App: FunctionComponent = () => {
               </div>
             }
           >
-            <Switch>
-              <Route exact path={'/'} component={HomePage} />
-              <Route exact path={'/share/:team_id'} component={ShareTeamPage} />
+            <Routes>
+              <Route path={'/'} element={<HomePage />}>
+                <Route path='share'>
+                  <Route path=':team_id' element={<ShareTeamPage />}>
+                    <Route path=':set_id' element={<ShareSetPage />} />
+                  </Route>
+                  <Route path='user'>
+                    <Route path='folder'>
+                      <Route path=':folder_id' element={<ShareFolderPage />} />
+                    </Route>
+                  </Route>
+                </Route>
+                <Route path={'privacy-policy'} element={<PrivacyPolicy />} />
+                <Route
+                  path={'terms-and-conditions'}
+                  element={<TermsAndConditions />}
+                />
+              </Route>
+              <PublicOnlyRoute path={'landing'} element={<LandingPage />} />
+              <PublicOnlyRoute
+                path={'register'}
+                element={<RegistrationPage />}
+              />
+
+              <PrivateRoute path={'build'} element={BuildPage} />
+              <Route path='*' element={<NotFoundPage />} />
+              {/* <Route path={'/'} element={HomePage} />
+              <Route>
+
+              </Route>
+              <Route exact path={'/share/:team_id'} element={ShareTeamPage} />
               <Route
                 exact
                 path={'/share/:team_id/:set_id'}
-                component={ShareSetPage}
+                element={ShareSetPage}
               />
               <Route
                 exact
                 path={'/share/user/folder/:folder_id'}
-                component={ShareFolderPage}
+                element={ShareFolderPage}
               />
-              <Route exact path={'/privacy-policy'} component={PrivacyPolicy} />
+              <Route exact path={'/privacy-policy'} element={PrivacyPolicy} />
               <Route
                 exact
                 path={'/terms-and-conditions'}
-                component={TermsAndConditions}
+                element={TermsAndConditions}
               />
-              <PublicOnlyRoute path={'/landing'} component={LandingPage} />
-              <PublicOnlyRoute
-                path={'/register'}
-                component={RegistrationPage}
-              />
+              <PublicOnlyRoute path={'/landing'} element={LandingPage} />
+              <PublicOnlyRoute path={'/register'} element={RegistrationPage} />
 
-              <PrivateRoute path={'/build'} component={BuildPage} />
-              <Route component={NotFoundPage} />
-            </Switch>
+              <PrivateRoute path={'/build'} element={BuildPage} />
+              <Route element={NotFoundPage} /> */}
+            </Routes>
           </Suspense>
         </ErrorBoundary>
         <Toaster />

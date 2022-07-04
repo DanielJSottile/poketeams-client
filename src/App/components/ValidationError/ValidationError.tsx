@@ -1,6 +1,6 @@
 import React, { FunctionComponent, ReactNode } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styles from './ValidationError.module.scss';
 
 type ValidationErrorProps = {
