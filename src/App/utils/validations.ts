@@ -202,7 +202,7 @@ export const validateLevel = (level: NumberInput): string | boolean => {
 
 export const validateHappiness = (happiness: NumberInput): string | boolean => {
   if (Number(happiness.value) > 255 || Number(happiness.value) < 0) {
-    return `Hapiness must be between 0 and 255`;
+    return `Happiness must be between 0 and 255`;
   }
 
   return false;

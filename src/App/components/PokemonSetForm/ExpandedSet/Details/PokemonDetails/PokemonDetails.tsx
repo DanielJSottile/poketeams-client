@@ -119,12 +119,15 @@ const PokemonDetails: FunctionComponent<PokemonDetailsProps> = ({
         label={'Happiness:'}
         inputClass={styles['pokemon-happiness']}
         validationCallback={() => validateHappiness(happiness)}
-        onChangeCallback={(e) =>
-          setHappiness({ value: Number(e.target.value), touched: true })
-        }
+        onChangeCallback={(e) => {
+          const re = /^[0-9\b]+$/;
+          if (e.target.value === '' || re.test(e.target.value)) {
+            setHappiness({ value: Number(e.target.value), touched: true });
+          }
+        }}
         placeholder="255"
         value={isPublic ? set.happiness || 255 : happiness.value}
-        type="number"
+        type="text"
         name="pokemon-happiness"
         min="0"
         max="255"
