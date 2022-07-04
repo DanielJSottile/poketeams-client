@@ -1,4 +1,5 @@
-import { PokemonSet, ParseReturn } from '../@types';
+import { ChangeEvent, SetStateAction } from 'react';
+import { PokemonSet, ParseReturn, NumberInput } from '../@types';
 import {
   FOLDERPARSE,
   NICKNAME_GEN_AND_ITEM_RE,
@@ -439,4 +440,19 @@ export const showdownFolderParse = (input: string): ParseReturn[] => {
     final[teamname] = setList as PokemonSet[];
     return final;
   });
+};
+
+/**
+ * This will only allow updating of the set-state callback if the character is a 0-9 digit
+ * @param e HTML Input Change Event element
+ * @param setStateCallback A set-state callback, i.e. setHpIv
+ */
+export const numberInputOnChange = (
+  e: ChangeEvent<HTMLInputElement>,
+  setStateCallback: (value: SetStateAction<NumberInput>) => void
+): void => {
+  const re = /^[0-9\b]+$/;
+  if (e.target.value === '' || re.test(e.target.value)) {
+    setStateCallback({ value: Number(e.target.value), touched: true });
+  }
 };

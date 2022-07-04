@@ -21,6 +21,7 @@ import {
   validateIvs,
   validateMoves,
 } from '../../../../utils/validations';
+import { numberInputOnChange } from '../../../../utils/functions';
 import {
   PokemonSet,
   TextInput,
@@ -140,7 +141,7 @@ const Details: FunctionComponent<DetailsProps> = ({
       isEffortValue: true,
       label: 'HP EV:',
       onChangeCallback: (e: ChangeEvent<HTMLInputElement>) =>
-        setHpEv({ value: Number(e.target.value), touched: true }),
+        numberInputOnChange(e, setHpEv),
       value: isPublic ? set.hp_ev || 0 : hpEv.value,
       name: 'pokemon-ev-hp',
       id: `pokemon-ev-hp-${set?.id}`,
@@ -149,7 +150,7 @@ const Details: FunctionComponent<DetailsProps> = ({
       isEffortValue: true,
       label: 'Atk EV:',
       onChangeCallback: (e: ChangeEvent<HTMLInputElement>) =>
-        setAtkEv({ value: Number(e.target.value), touched: true }),
+        numberInputOnChange(e, setAtkEv),
       value: isPublic ? set.atk_ev || 0 : atkEv.value,
       name: 'pokemon-ev-atk',
       id: `pokemon-ev-atk-${set?.id}`,
@@ -158,7 +159,7 @@ const Details: FunctionComponent<DetailsProps> = ({
       isEffortValue: true,
       label: 'Def EV:',
       onChangeCallback: (e: ChangeEvent<HTMLInputElement>) =>
-        setDefEv({ value: Number(e.target.value), touched: true }),
+        numberInputOnChange(e, setDefEv),
       value: isPublic ? set.def_ev || 0 : defEv.value,
       name: 'pokemon-ev-def',
       id: `pokemon-ev-def-${set?.id}`,
@@ -168,7 +169,7 @@ const Details: FunctionComponent<DetailsProps> = ({
       isEffortValue: true,
       label: 'SpA EV:',
       onChangeCallback: (e: ChangeEvent<HTMLInputElement>) =>
-        setSpAEv({ value: Number(e.target.value), touched: true }),
+        numberInputOnChange(e, setSpAEv),
       value: isPublic ? set.spa_ev || 0 : spAEv.value,
       name: 'pokemon-ev-spa',
       id: `pokemon-ev-spa-${set?.id}`,
@@ -177,7 +178,7 @@ const Details: FunctionComponent<DetailsProps> = ({
       isEffortValue: true,
       label: 'SpD EV:',
       onChangeCallback: (e: ChangeEvent<HTMLInputElement>) =>
-        setSpDEv({ value: Number(e.target.value), touched: true }),
+        numberInputOnChange(e, setSpDEv),
       value: isPublic ? set.spd_ev || 0 : spDEv.value,
       name: 'pokemon-ev-spd',
       id: `pokemon-ev-spd-${set?.id}`,
@@ -186,7 +187,7 @@ const Details: FunctionComponent<DetailsProps> = ({
       isEffortValue: true,
       label: 'Spe EV:',
       onChangeCallback: (e: ChangeEvent<HTMLInputElement>) =>
-        setSpeEv({ value: Number(e.target.value), touched: true }),
+        numberInputOnChange(e, setSpeEv),
       value: isPublic ? set.spe_ev || 0 : speEv.value,
       name: 'pokemon-ev-spe',
       id: `pokemon-ev-spe-${set?.id}`,
@@ -197,7 +198,7 @@ const Details: FunctionComponent<DetailsProps> = ({
       isEffortValue: false,
       label: 'HP IV:',
       onChangeCallback: (e: ChangeEvent<HTMLInputElement>) =>
-        setHpIv({ value: Number(e.target.value), touched: true }),
+        numberInputOnChange(e, setHpIv),
       value: isPublic ? set.hp_iv || 0 : hpIv.value,
       name: 'pokemon-iv-hp',
       id: `pokemon-iv-hp-${set?.id}`,
@@ -206,7 +207,7 @@ const Details: FunctionComponent<DetailsProps> = ({
       isEffortValue: false,
       label: 'Atk IV:',
       onChangeCallback: (e: ChangeEvent<HTMLInputElement>) =>
-        setAtkIv({ value: Number(e.target.value), touched: true }),
+        numberInputOnChange(e, setAtkIv),
       value: isPublic ? set.atk_iv || 0 : atkIv.value,
       name: 'pokemon-iv-atk',
       id: `pokemon-iv-atk-${set?.id}`,
@@ -215,7 +216,7 @@ const Details: FunctionComponent<DetailsProps> = ({
       isEffortValue: false,
       label: 'Def IV:',
       onChangeCallback: (e: ChangeEvent<HTMLInputElement>) =>
-        setDefIv({ value: Number(e.target.value), touched: true }),
+        numberInputOnChange(e, setDefIv),
       value: isPublic ? set.def_iv || 0 : defIv.value,
       name: 'pokemon-iv-def',
       id: `pokemon-iv-def-${set?.id}`,
@@ -225,7 +226,7 @@ const Details: FunctionComponent<DetailsProps> = ({
       isEffortValue: false,
       label: 'SpA IV:',
       onChangeCallback: (e: ChangeEvent<HTMLInputElement>) =>
-        setSpAIv({ value: Number(e.target.value), touched: true }),
+        numberInputOnChange(e, setSpAIv),
       value: isPublic ? set.spa_iv || 0 : spAIv.value,
       name: 'pokemon-iv-spa',
       id: `pokemon-iv-spa-${set?.id}`,
@@ -234,7 +235,7 @@ const Details: FunctionComponent<DetailsProps> = ({
       isEffortValue: false,
       label: 'SpD IV:',
       onChangeCallback: (e: ChangeEvent<HTMLInputElement>) =>
-        setSpDIv({ value: Number(e.target.value), touched: true }),
+        numberInputOnChange(e, setSpDIv),
       value: isPublic ? set.spd_iv || 0 : spDIv.value,
       name: 'pokemon-iv-spd',
       id: `pokemon-iv-spd-${set?.id}`,
@@ -243,7 +244,7 @@ const Details: FunctionComponent<DetailsProps> = ({
       isEffortValue: false,
       label: 'Spe IV:',
       onChangeCallback: (e: ChangeEvent<HTMLInputElement>) =>
-        setSpeIv({ value: Number(e.target.value), touched: true }),
+        numberInputOnChange(e, setSpeIv),
       value: isPublic ? set.spe_iv || 0 : speIv.value,
       name: 'pokemon-iv-spe',
       id: `pokemon-iv-spe-${set?.id}`,
