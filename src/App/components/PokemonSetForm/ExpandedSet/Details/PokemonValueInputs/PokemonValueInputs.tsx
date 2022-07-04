@@ -40,7 +40,6 @@ const PokemonValueInputs: FunctionComponent<PokemonValueInputsProps> = ({
           id={value.id}
           disabled={isPublic}
           readOnly={isPublic}
-          pattern={'[0-9.]+'}
         />
       ))}
     </>
