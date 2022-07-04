@@ -7,6 +7,7 @@ import {
   validateNature,
   validateHappiness,
 } from '../../../../../utils/validations';
+import { numberInputOnChange } from '../../../../../utils/functions';
 import { NumberInput, PokemonSet, TextInput } from '../../../../../@types';
 import styles from './PokemonDetails.module.scss';
 
@@ -119,12 +120,7 @@ const PokemonDetails: FunctionComponent<PokemonDetailsProps> = ({
         label={'Happiness:'}
         inputClass={styles['pokemon-happiness']}
         validationCallback={() => validateHappiness(happiness)}
-        onChangeCallback={(e) => {
-          const re = /^[0-9\b]+$/;
-          if (e.target.value === '' || re.test(e.target.value)) {
-            setHappiness({ value: Number(e.target.value), touched: true });
-          }
-        }}
+        onChangeCallback={(e) => numberInputOnChange(e, setHappiness)}
         placeholder="255"
         value={isPublic ? set.happiness || 255 : happiness.value}
         type="text"
