@@ -170,8 +170,8 @@ const legaltiy = {
           return `https://imgur.com/c4gnllj.png`;
         case 'ice':
           return `https://imgur.com/3NLAUft.png`;
-        case 'infinite':
-          return `https://imgur.com/pINWaZD.png`;
+        case 'delta':
+          return `https://imgur.com/NWiJNKn.png`;
         case 'normal':
           return `https://imgur.com/f4bdXSF.png`;
         case 'poison':
@@ -185,7 +185,6 @@ const legaltiy = {
         case 'water':
           return `https://imgur.com/7gDH9B8.png`;
         case '???':
-          return `https://imgur.com/kHG7M8L.png`;
         default:
           return `https://imgur.com/kHG7M8L.png`;
       }
