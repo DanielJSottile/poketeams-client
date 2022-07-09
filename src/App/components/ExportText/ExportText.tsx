@@ -63,10 +63,8 @@ const ExportText: FunctionComponent<ExportTextProps> = ({
           <div className={styles['inner-buttons']}>
             <Link
               className={styles['share-link']}
-              to={{
-                pathname: linkPathname,
-                state: linkState,
-              }}
+              to={linkPathname}
+              state={linkState}
               target='_blank'
             >
               {shareText} <FontAwesomeIcon icon={faShareSquare} />

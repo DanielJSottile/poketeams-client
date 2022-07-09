@@ -1,30 +1,27 @@
 import React, { FunctionComponent } from 'react';
-import { Location, History, LocationDescriptorObject } from 'history';
-import ScrollAnimation from 'react-animate-on-scroll';
-import { StaticContext } from 'react-router';
-import { Link, RouteComponentProps } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Footer from '../../components/Footer/Footer';
 import Image from '../../components/Image/Image';
 import LoginForm from '../../components/LoginForm/LoginForm';
+import AnimateOnScroll from '../../components/Utils/AnimateOnScroll';
 import styles from './LandingPage.module.scss';
 
-type RouteState = {
-  location: Location;
-  history: History;
-  from: LocationDescriptorObject<RouteState>;
-};
+interface LocationState {
+  from: {
+    pathname: string;
+  };
+}
 
-const LandingPage: FunctionComponent<
-  RouteComponentProps<
-    { [x: string]: string | undefined },
-    StaticContext,
-    RouteState
-  >
-> = ({ location, history }): JSX.Element => {
+const LandingPage: FunctionComponent = (): JSX.Element => {
+  const location = useLocation();
+  const navigate = useNavigate();
+
   const handleLoginSucess = (): void => {
-    const destination: LocationDescriptorObject<RouteState> =
-      (location.state || {}).from || '/';
-    history.push(destination);
+    const { from } = (location.state as LocationState) || {
+      from: { pathname: '/' },
+    };
+
+    navigate(from);
   };
 
   return (
@@ -67,7 +64,7 @@ const LandingPage: FunctionComponent<
       </section>
 
       <section>
-        <ScrollAnimation animateIn={styles['fade-in']} animateOnce={true}>
+        <AnimateOnScroll animateIn={styles['fade-in']} animateOnce={true}>
           <header>
             <h3>Store your teams like never before!</h3>
           </header>
@@ -82,11 +79,11 @@ const LandingPage: FunctionComponent<
             into a secure database. Never lose a team again! Say goodbye to
             Pastebin's forever!
           </p>
-        </ScrollAnimation>
+        </AnimateOnScroll>
       </section>
 
       <section>
-        <ScrollAnimation animateIn={styles['fade-in']} animateOnce={true}>
+        <AnimateOnScroll animateIn={styles['fade-in']} animateOnce={true}>
           <header>
             <h3>Upload, Edit, and Maintain your teams!</h3>
           </header>
@@ -99,11 +96,11 @@ const LandingPage: FunctionComponent<
             Once you've uploaded your teams, you'll be able to edit them by hand
             or by importing individual sets! The possibilities are endless!
           </p>
-        </ScrollAnimation>
+        </AnimateOnScroll>
       </section>
 
       <section>
-        <ScrollAnimation animateIn={styles['fade-in']} animateOnce={true}>
+        <AnimateOnScroll animateIn={styles['fade-in']} animateOnce={true}>
           <header>
             <h3>Search By Numerous Parameters!</h3>
           </header>
@@ -117,11 +114,11 @@ const LandingPage: FunctionComponent<
             alphabetical order and date created. In the future, you'll be able
             to search for specific teams and by popularity!
           </p>
-        </ScrollAnimation>
+        </AnimateOnScroll>
       </section>
 
       <section>
-        <ScrollAnimation animateIn={styles['fade-in']} animateOnce={true}>
+        <AnimateOnScroll animateIn={styles['fade-in']} animateOnce={true}>
           <header>
             <h3>Share Your Teams and Pokemon!</h3>
           </header>
@@ -135,7 +132,7 @@ const LandingPage: FunctionComponent<
             with anyone! Create awesome teams and Pokemon and let the world know
             about your creations!
           </p>
-        </ScrollAnimation>
+        </AnimateOnScroll>
       </section>
 
       <Footer />

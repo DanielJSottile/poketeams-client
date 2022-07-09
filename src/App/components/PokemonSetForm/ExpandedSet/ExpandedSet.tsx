@@ -10,7 +10,7 @@ import {
   faTrashAlt,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import toast from 'react-hot-toast';
+import { toast } from 'react-hot-toast';
 import { BoolInput, NumberInput, PokemonSet, TextInput } from '../../../@types';
 import GeneralContext from '../../../contexts/GeneralContext';
 import { showdownGenerate } from '../../../utils/functions';

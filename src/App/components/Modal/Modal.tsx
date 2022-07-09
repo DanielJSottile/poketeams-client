@@ -1,4 +1,7 @@
-import React, { FunctionComponent, ReactNode, ReactPortal } from 'react';
+import React, {
+  FunctionComponent,
+  ReactNode /** @todo: ReactPortal **/,
+} from 'react';
 import { faWindowClose } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { createPortal } from 'react-dom';
@@ -17,7 +20,9 @@ const Modal: FunctionComponent<ModalProps> = ({
   children,
   isModalOpen,
   handleSetModal,
-}): ReactPortal | null => {
+  /** @todo: The types of ReactPortal and the types in react-dom are mismatched */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+}): any => {
   if (!isModalOpen) {
     return null;
   }

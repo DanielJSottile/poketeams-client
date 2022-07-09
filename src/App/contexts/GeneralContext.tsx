@@ -7,7 +7,7 @@ import React, {
   SetStateAction,
 } from 'react';
 import jwtDecode from 'jwt-decode';
-import toast from 'react-hot-toast';
+import { toast } from 'react-hot-toast';
 import {
   PokemonFolder,
   PokemonTeam,

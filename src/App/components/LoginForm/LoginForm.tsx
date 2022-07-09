@@ -6,7 +6,7 @@ import React, {
 } from 'react';
 import { faSignInAlt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import toast from 'react-hot-toast';
+import { toast } from 'react-hot-toast';
 import GeneralContext from '../../contexts/GeneralContext';
 import AuthApiService from '../../services/auth-api-service';
 import TokenService from '../../services/token-service';

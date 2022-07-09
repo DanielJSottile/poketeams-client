@@ -44,57 +44,36 @@ const App: FunctionComponent = () => {
             }
           >
             <Routes>
-              <Route path={'/'} element={<HomePage />}>
-                <Route path='share'>
-                  <Route path=':team_id' element={<ShareTeamPage />}>
-                    <Route path=':set_id' element={<ShareSetPage />} />
-                  </Route>
-                  <Route path='user'>
-                    <Route path='folder'>
-                      <Route path=':folder_id' element={<ShareFolderPage />} />
-                    </Route>
+              <Route path='/' element={<HomePage />} />
+              <Route path='share'>
+                <Route path=':team_id' element={<ShareTeamPage />}>
+                  <Route path=':set_id' element={<ShareSetPage />} />
+                </Route>
+                <Route path='user'>
+                  <Route path='folder'>
+                    <Route path=':folder_id' element={<ShareFolderPage />} />
                   </Route>
                 </Route>
-                <Route path={'privacy-policy'} element={<PrivacyPolicy />} />
-                <Route
-                  path={'terms-and-conditions'}
-                  element={<TermsAndConditions />}
-                />
               </Route>
-              <PublicOnlyRoute path={'landing'} element={<LandingPage />} />
-              <PublicOnlyRoute
-                path={'register'}
-                element={<RegistrationPage />}
+              <Route path={'privacy-policy'} element={<PrivacyPolicy />} />
+              <Route
+                path={'terms-and-conditions'}
+                element={<TermsAndConditions />}
+              />
+              <Route
+                path='landing'
+                element={<PublicOnlyRoute Component={LandingPage} />}
+              />
+              <Route
+                path='register'
+                element={<PublicOnlyRoute Component={RegistrationPage} />}
+              />
+              <Route
+                path='build'
+                element={<PrivateRoute Component={BuildPage} />}
               />
 
-              <PrivateRoute path={'build'} element={BuildPage} />
               <Route path='*' element={<NotFoundPage />} />
-              {/* <Route path={'/'} element={HomePage} />
-              <Route>
-
-              </Route>
-              <Route exact path={'/share/:team_id'} element={ShareTeamPage} />
-              <Route
-                exact
-                path={'/share/:team_id/:set_id'}
-                element={ShareSetPage}
-              />
-              <Route
-                exact
-                path={'/share/user/folder/:folder_id'}
-                element={ShareFolderPage}
-              />
-              <Route exact path={'/privacy-policy'} element={PrivacyPolicy} />
-              <Route
-                exact
-                path={'/terms-and-conditions'}
-                element={TermsAndConditions}
-              />
-              <PublicOnlyRoute path={'/landing'} element={LandingPage} />
-              <PublicOnlyRoute path={'/register'} element={RegistrationPage} />
-
-              <PrivateRoute path={'/build'} element={BuildPage} />
-              <Route element={NotFoundPage} /> */}
             </Routes>
           </Suspense>
         </ErrorBoundary>

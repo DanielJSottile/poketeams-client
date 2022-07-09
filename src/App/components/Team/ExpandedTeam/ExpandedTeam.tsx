@@ -7,7 +7,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classnames from 'classnames';
-import toast from 'react-hot-toast';
+import { toast } from 'react-hot-toast';
 import { PokemonTeam, PokemonSet, TextInput } from '../../../@types';
 import GeneralContext from '../../../contexts/GeneralContext';
 import { showdownGenerate } from '../../../utils/functions';

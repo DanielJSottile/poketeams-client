@@ -1,5 +1,5 @@
 import React, { StrictMode } from 'react';
-import * as ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App/App';
 import { GeneralProvider } from './App/contexts/GeneralContext';
@@ -7,8 +7,9 @@ import './index.scss';
 import { UserContextProvider } from './App/contexts/UserContext';
 import * as serviceWorker from './serviceWorker';
 
-const rootNode: HTMLElement | null = document.getElementById('root');
-ReactDOM.render(
+const container = document.getElementById('root') as Element;
+const root = createRoot(container);
+root.render(
   <StrictMode>
     <BrowserRouter>
       <UserContextProvider>
@@ -17,8 +18,7 @@ ReactDOM.render(
         </GeneralProvider>
       </UserContextProvider>
     </BrowserRouter>
-  </StrictMode>,
-  rootNode
+  </StrictMode>
 );
 
 // If you want your app to work offline and load faster, you can change
