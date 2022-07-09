@@ -12,7 +12,12 @@ const Footer: FunctionComponent = () => {
         src={PokeTeamsLogo}
         alt='PokeTeams Logo'
       />
-      <span>{`Created by Daniel Sottile || © August 2021 || Pokémon is © 1995-2021 Nintendo`}</span>
+      <span>{`Created by Daniel Sottile || PokéTeams © ${new Intl.DateTimeFormat(
+        'en-US',
+        { month: 'long' }
+      ).format(
+        new Date()
+      )} ${new Date().getFullYear()} || Pokémon © 1995-${new Date().getFullYear()} Nintendo`}</span>
       <div>
         <Link className={styles['no-styling']} to={'/privacy-policy'}>
           Privacy Policy
