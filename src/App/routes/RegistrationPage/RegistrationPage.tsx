@@ -1,19 +1,13 @@
 import React, { FunctionComponent } from 'react';
-import { Link } from 'react-router-dom';
-import { History } from 'history';
-import RegistrationForm from '../../components/RegistrationForm/RegistrationForm';
+import { Link, useNavigate } from 'react-router-dom';
 import Footer from '../../components/Footer/Footer';
+import RegistrationForm from '../../components/RegistrationForm/RegistrationForm';
 import styles from './RegistrationPage.module.scss';
 
-type RegistrationProps = {
-  history: History;
-};
-
-const RegistrationPage: FunctionComponent<RegistrationProps> = ({
-  history,
-}): JSX.Element => {
+const RegistrationPage: FunctionComponent = (): JSX.Element => {
+  const navigate = useNavigate();
   const handleRegistrationSuccess = () => {
-    history.push('/landing');
+    navigate('/landing');
   };
 
   return (

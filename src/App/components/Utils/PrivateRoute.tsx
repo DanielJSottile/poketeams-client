@@ -1,43 +1,20 @@
-import React, { LazyExoticComponent, FunctionComponent } from 'react';
-import { Route, Redirect, RouteComponentProps } from 'react-router-dom';
-import { StaticContext } from 'react-router';
+import React, { FunctionComponent } from 'react';
+import { Navigate } from 'react-router-dom';
 import TokenService from '../../services/token-service';
 
-export interface PrivateRouteProps {
-  component: LazyExoticComponent<
-    FunctionComponent<
-      RouteComponentProps<
-        { [x: string]: string | undefined },
-        StaticContext,
-        unknown
-      >
-    >
-  >;
-  path: string;
-}
+type PrivateOnlyRouteProps = {
+  /** Passed in Component to display  */
+  Component: FunctionComponent;
+};
 
-const PrivateRoute: FunctionComponent<PrivateRouteProps> = ({
-  component,
-  ...props
+const PrivateOnlyRoute: FunctionComponent<PrivateOnlyRouteProps> = ({
+  Component,
 }): JSX.Element => {
-  const Component = component;
-  return (
-    <Route
-      {...props}
-      render={(componentProps) =>
-        TokenService.hasAuthToken() ? (
-          <Component {...componentProps} />
-        ) : (
-          <Redirect
-            to={{
-              pathname: '/landing',
-              state: { from: componentProps.location },
-            }}
-          />
-        )
-      }
-    />
+  return TokenService.hasAuthToken() ? (
+    <Component />
+  ) : (
+    <Navigate to='/landing' replace />
   );
 };
 
-export default PrivateRoute;
+export default PrivateOnlyRoute;

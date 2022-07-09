@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
-import Image from '../../Image';
-import legality from '../../../utils/legality';
 import { PokemonSet, PokemonTeam } from '../../../@types';
+import legality from '../../../utils/legality';
+import Image from '../../Image';
 import styles from './UnexpandedTeam.module.scss';
 
 type UnexpandedTeamProps = {
@@ -30,7 +30,7 @@ const UnexpandedTeam: FunctionComponent<UnexpandedTeamProps> = ({
   return (
     <section className={styles['team-section']} id={`${id}`}>
       <div
-        role="button"
+        role='button'
         tabIndex={0}
         className={styles['team-closed']}
         onClick={() => handleTeamToggle()}

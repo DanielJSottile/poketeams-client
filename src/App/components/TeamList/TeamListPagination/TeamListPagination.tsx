@@ -1,11 +1,11 @@
 import React, { useContext, FunctionComponent } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faArrowCircleLeft,
   faArrowCircleRight,
 } from '@fortawesome/free-solid-svg-icons';
-import Button from '../../Button';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import GeneralContext from '../../../contexts/GeneralContext';
+import Button from '../../Button';
 import styles from './TeamListPagination.module.scss';
 
 const TeamListPagination: FunctionComponent = () => {
@@ -14,7 +14,7 @@ const TeamListPagination: FunctionComponent = () => {
   return (
     <div className={styles['team-pagination']}>
       <div className={styles['flex-container']}>
-        <header role="banner">
+        <header role='banner'>
           <h2 className={styles['no-margin']}>Results:</h2>
         </header>
         <div className={styles['pagebutton']}>

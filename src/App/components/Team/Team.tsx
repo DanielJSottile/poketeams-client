@@ -1,11 +1,11 @@
 import React, { useContext, useState, FunctionComponent } from 'react';
+import { PokemonTeam, PokemonSet } from '../../@types';
+import GeneralContext from '../../contexts/GeneralContext';
 import Button from '../Button';
 import PokemonSetForm from '../PokemonSetForm';
-import GeneralContext from '../../contexts/GeneralContext';
-import { PokemonTeam, PokemonSet } from '../../@types';
 import ExpandedTeam from './ExpandedTeam';
-import UnexpandedTeam from './UnexpandedTeam';
 import styles from './Team.module.scss';
+import UnexpandedTeam from './UnexpandedTeam';
 
 export type TeamProps = {
   /** pokemon team */

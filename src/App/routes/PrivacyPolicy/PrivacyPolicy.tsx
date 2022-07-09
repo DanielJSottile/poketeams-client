@@ -1,13 +1,13 @@
 import React, { FunctionComponent } from 'react';
-import { useHistory, Link } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHandPointLeft } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useNavigate, Link } from 'react-router-dom';
 import Button from '../../components/Button';
 import Footer from '../../components/Footer';
 import styles from './PrivacyPolicy.module.scss';
 
 const PrivacyPolicy: FunctionComponent = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
   return (
     <div className={styles['container']}>
       <section>
@@ -17,7 +17,7 @@ const PrivacyPolicy: FunctionComponent = () => {
           <Button
             buttonClass={styles['go-back-button']}
             onClickCallback={() => {
-              history.goBack();
+              navigate(-1);
             }}
           >
             Go Back <FontAwesomeIcon icon={faHandPointLeft} />
@@ -40,8 +40,8 @@ const PrivacyPolicy: FunctionComponent = () => {
             to={{
               pathname: 'https://www.termsfeed.com/privacy-policy-generator/',
             }}
-            target="_blank"
-            rel="noopener noreferrer"
+            target='_blank'
+            rel='noopener noreferrer'
           >
             Privacy Policy Generator
           </Link>
@@ -130,8 +130,8 @@ const PrivacyPolicy: FunctionComponent = () => {
                 to={{
                   pathname: 'http://poketeams.now.sh',
                 }}
-                target="_blank"
-                rel="noopener noreferrer"
+                target='_blank'
+                rel='noopener noreferrer'
               >
                 http://poketeams.now.sh
               </Link>
@@ -220,8 +220,8 @@ const PrivacyPolicy: FunctionComponent = () => {
                 pathname:
                   'https://helpx.adobe.com/flash-player/kb/disable-local-shared-objects-flash.html#main_Where_can_I_change_the_settings_for_disabling__or_deleting_local_shared_objects_',
               }}
-              target="_blank"
-              rel="noopener noreferrer"
+              target='_blank'
+              rel='noopener noreferrer'
             >
               https://helpx.adobe.com/flash-player/kb/disable-local-shared-objects-flash.html#main_Where_can_I_change_the_settings_for_disabling__or_deleting_local_shared_objects_
             </Link>
@@ -245,8 +245,8 @@ const PrivacyPolicy: FunctionComponent = () => {
             to={{
               pathname: 'https://www.termsfeed.com/blog/cookies/',
             }}
-            target="_blank"
-            rel="noopener noreferrer"
+            target='_blank'
+            rel='noopener noreferrer'
           >
             All About Cookies by TermsFeed
           </Link>

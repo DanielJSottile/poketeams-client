@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import classnames from 'classnames';
-import PokeballLoader from '../PokeballLoader';
 import Loading from '../Loading';
+import PokeballLoader from '../PokeballLoader';
 import styles from './LazyLoader.module.scss';
 
 type LazyLoaderProps = {

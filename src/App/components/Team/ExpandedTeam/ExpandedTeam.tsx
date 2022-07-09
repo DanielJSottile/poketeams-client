@@ -1,22 +1,22 @@
 import React, { useContext, FunctionComponent } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faCompressArrowsAlt,
   faSave,
   faTrashAlt,
   faBan,
 } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classnames from 'classnames';
-import toast from 'react-hot-toast';
-import Button from '../../Button';
-import TextArea from '../../TextArea';
-import ExportText from '../../ExportText';
+import { toast } from 'react-hot-toast';
+import { PokemonTeam, PokemonSet, TextInput } from '../../../@types';
 import GeneralContext from '../../../contexts/GeneralContext';
 import { showdownGenerate } from '../../../utils/functions';
 import { validateTeamName, validateDesc } from '../../../utils/validations';
-import { PokemonTeam, PokemonSet, TextInput } from '../../../@types';
-import styles from './ExpandedTeam.module.scss';
+import Button from '../../Button';
 import DeleteExpand from '../../DeleteExpand';
+import ExportText from '../../ExportText';
+import TextArea from '../../TextArea';
+import styles from './ExpandedTeam.module.scss';
 
 type ExpandedTeamProps = {
   isPublic: boolean;
@@ -73,11 +73,11 @@ const ExpandedTeam: FunctionComponent<ExpandedTeamProps> = ({
                   disabled={isPublic}
                   readOnly={isPublic}
                   textAreaClass={styles['title']}
-                  placeholder="e.g. Cool Team"
+                  placeholder='e.g. Cool Team'
                   value={isPublic ? team.team_name : teamName.value}
                   onChangeCallback={(e) => inputTeamName(e.target.value)}
                   validationCallback={() => validateTeamName(teamName)}
-                  name="team-name"
+                  name='team-name'
                   id={`team-name-${team.id}`}
                 />
               </div>
@@ -105,22 +105,22 @@ const ExpandedTeam: FunctionComponent<ExpandedTeamProps> = ({
               disabled={isPublic}
               readOnly={isPublic}
               containerClass={styles['desc-container']}
-              htmlFor="title-content"
-              label="Description:"
+              htmlFor='title-content'
+              label='Description:'
               validationCallback={() => validateDesc(description)}
               textAreaClass={classnames(
                 styles['title-content'],
                 styles['desc']
               )}
-              placeholder="e.g. description"
-              name="title-content"
+              placeholder='e.g. description'
+              name='title-content'
               id={`title-content-${team.id}`}
               value={isPublic ? team.description || '' : description.value}
               onChangeCallback={(e) => setDesc(e.target.value)}
             />
             {!isPublic && (
               <Button
-                type="submit"
+                type='submit'
                 disabled={
                   !!validateTeamName(teamName) ||
                   !!validateDesc(description) ||

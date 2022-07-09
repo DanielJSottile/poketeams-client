@@ -1,8 +1,8 @@
 import React, { FunctionComponent } from 'react';
-import Team from '../Team';
-import LazyLoader from '../Loaders/LazyLoader';
-import styles from './TeamListPublicShare.module.scss';
 import { PokemonTeam, PokemonSet } from '../../@types';
+import LazyLoader from '../Loaders/LazyLoader';
+import Team from '../Team';
+import styles from './TeamListPublicShare.module.scss';
 
 export type TeamListPublicShareProps = {
   /** List of Pokemon Teams */

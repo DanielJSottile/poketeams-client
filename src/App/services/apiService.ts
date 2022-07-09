@@ -1,11 +1,11 @@
 import config from '../../config';
-import TokenService from './token-service';
 import {
   PokemonFolder,
   PokemonTeam,
   PokemonSet,
   PokemonTeamPost,
 } from '../@types';
+import TokenService from './token-service';
 
 // PUBLIC SIDE
 

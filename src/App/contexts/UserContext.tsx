@@ -5,10 +5,10 @@ import React, {
   createContext,
   ReactNode,
 } from 'react';
-import { useLocation, useHistory } from 'react-router';
-import GeneralContext from './GeneralContext';
-import TokenService from '../services/token-service';
 import jwtDecode from 'jwt-decode';
+import { useLocation, useNavigate } from 'react-router';
+import TokenService from '../services/token-service';
+import GeneralContext from './GeneralContext';
 
 interface UserContextValues {
   isLoggedIn: boolean;
@@ -43,7 +43,7 @@ export const UserContextProvider = ({
   const [userId, setUserId] = useState(0);
   const { clearUserState } = useContext(GeneralContext);
   const location = useLocation();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   useEffect(() => {
     setIsLoggedIn(!!TokenService.getAuthToken());
@@ -62,7 +62,7 @@ export const UserContextProvider = ({
     /* I am unsure why the NavLink isnt doing this, 
     but i suspect it's trying to navigate while logged in still,
     so the 'to' property of a NavLink does not work. */
-    history.push('/landing');
+    navigate('/landing');
   };
 
   const value = {

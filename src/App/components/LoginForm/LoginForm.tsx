@@ -4,14 +4,14 @@ import React, {
   FormEvent,
   FunctionComponent,
 } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSignInAlt } from '@fortawesome/free-solid-svg-icons';
-import toast from 'react-hot-toast';
-import Input from '../Input';
-import Button from '../Button';
-import TokenService from '../../services/token-service';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { toast } from 'react-hot-toast';
 import GeneralContext from '../../contexts/GeneralContext';
 import AuthApiService from '../../services/auth-api-service';
+import TokenService from '../../services/token-service';
+import Button from '../Button';
+import Input from '../Input';
 import styles from './LoginForm.module.scss';
 
 type LoginFormProps = {
@@ -51,13 +51,13 @@ const LoginForm: FunctionComponent<LoginFormProps> = ({ onLoginSuccess }) => {
     <form className={styles['signup-form']} onSubmit={handleSubmitJwtAuth}>
       <Input
         inputHasError={false}
-        htmlFor="user_name"
-        label="Username"
-        placeholder="Username"
-        autoComplete="username"
-        type="text"
-        name="user_name"
-        id="user_name"
+        htmlFor='user_name'
+        label='Username'
+        placeholder='Username'
+        autoComplete='username'
+        type='text'
+        name='user_name'
+        id='user_name'
         onChangeCallback={(e) => {
           setUsername(e.target.value);
         }}
@@ -65,19 +65,19 @@ const LoginForm: FunctionComponent<LoginFormProps> = ({ onLoginSuccess }) => {
       />
       <Input
         inputHasError={false}
-        htmlFor="password"
-        label="Password"
-        placeholder="Password"
-        type="password"
-        autoComplete="current-password"
-        name="password"
-        id="password"
+        htmlFor='password'
+        label='Password'
+        placeholder='Password'
+        type='password'
+        autoComplete='current-password'
+        name='password'
+        id='password'
         onChangeCallback={(e) => {
           setPassword(e.target.value);
         }}
         value={password}
       />
-      <Button type="submit" buttonClass={styles['login-button']}>
+      <Button type='submit' buttonClass={styles['login-button']}>
         Log In <FontAwesomeIcon icon={faSignInAlt} />
       </Button>
     </form>

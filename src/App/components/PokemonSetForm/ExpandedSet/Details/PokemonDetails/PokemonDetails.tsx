@@ -1,5 +1,6 @@
 import React, { FunctionComponent, Dispatch, SetStateAction } from 'react';
-import Input from '../../../../Input';
+import { NumberInput, PokemonSet, TextInput } from '../../../../../@types';
+import { numberInputOnChange } from '../../../../../utils/functions';
 import {
   validateItem,
   validateAbility,
@@ -7,8 +8,7 @@ import {
   validateNature,
   validateHappiness,
 } from '../../../../../utils/validations';
-import { numberInputOnChange } from '../../../../../utils/functions';
-import { NumberInput, PokemonSet, TextInput } from '../../../../../@types';
+import Input from '../../../../Input';
 import styles from './PokemonDetails.module.scss';
 
 type PokemonDetailsProps = {
@@ -54,10 +54,10 @@ const PokemonDetails: FunctionComponent<PokemonDetailsProps> = ({
         onChangeCallback={(e) =>
           setLevel({ value: Number(e.target.value), touched: true })
         }
-        placeholder="100"
+        placeholder='100'
         value={isPublic ? set.level || 100 : level.value}
-        type="text"
-        name="pokemon-level"
+        type='text'
+        name='pokemon-level'
         id={`pokemon-level-${set?.id}`}
         disabled={isPublic}
         readOnly={isPublic}
@@ -71,10 +71,10 @@ const PokemonDetails: FunctionComponent<PokemonDetailsProps> = ({
         onChangeCallback={(e) =>
           setItem({ value: e.target.value, touched: true })
         }
-        placeholder="e.g. Leftovers"
+        placeholder='e.g. Leftovers'
         value={isPublic ? set.item || '' : item.value}
-        type="text"
-        name="pokemon-item"
+        type='text'
+        name='pokemon-item'
         id={`pokemon-item-${set?.id}`}
         disabled={isPublic}
         readOnly={isPublic}
@@ -88,10 +88,10 @@ const PokemonDetails: FunctionComponent<PokemonDetailsProps> = ({
         onChangeCallback={(e) =>
           setAbility({ value: e.target.value, touched: true })
         }
-        placeholder="e.g. Static"
+        placeholder='e.g. Static'
         value={isPublic ? set.ability || '' : ability.value}
-        type="text"
-        name="pokemon-ability"
+        type='text'
+        name='pokemon-ability'
         id={`pokemon-ability-${set?.id}`}
         disabled={isPublic}
         readOnly={isPublic}
@@ -105,10 +105,10 @@ const PokemonDetails: FunctionComponent<PokemonDetailsProps> = ({
         onChangeCallback={(e) =>
           setNature({ value: e.target.value, touched: true })
         }
-        placeholder="e.g. Adamant"
+        placeholder='e.g. Adamant'
         value={isPublic ? set.nature || '' : nature.value}
-        type="text"
-        name="pokemon-nature"
+        type='text'
+        name='pokemon-nature'
         id={`pokemon-nature-${set?.id}`}
         disabled={isPublic}
         readOnly={isPublic}
@@ -121,12 +121,12 @@ const PokemonDetails: FunctionComponent<PokemonDetailsProps> = ({
         inputClass={styles['pokemon-happiness']}
         validationCallback={() => validateHappiness(happiness)}
         onChangeCallback={(e) => numberInputOnChange(e, setHappiness)}
-        placeholder="255"
+        placeholder='255'
         value={isPublic ? set.happiness || 255 : happiness.value}
-        type="text"
-        name="pokemon-happiness"
-        min="0"
-        max="255"
+        type='text'
+        name='pokemon-happiness'
+        min='0'
+        max='255'
         id={`pokemon-happiness-${set?.id}`}
         disabled={isPublic}
         readOnly={isPublic}

@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
+import Footer from '../../components/Footer/Footer';
 import Navigation from '../../components/Navigation';
 import TeamList from '../../components/TeamList';
-import Footer from '../../components/Footer/Footer';
 
 const HomePage: FunctionComponent = (): JSX.Element => {
   return (

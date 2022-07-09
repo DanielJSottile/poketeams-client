@@ -1,21 +1,21 @@
 import React, { useContext, FunctionComponent } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faUpload,
   faCheckCircle,
   faPlusSquare,
   faBan,
 } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import GeneralContext from '../../contexts/GeneralContext';
-import Input from '../Input';
-import TextArea from '../TextArea';
-import Button from '../Button';
 import {
   validateDesc,
   validateNewTeamName,
   validateNewTeamImport,
   validateCurrentFolderClicked,
 } from '../../utils/validations';
+import Button from '../Button';
+import Input from '../Input';
+import TextArea from '../TextArea';
 import styles from './AddTeamSection.module.scss';
 
 const AddTeamSection: FunctionComponent = () => {
@@ -38,13 +38,13 @@ const AddTeamSection: FunctionComponent = () => {
         <Input
           inputHasError
           containerClass={styles['team-name']}
-          htmlFor="foldername"
-          label="Team Name:"
+          htmlFor='foldername'
+          label='Team Name:'
           validationCallback={() => validateNewTeamName(newTeamName)}
-          placeholder="e.g. My Cool Team"
-          type="text"
-          name="teamname"
-          id="teamname"
+          placeholder='e.g. My Cool Team'
+          type='text'
+          name='teamname'
+          id='teamname'
           value={newTeamName.value}
           onChangeCallback={(e) =>
             setNewTeamName({ value: e.target.value, touched: true })
@@ -53,12 +53,12 @@ const AddTeamSection: FunctionComponent = () => {
         <TextArea
           containerClass={styles['team-import']}
           textAreaHasError
-          htmlFor="title-content"
+          htmlFor='title-content'
           label={'Description:'}
           validationCallback={() => validateDesc(desc)}
-          placeholder="e.g. description"
-          name="title-content"
-          id="title-content"
+          placeholder='e.g. description'
+          name='title-content'
+          id='title-content'
           value={desc.value}
           onChangeCallback={(e) =>
             setDesc({ value: e.target.value, touched: true })
@@ -68,20 +68,20 @@ const AddTeamSection: FunctionComponent = () => {
           containerClass={styles['team-import']}
           textAreaHasError
           isError={!!newTeamImport.value}
-          htmlFor="team-import"
+          htmlFor='team-import'
           label={'Import Showdown Team: '}
           labelIcon={<FontAwesomeIcon icon={faUpload} />}
           validationCallback={() => validateNewTeamImport(newTeamImport)}
-          placeholder="Optionally Import a proper Pokemon Showdown Team Here And It Will Fill Out Your Whole Team!"
-          name="team-import"
-          id="team-import-1"
+          placeholder='Optionally Import a proper Pokemon Showdown Team Here And It Will Fill Out Your Whole Team!'
+          name='team-import'
+          id='team-import-1'
           value={newTeamImport.value}
           onChangeCallback={(e) =>
             setNewTeamImport({ value: e.target.value, touched: true })
           }
         />
         <Button
-          type="submit"
+          type='submit'
           buttonClass={styles['submit']}
           disabled={
             !!validateNewTeamName(newTeamName) ||

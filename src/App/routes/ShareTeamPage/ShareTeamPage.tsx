@@ -1,25 +1,19 @@
 import React, { useState, useEffect, FunctionComponent } from 'react';
-import { Link, RouteComponentProps } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Link, useParams } from 'react-router-dom';
+import { PokemonTeam, PokemonSet } from '../../@types';
 import Team from '../../components/Team';
 import apiService from '../../services/apiService';
 import styles from './ShareTeamPage.module.scss';
-import { PokemonTeam, PokemonSet } from '../../@types';
 
-export type MatchProps = {
-  /** match props */
-  team_id: string;
-};
-
-const ShareTeamPage: FunctionComponent<RouteComponentProps<MatchProps>> = ({
-  match,
-}): JSX.Element => {
+const ShareTeamPage: FunctionComponent = (): JSX.Element => {
+  const { team_id } = useParams();
   const [team, setTeam] = useState<PokemonTeam[]>([]);
   const [sets, setPokemonSets] = useState<PokemonSet[]>([]);
 
   useEffect(() => {
-    const id = Number(match.params.team_id);
+    const id = Number(team_id);
     apiService
       .getSingleTeam(id)
       .then((data) => {
@@ -30,7 +24,7 @@ const ShareTeamPage: FunctionComponent<RouteComponentProps<MatchProps>> = ({
           setPokemonSets(data);
         });
       });
-  }, [match.params.team_id]);
+  }, [team_id]);
 
   return (
     <div className={styles['container']}>
