@@ -19,6 +19,7 @@ import {
 import apiService from '../services/apiService';
 import TokenService from '../services/token-service';
 import { showdownParse, showdownFolderParse } from '../utils/functions';
+import legality from '../utils/legality';
 
 type ContextProps = {
   children: ReactNode;
@@ -707,7 +708,8 @@ export const GeneralProvider = ({ children }: ContextProps): JSX.Element => {
       ability: ability,
       level: Number(level),
       shiny: shiny,
-      gigantamax: gigantamax,
+      /** safeguard against switching between species */
+      gigantamax: legality.isGigantamaxSpecies(species) ? gigantamax : false,
       happiness: Number(happiness),
       nature: nature,
       hp_ev: Number(hp_ev),
