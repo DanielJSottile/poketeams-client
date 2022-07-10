@@ -9,6 +9,7 @@ import {
   validatePassword,
 } from '../../utils/validations';
 import Button from '../Button';
+import Form from '../Form';
 import Input from '../Input';
 import styles from './RegistrationForm.module.scss';
 
@@ -59,7 +60,7 @@ const RegistrationForm: FunctionComponent<RegistrationFormProps> = ({
   };
 
   return (
-    <form className={styles['registration-form']} onSubmit={handleSubmit}>
+    <Form className={styles['registration-form']} onSubmit={handleSubmit}>
       <div role='alert'>
         {error ? (
           <p className={styles['error']}>{error}</p>
@@ -144,7 +145,7 @@ const RegistrationForm: FunctionComponent<RegistrationFormProps> = ({
           Go Back <FontAwesomeIcon icon={faHandPointLeft} />
         </Button>
       </div>
-    </form>
+    </Form>
   );
 };
 

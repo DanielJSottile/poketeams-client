@@ -14,6 +14,7 @@ import {
   validateCurrentFolderClicked,
 } from '../../utils/validations';
 import Button from '../Button';
+import Form from '../Form';
 import Input from '../Input';
 import TextArea from '../TextArea';
 import styles from './AddTeamSection.module.scss';
@@ -34,7 +35,7 @@ const AddTeamSection: FunctionComponent = () => {
 
   const renderExpanded = () => {
     return (
-      <form>
+      <Form>
         <Input
           inputHasError
           containerClass={styles['team-name']}
@@ -96,7 +97,7 @@ const AddTeamSection: FunctionComponent = () => {
         >
           Submit <FontAwesomeIcon icon={faCheckCircle} />
         </Button>
-      </form>
+      </Form>
     );
   };
 

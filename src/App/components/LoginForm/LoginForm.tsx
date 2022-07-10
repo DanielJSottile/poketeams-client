@@ -11,6 +11,7 @@ import GeneralContext from '../../contexts/GeneralContext';
 import AuthApiService from '../../services/auth-api-service';
 import TokenService from '../../services/token-service';
 import Button from '../Button';
+import Form from '../Form';
 import Input from '../Input';
 import styles from './LoginForm.module.scss';
 
@@ -48,7 +49,7 @@ const LoginForm: FunctionComponent<LoginFormProps> = ({ onLoginSuccess }) => {
   };
 
   return (
-    <form className={styles['signup-form']} onSubmit={handleSubmitJwtAuth}>
+    <Form className={styles['signup-form']} onSubmit={handleSubmitJwtAuth}>
       <Input
         inputHasError={false}
         htmlFor='user_name'
@@ -80,7 +81,7 @@ const LoginForm: FunctionComponent<LoginFormProps> = ({ onLoginSuccess }) => {
       <Button type='submit' buttonClass={styles['login-button']}>
         Log In <FontAwesomeIcon icon={faSignInAlt} />
       </Button>
-    </form>
+    </Form>
   );
 };
 
