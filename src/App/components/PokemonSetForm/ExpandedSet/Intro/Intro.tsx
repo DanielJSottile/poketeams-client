@@ -150,7 +150,7 @@ const Intro: FunctionComponent<IntroProps> = ({
             disabled={isPublic}
             readOnly={isPublic}
           />
-          {!!legality.isGigantamaxSpecies(set.species) && (
+          {!!legality.isGigantamaxSpecies(species.value) && (
             <Input
               inputHasError={!isPublic}
               isError={species.touched}
