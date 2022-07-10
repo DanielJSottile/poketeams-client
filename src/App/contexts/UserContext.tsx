@@ -46,7 +46,14 @@ export const UserContextProvider = ({
   const navigate = useNavigate();
 
   useEffect(() => {
-    setIsLoggedIn(!!TokenService.getAuthToken());
+    const msUntilExpiry = TokenService._getMsUntilExpiry(
+      TokenService.parseAuthToken()
+    );
+    const isNotExpired = msUntilExpiry > 0;
+    if (!!TokenService.getAuthToken() && isNotExpired) {
+      TokenService.clearAuthToken();
+    }
+    setIsLoggedIn(!!TokenService.getAuthToken() && isNotExpired);
   }, [location]);
 
   useEffect(() => {
