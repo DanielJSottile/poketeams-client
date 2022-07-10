@@ -32,6 +32,13 @@ const TokenService = {
   _getMsUntilExpiry(payload: Payload | undefined): number {
     return (payload?.exp || 0) * 1000 - Date.now();
   },
+  isExpired(): boolean {
+    const msUntilExpiry = TokenService._getMsUntilExpiry(
+      TokenService.parseAuthToken()
+    );
+
+    return msUntilExpiry < 0;
+  },
   queueCallbackBeforeExpiry(callback: () => void): void {
     const msUntilExpiry = TokenService._getMsUntilExpiry(
       TokenService.parseAuthToken()
