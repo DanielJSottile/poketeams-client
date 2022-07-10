@@ -9,6 +9,7 @@ import { TextInput } from '../../@types';
 import GeneralContext from '../../contexts/GeneralContext';
 import { validateSearch } from '../../utils/validations';
 import Button from '../Button';
+import Form from '../Form';
 import Input from '../Input';
 import Select from '../Select';
 import styles from './SearchBar.module.scss';
@@ -49,7 +50,7 @@ const SearchBar: FunctionComponent<SearchBarProps> = ({ isPublic }) => {
 
   return (
     <div className={styles['searchbar']}>
-      <form className={styles['search-form']}>
+      <Form className={styles['search-form']}>
         <div className={styles['search']}>
           <Input
             inputHasError
@@ -99,7 +100,7 @@ const SearchBar: FunctionComponent<SearchBarProps> = ({ isPublic }) => {
             Go <FontAwesomeIcon icon={faExclamation} />
           </Button>
         </div>
-      </form>
+      </Form>
     </div>
   );
 };

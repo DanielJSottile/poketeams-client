@@ -15,6 +15,7 @@ import { validateTeamName, validateDesc } from '../../../utils/validations';
 import Button from '../../Button';
 import DeleteExpand from '../../DeleteExpand';
 import ExportText from '../../ExportText';
+import Form from '../../Form';
 import TextArea from '../../TextArea';
 import styles from './ExpandedTeam.module.scss';
 
@@ -63,7 +64,7 @@ const ExpandedTeam: FunctionComponent<ExpandedTeamProps> = ({
           <FontAwesomeIcon icon={faCompressArrowsAlt} />
         </Button>
         <div className={styles['team-header']}>
-          <form className={styles['team-form']}>
+          <Form className={styles['team-form']}>
             <div className={styles['team-title']}>
               <div className={styles['title-name']}>
                 <TextArea
@@ -141,7 +142,7 @@ const ExpandedTeam: FunctionComponent<ExpandedTeamProps> = ({
                 Save Team Details <FontAwesomeIcon icon={faSave} />
               </Button>
             )}
-          </form>
+          </Form>
           <ExportText
             exportText={'Export Team:'}
             shareText={'Share This Team!'}

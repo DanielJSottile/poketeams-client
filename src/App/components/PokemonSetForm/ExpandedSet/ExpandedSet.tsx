@@ -18,6 +18,7 @@ import { validateNewSetImport } from '../../../utils/validations';
 import Button from '../../Button';
 import DeleteExpand from '../../DeleteExpand';
 import ExportText from '../../ExportText';
+import Form from '../../Form';
 import TextArea from '../../TextArea';
 import Details from './Details';
 import styles from './ExpandedSet.module.scss';
@@ -154,7 +155,7 @@ const ExpandedSet: FunctionComponent<ExpandedSetProps> = ({
   return (
     <div className={styles['pokemon']}>
       {!isPublic && (
-        <form>
+        <Form>
           <div className={styles['pokemon-import']}>
             <TextArea
               containerClass={styles['import-width']}
@@ -185,9 +186,9 @@ const ExpandedSet: FunctionComponent<ExpandedSetProps> = ({
               Submit <FontAwesomeIcon icon={faCheckCircle} />
             </Button>
           </div>
-        </form>
+        </Form>
       )}
-      <form>
+      <Form>
         <Intro
           isPublic={isPublic}
           set={set}
@@ -253,7 +254,7 @@ const ExpandedSet: FunctionComponent<ExpandedSetProps> = ({
           setMoveThree={setMoveThree}
           setMoveFour={setMoveFour}
         />
-      </form>
+      </Form>
       <ExportText
         exportText={'Export Pokemon:'}
         shareText={'Share This Pokemon Set!'}

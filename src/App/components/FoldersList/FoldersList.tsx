@@ -19,6 +19,7 @@ import Button from '../Button';
 import DeleteExpand from '../DeleteExpand';
 import ExportText from '../ExportText';
 import Folder from '../Folder/Folder';
+import Form from '../Form';
 import Input from '../Input/Input';
 import LazyLoader from '../Loaders/LazyLoader';
 import TextArea from '../TextArea';
@@ -80,7 +81,7 @@ const FoldersList: FunctionComponent = () => {
 
   const renderExpanded = (): JSX.Element => {
     return (
-      <form>
+      <Form>
         <div>
           <Input
             inputHasError
@@ -127,13 +128,13 @@ const FoldersList: FunctionComponent = () => {
         >
           Submit <FontAwesomeIcon icon={faCheckCircle} />
         </Button>
-      </form>
+      </Form>
     );
   };
 
   const renderEditExpand = (): JSX.Element => {
     return (
-      <form>
+      <Form>
         <Input
           inputHasError
           htmlFor='foldername'
@@ -166,7 +167,7 @@ const FoldersList: FunctionComponent = () => {
         >
           Submit <FontAwesomeIcon icon={faCheckCircle} />
         </Button>
-      </form>
+      </Form>
     );
   };
 
