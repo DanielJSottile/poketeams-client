@@ -46,7 +46,12 @@ export const UserContextProvider = ({
   const navigate = useNavigate();
 
   useEffect(() => {
-    setIsLoggedIn(!!TokenService.getAuthToken());
+    /** check if the token is expired, and if so, clear the auth token */
+    const isExpired = TokenService.isExpired();
+    if (isExpired) {
+      TokenService.clearAuthToken();
+    }
+    setIsLoggedIn(!!TokenService.getAuthToken() && !isExpired);
   }, [location]);
 
   useEffect(() => {
