@@ -56,8 +56,6 @@ const FoldersList: FunctionComponent = () => {
     setDeleteClicked(!deleteClicked);
   };
 
-  const deleteSuccess = () => customSuccessToast('Folder Deleted!');
-
   /* --------------------- */
 
   /* Set Up Common Definitions to be 
@@ -263,7 +261,7 @@ const FoldersList: FunctionComponent = () => {
               yesCallback={() => {
                 handleDeleteFolder();
                 handleDeleteExpand();
-                deleteSuccess();
+                customSuccessToast('Folder Deleted!');
               }}
               noCallback={() => handleDeleteExpand()}
             />
