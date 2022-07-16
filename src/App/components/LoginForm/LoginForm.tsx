@@ -6,13 +6,13 @@ import React, {
 } from 'react';
 import { faSignInAlt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { toast } from 'react-hot-toast';
 import GeneralContext from '../../contexts/GeneralContext';
 import AuthApiService from '../../services/auth-api-service';
 import TokenService from '../../services/token-service';
 import Button from '../Button';
 import Form from '../Form';
 import Input from '../Input';
+import { customSuccessToast, customErrorToast } from '../Utils/CustomToasts';
 import styles from './LoginForm.module.scss';
 
 type LoginFormProps = {
@@ -33,9 +33,7 @@ const LoginForm: FunctionComponent<LoginFormProps> = ({ onLoginSuccess }) => {
       password: password,
     })
       .then((res) => {
-        const successToast = () =>
-          toast.success(`Login Successful: Welcome!! ${userName}`);
-        successToast();
+        customSuccessToast(`Login Successful: Welcome!! ${userName}`);
         setUsername('');
         setPassword('');
         TokenService.saveAuthToken(res.authToken);
@@ -43,8 +41,7 @@ const LoginForm: FunctionComponent<LoginFormProps> = ({ onLoginSuccess }) => {
         onLoginSuccess();
       })
       .catch((res) => {
-        const errorToast = () => toast.error(`Login Failed: ${res.error}!!`);
-        errorToast();
+        customErrorToast(`Login Failed: ${res.error}!!`);
       });
   };
 

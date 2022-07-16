@@ -7,7 +7,6 @@ import {
   faBan,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { toast } from 'react-hot-toast';
 import { PokemonFolder } from '../../@types';
 import GeneralContext from '../../contexts/GeneralContext';
 import { showdownFolderGenerate } from '../../utils/functions';
@@ -23,6 +22,7 @@ import Form from '../Form';
 import Input from '../Input/Input';
 import LazyLoader from '../Loaders/LazyLoader';
 import TextArea from '../TextArea';
+import { customSuccessToast } from '../Utils/CustomToasts';
 import styles from './FoldersList.module.scss';
 
 const FoldersList: FunctionComponent = () => {
@@ -56,7 +56,7 @@ const FoldersList: FunctionComponent = () => {
     setDeleteClicked(!deleteClicked);
   };
 
-  const deleteSuccess = () => toast.success('Folder Deleted!');
+  const deleteSuccess = () => customSuccessToast('Folder Deleted!');
 
   /* --------------------- */
 

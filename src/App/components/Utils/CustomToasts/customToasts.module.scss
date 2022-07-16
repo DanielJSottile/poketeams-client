@@ -1,0 +1,33 @@
+@import '../../../../index.scss';
+
+.toast {
+  display: flex;
+}
+
+.green {
+  color: green;
+}
+
+.red {
+  color: red;
+}
+
+.text {
+  width: 91%;
+}
+
+.close-button {
+  position: absolute;
+  padding-left: 6px;
+  padding-right: 6px;
+  padding-bottom: 2px;
+  right: 0.5rem;
+  border: none;
+  background-color: transparent;
+  color: $med-dark-grey;
+  &:hover:enabled {
+    transition: 0.3s;
+    background-color: $light-pokeball-red;
+    color: $super-light-cream;
+  }
+}

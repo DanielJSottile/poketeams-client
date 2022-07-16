@@ -7,7 +7,6 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classnames from 'classnames';
-import { toast } from 'react-hot-toast';
 import { PokemonTeam, PokemonSet, TextInput } from '../../../@types';
 import GeneralContext from '../../../contexts/GeneralContext';
 import { showdownGenerate } from '../../../utils/functions';
@@ -17,6 +16,7 @@ import DeleteExpand from '../../DeleteExpand';
 import ExportText from '../../ExportText';
 import Form from '../../Form';
 import TextArea from '../../TextArea';
+import { customSuccessToast } from '../../Utils/CustomToasts';
 import styles from './ExpandedTeam.module.scss';
 
 type ExpandedTeamProps = {
@@ -51,8 +51,6 @@ const ExpandedTeam: FunctionComponent<ExpandedTeamProps> = ({
   setDesc,
 }) => {
   const { handleUpdateTeam } = useContext(GeneralContext);
-
-  const deleteSuccess = () => toast.success('Team Deleted!');
 
   return (
     <section className={styles['team-section']} id={`${id}`}>
@@ -180,7 +178,7 @@ const ExpandedTeam: FunctionComponent<ExpandedTeamProps> = ({
                 handleDeleteExpand();
                 handleTeamToggle();
                 team.id && handleDeleteTeam(team.id);
-                deleteSuccess();
+                customSuccessToast('Team Deleted!');
               }}
               noCallback={() => handleDeleteExpand()}
             />
