@@ -61,10 +61,16 @@ const Intro: FunctionComponent<IntroProps> = ({
       ];
     }
     if (legality.returnGenderStatus(species) === 'M') {
-      return [{ value: 'M', label: 'Male' }];
+      return [
+        { value: '', label: '------' },
+        { value: 'M', label: 'Male' },
+      ];
     }
     if (legality.returnGenderStatus(species) === 'F') {
-      return [{ value: 'F', label: 'Female' }];
+      return [
+        { value: '', label: '------' },
+        { value: 'F', label: 'Female' },
+      ];
     }
     if (legality.returnGenderStatus(species) === null) {
       return [{ value: '', label: 'No Gender' }];

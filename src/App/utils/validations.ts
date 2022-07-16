@@ -182,7 +182,8 @@ export const validateGender = (
   if (legality.returnGenderStatus(species.value)) {
     if (
       gender.value.toString().trim() !==
-      legality.returnGenderStatus(species.value)
+        legality.returnGenderStatus(species.value) &&
+      !!gender.value.toString()
     ) {
       return `This species is locked to a gender of '${legality.returnGenderStatus(
         species.value
