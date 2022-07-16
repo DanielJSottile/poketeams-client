@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { toast } from 'react-hot-toast';
+import { customSuccessToast } from '../../components/Utils/CustomToasts';
 
 interface ClipboardReturn {
   copySuccess: () => string;
@@ -8,7 +8,7 @@ interface ClipboardReturn {
 }
 
 const useClipboard = (): ClipboardReturn => {
-  const copySuccess = () => toast.success('Copied to Clipboard!!');
+  const copySuccess = () => customSuccessToast('Copied to Clipboard!!');
   const textArea = useRef<HTMLTextAreaElement>(null);
 
   const copyCodeToClipboard = () => {

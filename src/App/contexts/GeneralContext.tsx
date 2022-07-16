@@ -7,7 +7,6 @@ import React, {
   SetStateAction,
 } from 'react';
 import jwtDecode from 'jwt-decode';
-import { toast } from 'react-hot-toast';
 import {
   PokemonFolder,
   PokemonTeam,
@@ -16,6 +15,10 @@ import {
   InputWithId,
   ParseReturn,
 } from '../@types';
+import {
+  customErrorToast,
+  customSuccessToast,
+} from '../components/Utils/CustomToasts';
 import apiService from '../services/apiService';
 import TokenService from '../services/token-service';
 import { showdownParse, showdownFolderParse } from '../utils/functions';
@@ -275,7 +278,7 @@ export const GeneralProvider = ({ children }: ContextProps): JSX.Element => {
         });
       } else {
         const searchFail = () =>
-          toast.error(
+          customErrorToast(
             'Search returned 0 results or no more teams.  Please try again with other parameters or go back.'
           );
         searchFail();
@@ -317,7 +320,6 @@ export const GeneralProvider = ({ children }: ContextProps): JSX.Element => {
 
   const handlePostNewFolder = () => {
     let folder: PokemonFolder;
-    const folderSuccessToast = () => toast.success('Posted New Folder!!');
     apiService
       .postUserFolder(
         newFolderName.value,
@@ -326,7 +328,7 @@ export const GeneralProvider = ({ children }: ContextProps): JSX.Element => {
       .then((f) => {
         folder = f;
         setUserFolders([...userFolders, folder]);
-        folderSuccessToast();
+        customSuccessToast('Posted New Folder!!');
       })
       .then(() => {
         if (newFolderImport.value) {
@@ -452,7 +454,7 @@ export const GeneralProvider = ({ children }: ContextProps): JSX.Element => {
       })
       .catch((error) => {
         const folderErrorToast = () =>
-          toast.error(`Posting New Folder Failed: ${error}`);
+          customErrorToast(`Posting New Folder Failed: ${error}`);
         folderErrorToast();
       })
       .then(() => {
@@ -493,20 +495,18 @@ export const GeneralProvider = ({ children }: ContextProps): JSX.Element => {
       move_four: null,
     };
 
-    const setSuccessToast = () => toast.success('Posted New Pokemon Set!!');
-
     apiService
       .postUserSet(
         set_body,
         jwtDecode<MyToken>(TokenService.getAuthToken() || '').user_id
       )
       .then((set) => {
-        setSuccessToast();
+        customSuccessToast('Posted New Pokemon Set!!');
         setUserSets([...userSets, set]);
       })
       .catch((error) => {
         const setErrorToast = () =>
-          toast.error(`Posting New Pokemon Set Failed: ${error}`);
+          customErrorToast(`Posting New Pokemon Set Failed: ${error}`);
         setErrorToast();
       });
   };
@@ -518,15 +518,13 @@ export const GeneralProvider = ({ children }: ContextProps): JSX.Element => {
       folder_id: Number(currentClickedFolder.id),
     };
 
-    const teamSuccessToast = () => toast.success('Posted New Team!!');
-
     apiService
       .postUserTeam(
         body,
         jwtDecode<MyToken>(TokenService.getAuthToken() || '').user_id
       )
       .then((team) => {
-        teamSuccessToast();
+        customSuccessToast('Posted New Team!!');
         setUserTeams([
           ...userTeams,
           {
@@ -605,7 +603,7 @@ export const GeneralProvider = ({ children }: ContextProps): JSX.Element => {
       })
       .catch((error) => {
         const teamErrorToast = () =>
-          toast.error(`Posting New Team Failed: ${error}`);
+          customErrorToast(`Posting New Team Failed: ${error}`);
         teamErrorToast();
       });
     setTeamAddClicked(!teamAddClicked);
@@ -620,7 +618,7 @@ export const GeneralProvider = ({ children }: ContextProps): JSX.Element => {
     ).user_id;
 
     const folderSuccessToast = () =>
-      toast.success('Successfully Edited Folder!!');
+      customSuccessToast('Successfully Edited Folder!!');
 
     apiService
       .patchUserFolder(newFolderName.value, currentClickedFolder.id, userId)
@@ -629,7 +627,7 @@ export const GeneralProvider = ({ children }: ContextProps): JSX.Element => {
       })
       .catch((error) => {
         const setErrorToast = () =>
-          toast.error(`Editing Folder Failed: ${error}`);
+          customErrorToast(`Editing Folder Failed: ${error}`);
         setErrorToast();
       });
 
@@ -649,15 +647,14 @@ export const GeneralProvider = ({ children }: ContextProps): JSX.Element => {
     const userId = jwtDecode<MyToken>(
       TokenService.getAuthToken() || ''
     ).user_id;
-    const teamSuccessToast = () => toast.success('Successfully Edited Team!!');
     apiService
       .patchUserTeam(body, userId)
       .then(() => {
-        teamSuccessToast();
+        customSuccessToast('Successfully Edited Team!!');
       })
       .catch((error) => {
         const setErrorToast = () =>
-          toast.error(`Editing Team Failed: ${error}`);
+          customErrorToast(`Editing Team Failed: ${error}`);
         setErrorToast();
       });
 
@@ -735,7 +732,7 @@ export const GeneralProvider = ({ children }: ContextProps): JSX.Element => {
     ).user_id;
 
     const setSuccessToast = () =>
-      toast.success('Successfully Edited Pokemon Set!!');
+      customSuccessToast('Successfully Edited Pokemon Set!!');
     apiService
       .patchUserSet(body, userId)
       .then(() => {
@@ -743,7 +740,7 @@ export const GeneralProvider = ({ children }: ContextProps): JSX.Element => {
       })
       .catch((error) => {
         const setErrorToast = () =>
-          toast.error(`Editing Pokemon Set Failed: ${error}`);
+          customErrorToast(`Editing Pokemon Set Failed: ${error}`);
         setErrorToast();
       });
 
@@ -789,8 +786,6 @@ export const GeneralProvider = ({ children }: ContextProps): JSX.Element => {
       TokenService.getAuthToken() || ''
     ).user_id;
 
-    const setSuccessToast = () => toast.success('Team Import Successful!!');
-
     const body = {
       id: id,
       nickname: parsed.nickname,
@@ -823,11 +818,11 @@ export const GeneralProvider = ({ children }: ContextProps): JSX.Element => {
     apiService
       .patchUserSet(body, userId)
       .then(() => {
-        setSuccessToast();
+        customSuccessToast('Team Import Successful!!');
       })
       .catch((error) => {
         const setErrorToast = () =>
-          toast.error(`Pokemon Set Import Failed: ${error}`);
+          customErrorToast(`Pokemon Set Import Failed: ${error}`);
         setErrorToast();
       });
 

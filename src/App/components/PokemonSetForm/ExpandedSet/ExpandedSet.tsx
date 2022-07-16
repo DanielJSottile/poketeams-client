@@ -10,7 +10,6 @@ import {
   faTrashAlt,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { toast } from 'react-hot-toast';
 import { BoolInput, NumberInput, PokemonSet, TextInput } from '../../../@types';
 import GeneralContext from '../../../contexts/GeneralContext';
 import { showdownGenerate } from '../../../utils/functions';
@@ -20,6 +19,7 @@ import DeleteExpand from '../../DeleteExpand';
 import ExportText from '../../ExportText';
 import Form from '../../Form';
 import TextArea from '../../TextArea';
+import { customSuccessToast } from '../../Utils/CustomToasts';
 import Details from './Details';
 import styles from './ExpandedSet.module.scss';
 import Intro from './Intro';
@@ -149,8 +149,6 @@ const ExpandedSet: FunctionComponent<ExpandedSetProps> = ({
     handleUpdateSetImport,
     handleDeleteSet,
   } = useContext(GeneralContext);
-
-  const deleteSuccess = () => toast.success('Set Deleted!');
 
   return (
     <div className={styles['pokemon']}>
@@ -283,7 +281,7 @@ const ExpandedSet: FunctionComponent<ExpandedSetProps> = ({
             yesCallback={() => {
               handleDeleteSet(set?.team_id || NaN, set?.id || NaN);
               setDeleteClicked(!deleteClicked);
-              deleteSuccess();
+              customSuccessToast('Set Deleted!');
             }}
             noCallback={() => setDeleteClicked(!deleteClicked)}
           />
