@@ -16,13 +16,13 @@ const ShareFolderPage: FunctionComponent = (): JSX.Element => {
   useEffect(() => {
     const id = folder_id;
     apiService
-      .getSingleFolderPublic(Number(id))
+      .getSingleFolderPublic(id || '')
       .then((data) => {
         setFolder([data]);
       })
       .then(() => {
         apiService
-          .getTeamsForOneFolder(Number(id))
+          .getTeamsForOneFolder(id || '')
           .then((data: PokemonTeam[]) => {
             setTeams(data);
 

@@ -177,7 +177,7 @@ const ExpandedSet: FunctionComponent<ExpandedSetProps> = ({
               disabled={!!validateNewSetImport(newSetImport)}
               onClickCallback={(e) => {
                 e.preventDefault();
-                handleUpdateSetImport(Number(set?.id));
+                handleUpdateSetImport(set?.id);
                 setFields(newSetImport.value);
               }}
             >
@@ -279,7 +279,7 @@ const ExpandedSet: FunctionComponent<ExpandedSetProps> = ({
           <DeleteExpand
             message={"Are You Sure You'd Like to Delete this Set?"}
             yesCallback={() => {
-              handleDeleteSet(set?.team_id || NaN, set?.id || NaN);
+              handleDeleteSet(set?.team_id || '', set?.id || '');
               setDeleteClicked(!deleteClicked);
               customSuccessToast('Set Deleted!');
             }}

@@ -30,7 +30,7 @@ type ContextProps = {
 
 export interface MyToken {
   sub: string;
-  user_id: number;
+  user_id: string;
 }
 
 interface GeneralContextValues {
@@ -78,9 +78,9 @@ interface GeneralContextValues {
   handleDeleteFolder: () => void;
   handleFilter: () => void;
   handleSearch: () => void;
-  handleUpdateSetImport: (id: number) => void;
+  handleUpdateSetImport: (id?: string) => void;
   handleUpdateSet: (
-    id: number | undefined,
+    id: string | undefined,
     nickname: string,
     species: string,
     gender: string,
@@ -108,10 +108,10 @@ interface GeneralContextValues {
     move_three: string,
     move_four: string
   ) => void;
-  handleDeleteSet: (teamId: number, setId: number) => void;
-  handleUpdateTeam: (teamName: string, desc: string, teamId: number) => void;
-  handleCreateDefaultPokemon: (team_id: number) => void;
-  handleDeleteTeam: (teamId: number) => void;
+  handleDeleteSet: (teamId: string, setId: string) => void;
+  handleUpdateTeam: (teamName: string, desc: string, teamId: string) => void;
+  handleCreateDefaultPokemon: (team_id: string) => void;
+  handleDeleteTeam: (teamId: string) => void;
   handlePage: (direction: 'up' | 'down') => void;
   getUserState: () => void;
   clearUserState: () => void;
@@ -464,7 +464,7 @@ export const GeneralProvider = ({ children }: ContextProps): JSX.Element => {
       });
   };
 
-  const handleCreateDefaultPokemon = (team_id: number) => {
+  const handleCreateDefaultPokemon = (team_id: string) => {
     const set_body = {
       team_id,
       nickname: null,
@@ -515,7 +515,7 @@ export const GeneralProvider = ({ children }: ContextProps): JSX.Element => {
     const body = {
       team_name: newTeamName.value,
       description: desc.value,
-      folder_id: Number(currentClickedFolder.id),
+      folder_id: currentClickedFolder.id,
     };
 
     apiService
@@ -529,7 +529,7 @@ export const GeneralProvider = ({ children }: ContextProps): JSX.Element => {
           ...userTeams,
           {
             ...team,
-            folder_id: Number(currentClickedFolder.id),
+            folder_id: currentClickedFolder.id,
           },
         ]);
         if (newTeamImport.value) {
@@ -642,7 +642,7 @@ export const GeneralProvider = ({ children }: ContextProps): JSX.Element => {
     );
   };
 
-  const handleUpdateTeam = (teamname: string, desc: string, id: number) => {
+  const handleUpdateTeam = (teamname: string, desc: string, id: string) => {
     const body = { id: id, team_name: teamname, description: desc };
     const userId = jwtDecode<MyToken>(
       TokenService.getAuthToken() || ''
@@ -668,7 +668,7 @@ export const GeneralProvider = ({ children }: ContextProps): JSX.Element => {
   };
 
   const handleUpdateSet = (
-    id: number | undefined,
+    id: string | undefined,
     nickname: string,
     species: string,
     gender: string,
@@ -780,7 +780,7 @@ export const GeneralProvider = ({ children }: ContextProps): JSX.Element => {
     );
   };
 
-  const handleUpdateSetImport = (id: number) => {
+  const handleUpdateSetImport = (id?: string) => {
     const parsed = showdownParse(newSetImport.value)[0];
     const userId = jwtDecode<MyToken>(
       TokenService.getAuthToken() || ''
@@ -863,18 +863,17 @@ export const GeneralProvider = ({ children }: ContextProps): JSX.Element => {
   };
 
   const handleDeleteFolder = () => {
-    apiService.deleteUserFolder(Number(currentClickedFolder.id));
+    apiService.deleteUserFolder(currentClickedFolder.id);
 
     setUserFolders(
       userFolders.filter(
-        (folder: PokemonFolder) =>
-          Number(folder.id) !== Number(currentClickedFolder.id)
+        (folder: PokemonFolder) => folder.id !== currentClickedFolder.id
       )
     );
     setCurrentClickedFolder({ value: '', id: '', touched: false });
   };
 
-  const handleDeleteTeam = (team_id: number) => {
+  const handleDeleteTeam = (team_id: string) => {
     apiService.deleteUserTeam(team_id);
 
     const newUserTeams = userTeams.filter((team) => team.id !== team_id);
@@ -884,7 +883,7 @@ export const GeneralProvider = ({ children }: ContextProps): JSX.Element => {
     setCurrentClickedTeam({ value: '', id: '', touched: false });
   };
 
-  const handleDeleteSet = (team_id: number, set_id: number) => {
+  const handleDeleteSet = (team_id: string, set_id: string) => {
     apiService.deleteUserSet(team_id, set_id);
 
     const newUserSets = userSets.filter((set) => set.id !== set_id);

@@ -12,7 +12,7 @@ const ShareSetPage: FunctionComponent = (): JSX.Element => {
   const [set, setPokemonSet] = useState<PokemonSet | null>(null);
 
   useEffect(() => {
-    apiService.getSingleSet(Number(set_id)).then((data) => {
+    apiService.getSingleSet(set_id || '').then((data) => {
       setPokemonSet(data);
     });
   }, [set_id]);

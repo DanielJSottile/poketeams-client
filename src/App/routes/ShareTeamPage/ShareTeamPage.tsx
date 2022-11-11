@@ -13,14 +13,14 @@ const ShareTeamPage: FunctionComponent = (): JSX.Element => {
   const [sets, setPokemonSets] = useState<PokemonSet[]>([]);
 
   useEffect(() => {
-    const id = Number(team_id);
+    const id = team_id;
     apiService
-      .getSingleTeam(id)
+      .getSingleTeam(id || '')
       .then((data) => {
         setTeam([data]);
       })
       .then(() => {
-        apiService.getSetsForOneTeam(id).then((data) => {
+        apiService.getSetsForOneTeam(id || '').then((data) => {
           setPokemonSets(data);
         });
       });

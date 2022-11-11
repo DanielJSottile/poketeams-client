@@ -68,7 +68,7 @@ const FoldersList: FunctionComponent = () => {
   });
 
   const folderTeams = userTeams.filter(
-    (team) => team.folder_id === Number(currentClickedFolder.id)
+    (team) => team.folder_id === currentClickedFolder.id
   );
 
   const input = folderTeams.map((team) => {

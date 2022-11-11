@@ -30,7 +30,7 @@ type ExpandedTeamProps = {
   deleteClicked: boolean;
   handleTeamToggle: () => void;
   handleDeleteExpand: () => void;
-  handleDeleteTeam: (id: number) => void;
+  handleDeleteTeam: (id: string) => void;
   inputTeamName: (teamName: string) => void;
   setDesc: (description: string) => void;
 };

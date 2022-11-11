@@ -13,7 +13,7 @@ import GeneralContext from './GeneralContext';
 interface UserContextValues {
   isLoggedIn: boolean;
   user: string;
-  userId: number;
+  userId: string;
   handleLogoutClick: () => void;
 }
 
@@ -24,13 +24,13 @@ type UserContextProps = {
 const UserContext = createContext<UserContextValues>({
   isLoggedIn: !!TokenService.getAuthToken(),
   user: '',
-  userId: 0,
+  userId: '',
   handleLogoutClick: () => null,
 });
 
 interface MyToken {
   sub: string;
-  user_id: number;
+  user_id: string;
 }
 
 export default UserContext;
@@ -40,7 +40,7 @@ export const UserContextProvider = ({
 }: UserContextProps): JSX.Element => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState('');
-  const [userId, setUserId] = useState(0);
+  const [userId, setUserId] = useState('');
   const { clearUserState } = useContext(GeneralContext);
   const location = useLocation();
   const navigate = useNavigate();

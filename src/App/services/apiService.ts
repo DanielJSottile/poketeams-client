@@ -91,24 +91,24 @@ const apiService = {
     return getAPIData(`/all/sets`, {});
   },
 
-  getLikesforOneTeam(team_id: number): Promise<unknown> {
+  getLikesforOneTeam(team_id: string): Promise<unknown> {
     // Not sure what this returns rn
     return getAPIData(`/all/${team_id}/likes`, {});
   },
 
-  getSetsForOneTeam(team_id: number): Promise<PokemonSet[]> {
+  getSetsForOneTeam(team_id: string): Promise<PokemonSet[]> {
     return getAPIData(`/all/${team_id}/sets`, {});
   },
 
-  getTeamsForOneFolder(folder_id: number): Promise<PokemonTeam[]> {
+  getTeamsForOneFolder(folder_id: string): Promise<PokemonTeam[]> {
     return getAPIData(`/all/${folder_id}/teams`, {});
   },
 
-  getSingleTeam(team_id: number): Promise<PokemonTeam> {
+  getSingleTeam(team_id: string): Promise<PokemonTeam> {
     return getAPIData(`/all/${team_id}`, {});
   },
 
-  getSingleSet(set_id: number): Promise<PokemonSet> {
+  getSingleSet(set_id: string): Promise<PokemonSet> {
     return getAPIData(`/all/set/${set_id}`, {});
   },
 
@@ -116,32 +116,32 @@ const apiService = {
 
   // GET
 
-  getSingleFolder(folder_id: number): Promise<PokemonFolder> {
+  getSingleFolder(folder_id: string): Promise<PokemonFolder> {
     return getAPIData(`/build/folder/${folder_id}`, {
       'content-type': 'application/json',
       authorization: `bearer ${TokenService.getAuthToken()}`,
     });
   },
 
-  getSingleFolderPublic(folder_id: number): Promise<PokemonFolder> {
+  getSingleFolderPublic(folder_id: string): Promise<PokemonFolder> {
     return getAPIData(`/all/folderpublic/${folder_id}`, {});
   },
 
-  getUserFolders(user_id: number): Promise<PokemonFolder[]> {
+  getUserFolders(user_id: string): Promise<PokemonFolder[]> {
     return getAPIData(`/build/folders/${user_id}`, {
       'content-type': 'application/json',
       authorization: `bearer ${TokenService.getAuthToken()}`,
     });
   },
 
-  getUserTeams(user_id: number): Promise<PokemonTeam[]> {
+  getUserTeams(user_id: string): Promise<PokemonTeam[]> {
     return getAPIData(`/build/teams/${user_id}`, {
       'content-type': 'application/json',
       authorization: `bearer ${TokenService.getAuthToken()}`,
     });
   },
 
-  getUserSets(user_id: number): Promise<PokemonSet[]> {
+  getUserSets(user_id: string): Promise<PokemonSet[]> {
     return getAPIData(`/build/sets/${user_id}`, {
       'content-type': 'application/json',
       authorization: `bearer ${TokenService.getAuthToken()}`,
@@ -149,7 +149,7 @@ const apiService = {
   },
 
   getUserFoldersFilter(
-    user_id: number,
+    user_id: string,
     query: string
   ): Promise<PokemonFolder[]> {
     return getAPIData(`/build/folders/${user_id}/filter${query}`, {
@@ -158,14 +158,14 @@ const apiService = {
     });
   },
 
-  getUserTeamsFilter(user_id: number, query: string): Promise<PokemonTeam[]> {
+  getUserTeamsFilter(user_id: string, query: string): Promise<PokemonTeam[]> {
     return getAPIData(`/build/teams/${user_id}/filter${query}`, {
       'content-type': 'application/json',
       authorization: `bearer ${TokenService.getAuthToken()}`,
     });
   },
 
-  getUserSetsFilter(user_id: number, query: string): Promise<PokemonSet[]> {
+  getUserSetsFilter(user_id: string, query: string): Promise<PokemonSet[]> {
     return getAPIData(`/build/sets/${user_id}/filter${query}`, {
       'content-type': 'application/json',
       authorization: `bearer ${TokenService.getAuthToken()}`,
@@ -174,7 +174,7 @@ const apiService = {
 
   // POST
 
-  postUserFolder(foldername: string, userid: number): Promise<PokemonFolder> {
+  postUserFolder(foldername: string, userid: string): Promise<PokemonFolder> {
     return postAPIData(
       `/build/folders/${userid}`,
       JSON.stringify({
@@ -184,11 +184,11 @@ const apiService = {
     );
   },
 
-  postUserTeam(body: PokemonTeamPost, userid: number): Promise<PokemonTeam> {
+  postUserTeam(body: PokemonTeamPost, userid: string): Promise<PokemonTeam> {
     return postAPIData(`/build/teams/${userid}`, JSON.stringify(body));
   },
 
-  postUserSet(body: PokemonSet, userid: number): Promise<PokemonSet> {
+  postUserSet(body: PokemonSet, userid: string): Promise<PokemonSet> {
     return postAPIData(`/build/sets/${userid}`, JSON.stringify(body));
   },
 
@@ -197,7 +197,7 @@ const apiService = {
   patchUserFolder(
     foldername: string,
     iden: string,
-    userid: number
+    userid: string
   ): Promise<Response> {
     return patchAPIData(
       `/build/folders/${userid}`,
@@ -211,29 +211,29 @@ const apiService = {
 
   patchUserTeam(
     body: Record<string, unknown>,
-    userid: number
+    userid: string
   ): Promise<Response> {
     return patchAPIData(`/build/teams/${userid}`, JSON.stringify(body));
   },
 
   patchUserSet(
     body: Record<string, unknown>,
-    userid: number
+    userid: string
   ): Promise<Response> {
     return patchAPIData(`/build/sets/${userid}`, JSON.stringify(body));
   },
 
   // DELETE
 
-  deleteUserFolder(folder_id: number): Promise<Response> {
+  deleteUserFolder(folder_id: string): Promise<Response> {
     return deleteAPIData(`/build/folder/${folder_id}`);
   },
 
-  deleteUserTeam(team_id: number): Promise<Response> {
+  deleteUserTeam(team_id: string): Promise<Response> {
     return deleteAPIData(`/build/team/${team_id}`);
   },
 
-  deleteUserSet(team_id: number, set_id: number): Promise<Response> {
+  deleteUserSet(team_id: string, set_id: string): Promise<Response> {
     return deleteAPIData(`/build/set/${team_id}/${set_id}`);
   },
 };
