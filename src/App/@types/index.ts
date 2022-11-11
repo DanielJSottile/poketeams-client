@@ -2,17 +2,17 @@ export interface PokemonFolder {
   date_created: string;
   date_modified: string;
   folder_name: string;
-  id: number;
-  user_id: number;
+  id: string;
+  user_id: string;
 }
 
 export interface PokemonTeam {
   team_name: string;
   description: string;
-  id: number;
+  id: string;
   user_name: string;
   date_created: string;
-  folder_id: number;
+  folder_id: string;
 }
 
 export interface PokemonSet {
@@ -45,8 +45,8 @@ export interface PokemonSet {
   setExpandToggle?: boolean;
   deleteClicked?: boolean;
   copySuccess?: boolean;
-  id?: number;
-  team_id?: number;
+  id?: string;
+  team_id?: string;
 }
 
 export type TextInput = {

@@ -22,9 +22,7 @@ const TeamList: FunctionComponent<TeamListProps> = ({
   });
 
   const privateTeamList = userTeams
-    .filter(
-      (team: PokemonTeam) => team.folder_id === Number(currentClickedFolder.id)
-    )
+    .filter((team: PokemonTeam) => team.folder_id === currentClickedFolder.id)
     .map((team: PokemonTeam) => {
       return (
         <Team

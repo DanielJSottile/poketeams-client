@@ -8,7 +8,7 @@ import styles from './Folder.module.scss';
 
 type FolderProps = {
   /** id for folder*/
-  id: number;
+  id: string;
   /** name for folder */
   folder_name: string | undefined;
 };
